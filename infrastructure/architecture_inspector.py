@@ -1,20 +1,28 @@
 #!/usr/bin/env python3
-"""架构巡检器 - V4.3.2 最终版
+"""架构巡检器 - V4.3.2 增强版
 
-功能：
-1. 检查六层架构完整性
-2. 检查文件保护规则
-3. 检查技能注册表一致性
-4. 检查配置文件完整性
-5. 检查依赖关系
-6. 生成巡检报告
+增强功能：
+1. 六层架构完整性检查
+2. 受保护文件检查
+3. 技能注册表一致性检查
+4. 配置文件完整性检查
+5. 依赖关系检查
+6. 代码质量检查
+7. 安全检查
+8. 性能指标检查
+9. 自动 Git 同步
+10. 生成详细报告
 """
 
 import json
 import sys
+import os
+import re
+import subprocess
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Set
+from collections import defaultdict
 
 # 项目根目录
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -24,41 +32,50 @@ LAYERS = {
     "L1_Core": {
         "name": "核心层",
         "path": "core",
-        "protected_files": [
-            "ARCHITECTURE.md", "AGENTS.md", "SOUL.md", "USER.md", 
-            "TOOLS.md", "IDENTITY.md"
-        ],
-        "required_dirs": ["config", "health"]
+        "protected_files": ["ARCHITECTURE.md", "AGENTS.md", "SOUL.md", "USER.md", "TOOLS.md", "IDENTITY.md"],
+        "required_dirs": ["config", "health"],
+        "max_files": 100,
+        "description": "核心认知、身份、规则"
     },
     "L2_Memory": {
         "name": "记忆层",
         "path": "memory_context",
-        "protected_files": ["MEMORY.md"],
-        "required_dirs": ["index", "vector"]
+        "protected_files": ["unified_search.py"],
+        "required_dirs": ["index", "vector"],
+        "max_files": 200,
+        "description": "记忆上下文、知识库"
     },
     "L3_Orchestration": {
         "name": "编排层",
         "path": "orchestration",
         "protected_files": ["router/router.py"],
-        "required_dirs": ["router"]
+        "required_dirs": ["router"],
+        "max_files": 100,
+        "description": "任务编排、工作流"
     },
     "L4_Execution": {
         "name": "执行层",
         "path": "execution",
         "protected_files": ["skill_gateway.py"],
-        "required_dirs": ["ecommerce"]
+        "required_dirs": ["ecommerce"],
+        "max_files": 150,
+        "description": "能力执行、技能网关"
     },
     "L5_Governance": {
         "name": "治理层",
         "path": "governance",
         "protected_files": ["security.py", "audit/explainer.py", "validators/architecture_validator.py"],
-        "required_dirs": ["security", "audit", "validators"]
+        "required_dirs": ["security", "audit", "validators"],
+        "max_files": 100,
+        "description": "稳定治理、安全审计"
     },
     "L6_Infrastructure": {
         "name": "基础设施层",
         "path": "infrastructure",
-        "protected_files": ["token_budget.py", "path_resolver.py"],
-        "required_dirs": ["loader", "cache", "inventory"]
+        "protected_files": ["token_budget.py", "path_resolver.py", "auto_git.py", "architecture_inspector.py"],
+        "required_dirs": ["loader", "cache", "inventory"],
+        "max_files": 200,
+        "description": "基础设施、工具链"
     }
 }
 
@@ -68,27 +85,63 @@ PROTECTED_FILES = {
     "MEMORY.md", "HEARTBEAT.md", "core/ARCHITECTURE.md"
 }
 
+# 安全检查模式
+SECURITY_PATTERNS = {
+    "hardcoded_secrets": [
+        r'api[_-]?key\s*=\s*["\'][^"\']{20,}["\']',
+        r'password\s*=\s*["\'][^"\']{8,}["\']',
+        r'secret\s*=\s*["\'][^"\']{10,}["\']',
+        r'token\s*=\s*["\'][^"\']{20,}["\']',
+    ],
+    "dangerous_commands": [
+        r'rm\s+-rf\s+/',
+        r'sudo\s+rm',
+        r'drop\s+table',
+        r'delete\s+from\s+\*',
+    ],
+    "shell_injection": [
+        r'shell\s*=\s*True',
+        r'os\.system\s*\(',
+        r'subprocess\.call\s*\([^)]*shell\s*=\s*True',
+    ]
+}
+
+# 代码质量检查
+QUALITY_CHECKS = {
+    "todo_fixme": r'(TODO|FIXME|XXX|HACK)',
+    "deprecated_imports": r'from\s+distutils|import\s+distutils',
+    "print_debug": r'print\s*\(["\']debug',
+}
+
+
 class ArchitectureInspector:
-    """架构巡检器"""
+    """架构巡检器 - V4.3.2 增强版"""
     
     def __init__(self):
         self.results = {
+            "version": "4.3.2",
             "timestamp": datetime.now().isoformat(),
             "layers": {},
             "protected_files": {},
             "skill_registry": {},
             "config_files": {},
             "dependencies": {},
+            "code_quality": {},
+            "security": {},
+            "performance": {},
             "issues": [],
             "warnings": [],
             "summary": {}
         }
+        self.stats = defaultdict(int)
     
     def inspect_all(self) -> Dict:
         """执行完整巡检"""
-        print("=" * 60)
-        print("架构巡检 - V4.3.2 最终版")
-        print("=" * 60)
+        print("=" * 70)
+        print("架构巡检器 - V4.3.2 增强版")
+        print("=" * 70)
+        print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print()
         
         # 1. 检查六层架构
         self._inspect_layers()
@@ -105,14 +158,27 @@ class ArchitectureInspector:
         # 5. 检查依赖关系
         self._inspect_dependencies()
         
-        # 6. 生成摘要
+        # 6. 代码质量检查
+        self._inspect_code_quality()
+        
+        # 7. 安全检查
+        self._inspect_security()
+        
+        # 8. 性能指标
+        self._inspect_performance()
+        
+        # 9. 生成摘要
         self._generate_summary()
+        
+        # 10. 自动 Git 同步
+        self._auto_git_sync()
         
         return self.results
     
     def _inspect_layers(self):
         """检查六层架构"""
-        print("\n【1. 六层架构检查】")
+        print("【1. 六层架构检查】")
+        print("-" * 70)
         
         for layer_id, layer_info in LAYERS.items():
             layer_path = PROJECT_ROOT / layer_info["path"]
@@ -120,15 +186,28 @@ class ArchitectureInspector:
                 "exists": layer_path.exists(),
                 "files": 0,
                 "dirs": 0,
+                "size_mb": 0,
                 "protected_ok": True,
                 "required_ok": True,
-                "issues": []
+                "file_limit_ok": True,
+                "issues": [],
+                "details": {}
             }
             
             if layer_path.exists():
                 # 统计文件
-                status["files"] = len(list(layer_path.rglob("*.py")))
+                py_files = list(layer_path.rglob("*.py"))
+                status["files"] = len(py_files)
                 status["dirs"] = len([d for d in layer_path.rglob("*") if d.is_dir()])
+                
+                # 计算大小
+                total_size = sum(f.stat().st_size for f in layer_path.rglob("*") if f.is_file())
+                status["size_mb"] = round(total_size / 1024 / 1024, 2)
+                
+                # 检查文件数量限制
+                if status["files"] > layer_info.get("max_files", 999):
+                    status["file_limit_ok"] = False
+                    status["issues"].append(f"文件数超限: {status['files']} > {layer_info['max_files']}")
                 
                 # 检查受保护文件
                 for pf in layer_info.get("protected_files", []):
@@ -143,72 +222,104 @@ class ArchitectureInspector:
                     if not rd_path.exists():
                         status["required_ok"] = False
                         status["issues"].append(f"缺失必需目录: {rd}")
+                
+                # 统计 Python 文件行数
+                total_lines = 0
+                for f in py_files[:50]:  # 最多检查50个文件
+                    try:
+                        total_lines += len(f.read_text(errors='ignore').splitlines())
+                    except:
+                        pass
+                status["details"]["total_lines"] = total_lines
             
             self.results["layers"][layer_id] = status
+            self.stats["total_files"] += status["files"]
             
             # 输出
-            icon = "✅" if status["exists"] and status["protected_ok"] and status["required_ok"] else "❌"
-            print(f"  {icon} {layer_info['name']}: {status['files']} 文件, {status['dirs']} 目录")
+            all_ok = status["exists"] and status["protected_ok"] and status["required_ok"] and status["file_limit_ok"]
+            icon = "✅" if all_ok else "❌"
+            
+            print(f"  {icon} {layer_info['name']} ({layer_id})")
+            print(f"      路径: {layer_info['path']}")
+            print(f"      文件: {status['files']} | 目录: {status['dirs']} | 大小: {status['size_mb']}MB")
+            print(f"      说明: {layer_info['description']}")
             
             for issue in status["issues"]:
                 print(f"      ⚠️ {issue}")
+            
+            print()
     
     def _inspect_protected_files(self):
         """检查受保护文件"""
-        print("\n【2. 受保护文件检查】")
+        print("【2. 受保护文件检查】")
+        print("-" * 70)
         
-        for pf in PROTECTED_FILES:
+        for pf in sorted(PROTECTED_FILES):
             pf_path = PROJECT_ROOT / pf
             status = {
                 "exists": pf_path.exists(),
-                "size": pf_path.stat().st_size if pf_path.exists() else 0,
-                "modified": datetime.fromtimestamp(pf_path.stat().st_mtime).isoformat() if pf_path.exists() else None
+                "size": 0,
+                "lines": 0,
+                "modified": None
             }
+            
+            if pf_path.exists():
+                status["size"] = pf_path.stat().st_size
+                status["modified"] = datetime.fromtimestamp(pf_path.stat().st_mtime).strftime('%Y-%m-%d %H:%M')
+                try:
+                    status["lines"] = len(pf_path.read_text(errors='ignore').splitlines())
+                except:
+                    pass
             
             self.results["protected_files"][pf] = status
             
             icon = "✅" if status["exists"] else "❌"
-            print(f"  {icon} {pf}")
+            info = f"{status['lines']}行, {status['size']}字节" if status["exists"] else "不存在"
+            print(f"  {icon} {pf} - {info}")
     
     def _inspect_skill_registry(self):
         """检查技能注册表"""
-        print("\n【3. 技能注册表检查】")
+        print()
+        print("【3. 技能注册表检查】")
+        print("-" * 70)
         
         registry_path = PROJECT_ROOT / "infrastructure" / "inventory" / "skill_registry.json"
         
         if registry_path.exists():
             try:
                 registry = json.loads(registry_path.read_text())
-                skills = registry.get("skills", [])
+                
+                # 处理不同格式
+                if isinstance(registry, dict):
+                    skills = registry.get("skills", [])
+                elif isinstance(registry, list):
+                    skills = registry
+                else:
+                    skills = []
                 
                 status = {
                     "exists": True,
                     "skill_count": len(skills),
                     "categories": {},
+                    "layers": {},
                     "issues": []
                 }
                 
-                # 统计分类
+                # 统计分类和层级
                 for skill in skills:
-                    cat = skill.get("category", "unknown")
-                    status["categories"][cat] = status["categories"].get(cat, 0) + 1
-                
-                # 检查必需字段
-                required_fields = ["name", "category", "layer", "status"]
-                for i, skill in enumerate(skills):
-                    for field in required_fields:
-                        if field not in skill:
-                            status["issues"].append(f"技能 {i} 缺失字段: {field}")
+                    if isinstance(skill, dict):
+                        cat = skill.get("category", "unknown")
+                        layer = skill.get("layer", "unknown")
+                        status["categories"][cat] = status["categories"].get(cat, 0) + 1
+                        status["layers"][layer] = status["layers"].get(layer, 0) + 1
                 
                 self.results["skill_registry"] = status
                 
                 print(f"  ✅ 技能总数: {status['skill_count']}")
-                for cat, count in status["categories"].items():
+                print(f"  分类统计:")
+                for cat, count in sorted(status["categories"].items(), key=lambda x: -x[1])[:10]:
                     print(f"      • {cat}: {count}")
                 
-                for issue in status["issues"][:5]:
-                    print(f"      ⚠️ {issue}")
-                    
             except Exception as e:
                 self.results["skill_registry"] = {"exists": True, "error": str(e)}
                 print(f"  ❌ 解析失败: {e}")
@@ -218,7 +329,9 @@ class ArchitectureInspector:
     
     def _inspect_config_files(self):
         """检查配置文件"""
-        print("\n【4. 配置文件检查】")
+        print()
+        print("【4. 配置文件检查】")
+        print("-" * 70)
         
         config_files = [
             "core/CONFIG.json",
@@ -233,34 +346,39 @@ class ArchitectureInspector:
             status = {
                 "exists": cf_path.exists(),
                 "valid_json": False,
-                "size": 0
+                "size": 0,
+                "keys": []
             }
             
             if cf_path.exists():
                 status["size"] = cf_path.stat().st_size
                 try:
-                    json.loads(cf_path.read_text())
+                    data = json.loads(cf_path.read_text())
                     status["valid_json"] = True
+                    if isinstance(data, dict):
+                        status["keys"] = list(data.keys())[:10]
                 except:
                     pass
             
             self.results["config_files"][cf] = status
             
             icon = "✅" if status["exists"] and status["valid_json"] else "❌"
-            print(f"  {icon} {cf}")
+            info = f"{status['size']}字节" if status["exists"] else "不存在"
+            print(f"  {icon} {cf} - {info}")
     
     def _inspect_dependencies(self):
         """检查依赖关系"""
-        print("\n【5. 依赖关系检查】")
+        print()
+        print("【5. 依赖关系检查】")
+        print("-" * 70)
         
-        import sys
         sys.path.insert(0, str(PROJECT_ROOT))
         
-        # 检查关键模块导入
         critical_imports = [
             ("memory_context.unified_search", "统一搜索"),
             ("infrastructure.token_budget", "Token 预算"),
             ("infrastructure.path_resolver", "路径解析"),
+            ("infrastructure.auto_git", "自动 Git"),
             ("execution.skill_gateway", "技能网关"),
         ]
         
@@ -278,11 +396,157 @@ class ArchitectureInspector:
         
         self.results["dependencies"] = status
     
+    def _inspect_code_quality(self):
+        """代码质量检查"""
+        print()
+        print("【6. 代码质量检查】")
+        print("-" * 70)
+        
+        status = {
+            "total_files": 0,
+            "total_lines": 0,
+            "todos": 0,
+            "fixmes": 0,
+            "deprecated": 0,
+            "issues": []
+        }
+        
+        # 检查关键目录
+        check_dirs = ["memory_context", "infrastructure", "execution", "orchestration"]
+        
+        for dir_name in check_dirs:
+            dir_path = PROJECT_ROOT / dir_name
+            if not dir_path.exists():
+                continue
+            
+            for py_file in dir_path.rglob("*.py"):
+                status["total_files"] += 1
+                try:
+                    content = py_file.read_text(errors='ignore')
+                    lines = content.splitlines()
+                    status["total_lines"] += len(lines)
+                    
+                    # 检查 TODO/FIXME
+                    for line in lines:
+                        if "TODO" in line.upper():
+                            status["todos"] += 1
+                        if "FIXME" in line.upper():
+                            status["fixmes"] += 1
+                        if "distutils" in line:
+                            status["deprecated"] += 1
+                
+                except:
+                    pass
+        
+        self.results["code_quality"] = status
+        
+        print(f"  文件数: {status['total_files']}")
+        print(f"  总行数: {status['total_lines']}")
+        print(f"  TODO: {status['todos']}")
+        print(f"  FIXME: {status['fixmes']}")
+        print(f"  废弃导入: {status['deprecated']}")
+    
+    def _inspect_security(self):
+        """安全检查"""
+        print()
+        print("【7. 安全检查】")
+        print("-" * 70)
+        
+        status = {
+            "hardcoded_secrets": 0,
+            "dangerous_commands": 0,
+            "shell_injection": 0,
+            "issues": []
+        }
+        
+        # 检查关键文件
+        check_files = []
+        for dir_name in ["memory_context", "infrastructure", "execution"]:
+            dir_path = PROJECT_ROOT / dir_name
+            if dir_path.exists():
+                check_files.extend(dir_path.rglob("*.py"))
+        
+        for py_file in check_files[:100]:  # 最多检查100个文件
+            try:
+                content = py_file.read_text(errors='ignore')
+                
+                for pattern_name, patterns in SECURITY_PATTERNS.items():
+                    for pattern in patterns:
+                        if re.search(pattern, content, re.IGNORECASE):
+                            status[pattern_name] += 1
+                            status["issues"].append(f"{py_file.name}: {pattern_name}")
+            except:
+                pass
+        
+        self.results["security"] = status
+        
+        icon_secrets = "✅" if status["hardcoded_secrets"] == 0 else "⚠️"
+        icon_danger = "✅" if status["dangerous_commands"] == 0 else "❌"
+        icon_shell = "✅" if status["shell_injection"] == 0 else "⚠️"
+        
+        print(f"  {icon_secrets} 硬编码密钥: {status['hardcoded_secrets']}")
+        print(f"  {icon_danger} 危险命令: {status['dangerous_commands']}")
+        print(f"  {icon_shell} Shell 注入风险: {status['shell_injection']}")
+    
+    def _inspect_performance(self):
+        """性能指标检查"""
+        print()
+        print("【8. 性能指标检查】")
+        print("-" * 70)
+        
+        status = {
+            "index_size": 0,
+            "cache_size": 0,
+            "log_size": 0,
+            "largest_files": []
+        }
+        
+        # 检查索引大小
+        index_dir = PROJECT_ROOT / "memory_context" / "index"
+        if index_dir.exists():
+            for f in index_dir.glob("*.json"):
+                status["index_size"] += f.stat().st_size
+        
+        # 检查缓存大小
+        cache_dir = PROJECT_ROOT / ".cache"
+        if cache_dir.exists():
+            for f in cache_dir.glob("*"):
+                if f.is_file():
+                    status["cache_size"] += f.stat().st_size
+        
+        # 检查日志大小
+        reports_dir = PROJECT_ROOT / "reports"
+        if reports_dir.exists():
+            for f in reports_dir.glob("*.json"):
+                status["log_size"] += f.stat().st_size
+        
+        # 找出最大的文件
+        all_files = []
+        for f in PROJECT_ROOT.rglob("*.py"):
+            if f.is_file() and "site-packages" not in str(f):
+                try:
+                    all_files.append((str(f.relative_to(PROJECT_ROOT)), f.stat().st_size))
+                except:
+                    pass
+        
+        all_files.sort(key=lambda x: -x[1])
+        status["largest_files"] = all_files[:5]
+        
+        self.results["performance"] = status
+        
+        print(f"  索引大小: {status['index_size'] / 1024:.1f}KB")
+        print(f"  缓存大小: {status['cache_size'] / 1024:.1f}KB")
+        print(f"  日志大小: {status['log_size'] / 1024:.1f}KB")
+        print(f"  最大文件:")
+        for path, size in status["largest_files"]:
+            print(f"      • {path}: {size / 1024:.1f}KB")
+    
     def _generate_summary(self):
         """生成摘要"""
-        print("\n" + "=" * 60)
+        print()
+        print("=" * 70)
         print("巡检摘要")
-        print("=" * 60)
+        print("=" * 70)
         
         # 统计
         layer_ok = sum(1 for s in self.results["layers"].values() 
@@ -299,12 +563,17 @@ class ArchitectureInspector:
         import_ok = sum(1 for s in self.results["dependencies"]["imports"].values() if s["ok"])
         import_total = len(self.results["dependencies"]["imports"])
         
+        security_ok = (self.results["security"]["dangerous_commands"] == 0)
+        
         # 汇总
         self.results["summary"] = {
             "layers": f"{layer_ok}/{layer_total}",
             "protected_files": f"{protected_ok}/{protected_total}",
             "config_files": f"{config_ok}/{config_total}",
             "imports": f"{import_ok}/{import_total}",
+            "security": "通过" if security_ok else "有问题",
+            "total_files": self.results["code_quality"]["total_files"],
+            "total_lines": self.results["code_quality"]["total_lines"],
             "issues": len(self.results["issues"]),
             "warnings": len(self.results["warnings"])
         }
@@ -313,26 +582,33 @@ class ArchitectureInspector:
         print(f"  受保护文件: {protected_ok}/{protected_total} 存在")
         print(f"  配置文件: {config_ok}/{config_total} 有效")
         print(f"  关键导入: {import_ok}/{import_total} 成功")
+        print(f"  安全检查: {'通过' if security_ok else '有问题'}")
+        print(f"  代码统计: {self.results['code_quality']['total_files']} 文件, {self.results['code_quality']['total_lines']} 行")
         print(f"  问题数: {len(self.results['issues'])}")
         print(f"  警告数: {len(self.results['warnings'])}")
         
         # 总体状态
         all_ok = (layer_ok == layer_total and 
                   protected_ok == protected_total and 
-                  import_ok == import_total)
+                  import_ok == import_total and
+                  security_ok)
         
         print()
         if all_ok:
             print("✅ 架构巡检通过")
         else:
             print("❌ 架构巡检发现问题，请检查上述项目")
-        
-        # 自动 Git 提交
+    
+    def _auto_git_sync(self):
+        """自动 Git 同步"""
         print()
         print("【自动 Git 同步】")
+        print("-" * 70)
+        
         try:
             from infrastructure.auto_git import auto_commit_if_changed
-            ok, msg = auto_commit_if_changed(f"架构巡检: {layer_ok}/{layer_total} 通过")
+            summary = self.results["summary"]
+            ok, msg = auto_commit_if_changed(f"架构巡检: {summary['layers']} 通过, {summary['total_files']} 文件")
             print(f"  {'✅' if ok else '❌'} {msg}")
         except Exception as e:
             print(f"  ⚠️ 自动提交失败: {e}")

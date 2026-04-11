@@ -42,6 +42,45 @@
         "deleted": [],
         "renamed": []
       }
+    },
+    {
+      "hash": "d2c32664",
+      "message": "V4.3.2 架构融合: 业务模块移入infrastructure, 清理根目录, 更新技能注册表(156技能)",
+      "timestamp": "2026-04-12T01:33:42.805063",
+      "changes": {
+        "modified": [
+          "infrastructure/inventory/skill_registry.json",
+          "reports/git_commits.json",
+          "skills/llm-memory-integration"
+        ],
+        "added": [],
+        "deleted": [
+          "UTO_OPTIMIZATION_V26.py",
+          "AUTO_OPTIMIZATION_V26_COMPLETE.py",
+          "AUTO_OPTIMIZATION_V26_FINAL.py",
+          "AUTO_OPTIMIZATION_V26_FULL.py",
+          "COMPLETE_TEST_V26.py",
+          "MODULE_ACTIVATION_MATRIX.json",
+          "SKILL_PACKAGE_V12.json",
+          "SYSTEM_CAPABILITY_MATRIX_V10.json",
+          "SYSTEM_CAPABILITY_MATRIX_V8.json",
+          "architecture_v27.html",
+          "architecture_v27_cn.html",
+          "architecture_v27_embed_font.html",
+          "architecture_v27_font_fix.html",
+          "architecture_v27_full_cn.html",
+          "architecture_v27_v2.html",
+          "business/packaging_manager.py",
+          "portfolio/resource_scheduler.py",
+          "release/release_manager.py",
+          "security_config.json",
+          "skills-lock.json",
+          "system-config-omega-v5.json",
+          "system-config-omega.json",
+          "templates/replication_engine.py"
+        ],
+        "renamed": []
+      }
     }
   ]
 }

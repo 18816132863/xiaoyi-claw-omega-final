@@ -326,6 +326,16 @@ class ArchitectureInspector:
             print("✅ 架构巡检通过")
         else:
             print("❌ 架构巡检发现问题，请检查上述项目")
+        
+        # 自动 Git 提交
+        print()
+        print("【自动 Git 同步】")
+        try:
+            from infrastructure.auto_git import auto_commit_if_changed
+            ok, msg = auto_commit_if_changed(f"架构巡检: {layer_ok}/{layer_total} 通过")
+            print(f"  {'✅' if ok else '❌'} {msg}")
+        except Exception as e:
+            print(f"  ⚠️ 自动提交失败: {e}")
     
     def save_report(self, path: Path = None):
         """保存报告"""

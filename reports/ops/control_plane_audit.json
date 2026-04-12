@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-12T23:06:02.143645",
+  "generated_at": "2026-04-12T23:47:54.003965",
   "version": "1.0.0",
   "release_gates": [
     {
@@ -40,6 +40,12 @@
     }
   ],
   "nightly_audits": [
+    {
+      "timestamp": "20260412_232158",
+      "passed": true,
+      "p0_count": 0,
+      "p1_count": 0
+    },
     {
       "timestamp": "20260412_224723",
       "passed": true,
@@ -93,12 +99,6 @@
       "passed": true,
       "p0_count": 0,
       "p1_count": 0
-    },
-    {
-      "timestamp": "20260412_165954",
-      "passed": true,
-      "p0_count": 0,
-      "p1_count": 0
     }
   ],
   "blocking_alerts": [
@@ -136,8 +136,8 @@
         "nightly": "2026-04-12T17:33:50.228675"
       },
       "blocked_reasons": [],
-      "resolution_note": "告警已自动恢复",
-      "resolved_at": "2026-04-12T17:46:26.127580"
+      "resolution_note": "手动关闭",
+      "resolved_at": "2026-04-12T23:34:46.354867"
     },
     {
       "incident_id": "INC-20260412193247",
@@ -210,6 +210,27 @@
   ],
   "remediations": [
     {
+      "action_id": "rem_20260412_233446_386",
+      "action_type": "toggle_incident",
+      "mode": "execute",
+      "success": true,
+      "timestamp": "2026-04-12T23:34:46"
+    },
+    {
+      "action_id": "rem_20260412_233406_379",
+      "action_type": "rerun_integration",
+      "mode": "execute",
+      "success": true,
+      "timestamp": "2026-04-12T23:34:06"
+    },
+    {
+      "action_id": "rem_20260412_232152_318",
+      "action_type": "rerun_nightly",
+      "mode": "execute",
+      "success": true,
+      "timestamp": "2026-04-12T23:21:52"
+    },
+    {
       "action_id": "rem_20260412_212756_740",
       "action_type": "retry_notifications",
       "mode": "execute",
@@ -252,7 +273,127 @@
       "timestamp": "2026-04-12T21:15:29"
     }
   ],
-  "approvals": [],
+  "approvals": {
+    "pending": [],
+    "granted": [
+      {
+        "approval_id": "apr_20260412_230647_236",
+        "action_type": "rerun_nightly",
+        "reason": "Nightly audit failed, need retry",
+        "source": "test",
+        "status": "approved",
+        "created_at": "2026-04-12T23:06:47.557595",
+        "approved_at": "2026-04-12T23:06:47.558491",
+        "approved_by": "admin",
+        "denied_at": null,
+        "denied_by": null,
+        "deny_reason": null,
+        "executed_at": null,
+        "execute_record_id": null
+      },
+      {
+        "approval_id": "apr_20260412_232132_312",
+        "action_type": "rerun_nightly",
+        "reason": "semi_auto action: rerun_nightly",
+        "source": "remediation_center",
+        "status": "approved",
+        "created_at": "2026-04-12T23:21:32.614161",
+        "approved_at": "2026-04-12T23:21:52.726026",
+        "approved_by": "admin",
+        "denied_at": null,
+        "denied_by": null,
+        "deny_reason": null,
+        "executed_at": "2026-04-12T23:21:58.355233",
+        "execute_record_id": "rem_20260412_232158",
+        "execute_success": true,
+        "final_status": "executed"
+      },
+      {
+        "approval_id": "apr_20260412_233345_373",
+        "action_type": "rerun_integration",
+        "reason": "semi_auto action: rerun_integration",
+        "source": "remediation_center",
+        "source_alert": null,
+        "source_incident": null,
+        "action_params": {},
+        "status": "approved",
+        "created_at": "2026-04-12T23:33:45.857448",
+        "approved_at": "2026-04-12T23:34:06.354650",
+        "approved_by": "admin",
+        "denied_at": null,
+        "denied_by": null,
+        "deny_reason": null,
+        "executed_at": "2026-04-12T23:34:06.831522",
+        "execute_record_id": "rem_20260412_233406_379",
+        "execute_success": true,
+        "execute_error": "",
+        "final_status": "executed"
+      },
+      {
+        "approval_id": "apr_20260412_233426_382",
+        "action_type": "toggle_incident",
+        "reason": "semi_auto action: toggle_incident",
+        "source": "remediation_center",
+        "source_alert": null,
+        "source_incident": null,
+        "action_params": {
+          "incident_id": "INC-20260412174545"
+        },
+        "status": "approved",
+        "created_at": "2026-04-12T23:34:26.678610",
+        "approved_at": "2026-04-12T23:34:45.941322",
+        "approved_by": "admin",
+        "denied_at": null,
+        "denied_by": null,
+        "deny_reason": null,
+        "executed_at": "2026-04-12T23:34:46.372425",
+        "execute_record_id": "rem_20260412_233446_386",
+        "execute_success": true,
+        "execute_error": "",
+        "final_status": "executed"
+      }
+    ],
+    "denied": [
+      {
+        "approval_id": "apr_20260412_230659_237",
+        "action_type": "rerun_release_gate",
+        "reason": "Release gate failed",
+        "source": "test",
+        "status": "denied",
+        "created_at": "2026-04-12T23:06:59.765561",
+        "approved_at": null,
+        "approved_by": null,
+        "denied_at": "2026-04-12T23:06:59.766444",
+        "denied_by": "admin",
+        "deny_reason": "风险过高，需人工检查",
+        "executed_at": null,
+        "execute_record_id": null
+      },
+      {
+        "approval_id": "apr_20260412_232218_323",
+        "action_type": "rerun_release_gate",
+        "reason": "semi_auto action: rerun_release_gate",
+        "source": "remediation_center",
+        "status": "denied",
+        "created_at": "2026-04-12T23:22:18.115364",
+        "approved_at": null,
+        "approved_by": null,
+        "denied_at": "2026-04-12T23:22:28.648987",
+        "denied_by": "admin",
+        "deny_reason": "风险过高，需人工检查",
+        "executed_at": null,
+        "execute_record_id": null
+      }
+    ],
+    "executed": [],
+    "execute_failed": [],
+    "pending_count": 0,
+    "granted_count": 4,
+    "denied_count": 2,
+    "executed_count": 0,
+    "execute_failed_count": 0,
+    "latest_execute_record_id": "rem_20260412_233446_386"
+  },
   "timeline": [
     {
       "type": "release_gate",
@@ -283,6 +424,24 @@
       "type": "release_gate",
       "timestamp": "20260412_171817",
       "result": "pass"
+    },
+    {
+      "type": "remediation",
+      "timestamp": "2026-04-12T23:34:46",
+      "action": "toggle_incident",
+      "result": "success"
+    },
+    {
+      "type": "remediation",
+      "timestamp": "2026-04-12T23:34:06",
+      "action": "rerun_integration",
+      "result": "success"
+    },
+    {
+      "type": "remediation",
+      "timestamp": "2026-04-12T23:21:52",
+      "action": "rerun_nightly",
+      "result": "success"
     },
     {
       "type": "remediation",

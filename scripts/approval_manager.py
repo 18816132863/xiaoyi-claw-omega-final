@@ -126,7 +126,14 @@ class ApprovalManager:
                 item["execute_record_id"] = execute_result.get("execute_record_id")
                 item["execute_success"] = execute_result.get("success", False)
                 item["execute_error"] = execute_result.get("error")
-                item["final_status"] = "executed" if execute_result.get("success") else "execute_failed"
+
+                # 状态统一
+                if execute_result.get("success"):
+                    item["status"] = "executed"
+                    item["final_status"] = "executed"
+                else:
+                    item["status"] = "execute_failed"
+                    item["final_status"] = "execute_failed"
 
                 # 移到历史
                 history = self._load_history()
@@ -192,6 +199,7 @@ class ApprovalManager:
         for item in queue.get("pending", []):
             if item.get("approval_id") == approval_id:
                 item["status"] = "denied"
+                item["final_status"] = "denied"
                 item["denied_at"] = datetime.now().isoformat()
                 item["denied_by"] = owner
                 item["deny_reason"] = reason

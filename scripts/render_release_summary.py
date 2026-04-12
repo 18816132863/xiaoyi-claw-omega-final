@@ -53,5 +53,30 @@ def main():
         except:
             pass
 
+    # Approval Summary
+    approval_history_path = root / "reports/remediation/approval_history.json"
+    if approval_history_path.exists():
+        try:
+            data = json.load(open(approval_history_path, encoding='utf-8'))
+            approvals = data.get("approvals", [])
+
+            pending = [a for a in approvals if a.get("status") == "pending"]
+            executed = [a for a in approvals if a.get("status") == "executed"]
+            denied = [a for a in approvals if a.get("status") == "denied"]
+
+            print(f"**Approval Summary**:")
+            print(f"- Pending: {len(pending)}")
+            print(f"- Executed: {len(executed)}")
+            print(f"- Denied: {len(denied)}")
+
+            if approvals:
+                latest = approvals[-1]
+                print(f"- Latest: {latest.get('approval_id', 'N/A')} ({latest.get('status', 'N/A')})")
+                if latest.get("execute_record_id"):
+                    print(f"- Latest execute_record_id: {latest.get('execute_record_id')}")
+            print()
+        except:
+            pass
+
 if __name__ == "__main__":
     main()

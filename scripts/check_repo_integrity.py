@@ -219,6 +219,40 @@ class RepoIntegrityChecker:
         """检查脚本依赖"""
         print("【检查脚本依赖】")
 
+        # deps = [...]  # 保持原有检查
+
+        # 新增：审批历史与 remediation history 一致性检查
+        self._check_approval_history_consistency()
+
+        print()
+
+    def _check_approval_history_consistency(self):
+        """检查审批历史与 remediation history 一致性"""
+        approval_history_path = self.root / "reports/remediation/approval_history.json"
+        remediation_history_dir = self.root / "reports/remediation/history"
+
+        if not approval_history_path.exists():
+            return
+
+        try:
+            data = json.load(open(approval_history_path, encoding='utf-8'))
+            approvals = data.get("approvals", [])
+
+            for approval in approvals:
+                execute_record_id = approval.get("execute_record_id")
+                if execute_record_id:
+                    # 检查对应的 history 文件是否存在
+                    history_file = remediation_history_dir / f"{execute_record_id}.json"
+                    if not history_file.exists():
+                        self.errors.append(
+                            f"approval_history 引用不存在的 remediation history: {execute_record_id}"
+                        )
+                        print(f"  ❌ 缺失 remediation history: {execute_record_id}")
+                    else:
+                        self.passed.append(f"remediation history 存在: {execute_record_id}")
+        except Exception as e:
+            self.warnings.append(f"无法检查审批历史一致性: {e}")
+
         # run_release_gate.py 依赖
         deps = [
             ("scripts/run_release_gate.py", "infrastructure/verify_runtime_integrity.py"),

@@ -139,10 +139,38 @@ class ControlPlaneAuditAggregator:
                 })
         return records
 
-    def _get_approvals(self) -> List[Dict]:
-        """获取最近 approval 记录"""
+    def _get_approvals(self) -> Dict:
+        """获取审批结构化摘要"""
         history = load_json(self.reports_dir / "remediation" / "approval_history.json") or {}
-        return history.get("approvals", [])[:self.limit]
+        approvals = history.get("approvals", [])
+
+        # 分类
+        pending = [a for a in approvals if a.get("status") == "pending"]
+        granted = [a for a in approvals if a.get("status") in ["approved", "executed"]]
+        denied = [a for a in approvals if a.get("status") == "denied"]
+        executed = [a for a in approvals if a.get("status") == "executed"]
+        execute_failed = [a for a in approvals if a.get("status") == "execute_failed"]
+
+        # 获取最新 execute_record_id
+        latest_execute_record_id = None
+        for a in reversed(approvals):
+            if a.get("execute_record_id"):
+                latest_execute_record_id = a.get("execute_record_id")
+                break
+
+        return {
+            "pending": pending[:self.limit],
+            "granted": granted[:self.limit],
+            "denied": denied[:self.limit],
+            "executed": executed[:self.limit],
+            "execute_failed": execute_failed[:self.limit],
+            "pending_count": len(pending),
+            "granted_count": len(granted),
+            "denied_count": len(denied),
+            "executed_count": len(executed),
+            "execute_failed_count": len(execute_failed),
+            "latest_execute_record_id": latest_execute_record_id
+        }
 
     def _build_timeline(self) -> List[Dict]:
         """构建时间线"""

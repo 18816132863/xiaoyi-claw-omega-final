@@ -1,0 +1,13 @@
+{
+  "latest_profile": "nightly_auto",
+  "latest_workflow": "test",
+  "latest_executed_actions": [],
+  "latest_denied_actions": [],
+  "latest_deny_reasons": {},
+  "latest_remediation_record_ids": [],
+  "cooldown_hits": false,
+  "circuit_open_hits": false,
+  "auto_execute_enabled": true,
+  "timestamp": "2026-04-12T21:55:20.660139",
+  "updated_at": "2026-04-12T21:55:20.661062"
+}

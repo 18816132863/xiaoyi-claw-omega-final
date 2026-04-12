@@ -635,13 +635,34 @@ class RemediationCenter:
         policy_path = self.root / "infrastructure" / "remediation" / "auto_execute_policy.json"
         return load_json(policy_path) or {"profiles": {}, "default_profile": "manual_only"}
 
-    def _check_cooldown(self, action: str) -> tuple:
-        """检查冷却期"""
+    def _generate_root_cause_key(self, action: str, plan_item: Dict = None) -> str:
+        """生成根因标识"""
+        if plan_item:
+            # 基于 action + reason + status 生成稳定 key
+            reason = plan_item.get("reason", "")
+            status = plan_item.get("status", "")
+            key_str = f"{action}:{reason}:{status}"
+        else:
+            key_str = action
+
+        # 简单 hash
+        import hashlib
+        return hashlib.md5(key_str.encode()).hexdigest()[:12]
+
+    def _check_cooldown(self, action: str, root_cause_key: str = None) -> tuple:
+        """检查冷却期（支持 root_cause_key）"""
         policy = self._load_auto_execute_policy()
         cooldown_minutes = policy.get("cooldown", {}).get("action_specific", {}).get(action, 5)
 
         guard_state = self._load_guard_state()
-        guard = guard_state.get("guards", {}).get(action, {})
+
+        # 优先按 action + root_cause_key 查找
+        guard_key = f"{action}:{root_cause_key}" if root_cause_key else action
+        guard = guard_state.get("guards", {}).get(guard_key, {})
+
+        # 如果没找到，尝试只按 action 查找
+        if not guard and root_cause_key:
+            guard = guard_state.get("guards", {}).get(action, {})
 
         last_attempt = guard.get("last_attempt_at")
         if last_attempt:
@@ -652,10 +673,16 @@ class RemediationCenter:
 
         return False, None
 
-    def _check_circuit_breaker(self, action: str) -> tuple:
-        """检查熔断器"""
+    def _check_circuit_breaker(self, action: str, root_cause_key: str = None) -> tuple:
+        """检查熔断器（支持 root_cause_key）"""
         guard_state = self._load_guard_state()
-        guard = guard_state.get("guards", {}).get(action, {})
+
+        guard_key = f"{action}:{root_cause_key}" if root_cause_key else action
+        guard = guard_state.get("guards", {}).get(guard_key, {})
+
+        # 如果没找到，尝试只按 action 查找
+        if not guard and root_cause_key:
+            guard = guard_state.get("guards", {}).get(action, {})
 
         if guard.get("circuit_open"):
             opened_at = guard.get("circuit_opened_at")
@@ -670,18 +697,24 @@ class RemediationCenter:
                     # 重置熔断器
                     guard["circuit_open"] = False
                     guard["circuit_reason"] = None
-                    guard_state["guards"][action] = guard
+                    guard_state["guards"][guard_key] = guard
                     self._save_guard_state(guard_state)
 
         return False, None
 
-    def _check_retry_limit(self, action: str) -> tuple:
-        """检查重试上限"""
+    def _check_retry_limit(self, action: str, root_cause_key: str = None) -> tuple:
+        """检查重试上限（支持 root_cause_key）"""
         policy = self._load_auto_execute_policy()
         max_retry = policy.get("retry", {}).get("max_retry_count", 3)
 
         guard_state = self._load_guard_state()
-        guard = guard_state.get("guards", {}).get(action, {})
+
+        guard_key = f"{action}:{root_cause_key}" if root_cause_key else action
+        guard = guard_state.get("guards", {}).get(guard_key, {})
+
+        # 如果没找到，尝试只按 action 查找
+        if not guard and root_cause_key:
+            guard = guard_state.get("guards", {}).get(action, {})
 
         if guard.get("retry_count", 0) >= max_retry:
             return True, f"已达到重试上限 ({max_retry})"
@@ -720,6 +753,24 @@ class RemediationCenter:
                 results["passed"] = False
                 results["failures"].append("Release 被阻塞")
 
+        # 检查 release_gate_passed（显式检查）
+        if prereqs.get("release_gate_passed"):
+            release = load_json(self.reports_dir / "release_gate.json")
+            if release:
+                # 检查 runtime_gate 和 quality_gate
+                runtime_passed = release.get("runtime_gate", {}).get("passed", False)
+                quality_passed = release.get("quality_gate", {}).get("passed", False)
+                can_release = release.get("can_release", False)
+
+                if not (runtime_passed and quality_passed and can_release):
+                    results["passed"] = False
+                    if not runtime_passed:
+                        results["failures"].append("Runtime gate 未通过")
+                    if not quality_passed:
+                        results["failures"].append("Quality gate 未通过")
+                    if not can_release:
+                        results["failures"].append("Release gate 未通过")
+
         # 检查 P0
         if prereqs.get("p0_must_be_zero"):
             runtime = load_json(self.reports_dir / "runtime_integrity.json")
@@ -729,18 +780,23 @@ class RemediationCenter:
 
         return results
 
-    def _update_guard_after_execute(self, action: str, success: bool, error: str = None):
-        """执行后更新熔断状态"""
+    def _update_guard_after_execute(self, action: str, success: bool, error: str = None, root_cause_key: str = None):
+        """执行后更新熔断状态（支持 root_cause_key）"""
         guard_state = self._load_guard_state()
         if "guards" not in guard_state:
             guard_state["guards"] = {}
 
-        guard = guard_state["guards"].get(action, {
+        guard_key = f"{action}:{root_cause_key}" if root_cause_key else action
+
+        guard = guard_state["guards"].get(guard_key, {
             "action_type": action,
+            "root_cause_key": root_cause_key,
             "retry_count": 0,
             "circuit_open": False
         })
 
+        guard["action_type"] = action
+        guard["root_cause_key"] = root_cause_key
         guard["last_attempt_at"] = datetime.now().isoformat()
 
         if success:
@@ -759,7 +815,7 @@ class RemediationCenter:
                 guard["circuit_reason"] = f"连续失败 {guard['retry_count']} 次"
                 guard["circuit_opened_at"] = datetime.now().isoformat()
 
-        guard_state["guards"][action] = guard
+        guard_state["guards"][guard_key] = guard
         self._save_guard_state(guard_state)
 
     def _save_auto_execute_audit(self, audit: Dict):
@@ -773,6 +829,26 @@ class RemediationCenter:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         history_path = self.history_dir / f"{timestamp}_auto_execute.json"
         save_json(history_path, audit)
+
+    def _save_auto_execute_summary(self, audit: Dict):
+        """保存自动执行摘要"""
+        summary_path = self.remediation_dir / "auto_execute_summary.json"
+
+        summary = {
+            "latest_profile": audit.get("profile"),
+            "latest_workflow": audit.get("workflow"),
+            "latest_executed_actions": audit.get("action_executed", []),
+            "latest_denied_actions": audit.get("action_denied", []),
+            "latest_deny_reasons": audit.get("deny_reasons", {}),
+            "latest_remediation_record_ids": audit.get("remediation_record_ids", []),
+            "cooldown_hits": audit.get("cooldown_hit", False),
+            "circuit_open_hits": audit.get("circuit_open", False),
+            "auto_execute_enabled": audit.get("auto_execute_enabled", False),
+            "timestamp": audit.get("timestamp"),
+            "updated_at": datetime.now().isoformat()
+        }
+
+        save_json(summary_path, summary)
 
     def cmd_auto_execute(self, profile: str, workflow: str = "manual") -> Dict:
         """受控自动执行"""
@@ -809,9 +885,10 @@ class RemediationCenter:
         print(f"✅ 自动执行已开启")
         print()
 
-        # 获取 plan
+        # 获取 plan（带详细信息用于生成 root_cause_key）
         plan = self._get_plan_internal()
-        pending_actions = [a["action"] for a in plan.get("safe_auto_actions", [])]
+        plan_actions = plan.get("safe_auto_actions", [])
+        pending_actions = [a["action"] for a in plan_actions]
 
         if not pending_actions:
             print("无待处理的 safe_auto 动作")
@@ -823,17 +900,19 @@ class RemediationCenter:
                 "action_executed": [],
                 "action_denied": [],
                 "deny_reasons": {},
+                "remediation_record_ids": [],
                 "preflight_result": "no_actions",
                 "cooldown_hit": False,
                 "circuit_open": False,
                 "timestamp": datetime.now().isoformat()
             }
             self._save_auto_execute_audit(audit)
+            self._save_auto_execute_summary(audit)
             return audit
 
         print(f"【待处理动作】")
-        for a in pending_actions:
-            print(f"  • {a}")
+        for a in plan_actions:
+            print(f"  • {a['action']}: {a.get('reason', '')}")
         print()
 
         # 检查前置条件
@@ -850,6 +929,7 @@ class RemediationCenter:
                 "action_executed": [],
                 "action_denied": pending_actions,
                 "deny_reasons": {a: "; ".join(prereq_result["failures"]) for a in pending_actions},
+                "remediation_record_ids": [],
                 "preflight_result": "failed",
                 "preflight_failures": prereq_result["failures"],
                 "cooldown_hit": False,
@@ -857,6 +937,7 @@ class RemediationCenter:
                 "timestamp": datetime.now().isoformat()
             }
             self._save_auto_execute_audit(audit)
+            self._save_auto_execute_summary(audit)
             return audit
 
         print(f"✅ 前置条件检查通过")
@@ -866,47 +947,57 @@ class RemediationCenter:
         executed = []
         denied = []
         deny_reasons = {}
+        remediation_record_ids = []
 
         allowed_actions = profile_config.get("allowed_actions", [])
 
-        for action in pending_actions:
+        for plan_item in plan_actions:
+            action = plan_item["action"]
+
+            # 生成 root_cause_key
+            root_cause_key = self._generate_root_cause_key(action, plan_item)
+
             # 检查是否允许
             if action not in allowed_actions:
                 denied.append(action)
                 deny_reasons[action] = "不在允许列表中"
                 continue
 
-            # 检查冷却
-            in_cooldown, cooldown_reason = self._check_cooldown(action)
+            # 检查冷却（带 root_cause_key）
+            in_cooldown, cooldown_reason = self._check_cooldown(action, root_cause_key)
             if in_cooldown:
                 denied.append(action)
                 deny_reasons[action] = cooldown_reason
                 continue
 
-            # 检查熔断
-            circuit_open, circuit_reason = self._check_circuit_breaker(action)
+            # 检查熔断（带 root_cause_key）
+            circuit_open, circuit_reason = self._check_circuit_breaker(action, root_cause_key)
             if circuit_open:
                 denied.append(action)
                 deny_reasons[action] = circuit_reason
                 continue
 
-            # 检查重试上限
-            over_limit, limit_reason = self._check_retry_limit(action)
+            # 检查重试上限（带 root_cause_key）
+            over_limit, limit_reason = self._check_retry_limit(action, root_cause_key)
             if over_limit:
                 denied.append(action)
                 deny_reasons[action] = limit_reason
                 continue
 
             # 执行
-            print(f"【执行】{action}")
+            print(f"【执行】{action} (root_cause: {root_cause_key})")
             result = self.cmd_execute(action)
+            record_id = result.get("action_id")
+
             if result.get("success"):
                 executed.append(action)
-                self._update_guard_after_execute(action, True)
+                if record_id:
+                    remediation_record_ids.append(record_id)
+                self._update_guard_after_execute(action, True, None, root_cause_key)
             else:
                 denied.append(action)
                 deny_reasons[action] = result.get("error", "执行失败")
-                self._update_guard_after_execute(action, False, result.get("error"))
+                self._update_guard_after_execute(action, False, result.get("error"), root_cause_key)
 
         # 保存审计
         audit = {
@@ -917,17 +1008,21 @@ class RemediationCenter:
             "action_executed": executed,
             "action_denied": denied,
             "deny_reasons": deny_reasons,
+            "remediation_record_ids": remediation_record_ids,
             "preflight_result": "passed",
             "cooldown_hit": len([r for r in deny_reasons.values() if "冷却" in r]) > 0,
             "circuit_open": len([r for r in deny_reasons.values() if "熔断" in r]) > 0,
             "timestamp": datetime.now().isoformat()
         }
         self._save_auto_execute_audit(audit)
+        self._save_auto_execute_summary(audit)
 
         print()
         print(f"【执行结果】")
         print(f"  执行: {executed if executed else '无'}")
         print(f"  拒绝: {denied if denied else '无'}")
+        if remediation_record_ids:
+            print(f"  记录ID: {remediation_record_ids}")
         if deny_reasons:
             print(f"  拒绝原因:")
             for a, r in deny_reasons.items():
@@ -992,6 +1087,8 @@ class RemediationCenter:
             print(f"{status} {action}")
             print(f"   重试次数: {guard.get('retry_count', 0)}")
             print(f"   最后尝试: {guard.get('last_attempt_at', 'N/A')[:19]}")
+            if guard.get("root_cause_key"):
+                print(f"   根因标识: {guard.get('root_cause_key')}")
             if guard.get("circuit_open"):
                 print(f"   熔断原因: {guard.get('circuit_reason', 'N/A')}")
                 print(f"   熔断时间: {guard.get('circuit_opened_at', 'N/A')[:19]}")
@@ -1029,9 +1126,12 @@ class RemediationCenter:
             wf = record.get("workflow", "?")
             executed = record.get("action_executed", [])
             denied_actions = record.get("action_denied", [])
+            record_ids = record.get("remediation_record_ids", [])
 
             print(f"{enabled} [{profile}] {wf}")
             print(f"   执行: {executed if executed else '无'}")
+            if record_ids:
+                print(f"   记录ID: {record_ids}")
             if denied_actions:
                 print(f"   拒绝: {denied_actions}")
                 for a, r in record.get("deny_reasons", {}).items():

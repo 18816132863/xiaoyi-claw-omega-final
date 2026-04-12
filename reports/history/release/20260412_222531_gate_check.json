@@ -1,0 +1,38 @@
+{
+  "can_release": true,
+  "runtime_gate": {
+    "profile": "release",
+    "passed": true,
+    "verified_at": "2026-04-12T22:25:30.722909",
+    "p0_count": 0,
+    "local_status": "pass",
+    "integration_status": "pass",
+    "external_status": "pass"
+  },
+  "quality_gate": {
+    "passed": true,
+    "verified_at": "2026-04-12T22:25:30.931605"
+  },
+  "blocked_reasons": [],
+  "skipped_external": [],
+  "quality_checks_summary": {
+    "protected_files": "pass",
+    "architecture_files": "pass",
+    "skill_registry": "pass"
+  },
+  "recent_nightly_status": [
+    {
+      "date": "2026-04-12T22:25:16.701247",
+      "passed": true,
+      "p0_count": 0,
+      "local_status": "pass"
+    }
+  ],
+  "last_blocked": {
+    "date": "2026-04-12T22:24:14.911856",
+    "reasons": [
+      "Local 层未通过: fail"
+    ]
+  },
+  "checked_at": "2026-04-12T22:25:31.138568"
+}

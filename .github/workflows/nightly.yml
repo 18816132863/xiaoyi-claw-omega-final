@@ -2,113 +2,72 @@ name: Nightly Audit
 
 on:
   schedule:
-    # Run at 2:00 UTC every day
     - cron: '0 2 * * *'
   workflow_dispatch:
 
 jobs:
   audit:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt 2>/dev/null || true
-    
+
+    - name: Check Repo Integrity
+      run: |
+        python scripts/check_repo_integrity.py --strict
+
     - name: Run Nightly Audit
-      id: audit
       run: |
         python scripts/run_nightly_audit.py
-      continue-on-error: true
-    
+
     - name: Generate Alerts
-      id: alerts
       run: |
         python scripts/generate_alerts.py --workflow nightly --profile nightly
-      continue-on-error: true
-    
-    - name: Create Summary
-      run: |
-        echo "## 🌙 Nightly Audit Results" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        
-        # Alerts Summary (使用通道适配器)
-        python -c "
-from infrastructure.alerting.channels.github_summary import generate_summary_markdown
-print(generate_summary_markdown())
-" >> $GITHUB_STEP_SUMMARY 2>/dev/null || echo "Alerts summary error" >> $GITHUB_STEP_SUMMARY
-    
+
     - name: Build Dashboard
       run: |
         python scripts/build_ops_dashboard.py
-    
+
     - name: Generate Ops State
       run: |
         python scripts/ops_center.py status
-    
+
     - name: Generate Ops Bundle
       run: |
         python scripts/ops_center.py bundle
-    
+
     - name: Remediation Plan
       run: |
-        echo "## 🔧 Remediation Plan" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        python scripts/remediation_center.py plan >> $GITHUB_STEP_SUMMARY 2>&1 || true
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "---" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        # 显示 remediation summary
-        if [ -f reports/remediation/remediation_summary.json ]; then
-          echo "### Remediation Summary" >> $GITHUB_STEP_SUMMARY
-          python -c "
-import json
-s = json.load(open('reports/remediation/remediation_summary.json'))
-print(f'- Pending actions: {s.get(\"pending_safe_actions\", [])}')
-print(f'- Latest execute: {s.get(\"latest_action_type\", \"none\")}')
-print(f'- Latest success: {s.get(\"latest_action_success\", \"N/A\")}')
-" >> $GITHUB_STEP_SUMMARY 2>/dev/null || true
-        fi
-    
+        python scripts/remediation_center.py plan
+
     - name: Auto Execute Remediation
       if: ${{ env.ENABLE_SAFE_REMEDIATION == 'true' }}
       env:
         ENABLE_SAFE_REMEDIATION: ${{ vars.ENABLE_SAFE_REMEDIATION || 'false' }}
       run: |
-        echo "## 🤖 Auto Execute Remediation" >> $GITHUB_STEP_SUMMARY
+        python scripts/remediation_center.py auto-execute --profile nightly_auto --workflow nightly
+
+    - name: Create Summary
+      run: |
+        echo "## 🌙 Nightly Audit Results" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "Auto execute enabled: true" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        python scripts/remediation_center.py auto-execute --profile nightly_auto --workflow nightly >> $GITHUB_STEP_SUMMARY 2>&1 || true
-    
+        python scripts/render_nightly_summary.py >> $GITHUB_STEP_SUMMARY 2>/dev/null || true
+
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: nightly-reports
         path: |
-          reports/runtime_integrity.json
-          reports/quality_gate.json
-          reports/release_gate.json
-          reports/nightly_audit.json
-          reports/nightly_summary.md
-          reports/trends/
-          reports/history/
-          reports/alerts/
-          reports/dashboard/
-          reports/ops/
-          reports/bundles/
-          reports/remediation/
+          reports/
           governance/ops/incident_tracker.json
         retention-days: 30
-    
-    - name: Check Result
-      if: steps.audit.outcome != 'success'
-      run: exit 1

@@ -32,7 +32,11 @@ class RepoIntegrityChecker:
         "Makefile",
         "infrastructure/verify_runtime_integrity.py",
         "infrastructure/release/release_manager.py",
+        "infrastructure/path_resolver.py",
+        "infrastructure/inventory/skill_registry.json",
+        "infrastructure/inventory/skill_inverted_index.json",
         "governance/quality_gate.py",
+        "governance/guard/protected_files.json",
         "scripts/run_release_gate.py",
         "scripts/run_nightly_audit.py",
         "scripts/generate_alerts.py",
@@ -57,6 +61,14 @@ class RepoIntegrityChecker:
         "infrastructure",
         "scripts",
         ".github/workflows",
+        "reports",
+        "reports/alerts",
+        "reports/bundles",
+        "reports/dashboard",
+        "reports/ops",
+        "reports/remediation",
+        "reports/trends",
+        "reports/history",
     ]
 
     # Makefile 必须支持的目标
@@ -150,7 +162,13 @@ class RepoIntegrityChecker:
             print(f"  检查 {wf.name}...")
             try:
                 content = yaml.safe_load(wf.read_text())
+                self.passed.append(f"Workflow 解析成功: {wf.name}")
+                print(f"    ✅ 解析成功")
                 self._check_workflow_commands(wf.name, content)
+            except yaml.YAMLError as e:
+                # 严格模式下，YAML 解析失败是错误
+                self.errors.append(f"Workflow YAML 解析失败: {wf.name}: {str(e)[:100]}")
+                print(f"    ❌ YAML 解析失败: {str(e)[:50]}")
             except Exception as e:
                 self.warnings.append(f"无法解析 {wf.name}: {e}")
                 print(f"    ⚠️ 无法解析: {e}")

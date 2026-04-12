@@ -1,41 +1,45 @@
 {
-  "version": "2.0",
+  "version": "4.0",
   "updated": "2026-04-12",
-  "description": "当前架构受保护文件清单",
-  
+  "description": "受保护文件清单 - 只包含真实存在的文件",
   "core": [
+    "core/ARCHITECTURE.md",
+    "core/ARCHITECTURE_INTEGRITY.md",
+    "core/AGENTS.md",
+    "core/SOUL.md",
+    "core/USER.md",
+    "core/TOOLS.md",
+    "core/IDENTITY.md",
+    "core/MEMORY.md",
+    "core/HEARTBEAT.md",
+    "governance/guard/file_guardian.py",
+    "governance/guard/protected_files.json",
+    "governance/quality_gate.py",
+    "infrastructure/path_resolver.py",
+    "infrastructure/verify_runtime_integrity.py",
+    "infrastructure/inventory/skill_registry.json",
+    "infrastructure/inventory/skill_inverted_index.json",
+    "infrastructure/release/release_manager.py",
+    "execution/skill_gateway.py",
+    "execution/skill_adapter_gateway.py"
+  ],
+  "directories": [
+    "governance/security/"
+  ],
+  "user_added": [],
+  "deprecated": [
+    "governance/security.py",
     "AGENTS.md",
     "SOUL.md",
     "USER.md",
     "TOOLS.md",
     "IDENTITY.md",
     "MEMORY.md",
-    "HEARTBEAT.md",
-    "core/ARCHITECTURE.md",
-    "core/ARCHITECTURE_INTEGRITY.md",
-    "governance/guard/file_guardian.py",
-    "governance/guard/protected_files.json",
-    "governance/security.py",
-    "governance/audit.py",
-    "infrastructure/path_resolver.py",
-    "infrastructure/inventory/skill_registry.json",
-    "infrastructure/inventory/skill_inverted_index.json",
-    "infrastructure/token_budget.py"
+    "HEARTBEAT.md"
   ],
-  
-  "user_added": [],
-  
-  "deprecated": [
-    "core/ARCHITECTURE_V2.9.2.md",
-    "core/ARCHITECTURE_V2.9.1.md",
-    "core/ARCHITECTURE_V2.8.1.md",
-    "infra/paths.py",
-    "guide/bootstrap.py",
-    "guide/assistant_guide.py"
-  ],
-  
   "notes": [
-    "deprecated 列表中的文件已归档，不再作为现行主保护对象",
-    "如需删除 deprecated 文件，需明确标识为 archive/deprecated"
+    "V4.0: 移除不存在的 governance/security.py",
+    "改为保护 governance/security/ 目录",
+    "只包含真实存在的文件"
   ]
 }

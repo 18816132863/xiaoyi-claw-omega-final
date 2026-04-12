@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-04-12T20:13:46.218582",
+  "source_workflow": "nightly",
+  "profile": "nightly",
+  "triggered_at": "2026-04-12T20:13:46.218582",
+  "has_blocking_alerts": true,
+  "has_warning_alerts": true,
+  "total_alerts": 2,
+  "blocking_count": 1,
+  "warning_count": 1,
+  "alerts": [
+    {
+      "alert_type": "P0_BLOCKED",
+      "severity": "blocking",
+      "message": "P0 硬编码路径: 1 处",
+      "details": {
+        "p0_count": 1
+      }
+    },
+    {
+      "alert_type": "WEAK_REGRESSION",
+      "severity": "warning",
+      "message": "检测到 1 个弱回归",
+      "details": {
+        "regressions": [
+          {
+            "type": "weak",
+            "change": {
+              "field": "p2_count",
+              "from": 27,
+              "to": 33
+            },
+            "source": "runtime"
+          }
+        ]
+      }
+    }
+  ],
+  "blocked_reasons": [],
+  "strong_regressions": [],
+  "weak_regressions": [
+    {
+      "type": "weak",
+      "change": {
+        "field": "p2_count",
+        "from": 27,
+        "to": 33
+      },
+      "source": "runtime"
+    }
+  ],
+  "skipped_external": [],
+  "source_reports": {
+    "runtime": "2026-04-12T19:53:56.437517",
+    "quality": "2026-04-12T19:53:56.645735",
+    "release": "2026-04-12T17:34:03.679687",
+    "nightly": "2026-04-12T19:53:56.667981"
+  },
+  "recommended_actions": [
+    "🚨 存在阻塞级告警，建议立即处理",
+    "修复 P0 硬编码路径后再合并"
+  ],
+  "incident_created": false,
+  "incident_resolved": false,
+  "incident_status_summary": {
+    "total_incidents": 0,
+    "open_incidents": 0,
+    "resolved_incidents": 0
+  }
+}

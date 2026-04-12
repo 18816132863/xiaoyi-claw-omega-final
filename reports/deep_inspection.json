@@ -1,0 +1,874 @@
+{
+  "inspected_at": "2026-04-12T19:56:11.486505",
+  "total_checks": 62,
+  "passed_checks": 51,
+  "failed_checks": 0,
+  "warnings": 11,
+  "categories": {
+    "protected_files": {
+      "pass": 12,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "AGENTS.md",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "SOUL.md",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "USER.md",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "TOOLS.md",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "IDENTITY.md",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "MEMORY.md",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "HEARTBEAT.md",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "Makefile",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "core/ARCHITECTURE.md",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "core/ARCHITECTURE_INTEGRITY.md",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "governance/guard/protected_files.json",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "infrastructure/inventory/skill_registry.json",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        }
+      ]
+    },
+    "directory_structure": {
+      "pass": 10,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "infrastructure",
+          "status": "pass",
+          "message": "存在 (352 文件)",
+          "details": null
+        },
+        {
+          "check": "governance",
+          "status": "pass",
+          "message": "存在 (118 文件)",
+          "details": null
+        },
+        {
+          "check": "execution",
+          "status": "pass",
+          "message": "存在 (121 文件)",
+          "details": null
+        },
+        {
+          "check": "orchestration",
+          "status": "pass",
+          "message": "存在 (80 文件)",
+          "details": null
+        },
+        {
+          "check": "core",
+          "status": "pass",
+          "message": "存在 (156 文件)",
+          "details": null
+        },
+        {
+          "check": "scripts",
+          "status": "pass",
+          "message": "存在 (5 文件)",
+          "details": null
+        },
+        {
+          "check": "reports",
+          "status": "pass",
+          "message": "存在 (89 文件)",
+          "details": null
+        },
+        {
+          "check": "tests",
+          "status": "pass",
+          "message": "存在 (34 文件)",
+          "details": null
+        },
+        {
+          "check": "memory_context/vector",
+          "status": "pass",
+          "message": "存在 (96 文件)",
+          "details": null
+        },
+        {
+          "check": "memory_context/ontology",
+          "status": "pass",
+          "message": "存在 (3 文件)",
+          "details": null
+        }
+      ]
+    },
+    "file_permissions": {
+      "pass": 5,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "generate_alerts.py",
+          "status": "pass",
+          "message": "可执行",
+          "details": null
+        },
+        {
+          "check": "deep_inspection.py",
+          "status": "pass",
+          "message": "可执行",
+          "details": null
+        },
+        {
+          "check": "run_nightly_audit.py",
+          "status": "pass",
+          "message": "可执行",
+          "details": null
+        },
+        {
+          "check": "build_ops_dashboard.py",
+          "status": "pass",
+          "message": "可执行",
+          "details": null
+        },
+        {
+          "check": "run_release_gate.py",
+          "status": "pass",
+          "message": "可执行",
+          "details": null
+        }
+      ]
+    },
+    "file_sizes": {
+      "pass": 0,
+      "fail": 0,
+      "warn": 2,
+      "checks": [
+        {
+          "check": "memory_context/index/fts_index.json",
+          "status": "warn",
+          "message": "17.9MB",
+          "details": null
+        },
+        {
+          "check": "memory_context/index/keyword_index.json",
+          "status": "warn",
+          "message": "26.0MB",
+          "details": null
+        }
+      ]
+    },
+    "orphan_files": {
+      "pass": 1,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "check",
+          "status": "pass",
+          "message": "无孤立文件",
+          "details": null
+        }
+      ]
+    },
+    "python_syntax": {
+      "pass": 1,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "check",
+          "status": "pass",
+          "message": "检查 50 文件",
+          "details": null
+        }
+      ]
+    },
+    "import_statements": {
+      "pass": 1,
+      "fail": 0,
+      "warn": 3,
+      "checks": [
+        {
+          "check": "infrastructure",
+          "status": "warn",
+          "message": "6 相对导入",
+          "details": null
+        },
+        {
+          "check": "governance",
+          "status": "warn",
+          "message": "1 相对导入",
+          "details": null
+        },
+        {
+          "check": "execution",
+          "status": "warn",
+          "message": "3 相对导入",
+          "details": null
+        },
+        {
+          "check": "orchestration",
+          "status": "pass",
+          "message": "导入正常",
+          "details": null
+        }
+      ]
+    },
+    "code_duplicates": {
+      "pass": 0,
+      "fail": 0,
+      "warn": 3,
+      "checks": [
+        {
+          "check": "__init__.py",
+          "status": "warn",
+          "message": "与 __init__.py 重复",
+          "details": null
+        },
+        {
+          "check": "performance_integration.py",
+          "status": "warn",
+          "message": "与 performance_integration.py 重复",
+          "details": null
+        },
+        {
+          "check": "__init__.py",
+          "status": "warn",
+          "message": "与 __init__.py 重复",
+          "details": null
+        }
+      ]
+    },
+    "json_configs": {
+      "pass": 1,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "check",
+          "status": "pass",
+          "message": "检查 30 文件",
+          "details": null
+        }
+      ]
+    },
+    "skill_registry": {
+      "pass": 3,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "total",
+          "status": "pass",
+          "message": "8 技能",
+          "details": null
+        },
+        {
+          "check": "callable",
+          "status": "pass",
+          "message": "0 可执行",
+          "details": null
+        },
+        {
+          "check": "metadata",
+          "status": "pass",
+          "message": "元数据完整",
+          "details": null
+        }
+      ]
+    },
+    "workflows": {
+      "pass": 3,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "premerge.yml",
+          "status": "pass",
+          "message": "配置有效",
+          "details": null
+        },
+        {
+          "check": "release-gate.yml",
+          "status": "pass",
+          "message": "配置有效",
+          "details": null
+        },
+        {
+          "check": "nightly.yml",
+          "status": "pass",
+          "message": "配置有效",
+          "details": null
+        }
+      ]
+    },
+    "dependencies": {
+      "pass": 0,
+      "fail": 0,
+      "warn": 1,
+      "checks": [
+        {
+          "check": "requirements.txt",
+          "status": "warn",
+          "message": "缺失",
+          "details": null
+        }
+      ]
+    },
+    "makefile": {
+      "pass": 4,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "targets",
+          "status": "pass",
+          "message": "7 目标",
+          "details": null
+        },
+        {
+          "check": "verify-premerge",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "verify-nightly",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        },
+        {
+          "check": "verify-release",
+          "status": "pass",
+          "message": "存在",
+          "details": null
+        }
+      ]
+    },
+    "reports": {
+      "pass": 6,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "reports/runtime_integrity.json",
+          "status": "pass",
+          "message": "有效 (1098 字符)",
+          "details": null
+        },
+        {
+          "check": "reports/quality_gate.json",
+          "status": "pass",
+          "message": "有效 (309 字符)",
+          "details": null
+        },
+        {
+          "check": "reports/release_gate.json",
+          "status": "pass",
+          "message": "有效 (940 字符)",
+          "details": null
+        },
+        {
+          "check": "reports/nightly_audit.json",
+          "status": "pass",
+          "message": "有效 (1397 字符)",
+          "details": null
+        },
+        {
+          "check": "reports/alerts/latest_alerts.json",
+          "status": "pass",
+          "message": "有效 (855 字符)",
+          "details": null
+        },
+        {
+          "check": "reports/dashboard/ops_dashboard.json",
+          "status": "pass",
+          "message": "有效 (4515 字符)",
+          "details": null
+        }
+      ]
+    },
+    "history": {
+      "pass": 4,
+      "fail": 0,
+      "warn": 0,
+      "checks": [
+        {
+          "check": "reports/history/runtime",
+          "status": "pass",
+          "message": "11 快照",
+          "details": null
+        },
+        {
+          "check": "reports/history/quality",
+          "status": "pass",
+          "message": "11 快照",
+          "details": null
+        },
+        {
+          "check": "reports/history/release",
+          "status": "pass",
+          "message": "2 快照",
+          "details": null
+        },
+        {
+          "check": "reports/alerts/history",
+          "status": "pass",
+          "message": "7 快照",
+          "details": null
+        }
+      ]
+    },
+    "secrets": {
+      "pass": 0,
+      "fail": 0,
+      "warn": 1,
+      "checks": [
+        {
+          "check": "integration_contract.py",
+          "status": "warn",
+          "message": "可能包含硬编码敏感信息",
+          "details": null
+        }
+      ]
+    },
+    "gitignore": {
+      "pass": 0,
+      "fail": 0,
+      "warn": 1,
+      "checks": [
+        {
+          "check": "entries",
+          "status": "warn",
+          "message": "缺少: ['*.pyc']",
+          "details": null
+        }
+      ]
+    }
+  },
+  "details": [
+    {
+      "category": "protected_files",
+      "check": "AGENTS.md",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "SOUL.md",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "USER.md",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "TOOLS.md",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "IDENTITY.md",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "MEMORY.md",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "HEARTBEAT.md",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "Makefile",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "core/ARCHITECTURE.md",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "core/ARCHITECTURE_INTEGRITY.md",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "governance/guard/protected_files.json",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "protected_files",
+      "check": "infrastructure/inventory/skill_registry.json",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "directory_structure",
+      "check": "infrastructure",
+      "status": "pass",
+      "message": "存在 (352 文件)"
+    },
+    {
+      "category": "directory_structure",
+      "check": "governance",
+      "status": "pass",
+      "message": "存在 (118 文件)"
+    },
+    {
+      "category": "directory_structure",
+      "check": "execution",
+      "status": "pass",
+      "message": "存在 (121 文件)"
+    },
+    {
+      "category": "directory_structure",
+      "check": "orchestration",
+      "status": "pass",
+      "message": "存在 (80 文件)"
+    },
+    {
+      "category": "directory_structure",
+      "check": "core",
+      "status": "pass",
+      "message": "存在 (156 文件)"
+    },
+    {
+      "category": "directory_structure",
+      "check": "scripts",
+      "status": "pass",
+      "message": "存在 (5 文件)"
+    },
+    {
+      "category": "directory_structure",
+      "check": "reports",
+      "status": "pass",
+      "message": "存在 (89 文件)"
+    },
+    {
+      "category": "directory_structure",
+      "check": "tests",
+      "status": "pass",
+      "message": "存在 (34 文件)"
+    },
+    {
+      "category": "directory_structure",
+      "check": "memory_context/vector",
+      "status": "pass",
+      "message": "存在 (96 文件)"
+    },
+    {
+      "category": "directory_structure",
+      "check": "memory_context/ontology",
+      "status": "pass",
+      "message": "存在 (3 文件)"
+    },
+    {
+      "category": "file_permissions",
+      "check": "generate_alerts.py",
+      "status": "pass",
+      "message": "可执行"
+    },
+    {
+      "category": "file_permissions",
+      "check": "deep_inspection.py",
+      "status": "pass",
+      "message": "可执行"
+    },
+    {
+      "category": "file_permissions",
+      "check": "run_nightly_audit.py",
+      "status": "pass",
+      "message": "可执行"
+    },
+    {
+      "category": "file_permissions",
+      "check": "build_ops_dashboard.py",
+      "status": "pass",
+      "message": "可执行"
+    },
+    {
+      "category": "file_permissions",
+      "check": "run_release_gate.py",
+      "status": "pass",
+      "message": "可执行"
+    },
+    {
+      "category": "file_sizes",
+      "check": "memory_context/index/fts_index.json",
+      "status": "warn",
+      "message": "17.9MB"
+    },
+    {
+      "category": "file_sizes",
+      "check": "memory_context/index/keyword_index.json",
+      "status": "warn",
+      "message": "26.0MB"
+    },
+    {
+      "category": "orphan_files",
+      "check": "check",
+      "status": "pass",
+      "message": "无孤立文件"
+    },
+    {
+      "category": "python_syntax",
+      "check": "check",
+      "status": "pass",
+      "message": "检查 50 文件"
+    },
+    {
+      "category": "import_statements",
+      "check": "infrastructure",
+      "status": "warn",
+      "message": "6 相对导入"
+    },
+    {
+      "category": "import_statements",
+      "check": "governance",
+      "status": "warn",
+      "message": "1 相对导入"
+    },
+    {
+      "category": "import_statements",
+      "check": "execution",
+      "status": "warn",
+      "message": "3 相对导入"
+    },
+    {
+      "category": "import_statements",
+      "check": "orchestration",
+      "status": "pass",
+      "message": "导入正常"
+    },
+    {
+      "category": "code_duplicates",
+      "check": "__init__.py",
+      "status": "warn",
+      "message": "与 __init__.py 重复"
+    },
+    {
+      "category": "code_duplicates",
+      "check": "performance_integration.py",
+      "status": "warn",
+      "message": "与 performance_integration.py 重复"
+    },
+    {
+      "category": "code_duplicates",
+      "check": "__init__.py",
+      "status": "warn",
+      "message": "与 __init__.py 重复"
+    },
+    {
+      "category": "json_configs",
+      "check": "check",
+      "status": "pass",
+      "message": "检查 30 文件"
+    },
+    {
+      "category": "skill_registry",
+      "check": "total",
+      "status": "pass",
+      "message": "8 技能"
+    },
+    {
+      "category": "skill_registry",
+      "check": "callable",
+      "status": "pass",
+      "message": "0 可执行"
+    },
+    {
+      "category": "skill_registry",
+      "check": "metadata",
+      "status": "pass",
+      "message": "元数据完整"
+    },
+    {
+      "category": "workflows",
+      "check": "premerge.yml",
+      "status": "pass",
+      "message": "配置有效"
+    },
+    {
+      "category": "workflows",
+      "check": "release-gate.yml",
+      "status": "pass",
+      "message": "配置有效"
+    },
+    {
+      "category": "workflows",
+      "check": "nightly.yml",
+      "status": "pass",
+      "message": "配置有效"
+    },
+    {
+      "category": "dependencies",
+      "check": "requirements.txt",
+      "status": "warn",
+      "message": "缺失"
+    },
+    {
+      "category": "makefile",
+      "check": "targets",
+      "status": "pass",
+      "message": "7 目标"
+    },
+    {
+      "category": "makefile",
+      "check": "verify-premerge",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "makefile",
+      "check": "verify-nightly",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "makefile",
+      "check": "verify-release",
+      "status": "pass",
+      "message": "存在"
+    },
+    {
+      "category": "reports",
+      "check": "reports/runtime_integrity.json",
+      "status": "pass",
+      "message": "有效 (1098 字符)"
+    },
+    {
+      "category": "reports",
+      "check": "reports/quality_gate.json",
+      "status": "pass",
+      "message": "有效 (309 字符)"
+    },
+    {
+      "category": "reports",
+      "check": "reports/release_gate.json",
+      "status": "pass",
+      "message": "有效 (940 字符)"
+    },
+    {
+      "category": "reports",
+      "check": "reports/nightly_audit.json",
+      "status": "pass",
+      "message": "有效 (1397 字符)"
+    },
+    {
+      "category": "reports",
+      "check": "reports/alerts/latest_alerts.json",
+      "status": "pass",
+      "message": "有效 (855 字符)"
+    },
+    {
+      "category": "reports",
+      "check": "reports/dashboard/ops_dashboard.json",
+      "status": "pass",
+      "message": "有效 (4515 字符)"
+    },
+    {
+      "category": "history",
+      "check": "reports/history/runtime",
+      "status": "pass",
+      "message": "11 快照"
+    },
+    {
+      "category": "history",
+      "check": "reports/history/quality",
+      "status": "pass",
+      "message": "11 快照"
+    },
+    {
+      "category": "history",
+      "check": "reports/history/release",
+      "status": "pass",
+      "message": "2 快照"
+    },
+    {
+      "category": "history",
+      "check": "reports/alerts/history",
+      "status": "pass",
+      "message": "7 快照"
+    },
+    {
+      "category": "secrets",
+      "check": "integration_contract.py",
+      "status": "warn",
+      "message": "可能包含硬编码敏感信息"
+    },
+    {
+      "category": "gitignore",
+      "check": "entries",
+      "status": "warn",
+      "message": "缺少: ['*.pyc']"
+    }
+  ]
+}

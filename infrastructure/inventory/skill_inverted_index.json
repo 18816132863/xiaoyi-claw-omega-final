@@ -1,155 +1,47 @@
 {
-  "version": "4.3.2",
-  "generated": "2026-04-11",
-  "total_skills": 156,
-  "executable_skills": 7,
+  "version": "1.0.0",
+  "generated_at": "2026-04-12T22:34:56.909618",
+  "source": "skill_registry.json",
+  "skills": [
+    "docx",
+    "file-manager",
+    "cron",
+    "pdf"
+  ],
   "by_trigger": {
-    "find": [
-      "find-skills"
-    ],
-    "skills": [
-      "find-skills"
-    ],
-    "find-skills": [
-      "find-skills"
-    ],
-    "此skill用于发现并为": [
-      "find-skills"
-    ],
-    "agent": [
-      "find-skills"
-    ],
-    "安装新能力，并在下载完成后统一强制执行安全扫描。它整合了内部小艺skill市场和外部开源skill生态。": [
-      "find-skills"
-    ],
-    "search": [
-      "find-skills"
-    ],
     "docx": [
       "docx"
-    ],
-    "overview": [
-      "pdf",
-      "docx"
-    ],
-    "document": [
-      "pdf",
-      "docx"
-    ],
-    "file": [
-      "file-manager"
-    ],
-    "manager": [
-      "file-manager"
     ],
     "file-manager": [
       "file-manager"
     ],
-    "核心功能": [
-      "file-manager"
-    ],
-    "other": [
-      "file-manager",
-      "huawei-drive"
-    ],
     "cron": [
-      "cron"
-    ],
-    "turn": [
-      "cron"
-    ],
-    "recurring": [
-      "cron"
-    ],
-    "intentions": [
-      "cron"
-    ],
-    "into": [
-      "cron"
-    ],
-    "structured": [
-      "cron"
-    ],
-    "local": [
-      "cron"
-    ],
-    "schedules.": [
-      "cron"
-    ],
-    "automation": [
       "cron"
     ],
     "pdf": [
       "pdf"
-    ],
-    "huawei": [
-      "huawei-drive"
-    ],
-    "drive": [
-      "huawei-drive"
-    ],
-    "huawei-drive": [
-      "huawei-drive"
-    ],
-    "目前只支持小艺claw，所有操作限制在`小艺claw`目录": [
-      "huawei-drive"
-    ],
-    "xiaoyi": [
-      "xiaoyi-image-understanding"
-    ],
-    "image": [
-      "xiaoyi-image-understanding"
-    ],
-    "understanding": [
-      "xiaoyi-image-understanding"
-    ],
-    "xiaoyi-image-understanding": [
-      "xiaoyi-image-understanding"
-    ],
-    "word": [
-      "docx"
-    ],
-    "skill": [
-      "find-skills"
-    ],
-    "photo": [
-      "xiaoyi-image-understanding"
-    ],
-    "picture": [
-      "xiaoyi-image-understanding"
-    ],
-    "schedule": [
-      "cron"
-    ],
-    "git": [
-      "git"
-    ],
-    "github": [
-      "git"
-    ],
-    "commit": [
-      "git"
-    ],
-    "push": [
-      "git"
-    ],
-    "pull": [
-      "git"
-    ],
-    "branch": [
-      "git"
-    ],
-    "repo": [
-      "git"
-    ],
-    "repository": [
-      "git"
-    ],
-    "版本": [
-      "git"
-    ],
-    "代码": [
-      "git"
     ]
+  },
+  "skill_details": {
+    "docx": {
+      "entry_point": "skills/docx/skill.py",
+      "test_mode": "local",
+      "smoke_test": true
+    },
+    "file-manager": {
+      "entry_point": "skills/file-manager/skill.py",
+      "test_mode": "integration",
+      "smoke_test": false
+    },
+    "cron": {
+      "entry_point": "skills/cron/skill.py",
+      "test_mode": "local",
+      "smoke_test": true
+    },
+    "pdf": {
+      "entry_point": "skills/pdf/skill.py",
+      "test_mode": "local",
+      "smoke_test": true
+    }
   }
 }

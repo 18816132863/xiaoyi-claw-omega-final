@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>运维观测看板</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { color: #333; }
+h2 { color: #444; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+.card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+.stat { text-align: center; padding: 15px; }
+.stat-value { font-size: 32px; font-weight: bold; }
+.stat-label { color: #666; margin-top: 5px; }
+.status-pass { color: #22c55e; }
+.status-fail { color: #ef4444; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+th { background: #f9f9f9; }
+.alert-blocking { background: #fef2f2; border-left: 4px solid #ef4444; padding: 10px; margin: 5px 0; }
+.alert-warning { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 10px; margin: 5px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📊 运维观测看板</h1>
+<p>生成时间: 2026-04-12T21:26:57.674122</p>
+
+<div class="card">
+<h2>🎯 总览</h2>
+<div class="grid">
+<div class="stat">
+<div class="stat-value status-pass">✅</div>
+<div class="stat-label">Runtime</div>
+</div>
+<div class="stat">
+<div class="stat-value status-pass">✅</div>
+<div class="stat-label">Quality</div>
+</div>
+<div class="stat">
+<div class="stat-value status-pass">✅</div>
+<div class="stat-label">Can Release</div>
+</div>
+<div class="stat">
+<div class="stat-value">0</div>
+<div class="stat-label">Blocking Alerts</div>
+</div>
+<div class="stat">
+<div class="stat-value">0</div>
+<div class="stat-label">Open Incidents</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>🔧 Runtime</h2>
+<p><strong>P0/P1/P2</strong>: 0 / 0 / 33</p>
+<p><strong>Local</strong>: pass | <strong>Integration</strong>: pass | <strong>External</strong>: pass</p>
+<p><strong>Skills</strong>: 0 total, 0 callable</p>
+</div>
+
+<div class="card">
+<h2>🚨 Alerts</h2>
+<p>Total: 1 | Blocking: 0 | Warning: 1</p>
+<div class="alert-warning">WEAK_REGRESSION: 检测到 1 个弱回归</div>
+</div>
+
+<div class="card">
+<h2>📋 Incidents</h2>
+<p>Open: 0 | Resolved: 5</p>
+</div>
+
+<div class="card">
+<h2>📈 Trends (Last 5)</h2>
+<table>
+<tr><th>Date</th><th>P0</th><th>P1</th><th>P2</th><th>Can Release</th></tr>
+<tr>
+<td>2026-04-12T17:18:04</td>
+<td>0</td>
+<td>0</td>
+<td>27</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>2026-04-12T17:18:30</td>
+<td>0</td>
+<td>0</td>
+<td>27</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>2026-04-12T17:33:50</td>
+<td>0</td>
+<td>0</td>
+<td>27</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>2026-04-12T19:53:56</td>
+<td>0</td>
+<td>0</td>
+<td>33</td>
+<td>✅</td>
+</tr>
+</table>
+</div>
+
+</div>
+</body>
+</html>

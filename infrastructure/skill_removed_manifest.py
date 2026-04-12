@@ -40,7 +40,9 @@ def generate_removed_manifest(workspace_path: str) -> dict:
     return results
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    # 使用 path_resolver 获取路径
+    from infrastructure.path_resolver import get_project_root
+    workspace = get_project_root()
     results = generate_removed_manifest(workspace)
     
     output_dir = Path(workspace) / "reports"

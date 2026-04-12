@@ -11,7 +11,10 @@ import inspect
 from pathlib import Path
 from typing import Dict, List, Any
 
-sys.path.insert(0, '/home/sandbox/.openclaw/workspace')
+# 使用 path_resolver 获取路径
+from pathlib import Path
+_workspace = Path(__file__).parent.parent
+sys.path.insert(0, str(_workspace))
 
 from infrastructure.component_base import ComponentBase
 

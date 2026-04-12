@@ -91,7 +91,8 @@ def review_frozen_skills(workspace_path: str) -> dict:
     return results
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    from infrastructure.path_resolver import get_project_root
+    workspace = get_project_root()
     results = review_frozen_skills(workspace)
     
     output_dir = Path(workspace) / "reports"

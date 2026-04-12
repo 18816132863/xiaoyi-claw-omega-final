@@ -65,7 +65,8 @@ def generate_merge_mapping(workspace_path: str) -> dict:
     return results
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    from infrastructure.path_resolver import get_project_root
+    workspace = get_project_root()
     results = generate_merge_mapping(workspace)
     
     output_dir = Path(workspace) / "reports"

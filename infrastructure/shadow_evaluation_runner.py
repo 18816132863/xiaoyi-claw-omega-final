@@ -67,7 +67,8 @@ def run_shadow_evaluation(workspace_path: str) -> dict:
     return results
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    from infrastructure.path_resolver import get_project_root
+    workspace = get_project_root()
     results = run_shadow_evaluation(workspace)
     
     output_dir = Path(workspace) / "reports"

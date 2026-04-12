@@ -178,8 +178,10 @@ def generate_file_states(base_dir: Path) -> dict:
 
 def create_backup(output_dir: Path = None, version: str = "v4.3.2") -> Path:
     """创建备份包"""
-    base_dir = Path("/home/sandbox/.openclaw")
-    output_dir = output_dir or Path("/home/sandbox")
+    # 使用 path_resolver 获取路径
+    from infrastructure.path_resolver import get_project_root
+    base_dir = get_project_root().parent  # .openclaw 目录
+    output_dir = output_dir or base_dir.parent  # /home/sandbox
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_file = output_dir / f"openclaw_{version}_{timestamp}.tar.gz"
@@ -223,11 +225,11 @@ def create_backup(output_dir: Path = None, version: str = "v4.3.2") -> Path:
                 file_count += 1
         
         # 添加 .local/bin 目录
-        local_bin = Path("/home/sandbox/.local/bin")
+        local_bin = base_dir.parent / ".local" / "bin"
         if local_bin.exists():
             for f in local_bin.rglob("*"):
                 if f.is_file() and not f.is_symlink():
-                    rel_path = f.relative_to("/home/sandbox")
+                    rel_path = f.relative_to(base_dir.parent)
                     tar.add(f, arcname=str(rel_path))
                     file_count += 1
         
@@ -252,5 +254,5 @@ def create_backup(output_dir: Path = None, version: str = "v4.3.2") -> Path:
 
 
 if __name__ == "__main__":
-    output_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/home/sandbox")
+    output_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else base_dir.parent
     create_backup(output_dir)

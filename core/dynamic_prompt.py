@@ -292,7 +292,8 @@ def get_prompt_manager() -> SystemPromptManager:
     """获取全局提示词管理器"""
     global _prompt_manager
     if _prompt_manager is None:
-        _prompt_manager = SystemPromptManager("/home/sandbox/.openclaw/workspace")
+        from infrastructure.path_resolver import get_project_root
+        _prompt_manager = SystemPromptManager(str(get_project_root()))
     return _prompt_manager
 
 

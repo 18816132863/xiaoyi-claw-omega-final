@@ -1134,7 +1134,13 @@ class UnifiedSearch:
         return result
     
     def search(self, query: str, mode: str = "balanced", limit: int = 10) -> Dict:
-        """统一搜索 - V4.3.2 第三阶段最终微修"""
+        """统一搜索 - V4.3.3 第四阶段搜索质量精修
+        
+        改进：
+        1. 文件类型权重调整
+        2. SKILL.md / 测试文件降权
+        3. 核心文件优先
+        """
         start = time.time()
         
         # 重置 token 预算和 lazy_loader 状态（联动重置）
@@ -1197,6 +1203,9 @@ class UnifiedSearch:
         # 去重
         results = self.dedup.dedup(results)
         
+        # 第四阶段新增：应用文件类型权重
+        results = self._apply_file_weights(results)
+        
         # LazyLoader 接入 - 带硬限制
         for result in results:
             file_path = self.base_dir / result.id
@@ -1254,6 +1263,46 @@ class UnifiedSearch:
             "token_budget": self.token_manager.get_summary(),
             "lazy_loader_status": self.lazy_loader.get_status()
         }
+    
+    def _apply_file_weights(self, results: List[SearchResult]) -> List[SearchResult]:
+        """应用文件类型权重 - V4.3.3 第四阶段
+        
+        降低 SKILL.md、测试文件、文档文件的权重
+        提升核心代码文件的权重
+        """
+        # 文件类型权重配置
+        high_value_patterns = [
+            "core/", "infrastructure/", "governance/", 
+            "orchestration/", "execution/", "memory_context/"
+        ]
+        low_value_patterns = [
+            "SKILL.md", "README.md", "test_", "_test.py",
+            "tests/", "examples/", "docs/", "CHANGELOG",
+            "CONTRIBUTING", "LICENSE"
+        ]
+        
+        for result in results:
+            file_id = result.id
+            weight = 1.0
+            
+            # 检查高价值模式
+            for pattern in high_value_patterns:
+                if pattern in file_id:
+                    weight = 1.3
+                    break
+            
+            # 检查低价值模式
+            for pattern in low_value_patterns:
+                if pattern in file_id:
+                    weight = 0.3
+                    break
+            
+            # 应用权重
+            result.score = result.score * weight
+        
+        # 重新排序
+        results.sort(key=lambda x: x.score, reverse=True)
+        return results
     
     def clear_cache(self):
         self._cache.clear()

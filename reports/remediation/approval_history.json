@@ -29,6 +29,38 @@
       "deny_reason": "风险过高，需人工检查",
       "executed_at": null,
       "execute_record_id": null
+    },
+    {
+      "approval_id": "apr_20260412_232132_312",
+      "action_type": "rerun_nightly",
+      "reason": "semi_auto action: rerun_nightly",
+      "source": "remediation_center",
+      "status": "approved",
+      "created_at": "2026-04-12T23:21:32.614161",
+      "approved_at": "2026-04-12T23:21:52.726026",
+      "approved_by": "admin",
+      "denied_at": null,
+      "denied_by": null,
+      "deny_reason": null,
+      "executed_at": "2026-04-12T23:21:58.355233",
+      "execute_record_id": "rem_20260412_232158",
+      "execute_success": true,
+      "final_status": "executed"
+    },
+    {
+      "approval_id": "apr_20260412_232218_323",
+      "action_type": "rerun_release_gate",
+      "reason": "semi_auto action: rerun_release_gate",
+      "source": "remediation_center",
+      "status": "denied",
+      "created_at": "2026-04-12T23:22:18.115364",
+      "approved_at": null,
+      "approved_by": null,
+      "denied_at": "2026-04-12T23:22:28.648987",
+      "denied_by": "admin",
+      "deny_reason": "风险过高，需人工检查",
+      "executed_at": null,
+      "execute_record_id": null
     }
   ],
   "generated_at": "2026-04-12T23:06:47.558551"

@@ -437,7 +437,29 @@ class RemediationCenter:
         print(f"✅ Dry-run 完成: {action_id}")
         return record
 
-    def cmd_execute(self, action: str, approve: bool = False) -> Dict:
+    def _is_semi_auto(self, action: str) -> bool:
+        """检查是否是 semi_auto 动作"""
+        return action in self.SEMI_AUTO_ACTIONS
+
+    def _add_to_approval_queue(self, action: str, reason: str, source_alert: str = None, source_incident: str = None) -> Dict:
+        """将 semi_auto 动作加入审批队列"""
+        sys.path.insert(0, str(self.root))
+        from scripts.approval_manager import ApprovalManager
+
+        manager = ApprovalManager(self.root)
+        approval_id = manager.add_to_queue(action, reason, "remediation_center")
+
+        return {
+            "status": "queued",
+            "approval_id": approval_id,
+            "action_type": action,
+            "reason": reason,
+            "source_alert": source_alert,
+            "source_incident": source_incident,
+            "queued_at": datetime.now().isoformat()
+        }
+
+    def cmd_execute(self, action: str, approve: bool = False, approval_id: str = None) -> Dict:
         """执行动作"""
         if action in self.FORBIDDEN_ACTIONS:
             print(f"❌ 动作 {action} 禁止自动执行")
@@ -447,10 +469,16 @@ class RemediationCenter:
             print(f"❌ 未知动作: {action}")
             return {"error": "unknown_action"}
 
-        # semi_auto 需要 approve
+        # semi_auto 需要审批
         if action in self.SEMI_AUTO_ACTIONS and not approve:
-            print(f"❌ 动作 {action} 需要 --approve")
-            return {"error": "approval_required"}
+            print(f"⚠️ 动作 {action} 需要审批")
+            print(f"   正在加入审批队列...")
+
+            # 自动入审批队列
+            result = self._add_to_approval_queue(action, f"semi_auto action: {action}")
+            print(f"   ✅ 已加入审批队列: {result['approval_id']}")
+            print(f"   使用 ops_center.py approval grant {result['approval_id']} <owner> 批准执行")
+            return result
 
         print(f"╔══════════════════════════════════════════════════╗")
         print(f"║  Execute: {action:<38} ║")
@@ -458,7 +486,7 @@ class RemediationCenter:
         print()
 
         action_id = self._generate_action_id()
-        record = self._record_action(action_id, action, "execute", "manual")
+        record = self._record_action(action_id, action, "execute", "manual" if not approval_id else "approval")
 
         # 执行命令
         if action == "rebuild_dashboard":
@@ -482,9 +510,36 @@ class RemediationCenter:
             else:
                 print(f"❌ 执行失败: {action_id}")
             return record
+        elif action == "rerun_nightly":
+            command = "python scripts/run_release_gate.py nightly"
+            timeout = 120
+        elif action == "rerun_release_gate":
+            command = "python scripts/run_release_gate.py release"
+            timeout = 120
+        elif action == "rerun_integration":
+            command = "python infrastructure/verify_runtime_integrity.py --scope integration"
+            timeout = 60
+        elif action == "toggle_incident":
+            print(f"❌ toggle_incident 需要 incident_id 参数")
+            record["finished_at"] = datetime.now().isoformat()
+            record["success"] = False
+            record["error"] = "missing incident_id"
+            self._save_action_result(record)
+            return record
+        elif action == "fix_config_drift":
+            print(f"❌ fix_config_drift 暂不支持，请手动处理")
+            record["finished_at"] = datetime.now().isoformat()
+            record["success"] = False
+            record["error"] = "not_implemented"
+            self._save_action_result(record)
+            return record
         else:
             print(f"❌ 未实现的动作: {action}")
-            return {"error": "not_implemented"}
+            record["finished_at"] = datetime.now().isoformat()
+            record["success"] = False
+            record["error"] = "not_implemented"
+            self._save_action_result(record)
+            return record
 
         print(f"【执行命令】")
         print(f"  {command}")
@@ -512,6 +567,11 @@ class RemediationCenter:
                     bundles = sorted(bundle_dir.glob("ops_bundle_*.zip"), reverse=True)
                     if bundles:
                         record["changed_files"] = [f"reports/bundles/{bundles[0].name}"]
+            elif action in ["rerun_nightly", "rerun_release_gate", "rerun_integration"]:
+                record["changed_files"] = [
+                    "reports/runtime_integrity.json",
+                    "reports/quality_gate.json"
+                ]
 
             print(f"【输出】")
             print(stdout[:500] if len(stdout) > 500 else stdout)
@@ -529,6 +589,14 @@ class RemediationCenter:
             print(f"❌ 执行失败: {action_id}")
 
         self._save_action_result(record)
+
+        # 如果是通过审批执行的，回填到 approval_history
+        if approval_id and success:
+            sys.path.insert(0, str(self.root))
+            from scripts.approval_manager import ApprovalManager
+            manager = ApprovalManager(self.root)
+            manager.record_execute(approval_id, action_id)
+
         return record
 
     def _retry_notifications_internal(self) -> tuple:
@@ -1155,6 +1223,7 @@ def main():
     execute_parser = subparsers.add_parser("execute", help="执行动作")
     execute_parser.add_argument("action", help="动作名称")
     execute_parser.add_argument("--approve", action="store_true", help="批准执行 semi_auto 动作")
+    execute_parser.add_argument("--approval-id", help="审批 ID（用于回填执行记录）")
 
     # auto-execute
     auto_exec_parser = subparsers.add_parser("auto-execute", help="受控自动执行")
@@ -1194,7 +1263,7 @@ def main():
     elif args.command == "dry-run":
         rc.cmd_dry_run(args.action)
     elif args.command == "execute":
-        rc.cmd_execute(args.action, args.approve)
+        rc.cmd_execute(args.action, args.approve, getattr(args, 'approval_id', None))
     elif args.command == "auto-execute":
         rc.cmd_auto_execute(args.profile, args.workflow)
     elif args.command == "history":

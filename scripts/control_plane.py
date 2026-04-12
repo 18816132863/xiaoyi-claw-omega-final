@@ -51,6 +51,7 @@ class ControlPlaneAggregator:
             "alerts": self._build_alerts(),
             "incidents": self._build_incidents(),
             "remediation": self._build_remediation(),
+            "approvals": self._build_approvals(),
             "notifications": self._build_notifications(),
             "dashboard": self._build_dashboard(),
             "trends": self._build_trends(),
@@ -153,6 +154,28 @@ class ControlPlaneAggregator:
             "total_failed": result.get("total_failed", 0),
             "channels": result.get("channels", []),
             "sent_at": result.get("sent_at", datetime.now().isoformat())
+        }
+
+    def _build_approvals(self) -> Dict:
+        """构建审批状态"""
+        queue = load_json(self.reports_dir / "remediation" / "approval_queue.json") or {}
+        history = load_json(self.reports_dir / "remediation" / "approval_history.json") or {}
+
+        pending = [i for i in queue.get("pending", []) if i.get("status") == "pending"]
+        approvals = history.get("approvals", [])
+
+        granted = [a for a in approvals if a.get("status") == "approved"]
+        denied = [a for a in approvals if a.get("status") == "denied"]
+        executed = [a for a in approvals if a.get("execute_record_id")]
+
+        return {
+            "pending_count": len(pending),
+            "approved_recent_count": len(granted),
+            "denied_recent_count": len(denied),
+            "executed_count": len(executed),
+            "last_approval_id": approvals[-1].get("approval_id") if approvals else None,
+            "last_approval_status": approvals[-1].get("status") if approvals else None,
+            "latest_execute_record_id": approvals[-1].get("execute_record_id") if approvals else None
         }
 
     def _build_dashboard(self) -> Dict:

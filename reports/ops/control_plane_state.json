@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-12T23:05:52.783475",
+  "generated_at": "2026-04-12T23:22:38.359818",
   "version": "1.0.0",
   "overview": {
     "runtime_passed": true,
@@ -8,12 +8,12 @@
     "p0_count": 0,
     "p1_count": 0,
     "p2_count": 35,
-    "last_verified": "2026-04-12T22:47:37.293071"
+    "last_verified": "2026-04-12T23:21:58.120677"
   },
   "gates": {
     "runtime": {
       "passed": true,
-      "profile": "release",
+      "profile": "nightly",
       "local_status": "pass",
       "integration_status": "pass"
     },
@@ -130,13 +130,22 @@
     ]
   },
   "remediation": {
-    "latest_action": "retry_notifications",
+    "latest_action": "rerun_nightly",
     "latest_success": true,
-    "latest_action_id": "rem_20260412_212756_740",
+    "latest_action_id": "rem_20260412_232152_318",
     "pending_actions": [],
     "auto_execute_enabled": true,
     "latest_executed": [],
     "latest_denied": []
+  },
+  "approvals": {
+    "pending_count": 0,
+    "approved_recent_count": 2,
+    "denied_recent_count": 2,
+    "executed_count": 1,
+    "last_approval_id": "apr_20260412_232218_323",
+    "last_approval_status": "denied",
+    "latest_execute_record_id": null
   },
   "notifications": {
     "total_sent": 1,
@@ -248,9 +257,9 @@
     ]
   },
   "audit": {
-    "last_runtime_check": "2026-04-12T23:05:52.787829",
-    "last_quality_check": "2026-04-12T23:05:52.787833",
-    "last_release_check": "2026-04-12T23:05:52.787834",
+    "last_runtime_check": "2026-04-12T23:22:38.363128",
+    "last_quality_check": "2026-04-12T23:22:38.363132",
+    "last_release_check": "2026-04-12T23:22:38.363134",
     "audit_trail": []
   }
 }

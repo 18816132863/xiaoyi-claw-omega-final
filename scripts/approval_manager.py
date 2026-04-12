@@ -96,7 +96,7 @@ class ApprovalManager:
         return [item for item in queue.get("pending", []) if item.get("status") == "pending"]
 
     def grant(self, approval_id: str, owner: str) -> Dict:
-        """批准"""
+        """批准并执行"""
         queue = self._load_queue()
 
         for item in queue.get("pending", []):
@@ -105,18 +105,58 @@ class ApprovalManager:
                 item["approved_at"] = datetime.now().isoformat()
                 item["approved_by"] = owner
 
+                # 从队列移除
+                queue["pending"] = [i for i in queue["pending"] if i.get("approval_id") != approval_id]
+                self._save_queue(queue)
+
+                # 执行动作
+                action_type = item.get("action_type")
+                execute_result = self._execute_approved_action(approval_id, action_type)
+
+                # 更新执行结果
+                item["executed_at"] = execute_result.get("executed_at")
+                item["execute_record_id"] = execute_result.get("action_id")
+                item["execute_success"] = execute_result.get("success", False)
+                item["final_status"] = "executed" if execute_result.get("success") else "execute_failed"
+
                 # 移到历史
                 history = self._load_history()
                 history["approvals"].append(item)
                 self._save_history(history)
 
-                # 从队列移除
-                queue["pending"] = [i for i in queue["pending"] if i.get("approval_id") != approval_id]
-                self._save_queue(queue)
-
-                return {"success": True, "approval_id": approval_id, "status": "approved"}
+                return {
+                    "success": True,
+                    "approval_id": approval_id,
+                    "status": "approved_and_executed",
+                    "execute_success": execute_result.get("success", False),
+                    "execute_record_id": execute_result.get("action_id")
+                }
 
         return {"success": False, "error": f"未找到审批项: {approval_id}"}
+
+    def _execute_approved_action(self, approval_id: str, action_type: str) -> Dict:
+        """执行已批准的动作"""
+        import subprocess
+
+        # 调用 remediation_center 执行
+        script = self.root / "scripts" / "remediation_center.py"
+        if not script.exists():
+            return {"success": False, "error": "remediation_center.py not found"}
+
+        result = subprocess.run(
+            [sys.executable, str(script), "execute", action_type, "--approve", "--approval-id", approval_id],
+            cwd=self.root,
+            capture_output=True,
+            text=True
+        )
+
+        return {
+            "success": result.returncode == 0,
+            "action_id": f"rem_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+            "executed_at": datetime.now().isoformat(),
+            "output": result.stdout[:500] if result.stdout else "",
+            "error": result.stderr[:200] if result.stderr else ""
+        }
 
     def deny(self, approval_id: str, owner: str, reason: str) -> Dict:
         """拒绝"""

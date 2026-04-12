@@ -58,6 +58,15 @@ print(generate_summary_markdown())
       run: |
         python scripts/ops_center.py bundle
     
+    - name: Remediation Plan
+      if: ${{ env.ENABLE_SAFE_REMEDIATION == 'true' }}
+      env:
+        ENABLE_SAFE_REMEDIATION: ${{ vars.ENABLE_SAFE_REMEDIATION || 'false' }}
+      run: |
+        echo "## 🔧 Remediation Plan" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        python scripts/remediation_center.py plan >> $GITHUB_STEP_SUMMARY 2>&1 || true
+    
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -74,6 +83,7 @@ print(generate_summary_markdown())
           reports/dashboard/
           reports/ops/
           reports/bundles/
+          reports/remediation/
           governance/ops/incident_tracker.json
         retention-days: 30
     

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-12T23:34:56.619672",
+  "generated_at": "2026-04-13T00:02:24.915882",
   "version": "1.0.0",
   "overview": {
     "runtime_passed": true,
@@ -140,11 +140,12 @@
   },
   "approvals": {
     "pending_count": 0,
-    "approved_recent_count": 4,
+    "approved_recent_count": 1,
     "denied_recent_count": 2,
     "executed_count": 3,
+    "execute_failed_count": 0,
     "last_approval_id": "apr_20260412_233426_382",
-    "last_approval_status": "approved",
+    "last_approval_status": "executed",
     "latest_execute_record_id": "rem_20260412_233446_386"
   },
   "notifications": {
@@ -257,9 +258,9 @@
     ]
   },
   "audit": {
-    "last_runtime_check": "2026-04-12T23:34:56.624484",
-    "last_quality_check": "2026-04-12T23:34:56.624487",
-    "last_release_check": "2026-04-12T23:34:56.624489",
+    "last_runtime_check": "2026-04-13T00:02:24.920662",
+    "last_quality_check": "2026-04-13T00:02:24.920669",
+    "last_release_check": "2026-04-13T00:02:24.920672",
     "audit_trail": []
   }
 }

@@ -54,26 +54,20 @@ def main():
             pass
 
     # Approval Summary
-    approval_history_path = root / "reports/remediation/approval_history.json"
-    if approval_history_path.exists():
+    control_plane_path = root / "reports/ops/control_plane_state.json"
+    if control_plane_path.exists():
         try:
-            data = json.load(open(approval_history_path, encoding='utf-8'))
-            approvals = data.get("approvals", [])
-
-            pending = [a for a in approvals if a.get("status") == "pending"]
-            executed = [a for a in approvals if a.get("status") == "executed"]
-            denied = [a for a in approvals if a.get("status") == "denied"]
+            data = json.load(open(control_plane_path, encoding='utf-8'))
+            approvals = data.get("approvals", {})
 
             print(f"**Approval Summary**:")
-            print(f"- Pending: {len(pending)}")
-            print(f"- Executed: {len(executed)}")
-            print(f"- Denied: {len(denied)}")
+            print(f"- Pending: {approvals.get('pending_count', 0)}")
+            print(f"- Executed: {approvals.get('executed_count', 0)}")
+            print(f"- Denied: {approvals.get('denied_recent_count', 0)}")
+            print(f"- Execute failed: {approvals.get('execute_failed_count', 0)}")
 
-            if approvals:
-                latest = approvals[-1]
-                print(f"- Latest: {latest.get('approval_id', 'N/A')} ({latest.get('status', 'N/A')})")
-                if latest.get("execute_record_id"):
-                    print(f"- Latest execute_record_id: {latest.get('execute_record_id')}")
+            latest_id = approvals.get('latest_execute_record_id')
+            print(f"- Latest execute record: {latest_id if latest_id else 'N/A'}")
             print()
         except:
             pass

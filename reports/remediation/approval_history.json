@@ -5,7 +5,7 @@
       "action_type": "rerun_nightly",
       "reason": "Nightly audit failed, need retry",
       "source": "test",
-      "status": "approved",
+      "status": "approved_legacy",
       "created_at": "2026-04-12T23:06:47.557595",
       "approved_at": "2026-04-12T23:06:47.558491",
       "approved_by": "admin",
@@ -28,14 +28,15 @@
       "denied_by": "admin",
       "deny_reason": "风险过高，需人工检查",
       "executed_at": null,
-      "execute_record_id": null
+      "execute_record_id": null,
+      "final_status": "denied"
     },
     {
       "approval_id": "apr_20260412_232132_312",
       "action_type": "rerun_nightly",
       "reason": "semi_auto action: rerun_nightly",
       "source": "remediation_center",
-      "status": "approved",
+      "status": "executed",
       "created_at": "2026-04-12T23:21:32.614161",
       "approved_at": "2026-04-12T23:21:52.726026",
       "approved_by": "admin",
@@ -60,7 +61,8 @@
       "denied_by": "admin",
       "deny_reason": "风险过高，需人工检查",
       "executed_at": null,
-      "execute_record_id": null
+      "execute_record_id": null,
+      "final_status": "denied"
     },
     {
       "approval_id": "apr_20260412_233345_373",
@@ -70,7 +72,7 @@
       "source_alert": null,
       "source_incident": null,
       "action_params": {},
-      "status": "approved",
+      "status": "executed",
       "created_at": "2026-04-12T23:33:45.857448",
       "approved_at": "2026-04-12T23:34:06.354650",
       "approved_by": "admin",
@@ -93,7 +95,7 @@
       "action_params": {
         "incident_id": "INC-20260412174545"
       },
-      "status": "approved",
+      "status": "executed",
       "created_at": "2026-04-12T23:34:26.678610",
       "approved_at": "2026-04-12T23:34:45.941322",
       "approved_by": "admin",

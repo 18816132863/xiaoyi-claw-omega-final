@@ -144,9 +144,9 @@ class ControlPlaneAuditAggregator:
         history = load_json(self.reports_dir / "remediation" / "approval_history.json") or {}
         approvals = history.get("approvals", [])
 
-        # 分类
+        # 按归一后的状态分类
         pending = [a for a in approvals if a.get("status") == "pending"]
-        granted = [a for a in approvals if a.get("status") in ["approved", "executed"]]
+        granted = [a for a in approvals if a.get("status") == "approved_legacy"]
         denied = [a for a in approvals if a.get("status") == "denied"]
         executed = [a for a in approvals if a.get("status") == "executed"]
         execute_failed = [a for a in approvals if a.get("status") == "execute_failed"]
@@ -154,7 +154,7 @@ class ControlPlaneAuditAggregator:
         # 获取最新 execute_record_id
         latest_execute_record_id = None
         for a in reversed(approvals):
-            if a.get("execute_record_id"):
+            if a.get("status") == "executed" and a.get("execute_record_id"):
                 latest_execute_record_id = a.get("execute_record_id")
                 break
 

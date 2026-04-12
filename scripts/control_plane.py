@@ -158,24 +158,41 @@ class ControlPlaneAggregator:
 
     def _build_approvals(self) -> Dict:
         """构建审批状态"""
-        queue = load_json(self.reports_dir / "remediation" / "approval_queue.json") or {}
         history = load_json(self.reports_dir / "remediation" / "approval_history.json") or {}
-
-        pending = [i for i in queue.get("pending", []) if i.get("status") == "pending"]
         approvals = history.get("approvals", [])
 
-        granted = [a for a in approvals if a.get("status") == "approved"]
-        denied = [a for a in approvals if a.get("status") == "denied"]
-        executed = [a for a in approvals if a.get("execute_record_id")]
+        # 按归一后的状态统计
+        pending_count = len([a for a in approvals if a.get("status") == "pending"])
+        approved_recent_count = len([a for a in approvals if a.get("status") == "approved_legacy"])
+        denied_recent_count = len([a for a in approvals if a.get("status") == "denied"])
+        executed_count = len([a for a in approvals if a.get("status") == "executed"])
+        execute_failed_count = len([a for a in approvals if a.get("status") == "execute_failed"])
+
+        # 获取最后一条记录
+        last_approval_id = None
+        last_approval_status = None
+        latest_execute_record_id = None
+
+        if approvals:
+            last = approvals[-1]
+            last_approval_id = last.get("approval_id")
+            last_approval_status = last.get("status")
+
+        # 从最后一条 executed 记录获取 execute_record_id
+        for a in reversed(approvals):
+            if a.get("status") == "executed" and a.get("execute_record_id"):
+                latest_execute_record_id = a.get("execute_record_id")
+                break
 
         return {
-            "pending_count": len(pending),
-            "approved_recent_count": len(granted),
-            "denied_recent_count": len(denied),
-            "executed_count": len(executed),
-            "last_approval_id": approvals[-1].get("approval_id") if approvals else None,
-            "last_approval_status": approvals[-1].get("status") if approvals else None,
-            "latest_execute_record_id": approvals[-1].get("execute_record_id") if approvals else None
+            "pending_count": pending_count,
+            "approved_recent_count": approved_recent_count,
+            "denied_recent_count": denied_recent_count,
+            "executed_count": executed_count,
+            "execute_failed_count": execute_failed_count,
+            "last_approval_id": last_approval_id,
+            "last_approval_status": last_approval_status,
+            "latest_execute_record_id": latest_execute_record_id
         }
 
     def _build_dashboard(self) -> Dict:

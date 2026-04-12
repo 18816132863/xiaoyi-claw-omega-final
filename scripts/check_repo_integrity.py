@@ -239,13 +239,17 @@ class RepoIntegrityChecker:
             approvals = data.get("approvals", [])
 
             for approval in approvals:
+                # 只检查 status == "executed" 的记录
+                if approval.get("status") != "executed":
+                    continue
+
                 execute_record_id = approval.get("execute_record_id")
                 if execute_record_id:
                     # 检查对应的 history 文件是否存在
                     history_file = remediation_history_dir / f"{execute_record_id}.json"
                     if not history_file.exists():
                         self.errors.append(
-                            f"approval_history 引用不存在的 remediation history: {execute_record_id}"
+                            f"executed 审批缺少 remediation history: {execute_record_id}"
                         )
                         print(f"  ❌ 缺失 remediation history: {execute_record_id}")
                     else:

@@ -33,6 +33,67 @@ def save_json(path: Path, data: Dict):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+def normalize_approval_record(record: dict) -> dict:
+    """统一归一审批记录状态"""
+    # 1. pending
+    if record.get("status") == "pending":
+        record["status"] = "pending"
+        record["final_status"] = None
+        return record
+
+    # 2. denied
+    if record.get("denied_at"):
+        record["status"] = "denied"
+        record["final_status"] = "denied"
+        return record
+
+    # 3. executed
+    if record.get("execute_success") is True:
+        record["status"] = "executed"
+        record["final_status"] = "executed"
+        record["execute_success"] = True
+        return record
+
+    if record.get("final_status") == "executed":
+        record["status"] = "executed"
+        record["final_status"] = "executed"
+        record["execute_success"] = True
+        return record
+
+    if record.get("execute_record_id") and record.get("executed_at"):
+        record["status"] = "executed"
+        record["final_status"] = "executed"
+        record["execute_success"] = True
+        return record
+
+    # 4. execute_failed
+    if record.get("execute_success") is False:
+        record["status"] = "execute_failed"
+        record["final_status"] = "execute_failed"
+        record["execute_success"] = False
+        return record
+
+    if record.get("final_status") == "execute_failed":
+        record["status"] = "execute_failed"
+        record["final_status"] = "execute_failed"
+        record["execute_success"] = False
+        return record
+
+    if record.get("execute_error"):
+        record["status"] = "execute_failed"
+        record["final_status"] = "execute_failed"
+        record["execute_success"] = False
+        return record
+
+    # 5. approved_legacy
+    if record.get("approved_at") and not record.get("executed_at") and not record.get("denied_at") and not record.get("execute_record_id"):
+        record["status"] = "approved_legacy"
+        # final_status 保持原样
+        return record
+
+    return record
+
+
 class ApprovalManager:
     """审批管理器"""
 
@@ -56,9 +117,14 @@ class ApprovalManager:
         save_json(self.queue_path, queue)
 
     def _load_history(self) -> Dict:
-        return load_json(self.history_path) or {"approvals": [], "generated_at": datetime.now().isoformat()}
+        data = load_json(self.history_path) or {"approvals": [], "generated_at": datetime.now().isoformat()}
+        # 归一化所有记录
+        data["approvals"] = [normalize_approval_record(a) for a in data.get("approvals", [])]
+        return data
 
     def _save_history(self, history: Dict):
+        # 归一化后保存
+        history["approvals"] = [normalize_approval_record(a) for a in history.get("approvals", [])]
         save_json(self.history_path, history)
 
     def add_to_queue(self, action_type: str, reason: str, source: str = "manual",
@@ -183,6 +249,17 @@ class ApprovalManager:
                 execute_record_id = latest.get("action_id")
             except:
                 pass
+
+        # 检查 history 文件是否存在
+        if execute_record_id:
+            history_file = self.root / "reports" / "remediation" / "history" / f"{execute_record_id}.json"
+            if not history_file.exists():
+                return {
+                    "success": False,
+                    "execute_record_id": execute_record_id,
+                    "executed_at": datetime.now().isoformat(),
+                    "error": "missing remediation history file"
+                }
 
         return {
             "success": result.returncode == 0,

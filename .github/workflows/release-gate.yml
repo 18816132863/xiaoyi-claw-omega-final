@@ -1,0 +1,86 @@
+name: Release Gate
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., v4.3.3)'
+        required: false
+        default: ''
+  push:
+    tags:
+      - 'v*'
+  release:
+    types: [published]
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt 2>/dev/null || true
+    
+    - name: Run Release Gate
+      id: gate
+      run: |
+        make verify-release
+      continue-on-error: true
+    
+    - name: Generate Alerts
+      id: alerts
+      run: |
+        python scripts/generate_alerts.py --workflow release-gate --profile release
+      continue-on-error: true
+    
+    - name: Create Summary
+      run: |
+        echo "## 🚀 Release Gate Results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Alerts Summary (使用通道适配器)
+        python -c "
+from infrastructure.alerting.channels.github_summary import generate_summary_markdown
+print(generate_summary_markdown())
+" >> $GITHUB_STEP_SUMMARY 2>/dev/null || echo "Alerts summary error" >> $GITHUB_STEP_SUMMARY
+    
+    - name: Build Dashboard
+      run: |
+        python scripts/build_ops_dashboard.py
+    
+    - name: Generate Ops State
+      run: |
+        python scripts/ops_center.py status
+    
+    - name: Generate Ops Bundle
+      run: |
+        python scripts/ops_center.py bundle
+    
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-reports
+        path: |
+          reports/runtime_integrity.json
+          reports/quality_gate.json
+          reports/release_gate.json
+          reports/alerts/
+          reports/dashboard/
+          reports/ops/
+          reports/bundles/
+          governance/ops/incident_tracker.json
+          reports/history/
+        retention-days: 90
+    
+    - name: Check Result
+      if: steps.gate.outcome != 'success'
+      run: exit 1

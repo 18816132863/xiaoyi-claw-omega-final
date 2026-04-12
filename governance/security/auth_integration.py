@@ -12,8 +12,16 @@ from typing import Dict, Any, Optional, Callable
 from pathlib import Path
 from functools import wraps
 
-WORKSPACE = Path("/home/sandbox/.openclaw/workspace")
-sys.path.insert(0, str(WORKSPACE))
+# 使用 path_resolver 获取项目根目录
+try:
+    from infrastructure.path_resolver import get_project_root
+    WORKSPACE = get_project_root()
+except ImportError:
+    # 回退
+    WORKSPACE = Path(__file__).parent.parent.parent
+
+if str(WORKSPACE) not in sys.path:
+    sys.path.insert(0, str(WORKSPACE))
 
 from governance.security.realtime_auth import (
     RealtimeAuthManager, get_auth_manager

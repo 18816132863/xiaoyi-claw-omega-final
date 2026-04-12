@@ -258,19 +258,28 @@ class ParallelVectorSearch:
 
 # ============== 超极速客户端 ==============
 
+def _get_default_vec0_path() -> str:
+    """获取默认 vec0.so 路径"""
+    try:
+        from infrastructure.path_resolver import get_project_root
+        return str(get_project_root() / "repo/lib/python3.12/site-packages/sqlite_vec/vec0.so")
+    except ImportError:
+        return "repo/lib/python3.12/site-packages/sqlite_vec/vec0.so"
+
+
 class UltraFastSQLiteVecClient:
     """超极速 SQLite-vec 客户端"""
     
     def __init__(
         self,
         db_path: str = ":memory:",
-        vec0_path: str = "/home/sandbox/.openclaw/workspace/repo/lib/python3.12/site-packages/sqlite_vec/vec0.so",
+        vec0_path: str = None,
         dimension: int = 1024,
         cache_size: int = 10000,
         n_threads: int = 4
     ):
         self.db_path = db_path
-        self.vec0_path = vec0_path
+        self.vec0_path = vec0_path if vec0_path else _get_default_vec0_path()
         self.dimension = dimension
         self.table_name = "embeddings"
         

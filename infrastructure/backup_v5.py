@@ -178,9 +178,8 @@ def generate_file_states(base_dir: Path) -> dict:
 
 def create_backup(output_dir: Path = None, version: str = "v4.3.2") -> Path:
     """创建备份包"""
-    # 使用 path_resolver 获取路径
-    from infrastructure.path_resolver import get_project_root
-    base_dir = get_project_root().parent  # .openclaw 目录
+    # 使用相对路径获取路径
+    base_dir = Path(__file__).parent.parent.parent  # .openclaw 目录
     output_dir = output_dir or base_dir.parent  # /home/sandbox
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

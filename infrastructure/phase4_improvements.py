@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import List, Dict, Optional, Tuple, Any
 from dataclasses import dataclass
 
-workspace = Path("/home/sandbox/.openclaw/workspace")
+workspace = Path(str(get_project_root()))
 
 # ============================================================
 # 1. 搜索质量精修 - 结果权重调整

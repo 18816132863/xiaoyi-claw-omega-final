@@ -41,12 +41,21 @@ class RealtimeAuthManager:
         self.current_session: Optional[AuthSession] = None
         self.operation_logs: List[OperationLog] = []
         
+        # 使用 path_resolver 获取安全路径
+        try:
+            from infrastructure.path_resolver import get_project_root
+            _workspace = str(get_project_root())
+            _repo = str(get_project_root() / "repo")
+        except ImportError:
+            _workspace = "."
+            _repo = "./repo"
+        
         # 默认安全配置
         self.default_config = {
             "safe_paths": [
-                "/home/sandbox/.openclaw/workspace",
+                _workspace,
                 "/tmp",
-                "/home/sandbox/.openclaw/workspace/repo",
+                _repo,
             ],
             "dangerous_commands": [
                 "rm", "sudo", "chmod", "chown",

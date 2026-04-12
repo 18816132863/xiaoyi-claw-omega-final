@@ -1,4 +1,0 @@
-# orchestration/RESULT_AGGREGATE.md
-
-版本: V26.0
-创建时间: 2026-04-08T05:43:07.634231+00:00

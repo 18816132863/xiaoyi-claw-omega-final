@@ -4,7 +4,7 @@
 _Learn about the person you're helping. Update this as you go._
 
 - **Name:**
-- **What to call them:**
+- **What to call them:** 主人
 - **Pronouns:** _(optional)_
 - **Timezone:**
 - **Notes:**

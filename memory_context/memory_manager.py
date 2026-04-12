@@ -262,7 +262,12 @@ def get_memory_manager() -> MemoryManager:
     """获取全局记忆管理器"""
     global _manager
     if _manager is None:
-        _manager = MemoryManager("/home/sandbox/.openclaw/workspace")
+        try:
+            from infrastructure.path_resolver import get_project_root
+            workspace = str(get_project_root())
+        except ImportError:
+            workspace = "."
+        _manager = MemoryManager(workspace)
     return _manager
 
 def store_memory(content: str, memory_type: str = "long_term", **kwargs) -> bool:

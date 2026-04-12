@@ -117,7 +117,11 @@ def test_golden_paths(workspace_path: str) -> dict:
     return results
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    try:
+        from infrastructure.path_resolver import get_project_root
+        workspace = str(get_project_root())
+    except ImportError:
+        workspace = "."
     results = test_golden_paths(workspace)
     
     output_dir = Path(workspace) / "reports"

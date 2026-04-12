@@ -15,6 +15,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 import re
+from infrastructure.path_resolver import get_project_root
 
 def extract_dependencies(workspace_path: str) -> dict:
     """提取依赖关系"""
@@ -100,7 +101,7 @@ def export_dot(graph: dict, output_path: str):
         f.write("}\n")
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     graph = extract_dependencies(workspace)
     
     output_dir = Path(workspace) / "reports"

@@ -280,7 +280,7 @@ class SkillAccessChecker:
 
 def main():
     """主函数"""
-    workspace_path = os.environ.get('WORKSPACE_PATH', '/home/sandbox/.openclaw/workspace')
+    workspace_path = os.environ.get('WORKSPACE_PATH', str(get_project_root()))
     checker = SkillAccessChecker(workspace_path)
     results = checker.check_all_skills()
     checker.print_report(results)

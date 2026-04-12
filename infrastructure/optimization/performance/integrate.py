@@ -10,7 +10,7 @@ import os
 import json
 from pathlib import Path
 
-WORKSPACE = Path("/home/sandbox/.openclaw/workspace")
+WORKSPACE = Path(str(get_project_root()))
 
 # 层级配置
 LAYER_CONFIG = {

@@ -1,17 +1,17 @@
 {
   "latest_plan_generated_at": "2026-04-12T21:55:12.059618",
   "pending_safe_actions": [],
-  "updated_at": "2026-04-12T21:55:12.062434",
+  "updated_at": "2026-04-12T23:34:46.362764",
   "available_safe_actions": [
     "rebuild_dashboard",
     "rebuild_ops_state",
     "rebuild_bundle",
     "retry_notifications"
   ],
-  "latest_execute_at": "2026-04-12T21:27:56.480038",
-  "latest_action_type": "retry_notifications",
+  "latest_execute_at": "2026-04-12T23:34:46.361597",
+  "latest_action_type": "toggle_incident",
   "latest_action_success": true,
-  "latest_action_id": "rem_20260412_212756_740",
+  "latest_action_id": "rem_20260412_233446_386",
   "failed_recent_actions": [
     "rem_20260412_212721_731"
   ]

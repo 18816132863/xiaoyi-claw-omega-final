@@ -14,6 +14,7 @@ import os
 import json
 from datetime import datetime
 from pathlib import Path
+from infrastructure.path_resolver import get_project_root
 
 def generate_assessment_template(workspace_path: str) -> dict:
     """生成评定模板"""
@@ -66,7 +67,7 @@ def generate_assessment_template(workspace_path: str) -> dict:
     return results
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     results = generate_assessment_template(workspace)
     
     output_dir = Path(workspace) / "reports"

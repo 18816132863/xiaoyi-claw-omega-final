@@ -68,7 +68,7 @@ def test_cold_start(tar_file: Path):
     # 4. 只插入新解压目录到 sys.path（不插入旧 workspace）
     print("【步骤 4】设置 Python 路径")
     # 清理可能存在的旧路径
-    sys.path = [p for p in sys.path if "/home/sandbox/.openclaw/workspace" not in p]
+    sys.path = [p for p in sys.path if str(get_project_root()) not in p]
     # 只插入新解压目录
     sys.path.insert(0, str(extracted_dir))
     print(f"sys.path[0]: {sys.path[0]}")

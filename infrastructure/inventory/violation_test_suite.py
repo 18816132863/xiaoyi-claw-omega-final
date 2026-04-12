@@ -290,7 +290,7 @@ response = requests.get('https://example.com')
 
 def main():
     """主函数"""
-    workspace_path = os.environ.get('WORKSPACE_PATH', '/home/sandbox/.openclaw/workspace')
+    workspace_path = os.environ.get('WORKSPACE_PATH', str(get_project_root()))
     suite = ViolationTestSuite(workspace_path)
     results = suite.run_all_tests()
     suite.print_report(results)

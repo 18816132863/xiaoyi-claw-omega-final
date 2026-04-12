@@ -157,5 +157,5 @@ class TokenOptimizer:
         return '\n'.join(report)
 
 if __name__ == "__main__":
-    optimizer = TokenOptimizer("/home/sandbox/.openclaw/workspace")
+    optimizer = TokenOptimizer(str(get_project_root()))
     print(optimizer.generate_report())

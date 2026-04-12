@@ -24,6 +24,7 @@ from typing import Dict, List, Tuple
 from dataclasses import dataclass
 from collections import defaultdict
 import logging
+from infrastructure.path_resolver import get_project_root
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 logger = logging.getLogger(__name__)
@@ -460,7 +461,7 @@ def generate_report(optimizer: CompleteOptimizer) -> str:
 
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     optimizer = CompleteOptimizer(workspace)
     
     print("""

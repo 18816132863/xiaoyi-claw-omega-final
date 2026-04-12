@@ -111,6 +111,6 @@ class PerformanceOptimizer:
         return results
 
 if __name__ == "__main__":
-    optimizer = PerformanceOptimizer("/home/sandbox/.openclaw/workspace")
+    optimizer = PerformanceOptimizer(str(get_project_root()))
     results = optimizer.run()
     print(f"\n总计节省: {sum(r['tokens_saved'] for r in results)} tokens")

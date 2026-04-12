@@ -172,7 +172,12 @@ def get_summarizer() -> MemorySummarizer:
     """获取全局总结器"""
     global _summarizer
     if _summarizer is None:
-        _summarizer = MemorySummarizer("/home/sandbox/.openclaw/workspace")
+        try:
+            from infrastructure.path_resolver import get_project_root
+            workspace = str(get_project_root())
+        except ImportError:
+            workspace = "."
+        _summarizer = MemorySummarizer(workspace)
     return _summarizer
 
 def summarize_session(log: str) -> str:

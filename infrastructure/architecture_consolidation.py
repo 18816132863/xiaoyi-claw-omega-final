@@ -52,7 +52,7 @@ CONSOLIDATION_MAP = {
 }
 
 def consolidate():
-    workspace = Path("/home/sandbox/.openclaw/workspace")
+    workspace = Path(str(get_project_root()))
     
     print("╔══════════════════════════════════════════════════╗")
     print("║        架构融合 V1.0                             ║")

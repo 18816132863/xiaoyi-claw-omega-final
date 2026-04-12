@@ -6,7 +6,7 @@ V2.7.0 - 2026-04-10
 """
 
 import sys
-sys.path.insert(0, '/home/sandbox/.openclaw/workspace')
+sys.path.insert(0, str(get_project_root()))
 
 # 从 layer_bridge 导入
 from core.layer_bridge import (

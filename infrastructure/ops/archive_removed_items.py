@@ -15,6 +15,7 @@ import json
 import shutil
 from datetime import datetime
 from pathlib import Path
+from infrastructure.path_resolver import get_project_root
 
 def archive_removed_items(workspace_path: str) -> dict:
     """归档删除项"""
@@ -73,7 +74,7 @@ def archive_removed_items(workspace_path: str) -> dict:
     return results
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     results = archive_removed_items(workspace)
     
     output_dir = Path(workspace) / "reports"

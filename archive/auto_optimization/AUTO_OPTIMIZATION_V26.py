@@ -22,6 +22,7 @@ from typing import Dict, List, Tuple, Any
 from dataclasses import dataclass, field
 from collections import defaultdict
 import logging
+from infrastructure.path_resolver import get_project_root
 
 # 设置日志
 logging.basicConfig(
@@ -746,7 +747,7 @@ def generate_report(optimizer: LayerOptimizer) -> str:
 
 def main():
     """主程序"""
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     optimizer = LayerOptimizer(workspace)
     
     print("""

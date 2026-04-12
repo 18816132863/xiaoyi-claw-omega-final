@@ -14,6 +14,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 from collections import defaultdict
+from infrastructure.path_resolver import get_project_root
 
 def load_config():
     config_file = Path(__file__).parent / "architecture_config.json"
@@ -260,7 +261,7 @@ def render_main_display(inventory: dict) -> str:
     return md
 
 def main():
-    workspace = Path(os.path.expanduser("~/.openclaw/workspace"))
+    workspace = Path(str(get_project_root()))
     reports_dir = workspace / "reports"
     reports_dir.mkdir(exist_ok=True)
     

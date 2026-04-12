@@ -14,6 +14,7 @@ import os
 import json
 from datetime import datetime
 from pathlib import Path
+from infrastructure.path_resolver import get_project_root
 
 def check_freeze_window(workspace_path: str) -> dict:
     """检查冻结窗口"""
@@ -64,7 +65,7 @@ def check_freeze_window(workspace_path: str) -> dict:
     return results
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     results = check_freeze_window(workspace)
     
     output_dir = Path(workspace) / "reports"

@@ -1,126 +1,95 @@
-# 架构完整性规范 - V4.3.2
+# 架构完整性检查 V1.0.0
 
-## 说明
+## 概述
 
-本文件仅定义校验规范、验收规则、约束条件。
-**不再定义第二套六层架构**，唯一主架构引用 `core/ARCHITECTURE.md`。
+本文档定义 OpenClaw 架构的完整性检查规则，确保六层架构的稳定性和一致性。
 
----
+## 六层架构
 
-## 一、架构引用
+```
+L1: Core              → 核心认知、身份、规则
+L2: Memory Context    → 记忆上下文、知识库
+L3: Orchestration     → 任务编排、工作流
+L4: Execution         → 能力执行、技能网关
+L5: Governance        → 稳定治理、安全审计
+L6: Infrastructure    → 基础设施、工具链
+```
 
-**唯一主架构**: `core/ARCHITECTURE.md`
+## 门禁体系
 
-所有层级定义、职责划分、模块归属均以 `core/ARCHITECTURE.md` 为准。
+### Profile 定义
 
----
+| Profile | P0 | Local | Integration | External | 用途 |
+|---------|-----|-------|-------------|----------|------|
+| premerge | =0 | 必须 | 不阻塞 | 不阻塞 | PR 合并前 |
+| nightly | =0 | 必须 | 必须 | 不阻塞 | 每日巡检 |
+| release | =0 | 必须 | 必须 | 无 error | 发布前 |
 
-## 二、注册表校验规范
+### 回归规则
 
-### 2.1 技能注册表
+**强回归（阻塞发布）：**
+- P0 数量上升
+- local 从 pass 变 fail/error
+- integration 默认样本从 pass 变 fail/error
+- quality_gate 任一 pass → fail
 
-路径: `infrastructure/inventory/skill_registry.json`
+**弱回归（警告）：**
+- P1/P2 数量上升
+- external skipped 原因变化
+- skill 总数异常波动
 
-**必需字段**:
-- `name`: 技能名称
-- `registered`: 是否已注册
-- `routable`: 是否可路由
-- `callable`: 是否可调用
-- `executor_type`: 执行类型 (python/script/api/skill_md)
-- `entry_point`: 入口文件
-- `path`: 技能路径（相对路径）
+## 验收入口
 
-**一致性校验**:
-- `executor_type=skill_md` → `callable=false`
-- `callable=true` → `entry_point` 不能是 `SKILL.md`
-- `registered=true` → `routable` 和 `callable` 必须有明确值
+```bash
+# CI 统一入口
+python scripts/run_release_gate.py premerge
+python scripts/run_release_gate.py nightly
+python scripts/run_release_gate.py release
 
-### 2.2 反向索引
+# 夜间巡检（带回归检测）
+python scripts/run_nightly_audit.py
+```
 
-路径: `infrastructure/inventory/skill_inverted_index.json`
+## 报告体系
 
-**校验规则**:
-- 只索引 `registered=true && routable=true && callable=true` 的技能
-- 索引条目数应与可执行技能数一致
+```
+reports/
+├── runtime_integrity.json      # 最新运行时报告
+├── quality_gate.json           # 最新质量报告
+├── nightly_audit.json          # 夜间审计报告
+├── nightly_summary.md          # 夜间摘要
+├── trends/
+│   └── runtime_trend.json      # 趋势数据
+└── history/
+    ├── runtime/                # 运行时历史快照
+    ├── quality/                # 质量历史快照
+    └── release/                # 发布历史
+```
 
----
+## 受保护文件
 
-## 三、路径规范
+见 `governance/guard/protected_files.json`
 
-### 3.1 禁止硬编码路径
+核心原则：
+- `core/` 目录为唯一主架构真源
+- 根目录的 AGENTS.md/SOUL.md 等为兼容副本
+- 禁止删除或移动受保护文件
 
-**禁止**:
-- `Path.home()`
-- `~/.openclaw`
-- `/home/sandbox/.openclaw/workspace`
-- 任何绝对路径
+## 路径解析
 
-**必须**:
-- 使用 `infrastructure/path_resolver.py` 提供的函数
-- `get_project_root()` 获取项目根目录
-- `get_skills_dir()` 获取技能目录
-- `get_infrastructure_dir()` 获取基础设施目录
+统一使用 `infrastructure/path_resolver.py`：
+- 基于模块位置解析项目根
+- 不依赖当前工作目录
+- 支持从任意目录执行
 
-### 3.2 相对路径
+## 技能分层
 
-所有注册表中的路径必须是相对路径，相对于项目根目录。
+| 层级 | 条件 | 阻塞 |
+|------|------|------|
+| local | smoke_test=true, test_mode=local | 是 |
+| integration | registered+routable+callable, test_mode=integration | nightly 必须 |
+| external | test_mode=external, requires_env | 仅检测 error |
 
----
+## 更新记录
 
-## 四、索引排除规范
-
-### 4.1 排除目录
-
-以下目录不进入主搜索和主上下文:
-- `node_modules`, `__pycache__`, `.git`
-- `archive`, `reports`, `backups`
-- `dist`, `build`, `.cache`, `logs`
-
-### 4.2 排除文件类型
-
-以下文件类型不进入索引:
-- 二进制文件: `.pyc`, `.so`, `.dll`, `.dylib`
-- 压缩文件: `.tar`, `.gz`, `.zip`, `.rar`
-- 媒体文件: `.mp3`, `.mp4`, `.jpg`, `.png`
-- 大型文档: `.pdf`, `.docx`, `.xlsx` (超过 10MB)
-- 锁文件: `package-lock.json`, `yarn.lock`
-
-### 4.3 大小限制
-
-- 单文件最大: 10MB
-- 超过限制的文件不进入索引
-
----
-
-## 五、验收规则
-
-### 5.1 第一阶段验收
-
-- [ ] 技能注册表字段完整
-- [ ] 反向索引与注册表一致
-- [ ] 路由能命中可执行技能
-- [ ] 技能能真实执行
-- [ ] Task 不返回假成功
-
-### 5.2 第二阶段验收
-
-- [ ] 统一搜索入口可用
-- [ ] 搜索结果经过 RRF 融合
-- [ ] 搜索结果经过去重
-- [ ] 索引排除名单生效
-- [ ] 无硬编码路径
-
----
-
-## 六、约束条件
-
-1. **单一真源**: 架构定义只在 `core/ARCHITECTURE.md`
-2. **路径统一**: 所有路径通过 `path_resolver` 获取
-3. **状态一致**: 注册表、索引、路由器状态必须一致
-4. **真实执行**: 不允许假成功，没有真实执行必须失败
-5. **参数过滤**: 按技能协议过滤参数，不传递无关参数
-
----
-
-**版本**: V4.3.2
-**更新**: 2026-04-11
+- 2026-04-12: V1.0.0 初始版本

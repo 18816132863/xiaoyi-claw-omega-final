@@ -397,6 +397,6 @@ def get_plugin_manager() -> PluginManager:
     global _plugin_manager
     if _plugin_manager is None:
         _plugin_manager = create_safe_plugin_manager(
-            "/home/sandbox/.openclaw/workspace/plugins"
+            str(get_project_root() / "plugins")
         )
     return _plugin_manager

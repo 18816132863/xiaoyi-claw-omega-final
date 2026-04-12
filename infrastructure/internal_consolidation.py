@@ -14,7 +14,7 @@ import os
 import shutil
 from pathlib import Path
 
-workspace = Path("/home/sandbox/.openclaw/workspace")
+workspace = Path(str(get_project_root()))
 
 # 内部融合映射
 INTERNAL_MERGES = [

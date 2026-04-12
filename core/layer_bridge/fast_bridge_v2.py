@@ -5,7 +5,8 @@
 """
 
 import sys
-sys.path.insert(0, '/home/sandbox/.openclaw/workspace')
+from infrastructure.path_resolver import get_project_root
+sys.path.insert(0, str(get_project_root()))
 
 import time
 from typing import Dict, Any, Optional, Callable

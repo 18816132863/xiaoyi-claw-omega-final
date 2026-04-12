@@ -13,8 +13,9 @@ import sys
 import tarfile
 from pathlib import Path
 from datetime import datetime
+from infrastructure.path_resolver import get_project_root
 
-workspace = Path("/home/sandbox/.openclaw/workspace")
+workspace = Path(str(get_project_root()))
 
 # 核心文件白名单
 CORE_FILES = {

@@ -16,7 +16,10 @@ from cryptography.hazmat.backends import default_backend
 
 def get_secret(name: str, master_password: str = None) -> str:
     """从密钥库获取密钥"""
-    vault_path = Path("/home/sandbox/.openclaw/vault")
+    # 使用环境变量或默认路径
+    vault_dir = os.environ.get("OPENCLAW_VAULT_DIR", 
+                               os.path.expanduser("~/.openclaw/vault"))
+    vault_path = Path(vault_dir)
     
     if not vault_path.exists():
         raise ValueError("Vault not initialized")
@@ -79,12 +82,15 @@ def get_github_token() -> str:
 if __name__ == "__main__":
     import sys
     
+    vault_dir = os.environ.get("OPENCLAW_VAULT_DIR", 
+                               os.path.expanduser("~/.openclaw/vault"))
+    vault_path = Path(vault_dir)
+    
     if len(sys.argv) > 1:
         name = sys.argv[1]
         print(get_secret(name))
     else:
         print("Available secrets:")
-        vault_path = Path("/home/sandbox/.openclaw/vault")
         vault_data = json.loads((vault_path / "vault.json").read_text())
         for name in vault_data["secrets"]:
             print(f"  - {name}")

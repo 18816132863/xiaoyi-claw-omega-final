@@ -14,6 +14,7 @@ import os
 import json
 from datetime import datetime
 from pathlib import Path
+from infrastructure.path_resolver import get_project_root
 
 def audit_evidence_chain(workspace_path: str) -> dict:
     """审计证据链"""
@@ -62,7 +63,7 @@ def audit_evidence_chain(workspace_path: str) -> dict:
     return results
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     results = audit_evidence_chain(workspace)
     
     output_dir = Path(workspace) / "reports"

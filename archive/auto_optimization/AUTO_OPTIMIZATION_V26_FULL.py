@@ -25,6 +25,7 @@ from typing import Dict, List, Tuple, Any, Optional
 from dataclasses import dataclass, field
 from collections import defaultdict
 import logging
+from infrastructure.path_resolver import get_project_root
 
 logging.basicConfig(
     level=logging.INFO,
@@ -695,7 +696,7 @@ def generate_full_report(optimizer: DeepOptimizer) -> str:
 # ============== 主程序 ==============
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     optimizer = DeepOptimizer(workspace)
     
     print("""

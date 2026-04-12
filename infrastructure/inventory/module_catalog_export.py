@@ -15,6 +15,7 @@ import json
 import csv
 from datetime import datetime
 from pathlib import Path
+from infrastructure.path_resolver import get_project_root
 
 def get_module_catalog(workspace_path: str) -> list:
     """生成模块目录"""
@@ -70,7 +71,7 @@ def get_module_catalog(workspace_path: str) -> list:
     return modules
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     modules = get_module_catalog(workspace)
     
     output_dir = Path(workspace) / "reports"

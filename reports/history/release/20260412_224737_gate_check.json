@@ -1,0 +1,39 @@
+{
+  "can_release": true,
+  "runtime_gate": {
+    "profile": "release",
+    "passed": true,
+    "verified_at": "2026-04-12T22:47:37.293071",
+    "p0_count": 0,
+    "local_status": "pass",
+    "integration_status": "pass",
+    "external_status": "pass"
+  },
+  "quality_gate": {
+    "passed": true,
+    "verified_at": "2026-04-12T22:47:37.493368"
+  },
+  "blocked_reasons": [],
+  "skipped_external": [],
+  "quality_checks_summary": {
+    "protected_files": "pass",
+    "architecture_files": "pass",
+    "skill_registry": "pass"
+  },
+  "recent_nightly_status": [
+    {
+      "date": "2026-04-12T22:47:23.315292",
+      "passed": true,
+      "p0_count": 0,
+      "local_status": "pass"
+    },
+    {
+      "date": "2026-04-12T22:39:03.370152",
+      "passed": true,
+      "p0_count": 0,
+      "local_status": "pass"
+    }
+  ],
+  "last_blocked": null,
+  "checked_at": "2026-04-12T22:47:37.685526"
+}

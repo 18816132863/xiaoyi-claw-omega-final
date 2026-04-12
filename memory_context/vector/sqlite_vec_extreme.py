@@ -233,17 +233,28 @@ class AsyncWriteQueue:
 
 # ============== 极致优化客户端 ==============
 
+def _get_default_vec0_path() -> str:
+    """获取默认 vec0.so 路径"""
+    try:
+        from infrastructure.path_resolver import get_project_root
+        return str(get_project_root() / "repo/lib/python3.12/site-packages/sqlite_vec/vec0.so")
+    except ImportError:
+        return "repo/lib/python3.12/site-packages/sqlite_vec/vec0.so"
+
+
 class ExtremeFastClient:
     """极致优化客户端"""
     
     def __init__(
         self,
         db_path: str = ":memory:",
-        vec0_path: str = "/home/sandbox/.openclaw/workspace/repo/lib/python3.12/site-packages/sqlite_vec/vec0.so",
+        vec0_path: str = None,
         dimension: int = 1024,
         cache_size: int = 10000,
         pool_size: int = 4
     ):
+        if vec0_path is None:
+            vec0_path = _get_default_vec0_path()
         self.db_path = db_path
         self.dimension = dimension
         self.table_name = "embeddings"

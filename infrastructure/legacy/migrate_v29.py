@@ -8,8 +8,9 @@ import os
 import shutil
 import json
 from pathlib import Path
+from infrastructure.path_resolver import get_project_root
 
-WORKSPACE = Path("/home/sandbox/.openclaw/workspace")
+WORKSPACE = Path(str(get_project_root()))
 
 # 需要删除的冗余目录
 REDUNDANT_DIRS = [
@@ -174,7 +175,7 @@ def create_guard_files():
 """
 
 DANGEROUS_COMMANDS = ["rm -rf", "sudo", "chmod 777", "> /dev/"]
-ALLOWED_PATHS = ["/home/sandbox/.openclaw/workspace"]
+ALLOWED_PATHS = [str(get_project_root())]
 
 def check_command(cmd: str) -> tuple:
     """检查命令是否安全"""
@@ -225,7 +226,7 @@ def create_infra_files():
 
 from pathlib import Path
 
-WORKSPACE = Path("/home/sandbox/.openclaw/workspace")
+WORKSPACE = Path(str(get_project_root()))
 
 def resolve(path: str) -> Path:
     """解析路径"""

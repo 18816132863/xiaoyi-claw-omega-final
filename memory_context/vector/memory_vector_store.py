@@ -50,7 +50,11 @@ class MemoryVectorStore:
     ):
         # 默认数据库路径
         if db_path is None:
-            db_path = os.path.expanduser("~/.openclaw/memory/vectors.db")
+            try:
+                from infrastructure.path_resolver import get_project_root
+                db_path = str(get_project_root() / "memory/vectors.db")
+            except ImportError:
+                db_path = "memory/vectors.db"
         
         # 确保目录存在
         os.makedirs(os.path.dirname(db_path), exist_ok=True)

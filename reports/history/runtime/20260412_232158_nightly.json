@@ -1,0 +1,39 @@
+{
+  "profile": "nightly",
+  "scope": "all",
+  "verified_at": "2026-04-12T23:21:58.120677",
+  "overall_passed": true,
+  "failure_reasons": [],
+  "p0_count": 0,
+  "p1_count": 0,
+  "p2_count": 35,
+  "local_status": "pass",
+  "local_results": [
+    {
+      "skill": "docx",
+      "status": "pass",
+      "message": ""
+    },
+    {
+      "skill": "cron",
+      "status": "pass",
+      "message": ""
+    },
+    {
+      "skill": "pdf",
+      "status": "pass",
+      "message": ""
+    }
+  ],
+  "integration_status": "pass",
+  "integration_results": [
+    {
+      "skill": "file-manager",
+      "status": "pass",
+      "message": ""
+    }
+  ],
+  "external_status": "pass",
+  "external_results": [],
+  "skipped_skills": []
+}

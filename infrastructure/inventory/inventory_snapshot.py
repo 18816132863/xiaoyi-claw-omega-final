@@ -14,6 +14,7 @@ import os
 import json
 from datetime import datetime
 from pathlib import Path
+from infrastructure.path_resolver import get_project_root
 
 def get_inventory_snapshot(workspace_path: str) -> dict:
     """生成库存快照"""
@@ -64,7 +65,7 @@ def get_inventory_snapshot(workspace_path: str) -> dict:
     return snapshot
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     snapshot = get_inventory_snapshot(workspace)
     
     # 保存快照

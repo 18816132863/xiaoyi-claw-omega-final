@@ -14,6 +14,7 @@ import os
 import json
 from datetime import datetime
 from pathlib import Path
+from infrastructure.path_resolver import get_project_root
 
 def load_inventory(file_path: str) -> dict:
     """加载库存文件"""
@@ -89,7 +90,7 @@ def compare_inventories(before: dict, after: dict) -> dict:
     return diff
 
 def main():
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     reports_dir = Path(workspace) / "reports"
     
     # 加载 before 和 after

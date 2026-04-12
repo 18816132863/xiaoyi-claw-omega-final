@@ -16,6 +16,7 @@ from typing import List
 from dataclasses import dataclass
 from collections import defaultdict
 import logging
+from infrastructure.path_resolver import get_project_root
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
 logger = logging.getLogger(__name__)
@@ -290,7 +291,7 @@ def report(o: FinalOptimizer) -> str:
     return r
 
 def main():
-    ws = os.path.expanduser("~/.openclaw/workspace")
+    ws = str(get_project_root())
     o = FinalOptimizer(ws)
     o.start_time = time.time()
     

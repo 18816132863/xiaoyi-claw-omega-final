@@ -23,6 +23,7 @@ from datetime import datetime, timezone
 from concurrent.futures import ThreadPoolExecutor, Future, as_completed
 from collections import OrderedDict
 import logging
+from infrastructure.path_resolver import get_project_root
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 logger = logging.getLogger(__name__)
@@ -501,7 +502,7 @@ def test_interconnect_v2():
 ╚══════════════════════════════════════════════════════════════════════╝
 """)
     
-    workspace = os.path.expanduser("~/.openclaw/workspace")
+    workspace = str(get_project_root())
     client = InterconnectClientV2(workspace)
     
     # 测试找房

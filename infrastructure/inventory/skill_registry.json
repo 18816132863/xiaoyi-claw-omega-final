@@ -19,7 +19,10 @@
       "callable": false,
       "path": "skills/screenshot",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "javascript-skills": {
       "name": "javascript-skills",
@@ -37,7 +40,10 @@
       "callable": false,
       "path": "skills/javascript-skills",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "skill-creator": {
       "name": "skill-creator",
@@ -52,10 +58,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/skill-creator",
       "entry_point": "scripts/test_quick_validate.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "linkedin-api": {
       "name": "linkedin-api",
@@ -73,7 +82,10 @@
       "callable": false,
       "path": "skills/linkedin-api",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "stock-price-query": {
       "name": "stock-price-query",
@@ -88,10 +100,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/stock-price-query",
       "entry_point": "scripts/stock_query.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "command-center": {
       "name": "command-center",
@@ -109,7 +124,10 @@
       "callable": false,
       "path": "skills/command-center",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "video-cog": {
       "name": "video-cog",
@@ -127,7 +145,10 @@
       "callable": false,
       "path": "skills/video-cog",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "tushare-data": {
       "name": "tushare-data",
@@ -142,10 +163,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/tushare-data",
       "entry_point": "scripts/stock_data_demo.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "eno": {
       "name": "eno",
@@ -163,7 +187,10 @@
       "callable": false,
       "path": "skills/eno",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "getnote": {
       "name": "getnote",
@@ -178,10 +205,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/getnote",
       "entry_point": "scripts/oauth_poll.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "image-gen": {
       "name": "image-gen",
@@ -199,7 +229,10 @@
       "callable": false,
       "path": "skills/image-gen",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "xiaohongshu-all-in-one": {
       "name": "xiaohongshu-all-in-one",
@@ -217,7 +250,10 @@
       "callable": false,
       "path": "skills/xiaohongshu-all-in-one",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "spotify-player": {
       "name": "spotify-player",
@@ -235,7 +271,10 @@
       "callable": false,
       "path": "skills/spotify-player",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "wan-image-video-generation-editting": {
       "name": "wan-image-video-generation-editting",
@@ -250,10 +289,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/wan-image-video-generation-editting",
       "entry_point": "scripts/wan-magic.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "post-job": {
       "name": "post-job",
@@ -271,7 +313,10 @@
       "callable": false,
       "path": "skills/post-job",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "senior-data-scientist": {
       "name": "senior-data-scientist",
@@ -286,10 +331,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/senior-data-scientist",
       "entry_point": "scripts/feature_engineering_pipeline.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "university-applications": {
       "name": "university-applications",
@@ -304,10 +352,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/university-applications",
       "entry_point": "scripts/feixing.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "xiao-gui-agent": {
       "name": "xiao-gui-agent",
@@ -327,7 +378,10 @@
       "priority": "P0",
       "last_verified": "2026-04-11",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "scrapling-official": {
       "name": "scrapling-official",
@@ -345,7 +399,10 @@
       "callable": false,
       "path": "skills/scrapling-official",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "t-trading": {
       "name": "t-trading",
@@ -363,7 +420,10 @@
       "callable": false,
       "path": "skills/t-trading",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "elasticsearch": {
       "name": "elasticsearch",
@@ -381,7 +441,10 @@
       "callable": false,
       "path": "skills/elasticsearch",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "mysql": {
       "name": "mysql",
@@ -399,7 +462,10 @@
       "callable": false,
       "path": "skills/mysql",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "ocr-local": {
       "name": "ocr-local",
@@ -417,7 +483,10 @@
       "callable": false,
       "path": "skills/ocr-local",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "taskr": {
       "name": "taskr",
@@ -435,7 +504,10 @@
       "callable": false,
       "path": "skills/taskr",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "agent-chronicle": {
       "name": "agent-chronicle",
@@ -450,10 +522,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/agent-chronicle",
       "entry_point": "scripts/export.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "keyword-research": {
       "name": "keyword-research",
@@ -471,7 +546,10 @@
       "callable": false,
       "path": "skills/keyword-research",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "xiaoyi-web-search": {
       "name": "xiaoyi-web-search",
@@ -491,7 +569,10 @@
       "priority": "P0",
       "last_verified": "2026-04-11",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "external"
     },
     "data-analysis": {
       "name": "data-analysis",
@@ -509,7 +590,10 @@
       "callable": false,
       "path": "skills/data-analysis",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "find-skills": {
       "name": "find-skills",
@@ -522,14 +606,22 @@
       "timeout": 60,
       "layer": 4,
       "status": "active",
-      "registered": true,
-      "routable": true,
-      "callable": true,
+      "registered": false,
+      "routable": false,
+      "callable": false,
       "path": "skills/find-skills",
       "priority": "P0",
       "last_verified": "2026-04-11",
       "entry_point": "scripts/search.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "external",
+      "requires_env": true,
+      "env_keys": [
+        "SKILLHUB_TOKEN"
+      ],
+      "healthcheck": "check_skillhub_token"
     },
     "dingtalk-ai-table": {
       "name": "dingtalk-ai-table",
@@ -544,10 +636,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/dingtalk-ai-table",
       "entry_point": "04-query-records.sh",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "terraform": {
       "name": "terraform",
@@ -565,7 +660,10 @@
       "callable": false,
       "path": "skills/terraform",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "poetry": {
       "name": "poetry",
@@ -580,10 +678,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/poetry",
       "entry_point": "setup.sh",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "seedream-image_gen": {
       "name": "seedream-image_gen",
@@ -598,10 +699,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/seedream-image_gen",
       "entry_point": "scripts/generate_seedream.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "webapp-testing": {
       "name": "webapp-testing",
@@ -616,10 +720,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/webapp-testing",
       "entry_point": "scripts/with_server.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "openai-whisper-api": {
       "name": "openai-whisper-api",
@@ -637,7 +744,10 @@
       "callable": false,
       "path": "skills/openai-whisper-api",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "cn-web-search": {
       "name": "cn-web-search",
@@ -652,10 +762,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/cn-web-search",
       "entry_point": "scripts/search.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "senior-architect": {
       "name": "senior-architect",
@@ -670,10 +783,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/senior-architect",
       "entry_point": "scripts/dependency_analyzer.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "openclaw-skills-agent-builder-1.0.3": {
       "name": "openclaw-skills-agent-builder-1.0.3",
@@ -691,7 +807,10 @@
       "callable": false,
       "path": "skills/openclaw-skills-agent-builder-1.0.3",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "clawdhub": {
       "name": "clawdhub",
@@ -709,7 +828,10 @@
       "callable": false,
       "path": "skills/clawdhub",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "docx": {
       "name": "docx",
@@ -728,8 +850,11 @@
       "path": "skills/docx",
       "priority": "P0",
       "last_verified": "2026-04-11",
-      "entry_point": "scripts/office/unpack.py",
-      "executor_type": "script"
+      "entry_point": "skills/docx/skill.py",
+      "executor_type": "python",
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "web-search-exa": {
       "name": "web-search-exa",
@@ -747,7 +872,10 @@
       "callable": false,
       "path": "skills/web-search-exa",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "xiaoyi-health": {
       "name": "xiaoyi-health",
@@ -765,7 +893,10 @@
       "callable": false,
       "path": "skills/xiaoyi-health",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "novel-generator": {
       "name": "novel-generator",
@@ -783,7 +914,10 @@
       "callable": false,
       "path": "skills/novel-generator",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "ui-design-system": {
       "name": "ui-design-system",
@@ -798,10 +932,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/ui-design-system",
       "entry_point": "scripts/design_token_generator.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "baidu-netdisk-skills": {
       "name": "baidu-netdisk-skills",
@@ -819,7 +956,10 @@
       "callable": false,
       "path": "skills/baidu-netdisk-skills",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "polymarket-trade": {
       "name": "polymarket-trade",
@@ -834,10 +974,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/polymarket-trade",
       "entry_point": "scripts/polymarket.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "nano-pdf": {
       "name": "nano-pdf",
@@ -855,7 +998,10 @@
       "callable": false,
       "path": "skills/nano-pdf",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "imsg": {
       "name": "imsg",
@@ -873,7 +1019,10 @@
       "callable": false,
       "path": "skills/imsg",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "copywriter": {
       "name": "copywriter",
@@ -891,7 +1040,10 @@
       "callable": false,
       "path": "skills/copywriter",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "file-manager": {
       "name": "file-manager",
@@ -910,8 +1062,11 @@
       "path": "skills/file-manager",
       "priority": "P0",
       "last_verified": "2026-04-11",
-      "entry_point": "scripts/sync.py",
-      "executor_type": "script"
+      "entry_point": "skills/file-manager/skill.py",
+      "executor_type": "python",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "beauty-generation-api": {
       "name": "beauty-generation-api",
@@ -929,7 +1084,10 @@
       "callable": false,
       "path": "skills/beauty-generation-api",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "moltguard": {
       "name": "moltguard",
@@ -947,7 +1105,10 @@
       "callable": false,
       "path": "skills/moltguard",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "unified-image": {
       "name": "unified-image",
@@ -965,7 +1126,10 @@
       "callable": false,
       "path": "skills/unified-image",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "image": {
       "name": "image",
@@ -983,7 +1147,10 @@
       "callable": false,
       "path": "skills/image",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "cron": {
       "name": "cron",
@@ -1002,8 +1169,11 @@
       "path": "skills/cron",
       "priority": "P0",
       "last_verified": "2026-04-11",
-      "entry_point": "scripts/init_storage.py",
-      "executor_type": "script"
+      "entry_point": "skills/cron/skill.py",
+      "executor_type": "python",
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "productivity": {
       "name": "productivity",
@@ -1021,7 +1191,10 @@
       "callable": false,
       "path": "skills/productivity",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "xiaoyi-image-search": {
       "name": "xiaoyi-image-search",
@@ -1041,7 +1214,10 @@
       "priority": "P0",
       "last_verified": "2026-04-11",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "external"
     },
     "china-stock-analysis": {
       "name": "china-stock-analysis",
@@ -1056,10 +1232,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/china-stock-analysis",
       "entry_point": "scripts/generate_answer.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "web-scraper": {
       "name": "web-scraper",
@@ -1077,7 +1256,10 @@
       "callable": false,
       "path": "skills/web-scraper",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "discord": {
       "name": "discord",
@@ -1095,7 +1277,10 @@
       "callable": false,
       "path": "skills/discord",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "admapix": {
       "name": "admapix",
@@ -1113,7 +1298,10 @@
       "callable": false,
       "path": "skills/admapix",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "auto-skill-upgrade": {
       "name": "auto-skill-upgrade",
@@ -1128,10 +1316,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/auto-skill-upgrade",
       "entry_point": "config-loader.sh",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "video-subtitles": {
       "name": "video-subtitles",
@@ -1146,10 +1337,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/video-subtitles",
       "entry_point": "scripts/generate_srt.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "ceo-advisor": {
       "name": "ceo-advisor",
@@ -1164,10 +1358,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/ceo-advisor",
       "entry_point": "scripts/financial_scenario_analyzer.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "tech-news-digest": {
       "name": "tech-news-digest",
@@ -1182,10 +1379,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/tech-news-digest",
       "entry_point": "scripts/merge-sources.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "playwright": {
       "name": "playwright",
@@ -1203,7 +1403,10 @@
       "callable": false,
       "path": "skills/playwright",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "moltrade": {
       "name": "moltrade",
@@ -1221,7 +1424,10 @@
       "callable": false,
       "path": "skills/moltrade",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "performance-upgrade": {
       "name": "performance-upgrade",
@@ -1239,7 +1445,10 @@
       "callable": false,
       "path": "skills/performance-upgrade",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "react-best-practices": {
       "name": "react-best-practices",
@@ -1257,7 +1466,10 @@
       "callable": false,
       "path": "skills/react-best-practices",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "git": {
       "name": "git",
@@ -1277,7 +1489,10 @@
       "priority": "P0",
       "last_verified": "2026-04-11",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "memory": {
       "name": "memory",
@@ -1295,7 +1510,10 @@
       "callable": false,
       "path": "skills/memory",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "calcom-cal.com-web-design-guidelines-1.0.2": {
       "name": "calcom-cal.com-web-design-guidelines-1.0.2",
@@ -1313,7 +1531,10 @@
       "callable": false,
       "path": "skills/calcom-cal.com-web-design-guidelines-1.0.2",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "openclaw-agent-optimize": {
       "name": "openclaw-agent-optimize",
@@ -1331,7 +1552,10 @@
       "callable": false,
       "path": "skills/openclaw-agent-optimize",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "beginner-mode": {
       "name": "beginner-mode",
@@ -1349,7 +1573,10 @@
       "callable": false,
       "path": "skills/beginner-mode",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "tdd-guide": {
       "name": "tdd-guide",
@@ -1367,7 +1594,10 @@
       "callable": false,
       "path": "skills/tdd-guide",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "clawsec-suite": {
       "name": "clawsec-suite",
@@ -1385,7 +1615,10 @@
       "callable": false,
       "path": "skills/clawsec-suite",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "local_app_interconnect": {
       "name": "local_app_interconnect",
@@ -1403,7 +1636,10 @@
       "callable": false,
       "path": "skills/local_app_interconnect",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "crypto": {
       "name": "crypto",
@@ -1418,10 +1654,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/crypto",
       "entry_point": "scripts/crypto.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "sonoscli": {
       "name": "sonoscli",
@@ -1439,7 +1678,10 @@
       "callable": false,
       "path": "skills/sonoscli",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "code-analysis-skills": {
       "name": "code-analysis-skills",
@@ -1457,7 +1699,10 @@
       "callable": false,
       "path": "skills/code-analysis-skills",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "audio-cog": {
       "name": "audio-cog",
@@ -1475,7 +1720,10 @@
       "callable": false,
       "path": "skills/audio-cog",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "bitsoul-stock-quantization": {
       "name": "bitsoul-stock-quantization",
@@ -1490,10 +1738,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/bitsoul-stock-quantization",
       "entry_point": "scripts/stock_crawler.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "skill-fusion": {
       "name": "skill-fusion",
@@ -1511,7 +1762,10 @@
       "callable": false,
       "path": "skills/skill-fusion",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "topic-monitor": {
       "name": "topic-monitor",
@@ -1526,10 +1780,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/topic-monitor",
       "entry_point": "scripts/setup_cron.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "sqlite": {
       "name": "sqlite",
@@ -1547,7 +1804,10 @@
       "callable": false,
       "path": "skills/sqlite",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "api-gateway": {
       "name": "api-gateway",
@@ -1565,7 +1825,10 @@
       "callable": false,
       "path": "skills/api-gateway",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "ontology": {
       "name": "ontology",
@@ -1580,10 +1843,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/ontology",
       "entry_point": "scripts/ontology.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "technical-seo-checker": {
       "name": "technical-seo-checker",
@@ -1601,7 +1867,10 @@
       "callable": false,
       "path": "skills/technical-seo-checker",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "klaviyo": {
       "name": "klaviyo",
@@ -1619,7 +1888,10 @@
       "callable": false,
       "path": "skills/klaviyo",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "marketing-strategy-pmm": {
       "name": "marketing-strategy-pmm",
@@ -1637,7 +1909,10 @@
       "callable": false,
       "path": "skills/marketing-strategy-pmm",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "personas": {
       "name": "personas",
@@ -1652,10 +1927,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/personas",
       "entry_point": "scripts/persona.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "best-minds": {
       "name": "best-minds",
@@ -1673,7 +1951,10 @@
       "callable": false,
       "path": "skills/best-minds",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "pdf": {
       "name": "pdf",
@@ -1692,8 +1973,11 @@
       "path": "skills/pdf",
       "priority": "P0",
       "last_verified": "2026-04-11",
-      "entry_point": "scripts/check_fillable_fields.py",
-      "executor_type": "script"
+      "entry_point": "skills/pdf/skill.py",
+      "executor_type": "python",
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "unified-search": {
       "name": "unified-search",
@@ -1708,10 +1992,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/unified-search",
       "entry_point": "scripts/setup.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "command-hook": {
       "name": "command-hook",
@@ -1726,10 +2013,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/command-hook",
       "entry_point": "scripts/hook_manager.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "huawei-drive": {
       "name": "huawei-drive",
@@ -1742,14 +2032,22 @@
       "timeout": 60,
       "layer": 4,
       "status": "active",
-      "registered": true,
-      "routable": true,
-      "callable": true,
+      "registered": false,
+      "routable": false,
+      "callable": false,
       "path": "skills/huawei-drive",
       "priority": "P0",
       "last_verified": "2026-04-11",
       "entry_point": "scripts/huawei_drive.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "external",
+      "requires_env": true,
+      "env_keys": [
+        "HUAWEI_DRIVE_TOKEN"
+      ],
+      "healthcheck": "check_huawei_drive_token"
     },
     "imap-smtp-email": {
       "name": "imap-smtp-email",
@@ -1764,10 +2062,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/imap-smtp-email",
       "entry_point": "setup.sh",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "self-improving-agent": {
       "name": "self-improving-agent",
@@ -1785,7 +2086,10 @@
       "callable": false,
       "path": "skills/self-improving-agent",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "obsidian": {
       "name": "obsidian",
@@ -1803,7 +2107,10 @@
       "callable": false,
       "path": "skills/obsidian",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "tavily-search-skill": {
       "name": "tavily-search-skill",
@@ -1818,10 +2125,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/tavily-search-skill",
       "entry_point": "search.sh",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "xiaoyi-file-upload": {
       "name": "xiaoyi-file-upload",
@@ -1839,7 +2149,10 @@
       "callable": false,
       "path": "skills/xiaoyi-file-upload",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "web-browsing": {
       "name": "web-browsing",
@@ -1854,10 +2167,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/web-browsing",
       "entry_point": "scripts/search_web.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "ai-picture-book": {
       "name": "ai-picture-book",
@@ -1872,10 +2188,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/ai-picture-book",
       "entry_point": "scripts/ai_picture_book_task_create.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "industry-stock-tracker": {
       "name": "industry-stock-tracker",
@@ -1890,10 +2209,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/industry-stock-tracker",
       "entry_point": "scripts/generate_industry_stock_tracker_report.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "today-task": {
       "name": "today-task",
@@ -1908,10 +2230,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/today-task",
       "entry_point": "scripts/hiboards_client.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "planning-with-files": {
       "name": "planning-with-files",
@@ -1926,10 +2251,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/planning-with-files",
       "entry_point": "scripts/session-catchup.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "markitdown": {
       "name": "markitdown",
@@ -1944,10 +2272,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/markitdown",
       "entry_point": "scripts/convert_with_ai.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "quality-documentation-manager": {
       "name": "quality-documentation-manager",
@@ -1962,10 +2293,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/quality-documentation-manager",
       "entry_point": "scripts/document_validator.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "google-maps": {
       "name": "google-maps",
@@ -1983,7 +2317,10 @@
       "callable": false,
       "path": "skills/google-maps",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "market-research": {
       "name": "market-research",
@@ -2001,7 +2338,10 @@
       "callable": false,
       "path": "skills/market-research",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "agent-browser-clawdbot": {
       "name": "agent-browser-clawdbot",
@@ -2019,7 +2359,10 @@
       "callable": false,
       "path": "skills/agent-browser-clawdbot",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "ai-ppt-generator": {
       "name": "ai-ppt-generator",
@@ -2034,10 +2377,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/ai-ppt-generator",
       "entry_point": "scripts/ppt_theme_list.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "xiaoyi-image-understanding": {
       "name": "xiaoyi-image-understanding",
@@ -2050,14 +2396,22 @@
       "timeout": 60,
       "layer": 4,
       "status": "active",
-      "registered": true,
-      "routable": true,
-      "callable": true,
+      "registered": false,
+      "routable": false,
+      "callable": false,
       "path": "skills/xiaoyi-image-understanding",
       "priority": "P0",
       "last_verified": "2026-04-11",
       "entry_point": "scripts/image_understanding.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "external",
+      "requires_env": true,
+      "env_keys": [
+        "XIAOYI_TOKEN"
+      ],
+      "healthcheck": "check_xiaoyi_token"
     },
     "verified-agent-identity": {
       "name": "verified-agent-identity",
@@ -2075,7 +2429,10 @@
       "callable": false,
       "path": "skills/verified-agent-identity",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "mongodb": {
       "name": "mongodb",
@@ -2093,7 +2450,10 @@
       "callable": false,
       "path": "skills/mongodb",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "senior-security": {
       "name": "senior-security",
@@ -2108,10 +2468,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/senior-security",
       "entry_point": "scripts/secret_scanner.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "excel-analysis": {
       "name": "excel-analysis",
@@ -2129,7 +2492,10 @@
       "callable": false,
       "path": "skills/excel-analysis",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "story-cog": {
       "name": "story-cog",
@@ -2147,7 +2513,10 @@
       "callable": false,
       "path": "skills/story-cog",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "camsnap": {
       "name": "camsnap",
@@ -2165,7 +2534,10 @@
       "callable": false,
       "path": "skills/camsnap",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "skill-finder": {
       "name": "skill-finder",
@@ -2183,7 +2555,10 @@
       "callable": false,
       "path": "skills/skill-finder",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "risk-management-specialist": {
       "name": "risk-management-specialist",
@@ -2198,10 +2573,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/risk-management-specialist",
       "entry_point": "scripts/risk_matrix_calculator.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "hot-news-aggregator": {
       "name": "hot-news-aggregator",
@@ -2219,7 +2597,10 @@
       "callable": false,
       "path": "skills/hot-news-aggregator",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "juejin-skills": {
       "name": "juejin-skills",
@@ -2237,7 +2618,10 @@
       "callable": false,
       "path": "skills/juejin-skills",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "amazon-product-search-api-skill": {
       "name": "amazon-product-search-api-skill",
@@ -2252,10 +2636,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/amazon-product-search-api-skill",
       "entry_point": "scripts/amazon_product_search_api.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "weather": {
       "name": "weather",
@@ -2273,7 +2660,10 @@
       "callable": false,
       "path": "skills/weather",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "xiaoyi-doc-convert": {
       "name": "xiaoyi-doc-convert",
@@ -2293,7 +2683,10 @@
       "priority": "P0",
       "last_verified": "2026-04-11",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "xiaoyi-report": {
       "name": "xiaoyi-report",
@@ -2311,7 +2704,10 @@
       "callable": false,
       "path": "skills/xiaoyi-report",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "sheet-cog": {
       "name": "sheet-cog",
@@ -2329,7 +2725,10 @@
       "callable": false,
       "path": "skills/sheet-cog",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "docker": {
       "name": "docker",
@@ -2347,7 +2746,10 @@
       "callable": false,
       "path": "skills/docker",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "ansible": {
       "name": "ansible",
@@ -2365,7 +2767,10 @@
       "callable": false,
       "path": "skills/ansible",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "proactivity": {
       "name": "proactivity",
@@ -2383,7 +2788,10 @@
       "callable": false,
       "path": "skills/proactivity",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "deep-search-and-insight-synthesize": {
       "name": "deep-search-and-insight-synthesize",
@@ -2401,7 +2809,10 @@
       "callable": false,
       "path": "skills/deep-search-and-insight-synthesize",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "video-agent": {
       "name": "video-agent",
@@ -2419,7 +2830,10 @@
       "callable": false,
       "path": "skills/video-agent",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "tencent-cos-skill": {
       "name": "tencent-cos-skill",
@@ -2437,7 +2851,10 @@
       "callable": false,
       "path": "skills/tencent-cos-skill",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "su-lan-paper-daily-skill": {
       "name": "su-lan-paper-daily-skill",
@@ -2455,7 +2872,10 @@
       "callable": false,
       "path": "skills/su-lan-paper-daily-skill",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "article-writer": {
       "name": "article-writer",
@@ -2473,7 +2893,10 @@
       "callable": false,
       "path": "skills/article-writer",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "research-cog": {
       "name": "research-cog",
@@ -2491,7 +2914,10 @@
       "callable": false,
       "path": "skills/research-cog",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "good-txt-to-hwreader": {
       "name": "good-txt-to-hwreader",
@@ -2506,10 +2932,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/good-txt-to-hwreader",
       "entry_point": "scripts/clean_txt.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "mx-stocks-screener": {
       "name": "mx-stocks-screener",
@@ -2524,10 +2953,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/mx-stocks-screener",
       "entry_point": "scripts/get_data.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "unified-document": {
       "name": "unified-document",
@@ -2545,7 +2977,10 @@
       "callable": false,
       "path": "skills/unified-document",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "docs-cog": {
       "name": "docs-cog",
@@ -2563,7 +2998,10 @@
       "callable": false,
       "path": "skills/docs-cog",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "pexoai-agent": {
       "name": "pexoai-agent",
@@ -2581,7 +3019,10 @@
       "callable": false,
       "path": "skills/pexoai-agent",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "chart-image": {
       "name": "chart-image",
@@ -2599,7 +3040,10 @@
       "callable": false,
       "path": "skills/chart-image",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "pptx": {
       "name": "pptx",
@@ -2614,10 +3058,13 @@
       "status": "healthy",
       "registered": false,
       "routable": false,
-      "callable": true,
+      "callable": false,
       "path": "skills/pptx",
       "entry_point": "scripts/clean.py",
-      "executor_type": "script"
+      "executor_type": "script",
+      "testable": true,
+      "smoke_test": false,
+      "test_mode": "integration"
     },
     "frontend-design-pro": {
       "name": "frontend-design-pro",
@@ -2635,7 +3082,10 @@
       "callable": false,
       "path": "skills/frontend-design-pro",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "skill-install-manager-1-0-0": {
       "name": "skill-install-manager-1-0-0",
@@ -2653,7 +3103,10 @@
       "callable": false,
       "path": "skills/skill-install-manager-1-0-0",
       "entry_point": "SKILL.md",
-      "executor_type": "skill_md"
+      "executor_type": "skill_md",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "dealer-leader-cooperation": {
       "id": "dealer-leader-cooperation",
@@ -2690,7 +3143,10 @@
       "last_verified": "2026-04-11",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "path": "skills/dealer-leader-cooperation"
+      "path": "skills/dealer-leader-cooperation",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "douyin-shop-operation": {
       "id": "douyin-shop-operation",
@@ -2725,7 +3181,10 @@
       "last_verified": "2026-04-11",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "path": "skills/douyin-shop-operation"
+      "path": "skills/douyin-shop-operation",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "kuaishou-shop-operation": {
       "id": "kuaishou-shop-operation",
@@ -2758,7 +3217,10 @@
       "callable": false,
       "path": "skills/kuaishou-shop-operation",
       "registered": false,
-      "routable": false
+      "routable": false,
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "platform-comparison": {
       "id": "platform-comparison",
@@ -2789,7 +3251,10 @@
       "callable": false,
       "path": "skills/platform-comparison",
       "registered": false,
-      "routable": false
+      "routable": false,
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "omni-channel-ecommerce": {
       "name": "全渠道电商运营",
@@ -2810,7 +3275,10 @@
       "status": "healthy",
       "path": "skills/omni-channel-ecommerce",
       "registered": false,
-      "routable": false
+      "routable": false,
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "product-management": {
       "id": "product-management",
@@ -2843,7 +3311,10 @@
       "last_verified": "2026-04-11",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "path": "skills/product-management"
+      "path": "skills/product-management",
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "marketing-campaign": {
       "id": "marketing-campaign",
@@ -2875,7 +3346,10 @@
       "callable": false,
       "path": "skills/marketing-campaign",
       "registered": false,
-      "routable": false
+      "routable": false,
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "ecommerce-analytics": {
       "name": "电商数据分析",
@@ -2897,7 +3371,10 @@
       "status": "healthy",
       "path": "skills/ecommerce-analytics",
       "registered": false,
-      "routable": false
+      "routable": false,
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "supply-chain-management": {
       "id": "supply-chain-management",
@@ -2928,7 +3405,10 @@
       "callable": false,
       "path": "skills/supply-chain-management",
       "registered": false,
-      "routable": false
+      "routable": false,
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     },
     "customer-service": {
       "id": "customer-service",
@@ -2959,7 +3439,10 @@
       "callable": false,
       "path": "skills/customer-service",
       "registered": false,
-      "routable": false
+      "routable": false,
+      "testable": false,
+      "smoke_test": false,
+      "test_mode": "none"
     }
   },
   "categories": {

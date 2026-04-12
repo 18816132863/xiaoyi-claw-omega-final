@@ -39,6 +39,15 @@ class RepoIntegrityChecker:
         "scripts/build_ops_dashboard.py",
         "scripts/ops_center.py",
         "scripts/remediation_center.py",
+        "execution/skill_adapter_gateway.py",
+        "execution/skill_gateway.py",
+        "skills/docx/skill.py",
+        "skills/pdf/skill.py",
+        "skills/cron/skill.py",
+        "skills/file-manager/skill.py",
+        "tests/fixtures/smoke/blank.pdf",
+        "tests/fixtures/smoke/sample.docx",
+        "tests/fixtures/integration/file_manager/source/sample.txt",
     ]
 
     # 必须存在的目录

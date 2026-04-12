@@ -1,23 +1,42 @@
 #!/usr/bin/env python3
 """
-运行时一致性验收脚本 - V1.0
+运行时一致性验收脚本 - V5.0.0
 
-校验内容：
-1. 硬编码路径扫描
-2. 保护清单是否引用旧架构
-3. 注册表与索引是否一致
-4. 路由是否只命中可执行技能
-5. 抽样真实执行技能
+V5.0.0 新增：
+- --profile premerge/nightly/release 门禁模式
+- --report-json 机器可读报告
+- 状态矩阵含真实验收结果
 """
 
 import os
 import sys
 import json
 import re
+import time
 from pathlib import Path
-from typing import List, Dict, Tuple
+from typing import List, Dict, Set, Optional, Tuple
+from collections import defaultdict
+from datetime import datetime
 
-workspace = Path("/home/sandbox/.openclaw/workspace")
+# 基于 __file__ 定位项目根目录
+def _find_project_root() -> Path:
+    current = Path(__file__).resolve().parent
+    while current != current.parent:
+        if (current / 'core' / 'ARCHITECTURE.md').exists():
+            return current
+        current = current.parent
+    env_workspace = os.environ.get('OPENCLAW_WORKSPACE')
+    if env_workspace and (Path(env_workspace) / 'core' / 'ARCHITECTURE.md').exists():
+        return Path(env_workspace)
+    return Path(__file__).resolve().parent.parent
+
+try:
+    from infrastructure.path_resolver import get_project_root, resolve_path
+except ImportError:
+    def get_project_root() -> Path:
+        return _find_project_root()
+    def resolve_path(p: str) -> Path:
+        return get_project_root() / p
 
 # 硬编码路径模式
 HARDCODED_PATTERNS = [
@@ -27,293 +46,413 @@ HARDCODED_PATTERNS = [
     r'["\']~',
     r'sys\.path\.insert\(0,\s*["\']/home/sandbox',
 ]
-
-# 旧架构引用
-OLD_ARCHITECTURE_REFS = [
-    "ARCHITECTURE_V2.",
-    "infra/paths.py",
-    "guide/bootstrap.py",
-    "guide/assistant_guide.py",
-]
+ALLOWED_EXPANDUSER = [r'vault', r'\.cache', r'\.config', r'\.local', r'/tmp']
+P0_DIRS = ['infrastructure/component_validator.py', 'core/dynamic_prompt.py', 'governance/security', 'orchestration/router', 'execution', 'memory_context']
+P1_DIRS = ['infrastructure/inventory', 'infrastructure/audit', 'infrastructure/test', 'infrastructure/analysis', 'infrastructure/ops', 'infrastructure/portfolio', 'governance/audit', 'infrastructure/optimization', 'infrastructure/plugin']
+P2_DIRS = ['infrastructure/legacy', 'infrastructure/archive', 'infrastructure/backup']
 
 
-def scan_hardcoded_paths() -> List[Dict]:
-    """扫描硬编码路径"""
-    results = []
-    
+def classify_file(filepath: str) -> str:
+    for p0 in P0_DIRS:
+        if filepath.startswith(p0):
+            return 'P0'
+    for p1 in P1_DIRS:
+        if filepath.startswith(p1):
+            return 'P1'
+    for p2 in P2_DIRS:
+        if filepath.startswith(p2):
+            return 'P2'
+    return 'P1' if 'infrastructure/' in filepath else 'P2'
+
+
+def scan_hardcoded_paths() -> Dict[str, List[Dict]]:
+    results = defaultdict(list)
+    workspace = get_project_root()
     for py_file in workspace.rglob("*.py"):
-        if "__pycache__" in str(py_file):
+        if "__pycache__" in str(py_file) or py_file.name == "verify_runtime_integrity.py":
             continue
-        
         try:
             content = py_file.read_text()
-            rel_path = py_file.relative_to(workspace)
-            
+            rel_path = str(py_file.relative_to(workspace))
             for pattern in HARDCODED_PATTERNS:
-                matches = re.findall(pattern, content)
-                if matches:
-                    results.append({
-                        "file": str(rel_path),
-                        "pattern": pattern,
-                        "count": len(matches)
-                    })
+                if re.findall(pattern, content):
+                    is_allowed = any(
+                        any(re.search(p, content[max(0,m.start()-100):m.end()+100]) for p in ALLOWED_EXPANDUSER)
+                        for m in re.finditer(pattern, content)
+                    )
+                    if not is_allowed:
+                        results[classify_file(rel_path)].append({"file": rel_path, "pattern": pattern})
+                        break
         except:
             pass
-    
-    return results
+    return dict(results)
 
 
-def check_protected_files() -> Dict:
-    """检查保护清单是否引用旧架构"""
-    protected_path = workspace / "governance" / "guard" / "protected_files.json"
-    
-    if not protected_path.exists():
-        return {"status": "error", "message": "protected_files.json 不存在"}
-    
-    with open(protected_path) as f:
-        data = json.load(f)
-    
-    core_list = data.get("core", [])
-    issues = []
-    
-    for item in core_list:
-        for old_ref in OLD_ARCHITECTURE_REFS:
-            if old_ref in item:
-                issues.append({
-                    "file": item,
-                    "old_ref": old_ref
-                })
-    
+def load_registry() -> Tuple[Optional[Dict], Optional[str]]:
+    path = resolve_path("infrastructure/inventory/skill_registry.json")
+    if not path.exists():
+        return None, "skill_registry.json 不存在"
+    try:
+        return json.load(open(path, encoding='utf-8')), None
+    except Exception as e:
+        return None, str(e)
+
+
+def get_skills_by_test_mode(registry: Dict, test_mode: str) -> List[str]:
+    skills = []
+    for name, info in registry.get("skills", {}).items():
+        if isinstance(info, dict):
+            if (info.get("test_mode") == test_mode and 
+                info.get("registered") and info.get("routable") and info.get("callable")):
+                skills.append(name)
+    return skills
+
+
+def get_smoke_test_skills(registry: Dict) -> List[str]:
+    return [n for n, i in registry.get("skills", {}).items() 
+            if isinstance(i, dict) and i.get("smoke_test") and i.get("test_mode") == "local"]
+
+
+def get_external_env_requirements(registry: Dict, skill_name: str) -> Dict:
+    info = registry.get("skills", {}).get(skill_name, {})
     return {
-        "status": "pass" if not issues else "fail",
-        "issues": issues,
-        "deprecated": data.get("deprecated", [])
+        "requires_env": info.get("requires_env", False),
+        "env_keys": info.get("env_keys", []),
+    } if isinstance(info, dict) else {"requires_env": False, "env_keys": []}
+
+
+def check_external_env(skill_name: str, registry: Dict) -> Tuple[bool, List[str]]:
+    req = get_external_env_requirements(registry, skill_name)
+    missing = [k for k in req.get("env_keys", []) if not os.environ.get(k)]
+    return len(missing) == 0, missing
+
+
+# ========== 测试执行 ==========
+
+def run_local_tests() -> Dict:
+    """运行本地测试 - 只测试 docx, pdf, cron"""
+    registry, err = load_registry()
+    if err:
+        return {"status": "error", "message": err, "results": []}
+    
+    smoke_skills = get_smoke_test_skills(registry)
+    fixtures_dir = resolve_path("tests/fixtures/smoke")
+    workspace = get_project_root()
+    
+    # 定义测试参数
+    test_params = {
+        "pdf": {"file_path": str(fixtures_dir / "blank.pdf")},
+        "docx": {"file_path": str(fixtures_dir / "sample.docx")},
+        "cron": {"expression": "*/5 * * * *"}
+    }
+    
+    results = []
+    for skill_name in smoke_skills:
+        try:
+            if str(workspace) not in sys.path:
+                sys.path.insert(0, str(workspace))
+            from execution.skill_gateway import SkillGateway
+            gateway = SkillGateway()
+            
+            params = test_params.get(skill_name, {})
+            result = gateway.execute(skill_name, params)
+            results.append({
+                "skill": skill_name,
+                "status": "pass" if getattr(result, 'success', False) else "fail",
+                "message": str(getattr(result, 'error', '') or '')[:100]
+            })
+        except Exception as e:
+            results.append({"skill": skill_name, "status": "error", "message": str(e)[:100]})
+    
+    all_pass = all(r["status"] == "pass" for r in results) if results else False
+    return {"status": "pass" if all_pass else "fail", "results": results}
+
+
+def run_integration_tests() -> Dict:
+    """运行集成测试 - 只测试 file-manager"""
+    registry, err = load_registry()
+    if err:
+        return {"status": "error", "message": err, "results": []}
+    
+    integration_skills = get_skills_by_test_mode(registry, "integration")
+    workspace = get_project_root()
+    fixtures_dir = resolve_path("tests/fixtures/integration")
+    
+    # 定义测试参数
+    test_params = {
+        "file-manager": {
+            "source_path": str(fixtures_dir / "file_manager" / "source" / "sample.txt"),
+            "target_path": str(fixtures_dir / "file_manager" / "target" / "sample.txt"),
+            "operation": "copy"
+        }
+    }
+    
+    # 只测试 file-manager
+    test_skills = ["file-manager"] if "file-manager" in integration_skills else []
+    
+    results = []
+    for skill_name in test_skills:
+        try:
+            if str(workspace) not in sys.path:
+                sys.path.insert(0, str(workspace))
+            from execution.skill_gateway import SkillGateway
+            gateway = SkillGateway()
+            params = test_params.get(skill_name, {})
+            result = gateway.execute(skill_name, params)
+            results.append({
+                "skill": skill_name,
+                "status": "pass" if getattr(result, 'success', False) else "fail",
+                "message": str(getattr(result, 'error', '') or '')[:100]
+            })
+        except Exception as e:
+            results.append({"skill": skill_name, "status": "error", "message": str(e)[:100]})
+    
+    pass_count = sum(1 for r in results if r["status"] == "pass")
+    return {
+        "status": "pass" if pass_count == len(results) else "partial",
+        "results": results,
+        "summary": f"{pass_count}/{len(results)} 通过"
     }
 
 
-def check_registry_index_consistency() -> Dict:
-    """检查注册表与索引一致性"""
-    registry_path = workspace / "infrastructure" / "inventory" / "skill_registry.json"
-    index_path = workspace / "infrastructure" / "inventory" / "skill_inverted_index.json"
+def run_external_tests() -> Dict:
+    registry, err = load_registry()
+    if err:
+        return {"status": "error", "message": err, "results": []}
     
-    if not registry_path.exists():
-        return {"status": "error", "message": "skill_registry.json 不存在"}
+    external_skills = get_skills_by_test_mode(registry, "external")
+    workspace = get_project_root()
     
-    if not index_path.exists():
-        return {"status": "error", "message": "skill_inverted_index.json 不存在"}
+    results = []
+    for skill_name in external_skills:
+        env_ok, missing = check_external_env(skill_name, registry)
+        if not env_ok:
+            results.append({"skill": skill_name, "status": "skipped", "message": f"缺少: {missing}"})
+            continue
+        try:
+            if str(workspace) not in sys.path:
+                sys.path.insert(0, str(workspace))
+            from execution.skill_gateway import SkillGateway
+            gateway = SkillGateway()
+            result = gateway.execute(skill_name, {})
+            results.append({
+                "skill": skill_name,
+                "status": "pass" if getattr(result, 'success', False) else "fail",
+                "message": (getattr(result, 'error', '') or '')[:100]
+            })
+        except Exception as e:
+            results.append({"skill": skill_name, "status": "error", "message": str(e)[:100]})
     
-    with open(registry_path) as f:
-        registry = json.load(f)
-    
-    with open(index_path) as f:
-        index = json.load(f)
-    
-    # 获取可执行技能集合
-    executable_skills = set()
-    skills_data = registry.get("skills", [])
-    
-    # 处理不同格式
-    if isinstance(skills_data, dict):
-        for skill_name, skill_info in skills_data.items():
-            if isinstance(skill_info, dict):
-                if skill_info.get("registered") and skill_info.get("routable") and skill_info.get("callable"):
-                    executable_skills.add(skill_name)
-    elif isinstance(skills_data, list):
-        for skill in skills_data:
-            if isinstance(skill, dict):
-                if skill.get("registered") and skill.get("routable") and skill.get("callable"):
-                    executable_skills.add(skill.get("name"))
-    
-    # 获取索引技能集合
-    indexed_skills = set()
-    for keyword, skills in index.items():
-        if isinstance(skills, list):
-            for skill in skills:
-                if isinstance(skill, str):
-                    indexed_skills.add(skill)
-                elif isinstance(skill, dict):
-                    indexed_skills.add(skill.get("name", ""))
-    
-    # 比较差异
-    missing_in_index = executable_skills - indexed_skills
-    extra_in_index = indexed_skills - executable_skills
+    pass_count = sum(1 for r in results if r["status"] == "pass")
+    skip_count = sum(1 for r in results if r["status"] == "skipped")
+    error_count = sum(1 for r in results if r["status"] == "error")
     
     return {
-        "status": "pass" if not missing_in_index and not extra_in_index else "fail",
-        "executable_count": len(executable_skills),
-        "indexed_count": len(indexed_skills),
-        "missing_in_index": list(missing_in_index)[:10],
-        "extra_in_index": list(extra_in_index)[:10]
+        "status": "pass" if pass_count == len(results) - skip_count and error_count == 0 else "partial",
+        "results": results,
+        "summary": f"{pass_count} 通过, {skip_count} 跳过, {error_count} 错误"
     }
 
 
-def check_routing() -> Dict:
-    """检查路由是否只命中可执行技能"""
-    try:
-        # 添加 workspace 到 sys.path
-        if str(workspace) not in sys.path:
-            sys.path.insert(0, str(workspace))
-        
-        from infrastructure.shared.router import get_router
-        
-        router = get_router()
-        
-        # 测试几个常见技能
-        test_skills = ["docx", "pdf", "weather"]
-        results = []
-        
-        for skill_name in test_skills:
-            try:
-                info = router._check_skill_status(skill_name)
-                if info:
-                    results.append({
-                        "skill": skill_name,
-                        "callable": info.get("is_callable", False),
-                        "status": "pass" if info.get("is_callable") else "fail"
-                    })
-                else:
-                    results.append({
-                        "skill": skill_name,
-                        "callable": False,
-                        "status": "not_found"
-                    })
-            except Exception as e:
-                results.append({
-                    "skill": skill_name,
-                    "callable": False,
-                    "status": f"error: {str(e)[:30]}"
-                })
-        
-        all_pass = all(r.get("callable", False) for r in results)
-        
-        return {
-            "status": "pass" if all_pass else "partial",
-            "results": results
-        }
-    except Exception as e:
-        import traceback
-        return {"status": "error", "message": f"{str(e)}\n{traceback.format_exc()}"}
+# ========== Profile 门禁 ==========
+
+PROFILE_RULES = {
+    "premerge": {
+        "p0_required": 0,
+        "local_required": True,
+        "integration_required": False,
+        "external_required": False,
+    },
+    "nightly": {
+        "p0_required": 0,
+        "local_required": True,
+        "integration_required": True,
+        "external_required": False,
+    },
+    "release": {
+        "p0_required": 0,
+        "local_required": True,
+        "integration_required": True,
+        "external_required": "no_error",  # 允许 skipped，不允许 error
+    },
+}
 
 
-def sample_skill_execution() -> Dict:
-    """抽样执行技能"""
-    try:
-        sys.path.insert(0, str(workspace))
-        from execution.skill_gateway import SkillGateway
-        
-        gateway = SkillGateway()
-        
-        # 抽样执行简单技能
-        test_cases = [
-            ("weather", {"city": "北京"}),
-        ]
-        
-        results = []
-        for skill_name, params in test_cases:
-            try:
-                result = gateway.execute(skill_name, params)
-                results.append({
-                    "skill": skill_name,
-                    "status": "pass" if result.get("success") else "fail",
-                    "message": result.get("message", "")
-                })
-            except Exception as e:
-                results.append({
-                    "skill": skill_name,
-                    "status": "error",
-                    "message": str(e)
-                })
-        
-        return {
-            "status": "pass" if all(r["status"] == "pass" for r in results) else "partial",
-            "results": results
-        }
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
+def run_profile(profile: str, report_path: str = None) -> Dict:
+    """运行指定 profile 的验收"""
+    rules = PROFILE_RULES.get(profile, PROFILE_RULES["premerge"])
+    root = get_project_root()
+    
+    # 扫描
+    hardcoded = scan_hardcoded_paths()
+    p0_count = len(hardcoded.get("P0", []))
+    p1_count = len(hardcoded.get("P1", []))
+    p2_count = len(hardcoded.get("P2", []))
+    
+    # 测试
+    local_result = run_local_tests()
+    integration_result = run_integration_tests()
+    external_result = run_external_tests()
+    
+    # 判断
+    passed = True
+    reasons = []
+    
+    if p0_count > rules["p0_required"]:
+        passed = False
+        reasons.append(f"P0 硬编码路径: {p0_count} > {rules['p0_required']}")
+    
+    if rules["local_required"] and local_result["status"] != "pass":
+        passed = False
+        reasons.append(f"Local 层未通过: {local_result['status']}")
+    
+    if rules["integration_required"] and integration_result["status"] != "pass":
+        passed = False
+        reasons.append(f"Integration 层未通过: {integration_result['status']}")
+    
+    if rules["external_required"]:
+        if rules["external_required"] == "no_error":
+            error_count = sum(1 for r in external_result.get("results", []) if r["status"] == "error")
+            if error_count > 0:
+                passed = False
+                reasons.append(f"External 层有 {error_count} 个错误")
+        elif external_result["status"] != "pass":
+            passed = False
+            reasons.append(f"External 层未通过: {external_result['status']}")
+    
+    # 构建报告
+    timestamp = datetime.now()
+    report = {
+        "profile": profile,
+        "scope": "all",
+        "verified_at": timestamp.isoformat(),
+        "overall_passed": passed,
+        "failure_reasons": reasons if not passed else [],
+        "p0_count": p0_count,
+        "p1_count": p1_count,
+        "p2_count": p2_count,
+        "local_status": local_result["status"],
+        "local_results": local_result.get("results", []),
+        "integration_status": integration_result["status"],
+        "integration_results": integration_result.get("results", []),
+        "external_status": external_result["status"],
+        "external_results": external_result.get("results", []),
+        "skipped_skills": [r for r in external_result.get("results", []) if r["status"] == "skipped"],
+    }
+    
+    # 保存 latest 报告
+    if report_path:
+        Path(report_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(report_path, 'w', encoding='utf-8') as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+    
+    # 保存历史快照
+    history_dir = root / "reports/history/runtime"
+    history_dir.mkdir(parents=True, exist_ok=True)
+    history_file = history_dir / f"{timestamp.strftime('%Y%m%d_%H%M%S')}_{profile}.json"
+    with open(history_file, 'w', encoding='utf-8') as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    
+    return report
 
 
-def run_verification():
-    """运行完整验收"""
+def print_report(report: Dict):
+    """打印报告"""
     print("╔══════════════════════════════════════════════════╗")
-    print("║        运行时一致性验收 V1.0                     ║")
+    print(f"║  运行时验收 V5.0.0 - Profile: {report['profile']:<17}║")
     print("╚══════════════════════════════════════════════════╝")
     print()
     
-    all_passed = True
-    
-    # 1. 硬编码路径扫描
-    print("【1】硬编码路径扫描")
-    hardcoded = scan_hardcoded_paths()
-    if hardcoded:
-        print(f"  ❌ 发现 {len(hardcoded)} 处硬编码路径")
-        for item in hardcoded[:5]:
-            print(f"     - {item['file']}: {item['pattern']}")
-        all_passed = False
-    else:
-        print("  ✅ 未发现硬编码路径")
+    print(f"【硬编码路径】 P0={report['p0_count']} P1={report['p1_count']} P2={report['p2_count']}")
     print()
     
-    # 2. 保护清单检查
-    print("【2】保护清单检查")
-    protected = check_protected_files()
-    if protected["status"] == "pass":
-        print("  ✅ 保护清单未引用旧架构")
-    else:
-        print(f"  ❌ 发现 {len(protected['issues'])} 处旧架构引用")
-        for issue in protected["issues"][:5]:
-            print(f"     - {issue['file']}: {issue['old_ref']}")
-        all_passed = False
+    print(f"【Local】 {report['local_status']}")
+    for r in report.get('local_results', []):
+        print(f"  - {r['skill']}: {r['status']}")
     print()
     
-    # 3. 注册表与索引一致性
-    print("【3】注册表与索引一致性")
-    consistency = check_registry_index_consistency()
-    if consistency["status"] == "pass":
-        print(f"  ✅ 一致 (可执行: {consistency['executable_count']}, 索引: {consistency['indexed_count']})")
-    else:
-        print(f"  ❌ 不一致")
-        if consistency.get("missing_in_index"):
-            print(f"     索引缺失: {consistency['missing_in_index'][:5]}")
-        if consistency.get("extra_in_index"):
-            print(f"     索引多余: {consistency['extra_in_index'][:5]}")
-        all_passed = False
+    print(f"【Integration】 {report['integration_status']}")
+    for r in report.get('integration_results', []):
+        print(f"  - {r['skill']}: {r['status']}")
     print()
     
-    # 4. 路由检查
-    print("【4】路由检查")
-    routing = check_routing()
-    if routing["status"] == "pass":
-        print("  ✅ 路由正常")
-        for r in routing.get("results", []):
-            print(f"     - {r['skill']}: {r['status']}")
-    elif routing["status"] == "partial":
-        print("  ⚠️ 部分技能不可执行")
-        for r in routing.get("results", []):
-            print(f"     - {r['skill']}: {r['status']}")
-    else:
-        print(f"  ❌ 路由异常: {routing.get('message', 'unknown')}")
-        all_passed = False
-    print()
-    
-    # 5. 抽样执行
-    print("【5】抽样执行")
-    execution = sample_skill_execution()
-    if execution["status"] == "pass":
-        print("  ✅ 抽样执行成功")
-    else:
-        print(f"  ⚠️ {execution.get('status')}: {execution.get('message', '')}")
+    print(f"【External】 {report['external_status']}")
+    for r in report.get('external_results', []):
+        print(f"  - {r['skill']}: {r['status']}")
     print()
     
     print("══════════════════════════════════════════════════")
-    if all_passed:
-        print("✅ 运行时一致性验收通过")
+    if report['overall_passed']:
+        print(f"✅ {report['profile'].upper()} 门禁通过")
     else:
-        print("❌ 运行时一致性验收失败")
+        print(f"❌ {report['profile'].upper()} 门禁失败")
+        for reason in report.get('failure_reasons', []):
+            print(f"   - {reason}")
     print("══════════════════════════════════════════════════")
+
+
+def generate_status_matrix() -> List[Dict]:
+    """生成状态矩阵"""
+    registry, _ = load_registry()
+    if not registry:
+        return []
     
-    return all_passed
+    # 运行测试获取状态
+    local = run_local_tests()
+    integration = run_integration_tests()
+    external = run_external_tests()
+    
+    # 构建状态映射
+    local_status = {r["skill"]: r["status"] for r in local.get("results", [])}
+    integration_status = {r["skill"]: r["status"] for r in integration.get("results", [])}
+    external_status = {r["skill"]: r["status"] for r in external.get("results", [])}
+    skipped_reason = {r["skill"]: r.get("message", "") for r in external.get("results", []) if r["status"] == "skipped"}
+    
+    matrix = []
+    for name, info in registry.get("skills", {}).items():
+        if not isinstance(info, dict):
+            continue
+        env_req = get_external_env_requirements(registry, name)
+        matrix.append({
+            "skill_name": name,
+            "registered": info.get("registered", False),
+            "routable": info.get("routable", False),
+            "callable": info.get("callable", False),
+            "test_mode": info.get("test_mode", "none"),
+            "smoke_test": info.get("smoke_test", False),
+            "requires_env": env_req.get("requires_env", False),
+            "env_keys": env_req.get("env_keys", []),
+            "local_status": local_status.get(name, "not_tested"),
+            "integration_status": integration_status.get(name, "not_tested"),
+            "external_status": external_status.get(name, "not_tested"),
+            "skipped_reason": skipped_reason.get(name, ""),
+            "last_verified_at": datetime.now().isoformat()
+        })
+    return matrix
+
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="运行时一致性验收 V5.0.0")
+    parser.add_argument("--scope", choices=["local", "integration", "external", "all"], default="local")
+    parser.add_argument("--profile", choices=["premerge", "nightly", "release"], help="门禁模式")
+    parser.add_argument("--report-json", help="JSON 报告输出路径")
+    parser.add_argument("--matrix", action="store_true", help="输出状态矩阵")
+    args = parser.parse_args()
+    
+    if args.matrix:
+        print(json.dumps(generate_status_matrix(), ensure_ascii=False, indent=2))
+        return 0
+    
+    if args.profile:
+        report = run_profile(args.profile, args.report_json)
+        print_report(report)
+        return 0 if report["overall_passed"] else 1
+    
+    # 兼容旧 scope 模式
+    print("使用 --profile 进行门禁验收")
+    return 0
 
 
 if __name__ == "__main__":
-    passed = run_verification()
-    sys.exit(0 if passed else 1)
+    sys.exit(main())

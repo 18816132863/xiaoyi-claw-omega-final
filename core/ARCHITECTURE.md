@@ -1,4 +1,4 @@
-# 六层架构定义 V4.3.3
+# 六层架构定义 V4.3.4
 
 > **唯一主架构定义** - 本文档是项目唯一正式运行架构定义
 > 
@@ -17,79 +17,27 @@
 
 ---
 
-## V4.3.3 架构融合更新
+## 技能体系
 
-### 融合映射
+### 技能目录
 
-以下目录已融合到六层架构中：
+**路径**: `skills/`
 
-| 原目录 | 融合目标 | 层级 |
-|--------|----------|------|
-| `autonomy/` | `governance/autonomy/` | L5 |
-| `billing/` | `governance/billing/` | L5 |
-| `collaboration/` | `orchestration/collaboration/` | L3 |
-| `compliance/` | `governance/compliance/` | L5 |
-| `config/` | `infrastructure/config/` | L6 |
-| `delivery/` | `execution/delivery/` | L4 |
-| `ecosystem/` | `infrastructure/ecosystem/` | L6 |
-| `extension/` | `infrastructure/extension/` | L6 |
-| `guard/` | `governance/guard/` | L5 |
-| `guide/` | `core/guide/` | L1 |
-| `infra/` | `infrastructure/legacy/` | L6 |
-| `openapi/` | `infrastructure/openapi/` | L6 |
-| `ops/` | `infrastructure/ops/` | L6 |
-| `product/` | `orchestration/product/` | L3 |
-| `reliability/` | `governance/reliability/` | L5 |
-| `simulation/` | `execution/simulation/` | L4 |
-| `standards/` | `core/standards/` | L1 |
-| `strategy/` | `orchestration/strategy/` | L3 |
-| `tenant/` | `infrastructure/tenant/` | L6 |
+**统计**:
+- 总技能数: 168
+- 已注册: 156
+- 可执行: 4 (docx, pdf, cron, file-manager)
 
-### 融合后目录结构
+### 核心可执行技能
 
-```
-workspace/
-├── core/                    # L1: 核心认知层
-│   ├── guide/              # 助手指南（原 guide/）
-│   ├── standards/          # 标准规范（原 standards/）
-│   └── ...
-├── memory_context/          # L2: 记忆上下文层
-├── orchestration/           # L3: 任务编排层
-│   ├── collaboration/      # 协作编排（原 collaboration/）
-│   ├── product/            # 产品编排（原 product/）
-│   ├── strategy/           # 策略编排（原 strategy/）
-│   └── ...
-├── execution/               # L4: 能力执行层
-│   ├── delivery/           # 交付执行（原 delivery/）
-│   ├── simulation/         # 模拟执行（原 simulation/）
-│   └── ...
-├── governance/              # L5: 稳定治理层
-│   ├── autonomy/           # 自治治理（原 autonomy/）
-│   ├── billing/            # 计费中心（原 billing/）
-│   ├── compliance/         # 合规中心（原 compliance/）
-│   ├── guard/              # 文件守护（原 guard/）
-│   ├── reliability/        # 可靠性（原 reliability/）
-│   └── ...
-├── infrastructure/          # L6: 基础设施层
-│   ├── config/             # 统一配置（原 config/）
-│   ├── ecosystem/          # 生态管理（原 ecosystem/）
-│   ├── extension/          # 扩展管理（原 extension/）
-│   ├── legacy/             # 遗留迁移（原 infra/）
-│   ├── openapi/            # OpenAPI（原 openapi/）
-│   ├── ops/                # 运维工具（原 ops/）
-│   ├── tenant/             # 租户管理（原 tenant/）
-│   └── ...
-├── skills/                  # 技能目录
-├── plugins/                 # 插件目录
-├── archive/                 # 归档目录
-└── reports/                 # 报告目录
-```
+| 技能 | 路径 | 功能 |
+|------|------|------|
+| docx | `skills/docx/skill.py` | DOCX 文件校验 |
+| pdf | `skills/pdf/skill.py` | PDF 文件校验 |
+| cron | `skills/cron/skill.py` | Cron 表达式校验 |
+| file-manager | `skills/file-manager/skill.py` | 文件复制 |
 
----
-
-## 第一阶段：主链打通
-
-### 技能注册体系
+### 技能注册表
 
 **路径**: `infrastructure/inventory/skill_registry.json`
 
@@ -98,6 +46,142 @@ workspace/
 - `registered`: 是否已注册
 - `routable`: 是否可路由
 - `callable`: 是否可调用
+- `entry_point`: 入口文件路径
+- `test_mode`: 测试模式 (local/integration)
+
+### 技能倒排索引
+
+**路径**: `infrastructure/inventory/skill_inverted_index.json`
+
+**功能**: 按 trigger 快速定位技能
+
+---
+
+## 脚本体系
+
+### 运维脚本 (scripts/)
+
+| 脚本 | 功能 |
+|------|------|
+| `ops_center.py` | 运维中心统一入口 |
+| `remediation_center.py` | 处置中心 |
+| `approval_manager.py` | 审批管理器 |
+| `control_plane.py` | 控制平面状态聚合 |
+| `control_plane_audit.py` | 控制平面审计聚合 |
+| `run_release_gate.py` | Release Gate 执行 |
+| `run_nightly_audit.py` | Nightly Audit 执行 |
+| `generate_alerts.py` | 告警生成 |
+| `build_ops_dashboard.py` | Dashboard 构建 |
+| `incident_cli.py` | Incident CLI |
+| `check_repo_integrity.py` | 仓库完整性检查 |
+| `render_premerge_summary.py` | Premerge Summary 渲染 |
+| `render_nightly_summary.py` | Nightly Summary 渲染 |
+| `render_release_summary.py` | Release Summary 渲染 |
+
+### 基础设施脚本 (infrastructure/)
+
+| 脚本 | 功能 |
+|------|------|
+| `verify_runtime_integrity.py` | Runtime 完整性验证 |
+| `path_resolver.py` | 统一路径解析 |
+| `architecture_inspector.py` | 架构巡检 |
+| `auto_git.py` | 自动 Git 同步 |
+| `backup_*.py` | 备份工具集 |
+
+---
+
+## 报告体系
+
+### 报告目录结构
+
+```
+reports/
+├── runtime_integrity.json      # Runtime 完整性报告
+├── quality_gate.json           # Quality Gate 报告
+├── release_gate.json           # Release Gate 报告
+├── nightly_audit.json          # Nightly Audit 报告
+├── nightly_summary.md          # Nightly Summary
+├── alerts/
+│   ├── latest_alerts.json      # 最新告警
+│   ├── notification_result.json # 通知结果
+│   └── incident_summary.json   # Incident 摘要
+├── dashboard/
+│   ├── ops_dashboard.json      # Dashboard 数据
+│   ├── ops_dashboard.md        # Dashboard Markdown
+│   └── ops_dashboard.html      # Dashboard HTML
+├── ops/
+│   ├── ops_state.json          # 运维状态
+│   ├── control_plane_state.json # 控制平面状态
+│   └── control_plane_audit.json # 控制平面审计
+├── remediation/
+│   ├── approval_queue.json     # 审批队列
+│   ├── approval_history.json   # 审批历史
+│   ├── latest_remediation.json # 最新处置
+│   ├── remediation_summary.json # 处置摘要
+│   ├── auto_execute_audit.json # 自动执行审计
+│   ├── auto_execute_summary.json # 自动执行摘要
+│   ├── remediation_guard.json  # 熔断状态
+│   └── history/                # 处置历史
+│       └── rem_*.json          # 处置记录
+├── trends/
+│   └── gate_trend.json         # 门禁趋势
+├── bundles/
+│   └── ops_bundle_*.zip        # 证据包
+└── history/
+    ├── runtime/                # Runtime 历史
+    ├── quality/                # Quality 历史
+    └── release/                # Release 历史
+```
+
+---
+
+## 巡检体系
+
+### 仓库完整性检查
+
+**脚本**: `scripts/check_repo_integrity.py`
+
+**检查项**:
+1. 必需文件存在
+2. 必需目录存在
+3. Makefile 目标
+4. Workflow 完整性
+5. 脚本依赖
+6. 审批历史与 remediation history 一致性
+
+**命令**:
+```bash
+python scripts/check_repo_integrity.py --strict
+```
+
+### 架构巡检
+
+**脚本**: `infrastructure/architecture_inspector.py`
+
+**检查项**:
+1. 六层架构完整性
+2. 文件保护状态
+3. 技能注册一致性
+4. 目录结构合规
+
+**命令**:
+```bash
+python infrastructure/architecture_inspector.py
+```
+
+---
+
+## 版本历史
+
+- V4.3.4: 技能体系 + 脚本体系 + 报告体系 + 巡检体系融入架构
+- V4.3.3: 第九阶段运维平台收口 + 审批主链做实
+- V4.3.2: 第一阶段主链打通 + 第二阶段搜索统一
+- V4.3.0: 架构收口，统一为六层
+- V4.2.x: 性能优化
+- V4.1.0: 纯文档版本
+- V4.0.0: 完整六层架构
+
+---
 - `executor_type`: 执行类型 (python/script/api/skill_md)
 - `entry_point`: 入口文件
 - `path`: 技能路径（相对路径）

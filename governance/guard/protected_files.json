@@ -1,213 +1,41 @@
 {
-  "version": "1.0",
-  "description": "受保护文件列表 - 删除前必须人工确认并说明必要性",
-  "last_updated": "2026-04-11T09:34:00+08:00",
-  "total_protected": 18,
+  "version": "2.0",
+  "updated": "2026-04-12",
+  "description": "当前架构受保护文件清单",
   
-  "L1_core": {
-    "description": "核心认知层文件",
-    "files": [
-      {
-        "path": "AGENTS.md",
-        "reason": "工作空间规则，定义每次会话的加载流程和六层架构",
-        "layer": "L1",
-        "deletable": false,
-        "calls": ["L2", "L5"]
-      },
-      {
-        "path": "SOUL.md",
-        "reason": "身份定义，定义AI的性格和行为准则",
-        "layer": "L1",
-        "deletable": false,
-        "calls": []
-      },
-      {
-        "path": "USER.md",
-        "reason": "用户信息，记录用户的偏好和上下文",
-        "layer": "L1",
-        "deletable": false,
-        "calls": []
-      },
-      {
-        "path": "TOOLS.md",
-        "reason": "工具规则，定义工具的使用优先级和约束",
-        "layer": "L1",
-        "deletable": false,
-        "calls": ["L4", "L5"]
-      },
-      {
-        "path": "IDENTITY.md",
-        "reason": "身份标识，定义AI的名称和形象",
-        "layer": "L1",
-        "deletable": false,
-        "calls": []
-      },
-      {
-        "path": "CONFIG.json",
-        "reason": "核心配置，定义六层架构的Token预算和加载策略",
-        "layer": "L1",
-        "deletable": false,
-        "calls": ["L2", "L3", "L4", "L5", "L6"]
-      }
-    ]
-  },
+  "core": [
+    "AGENTS.md",
+    "SOUL.md",
+    "USER.md",
+    "TOOLS.md",
+    "IDENTITY.md",
+    "MEMORY.md",
+    "HEARTBEAT.md",
+    "core/ARCHITECTURE.md",
+    "core/ARCHITECTURE_INTEGRITY.md",
+    "governance/guard/file_guardian.py",
+    "governance/guard/protected_files.json",
+    "governance/security.py",
+    "governance/audit.py",
+    "infrastructure/path_resolver.py",
+    "infrastructure/inventory/skill_registry.json",
+    "infrastructure/inventory/skill_inverted_index.json",
+    "infrastructure/token_budget.py"
+  ],
   
-  "L2_memory": {
-    "description": "记忆上下文层文件",
-    "files": [
-      {
-        "path": "MEMORY.md",
-        "reason": "长期记忆，存储重要的历史信息",
-        "layer": "L2",
-        "deletable": false,
-        "calls": []
-      },
-      {
-        "path": "memory/*.md",
-        "reason": "日记文件，记录每日工作",
-        "layer": "L2",
-        "deletable": "need_confirm",
-        "pattern": true,
-        "calls": []
-      }
-    ]
-  },
+  "user_added": [],
   
-  "L3_orchestration": {
-    "description": "任务编排层文件",
-    "files": [
-      {
-        "path": "engine/router.py",
-        "reason": "技能路由器，根据任务类型路由到对应技能",
-        "layer": "L3",
-        "deletable": false,
-        "calls": ["L4/skills", "L6/registry.py"]
-      }
-    ]
-  },
+  "deprecated": [
+    "core/ARCHITECTURE_V2.9.2.md",
+    "core/ARCHITECTURE_V2.9.1.md",
+    "core/ARCHITECTURE_V2.8.1.md",
+    "infra/paths.py",
+    "guide/bootstrap.py",
+    "guide/assistant_guide.py"
+  ],
   
-  "L4_execution": {
-    "description": "能力执行层文件",
-    "files": [
-      {
-        "path": "engine/executor.py",
-        "reason": "技能执行器，调用具体技能并返回结果",
-        "layer": "L4",
-        "deletable": false,
-        "calls": ["skills/*", "L5/validator.py"]
-      },
-      {
-        "path": "engine/validator.py",
-        "reason": "结果验证器，验证技能执行结果",
-        "layer": "L4",
-        "deletable": false,
-        "calls": ["L5/audit.py"]
-      }
-    ]
-  },
-  
-  "L5_governance": {
-    "description": "稳定治理层文件 - 包含文件保护模块",
-    "files": [
-      {
-        "path": "guard/security.py",
-        "reason": "安全检查模块，检查危险命令和路径",
-        "layer": "L5",
-        "deletable": false,
-        "calls": ["L5/audit.py"]
-      },
-      {
-        "path": "guard/permissions.py",
-        "reason": "权限管理模块，控制操作权限",
-        "layer": "L5",
-        "deletable": false,
-        "calls": ["L5/audit.py"]
-      },
-      {
-        "path": "guard/audit.py",
-        "reason": "审计日志模块，记录所有操作",
-        "layer": "L5",
-        "deletable": false,
-        "calls": ["L2/memory"]
-      },
-      {
-        "path": "guard/file_guardian.py",
-        "reason": "文件保护模块，防止误删重要文件，核心保护机制",
-        "layer": "L5",
-        "deletable": false,
-        "calls": ["L5/audit.py", "L6/paths.py"],
-        "critical": true
-      },
-      {
-        "path": "guard/protected_files.json",
-        "reason": "受保护文件列表，定义哪些文件不可直接删除",
-        "layer": "L5",
-        "deletable": false,
-        "calls": [],
-        "critical": true
-      }
-    ]
-  },
-  
-  "L6_infrastructure": {
-    "description": "基础设施层文件",
-    "files": [
-      {
-        "path": "infra/paths.py",
-        "reason": "路径解析模块，处理文件路径，被文件保护模块调用",
-        "layer": "L6",
-        "deletable": false,
-        "calls": []
-      },
-      {
-        "path": "infra/plugins.py",
-        "reason": "插件标准模块，定义插件接口",
-        "layer": "L6",
-        "deletable": false,
-        "calls": ["L5/security.py"]
-      },
-      {
-        "path": "infra/performance.py",
-        "reason": "性能优化模块，缓存和加速",
-        "layer": "L6",
-        "deletable": false,
-        "calls": []
-      },
-      {
-        "path": "infra/registry.py",
-        "reason": "技能注册表，管理所有技能",
-        "layer": "L6",
-        "deletable": false,
-        "calls": ["L5/audit.py"]
-      }
-    ]
-  },
-  
-  "user_added": {
-    "description": "用户添加的保护文件",
-    "files": []
-  },
-  
-  "rules": {
-    "delete_requires_confirm": true,
-    "show_file_description": true,
-    "show_file_necessity": true,
-    "show_file_calls": true,
-    "use_trash_not_rm": true,
-    "log_all_deletions": true,
-    "critical_files_never_delete": true
-  },
-  
-  "integration": {
-    "file_guardian_calls": {
-      "check_before_delete": "删除前检查，返回确认信息",
-      "confirm_and_delete": "确认后执行删除",
-      "is_protected": "检查文件是否受保护",
-      "add_protection": "添加文件到保护列表",
-      "request_delete": "请求删除，显示必要性"
-    },
-    "audit_integration": "所有删除操作记录到 L5/audit.py",
-    "paths_integration": "使用 L6/paths.py 解析路径",
-    "trash_integration": "移至 .trash 目录而非 rm"
-  }
+  "notes": [
+    "deprecated 列表中的文件已归档，不再作为现行主保护对象",
+    "如需删除 deprecated 文件，需明确标识为 archive/deprecated"
+  ]
 }

@@ -55,6 +55,7 @@ class RemediationCenter:
     SEMI_AUTO_ACTIONS = [
         "rerun_nightly",
         "rerun_release_gate",
+        "rerun_integration",
         "toggle_incident"
     ]
 
@@ -441,13 +442,18 @@ class RemediationCenter:
         """检查是否是 semi_auto 动作"""
         return action in self.SEMI_AUTO_ACTIONS
 
-    def _add_to_approval_queue(self, action: str, reason: str, source_alert: str = None, source_incident: str = None) -> Dict:
+    def _add_to_approval_queue(self, action: str, reason: str,
+                               source_alert: str = None, source_incident: str = None,
+                               action_params: dict = None) -> Dict:
         """将 semi_auto 动作加入审批队列"""
         sys.path.insert(0, str(self.root))
         from scripts.approval_manager import ApprovalManager
 
         manager = ApprovalManager(self.root)
-        approval_id = manager.add_to_queue(action, reason, "remediation_center")
+        approval_id = manager.add_to_queue(
+            action, reason, "remediation_center",
+            source_alert, source_incident, action_params
+        )
 
         return {
             "status": "queued",
@@ -456,10 +462,11 @@ class RemediationCenter:
             "reason": reason,
             "source_alert": source_alert,
             "source_incident": source_incident,
+            "action_params": action_params or {},
             "queued_at": datetime.now().isoformat()
         }
 
-    def cmd_execute(self, action: str, approve: bool = False, approval_id: str = None) -> Dict:
+    def cmd_execute(self, action: str, approve: bool = False, approval_id: str = None, action_params: dict = None) -> Dict:
         """执行动作"""
         if action in self.FORBIDDEN_ACTIONS:
             print(f"❌ 动作 {action} 禁止自动执行")
@@ -474,8 +481,17 @@ class RemediationCenter:
             print(f"⚠️ 动作 {action} 需要审批")
             print(f"   正在加入审批队列...")
 
+            # 检查 toggle_incident 是否有 incident_id
+            if action == "toggle_incident":
+                if not action_params or not action_params.get("incident_id"):
+                    print(f"❌ toggle_incident 需要 incident_id 参数")
+                    return {"error": "missing_incident_id"}
+
             # 自动入审批队列
-            result = self._add_to_approval_queue(action, f"semi_auto action: {action}")
+            result = self._add_to_approval_queue(
+                action, f"semi_auto action: {action}",
+                action_params=action_params
+            )
             print(f"   ✅ 已加入审批队列: {result['approval_id']}")
             print(f"   使用 ops_center.py approval grant {result['approval_id']} <owner> 批准执行")
             return result
@@ -520,10 +536,36 @@ class RemediationCenter:
             command = "python infrastructure/verify_runtime_integrity.py --scope integration"
             timeout = 60
         elif action == "toggle_incident":
-            print(f"❌ toggle_incident 需要 incident_id 参数")
-            record["finished_at"] = datetime.now().isoformat()
-            record["success"] = False
-            record["error"] = "missing incident_id"
+            if not action_params or not action_params.get("incident_id"):
+                print(f"❌ toggle_incident 需要 incident_id 参数")
+                record["finished_at"] = datetime.now().isoformat()
+                record["success"] = False
+                record["error"] = "missing incident_id"
+                self._save_action_result(record)
+                return record
+
+            # 执行 incident 状态切换
+            incident_id = action_params.get("incident_id")
+            target_status = action_params.get("target_status", "resolved")
+
+            # 调用 incident_cli
+            incident_script = self.root / "scripts" / "incident_cli.py"
+            if incident_script.exists():
+                toggle_cmd = f"python scripts/incident_cli.py resolve {incident_id}"
+                success, stdout, stderr = self._execute_command(toggle_cmd, 30)
+                record["finished_at"] = datetime.now().isoformat()
+                record["success"] = success
+                record["changed_files"] = ["governance/ops/incident_tracker.json"]
+                if success:
+                    print(f"✅ Incident {incident_id} 已切换到 {target_status}")
+                else:
+                    record["error"] = stderr or stdout
+                    print(f"❌ 切换失败: {stderr or stdout}")
+            else:
+                record["finished_at"] = datetime.now().isoformat()
+                record["success"] = False
+                record["error"] = "incident_cli.py not found"
+                print(f"❌ incident_cli.py 不存在")
             self._save_action_result(record)
             return record
         elif action == "fix_config_drift":
@@ -1224,6 +1266,7 @@ def main():
     execute_parser.add_argument("action", help="动作名称")
     execute_parser.add_argument("--approve", action="store_true", help="批准执行 semi_auto 动作")
     execute_parser.add_argument("--approval-id", help="审批 ID（用于回填执行记录）")
+    execute_parser.add_argument("--params", help="动作参数（JSON 格式）")
 
     # auto-execute
     auto_exec_parser = subparsers.add_parser("auto-execute", help="受控自动执行")
@@ -1263,7 +1306,8 @@ def main():
     elif args.command == "dry-run":
         rc.cmd_dry_run(args.action)
     elif args.command == "execute":
-        rc.cmd_execute(args.action, args.approve, getattr(args, 'approval_id', None))
+        params = json.loads(args.params) if hasattr(args, 'params') and args.params else None
+        rc.cmd_execute(args.action, args.approve, getattr(args, 'approval_id', None), params)
     elif args.command == "auto-execute":
         rc.cmd_auto_execute(args.profile, args.workflow)
     elif args.command == "history":

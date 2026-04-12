@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-12T23:22:38.359818",
+  "generated_at": "2026-04-12T23:34:56.619672",
   "version": "1.0.0",
   "overview": {
     "runtime_passed": true,
@@ -56,8 +56,8 @@
           "nightly": "2026-04-12T17:33:50.228675"
         },
         "blocked_reasons": [],
-        "resolution_note": "告警已自动恢复",
-        "resolved_at": "2026-04-12T17:46:26.127580"
+        "resolution_note": "手动关闭",
+        "resolved_at": "2026-04-12T23:34:46.354867"
       },
       {
         "incident_id": "INC-20260412193247",
@@ -130,9 +130,9 @@
     ]
   },
   "remediation": {
-    "latest_action": "rerun_nightly",
+    "latest_action": "toggle_incident",
     "latest_success": true,
-    "latest_action_id": "rem_20260412_232152_318",
+    "latest_action_id": "rem_20260412_233446_386",
     "pending_actions": [],
     "auto_execute_enabled": true,
     "latest_executed": [],
@@ -140,12 +140,12 @@
   },
   "approvals": {
     "pending_count": 0,
-    "approved_recent_count": 2,
+    "approved_recent_count": 4,
     "denied_recent_count": 2,
-    "executed_count": 1,
-    "last_approval_id": "apr_20260412_232218_323",
-    "last_approval_status": "denied",
-    "latest_execute_record_id": null
+    "executed_count": 3,
+    "last_approval_id": "apr_20260412_233426_382",
+    "last_approval_status": "approved",
+    "latest_execute_record_id": "rem_20260412_233446_386"
   },
   "notifications": {
     "total_sent": 1,
@@ -257,9 +257,9 @@
     ]
   },
   "audit": {
-    "last_runtime_check": "2026-04-12T23:22:38.363128",
-    "last_quality_check": "2026-04-12T23:22:38.363132",
-    "last_release_check": "2026-04-12T23:22:38.363134",
+    "last_runtime_check": "2026-04-12T23:34:56.624484",
+    "last_quality_check": "2026-04-12T23:34:56.624487",
+    "last_release_check": "2026-04-12T23:34:56.624489",
     "audit_trail": []
   }
 }

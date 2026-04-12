@@ -39,9 +39,8 @@ class ApprovalManager:
     SEMI_AUTO_ACTIONS = [
         "rerun_nightly",
         "rerun_release_gate",
-        "toggle_incident",
         "rerun_integration",
-        "fix_config_drift"
+        "toggle_incident"
     ]
 
     def __init__(self, root: Path):
@@ -62,7 +61,9 @@ class ApprovalManager:
     def _save_history(self, history: Dict):
         save_json(self.history_path, history)
 
-    def add_to_queue(self, action_type: str, reason: str, source: str = "manual") -> str:
+    def add_to_queue(self, action_type: str, reason: str, source: str = "manual",
+                     source_alert: str = None, source_incident: str = None,
+                     action_params: dict = None) -> str:
         """添加到审批队列"""
         queue = self._load_queue()
 
@@ -73,6 +74,9 @@ class ApprovalManager:
             "action_type": action_type,
             "reason": reason,
             "source": source,
+            "source_alert": source_alert,
+            "source_incident": source_incident,
+            "action_params": action_params or {},
             "status": "pending",
             "created_at": datetime.now().isoformat(),
             "approved_at": None,
@@ -81,7 +85,10 @@ class ApprovalManager:
             "denied_by": None,
             "deny_reason": None,
             "executed_at": None,
-            "execute_record_id": None
+            "execute_record_id": None,
+            "execute_success": None,
+            "execute_error": None,
+            "final_status": None
         }
 
         queue["pending"].append(item)
@@ -111,12 +118,14 @@ class ApprovalManager:
 
                 # 执行动作
                 action_type = item.get("action_type")
-                execute_result = self._execute_approved_action(approval_id, action_type)
+                action_params = item.get("action_params", {})
+                execute_result = self._execute_approved_action(approval_id, action_type, action_params)
 
                 # 更新执行结果
                 item["executed_at"] = execute_result.get("executed_at")
-                item["execute_record_id"] = execute_result.get("action_id")
+                item["execute_record_id"] = execute_result.get("execute_record_id")
                 item["execute_success"] = execute_result.get("success", False)
+                item["execute_error"] = execute_result.get("error")
                 item["final_status"] = "executed" if execute_result.get("success") else "execute_failed"
 
                 # 移到历史
@@ -129,30 +138,48 @@ class ApprovalManager:
                     "approval_id": approval_id,
                     "status": "approved_and_executed",
                     "execute_success": execute_result.get("success", False),
-                    "execute_record_id": execute_result.get("action_id")
+                    "execute_record_id": execute_result.get("execute_record_id")
                 }
 
         return {"success": False, "error": f"未找到审批项: {approval_id}"}
 
-    def _execute_approved_action(self, approval_id: str, action_type: str) -> Dict:
+    def _execute_approved_action(self, approval_id: str, action_type: str, action_params: dict) -> Dict:
         """执行已批准的动作"""
         import subprocess
+        import json
 
         # 调用 remediation_center 执行
         script = self.root / "scripts" / "remediation_center.py"
         if not script.exists():
             return {"success": False, "error": "remediation_center.py not found"}
 
+        # 构建命令
+        cmd = [sys.executable, str(script), "execute", action_type, "--approve", "--approval-id", approval_id]
+
+        # 如果有参数，传递给脚本
+        if action_params:
+            cmd.extend(["--params", json.dumps(action_params)])
+
         result = subprocess.run(
-            [sys.executable, str(script), "execute", action_type, "--approve", "--approval-id", approval_id],
+            cmd,
             cwd=self.root,
             capture_output=True,
             text=True
         )
 
+        # 从 latest_remediation.json 获取真实的 action_id
+        latest_path = self.root / "reports" / "remediation" / "latest_remediation.json"
+        execute_record_id = None
+        if latest_path.exists():
+            try:
+                latest = json.load(open(latest_path))
+                execute_record_id = latest.get("action_id")
+            except:
+                pass
+
         return {
             "success": result.returncode == 0,
-            "action_id": f"rem_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+            "execute_record_id": execute_record_id,
             "executed_at": datetime.now().isoformat(),
             "output": result.stdout[:500] if result.stdout else "",
             "error": result.stderr[:200] if result.stderr else ""

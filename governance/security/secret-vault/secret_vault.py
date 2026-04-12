@@ -2,9 +2,12 @@
 """
 密钥安全存储模块
 使用 AES-256-GCM + RSA-4096 多层加密保护敏感密钥
+
+V2.0: 使用 path_resolver 统一路径
 """
 
 import os
+import sys
 import json
 import hashlib
 import secrets
@@ -17,6 +20,10 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
+
+# 使用 path_resolver
+sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
+from infrastructure.path_resolver import get_project_root
 
 
 @dataclass
@@ -31,10 +38,15 @@ class EncryptedSecret:
 
 
 class SecretVault:
-    """密钥安全存储"""
+    """密钥安全存储 V2.0"""
     
     def __init__(self, vault_path: str = None, master_password: str = None):
-        self.vault_path = Path(vault_path or "~/.openclaw/vault").expanduser()
+        # 使用 path_resolver 获取路径
+        if vault_path:
+            self.vault_path = Path(vault_path)
+        else:
+            self.vault_path = get_project_root() / "governance" / "security" / "secret-vault" / "vault"
+        
         self.vault_path.mkdir(parents=True, exist_ok=True)
         
         self.vault_file = self.vault_path / "vault.json"

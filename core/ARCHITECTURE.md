@@ -312,8 +312,203 @@ workspace/
 
 ## 版本历史
 
+- V4.3.3: 第九阶段运维平台收口 + 审批主链做实
 - V4.3.2: 第一阶段主链打通 + 第二阶段搜索统一
 - V4.3.0: 架构收口，统一为六层
 - V4.2.x: 性能优化
 - V4.1.0: 纯文档版本
 - V4.0.0: 完整六层架构
+
+---
+
+## 第九阶段：运维平台收口
+
+### 控制平面
+
+**路径**: `scripts/control_plane.py`
+
+**功能**:
+- 聚合所有运维状态到统一视图
+- 输出 `reports/ops/control_plane_state.json`
+
+**聚合内容**:
+- `overview`: Runtime/Quality/Release 概览
+- `gates`: 门禁状态详情
+- `alerts`: 告警状态
+- `incidents`: Incident 状态
+- `remediation`: 处置状态
+- `approvals`: 审批摘要
+- `notifications`: 通知状态
+- `dashboard`: Dashboard 状态
+- `trends`: 趋势状态
+
+### 控制平面审计
+
+**路径**: `scripts/control_plane_audit.py`
+
+**功能**:
+- 聚合历史审计记录
+- 输出 `reports/ops/control_plane_audit.json`
+
+**聚合内容**:
+- `release_gates`: 最近 release gate 记录
+- `nightly_audits`: 最近 nightly audit 记录
+- `blocking_alerts`: 最近 blocking alerts
+- `incidents`: 最近 incidents
+- `remediations`: 最近 remediation 记录
+- `approvals`: 结构化审批摘要
+- `timeline`: 时间线事件
+
+### 审批管理器
+
+**路径**: `scripts/approval_manager.py`
+
+**功能**:
+- 管理 semi_auto 动作的审批流程
+- 状态归一化：pending/executed/execute_failed/denied/approved_legacy
+
+**核心函数**:
+- `normalize_approval_record()`: 状态归一化
+- `add_to_queue()`: 添加到审批队列
+- `grant()`: 批准并执行
+- `deny()`: 拒绝
+- `record_execute()`: 回填执行记录
+
+**状态规则**:
+| 状态 | 说明 |
+|------|------|
+| pending | 待审批 |
+| executed | 批准后执行成功 |
+| execute_failed | 批准后执行失败 |
+| denied | 拒绝 |
+| approved_legacy | 历史遗留记录 |
+
+**产物**:
+- `reports/remediation/approval_queue.json`: 审批队列
+- `reports/remediation/approval_history.json`: 审批历史
+
+### 处置中心
+
+**路径**: `scripts/remediation_center.py`
+
+**功能**:
+- 统一处置入口
+- 支持 safe_auto / semi_auto / forbidden_auto 分类
+
+**命令**:
+- `plan`: 输出建议处置动作
+- `dry-run`: 模拟执行
+- `execute`: 执行动作
+- `auto-execute`: 受控自动执行
+- `history`: 查看处置历史
+- `guard`: 查看熔断状态
+- `audit`: 查看审计记录
+
+**动作分类**:
+| 类别 | 动作 | 说明 |
+|------|------|------|
+| safe_auto | rebuild_dashboard, rebuild_ops_state, rebuild_bundle, retry_notifications | 可自动执行 |
+| semi_auto | rerun_nightly, rerun_release_gate, rerun_integration, toggle_incident | 需审批 |
+| forbidden_auto | modify_core_arch, modify_skill_registry, ... | 禁止自动执行 |
+
+### 运维中心
+
+**路径**: `scripts/ops_center.py`
+
+**命令**:
+- `status`: 查看总状态
+- `verify`: 运行门禁
+- `incidents`: 管理 incidents
+- `alerts`: 查看告警
+- `dashboard`: 构建看板
+- `bundle`: 打包证据
+- `remediation`: 处置管理
+- `guard`: 查看熔断状态
+- `audit`: 查看审计记录
+- `control-plane`: 控制平面命令
+- `approval`: 审批命令
+
+### 审批主链
+
+**流程**:
+```
+semi_auto 动作 → 自动入审批队列 → grant 批准 → 真实执行 → 回填 execute_record_id
+```
+
+**关键约束**:
+1. `execute_record_id` 必须是真实 remediation 记录 ID
+2. 对应 `reports/remediation/history/<id>.json` 必须存在
+3. 没有 history 文件不能标记为 executed
+
+**产物关联**:
+```
+approval_history.json
+  └─ execute_record_id
+      └─ reports/remediation/history/<id>.json
+```
+
+### 报告体系扩展
+
+```
+reports/
+├── ops/
+│   ├── control_plane_state.json    # 控制平面状态
+│   ├── control_plane_audit.json    # 控制平面审计
+│   └── ops_state.json              # 运维状态
+├── remediation/
+│   ├── approval_queue.json         # 审批队列
+│   ├── approval_history.json       # 审批历史
+│   ├── latest_remediation.json     # 最新处置
+│   ├── remediation_summary.json    # 处置摘要
+│   ├── auto_execute_audit.json     # 自动执行审计
+│   ├── auto_execute_summary.json   # 自动执行摘要
+│   ├── remediation_guard.json      # 熔断状态
+│   └── history/                    # 处置历史
+│       └── rem_*.json              # 处置记录
+└── ...
+```
+
+### 第九阶段验收
+
+- [ ] control_plane_state.json 包含 approvals 摘要
+- [ ] control_plane_audit.json 结构化输出
+- [ ] approval_history.json 状态归一
+- [ ] executed 记录有真实 execute_record_id
+- [ ] execute_record_id 对应 history 文件存在
+- [ ] summary 脚本显示 Approval Summary
+
+---
+
+## 门禁与验收体系
+
+### 统一入口
+
+```bash
+# CI 门禁
+python scripts/run_release_gate.py {premerge|nightly|release}
+
+# 夜间巡检（带回归检测）
+python scripts/run_nightly_audit.py
+```
+
+### Profile 规则
+
+| Profile | P0 | Local | Integration | External |
+|---------|-----|-------|-------------|----------|
+| premerge | =0 | 必须 | 不阻塞 | 不阻塞 |
+| nightly | =0 | 必须 | 必须 | 不阻塞 |
+| release | =0 | 必须 | 必须 | 无 error |
+
+### 报告体系
+
+```
+reports/
+├── runtime_integrity.json      # 最新
+├── quality_gate.json           # 最新
+├── nightly_audit.json          # 审计
+├── nightly_summary.md          # 摘要
+├── trends/runtime_trend.json   # 趋势
+└── history/                    # 历史快照
+```
+
+详见 `core/ARCHITECTURE_INTEGRITY.md`

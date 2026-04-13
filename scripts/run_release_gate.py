@@ -73,6 +73,59 @@ def print_rule_summary(rule_results: dict):
     print("=" * 50)
 
 
+def print_change_impact_summary():
+    """打印变更影响摘要"""
+    root = get_project_root()
+    
+    print("\n" + "=" * 50)
+    print("【Change Impact Summary】")
+    print("=" * 50)
+    
+    # 尝试获取 git diff
+    try:
+        result = subprocess.run(
+            ["git", "diff", "--name-only", "HEAD~1"],
+            capture_output=True,
+            text=True,
+            cwd=root
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            changed_files = [f.strip() for f in result.stdout.strip().split("\n") if f.strip()]
+            print(f"  Changed Files: {len(changed_files)}")
+            
+            # 调用 change impact 检查
+            impact_result = subprocess.run(
+                [sys.executable, str(root / "scripts/check_change_impact.py"), "--json", "--files"] + changed_files,
+                capture_output=True,
+                text=True,
+                cwd=root
+            )
+            if impact_result.returncode == 0:
+                import json
+                try:
+                    impact_data = json.loads(impact_result.stdout)
+                    if impact_data.get("required_commands"):
+                        print(f"  Required Commands: {impact_data['total_commands']}")
+                        for cmd in impact_data["required_commands"][:3]:
+                            print(f"    - {cmd}")
+                        if impact_data['total_commands'] > 3:
+                            print(f"    ... and {impact_data['total_commands'] - 3} more")
+                    else:
+                        print("  Required Commands: None")
+                except:
+                    print("  Required Commands: N/A")
+            else:
+                print("  Required Commands: N/A")
+        else:
+            print("  Changed Files: N/A (not in git context)")
+            print("  Required Commands: N/A")
+    except Exception as e:
+        print("  Changed Files: N/A")
+        print("  Required Commands: N/A")
+    
+    print("=" * 50)
+
+
 def verify_premerge():
     """premerge 门禁"""
     root = get_project_root()
@@ -80,6 +133,9 @@ def verify_premerge():
     # 0. 规则检查
     rule_results = run_rule_checks()
     print_rule_summary(rule_results)
+    
+    # 0.1 变更影响摘要
+    print_change_impact_summary()
     
     # 1. 运行时验收
     rc = run_command([

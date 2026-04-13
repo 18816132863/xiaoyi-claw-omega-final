@@ -212,26 +212,34 @@ class RepoIntegrityChecker:
                 self.warnings.append(f"无法检查规则一致性: {e}")
                 print(f"  ⚠️ 无法检查: {e}")
         
-        # 2. 检查 SINGLE_SOURCE_OF_TRUTH.md 中声明的文件是否存在
-        sst_file = self.root / "core/SINGLE_SOURCE_OF_TRUTH.md"
-        if sst_file.exists():
-            content = sst_file.read_text()
-            # 简单检查：确保文件中提到的关键文件存在
-            key_files = ["LAYER_DEPENDENCY_MATRIX.md", "LAYER_DEPENDENCY_RULES.json", "skill_registry.json"]
-            for kf in key_files:
-                if kf in content:
-                    # 尝试找到对应的实际文件
-                    found = False
-                    for f in self.SINGLE_SOURCE_FILES:
-                        if kf in f and self.check_file_exists(f):
-                            found = True
-                            break
-                    if found:
-                        self.passed.append(f"真源声明一致: {kf}")
-                        print(f"  ✅ 真源声明一致: {kf}")
-                    else:
-                        self.warnings.append(f"真源声明可能不一致: {kf}")
-                        print(f"  ⚠️ 真源声明可能不一致: {kf}")
+        # 2. 检查 skill_registry.json 与 skill_inverted_index.json 的真源/派生关系
+        registry_file = self.root / "infrastructure/inventory/skill_registry.json"
+        index_file = self.root / "infrastructure/inventory/skill_inverted_index.json"
+        
+        if registry_file.exists() and index_file.exists():
+            try:
+                index_data = json.load(open(index_file, encoding='utf-8'))
+                
+                # 检查 index 是否标注为派生物
+                if index_data.get("derived") == True:
+                    self.passed.append("skill_inverted_index.json 正确标注为派生物")
+                    print(f"  ✅ skill_inverted_index.json 正确标注为派生物")
+                else:
+                    self.warnings.append("skill_inverted_index.json 未标注为派生物")
+                    print(f"  ⚠️ skill_inverted_index.json 未标注 derived=true")
+                
+                # 检查 source 字段是否指向 registry
+                source = index_data.get("source", "")
+                if "skill_registry.json" in source:
+                    self.passed.append("skill_inverted_index.json source 指向正确")
+                    print(f"  ✅ skill_inverted_index.json source 指向 skill_registry.json")
+                else:
+                    self.warnings.append("skill_inverted_index.json source 未指向 skill_registry.json")
+                    print(f"  ⚠️ skill_inverted_index.json source 应指向 skill_registry.json")
+                    
+            except Exception as e:
+                self.warnings.append(f"无法检查 skill index: {e}")
+                print(f"  ⚠️ 无法检查: {e}")
         
         print()
 
@@ -365,6 +373,41 @@ class RepoIntegrityChecker:
         print()
         return True
 
+    def run_rule_guards_self_test(self) -> bool:
+        """调用规则守卫自测"""
+        print("【调用规则守卫自测】")
+        script_path = self.root / "scripts/check_rule_guards.py"
+
+        if not script_path.exists():
+            self.warnings.append("check_rule_guards.py 不存在，跳过")
+            print("  ⚠️ check_rule_guards.py 不存在，跳过")
+            print()
+            return True
+
+        try:
+            result = subprocess.run(
+                [sys.executable, str(script_path)],
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+
+            if result.returncode == 0:
+                self.passed.append("规则守卫自测通过")
+                print("  ✅ 规则守卫自测通过")
+            else:
+                self.errors.append("规则守卫自测失败")
+                print("  ❌ 规则守卫自测失败")
+                if result.stdout:
+                    print(result.stdout[-500:])
+
+        except Exception as e:
+            self.warnings.append(f"无法运行规则守卫自测: {e}")
+            print(f"  ⚠️ 无法运行: {e}")
+
+        print()
+        return True
+
     def run_all_checks(self) -> bool:
         """运行所有检查"""
         print("╔══════════════════════════════════════════════════╗")
@@ -384,6 +427,9 @@ class RepoIntegrityChecker:
         # 新增：调用两个检查脚本
         self.run_layer_dependency_check()
         self.run_json_contract_check()
+        
+        # 新增：规则守卫自测
+        self.run_rule_guards_self_test()
 
         # 汇总
         print("╔══════════════════════════════════════════════════╗")

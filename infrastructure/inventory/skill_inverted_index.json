@@ -1,7 +1,9 @@
 {
   "version": "1.0.0",
+  "derived": true,
+  "source": "infrastructure/inventory/skill_registry.json",
   "generated_at": "2026-04-12T22:34:56.909618",
-  "source": "skill_registry.json",
+  "generator": "infrastructure/inventory/build_inverted_index.py",
   "skills": [
     "docx",
     "file-manager",

@@ -120,8 +120,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/command-center",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -677,8 +677,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/poetry",
       "entry_point": "setup.sh",
       "executor_type": "script",
@@ -910,8 +910,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/novel-generator",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -1716,8 +1716,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/audio-cog",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -1905,8 +1905,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/marketing-strategy-pmm",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -2271,8 +2271,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/markitdown",
       "entry_point": "scripts/convert_with_ai.py",
       "executor_type": "script",
@@ -3057,8 +3057,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/pptx",
       "entry_point": "scripts/clean.py",
       "executor_type": "script",
@@ -3367,11 +3367,11 @@
       ],
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "callable": false,
+      "callable": true,
       "status": "healthy",
       "path": "skills/ecommerce-analytics",
       "registered": false,
-      "routable": false,
+      "routable": true,
       "testable": false,
       "smoke_test": false,
       "test_mode": "none"
@@ -3499,7 +3499,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "anthropics-skills-canvas-design": {
       "name": "anthropics-skills-canvas-design",
@@ -4506,7 +4507,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "lyrical-fable": {
       "name": "lyrical-fable",
@@ -5077,7 +5079,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "feishu-channel-skill": {
       "name": "feishu-channel-skill",
@@ -5362,7 +5365,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "alphaear-news": {
       "name": "alphaear-news",
@@ -5419,7 +5423,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "xiaoyi-ppt": {
       "name": "xiaoyi-ppt",

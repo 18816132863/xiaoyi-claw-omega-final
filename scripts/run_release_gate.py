@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-发布门禁统一入口 - V2.0.0
+发布门禁统一入口 - V3.0.0
 
-提供 CI 可用的统一命令，包含规则检查
+提供 CI 可用的统一命令，包含规则检查和变更影响强制门禁
 """
 
 import sys
+import json
 import subprocess
 from pathlib import Path
 from datetime import datetime
@@ -93,28 +94,27 @@ def print_change_impact_summary():
             changed_files = [f.strip() for f in result.stdout.strip().split("\n") if f.strip()]
             print(f"  Changed Files: {len(changed_files)}")
             
-            # 调用 change impact 检查
+            # 调用 change impact 检查并保存报告
             impact_result = subprocess.run(
-                [sys.executable, str(root / "scripts/check_change_impact.py"), "--json", "--files"] + changed_files,
+                [sys.executable, str(root / "scripts/check_change_impact.py"), 
+                 "--json", "--from-git", "--report-json", "reports/ops/change_impact.json"],
                 capture_output=True,
                 text=True,
                 cwd=root
             )
-            if impact_result.returncode == 0:
-                import json
-                try:
-                    impact_data = json.loads(impact_result.stdout)
-                    if impact_data.get("required_commands"):
-                        print(f"  Required Commands: {impact_data['total_commands']}")
-                        for cmd in impact_data["required_commands"][:3]:
-                            print(f"    - {cmd}")
-                        if impact_data['total_commands'] > 3:
-                            print(f"    ... and {impact_data['total_commands'] - 3} more")
-                    else:
-                        print("  Required Commands: None")
-                except:
-                    print("  Required Commands: N/A")
-            else:
+            try:
+                impact_data = json.loads(impact_result.stdout)
+                if impact_data.get("required_commands"):
+                    print(f"  Required Commands: {impact_data['total_commands']}")
+                    for cmd in impact_data["required_commands"][:3]:
+                        print(f"    - {cmd}")
+                    if impact_data['total_commands'] > 3:
+                        print(f"    ... and {impact_data['total_commands'] - 3} more")
+                    if impact_data.get("blocking_if_missing"):
+                        print(f"  Blocking: Yes")
+                else:
+                    print("  Required Commands: None")
+            except:
                 print("  Required Commands: N/A")
         else:
             print("  Changed Files: N/A (not in git context)")
@@ -122,6 +122,103 @@ def print_change_impact_summary():
     except Exception as e:
         print("  Changed Files: N/A")
         print("  Required Commands: N/A")
+    
+    print("=" * 50)
+
+
+def save_executed_checks(profile: str, rule_results: dict, gate_results: dict):
+    """保存已执行的检查记录"""
+    root = get_project_root()
+    
+    executed = {
+        "current_profile": profile,
+        "executed_commands": [
+            "python scripts/check_layer_dependencies.py",
+            "python scripts/check_json_contracts.py",
+            "python scripts/check_repo_integrity.py --strict",
+            f"python scripts/run_release_gate.py {profile}"
+        ],
+        "executed_rule_checks": {
+            "layer_dependency": rule_results.get("layer_dependency", {}).get("passed", False),
+            "json_contract": rule_results.get("json_contract", {}).get("passed", False)
+        },
+        "executed_gate_checks": gate_results,
+        "timestamp": datetime.now().isoformat()
+    }
+    
+    path = root / "reports/ops/executed_checks.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(executed, f, ensure_ascii=False, indent=2)
+
+
+def check_impact_enforcement() -> dict:
+    """检查变更影响强制门禁"""
+    root = get_project_root()
+    
+    result = {
+        "passed": True,
+        "missing_commands": [],
+        "required_by": []
+    }
+    
+    # 读取 change_impact.json
+    impact_path = root / "reports/ops/change_impact.json"
+    if not impact_path.exists():
+        return result
+    
+    try:
+        impact_data = json.load(open(impact_path, encoding='utf-8'))
+    except:
+        return result
+    
+    if not impact_data.get("required_commands"):
+        return result
+    
+    # 读取 executed_checks.json
+    executed_path = root / "reports/ops/executed_checks.json"
+    executed_commands = []
+    if executed_path.exists():
+        try:
+            executed_data = json.load(open(executed_path, encoding='utf-8'))
+            executed_commands = executed_data.get("executed_commands", [])
+        except:
+            pass
+    
+    # 检查缺失的命令
+    for cmd in impact_data["required_commands"]:
+        # 简化匹配：检查命令是否在已执行列表中
+        cmd_base = cmd.replace("python scripts/", "")
+        found = any(cmd_base in ec for ec in executed_commands)
+        if not found:
+            result["missing_commands"].append(cmd)
+            # 找到是哪个文件要求的
+            for rule in impact_data.get("matched_rules", []):
+                if cmd in rule.get("commands", []):
+                    result["required_by"].append(rule["file"])
+    
+    result["passed"] = len(result["missing_commands"]) == 0
+    return result
+
+
+def print_impact_enforcement_summary(enforcement_result: dict):
+    """打印变更影响强制门禁摘要"""
+    print("\n" + "=" * 50)
+    print("【Change Impact Enforcement】")
+    print("=" * 50)
+    
+    if enforcement_result["passed"]:
+        print("  Status: ✅ PASSED")
+    else:
+        print("  Status: ❌ FAILED")
+        print(f"  Missing Commands: {len(enforcement_result['missing_commands'])}")
+        for cmd in enforcement_result["missing_commands"]:
+            print(f"    - {cmd}")
+        if enforcement_result["required_by"]:
+            print("  Required By:")
+            for f in enforcement_result["required_by"][:5]:
+                print(f"    - {f}")
     
     print("=" * 50)
 
@@ -144,7 +241,12 @@ def verify_premerge():
         "--profile", "premerge",
         "--report-json", "reports/runtime_integrity.json"
     ])
+    
+    gate_results = {"runtime": rc == 0, "quality": False}
+    
     if rc != 0:
+        # 保存执行记录
+        save_executed_checks("premerge", rule_results, gate_results)
         return rc
     
     # 2. 质量门禁
@@ -154,8 +256,21 @@ def verify_premerge():
         "--report-json", "reports/quality_gate.json"
     ])
     
+    gate_results["quality"] = rc == 0
+    
+    # 保存执行记录
+    save_executed_checks("premerge", rule_results, gate_results)
+    
+    # 3. 检查变更影响强制门禁
+    enforcement_result = check_impact_enforcement()
+    print_impact_enforcement_summary(enforcement_result)
+    
     # 规则检查失败也返回错误
     if not rule_results["layer_dependency"]["passed"] or not rule_results["json_contract"]["passed"]:
+        return 1
+    
+    # 变更影响强制门禁失败也返回错误
+    if not enforcement_result["passed"]:
         return 1
     
     return rc

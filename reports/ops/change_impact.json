@@ -1,0 +1,52 @@
+{
+  "changed_files": [
+    "infrastructure/inventory/skill_inverted_index.json",
+    "reports/history/quality/20260414_002706.json",
+    "reports/history/runtime/20260414_002706_premerge.json",
+    "reports/quality_gate.json",
+    "reports/runtime_integrity.json",
+    "scripts/check_change_impact.py",
+    "scripts/check_repo_integrity.py",
+    "scripts/check_rule_guards.py",
+    "scripts/run_release_gate.py"
+  ],
+  "changed_categories": [
+    "scripts/check_*.py"
+  ],
+  "matched_rules": [
+    {
+      "file": "scripts/check_change_impact.py",
+      "pattern": "scripts/check_*.py",
+      "description": "检查脚本变更，建议验证仓库完整性",
+      "commands": [
+        "python scripts/check_repo_integrity.py --strict"
+      ],
+      "blocking": false
+    },
+    {
+      "file": "scripts/check_repo_integrity.py",
+      "pattern": "scripts/check_*.py",
+      "description": "检查脚本变更，建议验证仓库完整性",
+      "commands": [
+        "python scripts/check_repo_integrity.py --strict"
+      ],
+      "blocking": false
+    },
+    {
+      "file": "scripts/check_rule_guards.py",
+      "pattern": "scripts/check_*.py",
+      "description": "检查脚本变更，建议验证仓库完整性",
+      "commands": [
+        "python scripts/check_repo_integrity.py --strict"
+      ],
+      "blocking": false
+    }
+  ],
+  "required_commands": [
+    "python scripts/check_repo_integrity.py --strict"
+  ],
+  "required_profiles": [],
+  "total_commands": 1,
+  "blocking_if_missing": false,
+  "generated_at": "2026-04-14T00:41:24.815736"
+}

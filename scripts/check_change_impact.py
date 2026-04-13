@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-变更影响检查器 - V1.0.0
+变更影响检查器 - V2.0.0
 
-根据 CHANGE_IMPACT_MATRIX.md 规则，分析变更文件并输出必须执行的命令
+根据 CHANGE_IMPACT_ENFORCEMENT_POLICY.md 规则，分析变更文件并输出必须执行的命令
 
 使用方法：
     python scripts/check_change_impact.py --files file1.py file2.json
-    python scripts/check_change_impact.py --git-diff HEAD~1
+    python scripts/check_change_impact.py --from-git
+    python scripts/check_change_impact.py --from-git --report-json reports/ops/change_impact.json
 """
 
 import os
@@ -26,14 +27,15 @@ def get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
-# 变更影响规则映射
+# 变更影响规则映射 (V2.0.0 - 增加 blocking 标记)
 CHANGE_IMPACT_RULES = {
-    # (文件模式, 必须执行的命令)
     "infrastructure/inventory/skill_registry.json": {
         "required_commands": [
             "python scripts/check_repo_integrity.py --strict",
             "python scripts/run_release_gate.py premerge"
         ],
+        "required_profiles": ["premerge"],
+        "blocking": True,
         "description": "技能注册表变更，必须验证仓库完整性和 premerge 门禁"
     },
     "execution/*": {
@@ -42,6 +44,8 @@ CHANGE_IMPACT_RULES = {
             "python scripts/run_release_gate.py premerge",
             "python scripts/run_release_gate.py nightly"
         ],
+        "required_profiles": ["premerge", "nightly"],
+        "blocking": True,
         "description": "执行层变更，必须验证依赖规则和 premerge + nightly 门禁"
     },
     "governance/*": {
@@ -50,6 +54,8 @@ CHANGE_IMPACT_RULES = {
             "python scripts/run_release_gate.py premerge",
             "python scripts/run_release_gate.py release"
         ],
+        "required_profiles": ["premerge", "release"],
+        "blocking": True,
         "description": "治理层变更，必须验证依赖规则和 premerge + release 门禁"
     },
     "scripts/approval_manager.py": {
@@ -57,6 +63,8 @@ CHANGE_IMPACT_RULES = {
             "python scripts/run_release_gate.py nightly",
             "python scripts/run_release_gate.py release"
         ],
+        "required_profiles": ["nightly", "release"],
+        "blocking": True,
         "description": "审批管理器变更，必须验证 nightly + release 门禁"
     },
     "core/contracts/*": {
@@ -64,6 +72,8 @@ CHANGE_IMPACT_RULES = {
             "python scripts/check_json_contracts.py",
             "python scripts/check_repo_integrity.py --strict"
         ],
+        "required_profiles": ["premerge"],
+        "blocking": True,
         "description": "契约文件变更，必须验证 JSON 契约和仓库完整性"
     },
     "core/LAYER_DEPENDENCY_RULES.json": {
@@ -71,25 +81,33 @@ CHANGE_IMPACT_RULES = {
             "python scripts/check_layer_dependencies.py",
             "python scripts/check_repo_integrity.py --strict"
         ],
+        "required_profiles": ["premerge"],
+        "blocking": True,
         "description": "依赖规则变更，必须验证层间依赖和仓库完整性"
     },
     "scripts/check_*.py": {
         "required_commands": [
             "python scripts/check_repo_integrity.py --strict"
         ],
-        "description": "检查脚本变更，必须验证仓库完整性"
+        "required_profiles": [],
+        "blocking": False,
+        "description": "检查脚本变更，建议验证仓库完整性"
     },
     "infrastructure/release/*": {
         "required_commands": [
             "python scripts/run_release_gate.py release"
         ],
-        "description": "发布管理变更，必须验证 release 门禁"
+        "required_profiles": ["release"],
+        "blocking": False,
+        "description": "发布管理变更，建议验证 release 门禁"
     },
     "reports/ops/*": {
         "required_commands": [
             "python scripts/check_json_contracts.py"
         ],
-        "description": "控制平面报告变更，必须验证 JSON 契约"
+        "required_profiles": [],
+        "blocking": False,
+        "description": "控制平面报告变更，建议验证 JSON 契约"
     }
 }
 
@@ -116,28 +134,44 @@ def match_pattern(file_path: str, pattern: str) -> bool:
 def get_required_commands(changed_files: List[str]) -> Dict:
     """获取变更文件需要执行的命令"""
     all_commands: Set[str] = set()
+    all_profiles: Set[str] = set()
     matched_rules = []
+    has_blocking = False
+    changed_categories = set()
     
     for file_path in changed_files:
         for pattern, rule in CHANGE_IMPACT_RULES.items():
             if match_pattern(file_path, pattern):
+                # 提取变更类别
+                if "/*" in pattern:
+                    changed_categories.add(pattern.split("/*")[0])
+                else:
+                    changed_categories.add(pattern)
+                
                 matched_rules.append({
                     "file": file_path,
                     "pattern": pattern,
                     "description": rule["description"],
-                    "commands": rule["required_commands"]
+                    "commands": rule["required_commands"],
+                    "blocking": rule.get("blocking", False)
                 })
                 all_commands.update(rule["required_commands"])
+                all_profiles.update(rule.get("required_profiles", []))
+                if rule.get("blocking", False):
+                    has_blocking = True
     
     return {
         "changed_files": changed_files,
+        "changed_categories": list(changed_categories),
         "matched_rules": matched_rules,
         "required_commands": list(all_commands),
-        "total_commands": len(all_commands)
+        "required_profiles": list(all_profiles),
+        "total_commands": len(all_commands),
+        "blocking_if_missing": has_blocking
     }
 
 
-def get_git_diff_files(commit_range: str) -> List[str]:
+def get_git_diff_files(commit_range: str = "HEAD~1") -> List[str]:
     """获取 git diff 的变更文件列表"""
     try:
         result = subprocess.run(
@@ -151,6 +185,21 @@ def get_git_diff_files(commit_range: str) -> List[str]:
     except Exception as e:
         print(f"获取 git diff 失败: {e}")
     return []
+
+
+def save_report(report: Dict, report_path: str):
+    """保存报告到文件"""
+    root = get_project_root()
+    path = root / report_path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    
+    # 添加时间戳
+    report["generated_at"] = datetime.now().isoformat()
+    
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    
+    print(f"报告已保存: {report_path}")
 
 
 def print_impact_report(report: Dict):
@@ -185,24 +234,42 @@ def print_impact_report(report: Dict):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="变更影响检查器")
+    parser = argparse.ArgumentParser(description="变更影响检查器 V2.0.0")
     parser.add_argument("--files", nargs="+", help="变更文件列表")
-    parser.add_argument("--git-diff", help="git diff 范围 (如 HEAD~1)")
+    parser.add_argument("--from-git", action="store_true", help="从 git diff HEAD~1 获取变更文件")
+    parser.add_argument("--git-diff", help="git diff 范围 (如 HEAD~1，--from-git 的替代)")
     parser.add_argument("--json", action="store_true", help="输出 JSON 格式")
+    parser.add_argument("--report-json", help="保存报告到 JSON 文件")
     args = parser.parse_args()
     
     changed_files = []
     
     if args.files:
         changed_files = args.files
+    elif args.from_git:
+        changed_files = get_git_diff_files("HEAD~1")
     elif args.git_diff:
         changed_files = get_git_diff_files(args.git_diff)
     else:
-        print("请指定 --files 或 --git-diff")
+        print("请指定 --files, --from-git 或 --git-diff")
         return 1
     
     if not changed_files:
         print("无变更文件")
+        report = {
+            "changed_files": [],
+            "changed_categories": [],
+            "matched_rules": [],
+            "required_commands": [],
+            "required_profiles": [],
+            "total_commands": 0,
+            "blocking_if_missing": False,
+            "generated_at": datetime.now().isoformat()
+        }
+        if args.json:
+            print(json.dumps(report, ensure_ascii=False, indent=2))
+        if args.report_json:
+            save_report(report, args.report_json)
         return 0
     
     report = get_required_commands(changed_files)
@@ -211,6 +278,9 @@ def main():
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:
         print_impact_report(report)
+    
+    if args.report_json:
+        save_report(report, args.report_json)
     
     return 0 if report['total_commands'] == 0 else 1
 

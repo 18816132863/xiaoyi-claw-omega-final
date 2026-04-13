@@ -1,0 +1,18 @@
+{
+  "current_profile": "premerge",
+  "executed_commands": [
+    "python scripts/check_layer_dependencies.py",
+    "python scripts/check_json_contracts.py",
+    "python scripts/check_repo_integrity.py --strict",
+    "python scripts/run_release_gate.py premerge"
+  ],
+  "executed_rule_checks": {
+    "layer_dependency": true,
+    "json_contract": true
+  },
+  "executed_gate_checks": {
+    "runtime": true,
+    "quality": true
+  },
+  "timestamp": "2026-04-14T00:41:28.030650"
+}

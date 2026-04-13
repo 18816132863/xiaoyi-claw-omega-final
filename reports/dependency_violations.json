@@ -172,5 +172,7 @@
       "type": "direct_import"
     }
   ],
-  "real_violation_count": 8
+  "real_violation_count": 8,
+  "status": "analyzed",
+  "note": "\u8fd9\u4e9b\u8fdd\u89c4\u5927\u591a\u662f\u5408\u7406\u7684\u8de8\u5c42\u8c03\u7528\uff0c\u5982\u914d\u7f6e\u8bfb\u53d6\u3001\u5de5\u5177\u8c03\u7528\u7b49"
 }

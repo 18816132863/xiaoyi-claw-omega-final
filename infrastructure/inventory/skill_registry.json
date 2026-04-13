@@ -2868,8 +2868,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/su-lan-paper-daily-skill",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -2910,8 +2910,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/research-cog",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -2952,8 +2952,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/mx-stocks-screener",
       "entry_point": "scripts/get_data.py",
       "executor_type": "script",
@@ -2973,8 +2973,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/unified-document",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -2994,8 +2994,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/docs-cog",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -3015,8 +3015,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/pexoai-agent",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -3036,8 +3036,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/chart-image",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -3078,8 +3078,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/frontend-design-pro",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -3099,8 +3099,8 @@
       "layer": 4,
       "status": "healthy",
       "registered": false,
-      "routable": false,
-      "callable": false,
+      "routable": true,
+      "callable": true,
       "path": "skills/skill-install-manager-1-0-0",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
@@ -3214,10 +3214,10 @@
       ],
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "callable": false,
+      "callable": true,
       "path": "skills/kuaishou-shop-operation",
       "registered": false,
-      "routable": false,
+      "routable": true,
       "testable": false,
       "smoke_test": false,
       "test_mode": "none"
@@ -3248,10 +3248,10 @@
       ],
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "callable": false,
+      "callable": true,
       "path": "skills/platform-comparison",
       "registered": false,
-      "routable": false,
+      "routable": true,
       "testable": false,
       "smoke_test": false,
       "test_mode": "none"
@@ -3271,11 +3271,11 @@
       ],
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "callable": false,
+      "callable": true,
       "status": "healthy",
       "path": "skills/omni-channel-ecommerce",
       "registered": false,
-      "routable": false,
+      "routable": true,
       "testable": false,
       "smoke_test": false,
       "test_mode": "none"
@@ -3306,7 +3306,7 @@
       ],
       "registered": true,
       "routable": true,
-      "callable": false,
+      "callable": true,
       "priority": "P0",
       "last_verified": "2026-04-11",
       "entry_point": "SKILL.md",
@@ -3343,10 +3343,10 @@
       ],
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "callable": false,
+      "callable": true,
       "path": "skills/marketing-campaign",
       "registered": false,
-      "routable": false,
+      "routable": true,
       "testable": false,
       "smoke_test": false,
       "test_mode": "none"
@@ -3402,10 +3402,10 @@
       ],
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "callable": false,
+      "callable": true,
       "path": "skills/supply-chain-management",
       "registered": false,
-      "routable": false,
+      "routable": true,
       "testable": false,
       "smoke_test": false,
       "test_mode": "none"
@@ -3436,10 +3436,10 @@
       ],
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "callable": false,
+      "callable": true,
       "path": "skills/customer-service",
       "registered": false,
-      "routable": false,
+      "routable": true,
       "testable": false,
       "smoke_test": false,
       "test_mode": "none"
@@ -3461,7 +3461,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "shubhamsaboo-awesome-llm-apps-ux-designer": {
       "name": "shubhamsaboo-awesome-llm-apps-ux-designer",
@@ -3480,7 +3481,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "canvas-design": {
       "name": "canvas-design",
@@ -3519,7 +3521,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "proactive-tasks": {
       "name": "proactive-tasks",
@@ -3538,7 +3541,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "shareai-lab-learn-claude-code-pdf": {
       "name": "shareai-lab-learn-claude-code-pdf",
@@ -3557,7 +3561,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "openclaw-skills-assistant": {
       "name": "openclaw-skills-assistant",
@@ -3576,7 +3581,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "agent_reach": {
       "name": "agent_reach",
@@ -3595,7 +3601,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "aiskillstore-marketplace-test-case-generator": {
       "name": "aiskillstore-marketplace-test-case-generator",
@@ -3614,7 +3621,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "yanxue-course-manager": {
       "name": "yanxue-course-manager",
@@ -3633,7 +3641,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "minimax-music-gen": {
       "name": "minimax-music-gen",
@@ -3672,7 +3681,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "openclaw-skills-video-script-creator": {
       "name": "openclaw-skills-video-script-creator",
@@ -3691,7 +3701,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "ai-drama-prompt-factory": {
       "name": "ai-drama-prompt-factory",
@@ -3710,7 +3721,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "guide": {
       "name": "guide",
@@ -3729,7 +3741,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "qq-clawbot-setup": {
       "name": "qq-clawbot-setup",
@@ -3748,7 +3761,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "minimax-pdf": {
       "name": "minimax-pdf",
@@ -3767,7 +3781,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "superdesign": {
       "name": "superdesign",
@@ -3786,7 +3801,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "ima-skill": {
       "name": "ima-skill",
@@ -3805,7 +3821,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "general-writing": {
       "name": "general-writing",
@@ -3824,7 +3841,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "news-writing": {
       "name": "news-writing",
@@ -3843,7 +3861,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "seedance-video-gen": {
       "name": "seedance-video-gen",
@@ -3862,7 +3881,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "amazing129-skills-mbti-for-agents": {
       "name": "amazing129-skills-mbti-for-agents",
@@ -3881,7 +3901,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "claw-art": {
       "name": "claw-art",
@@ -3900,7 +3921,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "metabase-metabase-docs-write": {
       "name": "metabase-metabase-docs-write",
@@ -3919,7 +3941,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "prd-writer": {
       "name": "prd-writer",
@@ -3938,7 +3961,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "baoyu-comic": {
       "name": "baoyu-comic",
@@ -3957,7 +3981,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "writing-style-iterator": {
       "name": "writing-style-iterator",
@@ -3976,7 +4001,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "rkiding-awesome-finance-skills-alphaear-sentiment": {
       "name": "rkiding-awesome-finance-skills-alphaear-sentiment",
@@ -3995,7 +4021,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "anthropics-skills-pptx": {
       "name": "anthropics-skills-pptx",
@@ -4014,7 +4041,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "gesture-html": {
       "name": "gesture-html",
@@ -4033,7 +4061,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "kids-book-writer": {
       "name": "kids-book-writer",
@@ -4052,7 +4081,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "agentmcmillan-brain-and-co-plan-ceo-review": {
       "name": "agentmcmillan-brain-and-co-plan-ceo-review",
@@ -4071,7 +4101,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "Humanizer-zh-main": {
       "name": "Humanizer-zh-main",
@@ -4090,7 +4121,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "openclaw-skills-soulcraft": {
       "name": "openclaw-skills-soulcraft",
@@ -4109,7 +4141,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "tc-chengxin": {
       "name": "tc-chengxin",
@@ -4128,7 +4161,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "jdjr": {
       "name": "jdjr",
@@ -4147,7 +4181,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "autonomous-tasks": {
       "name": "autonomous-tasks",
@@ -4166,7 +4201,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "xiaoyi-xlsx": {
       "name": "xiaoyi-xlsx",
@@ -4205,7 +4241,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "wecom-bot-setup": {
       "name": "wecom-bot-setup",
@@ -4224,7 +4261,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "tts": {
       "name": "tts",
@@ -4243,7 +4281,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "speech-to-text": {
       "name": "speech-to-text",
@@ -4262,7 +4301,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "fasting-tracker": {
       "name": "fasting-tracker",
@@ -4281,7 +4321,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "product-manager": {
       "name": "product-manager",
@@ -4300,7 +4341,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "utils": {
       "name": "utils",
@@ -4319,7 +4361,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "rkiding-awesome-finance-skills-alphaear-signal-tracker": {
       "name": "rkiding-awesome-finance-skills-alphaear-signal-tracker",
@@ -4338,7 +4381,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "educational-video-creator": {
       "name": "educational-video-creator",
@@ -4357,7 +4401,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "affaan-m-everything-claude-code-article-writing": {
       "name": "affaan-m-everything-claude-code-article-writing",
@@ -4376,7 +4421,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "engines": {
       "name": "engines",
@@ -4395,7 +4441,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "voice-synthesis": {
       "name": "voice-synthesis",
@@ -4414,7 +4461,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "html-ux-guidance": {
       "name": "html-ux-guidance",
@@ -4433,7 +4481,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "aigc_marker": {
       "name": "aigc_marker",
@@ -4452,7 +4501,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "meituan-coupon-get-tool": {
       "name": "meituan-coupon-get-tool",
@@ -4471,7 +4521,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "didi-ride-skill": {
       "name": "didi-ride-skill",
@@ -4490,7 +4541,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "arxiv-search": {
       "name": "arxiv-search",
@@ -4529,7 +4581,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "nini-writing-inspiration": {
       "name": "nini-writing-inspiration",
@@ -4548,7 +4601,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "davila7-claude-code-templates-ship-learn-next": {
       "name": "davila7-claude-code-templates-ship-learn-next",
@@ -4567,7 +4621,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "daily-hot-news": {
       "name": "daily-hot-news",
@@ -4586,7 +4641,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "xiaoyi-HarmonyOSSmartHome-skill": {
       "name": "xiaoyi-HarmonyOSSmartHome-skill",
@@ -4605,7 +4661,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "ab-test-setup": {
       "name": "ab-test-setup",
@@ -4624,7 +4681,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "github-awesome-copilot-prd": {
       "name": "github-awesome-copilot-prd",
@@ -4643,7 +4701,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "scientific-slides": {
       "name": "scientific-slides",
@@ -4662,7 +4721,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "daily-tech-broadcast": {
       "name": "daily-tech-broadcast",
@@ -4681,7 +4741,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "limtdesign": {
       "name": "limtdesign",
@@ -4700,7 +4761,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "pua": {
       "name": "pua",
@@ -4719,7 +4781,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "core": {
       "name": "core",
@@ -4738,7 +4801,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "bytedance-deer-flow-surprise-me": {
       "name": "bytedance-deer-flow-surprise-me",
@@ -4757,7 +4821,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "flyai-travel": {
       "name": "flyai-travel",
@@ -4776,7 +4841,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "hunyuan-image": {
       "name": "hunyuan-image",
@@ -4835,7 +4901,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "yunshu0909-yunshu-skillshub-prd-doc-writer": {
       "name": "yunshu0909-yunshu-skillshub-prd-doc-writer",
@@ -4854,7 +4921,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "weibo-clawbot-setup": {
       "name": "weibo-clawbot-setup",
@@ -4873,7 +4941,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "llm-memory-integration": {
       "name": "llm-memory-integration",
@@ -4912,7 +4981,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "amap-jsapi-skill": {
       "name": "amap-jsapi-skill",
@@ -4931,7 +5001,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "baoyu-url-to-markdown": {
       "name": "baoyu-url-to-markdown",
@@ -4950,7 +5021,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "brainhole-factory": {
       "name": "brainhole-factory",
@@ -4969,7 +5041,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "weixin-clawbot-setup": {
       "name": "weixin-clawbot-setup",
@@ -4988,7 +5061,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "humanize-chinese": {
       "name": "humanize-chinese",
@@ -5007,7 +5081,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "browser-control": {
       "name": "browser-control",
@@ -5026,7 +5101,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "openmaic": {
       "name": "openmaic",
@@ -5045,7 +5121,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "bdpan-storage": {
       "name": "bdpan-storage",
@@ -5064,7 +5141,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "multi-search-engine": {
       "name": "multi-search-engine",
@@ -5103,7 +5181,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "remotion-video-toolkit": {
       "name": "remotion-video-toolkit",
@@ -5122,7 +5201,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "news-extractor": {
       "name": "news-extractor",
@@ -5141,7 +5221,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "hz-proactive-agent": {
       "name": "hz-proactive-agent",
@@ -5160,7 +5241,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "pptx-posters": {
       "name": "pptx-posters",
@@ -5179,7 +5261,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "bilibili-all-in-one": {
       "name": "bilibili-all-in-one",
@@ -5218,7 +5301,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "nicepkg-ai-workflow-user-research": {
       "name": "nicepkg-ai-workflow-user-research",
@@ -5237,7 +5321,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "read-arxiv-paper": {
       "name": "read-arxiv-paper",
@@ -5256,7 +5341,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "meitu-skills": {
       "name": "meitu-skills",
@@ -5275,7 +5361,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "qcc-agent-skill": {
       "name": "qcc-agent-skill",
@@ -5294,7 +5381,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "feiskyer-claude-code-settings-deep-research": {
       "name": "feiskyer-claude-code-settings-deep-research",
@@ -5313,7 +5401,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "eastmoney-mx-skills-suite": {
       "name": "eastmoney-mx-skills-suite",
@@ -5332,7 +5421,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "backup-cleaner": {
       "name": "backup-cleaner",
@@ -5351,7 +5441,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "brainstorming": {
       "name": "brainstorming",
@@ -5390,7 +5481,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "opengfx": {
       "name": "opengfx",
@@ -5409,7 +5501,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "fitness-coach": {
       "name": "fitness-coach",
@@ -5448,7 +5541,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "creative-thought-partner": {
       "name": "creative-thought-partner",
@@ -5467,7 +5561,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "slidevjs-slidev-slidev": {
       "name": "slidevjs-slidev-slidev",
@@ -5486,7 +5581,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "bytesagain-ai-skills-meme-generator": {
       "name": "bytesagain-ai-skills-meme-generator",
@@ -5505,7 +5601,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "axton-obsidian-visual-skills-excalidraw-diagram": {
       "name": "axton-obsidian-visual-skills-excalidraw-diagram",
@@ -5524,7 +5621,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "natural-language-planner": {
       "name": "natural-language-planner",
@@ -5543,7 +5641,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "alphaear-predictor": {
       "name": "alphaear-predictor",
@@ -5562,7 +5661,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "2nd-brain": {
       "name": "2nd-brain",
@@ -5581,7 +5681,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "wendao-skill": {
       "name": "wendao-skill",
@@ -5600,7 +5701,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "web-content-fetcher": {
       "name": "web-content-fetcher",
@@ -5619,7 +5721,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "architecture-inspector": {
       "name": "architecture-inspector",
@@ -5638,7 +5741,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     },
     "skillhub-preference": {
       "name": "skillhub-preference",
@@ -5657,7 +5761,8 @@
       "last_verified": "2026-04-13",
       "status": "active",
       "registered": true,
-      "routable": true
+      "routable": true,
+      "callable": true
     }
   },
   "categories": {

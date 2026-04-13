@@ -1,39 +1,56 @@
 {
   "changed_files": [
-    "infrastructure/inventory/skill_inverted_index.json",
-    "reports/history/quality/20260414_002706.json",
-    "reports/history/runtime/20260414_002706_premerge.json",
+    "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md",
+    "reports/history/quality/20260414_004006.json",
+    "reports/history/quality/20260414_004038.json",
+    "reports/history/quality/20260414_004128.json",
+    "reports/history/runtime/20260414_004006_premerge.json",
+    "reports/history/runtime/20260414_004038_premerge.json",
+    "reports/history/runtime/20260414_004127_premerge.json",
+    "reports/ops/change_impact.json",
+    "reports/ops/executed_checks.json",
     "reports/quality_gate.json",
     "reports/runtime_integrity.json",
     "scripts/check_change_impact.py",
-    "scripts/check_repo_integrity.py",
-    "scripts/check_rule_guards.py",
     "scripts/run_release_gate.py"
   ],
   "changed_categories": [
-    "scripts/check_*.py"
+    "scripts/check_*.py",
+    "governance",
+    "reports/ops"
   ],
   "matched_rules": [
     {
+      "file": "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md",
+      "pattern": "governance/*",
+      "description": "治理层变更，必须验证依赖规则和 premerge + release 门禁",
+      "commands": [
+        "python scripts/check_layer_dependencies.py",
+        "python scripts/run_release_gate.py premerge",
+        "python scripts/run_release_gate.py release"
+      ],
+      "blocking": true
+    },
+    {
+      "file": "reports/ops/change_impact.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "blocking": false
+    },
+    {
+      "file": "reports/ops/executed_checks.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "blocking": false
+    },
+    {
       "file": "scripts/check_change_impact.py",
-      "pattern": "scripts/check_*.py",
-      "description": "检查脚本变更，建议验证仓库完整性",
-      "commands": [
-        "python scripts/check_repo_integrity.py --strict"
-      ],
-      "blocking": false
-    },
-    {
-      "file": "scripts/check_repo_integrity.py",
-      "pattern": "scripts/check_*.py",
-      "description": "检查脚本变更，建议验证仓库完整性",
-      "commands": [
-        "python scripts/check_repo_integrity.py --strict"
-      ],
-      "blocking": false
-    },
-    {
-      "file": "scripts/check_rule_guards.py",
       "pattern": "scripts/check_*.py",
       "description": "检查脚本变更，建议验证仓库完整性",
       "commands": [
@@ -43,10 +60,17 @@
     }
   ],
   "required_commands": [
-    "python scripts/check_repo_integrity.py --strict"
+    "python scripts/check_repo_integrity.py --strict",
+    "python scripts/run_release_gate.py release",
+    "python scripts/check_layer_dependencies.py",
+    "python scripts/run_release_gate.py premerge",
+    "python scripts/check_json_contracts.py"
   ],
-  "required_profiles": [],
-  "total_commands": 1,
-  "blocking_if_missing": false,
-  "generated_at": "2026-04-14T00:41:24.815736"
+  "required_profiles": [
+    "premerge",
+    "release"
+  ],
+  "total_commands": 5,
+  "blocking_if_missing": true,
+  "generated_at": "2026-04-14T00:56:58.163208"
 }

@@ -153,6 +153,97 @@ def save_executed_checks(profile: str, rule_results: dict, gate_results: dict):
         json.dump(executed, f, ensure_ascii=False, indent=2)
 
 
+def save_followup_requirements(impact_data: dict, profile: str):
+    """保存 follow-up 要求"""
+    root = get_project_root()
+    
+    # 读取现有的 followup 文件
+    followup_path = root / "reports/ops/followup_requirements.json"
+    followup = {
+        "required_profiles": [],
+        "reason_by_profile": {},
+        "satisfied_profiles": [],
+        "pending_profiles": [],
+        "generated_at": datetime.now().isoformat()
+    }
+    
+    if followup_path.exists():
+        try:
+            followup = json.load(open(followup_path, encoding='utf-8'))
+        except:
+            pass
+    
+    # 从 impact_data 获取 required_profiles
+    if impact_data:
+        required_profiles = impact_data.get("required_profiles", [])
+        matched_rules = impact_data.get("matched_rules", [])
+        
+        for p in required_profiles:
+            if p not in followup["required_profiles"]:
+                followup["required_profiles"].append(p)
+            
+            # 记录原因
+            if p not in followup["reason_by_profile"]:
+                followup["reason_by_profile"][p] = []
+            
+            for rule in matched_rules:
+                if p in rule.get("pattern", "") or any(p in cmd for cmd in rule.get("commands", [])):
+                    reason = f"{rule['file']} changed"
+                    if reason not in followup["reason_by_profile"][p]:
+                        followup["reason_by_profile"][p].append(reason)
+    
+    # 更新 satisfied 状态
+    if profile in followup["required_profiles"] and profile not in followup["satisfied_profiles"]:
+        followup["satisfied_profiles"].append(profile)
+    
+    # 更新 pending 状态
+    followup["pending_profiles"] = [p for p in followup["required_profiles"] 
+                                    if p not in followup["satisfied_profiles"]]
+    
+    followup["generated_at"] = datetime.now().isoformat()
+    
+    # 保存
+    followup_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(followup_path, 'w', encoding='utf-8') as f:
+        json.dump(followup, f, ensure_ascii=False, indent=2)
+    
+    return followup
+
+
+def save_enforcement_report(profile: str, impact_data: dict, executed_data: dict, missing: list):
+    """保存强制门禁报告"""
+    root = get_project_root()
+    
+    report = {
+        "profile": profile,
+        "changed_files": impact_data.get("changed_files", []),
+        "required_commands": impact_data.get("required_commands", []),
+        "required_profiles": impact_data.get("required_profiles", []),
+        "executed_commands": executed_data.get("executed_commands", []),
+        "missing_required_checks": missing,
+        "followup_required_profiles": [],
+        "enforcement_passed": len(missing) == 0,
+        "generated_at": datetime.now().isoformat()
+    }
+    
+    # 读取 followup 获取 pending profiles
+    followup_path = root / "reports/ops/followup_requirements.json"
+    if followup_path.exists():
+        try:
+            followup = json.load(open(followup_path, encoding='utf-8'))
+            report["followup_required_profiles"] = followup.get("pending_profiles", [])
+        except:
+            pass
+    
+    path = root / "reports/ops/change_impact_enforcement.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    
+    return report
+
+
 def check_impact_enforcement() -> dict:
     """检查变更影响强制门禁"""
     root = get_project_root()
@@ -261,9 +352,44 @@ def verify_premerge():
     # 保存执行记录
     save_executed_checks("premerge", rule_results, gate_results)
     
-    # 3. 检查变更影响强制门禁
+    # 3. 读取 change_impact.json
+    impact_path = root / "reports/ops/change_impact.json"
+    impact_data = {}
+    if impact_path.exists():
+        try:
+            impact_data = json.load(open(impact_path, encoding='utf-8'))
+        except:
+            pass
+    
+    # 4. 保存 follow-up 要求
+    followup = save_followup_requirements(impact_data, "premerge")
+    
+    # 5. 检查变更影响强制门禁
     enforcement_result = check_impact_enforcement()
     print_impact_enforcement_summary(enforcement_result)
+    
+    # 6. 保存强制门禁报告
+    executed_path = root / "reports/ops/executed_checks.json"
+    executed_data = {}
+    if executed_path.exists():
+        try:
+            executed_data = json.load(open(executed_path, encoding='utf-8'))
+        except:
+            pass
+    
+    save_enforcement_report("premerge", impact_data, executed_data, enforcement_result["missing_commands"])
+    
+    # 7. 打印 follow-up 状态
+    if followup.get("pending_profiles"):
+        print("\n" + "=" * 50)
+        print("【Follow-up Requirements】")
+        print("=" * 50)
+        print(f"  Pending Profiles: {', '.join(followup['pending_profiles'])}")
+        for p in followup['pending_profiles']:
+            reasons = followup.get('reason_by_profile', {}).get(p, [])
+            if reasons:
+                print(f"    {p}: {', '.join(reasons[:3])}")
+        print("=" * 50)
     
     # 规则检查失败也返回错误
     if not rule_results["layer_dependency"]["passed"] or not rule_results["json_contract"]["passed"]:
@@ -290,7 +416,11 @@ def verify_nightly():
         "--profile", "nightly",
         "--report-json", "reports/runtime_integrity.json"
     ])
+    
+    gate_results = {"runtime": rc == 0, "quality": False}
+    
     if rc != 0:
+        save_executed_checks("nightly", rule_results, gate_results)
         return rc
     
     rc = run_command([
@@ -298,6 +428,34 @@ def verify_nightly():
         str(root / "governance/quality_gate.py"),
         "--report-json", "reports/quality_gate.json"
     ])
+    
+    gate_results["quality"] = rc == 0
+    save_executed_checks("nightly", rule_results, gate_results)
+    
+    # 更新 follow-up 状态
+    followup_path = root / "reports/ops/followup_requirements.json"
+    if followup_path.exists():
+        try:
+            followup = json.load(open(followup_path, encoding='utf-8'))
+            if "nightly" in followup.get("required_profiles", []):
+                if "nightly" not in followup.get("satisfied_profiles", []):
+                    followup["satisfied_profiles"].append("nightly")
+                followup["pending_profiles"] = [p for p in followup["required_profiles"] 
+                                                if p not in followup["satisfied_profiles"]]
+                followup["generated_at"] = datetime.now().isoformat()
+                
+                with open(followup_path, 'w', encoding='utf-8') as f:
+                    json.dump(followup, f, ensure_ascii=False, indent=2)
+                
+                print("\n" + "=" * 50)
+                print("【Follow-up Requirements Status】")
+                print("=" * 50)
+                print(f"  Nightly: ✅ Satisfied")
+                if followup.get("pending_profiles"):
+                    print(f"  Pending: {', '.join(followup['pending_profiles'])}")
+                print("=" * 50)
+        except:
+            pass
     
     # 规则检查失败也返回错误
     if not rule_results["layer_dependency"]["passed"] or not rule_results["json_contract"]["passed"]:
@@ -321,7 +479,11 @@ def verify_release():
         "--profile", "release",
         "--report-json", "reports/runtime_integrity.json"
     ])
+    
+    gate_results = {"runtime": rc == 0, "quality": False, "release": False}
+    
     if rc != 0:
+        save_executed_checks("release", rule_results, gate_results)
         return rc
     
     # 2. 质量门禁
@@ -330,7 +492,11 @@ def verify_release():
         str(root / "governance/quality_gate.py"),
         "--report-json", "reports/quality_gate.json"
     ])
+    
+    gate_results["quality"] = rc == 0
+    
     if rc != 0:
+        save_executed_checks("release", rule_results, gate_results)
         return rc
     
     # 3. 发布门禁检查
@@ -340,6 +506,36 @@ def verify_release():
         "--check",
         "--report-json", "reports/release_gate.json"
     ])
+    
+    gate_results["release"] = rc == 0
+    save_executed_checks("release", rule_results, gate_results)
+    
+    # 更新 follow-up 状态
+    followup_path = root / "reports/ops/followup_requirements.json"
+    if followup_path.exists():
+        try:
+            followup = json.load(open(followup_path, encoding='utf-8'))
+            if "release" in followup.get("required_profiles", []):
+                if "release" not in followup.get("satisfied_profiles", []):
+                    followup["satisfied_profiles"].append("release")
+                followup["pending_profiles"] = [p for p in followup["required_profiles"] 
+                                                if p not in followup["satisfied_profiles"]]
+                followup["generated_at"] = datetime.now().isoformat()
+                
+                with open(followup_path, 'w', encoding='utf-8') as f:
+                    json.dump(followup, f, ensure_ascii=False, indent=2)
+                
+                print("\n" + "=" * 50)
+                print("【Follow-up Requirements Status】")
+                print("=" * 50)
+                print(f"  Release: ✅ Satisfied")
+                if followup.get("pending_profiles"):
+                    print(f"  Pending: {', '.join(followup['pending_profiles'])}")
+                else:
+                    print("  All follow-up requirements satisfied!")
+                print("=" * 50)
+        except:
+            pass
     
     # 规则检查失败也返回错误
     if not rule_results["layer_dependency"]["passed"] or not rule_results["json_contract"]["passed"]:

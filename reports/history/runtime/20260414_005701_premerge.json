@@ -1,7 +1,7 @@
 {
-  "profile": "release",
+  "profile": "premerge",
   "scope": "all",
-  "verified_at": "2026-04-14T00:57:36.993047",
+  "verified_at": "2026-04-14T00:57:01.034792",
   "overall_passed": true,
   "failure_reasons": [],
   "p0_count": 0,

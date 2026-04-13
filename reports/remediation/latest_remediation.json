@@ -1,16 +1,16 @@
 {
   "action_id": "rem_20260412_233446_386",
-  "action_type": "toggle_incident",
+  "action_type": "semi_auto",
   "mode": "execute",
   "triggered_by": "approval",
-  "source_alert": null,
-  "source_incident": null,
+  "source_alert": "none",
+  "source_incident": "none",
   "started_at": "2026-04-12T23:34:46.198778",
   "finished_at": "2026-04-12T23:34:46.361597",
   "success": true,
   "changed_files": [
     "governance/ops/incident_tracker.json"
   ],
-  "error": null,
+  "error": "",
   "requires_approval": true
 }

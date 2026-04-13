@@ -39,25 +39,12 @@
       "description": "稳定治理、安全审计、合规",
       "allow_read_from": ["core", "infrastructure"],
       "allow_write_to": [],
-      "forbid_import_from": ["execution"]
+      "forbid_import_from": ["execution", "scripts"]
     },
     "infrastructure": {
       "description": "基础设施、工具链、注册表",
       "allow_read_from": ["core"],
       "allow_write_to": [],
-      "forbid_import_from": []
-    },
-    "control_plane": {
-      "description": "控制面（scripts/reports/ops），非业务真源层",
-      "allow_read_from": [
-        "core",
-        "orchestration",
-        "execution",
-        "memory_context",
-        "governance",
-        "infrastructure"
-      ],
-      "allow_write_to": ["reports"],
       "forbid_import_from": []
     }
   },
@@ -66,7 +53,6 @@
     "core 只能被读，不承担业务执行",
     "execution 不直接依赖 governance 规则实现",
     "governance 不直接依赖具体 skills 实现",
-    "control_plane 只能聚合，不是业务真源",
     "registry 是真源，index 是派生物",
     "reports 是产物，不是主逻辑输入真源"
   ],

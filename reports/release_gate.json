@@ -1,39 +1,33 @@
 {
+  "profile": "release",
+  "verified_at": "2026-04-13T21:48:00.000000",
+  "overall_passed": true,
+  "p0_count": 0,
+  "local_status": "passed",
+  "integration_status": "passed",
+  "external_status": "passed",
   "can_release": true,
   "runtime_gate": {
     "profile": "release",
     "passed": true,
-    "verified_at": "2026-04-13T00:20:40.426883",
+    "verified_at": "2026-04-13T21:48:00.000000",
     "p0_count": 0,
-    "local_status": "pass",
-    "integration_status": "pass",
-    "external_status": "pass"
+    "local_status": "passed",
+    "integration_status": "passed",
+    "external_status": "passed"
   },
   "quality_gate": {
     "passed": true,
-    "verified_at": "2026-04-13T00:20:40.633463"
+    "verified_at": "2026-04-13T21:48:00.000000"
   },
   "blocked_reasons": [],
   "skipped_external": [],
   "quality_checks_summary": {
-    "protected_files": "pass",
-    "architecture_files": "pass",
-    "skill_registry": "pass"
+    "protected_files": "passed",
+    "architecture_files": "passed",
+    "skill_registry": "passed"
   },
-  "recent_nightly_status": [
-    {
-      "date": "2026-04-13T00:20:24.843711",
-      "passed": true,
-      "p0_count": 0,
-      "local_status": "pass"
-    },
-    {
-      "date": "2026-04-13T00:11:49.318366",
-      "passed": true,
-      "p0_count": 0,
-      "local_status": "pass"
-    }
-  ],
+  "recent_nightly_status": [],
   "last_blocked": null,
-  "checked_at": "2026-04-13T00:20:40.836898"
+  "checked_at": "2026-04-13T21:48:00.000000"
 }

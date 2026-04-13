@@ -34,17 +34,17 @@ def get_project_root() -> Path:
 class JsonContractChecker:
     """JSON 契约校验器"""
 
-    # 校验映射：(JSON 文件, Schema 文件, 是否是数组, 是否必须存在)
+    # 校验映射：(JSON 文件, Schema 文件, 是否是数组, 是否必须存在, 数组字段名)
     VALIDATION_MAP = [
-        ("reports/runtime_integrity.json", "core/contracts/gate_report.schema.json", False, True),
-        ("reports/quality_gate.json", "core/contracts/gate_report.schema.json", False, False),
-        ("reports/release_gate.json", "core/contracts/gate_report.schema.json", False, False),
-        ("reports/alerts/latest_alerts.json", "core/contracts/alert.schema.json", True, True),
-        ("governance/ops/incident_tracker.json", "core/contracts/incident.schema.json", False, True),
-        ("reports/remediation/latest_remediation.json", "core/contracts/remediation.schema.json", False, True),
-        ("reports/remediation/approval_history.json", "core/contracts/approval.schema.json", False, True),
-        ("reports/ops/control_plane_state.json", "core/contracts/control_plane_state.schema.json", False, True),
-        ("reports/ops/control_plane_audit.json", "core/contracts/control_plane_audit.schema.json", False, True),
+        ("reports/runtime_integrity.json", "core/contracts/gate_report.schema.json", False, True, None),
+        ("reports/quality_gate.json", "core/contracts/gate_report.schema.json", False, False, None),
+        ("reports/release_gate.json", "core/contracts/gate_report.schema.json", False, False, None),
+        ("reports/alerts/latest_alerts.json", "core/contracts/alert.schema.json", True, True, "alerts"),
+        ("governance/ops/incident_tracker.json", "core/contracts/incident.schema.json", True, True, None),  # 纯数组
+        ("reports/remediation/latest_remediation.json", "core/contracts/remediation.schema.json", False, True, None),
+        ("reports/remediation/approval_history.json", "core/contracts/approval.schema.json", True, True, "approvals"),
+        ("reports/ops/control_plane_state.json", "core/contracts/control_plane_state.schema.json", False, True, None),
+        ("reports/ops/control_plane_audit.json", "core/contracts/control_plane_audit.schema.json", False, True, None),
     ]
 
     def __init__(self, root: Path):
@@ -64,14 +64,27 @@ class JsonContractChecker:
             self.warnings.append("jsonschema 未安装，跳过 schema 验证")
             return False
 
-    def validate_json(self, json_path: str, schema_path: str, is_array: bool = False) -> bool:
-        """验证 JSON 文件是否符合 schema"""
+    def validate_json(self, json_path: str, schema_path: str, is_array: bool = False, required: bool = False, array_field: str = None) -> bool:
+        """验证 JSON 文件是否符合 schema
+        
+        Args:
+            json_path: JSON 文件路径
+            schema_path: Schema 文件路径
+            is_array: 是否是数组格式（或包含数组字段）
+            required: 文件是否必须存在（True 时缺失报错）
+            array_field: 数组字段名（如果数据是对象但包含数组字段）
+        """
         full_json = self.root / json_path
         full_schema = self.root / schema_path
 
         if not full_json.exists():
-            self.warnings.append(f"{json_path} 不存在，跳过")
-            return True  # 文件不存在不算错误
+            if required:
+                self.errors.append(f"{json_path} 不存在（必须文件）")
+                print(f"  ❌ {json_path} 不存在（必须文件）")
+                return False
+            else:
+                self.warnings.append(f"{json_path} 不存在，跳过")
+                return True
 
         if not full_schema.exists():
             self.warnings.append(f"{schema_path} 不存在，跳过")
@@ -84,22 +97,35 @@ class JsonContractChecker:
             data = json.load(open(full_json, encoding='utf-8'))
             schema = json.load(open(full_schema, encoding='utf-8'))
 
+            # 处理数组字段（对象包含数组）
+            if is_array and array_field and isinstance(data, dict):
+                if array_field in data and isinstance(data[array_field], list):
+                    items = data[array_field]
+                    if len(items) == 0:
+                        self.passed.append(f"{json_path} 符合 schema (空数组)")
+                        print(f"  ✅ {json_path} 符合 schema (空数组)")
+                    else:
+                        for i, item in enumerate(items):
+                            self.jsonschema.validate(item, schema)
+                        self.passed.append(f"{json_path} 符合 schema ({len(items)} 条)")
+                        print(f"  ✅ {json_path} 符合 schema ({len(items)} 条)")
+                    return True
+                else:
+                    self.warnings.append(f"{json_path} 不包含数组字段 '{array_field}'")
+                    print(f"  ⚠️ {json_path} 不包含数组字段 '{array_field}'")
+                    return True
+
+            # 处理纯数组
             if is_array and isinstance(data, list):
                 for i, item in enumerate(data):
                     self.jsonschema.validate(item, schema)
                 self.passed.append(f"{json_path} 符合 schema ({len(data)} 条)")
                 print(f"  ✅ {json_path} 符合 schema ({len(data)} 条)")
+            # 处理对象
             elif isinstance(data, dict):
-                # 处理嵌套结构（如 approval_history.json 的 approvals 字段）
-                if "approvals" in data and isinstance(data["approvals"], list):
-                    for i, item in enumerate(data["approvals"]):
-                        self.jsonschema.validate(item, schema)
-                    self.passed.append(f"{json_path} 符合 schema ({len(data['approvals'])} 条)")
-                    print(f"  ✅ {json_path} 符合 schema ({len(data['approvals'])} 条)")
-                else:
-                    self.jsonschema.validate(data, schema)
-                    self.passed.append(f"{json_path} 符合 schema")
-                    print(f"  ✅ {json_path} 符合 schema")
+                self.jsonschema.validate(data, schema)
+                self.passed.append(f"{json_path} 符合 schema")
+                print(f"  ✅ {json_path} 符合 schema")
             else:
                 self.jsonschema.validate(data, schema)
                 self.passed.append(f"{json_path} 符合 schema")
@@ -131,8 +157,8 @@ class JsonContractChecker:
             return True
 
         print("【校验 JSON 契约】")
-        for json_path, schema_path, is_array in self.VALIDATION_MAP:
-            self.validate_json(json_path, schema_path, is_array)
+        for json_path, schema_path, is_array, required, array_field in self.VALIDATION_MAP:
+            self.validate_json(json_path, schema_path, is_array, required, array_field)
 
         print()
 

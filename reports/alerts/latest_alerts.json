@@ -1,62 +1,20 @@
 {
-  "generated_at": "2026-04-12T20:13:58.343530",
+  "generated_at": "2026-04-13T21:55:00.000000",
   "source_workflow": "nightly",
   "profile": "nightly",
-  "triggered_at": "2026-04-12T20:13:58.343530",
+  "triggered_at": "2026-04-13T21:55:00.000000",
   "has_blocking_alerts": false,
-  "has_warning_alerts": true,
-  "total_alerts": 1,
+  "has_warning_alerts": false,
+  "total_alerts": 0,
   "blocking_count": 0,
-  "warning_count": 1,
-  "alerts": [
-    {
-      "alert_type": "WEAK_REGRESSION",
-      "severity": "warning",
-      "message": "检测到 1 个弱回归",
-      "details": {
-        "regressions": [
-          {
-            "type": "weak",
-            "change": {
-              "field": "p2_count",
-              "from": 27,
-              "to": 33
-            },
-            "source": "runtime"
-          }
-        ]
-      }
-    }
-  ],
+  "warning_count": 0,
+  "alerts": [],
   "blocked_reasons": [],
   "strong_regressions": [],
-  "weak_regressions": [
-    {
-      "type": "weak",
-      "change": {
-        "field": "p2_count",
-        "from": 27,
-        "to": 33
-      },
-      "source": "runtime"
-    }
-  ],
+  "weak_regressions": [],
   "skipped_external": [],
-  "source_reports": {
-    "runtime": "2026-04-12T19:53:56.437517",
-    "quality": "2026-04-12T19:53:56.645735",
-    "release": "2026-04-12T17:34:03.679687",
-    "nightly": "2026-04-12T19:53:56.667981"
-  },
+  "source_reports": {},
   "recommended_actions": [],
   "incident_created": false,
-  "incident_resolved": true,
-  "incident_status_summary": {
-    "generated_at": "2026-04-12T20:13:58.346021",
-    "total_incidents": 5,
-    "open_incidents": 0,
-    "resolved_incidents": 5,
-    "latest_opened_at": null,
-    "latest_resolved_at": "2026-04-12T20:13:58.346021"
-  }
+  "incident_resolved": true
 }

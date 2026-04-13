@@ -33,21 +33,41 @@ def get_project_root() -> Path:
 class LayerDependencyChecker:
     """层间依赖检查器"""
 
-    # 显式违规规则
-    EXPLICIT_VIOLATIONS = [
-        # (目录, 禁止 import 的模块)
-        ("core", ["execution", "orchestration", "memory_context", "governance", "infrastructure", "scripts"]),
-        ("execution", ["governance", "scripts"]),
-        ("governance", ["execution", "skills"]),
-        ("memory_context", ["orchestration", "governance", "scripts"]),
-        ("orchestration", ["execution", "scripts"]),
-        ("infrastructure", ["memory_context", "orchestration", "execution", "governance"]),
-    ]
-
     def __init__(self, root: Path):
         self.root = root
         self.violations = []
         self.passed = []
+        self.rules = self.load_rules()
+
+    def load_rules(self) -> Dict:
+        """加载依赖规则配置"""
+        rules_file = self.root / "core" / "LAYER_DEPENDENCY_RULES.json"
+        if rules_file.exists():
+            with open(rules_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        else:
+            # 默认规则
+            return {
+                "layers": {
+                    "core": {"forbid_import_from": ["execution", "orchestration", "memory_context", "governance", "infrastructure", "scripts"]},
+                    "execution": {"forbid_import_from": ["governance", "scripts"]},
+                    "governance": {"forbid_import_from": ["execution", "skills"]},
+                    "memory_context": {"forbid_import_from": ["orchestration", "governance", "scripts"]},
+                    "orchestration": {"forbid_import_from": ["scripts"]},  # 允许依赖 execution
+                    "infrastructure": {"forbid_import_from": []},  # 基础设施层可以依赖所有层
+                }
+            }
+
+    def get_forbidden_modules(self, directory: str) -> List[str]:
+        """获取目录禁止导入的模块列表"""
+        layers = self.rules.get("layers", {})
+        
+        # 映射目录名到规则层名
+        layer_name = directory
+        if layer_name in layers:
+            return layers[layer_name].get("forbid_import_from", [])
+        
+        return []
 
     def check_imports(self, directory: str, forbidden: List[str]) -> List[Dict]:
         """检查目录下的 import 违规"""
@@ -89,9 +109,18 @@ class LayerDependencyChecker:
         print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print()
 
+        # 从规则文件获取要检查的目录
+        layers = self.rules.get("layers", {})
+        directories = list(layers.keys())
+
         total_violations = 0
 
-        for directory, forbidden in self.EXPLICIT_VIOLATIONS:
+        for directory in directories:
+            forbidden = self.get_forbidden_modules(directory)
+            if not forbidden:
+                # 没有禁止规则，跳过
+                continue
+                
             print(f"【检查 {directory}/】")
             violations = self.check_imports(directory, forbidden)
 

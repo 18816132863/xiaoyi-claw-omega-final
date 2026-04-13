@@ -1,0 +1,405 @@
+{
+  "version": "5.0.0",
+  "timestamp": "2026-04-13T16:03:06.248324",
+  "layers": {
+    "L1_Core": {
+      "exists": true,
+      "files": 20,
+      "dirs": 20,
+      "size_mb": 0.49,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 3195
+      },
+      "health": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      }
+    },
+    "L2_Memory": {
+      "exists": true,
+      "files": 44,
+      "dirs": 15,
+      "size_mb": 7.14,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 7300
+      },
+      "health": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      }
+    },
+    "L3_Orchestration": {
+      "exists": true,
+      "files": 29,
+      "dirs": 6,
+      "size_mb": 0.23,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 5062
+      },
+      "health": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      }
+    },
+    "L4_Execution": {
+      "exists": true,
+      "files": 37,
+      "dirs": 17,
+      "size_mb": 0.27,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 6237
+      },
+      "health": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      }
+    },
+    "L5_Governance": {
+      "exists": true,
+      "files": 28,
+      "dirs": 15,
+      "size_mb": 0.29,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 4231
+      },
+      "health": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      }
+    },
+    "L6_Infrastructure": {
+      "exists": true,
+      "files": 110,
+      "dirs": 28,
+      "size_mb": 1.71,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 9941
+      },
+      "health": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      }
+    }
+  },
+  "protected_files": {
+    "AGENTS.md": {
+      "exists": true,
+      "size": 3388,
+      "lines": 127,
+      "modified": "2026-04-13 13:17",
+      "hash": "b5d8b0a1"
+    },
+    "HEARTBEAT.md": {
+      "exists": true,
+      "size": 604,
+      "lines": 30,
+      "modified": "2026-04-13 13:17",
+      "hash": "ba5b04fc"
+    },
+    "IDENTITY.md": {
+      "exists": true,
+      "size": 574,
+      "lines": 23,
+      "modified": "2026-04-13 13:17",
+      "hash": "4507c19f"
+    },
+    "MEMORY.md": {
+      "exists": true,
+      "size": 3996,
+      "lines": 135,
+      "modified": "2026-04-13 13:17",
+      "hash": "e87be6e5"
+    },
+    "SOUL.md": {
+      "exists": true,
+      "size": 1713,
+      "lines": 37,
+      "modified": "2026-04-13 13:17",
+      "hash": "8a1c0c0c"
+    },
+    "TOOLS.md": {
+      "exists": true,
+      "size": 4299,
+      "lines": 177,
+      "modified": "2026-04-13 13:17",
+      "hash": "67b629be"
+    },
+    "USER.md": {
+      "exists": true,
+      "size": 524,
+      "lines": 18,
+      "modified": "2026-04-13 13:17",
+      "hash": "b0850f13"
+    },
+    "core/ARCHITECTURE.md": {
+      "exists": true,
+      "size": 17943,
+      "lines": 659,
+      "modified": "2026-04-13 13:53",
+      "hash": "afacc320"
+    }
+  },
+  "skill_registry": {
+    "exists": true,
+    "total_skills": 272,
+    "active_skills": 4,
+    "inactive_skills": 268,
+    "activation_rate": 1.5,
+    "file_size_kb": 133.3486328125
+  },
+  "config_files": {
+    "total": 31,
+    "valid": 31,
+    "invalid": 0
+  },
+  "dependencies": {
+    "layer_violations": 82,
+    "issues": [
+      "core/dynamic_prompt.py 违规导入 L6_Infrastructure",
+      "core/performance_integration.py 违规导入 L6_Infrastructure",
+      "core/llm.py 违规导入 L6_Infrastructure",
+      "core/guide/assistant_guide.py 违规导入 L6_Infrastructure",
+      "core/layer_bridge/benchmark.py 违规导入 L6_Infrastructure"
+    ]
+  },
+  "code_quality": {
+    "todo_fixme": 9,
+    "deprecated_imports": 0,
+    "print_debug": 0,
+    "details": {
+      "todo_fixme": [
+        "core/guide/assistant_guide.py",
+        "core/standards/asset_registry.py",
+        "orchestration/goal_tracker.py",
+        "orchestration/product/surface_manager.py",
+        "execution/guided_autonomy.py"
+      ]
+    }
+  },
+  "security": {
+    "issues": [],
+    "total": 0
+  },
+  "performance": {
+    "index_size_mb": 6.39,
+    "skills_size_mb": 39.4,
+    "cache_size_kb": 0.22,
+    "issues": []
+  },
+  "deep_analysis": {
+    "health_scores": {
+      "L1_Core": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      },
+      "L2_Memory": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      },
+      "L3_Orchestration": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      },
+      "L4_Execution": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      },
+      "L5_Governance": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      },
+      "L6_Infrastructure": {
+        "scores": {
+          "file_completeness": 1.0,
+          "rule_compliance": 1.0,
+          "documentation": 0.3333333333333333
+        },
+        "total": 0.8,
+        "level": "良好"
+      }
+    },
+    "risks": {
+      "high": [],
+      "medium": [],
+      "low": []
+    },
+    "recommendations": [
+      {
+        "priority": "low",
+        "layer": "L4_Execution",
+        "action": "激活更多技能",
+        "details": "仅 4/272 技能处于活跃状态"
+      }
+    ],
+    "dependency_graph": {
+      "nodes": [
+        {
+          "id": "L1_Core",
+          "type": "layer",
+          "name": "核心层",
+          "health": 0.8
+        },
+        {
+          "id": "L2_Memory",
+          "type": "layer",
+          "name": "记忆层",
+          "health": 0.8
+        },
+        {
+          "id": "L3_Orchestration",
+          "type": "layer",
+          "name": "编排层",
+          "health": 0.8
+        },
+        {
+          "id": "L4_Execution",
+          "type": "layer",
+          "name": "执行层",
+          "health": 0.8
+        },
+        {
+          "id": "L5_Governance",
+          "type": "layer",
+          "name": "治理层",
+          "health": 0.8
+        },
+        {
+          "id": "L6_Infrastructure",
+          "type": "layer",
+          "name": "基础设施层",
+          "health": 0.8
+        }
+      ],
+      "edges": [
+        {
+          "source": "L1_Core",
+          "target": "L2_Memory",
+          "relationship": "provides_rules"
+        },
+        {
+          "source": "L1_Core",
+          "target": "L3_Orchestration",
+          "relationship": "provides_config"
+        },
+        {
+          "source": "L1_Core",
+          "target": "L4_Execution",
+          "relationship": "provides_identity"
+        },
+        {
+          "source": "L2_Memory",
+          "target": "L3_Orchestration",
+          "relationship": "provides_context"
+        },
+        {
+          "source": "L3_Orchestration",
+          "target": "L4_Execution",
+          "relationship": "dispatches_tasks"
+        },
+        {
+          "source": "L4_Execution",
+          "target": "L5_Governance",
+          "relationship": "reports_metrics"
+        },
+        {
+          "source": "L5_Governance",
+          "target": "L6_Infrastructure",
+          "relationship": "triggers_maintenance"
+        },
+        {
+          "source": "L6_Infrastructure",
+          "target": "L1_Core",
+          "relationship": "updates_config"
+        }
+      ]
+    }
+  },
+  "issues": [],
+  "warnings": [],
+  "summary": {
+    "total_issues": 0,
+    "total_warnings": 0,
+    "security_issues": 0,
+    "overall_health": 0.8,
+    "status": "PASS"
+  }
+}

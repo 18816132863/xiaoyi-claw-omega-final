@@ -211,14 +211,33 @@ class DeepThinker:
         scores["rule_compliance"] = max(0, 1 - issues_count * 0.1)
         
         # 文档完整性
-        doc_files = ["README.md", "SKILL.md", "CHANGELOG.md"]
         layer_path = PROJECT_ROOT / LAYERS.get(layer_id, {}).get("path", "")
+        doc_files = ["README.md", "SKILL.md", "CHANGELOG.md"]
         doc_count = sum(1 for df in doc_files if (layer_path / df).exists())
         scores["documentation"] = doc_count / len(doc_files) if doc_files else 0
         
-        # 计算加权总分
+        # 计算加权总分 - 使用通用权重
+        default_weights = {
+            "file_completeness": 0.4,
+            "rule_compliance": 0.3,
+            "documentation": 0.3
+        }
+        
+        # 如果权重键名不匹配，使用默认权重
+        effective_weights = {}
+        for key in scores.keys():
+            if key in weights:
+                effective_weights[key] = weights[key]
+            elif key in default_weights:
+                effective_weights[key] = default_weights[key]
+        
+        # 归一化权重
+        total_weight = sum(effective_weights.values())
+        if total_weight > 0:
+            effective_weights = {k: v/total_weight for k, v in effective_weights.items()}
+        
         total_score = 0
-        for key, weight in weights.items():
+        for key, weight in effective_weights.items():
             if key in scores:
                 total_score += scores[key] * weight
         
@@ -749,9 +768,20 @@ class ArchitectureInspector:
             for py_file in layer_path.rglob("*.py"):
                 try:
                     content = py_file.read_text(errors='ignore')
+                    
+                    # 移除注释后再检查
+                    lines = content.splitlines()
+                    code_lines = []
+                    for line in lines:
+                        # 移除单行注释
+                        if '#' in line:
+                            line = line[:line.index('#')]
+                        code_lines.append(line)
+                    code_content = '\n'.join(code_lines)
+                    
                     for check_name, patterns in SECURITY_PATTERNS.items():
                         for pattern in patterns:
-                            matches = re.findall(pattern, content, re.IGNORECASE)
+                            matches = re.findall(pattern, code_content, re.IGNORECASE)
                             if matches:
                                 security_issues.append({
                                     "file": str(py_file.relative_to(PROJECT_ROOT)),

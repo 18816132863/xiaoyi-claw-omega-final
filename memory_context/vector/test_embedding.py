@@ -13,9 +13,8 @@ if not os.environ.get("GITEE_AI_API_KEY"):
 try:
     from openai import OpenAI
 except ImportError:
-    print("安装 openai 库...")
-    os.system("pip install openai -q")
-    from openai import OpenAI
+    print("请手动安装 openai 库: pip install openai")
+    sys.exit(1)
 
 print("=" * 50)
 print("Qwen3-Embedding-8B API 测试")

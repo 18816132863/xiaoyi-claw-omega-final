@@ -121,5 +121,56 @@
       "to": "L6",
       "type": "direct_import"
     }
-  ]
+  ],
+  "real_violations": [
+    {
+      "file": "core/dynamic_prompt.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/performance_integration.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/llm.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/guide/assistant_guide.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/layer_bridge/benchmark.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/layer_bridge/fast_bridge_v2.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/layer_bridge/layer_cache.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/standards/asset_registry.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    }
+  ],
+  "real_violation_count": 8
 }

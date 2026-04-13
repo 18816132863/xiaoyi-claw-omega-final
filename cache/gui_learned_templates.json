@@ -1,0 +1,35 @@
+{
+  "b3be44ea": {
+    "query_pattern": "\u6253\u5f00\u5fae\u4fe1\u53d1\u9001\u6d88\u606f\u7ed9\u5f20\u4e09",
+    "operations": [
+      "open_app:wechat",
+      "click_chat",
+      "input:\u5f20\u4e09",
+      "send"
+    ],
+    "count": 1,
+    "avg_duration": 15.5,
+    "created": "2026-04-13T19:11:09.558086",
+    "last_used": "2026-04-13T19:11:09.558086"
+  },
+  "da6089f7": {
+    "query_pattern": "\u6253\u5f00\u5fae\u4fe1",
+    "operations": [
+      "open_app:wechat"
+    ],
+    "count": 1,
+    "avg_duration": 3.2,
+    "created": "2026-04-13T19:11:09.559015",
+    "last_used": "2026-04-13T19:11:09.559015"
+  },
+  "a4e3814d": {
+    "query_pattern": "\u6253\u5f00\u652f\u4ed8\u5b9d",
+    "operations": [
+      "open_app:alipay"
+    ],
+    "count": 1,
+    "avg_duration": 5.2,
+    "created": "2026-04-13T19:14:01.884150",
+    "last_used": "2026-04-13T19:14:01.884150"
+  }
+}

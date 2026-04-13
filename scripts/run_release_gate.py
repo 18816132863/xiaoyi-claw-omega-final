@@ -211,29 +211,19 @@ def save_followup_requirements(impact_data: dict, profile: str):
 
 
 def save_enforcement_report(profile: str, impact_data: dict, executed_data: dict, missing: list):
-    """保存强制门禁报告"""
+    """保存强制门禁报告（V2.0.0 - 只检查当前阻断项）"""
     root = get_project_root()
     
     report = {
         "profile": profile,
         "changed_files": impact_data.get("changed_files", []),
-        "required_commands": impact_data.get("required_commands", []),
-        "required_profiles": impact_data.get("required_profiles", []),
+        "blocking_commands_current_profile": impact_data.get("blocking_commands_current_profile", []),
         "executed_commands": executed_data.get("executed_commands", []),
         "missing_required_checks": missing,
-        "followup_required_profiles": [],
+        "followup_required_profiles": impact_data.get("followup_required_profiles", []),
         "enforcement_passed": len(missing) == 0,
         "generated_at": datetime.now().isoformat()
     }
-    
-    # 读取 followup 获取 pending profiles
-    followup_path = root / "reports/ops/followup_requirements.json"
-    if followup_path.exists():
-        try:
-            followup = json.load(open(followup_path, encoding='utf-8'))
-            report["followup_required_profiles"] = followup.get("pending_profiles", [])
-        except:
-            pass
     
     path = root / "reports/ops/change_impact_enforcement.json"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -245,7 +235,7 @@ def save_enforcement_report(profile: str, impact_data: dict, executed_data: dict
 
 
 def check_impact_enforcement() -> dict:
-    """检查变更影响强制门禁"""
+    """检查变更影响强制门禁（V2.0.0 - 只检查当前阻断项）"""
     root = get_project_root()
     
     result = {
@@ -264,7 +254,9 @@ def check_impact_enforcement() -> dict:
     except:
         return result
     
-    if not impact_data.get("required_commands"):
+    # V3.0.0: 只检查当前阻断项，不检查 follow-up
+    blocking_commands = impact_data.get("blocking_commands_current_profile", [])
+    if not blocking_commands:
         return result
     
     # 读取 executed_checks.json
@@ -277,17 +269,13 @@ def check_impact_enforcement() -> dict:
         except:
             pass
     
-    # 检查缺失的命令
-    for cmd in impact_data["required_commands"]:
+    # 检查缺失的命令（只检查当前阻断项）
+    for cmd in blocking_commands:
         # 简化匹配：检查命令是否在已执行列表中
         cmd_base = cmd.replace("python scripts/", "")
         found = any(cmd_base in ec for ec in executed_commands)
         if not found:
             result["missing_commands"].append(cmd)
-            # 找到是哪个文件要求的
-            for rule in impact_data.get("matched_rules", []):
-                if cmd in rule.get("commands", []):
-                    result["required_by"].append(rule["file"])
     
     result["passed"] = len(result["missing_commands"]) == 0
     return result

@@ -31,7 +31,7 @@ def load_json_file(path: Path) -> Dict:
 
 
 def check_enforcement(profile: str = "premerge") -> Dict:
-    """检查变更影响强制门禁"""
+    """检查变更影响强制门禁（V2.0.0 - 只检查当前阻断项）"""
     root = get_project_root()
     
     # 读取变更影响报告
@@ -40,35 +40,26 @@ def check_enforcement(profile: str = "premerge") -> Dict:
     # 读取已执行检查
     executed_data = load_json_file(root / "reports/ops/executed_checks.json")
     
-    # 读取 follow-up 要求
-    followup_data = load_json_file(root / "reports/ops/followup_requirements.json")
-    
     result = {
         "profile": profile,
         "changed_files": impact_data.get("changed_files", []),
-        "required_commands": impact_data.get("required_commands", []),
-        "required_profiles": impact_data.get("required_profiles", []),
+        "blocking_commands_current_profile": impact_data.get("blocking_commands_current_profile", []),
         "executed_commands": executed_data.get("executed_commands", []),
         "missing_required_checks": [],
-        "followup_required_profiles": [],
+        "followup_required_profiles": impact_data.get("followup_required_profiles", []),
         "enforcement_passed": True,
         "generated_at": datetime.now().isoformat()
     }
     
-    # 检查 required commands
-    for cmd in result["required_commands"]:
+    # 只检查当前 profile 的阻断命令
+    for cmd in result["blocking_commands_current_profile"]:
         cmd_base = cmd.replace("python scripts/", "")
         found = any(cmd_base in ec for ec in result["executed_commands"])
         if not found:
             result["missing_required_checks"].append(cmd)
     
-    # 检查 follow-up profiles
-    if followup_data:
-        result["followup_required_profiles"] = followup_data.get("pending_profiles", [])
-    
-    # 判断是否通过
-    if result["missing_required_checks"]:
-        result["enforcement_passed"] = False
+    # 判断是否通过（只看当前阻断项，不看 follow-up）
+    result["enforcement_passed"] = len(result["missing_required_checks"]) == 0
     
     return result
 

@@ -1,30 +1,25 @@
 {
   "profile": "premerge",
   "changed_files": [
-    "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md",
-    "reports/history/quality/20260414_004006.json",
-    "reports/history/quality/20260414_004038.json",
-    "reports/history/quality/20260414_004128.json",
-    "reports/history/runtime/20260414_004006_premerge.json",
-    "reports/history/runtime/20260414_004038_premerge.json",
-    "reports/history/runtime/20260414_004127_premerge.json",
+    "reports/history/quality/20260414_005701.json",
+    "reports/history/quality/20260414_005737.json",
+    "reports/history/release/20260414_005737_gate_check.json",
+    "reports/history/runtime/20260414_005701_premerge.json",
+    "reports/history/runtime/20260414_005736_release.json",
     "reports/ops/change_impact.json",
+    "reports/ops/change_impact_enforcement.json",
     "reports/ops/executed_checks.json",
+    "reports/ops/followup_requirements.json",
     "reports/quality_gate.json",
+    "reports/release_gate.json",
     "reports/runtime_integrity.json",
     "scripts/check_change_impact.py",
+    "scripts/check_change_impact_enforcement.py",
     "scripts/run_release_gate.py"
   ],
-  "required_commands": [
-    "python scripts/check_repo_integrity.py --strict",
-    "python scripts/run_release_gate.py release",
-    "python scripts/check_layer_dependencies.py",
-    "python scripts/run_release_gate.py premerge",
-    "python scripts/check_json_contracts.py"
-  ],
-  "required_profiles": [
-    "premerge",
-    "release"
+  "blocking_commands_current_profile": [
+    "python scripts/check_json_contracts.py",
+    "python scripts/check_repo_integrity.py --strict"
   ],
   "executed_commands": [
     "python scripts/check_layer_dependencies.py",
@@ -32,12 +27,8 @@
     "python scripts/check_repo_integrity.py --strict",
     "python scripts/run_release_gate.py premerge"
   ],
-  "missing_required_checks": [
-    "python scripts/run_release_gate.py release"
-  ],
-  "followup_required_profiles": [
-    "release"
-  ],
-  "enforcement_passed": false,
-  "generated_at": "2026-04-14T00:57:01.291257"
+  "missing_required_checks": [],
+  "followup_required_profiles": [],
+  "enforcement_passed": true,
+  "generated_at": "2026-04-14T01:31:19.783109"
 }

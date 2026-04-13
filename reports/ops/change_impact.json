@@ -1,76 +1,86 @@
 {
   "changed_files": [
-    "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md",
-    "reports/history/quality/20260414_004006.json",
-    "reports/history/quality/20260414_004038.json",
-    "reports/history/quality/20260414_004128.json",
-    "reports/history/runtime/20260414_004006_premerge.json",
-    "reports/history/runtime/20260414_004038_premerge.json",
-    "reports/history/runtime/20260414_004127_premerge.json",
+    "reports/history/quality/20260414_005701.json",
+    "reports/history/quality/20260414_005737.json",
+    "reports/history/release/20260414_005737_gate_check.json",
+    "reports/history/runtime/20260414_005701_premerge.json",
+    "reports/history/runtime/20260414_005736_release.json",
     "reports/ops/change_impact.json",
+    "reports/ops/change_impact_enforcement.json",
     "reports/ops/executed_checks.json",
+    "reports/ops/followup_requirements.json",
     "reports/quality_gate.json",
+    "reports/release_gate.json",
     "reports/runtime_integrity.json",
     "scripts/check_change_impact.py",
+    "scripts/check_change_impact_enforcement.py",
     "scripts/run_release_gate.py"
   ],
   "changed_categories": [
     "scripts/check_*.py",
-    "governance",
     "reports/ops"
   ],
   "matched_rules": [
     {
-      "file": "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md",
-      "pattern": "governance/*",
-      "description": "治理层变更，必须验证依赖规则和 premerge + release 门禁",
-      "commands": [
-        "python scripts/check_layer_dependencies.py",
-        "python scripts/run_release_gate.py premerge",
-        "python scripts/run_release_gate.py release"
-      ],
-      "blocking": true
-    },
-    {
       "file": "reports/ops/change_impact.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
-      "commands": [
+      "blocking_commands": [
         "python scripts/check_json_contracts.py"
       ],
-      "blocking": false
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/change_impact_enforcement.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
     },
     {
       "file": "reports/ops/executed_checks.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
-      "commands": [
+      "blocking_commands": [
         "python scripts/check_json_contracts.py"
       ],
-      "blocking": false
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/followup_requirements.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
     },
     {
       "file": "scripts/check_change_impact.py",
       "pattern": "scripts/check_*.py",
       "description": "检查脚本变更，建议验证仓库完整性",
-      "commands": [
+      "blocking_commands": [
         "python scripts/check_repo_integrity.py --strict"
       ],
-      "blocking": false
+      "followup_profiles": []
+    },
+    {
+      "file": "scripts/check_change_impact_enforcement.py",
+      "pattern": "scripts/check_*.py",
+      "description": "检查脚本变更，建议验证仓库完整性",
+      "blocking_commands": [
+        "python scripts/check_repo_integrity.py --strict"
+      ],
+      "followup_profiles": []
     }
   ],
-  "required_commands": [
-    "python scripts/check_repo_integrity.py --strict",
-    "python scripts/run_release_gate.py release",
-    "python scripts/check_layer_dependencies.py",
-    "python scripts/run_release_gate.py premerge",
-    "python scripts/check_json_contracts.py"
+  "blocking_commands_current_profile": [
+    "python scripts/check_json_contracts.py",
+    "python scripts/check_repo_integrity.py --strict"
   ],
-  "required_profiles": [
-    "premerge",
-    "release"
-  ],
-  "total_commands": 5,
-  "blocking_if_missing": true,
-  "generated_at": "2026-04-14T00:56:58.163208"
+  "followup_required_profiles": [],
+  "followup_reason_by_profile": {},
+  "generated_at": "2026-04-14T01:31:16.595586"
 }

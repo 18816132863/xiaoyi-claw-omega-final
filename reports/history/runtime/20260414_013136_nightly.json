@@ -1,7 +1,7 @@
 {
-  "profile": "release",
+  "profile": "nightly",
   "scope": "all",
-  "verified_at": "2026-04-14T01:31:51.919396",
+  "verified_at": "2026-04-14T01:31:36.168451",
   "overall_passed": true,
   "failure_reasons": [],
   "p0_count": 0,

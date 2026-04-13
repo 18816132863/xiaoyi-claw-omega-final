@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""架构巡检器 - V4.3.2 增强版
+"""架构巡检器 - V5.0.0 规则平台化版
 
 增强功能：
 1. 六层架构完整性检查
@@ -12,6 +12,14 @@
 8. 性能指标检查
 9. 自动 Git 同步
 10. 生成详细报告
+
+V5.0.0 新增:
+11. 规则注册表检查 (RULE_REGISTRY.json)
+12. 规则引擎检查 (run_rule_engine.py)
+13. 变更影响检查 (change_impact.json)
+14. 技能安全检查 (skill_security_report.json)
+15. 循环防护检查 (loop_guard.py)
+16. 门禁报告检查 (gate_report.json)
 """
 
 import json
@@ -82,7 +90,12 @@ LAYERS = {
 # 受保护文件列表
 PROTECTED_FILES = {
     "AGENTS.md", "SOUL.md", "USER.md", "TOOLS.md", "IDENTITY.md",
-    "MEMORY.md", "HEARTBEAT.md", "core/ARCHITECTURE.md"
+    "MEMORY.md", "HEARTBEAT.md", "core/ARCHITECTURE.md",
+    "core/RULE_REGISTRY.json", "core/LAYER_DEPENDENCY_MATRIX.md",
+    "core/LAYER_DEPENDENCY_RULES.json", "core/LAYER_IO_CONTRACTS.md",
+    "core/CHANGE_IMPACT_MATRIX.md", "core/SINGLE_SOURCE_OF_TRUTH.md",
+    "governance/ARCHITECTURE_GUARDRAILS.md",
+    "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md"
 }
 
 # 安全检查模式
@@ -115,11 +128,11 @@ QUALITY_CHECKS = {
 
 
 class ArchitectureInspector:
-    """架构巡检器 - V4.3.2 增强版"""
+    """架构巡检器 - V5.0.0 规则平台化版"""
     
     def __init__(self):
         self.results = {
-            "version": "4.3.2",
+            "version": "5.0.0",
             "timestamp": datetime.now().isoformat(),
             "layers": {},
             "protected_files": {},
@@ -129,6 +142,12 @@ class ArchitectureInspector:
             "code_quality": {},
             "security": {},
             "performance": {},
+            "rule_registry": {},
+            "rule_engine": {},
+            "change_impact": {},
+            "skill_security": {},
+            "loop_guard": {},
+            "gate_reports": {},
             "issues": [],
             "warnings": [],
             "summary": {}
@@ -138,7 +157,7 @@ class ArchitectureInspector:
     def inspect_all(self) -> Dict:
         """执行完整巡检"""
         print("=" * 70)
-        print("架构巡检器 - V4.3.2 增强版")
+        print("架构巡检器 - V5.0.0 规则平台化版")
         print("=" * 70)
         print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print()
@@ -167,10 +186,28 @@ class ArchitectureInspector:
         # 8. 性能指标
         self._inspect_performance()
         
-        # 9. 生成摘要
+        # 9. 规则注册表检查 (V5.0.0 新增)
+        self._inspect_rule_registry()
+        
+        # 10. 规则引擎检查 (V5.0.0 新增)
+        self._inspect_rule_engine()
+        
+        # 11. 变更影响检查 (V5.0.0 新增)
+        self._inspect_change_impact()
+        
+        # 12. 技能安全检查 (V5.0.0 新增)
+        self._inspect_skill_security()
+        
+        # 13. 循环防护检查 (V5.0.0 新增)
+        self._inspect_loop_guard()
+        
+        # 14. 门禁报告检查 (V5.0.0 新增)
+        self._inspect_gate_reports()
+        
+        # 15. 生成摘要
         self._generate_summary()
         
-        # 10. 自动 Git 同步
+        # 16. 自动 Git 同步
         self._auto_git_sync()
         
         return self.results
@@ -541,6 +578,239 @@ class ArchitectureInspector:
         for path, size in status["largest_files"]:
             print(f"      • {path}: {size / 1024:.1f}KB")
     
+    def _inspect_rule_registry(self):
+        """检查规则注册表 (V5.0.0 新增)"""
+        print()
+        print("【9. 规则注册表检查】")
+        print("-" * 70)
+        
+        registry_path = PROJECT_ROOT / "core" / "RULE_REGISTRY.json"
+        
+        if registry_path.exists():
+            try:
+                registry = json.loads(registry_path.read_text())
+                
+                rules = registry.get("rules", {})
+                profiles = registry.get("profiles", {})
+                
+                status = {
+                    "exists": True,
+                    "version": registry.get("version", "unknown"),
+                    "rule_count": len(rules),
+                    "profile_count": len(profiles),
+                    "rules": list(rules.keys()),
+                    "profiles": list(profiles.keys()),
+                    "issues": []
+                }
+                
+                # 检查每条规则的 checker 是否存在
+                for rule_id, rule in rules.items():
+                    checker = rule.get("checker_script", "")
+                    if checker:
+                        checker_path = PROJECT_ROOT / checker
+                        if not checker_path.exists():
+                            status["issues"].append(f"规则 {rule_id} 的检查器不存在: {checker}")
+                
+                self.results["rule_registry"] = status
+                
+                print(f"  ✅ 版本: {status['version']}")
+                print(f"  ✅ 规则数: {status['rule_count']}")
+                print(f"  ✅ Profile 数: {status['profile_count']}")
+                print(f"  规则列表:")
+                for rule_id in status["rules"]:
+                    print(f"      • {rule_id}")
+                
+                for issue in status["issues"]:
+                    print(f"  ⚠️ {issue}")
+                
+            except Exception as e:
+                self.results["rule_registry"] = {"exists": True, "error": str(e)}
+                print(f"  ❌ 解析失败: {e}")
+        else:
+            self.results["rule_registry"] = {"exists": False}
+            print("  ❌ 规则注册表不存在")
+    
+    def _inspect_rule_engine(self):
+        """检查规则引擎 (V5.0.0 新增)"""
+        print()
+        print("【10. 规则引擎检查】")
+        print("-" * 70)
+        
+        engine_path = PROJECT_ROOT / "scripts" / "run_rule_engine.py"
+        report_path = PROJECT_ROOT / "reports" / "ops" / "rule_engine_report.json"
+        
+        status = {
+            "engine_exists": engine_path.exists(),
+            "report_exists": report_path.exists(),
+            "last_run": None,
+            "passed_rules": 0,
+            "failed_rules": 0
+        }
+        
+        if engine_path.exists():
+            print(f"  ✅ 规则引擎存在: scripts/run_rule_engine.py")
+        else:
+            print(f"  ❌ 规则引擎不存在")
+        
+        if report_path.exists():
+            try:
+                report = json.loads(report_path.read_text())
+                status["last_run"] = report.get("generated_at")
+                status["passed_rules"] = len(report.get("passed_rules", []))
+                status["failed_rules"] = len(report.get("failed_rules", []))
+                
+                print(f"  ✅ 最近运行: {status['last_run']}")
+                print(f"  ✅ 通过规则: {status['passed_rules']}")
+                print(f"  {'✅' if status['failed_rules'] == 0 else '❌'} 失败规则: {status['failed_rules']}")
+            except:
+                print(f"  ⚠️ 报告解析失败")
+        else:
+            print(f"  ⚠️ 规则引擎报告不存在")
+        
+        self.results["rule_engine"] = status
+    
+    def _inspect_change_impact(self):
+        """检查变更影响 (V5.0.0 新增)"""
+        print()
+        print("【11. 变更影响检查】")
+        print("-" * 70)
+        
+        impact_path = PROJECT_ROOT / "reports" / "ops" / "change_impact.json"
+        enforcement_path = PROJECT_ROOT / "reports" / "ops" / "change_impact_enforcement.json"
+        
+        status = {
+            "impact_exists": impact_path.exists(),
+            "enforcement_exists": enforcement_path.exists(),
+            "changed_files": 0,
+            "blocking_commands": 0,
+            "enforcement_passed": None
+        }
+        
+        if impact_path.exists():
+            try:
+                impact = json.loads(impact_path.read_text())
+                status["changed_files"] = len(impact.get("changed_files", []))
+                status["blocking_commands"] = len(impact.get("blocking_commands_current_profile", []))
+                print(f"  ✅ 变更文件数: {status['changed_files']}")
+                print(f"  ✅ 阻断命令数: {status['blocking_commands']}")
+            except:
+                print(f"  ⚠️ 变更影响报告解析失败")
+        else:
+            print(f"  ⚠️ 变更影响报告不存在")
+        
+        if enforcement_path.exists():
+            try:
+                enforcement = json.loads(enforcement_path.read_text())
+                status["enforcement_passed"] = enforcement.get("enforcement_passed", False)
+                icon = "✅" if status["enforcement_passed"] else "❌"
+                print(f"  {icon} 强制门禁: {'通过' if status['enforcement_passed'] else '未通过'}")
+            except:
+                print(f"  ⚠️ 强制门禁报告解析失败")
+        else:
+            print(f"  ⚠️ 强制门禁报告不存在")
+        
+        self.results["change_impact"] = status
+    
+    def _inspect_skill_security(self):
+        """检查技能安全 (V5.0.0 新增)"""
+        print()
+        print("【12. 技能安全检查】")
+        print("-" * 70)
+        
+        checker_path = PROJECT_ROOT / "scripts" / "check_skill_security.py"
+        report_path = PROJECT_ROOT / "reports" / "ops" / "skill_security_report.json"
+        
+        status = {
+            "checker_exists": checker_path.exists(),
+            "report_exists": report_path.exists(),
+            "scanned": 0,
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+        }
+        
+        if checker_path.exists():
+            print(f"  ✅ 技能安全检查器存在: scripts/check_skill_security.py")
+        else:
+            print(f"  ❌ 技能安全检查器不存在")
+        
+        if report_path.exists():
+            try:
+                report = json.loads(report_path.read_text())
+                status["scanned"] = report.get("scanned", 0)
+                status["critical"] = report.get("critical", 0)
+                status["high"] = report.get("high", 0)
+                status["medium"] = report.get("medium", 0)
+                status["low"] = report.get("low", 0)
+                
+                print(f"  ✅ 扫描技能数: {status['scanned']}")
+                
+                icon_crit = "❌" if status["critical"] > 0 else "✅"
+                icon_high = "⚠️" if status["high"] > 0 else "✅"
+                
+                print(f"  {icon_crit} Critical 风险: {status['critical']}")
+                print(f"  {icon_high} High 风险: {status['high']}")
+                print(f"  ✅ Medium 风险: {status['medium']}")
+                print(f"  ✅ Low 风险: {status['low']}")
+            except:
+                print(f"  ⚠️ 技能安全报告解析失败")
+        else:
+            print(f"  ⚠️ 技能安全报告不存在")
+        
+        self.results["skill_security"] = status
+    
+    def _inspect_loop_guard(self):
+        """检查循环防护 (V5.0.0 新增)"""
+        print()
+        print("【13. 循环防护检查】")
+        print("-" * 70)
+        
+        guard_path = PROJECT_ROOT / "execution" / "loop_guard.py"
+        design_path = PROJECT_ROOT / "docs" / "loop_guard_design.md"
+        
+        status = {
+            "guard_exists": guard_path.exists(),
+            "design_exists": design_path.exists()
+        }
+        
+        if guard_path.exists():
+            print(f"  ✅ 循环防护模块存在: execution/loop_guard.py")
+        else:
+            print(f"  ❌ 循环防护模块不存在")
+        
+        if design_path.exists():
+            print(f"  ✅ 设计文档存在: docs/loop_guard_design.md")
+        else:
+            print(f"  ⚠️ 设计文档不存在")
+        
+        self.results["loop_guard"] = status
+    
+    def _inspect_gate_reports(self):
+        """检查门禁报告 (V5.0.0 新增)"""
+        print()
+        print("【14. 门禁报告检查】")
+        print("-" * 70)
+        
+        reports = {
+            "runtime_integrity": PROJECT_ROOT / "reports" / "runtime_integrity.json",
+            "quality_gate": PROJECT_ROOT / "reports" / "quality_gate.json",
+            "release_gate": PROJECT_ROOT / "reports" / "release_gate.json",
+            "rule_execution_index": PROJECT_ROOT / "reports" / "ops" / "rule_execution_index.json",
+            "followup_requirements": PROJECT_ROOT / "reports" / "ops" / "followup_requirements.json"
+        }
+        
+        status = {"reports": {}}
+        
+        for name, path in reports.items():
+            exists = path.exists()
+            status["reports"][name] = {"exists": exists}
+            
+            icon = "✅" if exists else "⚠️"
+            print(f"  {icon} {name}: {'存在' if exists else '不存在'}")
+        
+        self.results["gate_reports"] = status
+    
     def _generate_summary(self):
         """生成摘要"""
         print()
@@ -575,7 +845,13 @@ class ArchitectureInspector:
             "total_files": self.results["code_quality"]["total_files"],
             "total_lines": self.results["code_quality"]["total_lines"],
             "issues": len(self.results["issues"]),
-            "warnings": len(self.results["warnings"])
+            "warnings": len(self.results["warnings"]),
+            # V5.0.0 新增
+            "rule_registry": "存在" if self.results["rule_registry"].get("exists") else "不存在",
+            "rule_engine": "存在" if self.results["rule_engine"].get("engine_exists") else "不存在",
+            "change_impact": "通过" if self.results["change_impact"].get("enforcement_passed") else "未通过",
+            "skill_security": f"Critical:{self.results['skill_security'].get('critical', 0)} High:{self.results['skill_security'].get('high', 0)}",
+            "loop_guard": "存在" if self.results["loop_guard"].get("guard_exists") else "不存在"
         }
         
         print(f"  六层架构: {layer_ok}/{layer_total} 通过")
@@ -587,11 +863,22 @@ class ArchitectureInspector:
         print(f"  问题数: {len(self.results['issues'])}")
         print(f"  警告数: {len(self.results['warnings'])}")
         
+        # V5.0.0 新增摘要
+        print()
+        print("【V5.0.0 新增检查】")
+        print(f"  规则注册表: {self.results['summary']['rule_registry']}")
+        print(f"  规则引擎: {self.results['summary']['rule_engine']}")
+        print(f"  变更影响: {self.results['summary']['change_impact']}")
+        print(f"  技能安全: {self.results['summary']['skill_security']}")
+        print(f"  循环防护: {self.results['summary']['loop_guard']}")
+        
         # 总体状态
         all_ok = (layer_ok == layer_total and 
                   protected_ok == protected_total and 
                   import_ok == import_total and
-                  security_ok)
+                  security_ok and
+                  self.results["rule_registry"].get("exists", False) and
+                  self.results["rule_engine"].get("engine_exists", False))
         
         print()
         if all_ok:

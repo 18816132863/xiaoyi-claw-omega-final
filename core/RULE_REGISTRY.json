@@ -1,0 +1,113 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-14",
+  "description": "统一规则注册表 - 定义所有规则检查器及其执行配置",
+  
+  "rules": {
+    "layer_dependency_rule": {
+      "rule_id": "R001",
+      "name": "层间依赖规则",
+      "description": "检查六层架构的层间依赖是否合规",
+      "owner_layer": "L1",
+      "source_files": [
+        "core/LAYER_DEPENDENCY_MATRIX.md",
+        "core/LAYER_DEPENDENCY_RULES.json"
+      ],
+      "checker_script": "scripts/check_layer_dependencies.py",
+      "enforcement_stage": ["premerge", "nightly", "release"],
+      "severity": "error",
+      "blocking": true,
+      "outputs": [
+        "reports/integrity/dependency_violations.json"
+      ]
+    },
+    "json_contract_rule": {
+      "rule_id": "R002",
+      "name": "JSON 契约规则",
+      "description": "检查 JSON 文件是否符合 schema 契约",
+      "owner_layer": "L1",
+      "source_files": [
+        "core/contracts/*.schema.json"
+      ],
+      "checker_script": "scripts/check_json_contracts.py",
+      "enforcement_stage": ["premerge", "nightly", "release"],
+      "severity": "error",
+      "blocking": true,
+      "outputs": []
+    },
+    "single_source_of_truth_rule": {
+      "rule_id": "R003",
+      "name": "唯一真源规则",
+      "description": "检查唯一真源文件是否存在且一致",
+      "owner_layer": "L1",
+      "source_files": [
+        "core/SINGLE_SOURCE_OF_TRUTH.md"
+      ],
+      "checker_script": "scripts/check_repo_integrity.py",
+      "enforcement_stage": ["premerge", "nightly", "release"],
+      "severity": "error",
+      "blocking": true,
+      "outputs": []
+    },
+    "change_impact_rule": {
+      "rule_id": "R004",
+      "name": "变更影响规则",
+      "description": "检查变更文件是否触发了必须执行的命令",
+      "owner_layer": "L4",
+      "source_files": [
+        "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md"
+      ],
+      "checker_script": "scripts/check_change_impact_enforcement.py",
+      "enforcement_stage": ["premerge", "nightly", "release"],
+      "severity": "error",
+      "blocking": true,
+      "outputs": [
+        "reports/ops/change_impact.json",
+        "reports/ops/change_impact_enforcement.json"
+      ]
+    },
+    "rule_self_test_rule": {
+      "rule_id": "R005",
+      "name": "规则自测规则",
+      "description": "验证规则检查器能正确检测违规样例",
+      "owner_layer": "L5",
+      "source_files": [
+        "tests/rule_violations/"
+      ],
+      "checker_script": "scripts/check_rule_guards.py",
+      "enforcement_stage": ["premerge", "nightly", "release"],
+      "severity": "error",
+      "blocking": true,
+      "outputs": []
+    },
+    "repo_integrity_rule": {
+      "rule_id": "R006",
+      "name": "仓库完整性规则",
+      "description": "检查必需文件、目录、Makefile 目标等完整性",
+      "owner_layer": "L6",
+      "source_files": [
+        "scripts/check_repo_integrity.py"
+      ],
+      "checker_script": "scripts/check_repo_integrity.py",
+      "enforcement_stage": ["premerge", "nightly", "release"],
+      "severity": "error",
+      "blocking": true,
+      "outputs": []
+    }
+  },
+  
+  "profiles": {
+    "premerge": {
+      "rules": ["R001", "R002", "R003", "R004", "R005", "R006"],
+      "description": "Premerge 门禁规则集"
+    },
+    "nightly": {
+      "rules": ["R001", "R002", "R003", "R005", "R006"],
+      "description": "Nightly 门禁规则集"
+    },
+    "release": {
+      "rules": ["R001", "R002", "R003", "R005", "R006"],
+      "description": "Release 门禁规则集"
+    }
+  }
+}

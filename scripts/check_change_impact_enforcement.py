@@ -77,7 +77,7 @@ def save_enforcement_report(report: Dict):
 def print_enforcement_report(report: Dict):
     """打印强制门禁报告"""
     print("╔══════════════════════════════════════════════════╗")
-    print("║          变更影响强制门禁检查                   ║")
+    print("║          变更影响强制门禁检查 V2.0.0            ║")
     print("╚══════════════════════════════════════════════════╝")
     print()
     
@@ -85,7 +85,7 @@ def print_enforcement_report(report: Dict):
     print(f"Changed Files: {len(report['changed_files'])}")
     print()
     
-    print(f"Required Commands: {len(report['required_commands'])}")
+    print(f"Blocking Commands: {len(report.get('blocking_commands_current_profile', []))}")
     print(f"Executed Commands: {len(report['executed_commands'])}")
     print()
     

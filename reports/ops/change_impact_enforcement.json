@@ -1,11 +1,13 @@
 {
   "profile": "premerge",
   "changed_files": [
-    "reports/history/quality/20260414_005701.json",
-    "reports/history/quality/20260414_005737.json",
-    "reports/history/release/20260414_005737_gate_check.json",
-    "reports/history/runtime/20260414_005701_premerge.json",
-    "reports/history/runtime/20260414_005736_release.json",
+    "reports/history/quality/20260414_013119.json",
+    "reports/history/quality/20260414_013136.json",
+    "reports/history/quality/20260414_013152.json",
+    "reports/history/release/20260414_013152_gate_check.json",
+    "reports/history/runtime/20260414_013119_premerge.json",
+    "reports/history/runtime/20260414_013136_nightly.json",
+    "reports/history/runtime/20260414_013151_release.json",
     "reports/ops/change_impact.json",
     "reports/ops/change_impact_enforcement.json",
     "reports/ops/executed_checks.json",
@@ -18,17 +20,17 @@
     "scripts/run_release_gate.py"
   ],
   "blocking_commands_current_profile": [
-    "python scripts/check_json_contracts.py",
-    "python scripts/check_repo_integrity.py --strict"
+    "python scripts/check_repo_integrity.py --strict",
+    "python scripts/check_json_contracts.py"
   ],
   "executed_commands": [
     "python scripts/check_layer_dependencies.py",
     "python scripts/check_json_contracts.py",
     "python scripts/check_repo_integrity.py --strict",
-    "python scripts/run_release_gate.py premerge"
+    "python scripts/run_release_gate.py release"
   ],
   "missing_required_checks": [],
   "followup_required_profiles": [],
   "enforcement_passed": true,
-  "generated_at": "2026-04-14T01:31:19.783109"
+  "generated_at": "2026-04-14T01:44:43.133806"
 }

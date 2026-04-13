@@ -1,0 +1,22 @@
+{
+  "profile": "premerge",
+  "executed_rule_ids": [
+    "R001",
+    "R002",
+    "R003",
+    "R004",
+    "R005",
+    "R006"
+  ],
+  "passed_rule_ids": [
+    "R001",
+    "R002",
+    "R003",
+    "R004",
+    "R005",
+    "R006"
+  ],
+  "failed_rule_ids": [],
+  "blocking_failures": [],
+  "timestamp": "2026-04-14T01:45:10.059842"
+}

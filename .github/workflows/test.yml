@@ -1,0 +1,55 @@
+name: 架构测试
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 设置 Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: 安装依赖
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+    
+    - name: 运行架构测试
+      run: |
+        python tests/test_architecture.py -v
+    
+    - name: 运行技能注册表测试
+      run: |
+        python tests/test_skill_registry.py -v
+    
+    - name: 运行架构巡检
+      run: |
+        python infrastructure/architecture_inspector.py
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 设置 Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: 安装 linter
+      run: |
+        pip install flake8
+    
+    - name: 代码检查
+      run: |
+        flake8 core/ infrastructure/ governance/ --count --select=E9,F63,F7,F82 --show-source --statistics

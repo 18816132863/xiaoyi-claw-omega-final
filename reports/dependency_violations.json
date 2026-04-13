@@ -1,0 +1,125 @@
+{
+  "total_violations": 82,
+  "violations": [
+    {
+      "file": "core/dynamic_prompt.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/performance_integration.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/llm.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/guide/assistant_guide.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/layer_bridge/benchmark.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/layer_bridge/fast_bridge_v2.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/layer_bridge/layer_cache.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "core/standards/asset_registry.py",
+      "from": "L1",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/unified_search.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/memory_quality.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/memory_manager.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/memory_summarizer.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/performance_integration.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/vector/sqlite_vec_extreme.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/vector/memory_vector_store.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/vector/embedding_config.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/vector/embedding.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/vector/sqlite_vec_ultrafast.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/vector/cache.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    },
+    {
+      "file": "memory_context/vector/sqlite_vec_client.py",
+      "from": "L2",
+      "to": "L6",
+      "type": "direct_import"
+    }
+  ]
+}

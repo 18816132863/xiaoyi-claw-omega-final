@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenClaw 改进仪表板</title>
+    <title>OpenClaw 改进仪表板 V5.0.5</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
         .container { max-width: 1200px; margin: 0 auto; }
-        h1 { color: #333; margin-bottom: 20px; }
-        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .card h3 { margin: 0 0 10px 0; color: #666; font-size: 14px; }
-        .card .value { font-size: 32px; font-weight: bold; color: #333; }
-        .card .change { font-size: 14px; margin-top: 5px; }
+        h1 { color: white; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .version { color: rgba(255,255,255,0.8); font-size: 14px; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); }
+        .card h3 { margin: 0 0 8px 0; color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card .value { font-size: 28px; font-weight: bold; color: #333; }
+        .card .change { font-size: 12px; margin-top: 5px; }
         .positive { color: #4caf50; }
         .negative { color: #f44336; }
-        .progress { height: 8px; background: #e0e0e0; border-radius: 4px; margin-top: 10px; }
-        .progress-bar { height: 100%; border-radius: 4px; background: #4caf50; }
-        .section { margin-top: 30px; }
-        .section h2 { color: #333; border-bottom: 2px solid #4caf50; padding-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e0e0e0; }
-        th { background: #f5f5f5; font-weight: 600; }
+        .progress { height: 6px; background: #e0e0e0; border-radius: 3px; margin-top: 10px; overflow: hidden; }
+        .progress-bar { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #4caf50, #8bc34a); }
+        .section { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .section h2 { color: #333; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #667eea; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+        th { background: #f8f9fa; font-weight: 600; font-size: 12px; text-transform: uppercase; }
         .status-pass { color: #4caf50; font-weight: bold; }
         .status-fail { color: #f44336; font-weight: bold; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-success { background: #e8f5e9; color: #2e7d32; }
+        .badge-warning { background: #fff3e0; color: #ef6c00; }
+        .footer { text-align: center; color: rgba(255,255,255,0.7); margin-top: 20px; font-size: 12px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🐦 OpenClaw 改进仪表板</h1>
+        <h1>🐦 OpenClaw 改进仪表板 <span class="version">V5.0.5</span></h1>
         
         <div class="cards">
             <div class="card">
@@ -40,9 +47,9 @@
             
             <div class="card">
                 <h3>活跃技能</h3>
-                <div class="value">61/272</div>
-                <div class="change positive">22.4%</div>
-                <div class="progress"><div class="progress-bar" style="width: 22.4%"></div></div>
+                <div class="value">101/272</div>
+                <div class="change positive">37.1% ↑</div>
+                <div class="progress"><div class="progress-bar" style="width: 37.1%"></div></div>
             </div>
             
             <div class="card">
@@ -54,32 +61,48 @@
             <div class="card">
                 <h3>安全问题</h3>
                 <div class="value">0</div>
-                <div class="change positive">无安全问题 ✅</div>
+                <div class="change positive">无安全问题</div>
+            </div>
+            
+            <div class="card">
+                <h3>层间依赖违规</h3>
+                <div class="value">20</div>
+                <div class="change">需修复</div>
+            </div>
+            
+            <div class="card">
+                <h3>索引大小</h3>
+                <div class="value">3.8MB</div>
+                <div class="change positive">已优化</div>
             </div>
         </div>
         
         <div class="section">
             <h2>层级健康度</h2>
             <table>
-                <tr><th>层级</th><th>健康度</th><th>状态</th></tr>
-                <tr><td>L1 Core</td><td>0.80</td><td class="status-pass">良好 ✨</td></tr>
-                <tr><td>L2 Memory</td><td>0.80</td><td class="status-pass">良好 ✨</td></tr>
-                <tr><td>L3 Orchestration</td><td>0.80</td><td class="status-pass">良好 ✨</td></tr>
-                <tr><td>L4 Execution</td><td>0.80</td><td class="status-pass">良好 ✨</td></tr>
-                <tr><td>L5 Governance</td><td>0.80</td><td class="status-pass">良好 ✨</td></tr>
-                <tr><td>L6 Infrastructure</td><td>0.80</td><td class="status-pass">良好 ✨</td></tr>
+                <tr><th>层级</th><th>健康度</th><th>状态</th><th>说明</th></tr>
+                <tr><td>L1 Core</td><td>0.80</td><td><span class="badge badge-success">良好</span></td><td>核心认知、身份、规则</td></tr>
+                <tr><td>L2 Memory</td><td>0.80</td><td><span class="badge badge-success">良好</span></td><td>记忆上下文、知识库</td></tr>
+                <tr><td>L3 Orchestration</td><td>0.80</td><td><span class="badge badge-success">良好</span></td><td>任务编排、工作流</td></tr>
+                <tr><td>L4 Execution</td><td>0.80</td><td><span class="badge badge-success">良好</span></td><td>能力执行、技能网关</td></tr>
+                <tr><td>L5 Governance</td><td>0.80</td><td><span class="badge badge-success">良好</span></td><td>稳定治理、安全审计</td></tr>
+                <tr><td>L6 Infrastructure</td><td>0.80</td><td><span class="badge badge-success">良好</span></td><td>基础设施、工具链</td></tr>
             </table>
         </div>
         
         <div class="section">
             <h2>性能指标</h2>
             <table>
-                <tr><th>指标</th><th>值</th><th>目标</th><th>状态</th></tr>
-                <tr><td>启动加载</td><td>1.4ms</td><td><100ms</td><td class="status-pass">✅</td></tr>
-                <tr><td>技能注册表加载</td><td>1.7ms</td><td><50ms</td><td class="status-pass">✅</td></tr>
-                <tr><td>关键词搜索</td><td>0.0ms</td><td><10ms</td><td class="status-pass">✅</td></tr>
-                <tr><td>索引大小</td><td>3.8MB</td><td><10MB</td><td class="status-pass">✅</td></tr>
+                <tr><th>指标</th><th>当前值</th><th>目标</th><th>状态</th></tr>
+                <tr><td>启动加载</td><td>1.4ms</td><td>&lt;100ms</td><td class="status-pass">✅ 优秀</td></tr>
+                <tr><td>技能注册表加载</td><td>1.7ms</td><td>&lt;50ms</td><td class="status-pass">✅ 优秀</td></tr>
+                <tr><td>关键词搜索</td><td>0.0ms</td><td>&lt;10ms</td><td class="status-pass">✅ 优秀</td></tr>
+                <tr><td>缓存命中率</td><td>99%</td><td>&gt;80%</td><td class="status-pass">✅ 优秀</td></tr>
             </table>
+        </div>
+        
+        <div class="footer">
+            更新时间: 2026-04-13 16:35 | OpenClaw V5.0.5
         </div>
     </div>
 </body>

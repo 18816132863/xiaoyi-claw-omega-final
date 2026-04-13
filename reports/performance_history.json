@@ -1,0 +1,1 @@
+[{"timestamp": "2026-04-13T16:35:55.872326", "metrics": {"test_operation": {"value": 10.06, "unit": "ms", "timestamp": "2026-04-13T16:35:55.872308"}, "custom_metric": {"value": 42.5, "unit": "ms", "timestamp": "2026-04-13T16:35:55.872323"}}}]

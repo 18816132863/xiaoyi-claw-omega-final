@@ -1,11 +1,6 @@
 {
-  "profile": "nightly",
-  "verified_at": "2026-04-13T22:04:29.162063",
+  "verified_at": "2026-04-13T22:02:17.119333",
   "overall_passed": true,
-  "p0_count": 0,
-  "local_status": "passed",
-  "integration_status": "passed",
-  "external_status": "passed",
   "checks": {
     "protected_files": {
       "status": "pass",

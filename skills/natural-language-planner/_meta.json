@@ -1,0 +1,11 @@
+{
+  "owner": "bparticle",
+  "slug": "natural-language-planner",
+  "displayName": "Natural Language Planner",
+  "latest": {
+    "version": "0.1.0",
+    "publishedAt": 1770645538160,
+    "commit": "https://github.com/openclaw/skills/commit/d2c9fd5988a88514578136e40a6b252863230f17"
+  },
+  "history": []
+}

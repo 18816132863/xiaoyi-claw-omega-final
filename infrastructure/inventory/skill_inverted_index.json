@@ -43,5 +43,785 @@
       "test_mode": "local",
       "smoke_test": true
     }
+  },
+  "triggers": {
+    "scene": [
+      "movie-producer-scene"
+    ],
+    "movie": [
+      "movie-producer-scene"
+    ],
+    "producer": [
+      "movie-producer-scene"
+    ],
+    "apps": [
+      "shubhamsaboo-awesome-llm-apps-ux-designer"
+    ],
+    "llm": [
+      "shubhamsaboo-awesome-llm-apps-ux-designer",
+      "llm-memory-integration"
+    ],
+    "designer": [
+      "shubhamsaboo-awesome-llm-apps-ux-designer"
+    ],
+    "awesome": [
+      "shubhamsaboo-awesome-llm-apps-ux-designer",
+      "rkiding-awesome-finance-skills-alphaear-sentiment",
+      "rkiding-awesome-finance-skills-alphaear-signal-tracker",
+      "github-awesome-copilot-prd"
+    ],
+    "shubhamsaboo": [
+      "shubhamsaboo-awesome-llm-apps-ux-designer"
+    ],
+    "design": [
+      "canvas-design",
+      "anthropics-skills-canvas-design"
+    ],
+    "canvas": [
+      "canvas-design",
+      "anthropics-skills-canvas-design"
+    ],
+    "anthropics": [
+      "anthropics-skills-canvas-design",
+      "anthropics-skills-pptx"
+    ],
+    "skills": [
+      "anthropics-skills-canvas-design",
+      "openclaw-skills-assistant",
+      "openclaw-skills-video-script-creator",
+      "amazing129-skills-mbti-for-agents",
+      "rkiding-awesome-finance-skills-alphaear-sentiment",
+      "anthropics-skills-pptx",
+      "openclaw-skills-soulcraft",
+      "rkiding-awesome-finance-skills-alphaear-signal-tracker",
+      "meitu-skills",
+      "eastmoney-mx-skills-suite",
+      "bytesagain-ai-skills-meme-generator",
+      "axton-obsidian-visual-skills-excalidraw-diagram"
+    ],
+    "proactive": [
+      "proactive-tasks",
+      "hz-proactive-agent"
+    ],
+    "tasks": [
+      "proactive-tasks",
+      "autonomous-tasks"
+    ],
+    "claude": [
+      "shareai-lab-learn-claude-code-pdf",
+      "affaan-m-everything-claude-code-article-writing",
+      "davila7-claude-code-templates-ship-learn-next",
+      "feiskyer-claude-code-settings-deep-research"
+    ],
+    "pdf": [
+      "shareai-lab-learn-claude-code-pdf",
+      "minimax-pdf"
+    ],
+    "lab": [
+      "shareai-lab-learn-claude-code-pdf"
+    ],
+    "shareai": [
+      "shareai-lab-learn-claude-code-pdf"
+    ],
+    "code": [
+      "shareai-lab-learn-claude-code-pdf",
+      "affaan-m-everything-claude-code-article-writing",
+      "davila7-claude-code-templates-ship-learn-next",
+      "feiskyer-claude-code-settings-deep-research"
+    ],
+    "learn": [
+      "shareai-lab-learn-claude-code-pdf",
+      "davila7-claude-code-templates-ship-learn-next"
+    ],
+    "openclaw": [
+      "openclaw-skills-assistant",
+      "openclaw-skills-video-script-creator",
+      "openclaw-skills-soulcraft"
+    ],
+    "assistant": [
+      "openclaw-skills-assistant"
+    ],
+    "reach": [
+      "agent_reach"
+    ],
+    "agent": [
+      "agent_reach",
+      "hz-proactive-agent",
+      "qcc-agent-skill"
+    ],
+    "generator": [
+      "aiskillstore-marketplace-test-case-generator",
+      "flowchart-generator-skill",
+      "bytesagain-ai-skills-meme-generator"
+    ],
+    "case": [
+      "aiskillstore-marketplace-test-case-generator"
+    ],
+    "aiskillstore": [
+      "aiskillstore-marketplace-test-case-generator"
+    ],
+    "test": [
+      "aiskillstore-marketplace-test-case-generator",
+      "ab-test-setup"
+    ],
+    "marketplace": [
+      "aiskillstore-marketplace-test-case-generator"
+    ],
+    "yanxue": [
+      "yanxue-course-manager"
+    ],
+    "manager": [
+      "yanxue-course-manager",
+      "product-manager"
+    ],
+    "course": [
+      "yanxue-course-manager"
+    ],
+    "minimax": [
+      "minimax-music-gen",
+      "minimax-pdf"
+    ],
+    "music": [
+      "minimax-music-gen"
+    ],
+    "gen": [
+      "minimax-music-gen",
+      "seedance-video-gen"
+    ],
+    "flow": [
+      "bytedance-deer-flow-vercel-deploy-claimable",
+      "bytedance-deer-flow-surprise-me"
+    ],
+    "vercel": [
+      "bytedance-deer-flow-vercel-deploy-claimable"
+    ],
+    "deer": [
+      "bytedance-deer-flow-vercel-deploy-claimable",
+      "bytedance-deer-flow-surprise-me"
+    ],
+    "claimable": [
+      "bytedance-deer-flow-vercel-deploy-claimable"
+    ],
+    "bytedance": [
+      "bytedance-deer-flow-vercel-deploy-claimable",
+      "bytedance-deer-flow-surprise-me"
+    ],
+    "deploy": [
+      "bytedance-deer-flow-vercel-deploy-claimable"
+    ],
+    "creator": [
+      "openclaw-skills-video-script-creator",
+      "educational-video-creator"
+    ],
+    "video": [
+      "openclaw-skills-video-script-creator",
+      "seedance-video-gen",
+      "educational-video-creator",
+      "remotion-video-toolkit"
+    ],
+    "script": [
+      "openclaw-skills-video-script-creator"
+    ],
+    "drama": [
+      "ai-drama-prompt-factory"
+    ],
+    "factory": [
+      "ai-drama-prompt-factory",
+      "brainhole-factory"
+    ],
+    "prompt": [
+      "ai-drama-prompt-factory"
+    ],
+    "guide": [
+      "guide"
+    ],
+    "setup": [
+      "qq-clawbot-setup",
+      "wecom-bot-setup",
+      "ab-test-setup",
+      "weibo-clawbot-setup",
+      "weixin-clawbot-setup"
+    ],
+    "clawbot": [
+      "qq-clawbot-setup",
+      "weibo-clawbot-setup",
+      "weixin-clawbot-setup"
+    ],
+    "superdesign": [
+      "superdesign"
+    ],
+    "ima": [
+      "ima-skill"
+    ],
+    "skill": [
+      "ima-skill",
+      "didi-ride-skill",
+      "xiaoyi-HarmonyOSSmartHome-skill",
+      "amap-jsapi-skill",
+      "feishu-channel-skill",
+      "flowchart-generator-skill",
+      "qcc-agent-skill",
+      "wendao-skill"
+    ],
+    "writing": [
+      "general-writing",
+      "news-writing",
+      "writing-style-iterator",
+      "affaan-m-everything-claude-code-article-writing",
+      "nini-writing-inspiration"
+    ],
+    "general": [
+      "general-writing"
+    ],
+    "news": [
+      "news-writing",
+      "daily-hot-news",
+      "news-extractor",
+      "alphaear-news"
+    ],
+    "seedance": [
+      "seedance-video-gen"
+    ],
+    "mbti": [
+      "amazing129-skills-mbti-for-agents"
+    ],
+    "agents": [
+      "amazing129-skills-mbti-for-agents"
+    ],
+    "amazing129": [
+      "amazing129-skills-mbti-for-agents"
+    ],
+    "for": [
+      "amazing129-skills-mbti-for-agents"
+    ],
+    "claw": [
+      "claw-art"
+    ],
+    "art": [
+      "claw-art"
+    ],
+    "write": [
+      "metabase-metabase-docs-write",
+      "write-a-prd"
+    ],
+    "metabase": [
+      "metabase-metabase-docs-write"
+    ],
+    "docs": [
+      "metabase-metabase-docs-write"
+    ],
+    "writer": [
+      "prd-writer",
+      "kids-book-writer",
+      "yunshu0909-yunshu-skillshub-prd-doc-writer"
+    ],
+    "prd": [
+      "prd-writer",
+      "github-awesome-copilot-prd",
+      "write-a-prd",
+      "yunshu0909-yunshu-skillshub-prd-doc-writer"
+    ],
+    "comic": [
+      "baoyu-comic"
+    ],
+    "baoyu": [
+      "baoyu-comic",
+      "baoyu-url-to-markdown"
+    ],
+    "iterator": [
+      "writing-style-iterator"
+    ],
+    "style": [
+      "writing-style-iterator"
+    ],
+    "finance": [
+      "rkiding-awesome-finance-skills-alphaear-sentiment",
+      "rkiding-awesome-finance-skills-alphaear-signal-tracker"
+    ],
+    "sentiment": [
+      "rkiding-awesome-finance-skills-alphaear-sentiment"
+    ],
+    "alphaear": [
+      "rkiding-awesome-finance-skills-alphaear-sentiment",
+      "rkiding-awesome-finance-skills-alphaear-signal-tracker",
+      "alphaear-news",
+      "alphaear-predictor"
+    ],
+    "rkiding": [
+      "rkiding-awesome-finance-skills-alphaear-sentiment",
+      "rkiding-awesome-finance-skills-alphaear-signal-tracker"
+    ],
+    "pptx": [
+      "anthropics-skills-pptx",
+      "pptx-posters"
+    ],
+    "gesture": [
+      "gesture-html"
+    ],
+    "html": [
+      "gesture-html",
+      "html-ux-guidance"
+    ],
+    "kids": [
+      "kids-book-writer"
+    ],
+    "book": [
+      "kids-book-writer"
+    ],
+    "plan": [
+      "agentmcmillan-brain-and-co-plan-ceo-review"
+    ],
+    "brain": [
+      "agentmcmillan-brain-and-co-plan-ceo-review",
+      "2nd-brain"
+    ],
+    "review": [
+      "agentmcmillan-brain-and-co-plan-ceo-review"
+    ],
+    "and": [
+      "agentmcmillan-brain-and-co-plan-ceo-review"
+    ],
+    "ceo": [
+      "agentmcmillan-brain-and-co-plan-ceo-review"
+    ],
+    "agentmcmillan": [
+      "agentmcmillan-brain-and-co-plan-ceo-review"
+    ],
+    "humanizer": [
+      "Humanizer-zh-main"
+    ],
+    "main": [
+      "Humanizer-zh-main"
+    ],
+    "soulcraft": [
+      "openclaw-skills-soulcraft"
+    ],
+    "chengxin": [
+      "tc-chengxin"
+    ],
+    "jdjr": [
+      "jdjr"
+    ],
+    "autonomous": [
+      "autonomous-tasks"
+    ],
+    "xlsx": [
+      "xiaoyi-xlsx"
+    ],
+    "xiaoyi": [
+      "xiaoyi-xlsx",
+      "xiaoyi-HarmonyOSSmartHome-skill",
+      "xiaoyi-ppt"
+    ],
+    "frontend": [
+      "frontend-ui-ux-engineer"
+    ],
+    "engineer": [
+      "frontend-ui-ux-engineer"
+    ],
+    "bot": [
+      "wecom-bot-setup"
+    ],
+    "wecom": [
+      "wecom-bot-setup"
+    ],
+    "tts": [
+      "tts"
+    ],
+    "text": [
+      "speech-to-text"
+    ],
+    "speech": [
+      "speech-to-text"
+    ],
+    "tracker": [
+      "fasting-tracker",
+      "rkiding-awesome-finance-skills-alphaear-signal-tracker"
+    ],
+    "fasting": [
+      "fasting-tracker"
+    ],
+    "product": [
+      "product-manager"
+    ],
+    "utils": [
+      "utils"
+    ],
+    "signal": [
+      "rkiding-awesome-finance-skills-alphaear-signal-tracker"
+    ],
+    "educational": [
+      "educational-video-creator"
+    ],
+    "affaan": [
+      "affaan-m-everything-claude-code-article-writing"
+    ],
+    "everything": [
+      "affaan-m-everything-claude-code-article-writing"
+    ],
+    "article": [
+      "affaan-m-everything-claude-code-article-writing"
+    ],
+    "engines": [
+      "engines"
+    ],
+    "voice": [
+      "voice-synthesis"
+    ],
+    "synthesis": [
+      "voice-synthesis"
+    ],
+    "guidance": [
+      "html-ux-guidance"
+    ],
+    "marker": [
+      "aigc_marker"
+    ],
+    "aigc": [
+      "aigc_marker"
+    ],
+    "meituan": [
+      "meituan-coupon-get-tool"
+    ],
+    "tool": [
+      "meituan-coupon-get-tool"
+    ],
+    "coupon": [
+      "meituan-coupon-get-tool"
+    ],
+    "get": [
+      "meituan-coupon-get-tool"
+    ],
+    "didi": [
+      "didi-ride-skill"
+    ],
+    "ride": [
+      "didi-ride-skill"
+    ],
+    "arxiv": [
+      "arxiv-search",
+      "read-arxiv-paper"
+    ],
+    "search": [
+      "arxiv-search",
+      "multi-search-engine"
+    ],
+    "fable": [
+      "lyrical-fable"
+    ],
+    "lyrical": [
+      "lyrical-fable"
+    ],
+    "inspiration": [
+      "nini-writing-inspiration"
+    ],
+    "nini": [
+      "nini-writing-inspiration"
+    ],
+    "davila7": [
+      "davila7-claude-code-templates-ship-learn-next"
+    ],
+    "ship": [
+      "davila7-claude-code-templates-ship-learn-next"
+    ],
+    "next": [
+      "davila7-claude-code-templates-ship-learn-next"
+    ],
+    "templates": [
+      "davila7-claude-code-templates-ship-learn-next"
+    ],
+    "hot": [
+      "daily-hot-news"
+    ],
+    "daily": [
+      "daily-hot-news",
+      "daily-tech-broadcast"
+    ],
+    "harmonyossmarthome": [
+      "xiaoyi-HarmonyOSSmartHome-skill"
+    ],
+    "github": [
+      "github-awesome-copilot-prd"
+    ],
+    "copilot": [
+      "github-awesome-copilot-prd"
+    ],
+    "slides": [
+      "scientific-slides"
+    ],
+    "scientific": [
+      "scientific-slides"
+    ],
+    "broadcast": [
+      "daily-tech-broadcast"
+    ],
+    "tech": [
+      "daily-tech-broadcast"
+    ],
+    "limtdesign": [
+      "limtdesign"
+    ],
+    "pua": [
+      "pua"
+    ],
+    "core": [
+      "core"
+    ],
+    "surprise": [
+      "bytedance-deer-flow-surprise-me"
+    ],
+    "travel": [
+      "flyai-travel"
+    ],
+    "flyai": [
+      "flyai-travel"
+    ],
+    "image": [
+      "hunyuan-image"
+    ],
+    "hunyuan": [
+      "hunyuan-image"
+    ],
+    "pixverse": [
+      "pixverse"
+    ],
+    "skillshub": [
+      "yunshu0909-yunshu-skillshub-prd-doc-writer"
+    ],
+    "yunshu0909": [
+      "yunshu0909-yunshu-skillshub-prd-doc-writer"
+    ],
+    "yunshu": [
+      "yunshu0909-yunshu-skillshub-prd-doc-writer"
+    ],
+    "doc": [
+      "yunshu0909-yunshu-skillshub-prd-doc-writer"
+    ],
+    "weibo": [
+      "weibo-clawbot-setup"
+    ],
+    "memory": [
+      "llm-memory-integration"
+    ],
+    "integration": [
+      "llm-memory-integration"
+    ],
+    "marketing": [
+      "marketing-ideas"
+    ],
+    "ideas": [
+      "marketing-ideas"
+    ],
+    "amap": [
+      "amap-jsapi-skill"
+    ],
+    "jsapi": [
+      "amap-jsapi-skill"
+    ],
+    "markdown": [
+      "baoyu-url-to-markdown"
+    ],
+    "url": [
+      "baoyu-url-to-markdown"
+    ],
+    "brainhole": [
+      "brainhole-factory"
+    ],
+    "weixin": [
+      "weixin-clawbot-setup"
+    ],
+    "humanize": [
+      "humanize-chinese"
+    ],
+    "chinese": [
+      "humanize-chinese"
+    ],
+    "control": [
+      "browser-control"
+    ],
+    "browser": [
+      "browser-control"
+    ],
+    "openmaic": [
+      "openmaic"
+    ],
+    "storage": [
+      "bdpan-storage"
+    ],
+    "bdpan": [
+      "bdpan-storage"
+    ],
+    "engine": [
+      "multi-search-engine"
+    ],
+    "multi": [
+      "multi-search-engine"
+    ],
+    "feishu": [
+      "feishu-channel-skill"
+    ],
+    "channel": [
+      "feishu-channel-skill"
+    ],
+    "remotion": [
+      "remotion-video-toolkit"
+    ],
+    "toolkit": [
+      "remotion-video-toolkit"
+    ],
+    "extractor": [
+      "news-extractor"
+    ],
+    "posters": [
+      "pptx-posters"
+    ],
+    "one": [
+      "bilibili-all-in-one"
+    ],
+    "all": [
+      "bilibili-all-in-one"
+    ],
+    "bilibili": [
+      "bilibili-all-in-one"
+    ],
+    "flowchart": [
+      "flowchart-generator-skill"
+    ],
+    "workflow": [
+      "nicepkg-ai-workflow-user-research"
+    ],
+    "user": [
+      "nicepkg-ai-workflow-user-research"
+    ],
+    "research": [
+      "nicepkg-ai-workflow-user-research",
+      "feiskyer-claude-code-settings-deep-research"
+    ],
+    "nicepkg": [
+      "nicepkg-ai-workflow-user-research"
+    ],
+    "paper": [
+      "read-arxiv-paper"
+    ],
+    "read": [
+      "read-arxiv-paper"
+    ],
+    "meitu": [
+      "meitu-skills"
+    ],
+    "qcc": [
+      "qcc-agent-skill"
+    ],
+    "settings": [
+      "feiskyer-claude-code-settings-deep-research"
+    ],
+    "deep": [
+      "feiskyer-claude-code-settings-deep-research"
+    ],
+    "feiskyer": [
+      "feiskyer-claude-code-settings-deep-research"
+    ],
+    "suite": [
+      "eastmoney-mx-skills-suite"
+    ],
+    "eastmoney": [
+      "eastmoney-mx-skills-suite"
+    ],
+    "cleaner": [
+      "backup-cleaner"
+    ],
+    "backup": [
+      "backup-cleaner"
+    ],
+    "brainstorming": [
+      "brainstorming"
+    ],
+    "opengfx": [
+      "opengfx"
+    ],
+    "fitness": [
+      "fitness-coach"
+    ],
+    "coach": [
+      "fitness-coach"
+    ],
+    "ppt": [
+      "xiaoyi-ppt"
+    ],
+    "thought": [
+      "creative-thought-partner"
+    ],
+    "partner": [
+      "creative-thought-partner"
+    ],
+    "creative": [
+      "creative-thought-partner"
+    ],
+    "slidevjs": [
+      "slidevjs-slidev-slidev"
+    ],
+    "slidev": [
+      "slidevjs-slidev-slidev"
+    ],
+    "bytesagain": [
+      "bytesagain-ai-skills-meme-generator"
+    ],
+    "meme": [
+      "bytesagain-ai-skills-meme-generator"
+    ],
+    "diagram": [
+      "axton-obsidian-visual-skills-excalidraw-diagram"
+    ],
+    "excalidraw": [
+      "axton-obsidian-visual-skills-excalidraw-diagram"
+    ],
+    "axton": [
+      "axton-obsidian-visual-skills-excalidraw-diagram"
+    ],
+    "visual": [
+      "axton-obsidian-visual-skills-excalidraw-diagram"
+    ],
+    "obsidian": [
+      "axton-obsidian-visual-skills-excalidraw-diagram"
+    ],
+    "natural": [
+      "natural-language-planner"
+    ],
+    "planner": [
+      "natural-language-planner"
+    ],
+    "language": [
+      "natural-language-planner"
+    ],
+    "predictor": [
+      "alphaear-predictor"
+    ],
+    "2nd": [
+      "2nd-brain"
+    ],
+    "wendao": [
+      "wendao-skill"
+    ],
+    "web": [
+      "web-content-fetcher"
+    ],
+    "content": [
+      "web-content-fetcher"
+    ],
+    "fetcher": [
+      "web-content-fetcher"
+    ],
+    "inspector": [
+      "architecture-inspector"
+    ],
+    "architecture": [
+      "architecture-inspector"
+    ],
+    "skillhub": [
+      "skillhub-preference"
+    ],
+    "preference": [
+      "skillhub-preference"
+    ]
   }
 }

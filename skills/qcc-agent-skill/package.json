@@ -1,0 +1,30 @@
+{
+  "name": "qcc-agent-skill",
+  "version": "1.0.0",
+  "description": "企查查智能体数据平台 OpenClaw 技能包 - 65项企业信息查询工具",
+  "main": "SKILL.md",
+  "keywords": [
+    "qcc",
+    "企查查",
+    "openclaw",
+    "skill",
+    "企业查询",
+    "工商信息",
+    "风险查询"
+  ],
+  "author": "flp516",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flp516/qcc-agent-skill.git"
+  },
+  "engines": {
+    "openclaw": ">=1.0.0"
+  },
+  "skillMeta": {
+    "category": "business",
+    "tags": ["企业查询", "工商信息", "风险分析", "知识产权"],
+    "tools": 65,
+    "servers": ["company", "risk", "ipr", "operation"]
+  }
+}

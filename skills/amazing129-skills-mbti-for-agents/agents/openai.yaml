@@ -1,0 +1,7 @@
+interface:
+  display_name: "MBTI for Agents"
+  short_description: "Agent MBTI assessment via scenarios"
+  default_prompt: "Use $mbti-for-agents only for self-assessment of the current assistant; answer Q1-Q16 internally, give concrete analysis first, then restate the final 4-letter type at the end, and ask the user for their MBTI type."
+
+policy:
+  allow_implicit_invocation: false

@@ -96,6 +96,17 @@ class RepoIntegrityChecker:
         "core/SINGLE_SOURCE_OF_TRUTH.md",
     ]
 
+    # Schema 文件与对应的 contract
+    SCHEMA_CONTRACTS = {
+        "core/contracts/gate_report.schema.json": ["reports/runtime_integrity.json", "reports/quality_gate.json", "reports/release_gate.json"],
+        "core/contracts/alert.schema.json": ["reports/alerts/latest_alerts.json"],
+        "core/contracts/incident.schema.json": ["governance/ops/incident_tracker.json"],
+        "core/contracts/remediation.schema.json": ["reports/remediation/latest_remediation.json"],
+        "core/contracts/approval.schema.json": ["reports/remediation/approval_history.json"],
+        "core/contracts/control_plane_state.schema.json": ["reports/ops/control_plane_state.json"],
+        "core/contracts/control_plane_audit.schema.json": ["reports/ops/control_plane_audit.json"],
+    }
+
     # Makefile 必须支持的目标
     REQUIRED_MAKE_TARGETS = [
         "verify-premerge",
@@ -154,6 +165,74 @@ class RepoIntegrityChecker:
             else:
                 self.errors.append(f"真源文件缺失: {f}")
                 print(f"  ❌ {f} (缺失)")
+        print()
+
+    def check_schema_contracts(self):
+        """检查 Schema 与 Contract 对应关系"""
+        print("【检查 Schema 与 Contract 对应】")
+        for schema_file, contract_files in self.SCHEMA_CONTRACTS.items():
+            # 检查 schema 文件存在
+            if not self.check_file_exists(schema_file):
+                self.errors.append(f"Schema 文件缺失: {schema_file}")
+                print(f"  ❌ Schema 缺失: {schema_file}")
+                continue
+            
+            # 检查对应的 contract 文件
+            for contract_file in contract_files:
+                if self.check_file_exists(contract_file):
+                    self.passed.append(f"Contract 存在: {contract_file}")
+                    print(f"  ✅ {contract_file} -> {schema_file}")
+                else:
+                    self.errors.append(f"Contract 文件缺失: {contract_file} (对应 {schema_file})")
+                    print(f"  ❌ Contract 缺失: {contract_file}")
+        print()
+
+    def check_rules_self_consistency(self):
+        """检查规则层自洽性"""
+        print("【检查规则层自洽性】")
+        
+        # 1. 检查 LAYER_DEPENDENCY_RULES.json 与 check_layer_dependencies.py 一致性
+        rules_file = self.root / "core/LAYER_DEPENDENCY_RULES.json"
+        checker_file = self.root / "scripts/check_layer_dependencies.py"
+        
+        if rules_file.exists() and checker_file.exists():
+            try:
+                rules = json.load(open(rules_file, encoding='utf-8'))
+                layers = rules.get("layers", {})
+                
+                # 检查 checker 是否读取了规则文件
+                checker_content = checker_file.read_text()
+                if "LAYER_DEPENDENCY_RULES.json" in checker_content:
+                    self.passed.append("check_layer_dependencies.py 使用规则文件")
+                    print(f"  ✅ check_layer_dependencies.py 正确引用规则文件")
+                else:
+                    self.warnings.append("check_layer_dependencies.py 未引用规则文件")
+                    print(f"  ⚠️ check_layer_dependencies.py 未引用 LAYER_DEPENDENCY_RULES.json")
+            except Exception as e:
+                self.warnings.append(f"无法检查规则一致性: {e}")
+                print(f"  ⚠️ 无法检查: {e}")
+        
+        # 2. 检查 SINGLE_SOURCE_OF_TRUTH.md 中声明的文件是否存在
+        sst_file = self.root / "core/SINGLE_SOURCE_OF_TRUTH.md"
+        if sst_file.exists():
+            content = sst_file.read_text()
+            # 简单检查：确保文件中提到的关键文件存在
+            key_files = ["LAYER_DEPENDENCY_MATRIX.md", "LAYER_DEPENDENCY_RULES.json", "skill_registry.json"]
+            for kf in key_files:
+                if kf in content:
+                    # 尝试找到对应的实际文件
+                    found = False
+                    for f in self.SINGLE_SOURCE_FILES:
+                        if kf in f and self.check_file_exists(f):
+                            found = True
+                            break
+                    if found:
+                        self.passed.append(f"真源声明一致: {kf}")
+                        print(f"  ✅ 真源声明一致: {kf}")
+                    else:
+                        self.warnings.append(f"真源声明可能不一致: {kf}")
+                        print(f"  ⚠️ 真源声明可能不一致: {kf}")
+        
         print()
 
     def check_makefile_targets(self):
@@ -297,6 +376,8 @@ class RepoIntegrityChecker:
         self.check_required_dirs()
         self.check_required_files()
         self.check_single_source_files()
+        self.check_schema_contracts()
+        self.check_rules_self_consistency()
         self.check_makefile_targets()
         self.check_approval_history_consistency()
 

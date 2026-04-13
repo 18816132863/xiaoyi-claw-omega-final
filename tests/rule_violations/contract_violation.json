@@ -1,0 +1,5 @@
+{
+  "_description": "契约违规样例 - 用于测试 check_json_contracts.py",
+  "_note": "此文件故意缺少 gate_report.schema.json 要求的必需字段 profile, p0_count, local_status 等",
+  "overall_passed": true
+}

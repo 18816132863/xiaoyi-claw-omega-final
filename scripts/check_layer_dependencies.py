@@ -78,6 +78,10 @@ class LayerDependencyChecker:
             return violations
 
         for py_file in dir_path.rglob("*.py"):
+            # 跳过 tests/rule_violations 目录（这是故意违规的样例）
+            if "tests/rule_violations" in str(py_file):
+                continue
+                
             try:
                 content = py_file.read_text(encoding='utf-8')
                 rel_path = py_file.relative_to(self.root)

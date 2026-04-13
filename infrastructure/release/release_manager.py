@@ -62,8 +62,34 @@ def check_release_gate(report_path: str = None) -> Dict:
     runtime_report = load_report("reports/runtime_integrity.json")
     quality_report = load_report("reports/quality_gate.json")
     
+    # 从 runtime_report 提取字段
+    p0_count = 0
+    local_status = "skipped"
+    integration_status = "skipped"
+    external_status = "skipped"
+    
+    if runtime_report:
+        p0_count = runtime_report.get("p0_count", 0)
+        local_status = runtime_report.get("local_status", "skipped")
+        integration_status = runtime_report.get("integration_status", "skipped")
+        external_status = runtime_report.get("external_status", "skipped")
+    
+    # 判断是否可以发布
+    runtime_ok = runtime_report and runtime_report.get("overall_passed")
+    quality_ok = quality_report and quality_report.get("overall_passed")
+    can_release = runtime_ok and quality_ok
+    
     result = {
-        "can_release": False,
+        # gate_report contract 必需字段
+        "profile": "release",
+        "overall_passed": can_release,
+        "p0_count": p0_count,
+        "local_status": local_status,
+        "integration_status": integration_status,
+        "external_status": external_status,
+        "verified_at": timestamp.isoformat(),
+        # release 专属字段
+        "can_release": can_release,
         "runtime_gate": None,
         "quality_gate": None,
         "blocked_reasons": [],
@@ -135,11 +161,6 @@ def check_release_gate(report_path: str = None) -> Dict:
                 "reasons": h.get("failure_reasons", [])
             }
             break
-    
-    # 判断是否可以发布
-    runtime_ok = runtime_report and runtime_report.get("overall_passed")
-    quality_ok = quality_report and quality_report.get("overall_passed")
-    result["can_release"] = runtime_ok and quality_ok
     
     # 保存 latest
     if report_path:

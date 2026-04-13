@@ -19,7 +19,7 @@
     },
     "orchestration": {
       "description": "任务编排、工作流、路由",
-      "allow_read_from": ["core", "infrastructure"],
+      "allow_read_from": ["core", "infrastructure", "execution"],
       "allow_write_to": [],
       "forbid_import_from": ["scripts"]
     },

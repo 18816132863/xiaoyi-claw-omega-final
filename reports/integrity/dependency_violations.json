@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-13T11:24:51.771903",
+  "timestamp": "2026-04-13T21:38:51.395229",
   "total_violations": 21,
   "violations": [
     {
@@ -27,13 +27,7 @@
       "forbidden": "infrastructure"
     },
     {
-      "file": "core/standards/asset_registry.py",
-      "violation": "违规 import: from infrastructure",
-      "directory": "core",
-      "forbidden": "infrastructure"
-    },
-    {
-      "file": "core/layer_bridge/layer_cache.py",
+      "file": "core/layer_bridge/benchmark.py",
       "violation": "违规 import: from infrastructure",
       "directory": "core",
       "forbidden": "infrastructure"
@@ -45,16 +39,16 @@
       "forbidden": "infrastructure"
     },
     {
-      "file": "core/layer_bridge/benchmark.py",
+      "file": "core/layer_bridge/layer_cache.py",
       "violation": "违规 import: from infrastructure",
       "directory": "core",
       "forbidden": "infrastructure"
     },
     {
-      "file": "memory_context/search/rrf.py",
-      "violation": "违规 import: from orchestration",
-      "directory": "memory_context",
-      "forbidden": "orchestration"
+      "file": "core/standards/asset_registry.py",
+      "violation": "违规 import: from infrastructure",
+      "directory": "core",
+      "forbidden": "infrastructure"
     },
     {
       "file": "memory_context/feedback/feedback.py",
@@ -63,10 +57,22 @@
       "forbidden": "governance"
     },
     {
+      "file": "memory_context/search/rrf.py",
+      "violation": "违规 import: from orchestration",
+      "directory": "memory_context",
+      "forbidden": "orchestration"
+    },
+    {
       "file": "orchestration/task_engine.py",
       "violation": "违规 import: from execution",
       "directory": "orchestration",
       "forbidden": "execution"
+    },
+    {
+      "file": "infrastructure/phase4_improvements.py",
+      "violation": "违规 import: from memory_context",
+      "directory": "infrastructure",
+      "forbidden": "memory_context"
     },
     {
       "file": "infrastructure/cold_start_test.py",
@@ -81,6 +87,12 @@
       "forbidden": "memory_context"
     },
     {
+      "file": "infrastructure/diagnose_embedding.py",
+      "violation": "违规 import: from memory_context",
+      "directory": "infrastructure",
+      "forbidden": "memory_context"
+    },
+    {
       "file": "infrastructure/regression_test.py",
       "violation": "违规 import: from memory_context",
       "directory": "infrastructure",
@@ -99,24 +111,6 @@
       "forbidden": "execution"
     },
     {
-      "file": "infrastructure/phase4_improvements.py",
-      "violation": "违规 import: from memory_context",
-      "directory": "infrastructure",
-      "forbidden": "memory_context"
-    },
-    {
-      "file": "infrastructure/verify_runtime_integrity.py",
-      "violation": "违规 import: from execution",
-      "directory": "infrastructure",
-      "forbidden": "execution"
-    },
-    {
-      "file": "infrastructure/diagnose_embedding.py",
-      "violation": "违规 import: from memory_context",
-      "directory": "infrastructure",
-      "forbidden": "memory_context"
-    },
-    {
       "file": "infrastructure/integration.py",
       "violation": "违规 import: from execution",
       "directory": "infrastructure",
@@ -127,6 +121,12 @@
       "violation": "违规 import: from governance",
       "directory": "infrastructure",
       "forbidden": "governance"
+    },
+    {
+      "file": "infrastructure/verify_runtime_integrity.py",
+      "violation": "违规 import: from execution",
+      "directory": "infrastructure",
+      "forbidden": "execution"
     }
   ]
 }

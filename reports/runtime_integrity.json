@@ -1,12 +1,12 @@
 {
-  "profile": "nightly",
+  "profile": "release",
   "scope": "all",
-  "verified_at": "2026-04-13T11:25:19.937669",
+  "verified_at": "2026-04-13T00:20:40.426883",
   "overall_passed": true,
   "failure_reasons": [],
   "p0_count": 0,
   "p1_count": 0,
-  "p2_count": 38,
+  "p2_count": 35,
   "local_status": "pass",
   "local_results": [
     {

@@ -1,127 +1,128 @@
-# AGENTS.md V4.4.1 - 六层架构 + 规则硬化
+# AGENTS.md V4.3.0 - 六层架构 + 文件保护
 
 ---
 
 ## 每次会话
 
-`SOUL.md` `USER.md` `TOOLS.md` `memory/YYYY-MM-DD.md`
+1. `SOUL.md` — 身份
+2. `USER.md` — 用户
+3. `TOOLS.md` — 工具规则
+4. `memory/YYYY-MM-DD.md` — 今日日记
 
 ---
 
-## 六层架构
+## 六层架构 (唯一正式架构)
 
-| 层级 | 名称 | 职责 | 目录 |
-|------|------|------|------|
-| L1 | Core | 核心认知、规则 | `core/` |
-| L2 | Memory Context | 记忆、搜索 | `memory_context/` |
-| L3 | Orchestration | 编排、路由 | `orchestration/` |
-| L4 | Execution | 执行、技能 | `execution/`, `skills/` |
-| L5 | Governance | 治理、审计 | `governance/` |
-| L6 | Infrastructure | 基础设施 | `infrastructure/` |
+```
+L1: Core              → 核心认知、身份、规则
+L2: Memory Context    → 记忆上下文、知识库
+L3: Orchestration     → 任务编排、工作流
+L4: Execution         → 能力执行、技能网关
+L5: Governance        → 稳定治理、安全审计
+L6: Infrastructure    → 基础设施、工具链
+```
 
 ---
 
 ## Token 预算
 
-| 层级 | Token | 加载模式 |
-|------|-------|----------|
-| L1 | 2500 | 立即加载 |
-| L2 | 1500 | 按需加载 |
-| L3 | 1200 | 按需加载 |
-| L4 | 1200 | 延迟加载 |
-| L5 | 600 | 敏感加载 |
-| L6 | 500 | 系统加载 |
+| 层级 | Token | 加载 | 技能数 | 模块数 |
+|------|-------|------|--------|--------|
+| L1 | 3000 | 立即 | 0 | 6文件 |
+| L2 | 2000 | 按需 | 3 | 2文件 |
+| L3 | 1500 | 按需 | 8 | 2模块 |
+| L4 | 1500 | 分类 | 161 | 2模块 |
+| L5 | 800 | 敏感 | 6 | 5模块 |
+| L6 | 700 | 系统 | 17 | 4模块 |
 
-**总计**: 7500 Token
-
----
-
-## 受保护文件
-
-### L1 核心 (6个)
-`AGENTS.md` `SOUL.md` `USER.md` `TOOLS.md` `IDENTITY.md` `core/ARCHITECTURE.md`
-
-### L1 规则硬化 (5个)
-`core/LAYER_DEPENDENCY_MATRIX.md` `core/LAYER_DEPENDENCY_RULES.json` `core/LAYER_IO_CONTRACTS.md` `core/CHANGE_IMPACT_MATRIX.md` `core/SINGLE_SOURCE_OF_TRUTH.md`
-
-### L1 Schema (8个)
-`core/contracts/execution_result.schema.json` `core/contracts/gate_report.schema.json` `core/contracts/alert.schema.json` `core/contracts/incident.schema.json` `core/contracts/remediation.schema.json` `core/contracts/approval.schema.json` `core/contracts/control_plane_state.schema.json` `core/contracts/control_plane_audit.schema.json`
-
-### L2-L6 关键文件
-`MEMORY.md` `memory/*.md` `orchestration/task_engine.py` `execution/skill_gateway.py` `governance/ARCHITECTURE_GUARDRAILS.md` `infrastructure/inventory/skill_registry.json`
+**总计**: 9500 Token | 195 技能 | 21 模块
 
 ---
 
-## 层间依赖规则
+## 受保护文件 (按真实目录)
 
-| 层级 | 允许依赖 | 禁止依赖 |
-|------|----------|----------|
-| L1 Core | 无 | L2, L3, L4, L5, L6 |
-| L2 Memory | L1, L6 | L3, L4, L5 |
-| L3 Orchestration | L1, L2, L6 | L4, L5 |
-| L4 Execution | L1, L2, L3, L6 | L5 |
-| L5 Governance | L1, L6 | L4 |
-| L6 Infrastructure | L1 | L2, L3, L4, L5 |
+### L1 核心文件 (6个)
+
+| 文件 | 作用 | 可删除 |
+|------|------|--------|
+| AGENTS.md | 工作空间规则 | ❌ |
+| SOUL.md | 身份定义 | ❌ |
+| USER.md | 用户信息 | ❌ |
+| TOOLS.md | 工具规则 | ❌ |
+| IDENTITY.md | 身份标识 | ❌ |
+| core/ARCHITECTURE.md | 唯一主架构 | ❌ |
+
+### L2 记忆文件 (2个)
+
+| 文件 | 作用 | 可删除 |
+|------|------|--------|
+| MEMORY.md | 长期记忆 | ❌ |
+| memory/*.md | 日记文件 | 需确认 |
+
+### L3 编排文件 (2个)
+
+| 文件 | 作用 | 可删除 |
+|------|------|--------|
+| orchestration/router/skill_router.py | 技能路由器 | ❌ |
+| orchestration/task_engine.py | 任务引擎 | ❌ |
+
+### L4 执行文件 (2个)
+
+| 文件 | 作用 | 可删除 |
+|------|------|--------|
+| execution/skill_gateway.py | 技能网关 | ❌ |
+| execution/ecommerce/ | 电商执行器 | ❌ |
+
+### L5 治理文件 (5个)
+
+| 文件 | 作用 | 可删除 |
+|------|------|--------|
+| governance/security.py | 安全检查 | ❌ |
+| governance/permissions.py | 权限管理 | ❌ |
+| governance/audit.py | 审计日志 | ❌ |
+| governance/validator.py | 结果验证器 | ❌ |
+| governance/compliance.py | 合规检查 | ❌ |
+
+### L6 基础设施文件 (4个)
+
+| 文件 | 作用 | 可删除 |
+|------|------|--------|
+| infrastructure/loader/ | 懒加载器 | ❌ |
+| infrastructure/cache/ | 缓存管理 | ❌ |
+| infrastructure/optimization/ | 优化模块 | ❌ |
+| infrastructure/inventory/skill_registry.json | 技能注册表 | ❌ |
 
 ---
 
-## 规则硬化检查
+## 改动前检查规则
 
-```bash
-# 依赖违规检查
-python scripts/check_layer_dependencies.py
-
-# JSON 契约校验
-python scripts/check_json_contracts.py
-
-# 仓库完整性检查
-python scripts/check_repo_integrity.py --strict
-
-# 门禁命令
-python scripts/run_release_gate.py premerge
-python scripts/run_release_gate.py nightly
-python scripts/run_release_gate.py release
-```
-
----
-
-## 变更影响规则
-
-| 变更对象 | 必跑命令 |
-|----------|----------|
-| `skill_registry.json` | `check_repo_integrity.py --strict` + `run_release_gate.py premerge` |
-| `execution/*` | `run_release_gate.py premerge` + `run_release_gate.py nightly` |
-| `governance/*` | `run_release_gate.py premerge` + `run_release_gate.py release` |
-| `core/contracts/*` | `check_json_contracts.py` + `check_repo_integrity.py --strict` |
-
----
-
-## 改动前检查
-
+任何对主干文件的改动，需检查：
 1. 是否破坏六层边界
-2. 是否触发层间依赖违规
-3. 是否违反 JSON 契约
-4. 是否影响技能路由
+2. 是否影响已有技能路由
+3. 是否影响注册表字段一致性
+4. 是否影响历史兼容映射
 
 ---
 
 ## 安全规则
 
-| 规则 | 状态 |
-|------|------|
-| 禁用 execution-validator | ❌ |
-| 绕过文件保护删除 | ❌ |
-| 直接使用 rm | ❌ |
-| 用 trash 替代 rm | ✅ |
-| 敏感操作需确认 | ✅ |
-| 删除文件需二次确认 | ✅ |
+- **禁止**禁用 execution-validator
+- **禁止**绕过文件保护删除文件
+- **禁止**直接使用 rm 删除文件
+- **使用** trash 替代 rm
+- **安装技能前**检查 skill-scope
+- **敏感操作**需确认
+- **删除文件**需二次确认 + 说明必要性
 
 ---
 
 ## Heartbeat
 
-收到心跳回复 `HEARTBEAT_OK`
+收到心跳时:
+- 读 `HEARTBEAT.md`
+- 无需处理则回复 `HEARTBEAT_OK`
+- **禁止**用 Heartbeat 做定时提醒
 
 ---
 
-**版本**: V4.4.1 | 系统协调性优化 | 7500 Token
+**版本**: V4.3.0 | 六层架构收口 + 治理校准

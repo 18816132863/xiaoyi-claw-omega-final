@@ -63,7 +63,7 @@ class RealtimeAuthManager:
                 "shutdown", "reboot", "halt",
             ],
             "dangerous_patterns": [
-                r"rm\s+-rf\s+/",  # 检测模式：危险命令（仅用于检测，不执行）
+                "rm -rf /",
                 "> /dev/",
                 "chmod 777",
             ],

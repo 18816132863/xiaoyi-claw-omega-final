@@ -34,17 +34,17 @@ def get_project_root() -> Path:
 class JsonContractChecker:
     """JSON 契约校验器"""
 
-    # 校验映射：(JSON 文件, Schema 文件, 是否是数组)
+    # 校验映射：(JSON 文件, Schema 文件, 是否是数组, 是否必须存在)
     VALIDATION_MAP = [
-        ("reports/runtime_integrity.json", "core/contracts/gate_report.schema.json", False),
-        ("reports/quality_gate.json", "core/contracts/gate_report.schema.json", False),
-        ("reports/release_gate.json", "core/contracts/gate_report.schema.json", False),
-        ("reports/alerts/latest_alerts.json", "core/contracts/alert.schema.json", True),
-        ("governance/ops/incident_tracker.json", "core/contracts/incident.schema.json", False),
-        ("reports/remediation/latest_remediation.json", "core/contracts/remediation.schema.json", False),
-        ("reports/remediation/approval_history.json", "core/contracts/approval.schema.json", False),
-        ("reports/ops/control_plane_state.json", "core/contracts/control_plane_state.schema.json", False),
-        ("reports/ops/control_plane_audit.json", "core/contracts/control_plane_audit.schema.json", False),
+        ("reports/runtime_integrity.json", "core/contracts/gate_report.schema.json", False, True),
+        ("reports/quality_gate.json", "core/contracts/gate_report.schema.json", False, False),
+        ("reports/release_gate.json", "core/contracts/gate_report.schema.json", False, False),
+        ("reports/alerts/latest_alerts.json", "core/contracts/alert.schema.json", True, True),
+        ("governance/ops/incident_tracker.json", "core/contracts/incident.schema.json", False, True),
+        ("reports/remediation/latest_remediation.json", "core/contracts/remediation.schema.json", False, True),
+        ("reports/remediation/approval_history.json", "core/contracts/approval.schema.json", False, True),
+        ("reports/ops/control_plane_state.json", "core/contracts/control_plane_state.schema.json", False, True),
+        ("reports/ops/control_plane_audit.json", "core/contracts/control_plane_audit.schema.json", False, True),
     ]
 
     def __init__(self, root: Path):

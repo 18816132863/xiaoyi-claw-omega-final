@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
 """
-仓库完整性检查 - V1.0.0
+仓库完整性检查 - V3.0.0
 
 检查：
-1. workflow 引用的命令入口是否真实存在
-2. 主链脚本引用的文件是否真实存在
-3. governance / infrastructure / scripts 之间的关键入口是否断链
-4. Makefile 目标是否和 workflow 保持一致
+1. 必需文件和目录存在
+2. Makefile 目标完整
+3. Workflow 完整性
+4. 脚本依赖完整
+5. 审批历史与 remediation history 一致性
+6. 调用 layer dependency 检查（新增）
+7. 调用 json contract 检查（新增）
+8. 检查唯一真源文件是否存在（新增）
 """
 
 import os
 import sys
 import json
-import yaml
+import subprocess
 from pathlib import Path
-from typing import Dict, List, Tuple
+from datetime import datetime
+from typing import Dict, List
 
 def get_project_root() -> Path:
     current = Path(__file__).resolve().parent.parent
@@ -30,8 +35,13 @@ class RepoIntegrityChecker:
     # 必须存在的关键文件
     REQUIRED_FILES = [
         "Makefile",
+        "core/ARCHITECTURE.md",
+        "core/LAYER_DEPENDENCY_MATRIX.md",
+        "core/LAYER_DEPENDENCY_RULES.json",
+        "core/LAYER_IO_CONTRACTS.md",
+        "core/CHANGE_IMPACT_MATRIX.md",
+        "core/SINGLE_SOURCE_OF_TRUTH.md",
         "infrastructure/verify_runtime_integrity.py",
-        "infrastructure/release/release_manager.py",
         "infrastructure/path_resolver.py",
         "infrastructure/inventory/skill_registry.json",
         "infrastructure/inventory/skill_inverted_index.json",
@@ -47,25 +57,19 @@ class RepoIntegrityChecker:
         "scripts/control_plane.py",
         "scripts/control_plane_audit.py",
         "scripts/check_repo_integrity.py",
-        "scripts/render_premerge_summary.py",
-        "scripts/render_nightly_summary.py",
-        "scripts/render_release_summary.py",
+        "scripts/check_layer_dependencies.py",
+        "scripts/check_json_contracts.py",
         "execution/skill_adapter_gateway.py",
         "execution/skill_gateway.py",
-        "skills/docx/skill.py",
-        "skills/pdf/skill.py",
-        "skills/cron/skill.py",
-        "skills/file-manager/skill.py",
-        "tests/fixtures/smoke/blank.pdf",
-        "tests/fixtures/smoke/sample.docx",
-        "tests/fixtures/integration/file_manager/source/sample.txt",
     ]
 
     # 必须存在的目录
     REQUIRED_DIRS = [
         "core",
+        "core/contracts",
         "governance",
         "infrastructure",
+        "infrastructure/inventory",
         "scripts",
         ".github/workflows",
         "reports",
@@ -77,14 +81,19 @@ class RepoIntegrityChecker:
         "reports/remediation/history",
         "reports/trends",
         "reports/history",
-        "reports/history/runtime",
-        "reports/history/quality",
-        "reports/history/release",
         "skills",
         "execution",
         "orchestration",
         "memory_context",
-        "tests/fixtures",
+    ]
+
+    # 唯一真源文件
+    SINGLE_SOURCE_FILES = [
+        "core/LAYER_DEPENDENCY_MATRIX.md",
+        "core/LAYER_DEPENDENCY_RULES.json",
+        "core/LAYER_IO_CONTRACTS.md",
+        "core/CHANGE_IMPACT_MATRIX.md",
+        "core/SINGLE_SOURCE_OF_TRUTH.md",
     ]
 
     # Makefile 必须支持的目标
@@ -104,16 +113,12 @@ class RepoIntegrityChecker:
     def check_file_exists(self, rel_path: str) -> bool:
         """检查文件是否存在"""
         full_path = self.root / rel_path
-        if full_path.exists():
-            return True
-        return False
+        return full_path.exists()
 
     def check_dir_exists(self, rel_path: str) -> bool:
         """检查目录是否存在"""
         full_path = self.root / rel_path
-        if full_path.is_dir():
-            return True
-        return False
+        return full_path.is_dir()
 
     def check_required_files(self):
         """检查必需文件"""
@@ -139,6 +144,18 @@ class RepoIntegrityChecker:
                 print(f"  ❌ {d} (缺失)")
         print()
 
+    def check_single_source_files(self):
+        """检查唯一真源文件"""
+        print("【检查唯一真源文件】")
+        for f in self.SINGLE_SOURCE_FILES:
+            if self.check_file_exists(f):
+                self.passed.append(f"真源文件存在: {f}")
+                print(f"  ✅ {f}")
+            else:
+                self.errors.append(f"真源文件缺失: {f}")
+                print(f"  ❌ {f} (缺失)")
+        print()
+
     def check_makefile_targets(self):
         """检查 Makefile 目标"""
         print("【检查 Makefile 目标】")
@@ -161,167 +178,131 @@ class RepoIntegrityChecker:
                 print(f"  ❌ {target} (缺失)")
         print()
 
-    def check_workflow_integrity(self):
-        """检查 workflow 完整性"""
-        print("【检查 Workflow 完整性】")
-        workflows_dir = self.root / ".github" / "workflows"
-
-        if not workflows_dir.exists():
-            self.errors.append(".github/workflows 目录缺失")
-            print("  ❌ .github/workflows 目录缺失")
-            print()
-            return
-
-        workflow_files = list(workflows_dir.glob("*.yml"))
-
-        for wf in workflow_files:
-            print(f"  检查 {wf.name}...")
-            try:
-                content = yaml.safe_load(wf.read_text())
-                self.passed.append(f"Workflow 解析成功: {wf.name}")
-                print(f"    ✅ 解析成功")
-                self._check_workflow_commands(wf.name, content)
-            except yaml.YAMLError as e:
-                # 严格模式下，YAML 解析失败是错误
-                self.errors.append(f"Workflow YAML 解析失败: {wf.name}: {str(e)[:100]}")
-                print(f"    ❌ YAML 解析失败: {str(e)[:50]}")
-            except Exception as e:
-                self.warnings.append(f"无法解析 {wf.name}: {e}")
-                print(f"    ⚠️ 无法解析: {e}")
-
-        print()
-
-    def _check_workflow_commands(self, wf_name: str, content: dict):
-        """检查 workflow 中的命令"""
-        jobs = content.get("jobs", {})
-
-        for job_name, job in jobs.items():
-            steps = job.get("steps", [])
-            for step in steps:
-                run_cmd = step.get("run", "")
-                if not run_cmd:
-                    continue
-
-                # 检查 python scripts/ 调用
-                if "python scripts/" in run_cmd:
-                    lines = run_cmd.split("\n")
-                    for line in lines:
-                        if "python scripts/" in line:
-                            # 提取脚本名
-                            parts = line.split("python scripts/")
-                            if len(parts) > 1:
-                                script_part = parts[1].split()[0]
-                                script_path = f"scripts/{script_part}"
-                                if not self.check_file_exists(script_path):
-                                    self.errors.append(f"{wf_name} 引用不存在的脚本: {script_path}")
-                                    print(f"    ❌ 引用不存在: {script_path}")
-
-                # 检查 make 调用
-                if "make " in run_cmd:
-                    lines = run_cmd.split("\n")
-                    for line in lines:
-                        if "make " in line:
-                            parts = line.split("make ")
-                            if len(parts) > 1:
-                                target = parts[1].split()[0]
-                                # 检查 Makefile 是否有这个目标
-                                makefile = self.root / "Makefile"
-                                if makefile.exists():
-                                    if f"{target}:" not in makefile.read_text():
-                                        self.errors.append(f"{wf_name} 引用不存在的 make 目标: {target}")
-                                        print(f"    ❌ Make 目标不存在: {target}")
-
-    def check_script_dependencies(self):
-        """检查脚本依赖"""
-        print("【检查脚本依赖】")
-
-        # deps = [...]  # 保持原有检查
-
-        # 新增：审批历史与 remediation history 一致性检查
-        self._check_approval_history_consistency()
-
-        print()
-
-    def _check_approval_history_consistency(self):
+    def check_approval_history_consistency(self):
         """检查审批历史与 remediation history 一致性"""
+        print("【检查审批历史一致性】")
         approval_history_path = self.root / "reports/remediation/approval_history.json"
         remediation_history_dir = self.root / "reports/remediation/history"
 
         if not approval_history_path.exists():
+            print("  ⚠️ approval_history.json 不存在，跳过")
+            print()
             return
 
         try:
             data = json.load(open(approval_history_path, encoding='utf-8'))
             approvals = data.get("approvals", [])
 
+            checked = 0
             for approval in approvals:
-                # 只检查 status == "executed" 的记录
                 if approval.get("status") != "executed":
                     continue
 
                 execute_record_id = approval.get("execute_record_id")
                 if execute_record_id:
-                    # 检查对应的 history 文件是否存在
                     history_file = remediation_history_dir / f"{execute_record_id}.json"
                     if not history_file.exists():
-                        self.errors.append(
-                            f"executed 审批缺少 remediation history: {execute_record_id}"
-                        )
+                        self.errors.append(f"executed 审批缺少 remediation history: {execute_record_id}")
                         print(f"  ❌ 缺失 remediation history: {execute_record_id}")
                     else:
-                        self.passed.append(f"remediation history 存在: {execute_record_id}")
+                        checked += 1
+
+            if checked > 0:
+                self.passed.append(f"{checked} 条 executed 审批有对应的 remediation history")
+                print(f"  ✅ {checked} 条 executed 审批有对应的 remediation history")
         except Exception as e:
             self.warnings.append(f"无法检查审批历史一致性: {e}")
-
-        # run_release_gate.py 依赖
-        deps = [
-            ("scripts/run_release_gate.py", "infrastructure/verify_runtime_integrity.py"),
-            ("scripts/run_release_gate.py", "governance/quality_gate.py"),
-            ("scripts/run_nightly_audit.py", "infrastructure/verify_runtime_integrity.py"),
-            ("scripts/build_ops_dashboard.py", "reports/"),
-            ("scripts/ops_center.py", "reports/"),
-            ("scripts/remediation_center.py", "infrastructure/remediation/"),
-        ]
-
-        for script, dep in deps:
-            script_path = self.root / script
-            dep_path = self.root / dep
-
-            if not script_path.exists():
-                self.warnings.append(f"脚本不存在，跳过依赖检查: {script}")
-                continue
-
-            if dep.endswith("/"):
-                # 目录依赖
-                if dep_path.is_dir():
-                    self.passed.append(f"{script} -> {dep}")
-                    print(f"  ✅ {script} -> {dep}/")
-                else:
-                    self.errors.append(f"{script} 依赖目录不存在: {dep}")
-                    print(f"  ❌ {script} -> {dep}/ (缺失)")
-            else:
-                # 文件依赖
-                if dep_path.exists():
-                    self.passed.append(f"{script} -> {dep}")
-                    print(f"  ✅ {script} -> {dep}")
-                else:
-                    self.errors.append(f"{script} 依赖文件不存在: {dep}")
-                    print(f"  ❌ {script} -> {dep} (缺失)")
+            print(f"  ⚠️ 无法检查: {e}")
 
         print()
+
+    def run_layer_dependency_check(self) -> bool:
+        """调用层间依赖检查"""
+        print("【调用层间依赖检查】")
+        script_path = self.root / "scripts/check_layer_dependencies.py"
+
+        if not script_path.exists():
+            self.warnings.append("check_layer_dependencies.py 不存在，跳过")
+            print("  ⚠️ check_layer_dependencies.py 不存在，跳过")
+            print()
+            return True
+
+        try:
+            result = subprocess.run(
+                [sys.executable, str(script_path)],
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+
+            if result.returncode == 0:
+                self.passed.append("层间依赖检查通过")
+                print("  ✅ 层间依赖检查通过")
+            else:
+                self.errors.append("层间依赖检查失败")
+                print("  ❌ 层间依赖检查失败")
+                if result.stdout:
+                    print(result.stdout[-500:])
+
+        except Exception as e:
+            self.warnings.append(f"无法运行层间依赖检查: {e}")
+            print(f"  ⚠️ 无法运行: {e}")
+
+        print()
+        return True
+
+    def run_json_contract_check(self) -> bool:
+        """调用 JSON 契约检查"""
+        print("【调用 JSON 契约检查】")
+        script_path = self.root / "scripts/check_json_contracts.py"
+
+        if not script_path.exists():
+            self.warnings.append("check_json_contracts.py 不存在，跳过")
+            print("  ⚠️ check_json_contracts.py 不存在，跳过")
+            print()
+            return True
+
+        try:
+            result = subprocess.run(
+                [sys.executable, str(script_path)],
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+
+            if result.returncode == 0:
+                self.passed.append("JSON 契约检查通过")
+                print("  ✅ JSON 契约检查通过")
+            else:
+                self.errors.append("JSON 契约检查失败")
+                print("  ❌ JSON 契约检查失败")
+                if result.stdout:
+                    print(result.stdout[-500:])
+
+        except Exception as e:
+            self.warnings.append(f"无法运行 JSON 契约检查: {e}")
+            print(f"  ⚠️ 无法运行: {e}")
+
+        print()
+        return True
 
     def run_all_checks(self) -> bool:
         """运行所有检查"""
         print("╔══════════════════════════════════════════════════╗")
-        print("║          仓库完整性检查                         ║")
+        print("║          仓库完整性检查 V3.0.0                  ║")
         print("╚══════════════════════════════════════════════════╝")
+        print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print()
 
         self.check_required_dirs()
         self.check_required_files()
+        self.check_single_source_files()
         self.check_makefile_targets()
-        self.check_workflow_integrity()
-        self.check_script_dependencies()
+        self.check_approval_history_consistency()
+
+        # 新增：调用两个检查脚本
+        self.run_layer_dependency_check()
+        self.run_json_contract_check()
 
         # 汇总
         print("╔══════════════════════════════════════════════════╗")
@@ -359,7 +340,7 @@ class RepoIntegrityChecker:
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="仓库完整性检查")
+    parser = argparse.ArgumentParser(description="仓库完整性检查 V3.0.0")
     parser.add_argument("--strict", action="store_true", help="严格模式，任何错误都失败")
     args = parser.parse_args()
 

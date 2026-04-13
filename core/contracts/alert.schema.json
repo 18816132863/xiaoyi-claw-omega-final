@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "alert.schema.json",
+  "title": "Alert",
+  "description": "告警契约",
+  "type": "object",
+  "required": ["alert_type", "severity", "source_workflow", "triggered_at", "blocked_reasons", "recommended_actions"],
+  "properties": {
+    "alert_type": {
+      "type": "string",
+      "enum": ["gate_failure", "runtime_error", "security", "performance", "dependency", "custom"],
+      "description": "告警类型"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "严重程度"
+    },
+    "source_workflow": {
+      "type": "string",
+      "description": "来源 workflow"
+    },
+    "triggered_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "触发时间"
+    },
+    "blocked_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "阻塞原因"
+    },
+    "recommended_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "建议操作"
+    },
+    "alert_id": {
+      "type": "string",
+      "description": "告警 ID"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "acknowledged", "resolved", "suppressed"],
+      "description": "状态"
+    },
+    "acknowledged_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "确认时间"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "解决时间"
+    },
+    "incident_id": {
+      "type": "string",
+      "description": "关联的 Incident ID"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gate_report.schema.json",
+  "title": "Gate Report",
+  "description": "门禁报告契约",
+  "type": "object",
+  "required": ["profile", "overall_passed", "p0_count", "local_status", "integration_status", "external_status", "verified_at"],
+  "properties": {
+    "profile": {
+      "type": "string",
+      "enum": ["premerge", "nightly", "release"],
+      "description": "门禁类型"
+    },
+    "overall_passed": {
+      "type": "boolean",
+      "description": "是否通过"
+    },
+    "p0_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "P0 问题数"
+    },
+    "local_status": {
+      "type": "string",
+      "enum": ["passed", "failed", "skipped"],
+      "description": "本地测试状态"
+    },
+    "integration_status": {
+      "type": "string",
+      "enum": ["passed", "failed", "skipped"],
+      "description": "集成测试状态"
+    },
+    "external_status": {
+      "type": "string",
+      "enum": ["passed", "failed", "skipped"],
+      "description": "外部测试状态"
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "验证时间"
+    },
+    "total_checks": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "总检查数"
+    },
+    "passed_checks": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "通过数"
+    },
+    "failed_checks": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "失败数"
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "错误列表"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "警告列表"
+    },
+    "gate_id": {
+      "type": "string",
+      "description": "门禁唯一标识"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "运行唯一标识"
+    }
+  },
+  "additionalProperties": true
+}

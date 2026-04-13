@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "control_plane_audit.schema.json",
+  "title": "Control Plane Audit",
+  "description": "控制平面审计契约",
+  "type": "object",
+  "required": ["nightly_runs", "release_runs", "blocking_alerts", "incident_events", "remediation_events", "approvals"],
+  "properties": {
+    "nightly_runs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Nightly 运行记录"
+    },
+    "release_runs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Release 运行记录"
+    },
+    "blocking_alerts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "阻塞告警"
+    },
+    "incident_events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "事件记录"
+    },
+    "remediation_events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "处置记录"
+    },
+    "approvals": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "审批记录"
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "时间线"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "时间戳"
+    }
+  },
+  "additionalProperties": true
+}

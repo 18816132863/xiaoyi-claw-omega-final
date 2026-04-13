@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "remediation.schema.json",
+  "title": "Remediation",
+  "description": "处置契约",
+  "type": "object",
+  "required": ["action_id", "action_type", "mode", "triggered_by", "started_at", "finished_at", "success", "changed_files", "requires_approval"],
+  "properties": {
+    "action_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "动作 ID"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": ["safe_auto", "semi_auto", "forbidden_auto"],
+      "description": "动作类型"
+    },
+    "mode": {
+      "type": "string",
+      "description": "模式"
+    },
+    "triggered_by": {
+      "type": "string",
+      "description": "触发者"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "开始时间"
+    },
+    "finished_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "结束时间"
+    },
+    "success": {
+      "type": "boolean",
+      "description": "是否成功"
+    },
+    "changed_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "变更文件"
+    },
+    "requires_approval": {
+      "type": "boolean",
+      "description": "是否需要审批"
+    },
+    "result": {
+      "type": "object",
+      "description": "结果"
+    },
+    "error": {
+      "type": "string",
+      "description": "错误信息"
+    },
+    "incident_id": {
+      "type": "string",
+      "description": "关联的事件 ID"
+    },
+    "approval_id": {
+      "type": "string",
+      "description": "关联的审批 ID"
+    }
+  },
+  "additionalProperties": true
+}

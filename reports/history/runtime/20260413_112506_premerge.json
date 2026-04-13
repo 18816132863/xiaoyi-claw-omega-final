@@ -1,7 +1,7 @@
 {
-  "profile": "nightly",
+  "profile": "premerge",
   "scope": "all",
-  "verified_at": "2026-04-13T11:25:19.937669",
+  "verified_at": "2026-04-13T11:25:06.461289",
   "overall_passed": true,
   "failure_reasons": [],
   "p0_count": 0,

@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "incident.schema.json",
+  "title": "Incident",
+  "description": "事件契约",
+  "type": "object",
+  "required": ["incident_id", "alert_type", "status", "opened_at", "owner", "resolution_note"],
+  "properties": {
+    "incident_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "事件 ID"
+    },
+    "alert_type": {
+      "type": "string",
+      "description": "告警类型"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "investigating", "mitigated", "resolved", "closed"],
+      "description": "状态"
+    },
+    "opened_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "开启时间"
+    },
+    "owner": {
+      "type": "string",
+      "description": "负责人"
+    },
+    "resolution_note": {
+      "type": "string",
+      "description": "解决说明"
+    },
+    "description": {
+      "type": "string",
+      "description": "描述"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "严重程度"
+    },
+    "alerts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "关联告警 ID 列表"
+    },
+    "remediation_id": {
+      "type": "string",
+      "description": "关联的处置 ID"
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "event"],
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "event": { "type": "string" },
+          "actor": { "type": "string" }
+        }
+      },
+      "description": "时间线"
+    }
+  },
+  "additionalProperties": true
+}

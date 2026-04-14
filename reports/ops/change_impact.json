@@ -1,25 +1,104 @@
 {
   "changed_files": [
-    "core/RULE_EXCEPTIONS.json",
-    "core/RULE_EXCEPTION_OPERATIONS.md",
-    "memory/2026-04-14.md",
+    "IDENTITY.md",
+    "SOUL.md",
+    "TOOLS.md",
+    "USER.md",
+    "core/ANALOGY_ENGINE.md",
+    "core/DESIGN_ENGINE.md",
+    "core/DIVERGENT_THINKING.md",
+    "core/FIRST_PRINCIPLES.md",
+    "core/REVERSE_THINKING.md",
+    "execution/skill_adapter_gateway.py",
+    "infrastructure/inventory/skill_inverted_index.json",
+    "infrastructure/verify_runtime_integrity.py",
+    "reports/V4.3.2_Phase3_Final_Complete.md",
+    "reports/V4.3.2_Phase3_Final_Complete_v2.md",
+    "reports/V4.3.2_Phase3_Final_Micro_Fix.md",
+    "reports/V4.3.2_Phase3_Final_Micro_Fix_2.md",
     "reports/git_commits.json",
+    "reports/inspection_20260412_011655.json",
+    "reports/inspection_20260412_011753.json",
+    "reports/inspection_20260412_011822.json",
+    "reports/inspection_20260412_012512.json",
+    "reports/inspection_20260412_013014.json",
+    "reports/inspection_20260412_013357.json",
+    "reports/inspection_20260413_155627.json",
+    "reports/inspection_20260413_155934.json",
+    "reports/inspection_20260413_160043.json",
+    "reports/inspection_20260413_160054.json",
+    "reports/inspection_20260413_160123.json",
+    "reports/inspection_20260413_160226.json",
+    "reports/inspection_20260413_160307.json",
+    "reports/inspection_20260413_162343.json",
+    "reports/inspection_20260413_162716.json",
+    "reports/inspection_20260413_163025.json",
+    "reports/inspection_20260413_163737.json",
+    "reports/inspection_20260413_164641.json",
+    "reports/inspection_20260414_020511.json",
+    "reports/inspection_20260414_211837.json",
+    "reports/inspection_20260414_211905.json",
+    "reports/inspection_20260414_213508.json",
+    "reports/inspection_20260414_214040.json",
+    "reports/inspection_20260414_214203.json",
+    "reports/inspection_20260414_215553.json",
+    "reports/inspection_20260414_215737.json",
+    "reports/inspection_20260414_220448.json",
+    "reports/inspection_20260414_222533.json",
+    "reports/inspection_20260414_223143.json",
+    "reports/inspection_20260414_223305.json",
+    "reports/inspection_20260414_223724.json",
+    "reports/inspection_20260414_223742.json",
+    "reports/inspection_20260414_224338.json",
+    "reports/inspection_20260414_224355.json",
+    "reports/inspection_20260414_224432.json",
+    "reports/inspection_20260414_224449.json",
+    "reports/inspection_20260414_225421.json",
+    "reports/inspection_20260414_225703.json",
+    "reports/inspection_20260414_230346.json",
+    "reports/inspection_20260414_230444.json",
+    "reports/inspection_20260414_231115.json",
+    "reports/inspection_20260414_231725.json",
+    "reports/inspection_20260414_232020.json",
+    "reports/inspection_20260414_233511.json",
     "reports/inspection_20260414_233846.json",
-    "reports/ops/rule_exception_history.json",
+    "reports/inspection_20260414_234858.json",
+    "reports/inspection_20260415_001803.json",
+    "reports/inspection_20260415_003127.json",
+    "reports/ops/change_impact.json",
+    "reports/ops/executed_checks.json",
     "reports/ops/rule_registry_snapshot.json",
     "reports/ops/unified_inspection.json",
-    "scripts/exception_manager.py",
-    "scripts/render_nightly_summary.py",
-    "scripts/render_premerge_summary.py",
-    "scripts/render_release_summary.py",
-    "scripts/run_release_gate.py"
+    "reports/runtime_integrity.json"
   ],
   "changed_categories": [
-    "reports/ops"
+    "reports/ops",
+    "execution"
   ],
   "matched_rules": [
     {
-      "file": "reports/ops/rule_exception_history.json",
+      "file": "execution/skill_adapter_gateway.py",
+      "pattern": "execution/*",
+      "description": "执行层变更，premerge 必须通过，nightly 为 follow-up",
+      "blocking_commands": [
+        "python scripts/check_layer_dependencies.py",
+        "python scripts/run_release_gate.py premerge"
+      ],
+      "followup_profiles": [
+        "nightly"
+      ]
+    },
+    {
+      "file": "reports/ops/change_impact.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/executed_checks.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
       "blocking_commands": [
@@ -47,9 +126,17 @@
     }
   ],
   "blocking_commands_current_profile": [
+    "python scripts/run_release_gate.py premerge",
+    "python scripts/check_layer_dependencies.py",
     "python scripts/check_json_contracts.py"
   ],
-  "followup_required_profiles": [],
-  "followup_reason_by_profile": {},
-  "generated_at": "2026-04-15T00:17:01.750620"
+  "followup_required_profiles": [
+    "nightly"
+  ],
+  "followup_reason_by_profile": {
+    "nightly": [
+      "execution/skill_adapter_gateway.py changed"
+    ]
+  },
+  "generated_at": "2026-04-15T07:55:23.611744"
 }

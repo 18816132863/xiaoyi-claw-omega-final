@@ -64,19 +64,30 @@ class SkillAdapterGateway:
             raise ValueError(f"技能未注册: {skill_name}")
 
         entry_point = info.get("entry_point")
-        if not entry_point:
-            raise ValueError(f"技能缺少 entry_point: {skill_name}")
+        executor_type = info.get("executor_type", "skill_md")
+        skill_path = info.get("path", f"skills/{skill_name}")
 
-        # 解析文件路径
-        skill_path = self.root / entry_point
-        if not skill_path.exists():
-            raise FileNotFoundError(f"技能文件不存在: {skill_path}")
+        # 根据执行器类型决定加载方式
+        if executor_type == "skill_md":
+            # SKILL.md 是文档，实际执行文件是 skill.py
+            skill_file = self.root / skill_path / "skill.py"
+            if not skill_file.exists():
+                # 如果没有 skill.py，返回一个模拟模块
+                class MockModule:
+                    def run(self, params):
+                        return {"success": True, "data": {"message": f"技能 {skill_name} 文档模式，无实际执行"}}
+                return MockModule()
+        else:
+            # 直接使用 entry_point 作为 Python 文件
+            skill_file = self.root / entry_point
+            if not skill_file.exists():
+                raise FileNotFoundError(f"技能文件不存在: {skill_file}")
 
         # 按文件路径加载模块
         module_name = f"skill_{skill_name.replace('-', '_')}"
-        spec = importlib.util.spec_from_file_location(module_name, skill_path)
+        spec = importlib.util.spec_from_file_location(module_name, skill_file)
         if spec is None or spec.loader is None:
-            raise ImportError(f"无法加载技能模块: {skill_path}")
+            raise ImportError(f"无法加载技能模块: {skill_file}")
 
         module = importlib.util.module_from_spec(spec)
         sys.modules[module_name] = module

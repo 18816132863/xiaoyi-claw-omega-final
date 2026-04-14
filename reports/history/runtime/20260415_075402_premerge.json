@@ -1,0 +1,25 @@
+{
+  "profile": "premerge",
+  "scope": "all",
+  "verified_at": "2026-04-15T07:54:02.444571",
+  "overall_passed": false,
+  "failure_reasons": [
+    "Local 层未通过: failed"
+  ],
+  "p0_count": 0,
+  "p1_count": 0,
+  "p2_count": 207,
+  "local_status": "failed",
+  "local_results": [],
+  "integration_status": "failed",
+  "integration_results": [
+    {
+      "skill": "file-manager",
+      "status": "failed",
+      "message": "{'code': 'IMPORT_ERROR', 'message': '无法加载技能模块: /home/sandbox/.openclaw/workspace/SKILL.md'}"
+    }
+  ],
+  "external_status": "passed",
+  "external_results": [],
+  "skipped_skills": []
+}

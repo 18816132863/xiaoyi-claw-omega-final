@@ -1,18 +1,26 @@
-# 兼容副本 - 真源在 core/USER.md
 # USER.md - About Your Human
 
-_Learn about the person you're helping. Update this as you go._
+## 基本信息
+- **Name**: 鸽子王
+- **What to call them**: 鸽子王
+- **Timezone**: Asia/Shanghai (UTC+8)
 
-- **Name:**
-- **What to call them:** 主人
-- **Pronouns:** _(optional)_
-- **Timezone:**
-- **Notes:**
+## 用户偏好
+- **语言**: 永久全中文交流
+- **ClawHub账号**: @18816132863
 
 ## Context
 
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
+### ClawHub 技能
+- 已发布技能：小艺Claw终极鸽子王 (xiaoyi-claw-omega-final)
+- 希望更新已有技能而不是发布新技能
 
----
+### 工作习惯
+- 重视记忆持久化，希望刷新后不丢失之前的经验
+- 喜欢简洁直接的回复风格
 
-The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+## Notes
+
+- 2026-04-09: 确认全中文交流偏好
+- 2026-04-09: 发布技能到 ClawHub，版本 32.0.0
+- 2026-04-09: 添加自动清理功能

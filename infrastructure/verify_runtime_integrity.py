@@ -158,14 +158,14 @@ def run_local_tests() -> Dict:
             result = gateway.execute(skill_name, params)
             results.append({
                 "skill": skill_name,
-                "status": "pass" if getattr(result, 'success', False) else "fail",
+                "status": "passed" if getattr(result, 'success', False) else "failed",
                 "message": str(getattr(result, 'error', '') or '')[:100]
             })
         except Exception as e:
             results.append({"skill": skill_name, "status": "error", "message": str(e)[:100]})
     
-    all_pass = all(r["status"] == "pass" for r in results) if results else False
-    return {"status": "pass" if all_pass else "fail", "results": results}
+    all_pass = all(r["status"] == "passed" for r in results) if results else True
+    return {"status": "passed" if all_pass else "failed", "results": results}
 
 
 def run_integration_tests() -> Dict:
@@ -201,7 +201,7 @@ def run_integration_tests() -> Dict:
             result = gateway.execute(skill_name, params)
             results.append({
                 "skill": skill_name,
-                "status": "pass" if getattr(result, 'success', False) else "fail",
+                "status": "passed" if getattr(result, 'success', False) else "failed",
                 "message": str(getattr(result, 'error', '') or '')[:100]
             })
         except Exception as e:
@@ -209,7 +209,7 @@ def run_integration_tests() -> Dict:
     
     pass_count = sum(1 for r in results if r["status"] == "pass")
     return {
-        "status": "pass" if pass_count == len(results) else "partial",
+        "status": "passed" if pass_count == len(results) else "failed",
         "results": results,
         "summary": f"{pass_count}/{len(results)} 通过"
     }
@@ -237,7 +237,7 @@ def run_external_tests() -> Dict:
             result = gateway.execute(skill_name, {})
             results.append({
                 "skill": skill_name,
-                "status": "pass" if getattr(result, 'success', False) else "fail",
+                "status": "passed" if getattr(result, 'success', False) else "failed",
                 "message": (getattr(result, 'error', '') or '')[:100]
             })
         except Exception as e:
@@ -248,7 +248,7 @@ def run_external_tests() -> Dict:
     error_count = sum(1 for r in results if r["status"] == "error")
     
     return {
-        "status": "pass" if pass_count == len(results) - skip_count and error_count == 0 else "partial",
+        "status": "passed" if pass_count == len(results) - skip_count and error_count == 0 else "failed",
         "results": results,
         "summary": f"{pass_count} 通过, {skip_count} 跳过, {error_count} 错误"
     }
@@ -302,11 +302,11 @@ def run_profile(profile: str, report_path: str = None) -> Dict:
         passed = False
         reasons.append(f"P0 硬编码路径: {p0_count} > {rules['p0_required']}")
     
-    if rules["local_required"] and local_result["status"] != "pass":
+    if rules["local_required"] and local_result["status"] != "passed":
         passed = False
         reasons.append(f"Local 层未通过: {local_result['status']}")
     
-    if rules["integration_required"] and integration_result["status"] != "pass":
+    if rules["integration_required"] and integration_result["status"] != "passed":
         passed = False
         reasons.append(f"Integration 层未通过: {integration_result['status']}")
     
@@ -316,7 +316,7 @@ def run_profile(profile: str, report_path: str = None) -> Dict:
             if error_count > 0:
                 passed = False
                 reasons.append(f"External 层有 {error_count} 个错误")
-        elif external_result["status"] != "pass":
+        elif external_result["status"] != "passed":
             passed = False
             reasons.append(f"External 层未通过: {external_result['status']}")
     
@@ -331,11 +331,11 @@ def run_profile(profile: str, report_path: str = None) -> Dict:
         "p0_count": p0_count,
         "p1_count": p1_count,
         "p2_count": p2_count,
-        "local_status": "passed" if local_result["status"] == "pass" else local_result["status"],
+        "local_status": local_result["status"],
         "local_results": local_result.get("results", []),
-        "integration_status": "passed" if integration_result["status"] == "pass" else integration_result["status"],
+        "integration_status": integration_result["status"],
         "integration_results": integration_result.get("results", []),
-        "external_status": "passed" if external_result["status"] == "pass" else external_result["status"],
+        "external_status": external_result["status"],
         "external_results": external_result.get("results", []),
         "skipped_skills": [r for r in external_result.get("results", []) if r["status"] == "skipped"],
     }

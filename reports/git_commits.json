@@ -710,6 +710,36 @@
         "deleted": [],
         "renamed": []
       }
+    },
+    {
+      "hash": "7a957182",
+      "message": "架构巡检: 5/6 通过, 246 文件",
+      "timestamp": "2026-04-14T22:31:43.122015",
+      "changes": {
+        "modified": [
+          "ore/ARCHITECTURE.md",
+          "core/RULE_REGISTRY.json",
+          "infrastructure/config/unified.json",
+          "infrastructure/inventory/skill_registry.json",
+          "reports/git_commits.json",
+          "reports/ops/change_impact.json",
+          "reports/ops/executed_checks.json",
+          "reports/ops/rule_engine_report.json",
+          "reports/ops/rule_exception_debt.json",
+          "reports/ops/rule_execution_index.json",
+          "reports/ops/rule_registry_snapshot.json",
+          "reports/ops/unified_inspection.json",
+          "reports/runtime_integrity.json",
+          "scripts/check_skill_security.py",
+          "scripts/render_nightly_summary.py",
+          "scripts/render_premerge_summary.py",
+          "scripts/render_release_summary.py",
+          "scripts/unified_inspector.py"
+        ],
+        "added": [],
+        "deleted": [],
+        "renamed": []
+      }
     }
   ]
 }

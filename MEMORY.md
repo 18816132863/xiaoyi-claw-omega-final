@@ -4,7 +4,7 @@
 
 ## 项目状态
 
-- **版本**: V5.1.0
+- **版本**: V5.3.0
 - **状态**: 全面整合完成
 - **更新时间**: 2026-04-14
 
@@ -85,28 +85,37 @@
 | torch | 2.11.0 | 深度学习 |
 | transformers | 5.5.4 | NLP 模型 |
 
-## V5.1.0 新增/更新
+## V5.3.0 新增/更新
 
 ### 技能注册表
 - `infrastructure/inventory/skill_registry.json`: V5.0.0，275 个技能
 - `infrastructure/inventory/skill_inverted_index.json`: 倒排索引
 
 ### 统一巡检器
-- `scripts/unified_inspector.py`: V2.0.0
+- `scripts/unified_inspector.py`: V3.0.0
 - 6 项检查，并行执行
 
 ### 技能安全识别
-- `scripts/check_skill_security.py`: V2.0.0
+- `scripts/check_skill_security.py`: V3.0.0
 - 白名单机制，误报抑制
 
 ### 架构文档
-- `core/ARCHITECTURE.md`: V5.1.0，技能生态章节
+- `core/ARCHITECTURE.md`: V5.3.0，技能生态章节
 
 ## Git 认证
 
 - 仓库: https://github.com/18816132863/xiaoyi-claw-omega-final.git
 - Token: 见 git remote -v 输出（已配置在远程 URL 中）
 - 注意: Token 不应写入文件，使用环境变量或 git credential
+
+
+### 性能加速依赖
+| 依赖 | 版本 | 用途 |
+|------|------|------|
+| numba | 0.65.0 | JIT 编译加速 |
+| numpy | 1.26.4 | 向量化计算 |
+| numexpr | 2.14.1 | 表达式加速 |
+| bottleneck | 1.6.0 | 瓶颈优化 |
 
 ## 注意事项
 

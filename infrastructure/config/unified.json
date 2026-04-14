@@ -1,5 +1,5 @@
 {
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "唯一运行时配置 - 其他配置文件仅作兼容或实验用途",
   "search": {
     "top_k": 10,
@@ -43,7 +43,10 @@
     "cache_ttl": 3600,
     "lazy_load_skills": true,
     "batch_operations": true,
-    "async_io": true
+    "async_io": true,
+    "numba_enabled": true,
+    "numpy_enabled": true,
+    "max_workers": 4
   },
   "updated": "2026-04-14"
 }

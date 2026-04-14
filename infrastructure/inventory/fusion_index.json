@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "updated": "2026-04-14",
   "description": "架构融合索引 - 统一入口",
   "indexes": {
@@ -26,6 +26,9 @@
     "parallel_execution": true,
     "cache_enabled": true,
     "lazy_load": true,
-    "batch_operations": true
+    "batch_operations": true,
+    "inspector_version": "3.0.0",
+    "numba_enabled": true,
+    "numpy_enabled": true
   }
 }

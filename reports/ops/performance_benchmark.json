@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "updated": "2026-04-14",
   "targets": {
     "skill_lookup": "< 1ms",
@@ -19,6 +19,16 @@
     "结果缓存",
     "懒加载技能",
     "批量操作",
-    "异步 I/O"
-  ]
+    "异步 I/O",
+    "Numba JIT 编译",
+    "NumPy 向量化",
+    "numexpr 表达式加速",
+    "bottleneck 瓶颈优化"
+  ],
+  "acceleration": {
+    "numba_jit": true,
+    "numpy_vectorized": true,
+    "numexpr": true,
+    "bottleneck": true
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "updated": "2026-04-14",
   "description": "架构融合索引 - 统一入口",
   "indexes": {
@@ -27,8 +27,30 @@
     "cache_enabled": true,
     "lazy_load": true,
     "batch_operations": true,
-    "inspector_version": "3.0.0",
+    "inspector_version": "4.0.0",
     "numba_enabled": true,
-    "numpy_enabled": true
+    "numpy_enabled": true,
+    "max_workers": 6,
+    "target_time_ms": 10000
+  },
+  "injection": {
+    "mode": "minimal",
+    "config": "infrastructure/config/injection_config.json",
+    "estimated_tokens": 3500,
+    "minimal_tokens": 2762,
+    "modes": {
+      "full": {
+        "tokens": 13000000,
+        "description": "全量注入"
+      },
+      "minimal": {
+        "tokens": 5000,
+        "description": "精简注入"
+      },
+      "ultra_minimal": {
+        "tokens": 2762,
+        "description": "极简注入"
+      }
+    }
   }
 }

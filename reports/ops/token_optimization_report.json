@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-14 22:50",
+  "summary": {
+    "original_tokens": 13000000,
+    "minimal_tokens": 4961,
+    "ultra_minimal_tokens": 2763,
+    "reduction": "99.98%"
+  },
+  "modes": {
+    "full": {
+      "description": "全量注入",
+      "tokens": 13000000,
+      "files": "全部文件",
+      "use_case": "完整分析"
+    },
+    "minimal": {
+      "description": "精简注入",
+      "tokens": 4961,
+      "files": "核心文件 + 索引",
+      "use_case": "日常使用"
+    },
+    "ultra_minimal": {
+      "description": "极简注入",
+      "tokens": 2763,
+      "files": "压缩核心 + 索引",
+      "use_case": "快速响应"
+    }
+  },
+  "files": {
+    "injected_minimal": [
+      "AGENTS.md",
+      "SOUL.md",
+      "USER.md",
+      "TOOLS.md",
+      "MEMORY.md",
+      "infrastructure/inventory/fusion_index.json",
+      "infrastructure/inventory/skill_registry_summary.json"
+    ],
+    "injected_ultra_minimal": [
+      "SOUL.md",
+      "USER.md",
+      "MEMORY.md",
+      "core/compressed/AGENTS_summary.md",
+      "core/compressed/TOOLS_summary.md",
+      "infrastructure/inventory/skill_registry_summary.json"
+    ]
+  },
+  "lazy_load": {
+    "skills": "find-skills 技能发现",
+    "memory": "memory_search 记忆搜索",
+    "config": "read 按需读取",
+    "reports": "read 按需读取"
+  }
+}

@@ -865,6 +865,22 @@
         "deleted": [],
         "renamed": []
       }
+    },
+    {
+      "hash": "6c1c13af",
+      "message": "架构巡检: 5/6 通过, 246 文件",
+      "timestamp": "2026-04-14T22:57:03.673837",
+      "changes": {
+        "modified": [
+          "nfrastructure/inventory/fusion_index.json",
+          "reports/git_commits.json",
+          "reports/ops/token_optimization_report.json",
+          "reports/ops/unified_inspection.json"
+        ],
+        "added": [],
+        "deleted": [],
+        "renamed": []
+      }
     }
   ]
 }

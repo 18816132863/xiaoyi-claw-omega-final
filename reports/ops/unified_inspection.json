@@ -1,12 +1,12 @@
 {
   "profile": "premerge",
-  "generated_at": "2026-04-14T21:55:47.463573",
+  "generated_at": "2026-04-14T22:04:41.937572",
   "checks": [
     {
       "name": "变更影响",
       "script": "scripts/check_change_impact_enforcement.py",
       "passed": true,
-      "duration_ms": 458,
+      "duration_ms": 353,
       "output": "╔══════════════════════════════════════════════════╗\n║          变更影响强制门禁检查 V2.0.0            ║\n╚══════════════════════════════════════════════════╝\n\nProfile: premerge\nChanged Files: 57\n\nBlocking Commands: 4\nExecuted Commands: 4\n\nEnforcement Status: ✅ PASSED\n",
       "error": null
     },
@@ -14,15 +14,15 @@
       "name": "层间依赖",
       "script": "scripts/check_layer_dependencies.py",
       "passed": true,
-      "duration_ms": 468,
-      "output": "╔══════════════════════════════════════════════════╗\n║          层间依赖检查 V1.0.0                    ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-14 21:55:47\n\n【检查 core/】\n  ✅ 无违规\n\n【检查 orchestration/】\n  ✅ 无违规\n\n【检查 execution/】\n  ✅ 无违规\n\n【检查 memory_context/】\n  ✅ 无违规\n\n【检查 governance/】\n  ✅ 无违规\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 5\n  ❌ 违规: 0\n\n",
+      "duration_ms": 599,
+      "output": "╔══════════════════════════════════════════════════╗\n║          层间依赖检查 V1.0.0                    ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-14 22:04:42\n\n【检查 core/】\n  ✅ 无违规\n\n【检查 orchestration/】\n  ✅ 无违规\n\n【检查 execution/】\n  ✅ 无违规\n\n【检查 memory_context/】\n  ✅ 无违规\n\n【检查 governance/】\n  ✅ 无违规\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 5\n  ❌ 违规: 0\n\n",
       "error": null
     },
     {
       "name": "仓库完整性",
       "script": "scripts/check_repo_integrity_fast.py",
       "passed": true,
-      "duration_ms": 711,
+      "duration_ms": 620,
       "output": "═════════════════════════════════════════╝\n\n  ✅ core/ARCHITECTURE.md\n  ✅ core/RULE_REGISTRY.json\n  ✅ core/LAYER_DEPENDENCY_RULES.json\n  ✅ infrastructure/inventory/skill_registry.json\n  ✅ governance/guard/protected_files.json\n  ✅ scripts/run_release_gate.py\n  ✅ core/\n  ✅ governance/\n  ✅ infrastructure/\n  ✅ scripts/\n  ✅ skills/\n  ✅ execution/\n  ✅ reports/\n\n==================================================\n  ✅ 通过: 13\n  ⚠️ 警告: 0\n  ❌ 错误: 0\n==================================================\n✅ 所有检查通过\n",
       "error": null
     },
@@ -30,7 +30,7 @@
       "name": "JSON契约",
       "script": "scripts/check_json_contracts.py",
       "passed": true,
-      "duration_ms": 2580,
+      "duration_ms": 2778,
       "output": "latest_alerts.json 符合 schema (空数组)\n  ✅ governance/ops/incident_tracker.json 符合 schema (1 条)\n  ✅ reports/remediation/latest_remediation.json 符合 schema\n  ✅ reports/remediation/approval_history.json 符合 schema (1 条)\n  ✅ reports/ops/control_plane_state.json 符合 schema\n  ✅ reports/ops/control_plane_audit.json 符合 schema\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 9\n  ⚠️ 警告: 0\n  ❌ 错误: 0\n\n",
       "error": null
     },
@@ -38,7 +38,7 @@
       "name": "技能安全",
       "script": "scripts/check_skill_security.py",
       "passed": true,
-      "duration_ms": 4110,
+      "duration_ms": 4415,
       "output": "╔══════════════════════════════════════════════════╗\n║          技能安全识别报告 V2.0.0               ║\n╚══════════════════════════════════════════════════╝\n\n扫描技能数: 275\n通过: 275\n风险: 0\n\n【风险分布】\n  🔴 Critical: 0\n  🟠 High: 0\n  🟡 Medium: 264\n  🟢 Low: 0\n\n",
       "error": null
     },
@@ -46,8 +46,8 @@
       "name": "架构完整性",
       "script": "infrastructure/architecture_inspector.py",
       "passed": true,
-      "duration_ms": 6021,
-      "output": "  安全检查: 通过\n  代码统计: 246 文件, 44500 行\n  问题数: 0\n  警告数: 0\n\n【V5.0.0 新增检查】\n  规则注册表: 存在\n  规则引擎: 存在\n  变更影响: 通过\n  技能安全: Critical:0 High:0\n  循环防护: 存在\n\n❌ 架构巡检发现问题，请检查上述项目\n\n【自动 Git 同步】\n----------------------------------------------------------------------\n  ❌ 推送失败: fatal: The current branch master has no upstream branch.\nTo push the current branch and set the remote as upstream, use\n\n    git push --set-upstream origin master\n\n\n\n报告已保存: /home/sandbox/.openclaw/workspace/reports/inspection_20260414_215553.json\n",
+      "duration_ms": 6157,
+      "output": "  安全检查: 通过\n  代码统计: 246 文件, 44500 行\n  问题数: 0\n  警告数: 0\n\n【V5.0.0 新增检查】\n  规则注册表: 存在\n  规则引擎: 存在\n  变更影响: 通过\n  技能安全: Critical:0 High:0\n  循环防护: 存在\n\n❌ 架构巡检发现问题，请检查上述项目\n\n【自动 Git 同步】\n----------------------------------------------------------------------\n  ❌ 推送失败: fatal: The current branch master has no upstream branch.\nTo push the current branch and set the remote as upstream, use\n\n    git push --set-upstream origin master\n\n\n\n报告已保存: /home/sandbox/.openclaw/workspace/reports/inspection_20260414_220448.json\n",
       "error": null
     }
   ],
@@ -56,6 +56,6 @@
     "passed": 6,
     "failed": 0,
     "errors": 0,
-    "total_duration_ms": 14348
+    "total_duration_ms": 14922
   }
 }

@@ -87,6 +87,36 @@ def main():
             print(f"- Overused Exceptions: {overused_count}")
             print(f"- High Debt Exceptions: {high_debt_count}")
             print()
+            
+            # Recent Exception Actions
+            history_path = root / "reports/ops/rule_exception_history.json"
+            if history_path.exists():
+                try:
+                    from datetime import datetime, timedelta
+                    history = json.load(open(history_path, encoding='utf-8'))
+                    
+                    now = datetime.now()
+                    cutoff = now - timedelta(hours=24)
+                    
+                    stats = {"create": 0, "renew": 0, "revoke": 0, "expire": 0}
+                    for h in history:
+                        try:
+                            ts = datetime.fromisoformat(h.get("timestamp", ""))
+                            if ts >= cutoff:
+                                action = h.get("action", "")
+                                if action in stats:
+                                    stats[action] += 1
+                        except:
+                            continue
+                    
+                    print("**Recent Exception Actions** (24h):")
+                    print(f"- create: {stats['create']}")
+                    print(f"- renew: {stats['renew']}")
+                    print(f"- revoke: {stats['revoke']}")
+                    print(f"- expire: {stats['expire']}")
+                    print()
+                except:
+                    pass
         except:
             print("**Rule Checks**: ⚠️ 无法读取")
             print()

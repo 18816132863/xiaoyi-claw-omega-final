@@ -1,0 +1,72 @@
+[
+  {
+    "event_id": "exc_evt_20260414_234714_741fd3a1",
+    "exception_id": "EXC-R001-20260414-54730e",
+    "action": "create",
+    "rule_id": "R001",
+    "approved_by": "bob",
+    "owner": "alice",
+    "old_status": "none",
+    "new_status": "active",
+    "old_expires_at": "none",
+    "new_expires_at": "2026-05-14T23:47:14.945901",
+    "reason": "临时绕过层间依赖检查",
+    "timestamp": "2026-04-14T23:47:14.946675"
+  },
+  {
+    "event_id": "exc_evt_20260414_234721_3f1b7b32",
+    "exception_id": "EXC-R001-20260414-54730e",
+    "action": "renew",
+    "rule_id": "R001",
+    "approved_by": "bob",
+    "owner": "alice",
+    "old_status": "active",
+    "new_status": "active",
+    "old_expires_at": "2026-05-14T23:47:14.945901",
+    "new_expires_at": "2026-05-14T23:47:21.707870",
+    "reason": "需要更多时间修复",
+    "timestamp": "2026-04-14T23:47:21.708811"
+  },
+  {
+    "event_id": "exc_evt_20260414_234728_a229a1ed",
+    "exception_id": "EXC-R001-20260414-54730e",
+    "action": "revoke",
+    "rule_id": "R001",
+    "approved_by": "bob",
+    "owner": "alice",
+    "old_status": "active",
+    "new_status": "revoked",
+    "old_expires_at": "2026-05-14T23:47:21.707870",
+    "new_expires_at": "2026-05-14T23:47:21.707870",
+    "reason": "问题已修复，不再需要例外",
+    "timestamp": "2026-04-14T23:47:28.797967"
+  },
+  {
+    "event_id": "exc_evt_20260414_234843_62ea32b4",
+    "exception_id": "EXC-R002-20260414-e92d07",
+    "action": "create",
+    "rule_id": "R002",
+    "approved_by": "test",
+    "owner": "test",
+    "old_status": "none",
+    "new_status": "active",
+    "old_expires_at": "none",
+    "new_expires_at": "2026-05-14T23:48:43.805911",
+    "reason": "测试续期限制",
+    "timestamp": "2026-04-14T23:48:43.806866"
+  },
+  {
+    "event_id": "exc_evt_20260414_234850_614c64cb",
+    "exception_id": "EXC-R002-20260414-e92d07",
+    "action": "renew",
+    "rule_id": "R002",
+    "approved_by": "test",
+    "owner": "test",
+    "old_status": "active",
+    "new_status": "active",
+    "old_expires_at": "2026-05-14T23:48:43.805911",
+    "new_expires_at": "2026-05-14T23:48:50.052889",
+    "reason": "续期 30 天",
+    "timestamp": "2026-04-14T23:48:50.053845"
+  }
+]

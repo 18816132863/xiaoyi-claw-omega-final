@@ -2,9 +2,8 @@
   "version": "2.0.0",
   "updated": "2026-04-14",
   "description": "规则例外注册表 - 定义规则的临时豁免（含债务治理）",
-  
-  "exceptions": [
-    {
+  "exceptions": {
+    "EX001": {
       "exception_id": "EX001",
       "rule_id": "R007",
       "scope": "global",
@@ -21,12 +20,16 @@
       "ticket_ref": null,
       "note": "实验规则豁免，待规则稳定后关闭",
       "applies_to": {
-        "profiles": ["premerge", "nightly", "release"],
+        "profiles": [
+          "premerge",
+          "nightly",
+          "release"
+        ],
         "paths": [],
         "files": []
       }
     },
-    {
+    "EX002": {
       "exception_id": "EX002",
       "rule_id": "R004",
       "scope": "profile",
@@ -43,12 +46,14 @@
       "ticket_ref": "TICKET-001",
       "note": "演示过期例外，已超续期次数",
       "applies_to": {
-        "profiles": ["nightly"],
+        "profiles": [
+          "nightly"
+        ],
         "paths": [],
         "files": []
       }
     },
-    {
+    "EX003": {
       "exception_id": "EX003",
       "rule_id": "R006",
       "scope": "file",
@@ -67,10 +72,12 @@
       "applies_to": {
         "profiles": [],
         "paths": [],
-        "files": ["tests/fixtures/smoke/blank.pdf"]
+        "files": [
+          "tests/fixtures/smoke/blank.pdf"
+        ]
       }
     },
-    {
+    "EX004": {
       "exception_id": "EX004",
       "rule_id": "R007",
       "scope": "profile",
@@ -87,12 +94,14 @@
       "ticket_ref": "TICKET-002",
       "note": "演示 stale exception - 即将过期",
       "applies_to": {
-        "profiles": ["premerge"],
+        "profiles": [
+          "premerge"
+        ],
         "paths": [],
         "files": []
       }
     },
-    {
+    "EX005": {
       "exception_id": "EX005",
       "rule_id": "R004",
       "scope": "global",
@@ -109,22 +118,75 @@
       "ticket_ref": "TICKET-003",
       "note": "演示 overused exception - 已达续期上限",
       "applies_to": {
-        "profiles": ["premerge", "nightly", "release"],
+        "profiles": [
+          "premerge",
+          "nightly",
+          "release"
+        ],
         "paths": [],
         "files": []
       }
+    },
+    "EXC-R001-20260414-54730e": {
+      "rule_id": "R001",
+      "reason": "临时绕过层间依赖检查",
+      "owner": "alice",
+      "approved_by": "bob",
+      "status": "revoked",
+      "created_at": "2026-04-14T23:47:14.945901",
+      "expires_at": "2026-05-14T23:47:21.707870",
+      "renewal_count": 1,
+      "max_renewals": 2,
+      "ticket_ref": "JIRA-12345",
+      "last_renewed_at": "2026-04-14T23:47:21.707870",
+      "last_renewed_by": "bob",
+      "renewal_reason": "需要更多时间修复",
+      "revoked_at": "2026-04-14T23:47:28.796832",
+      "revoked_by": "bob",
+      "revoke_reason": "问题已修复，不再需要例外"
+    },
+    "EXC-R002-20260414-e92d07": {
+      "rule_id": "R002",
+      "reason": "测试续期限制",
+      "owner": "test",
+      "approved_by": "test",
+      "status": "active",
+      "created_at": "2026-04-14T23:48:43.805911",
+      "expires_at": "2026-05-14T23:48:50.052889",
+      "renewal_count": 1,
+      "max_renewals": 1,
+      "ticket_ref": "",
+      "last_renewed_at": "2026-04-14T23:48:50.052889",
+      "last_renewed_by": "test"
     }
-  ],
-  
+  },
   "policies": {
-    "allowed_for_rules": ["R004", "R006", "R007"],
-    "forbidden_for_rules": ["R001", "R002", "R003", "R005"],
+    "allowed_for_rules": [
+      "R004",
+      "R006",
+      "R007"
+    ],
+    "forbidden_for_rules": [
+      "R001",
+      "R002",
+      "R003",
+      "R005"
+    ],
     "max_duration_days": 30,
     "require_approval": true,
     "debt_thresholds": {
-      "low": {"warning_days": 7, "max_renewals": 3},
-      "medium": {"warning_days": 5, "max_renewals": 2},
-      "high": {"warning_days": 3, "max_renewals": 1}
+      "low": {
+        "warning_days": 7,
+        "max_renewals": 3
+      },
+      "medium": {
+        "warning_days": 5,
+        "max_renewals": 2
+      },
+      "high": {
+        "warning_days": 3,
+        "max_renewals": 1
+      }
     }
   }
 }

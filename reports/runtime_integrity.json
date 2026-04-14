@@ -11,7 +11,7 @@
   "p2_count": 207,
   "local_status": "failed",
   "local_results": [],
-  "integration_status": "partial",
+  "integration_status": "failed",
   "integration_results": [
     {
       "skill": "file-manager",

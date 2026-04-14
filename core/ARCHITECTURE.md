@@ -1,4 +1,4 @@
-# 六层架构定义 V6.0.0
+# 六层架构定义 V7.0.0
 
 > **唯一主架构定义** - 本文档是项目唯一正式运行架构定义
 > 
@@ -518,3 +518,99 @@ python scripts/run_release_gate.py release
 | 三引擎同步 | ✅ 启用 |
 | LLM 辅助 | ✅ 启用 |
 | 渐进式启用 | ✅ P0-P3 全启用 |
+
+---
+
+## 依赖管理机制
+
+### 模块信息
+- **脚本**: `scripts/dependency_manager.py`
+- **配置**: `infrastructure/config/dependency_manifest.json`
+- **报告**: `reports/ops/dependency_status.json`
+
+### 依赖分类
+
+| 类别 | 包含依赖 | 必需性 |
+|------|----------|--------|
+| core | numpy, scipy, scikit-learn | 必需 |
+| llm | openai, anthropic, langchain | 可选 |
+| embedding | sentence-transformers, transformers | 可选 |
+| vector | qdrant-client, chromadb, faiss-cpu | 可选 |
+| ml | torch, numba, llvmlite | 可选 |
+| performance | numexpr, bottleneck | 可选 |
+| document | reportlab, weasyprint, pdfkit | 可选 |
+
+### 使用方式
+
+```bash
+# 检查依赖状态
+python scripts/dependency_manager.py --check
+
+# 安装缺失依赖
+python scripts/dependency_manager.py --install
+
+# 安装特定类别
+python scripts/dependency_manager.py --install --category ml
+```
+
+---
+
+## 删除确认机制
+
+### 核心原则
+**所有删除操作必须经过用户确认！**
+
+### 模块信息
+- **脚本**: `scripts/delete_manager.py`
+- **回收站**: `archive/trash/`
+- **日志**: `reports/ops/delete_log.json`
+- **待确认**: `reports/ops/pending_deletes.json`
+
+### 删除流程
+
+```
+请求删除 → 创建待确认请求 → 用户确认 → 移至回收站
+                ↓
+            用户拒绝 → 取消删除
+```
+
+### 使用方式
+
+```bash
+# 请求删除
+python scripts/delete_manager.py --request "path" --reason "原因"
+
+# 查看待确认请求
+python scripts/delete_manager.py --list
+
+# 确认删除
+python scripts/delete_manager.py --confirm <request_id>
+
+# 拒绝删除
+python scripts/delete_manager.py --reject <request_id>
+
+# 从回收站恢复
+python scripts/delete_manager.py --restore "path"
+
+# 清空回收站
+python scripts/delete_manager.py --empty-trash 7
+```
+
+### 受保护文件
+
+| 文件 | 保护原因 |
+|------|----------|
+| core/ARCHITECTURE.md | 架构文档 |
+| core/RULE_REGISTRY.json | 规则注册表 |
+| core/SOUL.md | 身份定义 |
+| core/USER.md | 用户信息 |
+| core/AGENTS.md | 工作空间规则 |
+| core/TOOLS.md | 工具规则 |
+| MEMORY.md | 长期记忆 |
+
+### 禁止操作
+
+- ❌ 直接使用 `rm` 命令
+- ❌ 直接使用 `os.remove()`
+- ❌ 直接使用 `shutil.rmtree()`
+- ✅ 必须通过 `delete_manager.py`

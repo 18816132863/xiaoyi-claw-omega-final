@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-统一巡检器 - V5.0.0
+统一巡检器 - V6.0.0
 
 整合所有检查脚本，提供一站式巡检能力
 
-V5.0.0 新增:
+V6.0.0 新增:
 - Token 优化检查
 - 注入配置验证
 - 智能压缩验证
@@ -256,7 +256,7 @@ def run_all_checks_fast(profile: str = "premerge") -> Dict:
     }
     
     print("╔══════════════════════════════════════════════════╗")
-    print("║          统一巡检器 V5.0.0 (融合版)            ║")
+    print("║          统一巡检器 V6.0.0 (融合版)            ║")
     print("╚══════════════════════════════════════════════════╝")
     print(f"Profile: {profile} | Workers: {MAX_WORKERS}")
     print()
@@ -342,7 +342,7 @@ def save_report_fast(results: Dict):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="统一巡检器 V5.0.0")
+    parser = argparse.ArgumentParser(description="统一巡检器 V6.0.0")
     parser.add_argument("--profile", default="premerge")
     parser.add_argument("--save", action="store_true")
     args = parser.parse_args()

@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0",
+  "version": "4.0.0",
   "updated": "2026-04-14",
   "description": "架构融合索引 - 统一入口",
   "indexes": {
@@ -110,5 +110,34 @@
       "config/persona_update.json",
       "config/progressive_config.json"
     ]
+  },
+  "modules": {
+    "dependency_manager": {
+      "script": "scripts/dependency_manager.py",
+      "config": "infrastructure/config/dependency_manifest.json",
+      "report": "reports/ops/dependency_status.json",
+      "categories": [
+        "core",
+        "llm",
+        "embedding",
+        "vector",
+        "ml",
+        "performance",
+        "document"
+      ]
+    },
+    "delete_manager": {
+      "script": "scripts/delete_manager.py",
+      "trash_dir": "archive/trash/",
+      "log": "reports/ops/delete_log.json",
+      "pending": "reports/ops/pending_deletes.json",
+      "protected_files": [
+        "core/ARCHITECTURE.md",
+        "core/RULE_REGISTRY.json",
+        "core/SOUL.md",
+        "core/USER.md",
+        "MEMORY.md"
+      ]
+    }
   }
 }

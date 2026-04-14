@@ -1,5 +1,5 @@
 {
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "唯一运行时配置 - 其他配置文件仅作兼容或实验用途",
   "search": {
     "top_k": 10,
@@ -84,6 +84,19 @@
       "primary": "sqlite-vec",
       "secondary": "qdrant",
       "backup": "tfidf"
+    }
+  },
+  "modules": {
+    "dependency_manager": {
+      "enabled": true,
+      "auto_check": true,
+      "auto_install": false
+    },
+    "delete_manager": {
+      "enabled": true,
+      "require_confirmation": true,
+      "trash_enabled": true,
+      "trash_retention_days": 7
     }
   }
 }

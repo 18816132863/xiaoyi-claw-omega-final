@@ -196,6 +196,15 @@
       "severity": "info",
       "blocking": false,
       "outputs": []
+    },
+    "R009": {
+      "id": "R009",
+      "name": "删除确认规则",
+      "description": "所有删除操作必须经过 delete_manager.py",
+      "status": "active",
+      "owner": "governance",
+      "checker": "scripts/delete_manager.py",
+      "enforcement": "blocking"
     }
   },
   "profiles": {

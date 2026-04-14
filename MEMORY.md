@@ -4,9 +4,9 @@
 
 ## 项目状态
 
-- **版本**: V6.0.0
-- **状态**: 全面整合完成
-- **更新时间**: 2026-04-14
+- **版本**: V7.0.0
+- **状态**: 全面整合完成，门禁通过
+- **更新时间**: 2026-04-15
 
 ## 架构概览
 
@@ -85,29 +85,38 @@
 | torch | 2.11.0 | 深度学习 |
 | transformers | 5.5.4 | NLP 模型 |
 
-## V6.0.0 新增/更新
+## V7.0.0 整合更新
 
-### 技能注册表
-- `infrastructure/inventory/skill_registry.json`: V5.0.0，275 个技能
-- `infrastructure/inventory/skill_inverted_index.json`: 倒排索引
+### 文件同步
+- 根目录 `SOUL.md`, `USER.md`, `IDENTITY.md`, `TOOLS.md` 与 `core/` 真源同步
+- 移除"兼容副本"标记，直接使用真源内容
 
-### 统一巡检器
-- `scripts/unified_inspector.py`: V5.0.0
-- 6 项检查，并行执行
+### 报告清理
+- 清理旧巡检报告 (保留最近5个)
+- 清理旧版本报告 (V4.3.2_Phase3_*)
+- 移动空壳文件到 `archive/empty_shells/`
 
-### 技能安全识别
-- `scripts/check_skill_security.py`: V5.0.0
-- 白名单机制，误报抑制
+### JSON 契约修复
+- `runtime_integrity.json`: 状态值统一为 `passed/failed/skipped`
+- `skill_inverted_index.json`: 添加 `source` 和 `derived` 标注
 
-### 架构文档
-- `core/ARCHITECTURE.md`: V6.0.0，技能生态章节
+### 技能网关修复
+- `skill_adapter_gateway.py`: 支持 `skill_md` 执行器类型
+- 正确处理 SKILL.md 文档型技能
+
+### 门禁状态
+- ✅ JSON 契约检查通过
+- ✅ 唯一真源检查通过
+- ✅ 层间依赖检查通过
+- ✅ 仓库完整性检查通过
+- ✅ 技能安全检查通过
+- ✅ 架构完整性检查通过
 
 ## Git 认证
 
 - 仓库: https://github.com/18816132863/xiaoyi-claw-omega-final.git
 - Token: 见 git remote -v 输出（已配置在远程 URL 中）
 - 注意: Token 不应写入文件，使用环境变量或 git credential
-
 
 ### 性能加速依赖
 | 依赖 | 版本 | 用途 |
@@ -117,15 +126,11 @@
 | numexpr | 2.14.1 | 表达式加速 |
 | bottleneck | 1.6.0 | 瓶颈优化 |
 
-
-
-### 巡检器 V5.0.0
+### 巡检器 V6.0.0
 - 检查项: 8 项
 - Workers: 8
 - 目标耗时: < 6s
 - 新增: Token优化检查、注入配置检查
-
-
 
 ### 模块管理
 - **dependency_manager.py**: 依赖管理器，自动检测和安装依赖

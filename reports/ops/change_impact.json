@@ -1,117 +1,32 @@
 {
   "changed_files": [
-    ".clawhub/lock.json",
-    "AGENTS.md",
     "MEMORY.md",
-    "core/LAYER_DEPENDENCY_RULES.json",
-    "core/RULE_REGISTRY.json",
-    "infrastructure/backup_excludes.txt",
-    "infrastructure/backup_optimized.sh",
-    "memory/2026-04-14.md",
     "reports/git_commits.json",
-    "reports/inspection_20260414_020511.json",
-    "reports/ops/change_impact.json",
-    "reports/ops/change_impact_enforcement.json",
-    "reports/ops/executed_checks.json",
-    "reports/ops/followup_requirements.json",
+    "reports/inspection_20260414_220448.json",
     "reports/ops/rule_engine_report.json",
+    "reports/ops/rule_exception_debt.json",
     "reports/ops/rule_execution_index.json",
-    "reports/ops/skill_security_report.json",
-    "reports/quality_gate.json",
-    "reports/release_gate.json",
-    "reports/runtime_integrity.json",
+    "reports/ops/rule_registry_snapshot.json",
+    "reports/ops/unified_inspection.json",
     "scripts/render_nightly_summary.py",
     "scripts/render_premerge_summary.py",
-    "scripts/render_release_summary.py",
-    "scripts/run_release_gate.py",
-    "scripts/run_rule_engine.py",
-    "skills/beauty-generation-api/.clawhub/origin.json",
-    "skills/beauty-generation-api/SKILL.md",
-    "skills/beauty-generation-api/_meta.json",
-    "skills/beauty-generation-api/package.json",
-    "skills/beauty-generation-api/references/api-reference.md",
-    "skills/ocr-local/.clawhub/origin.json",
-    "skills/ocr-local/SKILL.md",
-    "skills/ocr-local/_meta.json",
-    "skills/ocr-local/package.json",
-    "skills/ocr-local/references/details.md",
-    "skills/openai-whisper-api/.clawhub/origin.json",
-    "skills/video-subtitles/.clawhub/origin.json",
-    "skills/video-subtitles/SKILL.md",
-    "skills/video-subtitles/references/details.md",
-    "tests/fixtures/smoke/blank.pdf",
-    "tests/fixtures/smoke/output/[Content_Types].xml",
-    "tests/fixtures/smoke/output/_rels/.rels",
-    "tests/fixtures/smoke/output/customXml/_rels/item1.xml.rels",
-    "tests/fixtures/smoke/output/customXml/item1.xml",
-    "tests/fixtures/smoke/output/customXml/itemProps1.xml",
-    "tests/fixtures/smoke/output/docProps/app.xml",
-    "tests/fixtures/smoke/output/docProps/core.xml",
-    "tests/fixtures/smoke/output/docProps/thumbnail.jpeg",
-    "tests/fixtures/smoke/output/word/_rels/document.xml.rels",
-    "tests/fixtures/smoke/output/word/document.xml",
-    "tests/fixtures/smoke/output/word/fontTable.xml",
-    "tests/fixtures/smoke/output/word/numbering.xml",
-    "tests/fixtures/smoke/output/word/settings.xml",
-    "tests/fixtures/smoke/output/word/styles.xml",
-    "tests/fixtures/smoke/output/word/stylesWithEffects.xml",
-    "tests/fixtures/smoke/output/word/theme/theme1.xml",
-    "tests/fixtures/smoke/output/word/webSettings.xml"
+    "scripts/render_release_summary.py"
   ],
   "changed_categories": [
-    "reports/ops",
-    "core/LAYER_DEPENDENCY_RULES.json"
+    "reports/ops"
   ],
   "matched_rules": [
     {
-      "file": "core/LAYER_DEPENDENCY_RULES.json",
-      "pattern": "core/LAYER_DEPENDENCY_RULES.json",
-      "description": "依赖规则变更，必须验证层间依赖和仓库完整性",
-      "blocking_commands": [
-        "python scripts/check_layer_dependencies.py",
-        "python scripts/check_repo_integrity.py --strict",
-        "python scripts/run_release_gate.py premerge"
-      ],
-      "followup_profiles": []
-    },
-    {
-      "file": "reports/ops/change_impact.json",
-      "pattern": "reports/ops/*",
-      "description": "控制平面报告变更，建议验证 JSON 契约",
-      "blocking_commands": [
-        "python scripts/check_json_contracts.py"
-      ],
-      "followup_profiles": []
-    },
-    {
-      "file": "reports/ops/change_impact_enforcement.json",
-      "pattern": "reports/ops/*",
-      "description": "控制平面报告变更，建议验证 JSON 契约",
-      "blocking_commands": [
-        "python scripts/check_json_contracts.py"
-      ],
-      "followup_profiles": []
-    },
-    {
-      "file": "reports/ops/executed_checks.json",
-      "pattern": "reports/ops/*",
-      "description": "控制平面报告变更，建议验证 JSON 契约",
-      "blocking_commands": [
-        "python scripts/check_json_contracts.py"
-      ],
-      "followup_profiles": []
-    },
-    {
-      "file": "reports/ops/followup_requirements.json",
-      "pattern": "reports/ops/*",
-      "description": "控制平面报告变更，建议验证 JSON 契约",
-      "blocking_commands": [
-        "python scripts/check_json_contracts.py"
-      ],
-      "followup_profiles": []
-    },
-    {
       "file": "reports/ops/rule_engine_report.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/rule_exception_debt.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
       "blocking_commands": [
@@ -129,7 +44,16 @@
       "followup_profiles": []
     },
     {
-      "file": "reports/ops/skill_security_report.json",
+      "file": "reports/ops/rule_registry_snapshot.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/unified_inspection.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
       "blocking_commands": [
@@ -139,12 +63,9 @@
     }
   ],
   "blocking_commands_current_profile": [
-    "python scripts/check_layer_dependencies.py",
-    "python scripts/run_release_gate.py premerge",
-    "python scripts/check_repo_integrity.py --strict",
     "python scripts/check_json_contracts.py"
   ],
   "followup_required_profiles": [],
   "followup_reason_by_profile": {},
-  "generated_at": "2026-04-14T11:34:34.795531"
+  "generated_at": "2026-04-14T22:27:55.543964"
 }

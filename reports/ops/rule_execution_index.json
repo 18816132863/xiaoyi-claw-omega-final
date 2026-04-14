@@ -1,5 +1,5 @@
 {
-  "profile": "premerge",
+  "profile": "release",
   "executions": [
     {
       "rule_id": "R001",
@@ -17,7 +17,7 @@
       "rule_id": "R002",
       "status": "active",
       "owner": "architecture",
-      "passed": true,
+      "passed": false,
       "blocking": true,
       "skipped": false,
       "skip_reason": null,
@@ -29,19 +29,7 @@
       "rule_id": "R003",
       "status": "active",
       "owner": "architecture",
-      "passed": true,
-      "blocking": true,
-      "skipped": false,
-      "skip_reason": null,
-      "waived": false,
-      "waiver_reason": null,
-      "waiver_debt_status": null
-    },
-    {
-      "rule_id": "R004",
-      "status": "active",
-      "owner": "governance",
-      "passed": true,
+      "passed": false,
       "blocking": true,
       "skipped": false,
       "skip_reason": null,
@@ -99,9 +87,9 @@
     }
   ],
   "summary": {
-    "total": 7,
-    "passed": 6,
-    "failed": 0,
+    "total": 6,
+    "passed": 3,
+    "failed": 2,
     "warnings": 0,
     "skipped": 1,
     "waived": 1
@@ -151,5 +139,5 @@
       "high_debt_count": 1
     }
   },
-  "timestamp": "2026-04-14T21:13:59.268805"
+  "timestamp": "2026-04-14T22:28:58.375347"
 }

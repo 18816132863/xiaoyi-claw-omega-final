@@ -63,6 +63,30 @@ def main():
             if data.get("skipped_rules"):
                 print(f"**Skipped Rules**: {', '.join(data['skipped_rules'])}")
                 print()
+            
+            # Exception Debt
+            exception_debt = data.get('exception_debt', {})
+            summary = exception_debt.get('summary', {})
+            
+            # Fallback to rule_exception_debt.json
+            if not summary:
+                debt_path = root / "reports/ops/rule_exception_debt.json"
+                if debt_path.exists():
+                    try:
+                        debt_data = json.load(open(debt_path, encoding='utf-8'))
+                        summary = debt_data.get('summary', {})
+                    except:
+                        pass
+            
+            stale_count = summary.get('stale_count', 0)
+            overused_count = summary.get('overused_count', 0)
+            high_debt_count = summary.get('high_debt_count', 0)
+            
+            print("**Exception Debt**:")
+            print(f"- Stale Exceptions: {stale_count}")
+            print(f"- Overused Exceptions: {overused_count}")
+            print(f"- High Debt Exceptions: {high_debt_count}")
+            print()
         except:
             print("**Rule Checks**: ⚠️ 无法读取")
             print()

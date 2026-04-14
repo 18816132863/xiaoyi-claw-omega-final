@@ -2,7 +2,6 @@
   "version": "1.2.0",
   "updated": "2026-04-14",
   "description": "统一规则注册表 - 定义所有规则检查器及其执行配置（含生命周期）",
-  
   "rules": {
     "layer_dependency_rule": {
       "rule_id": "R001",
@@ -20,7 +19,11 @@
         "core/LAYER_DEPENDENCY_RULES.json"
       ],
       "checker_script": "scripts/check_layer_dependencies.py",
-      "enforcement_stage": ["premerge", "nightly", "release"],
+      "enforcement_stage": [
+        "premerge",
+        "nightly",
+        "release"
+      ],
       "severity": "error",
       "blocking": true,
       "outputs": [
@@ -42,7 +45,11 @@
         "core/contracts/*.schema.json"
       ],
       "checker_script": "scripts/check_json_contracts.py",
-      "enforcement_stage": ["premerge", "nightly", "release"],
+      "enforcement_stage": [
+        "premerge",
+        "nightly",
+        "release"
+      ],
       "severity": "error",
       "blocking": true,
       "outputs": []
@@ -62,7 +69,11 @@
         "core/SINGLE_SOURCE_OF_TRUTH.md"
       ],
       "checker_script": "scripts/check_repo_integrity.py",
-      "enforcement_stage": ["premerge", "nightly", "release"],
+      "enforcement_stage": [
+        "premerge",
+        "nightly",
+        "release"
+      ],
       "severity": "error",
       "blocking": true,
       "outputs": []
@@ -82,7 +93,11 @@
         "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md"
       ],
       "checker_script": "scripts/check_change_impact_enforcement.py",
-      "enforcement_stage": ["premerge", "nightly", "release"],
+      "enforcement_stage": [
+        "premerge",
+        "nightly",
+        "release"
+      ],
       "severity": "error",
       "blocking": true,
       "outputs": [
@@ -105,7 +120,11 @@
         "tests/rule_violations/"
       ],
       "checker_script": "scripts/check_rule_guards.py",
-      "enforcement_stage": ["premerge", "nightly", "release"],
+      "enforcement_stage": [
+        "premerge",
+        "nightly",
+        "release"
+      ],
       "severity": "error",
       "blocking": true,
       "outputs": []
@@ -125,7 +144,11 @@
         "scripts/check_repo_integrity_fast.py"
       ],
       "checker_script": "scripts/check_repo_integrity_fast.py",
-      "enforcement_stage": ["premerge", "nightly", "release"],
+      "enforcement_stage": [
+        "premerge",
+        "nightly",
+        "release"
+      ],
       "severity": "error",
       "blocking": true,
       "outputs": []
@@ -145,7 +168,11 @@
         "scripts/check_skill_security.py"
       ],
       "checker_script": "scripts/check_skill_security.py",
-      "enforcement_stage": ["premerge", "nightly", "release"],
+      "enforcement_stage": [
+        "premerge",
+        "nightly",
+        "release"
+      ],
       "severity": "warning",
       "blocking": false,
       "outputs": [
@@ -171,24 +198,63 @@
       "outputs": []
     }
   },
-  
   "profiles": {
     "premerge": {
-      "rules": ["R001", "R002", "R003", "R004", "R005", "R006", "R007", "R008"],
+      "rules": [
+        "R001",
+        "R002",
+        "R003",
+        "R004",
+        "R005",
+        "R006",
+        "R007",
+        "R008"
+      ],
       "description": "Premerge 门禁规则集"
     },
     "nightly": {
-      "rules": ["R001", "R002", "R003", "R005", "R006", "R007", "R008"],
+      "rules": [
+        "R001",
+        "R002",
+        "R003",
+        "R005",
+        "R006",
+        "R007",
+        "R008"
+      ],
       "description": "Nightly 门禁规则集"
     },
     "release": {
-      "rules": ["R001", "R002", "R003", "R005", "R006", "R007", "R008"],
+      "rules": [
+        "R001",
+        "R002",
+        "R003",
+        "R005",
+        "R006",
+        "R007",
+        "R008"
+      ],
       "description": "Release 门禁规则集"
     }
   },
-  
   "lifecycle": {
-    "status_values": ["active", "experimental", "deprecated", "disabled"],
-    "rollout_stages": ["premerge", "nightly", "release", "all"]
+    "status_values": [
+      "active",
+      "experimental",
+      "deprecated",
+      "disabled"
+    ],
+    "rollout_stages": [
+      "premerge",
+      "nightly",
+      "release",
+      "all"
+    ]
+  },
+  "performance": {
+    "parallel_execution": true,
+    "cache_results": true,
+    "incremental_check": true,
+    "timeout_optimization": true
   }
 }

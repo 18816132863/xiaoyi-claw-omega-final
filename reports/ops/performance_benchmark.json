@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-14",
+  "targets": {
+    "skill_lookup": "< 1ms",
+    "rule_check": "< 100ms",
+    "full_inspection": "< 15s",
+    "embedding_4096": "< 500ms",
+    "vector_search": "< 100ms"
+  },
+  "current": {
+    "skill_registry_size": 275,
+    "rule_count": 8,
+    "embedding_dimensions": 4096,
+    "cache_hit_rate": "95%+"
+  },
+  "optimizations": [
+    "并行巡检执行",
+    "结果缓存",
+    "懒加载技能",
+    "批量操作",
+    "异步 I/O"
+  ]
+}

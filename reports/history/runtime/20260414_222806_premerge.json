@@ -1,11 +1,10 @@
 {
-  "profile": "release",
+  "profile": "premerge",
   "scope": "all",
-  "verified_at": "2026-04-14T22:29:10.248661",
+  "verified_at": "2026-04-14T22:28:06.584972",
   "overall_passed": false,
   "failure_reasons": [
-    "Local 层未通过: fail",
-    "Integration 层未通过: partial"
+    "Local 层未通过: fail"
   ],
   "p0_count": 0,
   "p1_count": 0,

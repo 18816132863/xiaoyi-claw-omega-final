@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-技能安全识别器 - V2.0.0
+技能安全识别器 - V2.1.0
 
 检测和识别高危 Skill，防止安装恶意或高风险的技能
 
@@ -14,7 +14,7 @@
 7. 第三方内容抓取型 - 抓取不可信网页内容
 8. 无维护型 - 零评论、零 star、几个月没更新
 
-V2.0.0 改进：
+V2.1.0 改进：
 - 添加白名单机制，排除常见合法关键词
 - 优化密钥检测，区分配置说明和恶意收割
 - 优化挖矿检测，排除数据挖掘等合法用途
@@ -259,7 +259,7 @@ def check_skill_security(skill_path: Path) -> Dict:
 
 
 def check_key_harvester(skill_path: Path) -> Optional[Dict]:
-    """检查密钥收割型 - V2.0.0 优化版"""
+    """检查密钥收割型 - V2.1.0 优化版"""
     indicators = []
     
     # 合法的 API 调用模式（这些是正常的 API 使用，不是恶意行为）
@@ -328,7 +328,7 @@ def check_key_harvester(skill_path: Path) -> Optional[Dict]:
 
 
 def check_crypto_miner(skill_path: Path) -> Optional[Dict]:
-    """检查挖矿注入型 - V2.0.0 优化版"""
+    """检查挖矿注入型 - V2.1.0 优化版"""
     indicators = []
     
     # 加密货币挖矿的明确特征
@@ -371,7 +371,7 @@ def check_crypto_miner(skill_path: Path) -> Optional[Dict]:
 
 
 def check_dynamic_fetcher(skill_path: Path) -> Optional[Dict]:
-    """检查动态拉取型 - V2.0.0 优化版"""
+    """检查动态拉取型 - V2.1.0 优化版"""
     indicators = []
     
     # 可疑的动态执行模式
@@ -591,7 +591,7 @@ def scan_all_skills() -> Dict:
 def print_report(report: Dict):
     """打印报告"""
     print("╔══════════════════════════════════════════════════╗")
-    print("║          技能安全识别报告 V2.0.0               ║")
+    print("║          技能安全识别报告 V2.1.0               ║")
     print("╚══════════════════════════════════════════════════╝")
     print()
     
@@ -633,7 +633,7 @@ def print_report(report: Dict):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="技能安全识别器 V2.0.0")
+    parser = argparse.ArgumentParser(description="技能安全识别器 V2.1.0")
     parser.add_argument("--scan-all", action="store_true", help="扫描所有技能")
     parser.add_argument("--skill", help="扫描指定技能目录")
     parser.add_argument("--json", action="store_true", help="输出 JSON 格式")

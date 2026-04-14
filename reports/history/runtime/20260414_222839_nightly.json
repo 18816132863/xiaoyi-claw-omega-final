@@ -1,7 +1,7 @@
 {
-  "profile": "release",
+  "profile": "nightly",
   "scope": "all",
-  "verified_at": "2026-04-14T22:29:10.248661",
+  "verified_at": "2026-04-14T22:28:39.814220",
   "overall_passed": false,
   "failure_reasons": [
     "Local 层未通过: fail",

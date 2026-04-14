@@ -1,34 +1,29 @@
 {
-  "version": "4.3.1",
+  "version": "5.0.0",
   "description": "唯一运行时配置 - 其他配置文件仅作兼容或实验用途",
-  
   "search": {
     "top_k": 10,
     "mode": "balanced",
     "timeout_ms": 3000,
     "use_semantic": true
   },
-  
   "cache": {
     "max_size": 1000,
     "default_ttl": 300,
     "l1_max_items": 100,
     "l2_max_size_mb": 10
   },
-  
   "router": {
     "mode": "balanced",
     "confidence_threshold": 0.5,
     "max_alternatives": 3
   },
-  
   "weights": {
     "keyword": 0.3,
     "semantic": 0.4,
     "popularity": 0.2,
     "recency": 0.1
   },
-  
   "token_budget": {
     "total": 10000,
     "l1_core": 3000,
@@ -38,10 +33,17 @@
     "l5_governance": 800,
     "l6_infrastructure": 700
   },
-  
   "ecommerce": {
     "default_commission_rate": 0.25,
     "min_follower_count": 10000,
     "max_risk_level": "medium"
-  }
+  },
+  "performance": {
+    "parallel_inspection": true,
+    "cache_ttl": 3600,
+    "lazy_load_skills": true,
+    "batch_operations": true,
+    "async_io": true
+  },
+  "updated": "2026-04-14"
 }

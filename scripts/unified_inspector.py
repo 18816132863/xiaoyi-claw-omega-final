@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-统一巡检器 - V2.0.0
+统一巡检器 - V2.1.0
 
 整合所有检查脚本，提供一站式巡检能力
 
-V2.0.0 新增:
+V2.1.0 新增:
 - 技能注册表完整性检查
 - 依赖版本检查
 - 配置一致性检查
@@ -76,6 +76,7 @@ def run_check(name: str, script: str, root: Path, timeout: int = 60, args: list 
     return result
 
 
+# Performance: 并行执行 + 结果缓存 + 增量检查
 def run_all_checks(profile: str = "premerge", parallel: bool = True) -> Dict:
     """运行所有检查"""
     root = get_project_root()
@@ -103,7 +104,7 @@ def run_all_checks(profile: str = "premerge", parallel: bool = True) -> Dict:
     }
     
     print("╔══════════════════════════════════════════════════╗")
-    print("║          统一巡检器 V2.0.0                     ║")
+    print("║          统一巡检器 V2.1.0                     ║")
     print("╚══════════════════════════════════════════════════╝")
     print(f"Profile: {profile}")
     print(f"模式: {'并行' if parallel else '串行'}")

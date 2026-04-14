@@ -5521,5 +5521,18 @@
     "communication": 2,
     "utility": 1
   },
-  "total_skills": 275
+  "total_skills": 275,
+  "performance": {
+    "total_skills": 275,
+    "routable": 273,
+    "testable": 80,
+    "callable": 273,
+    "cache_enabled": true,
+    "lazy_load": true,
+    "parallel_check": true
+  },
+  "dependency_stats": {
+    "total_dependencies": 0,
+    "avg_per_skill": 0.0
+  }
 }

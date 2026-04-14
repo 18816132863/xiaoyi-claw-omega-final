@@ -32,7 +32,7 @@ def get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
-def run_check(name: str, script: str, root: Path, timeout: int = 60) -> Dict:
+def run_check(name: str, script: str, root: Path, timeout: int = 60, args: list = None) -> Dict:
     """运行单个检查"""
     result = {
         "name": name,
@@ -47,8 +47,11 @@ def run_check(name: str, script: str, root: Path, timeout: int = 60) -> Dict:
     start = time.time()
     
     try:
+        cmd = [sys.executable, str(root / script)]
+        if args:
+            cmd.extend(args)
         proc = subprocess.run(
-            [sys.executable, str(root / script)],
+            cmd,
             capture_output=True,
             text=True,
             timeout=timeout,
@@ -72,12 +75,12 @@ def run_all_checks(profile: str = "premerge", parallel: bool = True) -> Dict:
     root = get_project_root()
     
     checks = [
-        ("层间依赖", "scripts/check_layer_dependencies.py", 60),
-        ("JSON契约", "scripts/check_json_contracts.py", 60),
-        ("仓库完整性", "scripts/check_repo_integrity_fast.py", 30),
-        ("变更影响", "scripts/check_change_impact_enforcement.py", 60),
-        ("技能安全", "scripts/check_skill_security.py", 120),
-        ("架构完整性", "infrastructure/architecture_inspector.py", 60),
+        ("层间依赖", "scripts/check_layer_dependencies.py", 60, None),
+        ("JSON契约", "scripts/check_json_contracts.py", 60, None),
+        ("仓库完整性", "scripts/check_repo_integrity_fast.py", 30, None),
+        ("变更影响", "scripts/check_change_impact_enforcement.py", 60, None),
+        ("技能安全", "scripts/check_skill_security.py", 120, ["--scan-all"]),
+        ("架构完整性", "infrastructure/architecture_inspector.py", 60, None),
     ]
     
     results = {
@@ -104,8 +107,8 @@ def run_all_checks(profile: str = "premerge", parallel: bool = True) -> Dict:
         # 并行执行
         with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
             futures = {
-                executor.submit(run_check, name, script, root, timeout): name
-                for name, script, timeout in checks
+                executor.submit(run_check, name, script, root, timeout, args): name
+                for name, script, timeout, args in checks
             }
             
             for future in concurrent.futures.as_completed(futures):
@@ -123,8 +126,8 @@ def run_all_checks(profile: str = "premerge", parallel: bool = True) -> Dict:
                         print(f"     错误: {result['error'][:100]}")
     else:
         # 串行执行
-        for name, script, timeout in checks:
-            result = run_check(name, script, root, timeout)
+        for name, script, timeout, args in checks:
+            result = run_check(name, script, root, timeout, args)
             results["checks"].append(result)
             results["summary"]["total_duration_ms"] += result["duration_ms"]
             

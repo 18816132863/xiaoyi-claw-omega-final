@@ -9,13 +9,13 @@
   "p0_count": 0,
   "p1_count": 0,
   "p2_count": 207,
-  "local_status": "fail",
+  "local_status": "failed",
   "local_results": [],
   "integration_status": "partial",
   "integration_results": [
     {
       "skill": "file-manager",
-      "status": "fail",
+      "status": "failed",
       "message": "{'code': 'IMPORT_ERROR', 'message': '无法加载技能模块: /home/sandbox/.openclaw/workspace/SKILL.md'}"
     }
   ],

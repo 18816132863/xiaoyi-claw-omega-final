@@ -6,8 +6,8 @@
   "auto_generate": true,
   "template": "daily",
   "memory_integration": {
-    "enabled": false,
-    "append_to_daily": false,
+    "enabled": true,
+    "append_to_daily": true,
     "format": "summary"
   },
   "sections": {
@@ -22,7 +22,7 @@
     "quotes": true,
     "curiosity": true,
     "decisions": true,
-    "relationship": false
+    "relationship": true
   },
   "features": {
     "quote_hall_of_fame": {
@@ -38,7 +38,7 @@
       "file": "decisions.md"
     },
     "relationship_evolution": {
-      "enabled": false,
+      "enabled": true,
       "file": "relationship.md"
     }
   },

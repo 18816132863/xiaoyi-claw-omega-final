@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-04-06T11:12:00+08:00",
-  "description": "审计配置",
+  "lastUpdated": "2026-04-14T21:45:00+08:00",
+  "description": "审计配置 - 高级功能已启用",
   "events": {
     "mandatory": [
       {
@@ -49,27 +49,32 @@
       {
         "type": "tool_call",
         "level": "INFO",
-        "retention": "30d"
+        "retention": "30d",
+        "enabled": true
       },
       {
         "type": "skill_call",
         "level": "INFO",
-        "retention": "30d"
+        "retention": "30d",
+        "enabled": true
       },
       {
         "type": "memory_read",
         "level": "INFO",
-        "retention": "30d"
+        "retention": "30d",
+        "enabled": true
       },
       {
         "type": "memory_write",
         "level": "INFO",
-        "retention": "30d"
+        "retention": "30d",
+        "enabled": true
       },
       {
         "type": "retrieval",
         "level": "INFO",
-        "retention": "30d"
+        "retention": "30d",
+        "enabled": true
       }
     ]
   },
@@ -79,7 +84,7 @@
     "sharding": "daily",
     "compression": "gzip",
     "encryption": {
-      "enabled": false,
+      "enabled": true,
       "algorithm": "AES-256-GCM"
     }
   },

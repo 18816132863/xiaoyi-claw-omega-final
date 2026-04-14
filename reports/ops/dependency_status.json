@@ -1,0 +1,165 @@
+{
+  "categories": {
+    "core": {
+      "description": "核心依赖 - 必须安装",
+      "packages": {
+        "numpy": {
+          "description": "数值计算",
+          "installed": true
+        },
+        "scipy": {
+          "description": "科学计算",
+          "installed": true
+        },
+        "scikit-learn": {
+          "description": "机器学习",
+          "installed": true
+        },
+        "requests": {
+          "description": "HTTP 请求",
+          "installed": true
+        },
+        "aiosqlite": {
+          "description": "异步 SQLite",
+          "installed": true
+        },
+        "cryptography": {
+          "description": "加密",
+          "installed": true
+        },
+        "pycryptodome": {
+          "description": "加密",
+          "installed": true
+        }
+      }
+    },
+    "llm": {
+      "description": "LLM 集成依赖",
+      "packages": {
+        "openai": {
+          "description": "OpenAI API",
+          "installed": true
+        },
+        "anthropic": {
+          "description": "Claude API",
+          "installed": true
+        },
+        "langchain": {
+          "description": "LLM 框架",
+          "installed": true
+        },
+        "tiktoken": {
+          "description": "Token 计数",
+          "installed": true
+        }
+      }
+    },
+    "embedding": {
+      "description": "Embedding 依赖",
+      "packages": {
+        "sentence-transformers": {
+          "description": "句子嵌入",
+          "installed": false
+        },
+        "transformers": {
+          "description": "Transformer 模型",
+          "installed": false
+        }
+      }
+    },
+    "vector": {
+      "description": "向量存储依赖",
+      "packages": {
+        "qdrant-client": {
+          "description": "Qdrant 向量数据库",
+          "installed": true
+        },
+        "chromadb": {
+          "description": "ChromaDB 向量存储",
+          "installed": true
+        },
+        "faiss-cpu": {
+          "description": "FAISS 相似度搜索",
+          "installed": false
+        }
+      }
+    },
+    "ml": {
+      "description": "机器学习依赖",
+      "packages": {
+        "torch": {
+          "description": "PyTorch 深度学习",
+          "installed": false
+        },
+        "numba": {
+          "description": "JIT 编译加速",
+          "installed": false
+        },
+        "llvmlite": {
+          "description": "LLVM 绑定",
+          "installed": false
+        }
+      }
+    },
+    "performance": {
+      "description": "性能优化依赖",
+      "packages": {
+        "numexpr": {
+          "description": "表达式加速",
+          "installed": true
+        },
+        "bottleneck": {
+          "description": "瓶颈优化",
+          "installed": true
+        }
+      }
+    },
+    "document": {
+      "description": "文档处理依赖",
+      "packages": {
+        "reportlab": {
+          "description": "PDF 生成",
+          "installed": true
+        },
+        "weasyprint": {
+          "description": "HTML 转 PDF",
+          "installed": true
+        },
+        "pdfkit": {
+          "description": "PDF 工具",
+          "installed": true
+        }
+      }
+    }
+  },
+  "missing": [
+    "sentence-transformers",
+    "transformers",
+    "faiss-cpu",
+    "torch",
+    "numba",
+    "llvmlite"
+  ],
+  "installed": [
+    "numpy",
+    "scipy",
+    "scikit-learn",
+    "requests",
+    "aiosqlite",
+    "cryptography",
+    "pycryptodome",
+    "openai",
+    "anthropic",
+    "langchain",
+    "tiktoken",
+    "qdrant-client",
+    "chromadb",
+    "numexpr",
+    "bottleneck",
+    "reportlab",
+    "weasyprint",
+    "pdfkit"
+  ],
+  "total": 24,
+  "missing_count": 6
+}

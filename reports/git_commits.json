@@ -947,6 +947,22 @@
         "deleted": [],
         "renamed": []
       }
+    },
+    {
+      "hash": "6655c355",
+      "message": "架构巡检: 5/6 通过, 246 文件",
+      "timestamp": "2026-04-14T23:20:20.734399",
+      "changes": {
+        "modified": [
+          "reports/git_commits.json",
+          "reports/ops/unified_inspection.json"
+        ],
+        "added": [],
+        "deleted": [
+          "rchive/backups/openclaw-full-20260414-020736.tar.gz.xz"
+        ],
+        "renamed": []
+      }
     }
   ]
 }

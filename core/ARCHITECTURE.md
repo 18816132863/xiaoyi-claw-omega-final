@@ -1,4 +1,4 @@
-# 六层架构定义 V5.0.0
+# 六层架构定义 V5.1.0
 
 > **唯一主架构定义** - 本文档是项目唯一正式运行架构定义
 > 
@@ -11,11 +11,81 @@
 | 层级 | 名称 | 职责 | 目录 |
 |------|------|------|------|
 | L1 | Core | 核心认知、身份、规则、标准 | `core/` |
-| L2 | Memory Context | 记忆上下文、知识库、统一搜索 | `memory_context/` |
+| L2 | Memory Context | 记忆上下文、知识库、统一搜索、向量存储 | `memory_context/` |
 | L3 | Orchestration | 任务编排、工作流、路由、策略 | `orchestration/` |
 | L4 | Execution | 能力执行、技能网关、交付 | `execution/` |
 | L5 | Governance | 稳定治理、安全审计、合规、计费 | `governance/` |
 | L6 | Infrastructure | 基础设施、工具链、注册表、运维 | `infrastructure/` |
+
+---
+
+## 技能生态
+
+### 技能统计
+
+| 指标 | 数量 |
+|------|------|
+| 总技能数 | 275 |
+| 可路由 | 273 |
+| 可测试 | 80 |
+| 可调用 | 273 |
+
+### 技能分类
+
+| 分类 | 数量 | 说明 |
+|------|------|------|
+| AI | 31 | LLM、Embedding、Agent |
+| Search | 24 | 搜索、查询、抓取 |
+| Image | 17 | 图像生成、处理 |
+| Document | 13 | PDF、DOCX、PPTX |
+| Video | 10 | 视频生成、处理 |
+| Finance | 8 | 股票、加密货币 |
+| Code | 8 | Git、Docker、Ansible |
+| E-commerce | 8 | 电商、优惠券 |
+| Data | 7 | 数据分析、数据库 |
+| Memory | 7 | 记忆、知识库 |
+| Audio | 5 | 语音、TTS |
+| Automation | 5 | 自动化、定时任务 |
+| Communication | 2 | 消息、邮件 |
+| Utility | 1 | 工具类 |
+| Other | 129 | 其他 |
+
+### 核心技能
+
+| 技能 | 版本 | 功能 |
+|------|------|------|
+| llm-memory-integration | 5.1.5 | LLM + 向量模型集成，4096维 Embedding |
+| agent-chronicle | 1.0.0 | 日记生成，记忆集成 |
+| find-skills | 1.0.0 | 技能发现 |
+| memory-setup | 1.0.0 | 记忆系统配置 |
+
+---
+
+## 高级功能
+
+### 向量存储
+
+| 引擎 | 状态 | 维度 | 说明 |
+|------|------|------|------|
+| sqlite-vec | ✅ 启用 | 4096 | 主引擎，本地存储 |
+| qdrant | ✅ 启用 | 4096 | 副引擎，高性能 |
+| tfidf | ✅ 启用 | - | 备份引擎，关键词检索 |
+
+### LLM 配置
+
+| 提供商 | 模型 | 用途 |
+|--------|------|------|
+| Gitee AI | Qwen3-235B-A22B | LLM |
+| Gitee AI | Qwen3-Embedding-8B | Embedding (4096维) |
+
+### 审计系统
+
+| 功能 | 状态 |
+|------|------|
+| 加密存储 | ✅ AES-256-GCM |
+| 工具调用审计 | ✅ 启用 |
+| 技能调用审计 | ✅ 启用 |
+| 内存读写审计 | ✅ 启用 |
 
 ---
 

@@ -1,20 +1,15 @@
 {
   "required_profiles": [
-    "premerge",
     "release"
   ],
   "reason_by_profile": {
-    "premerge": [
-      "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md changed"
-    ],
     "release": [
       "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md changed"
     ]
   },
   "satisfied_profiles": [
-    "premerge",
     "release"
   ],
   "pending_profiles": [],
-  "generated_at": "2026-04-14T01:31:52.413900"
+  "generated_at": "2026-04-14T11:34:37.292193"
 }

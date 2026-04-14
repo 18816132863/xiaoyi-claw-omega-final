@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "updated": "2026-04-13",
+  "version": "2.1.0",
+  "updated": "2026-04-14",
   "description": "层间依赖规则配置文件 - 规则硬化版",
   
   "layers": {
@@ -19,7 +19,7 @@
     },
     "orchestration": {
       "description": "任务编排、工作流、路由",
-      "allow_read_from": ["core", "infrastructure", "execution"],
+      "allow_read_from": ["core", "infrastructure"],
       "allow_write_to": [],
       "forbid_import_from": ["scripts"]
     },
@@ -46,6 +46,19 @@
       "allow_read_from": ["core"],
       "allow_write_to": [],
       "forbid_import_from": []
+    },
+    "control_plane": {
+      "description": "控制平面：scripts/reports/ops 聚合层",
+      "allow_read_from": [
+        "core",
+        "orchestration",
+        "execution",
+        "memory_context",
+        "governance",
+        "infrastructure"
+      ],
+      "allow_write_to": ["reports"],
+      "forbid_import_from": []
     }
   },
   
@@ -53,6 +66,7 @@
     "core 只能被读，不承担业务执行",
     "execution 不直接依赖 governance 规则实现",
     "governance 不直接依赖具体 skills 实现",
+    "control_plane 只能聚合，不是业务真源",
     "registry 是真源，index 是派生物",
     "reports 是产物，不是主逻辑输入真源"
   ],

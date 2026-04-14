@@ -5,12 +5,12 @@
   "local_status": "passed",
   "integration_status": "passed",
   "external_status": "passed",
-  "verified_at": "2026-04-14T01:31:52.394198",
+  "verified_at": "2026-04-14T10:39:16.020383",
   "can_release": true,
   "runtime_gate": {
     "profile": "release",
     "passed": true,
-    "verified_at": "2026-04-14T01:31:51.919396",
+    "verified_at": "2026-04-14T10:39:15.561176",
     "p0_count": 0,
     "local_status": "passed",
     "integration_status": "passed",
@@ -18,7 +18,7 @@
   },
   "quality_gate": {
     "passed": true,
-    "verified_at": "2026-04-14T01:31:52.159803"
+    "verified_at": "2026-04-14T10:39:15.793336"
   },
   "blocked_reasons": [],
   "skipped_external": [],
@@ -29,12 +29,12 @@
   },
   "recent_nightly_status": [
     {
-      "date": "2026-04-14T01:31:36.168451",
+      "date": "2026-04-14T10:39:01.611125",
       "passed": true,
       "p0_count": 0,
       "local_status": "passed"
     }
   ],
   "last_blocked": null,
-  "checked_at": "2026-04-14T01:31:52.394198"
+  "checked_at": "2026-04-14T10:39:16.020383"
 }

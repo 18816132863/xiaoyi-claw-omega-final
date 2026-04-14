@@ -1,13 +1,19 @@
 {
-  "version": "1.0.0",
+  "version": "1.2.0",
   "updated": "2026-04-14",
-  "description": "统一规则注册表 - 定义所有规则检查器及其执行配置",
+  "description": "统一规则注册表 - 定义所有规则检查器及其执行配置（含生命周期）",
   
   "rules": {
     "layer_dependency_rule": {
       "rule_id": "R001",
       "name": "层间依赖规则",
       "description": "检查六层架构的层间依赖是否合规",
+      "version": "1.0.0",
+      "owner": "architecture",
+      "status": "active",
+      "introduced_in": "11A",
+      "deprecated_in": null,
+      "rollout_stage": "all",
       "owner_layer": "L1",
       "source_files": [
         "core/LAYER_DEPENDENCY_MATRIX.md",
@@ -25,6 +31,12 @@
       "rule_id": "R002",
       "name": "JSON 契约规则",
       "description": "检查 JSON 文件是否符合 schema 契约",
+      "version": "1.0.0",
+      "owner": "architecture",
+      "status": "active",
+      "introduced_in": "11A",
+      "deprecated_in": null,
+      "rollout_stage": "all",
       "owner_layer": "L1",
       "source_files": [
         "core/contracts/*.schema.json"
@@ -39,6 +51,12 @@
       "rule_id": "R003",
       "name": "唯一真源规则",
       "description": "检查唯一真源文件是否存在且一致",
+      "version": "1.0.0",
+      "owner": "architecture",
+      "status": "active",
+      "introduced_in": "11A",
+      "deprecated_in": null,
+      "rollout_stage": "all",
       "owner_layer": "L1",
       "source_files": [
         "core/SINGLE_SOURCE_OF_TRUTH.md"
@@ -53,6 +71,12 @@
       "rule_id": "R004",
       "name": "变更影响规则",
       "description": "检查变更文件是否触发了必须执行的命令",
+      "version": "1.0.0",
+      "owner": "governance",
+      "status": "active",
+      "introduced_in": "11A",
+      "deprecated_in": null,
+      "rollout_stage": "all",
       "owner_layer": "L4",
       "source_files": [
         "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md"
@@ -70,6 +94,12 @@
       "rule_id": "R005",
       "name": "规则自测规则",
       "description": "验证规则检查器能正确检测违规样例",
+      "version": "1.0.0",
+      "owner": "governance",
+      "status": "active",
+      "introduced_in": "11A",
+      "deprecated_in": null,
+      "rollout_stage": "all",
       "owner_layer": "L5",
       "source_files": [
         "tests/rule_violations/"
@@ -83,31 +113,82 @@
     "repo_integrity_rule": {
       "rule_id": "R006",
       "name": "仓库完整性规则",
-      "description": "检查必需文件、目录、Makefile 目标等完整性",
+      "description": "检查必需文件、目录完整性（快速版）",
+      "version": "2.0.0",
+      "owner": "infrastructure",
+      "status": "active",
+      "introduced_in": "11A",
+      "deprecated_in": null,
+      "rollout_stage": "all",
       "owner_layer": "L6",
       "source_files": [
-        "scripts/check_repo_integrity.py"
+        "scripts/check_repo_integrity_fast.py"
       ],
-      "checker_script": "scripts/check_repo_integrity.py",
+      "checker_script": "scripts/check_repo_integrity_fast.py",
       "enforcement_stage": ["premerge", "nightly", "release"],
       "severity": "error",
       "blocking": true,
+      "outputs": []
+    },
+    "skill_security_rule": {
+      "rule_id": "R007",
+      "name": "技能安全规则",
+      "description": "检查技能是否存在安全风险（实验阶段）",
+      "version": "0.1.0",
+      "owner": "governance",
+      "status": "experimental",
+      "introduced_in": "11C",
+      "deprecated_in": null,
+      "rollout_stage": "all",
+      "owner_layer": "L5",
+      "source_files": [
+        "scripts/check_skill_security.py"
+      ],
+      "checker_script": "scripts/check_skill_security.py",
+      "enforcement_stage": ["premerge", "nightly", "release"],
+      "severity": "warning",
+      "blocking": false,
+      "outputs": [
+        "reports/ops/skill_security_report.json"
+      ]
+    },
+    "legacy_format_rule": {
+      "rule_id": "R008",
+      "name": "遗留格式规则",
+      "description": "检查遗留格式文件（已禁用）",
+      "version": "0.0.1",
+      "owner": "infrastructure",
+      "status": "disabled",
+      "introduced_in": "10A",
+      "deprecated_in": "11A",
+      "rollout_stage": "all",
+      "owner_layer": "L6",
+      "source_files": [],
+      "checker_script": "scripts/check_legacy_format.py",
+      "enforcement_stage": [],
+      "severity": "info",
+      "blocking": false,
       "outputs": []
     }
   },
   
   "profiles": {
     "premerge": {
-      "rules": ["R001", "R002", "R003", "R004", "R005", "R006"],
+      "rules": ["R001", "R002", "R003", "R004", "R005", "R006", "R007", "R008"],
       "description": "Premerge 门禁规则集"
     },
     "nightly": {
-      "rules": ["R001", "R002", "R003", "R005", "R006"],
+      "rules": ["R001", "R002", "R003", "R005", "R006", "R007", "R008"],
       "description": "Nightly 门禁规则集"
     },
     "release": {
-      "rules": ["R001", "R002", "R003", "R005", "R006"],
+      "rules": ["R001", "R002", "R003", "R005", "R006", "R007", "R008"],
       "description": "Release 门禁规则集"
     }
+  },
+  
+  "lifecycle": {
+    "status_values": ["active", "experimental", "deprecated", "disabled"],
+    "rollout_stages": ["premerge", "nightly", "release", "all"]
   }
 }

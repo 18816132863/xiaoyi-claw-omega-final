@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""渲染 nightly summary"""
+"""渲染 nightly summary - 从统一规则引擎报告读取"""
 
 import json
 from pathlib import Path
@@ -9,6 +9,63 @@ def main():
 
     print("## 🌙 Nightly Audit Summary")
     print()
+
+    # Rule Engine Report
+    rule_report_path = root / "reports/ops/rule_engine_report.json"
+    if rule_report_path.exists():
+        try:
+            data = json.load(open(rule_report_path, encoding='utf-8'))
+            print("**Rule Checks**:")
+            print(f"- Profile: {data.get('profile', 'N/A')}")
+            print(f"- Total Rules: {data.get('total_rules', 0)}")
+            print(f"- Passed: {data.get('passed_count', 0)}")
+            print(f"- Failed: {data.get('failed_count', 0)}")
+            print(f"- Warnings: {data.get('warning_count', 0)}")
+            print(f"- Skipped: {data.get('skipped_count', 0)}")
+            print(f"- Waived: {data.get('waived_count', 0)}")
+            print()
+            
+            # By Status
+            print("**By Status**:")
+            print(f"- Active: {len(data.get('active_rules', []))}")
+            print(f"- Experimental: {len(data.get('experimental_rules', []))}")
+            print(f"- Deprecated: {len(data.get('deprecated_rules', []))}")
+            print(f"- Disabled: {len(data.get('disabled_rules', []))}")
+            print()
+            
+            # Exceptions
+            if data.get('active_exceptions'):
+                print("**Active Exceptions**:")
+                for exc in data['active_exceptions']:
+                    print(f"  - {exc['exception_id']}: {exc['rule_id']}")
+                print()
+            
+            if data.get('expired_exceptions'):
+                print("**Expired Exceptions**:")
+                for exc in data['expired_exceptions']:
+                    print(f"  - {exc['exception_id']}: {exc['rule_id']}")
+                print()
+            
+            if data.get("blocking_failures"):
+                print(f"**Blocking Failures**: {len(data['blocking_failures'])}")
+                for bf in data['blocking_failures']:
+                    print(f"  - {bf['rule_id']} (owner: {bf['owner']})")
+                print()
+            
+            if data.get("warning_rules"):
+                print(f"**Warning Rules**: {', '.join(data['warning_rules'])}")
+                print()
+            
+            if data.get("waived_rules"):
+                print(f"**Waived Rules**: {', '.join(data['waived_rules'])}")
+                print()
+            
+            if data.get("skipped_rules"):
+                print(f"**Skipped Rules**: {', '.join(data['skipped_rules'])}")
+                print()
+        except:
+            print("**Rule Checks**: ⚠️ 无法读取")
+            print()
 
     # Runtime integrity
     runtime_path = root / "reports/runtime_integrity.json"

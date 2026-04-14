@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-04-14T20:40:26.570110",
+  "version": "1.0.0",
+  "active_exceptions": [
+    {
+      "exception_id": "EX001",
+      "rule_id": "R007",
+      "scope": "global",
+      "reason": "技能安全规则处于实验阶段，允许暂时豁免阻断",
+      "approved_by": "architecture",
+      "created_at": "2026-04-14T17:00:00",
+      "expires_at": "2026-05-14T23:59:59",
+      "status": "active",
+      "applies_to": {
+        "profiles": [
+          "premerge",
+          "nightly",
+          "release"
+        ],
+        "paths": [],
+        "files": []
+      }
+    }
+  ],
+  "expired_exceptions": [
+    {
+      "exception_id": "EX002",
+      "rule_id": "R004",
+      "scope": "profile",
+      "reason": "演示：变更影响规则在 nightly 暂时豁免（已过期）",
+      "approved_by": "governance",
+      "created_at": "2026-04-01T00:00:00",
+      "expires_at": "2026-04-10T23:59:59",
+      "status": "expired",
+      "applies_to": {
+        "profiles": [
+          "nightly"
+        ],
+        "paths": [],
+        "files": []
+      }
+    }
+  ],
+  "revoked_exceptions": [
+    {
+      "exception_id": "EX003",
+      "rule_id": "R006",
+      "scope": "file",
+      "reason": "演示：特定文件豁免（已撤销）",
+      "approved_by": "infrastructure",
+      "created_at": "2026-04-01T00:00:00",
+      "expires_at": "2026-05-01T23:59:59",
+      "status": "revoked",
+      "applies_to": {
+        "profiles": [],
+        "paths": [],
+        "files": [
+          "tests/fixtures/smoke/blank.pdf"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "active_count": 1,
+    "expired_count": 1,
+    "revoked_count": 1
+  }
+}

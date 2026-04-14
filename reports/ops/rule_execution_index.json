@@ -1,22 +1,155 @@
 {
   "profile": "premerge",
-  "executed_rule_ids": [
-    "R001",
-    "R002",
-    "R003",
-    "R004",
-    "R005",
-    "R006"
+  "executions": [
+    {
+      "rule_id": "R001",
+      "status": "active",
+      "owner": "architecture",
+      "passed": true,
+      "blocking": true,
+      "skipped": false,
+      "skip_reason": null,
+      "waived": false,
+      "waiver_reason": null,
+      "waiver_debt_status": null
+    },
+    {
+      "rule_id": "R002",
+      "status": "active",
+      "owner": "architecture",
+      "passed": true,
+      "blocking": true,
+      "skipped": false,
+      "skip_reason": null,
+      "waived": false,
+      "waiver_reason": null,
+      "waiver_debt_status": null
+    },
+    {
+      "rule_id": "R003",
+      "status": "active",
+      "owner": "architecture",
+      "passed": true,
+      "blocking": true,
+      "skipped": false,
+      "skip_reason": null,
+      "waived": false,
+      "waiver_reason": null,
+      "waiver_debt_status": null
+    },
+    {
+      "rule_id": "R004",
+      "status": "active",
+      "owner": "governance",
+      "passed": true,
+      "blocking": true,
+      "skipped": false,
+      "skip_reason": null,
+      "waived": false,
+      "waiver_reason": null,
+      "waiver_debt_status": null
+    },
+    {
+      "rule_id": "R005",
+      "status": "active",
+      "owner": "governance",
+      "passed": true,
+      "blocking": true,
+      "skipped": false,
+      "skip_reason": null,
+      "waived": false,
+      "waiver_reason": null,
+      "waiver_debt_status": null
+    },
+    {
+      "rule_id": "R006",
+      "status": "active",
+      "owner": "infrastructure",
+      "passed": true,
+      "blocking": true,
+      "skipped": false,
+      "skip_reason": null,
+      "waived": false,
+      "waiver_reason": null,
+      "waiver_debt_status": null
+    },
+    {
+      "rule_id": "R007",
+      "status": "experimental",
+      "owner": "governance",
+      "passed": false,
+      "blocking": false,
+      "skipped": false,
+      "skip_reason": null,
+      "waived": true,
+      "waiver_reason": "技能安全规则处于实验阶段，允许暂时豁免阻断",
+      "waiver_debt_status": "healthy"
+    },
+    {
+      "rule_id": "R008",
+      "status": "disabled",
+      "owner": "infrastructure",
+      "passed": null,
+      "blocking": false,
+      "skipped": true,
+      "skip_reason": "disabled",
+      "waived": false,
+      "waiver_reason": null,
+      "waiver_debt_status": null
+    }
   ],
-  "passed_rule_ids": [
-    "R001",
-    "R002",
-    "R003",
-    "R004",
-    "R005",
-    "R006"
-  ],
-  "failed_rule_ids": [],
-  "blocking_failures": [],
-  "timestamp": "2026-04-14T01:45:10.059842"
+  "summary": {
+    "total": 7,
+    "passed": 6,
+    "failed": 0,
+    "warnings": 0,
+    "skipped": 1,
+    "waived": 1
+  },
+  "exception_debt": {
+    "healthy": [
+      {
+        "exception_id": "EX001",
+        "rule_id": "R007"
+      }
+    ],
+    "stale": [
+      {
+        "exception_id": "EX004",
+        "rule_id": "R007",
+        "owner": "governance",
+        "debt_level": "medium",
+        "debt_status": "stale",
+        "debt_reason": "距离过期仅剩 1 天"
+      }
+    ],
+    "overused": [
+      {
+        "exception_id": "EX005",
+        "rule_id": "R004",
+        "owner": "architecture",
+        "debt_level": "high",
+        "debt_status": "overused",
+        "debt_reason": "续期次数 2/2 已达上限"
+      }
+    ],
+    "expired": [
+      {
+        "exception_id": "EX002",
+        "rule_id": "R004",
+        "owner": "governance",
+        "debt_level": "high",
+        "debt_status": "expired",
+        "debt_reason": "状态为 expired/revoked"
+      }
+    ],
+    "summary": {
+      "healthy_count": 1,
+      "stale_count": 1,
+      "overused_count": 1,
+      "expired_count": 1,
+      "high_debt_count": 1
+    }
+  },
+  "timestamp": "2026-04-14T21:13:59.268805"
 }

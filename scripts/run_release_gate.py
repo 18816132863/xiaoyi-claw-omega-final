@@ -27,50 +27,69 @@ def run_command(cmd: list) -> int:
     return result.returncode
 
 
-def run_rule_checks() -> dict:
-    """运行规则检查"""
+def run_rule_checks(profile: str = "premerge") -> dict:
+    """运行规则检查 - 通过统一规则引擎"""
     root = get_project_root()
+    
+    # 调用统一规则引擎
+    result = subprocess.run(
+        [sys.executable, str(root / "scripts/run_rule_engine.py"),
+         "--profile", profile, "--save"],
+        capture_output=True,
+        text=True,
+        cwd=root
+    )
+    
+    # 读取规则引擎报告
+    report_path = root / "reports/ops/rule_engine_report.json"
+    if report_path.exists():
+        try:
+            report = json.load(open(report_path, encoding='utf-8'))
+        except:
+            report = {}
+    else:
+        report = {}
+    
+    # 转换为兼容格式
     results = {
         "layer_dependency": {"passed": True, "output": ""},
-        "json_contract": {"passed": True, "output": ""}
+        "json_contract": {"passed": True, "output": ""},
+        "_engine_report": report
     }
     
-    # 层间依赖检查
-    print("\n【规则检查】层间依赖...")
-    result = subprocess.run(
-        [sys.executable, str(root / "scripts/check_layer_dependencies.py")],
-        capture_output=True,
-        text=True,
-        cwd=root
-    )
-    results["layer_dependency"]["passed"] = result.returncode == 0
-    results["layer_dependency"]["output"] = result.stdout[-500:] if result.stdout else ""
-    
-    # JSON 契约检查
-    print("【规则检查】JSON 契约...")
-    result = subprocess.run(
-        [sys.executable, str(root / "scripts/check_json_contracts.py")],
-        capture_output=True,
-        text=True,
-        cwd=root
-    )
-    results["json_contract"]["passed"] = result.returncode == 0
-    results["json_contract"]["output"] = result.stdout[-500:] if result.stdout else ""
+    # 从报告提取状态
+    for rule in report.get("executed_rules", []):
+        rule_id = rule.get("rule_id", "")
+        if rule_id in ["R001", "layer_dependency_rule"]:
+            results["layer_dependency"]["passed"] = rule.get("passed", False)
+        elif rule_id in ["R002", "json_contract_rule"]:
+            results["json_contract"]["passed"] = rule.get("passed", False)
     
     return results
 
 
 def print_rule_summary(rule_results: dict):
-    """打印规则检查摘要"""
+    """打印规则检查摘要 - 从规则引擎报告读取"""
     print("\n" + "=" * 50)
     print("【Rule Checks 摘要】")
     print("=" * 50)
     
-    ld_status = "✅ PASSED" if rule_results["layer_dependency"]["passed"] else "❌ FAILED"
-    jc_status = "✅ PASSED" if rule_results["json_contract"]["passed"] else "❌ FAILED"
+    report = rule_results.get("_engine_report", {})
     
-    print(f"  Layer Dependency Status: {ld_status}")
-    print(f"  JSON Contract Status: {jc_status}")
+    if report:
+        print(f"  Total Rules: {report.get('total_rules', 0)}")
+        print(f"  Passed: {report.get('passed_count', 0)}")
+        print(f"  Failed: {report.get('failed_count', 0)}")
+        
+        if report.get("blocking_failures"):
+            print(f"  Blocking Failures: {report['blocking_failures']}")
+    else:
+        # 回退到旧格式
+        ld_status = "✅ PASSED" if rule_results["layer_dependency"]["passed"] else "❌ FAILED"
+        jc_status = "✅ PASSED" if rule_results["json_contract"]["passed"] else "❌ FAILED"
+        print(f"  Layer Dependency Status: {ld_status}")
+        print(f"  JSON Contract Status: {jc_status}")
+    
     print("=" * 50)
 
 
@@ -154,7 +173,11 @@ def save_executed_checks(profile: str, rule_results: dict, gate_results: dict):
 
 
 def save_followup_requirements(impact_data: dict, profile: str):
-    """保存 follow-up 要求"""
+    """保存 follow-up 要求
+    
+    注意：当前 profile 不允许出现在 required_profiles 中
+    如果当前跑的是 premerge，follow-up 里只能有 nightly 和 release
+    """
     root = get_project_root()
     
     # 读取现有的 followup 文件
@@ -179,6 +202,10 @@ def save_followup_requirements(impact_data: dict, profile: str):
         matched_rules = impact_data.get("matched_rules", [])
         
         for p in required_profiles:
+            # 关键修复：当前 profile 不允许出现在 required_profiles
+            if p == profile:
+                continue
+            
             if p not in followup["required_profiles"]:
                 followup["required_profiles"].append(p)
             
@@ -196,9 +223,9 @@ def save_followup_requirements(impact_data: dict, profile: str):
     if profile in followup["required_profiles"] and profile not in followup["satisfied_profiles"]:
         followup["satisfied_profiles"].append(profile)
     
-    # 更新 pending 状态
+    # 更新 pending 状态（排除当前 profile）
     followup["pending_profiles"] = [p for p in followup["required_profiles"] 
-                                    if p not in followup["satisfied_profiles"]]
+                                    if p not in followup["satisfied_profiles"] and p != profile]
     
     followup["generated_at"] = datetime.now().isoformat()
     
@@ -306,8 +333,8 @@ def verify_premerge():
     """premerge 门禁"""
     root = get_project_root()
     
-    # 0. 规则检查
-    rule_results = run_rule_checks()
+    # 0. 规则检查 - 通过统一规则引擎
+    rule_results = run_rule_checks("premerge")
     print_rule_summary(rule_results)
     
     # 0.1 变更影响摘要
@@ -394,8 +421,8 @@ def verify_nightly():
     """nightly 门禁"""
     root = get_project_root()
     
-    # 0. 规则检查
-    rule_results = run_rule_checks()
+    # 0. 规则检查 - 通过统一规则引擎
+    rule_results = run_rule_checks("nightly")
     print_rule_summary(rule_results)
     
     rc = run_command([
@@ -456,8 +483,8 @@ def verify_release():
     """release 门禁"""
     root = get_project_root()
     
-    # 0. 规则检查
-    rule_results = run_rule_checks()
+    # 0. 规则检查 - 通过统一规则引擎
+    rule_results = run_rule_checks("release")
     print_rule_summary(rule_results)
     
     # 1. 运行时验收

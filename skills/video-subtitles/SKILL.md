@@ -65,7 +65,3 @@ Generate movie-style subtitles from video or audio files. Supports transcription
 - Bottom-aligned, movie-style positioning
 - Max 42 chars/line, 2 lines max
 - Natural breaks at punctuation and pauses
-
-## 详细文档
-
-请参阅 [references/details.md](references/details.md)

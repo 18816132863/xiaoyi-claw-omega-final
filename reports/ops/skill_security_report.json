@@ -1,8 +1,8 @@
 {
-  "scanned": 274,
+  "scanned": 276,
   "passed": 163,
-  "failed": 111,
-  "critical": 96,
+  "failed": 113,
+  "critical": 98,
   "high": 15,
   "medium": 155,
   "low": 0,
@@ -609,6 +609,32 @@
       "passed": false
     },
     {
+      "skill_path": "/home/sandbox/.openclaw/workspace/skills/nutrient-openclaw",
+      "skill_name": "nutrient-openclaw",
+      "risks": [
+        {
+          "type": "key_harvester",
+          "name": "密钥收割型",
+          "severity": "critical",
+          "indicators": [
+            "SKILL.md 中包含密钥相关关键词"
+          ]
+        },
+        {
+          "type": "no_author",
+          "name": "无作者溯源型",
+          "severity": "medium",
+          "indicators": [
+            "缺少 README 文件",
+            "_meta.json 中缺少作者信息"
+          ]
+        }
+      ],
+      "risk_count": 2,
+      "max_severity": "critical",
+      "passed": false
+    },
+    {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/video-generation-skill",
       "skill_name": "video-generation-skill",
       "risks": [
@@ -1160,6 +1186,40 @@
         }
       ],
       "risk_count": 2,
+      "max_severity": "critical",
+      "passed": false
+    },
+    {
+      "skill_path": "/home/sandbox/.openclaw/workspace/skills/paddleocr-doc-parsing",
+      "skill_name": "paddleocr-doc-parsing",
+      "risks": [
+        {
+          "type": "key_harvester",
+          "name": "密钥收割型",
+          "severity": "critical",
+          "indicators": [
+            "SKILL.md 中包含密钥相关关键词"
+          ]
+        },
+        {
+          "type": "dynamic_fetcher",
+          "name": "动态拉取型",
+          "severity": "high",
+          "indicators": [
+            "lib.py 中包含远程请求"
+          ]
+        },
+        {
+          "type": "no_author",
+          "name": "无作者溯源型",
+          "severity": "medium",
+          "indicators": [
+            "缺少 README 文件",
+            "_meta.json 中缺少作者信息"
+          ]
+        }
+      ],
+      "risk_count": 3,
       "max_severity": "critical",
       "passed": false
     },
@@ -2982,7 +3042,8 @@
           "name": "密钥收割型",
           "severity": "critical",
           "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
+            "SKILL.md 中包含密钥相关关键词",
+            "README.md 中包含密钥相关关键词"
           ]
         },
         {
@@ -2990,7 +3051,6 @@
           "name": "无作者溯源型",
           "severity": "medium",
           "indicators": [
-            "缺少 README 文件",
             "_meta.json 中缺少作者信息"
           ]
         }
@@ -3944,6 +4004,11 @@
             "batch_operations.py 中包含挖矿相关关键词",
             "async_support.py 中包含挖矿相关关键词",
             "test_suite.py 中包含挖矿相关关键词",
+            "__init__.py 中包含挖矿相关关键词",
+            "cache_optimizer.py 中包含挖矿相关关键词",
+            "gpu_accel.py 中包含挖矿相关关键词",
+            "distributed_search.py 中包含挖矿相关关键词",
+            "async_ops.py 中包含挖矿相关关键词",
             "async_support.py 中包含挖矿相关关键词",
             "test_suite.py 中包含挖矿相关关键词",
             "search_optimized.py 中包含挖矿相关关键词",
@@ -3999,7 +4064,8 @@
           "name": "无作者溯源型",
           "severity": "medium",
           "indicators": [
-            "缺少 README 文件"
+            "缺少 README 文件",
+            "_meta.json 中缺少作者信息"
           ]
         }
       ],
@@ -5930,5 +5996,5 @@
       "passed": false
     }
   ],
-  "generated_at": "2026-04-14T01:54:02.659359"
+  "generated_at": "2026-04-14T09:18:07.542821"
 }

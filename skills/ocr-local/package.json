@@ -1,26 +1,21 @@
 {
-  "name": "deepread",
-  "version": "1.0.6",
-  "description": "Production OCR API for AI agents. Process PDFs and extract structured data with confidence scoring.",
-  "author": "DeepRead <hello@deepread.tech>",
-  "homepage": "https://www.deepread.tech",
+  "name": "ocr",
+  "version": "1.0.0",
+  "description": "OCR skill for extracting text from images using Tesseract.js. Supports Chinese (simplified/traditional) and English.",
+  "main": "scripts/ocr.js",
+  "scripts": {
+    "test": "node scripts/ocr.js --help"
+  },
+  "keywords": ["ocr", "image", "text-recognition", "tesseract", "chinese", "image-to-text"],
+  "author": "OpenClaw Community",
+  "license": "MIT",
+  "acceptLicenseTerms": true,
+  "dependencies": {
+    "tesseract.js": "^7.0.0"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/deepread-tech/deep-read-service"
+    "url": "https://github.com/openclaw/skill-ocr.git"
   },
-  "keywords": [
-    "ocr",
-    "pdf",
-    "extraction",
-    "document-processing",
-    "ai",
-    "structured-data"
-  ],
-  "license": "MIT",
-  "openclaw": {
-    "requires": {
-      "env": ["DEEPREAD_API_KEY"]
-    },
-    "primaryEnv": "DEEPREAD_API_KEY"
-  }
+  "private": true
 }

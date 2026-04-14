@@ -29,3 +29,14 @@ git-lfs
 *.swp
 *.swo
 *~
+
+# Python 库（可通过 pip install 重建）
+.openclaw/workspace/repo/lib/*
+.openclaw/workspace/repo/include/*
+.openclaw/workspace/repo/bin/*
+
+# 向量索引（可重建）
+.openclaw/workspace/memory_context/index/*
+
+# Node modules（可通过 npm install 重建）
+.openclaw/extensions/*/node_modules/*

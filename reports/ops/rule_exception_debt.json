@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-04-14T21:13:49.122689",
+  "version": "2.0.0",
+  "summary": {
+    "active_count": 3,
+    "healthy_count": 1,
+    "stale_count": 1,
+    "overused_count": 1,
+    "expired_count": 1,
+    "revoked_count": 1,
+    "high_debt_count": 1
+  },
+  "exceptions_by_owner": {
+    "architecture": [
+      "EX001",
+      "EX005"
+    ],
+    "governance": [
+      "EX002",
+      "EX004"
+    ],
+    "infrastructure": [
+      "EX003"
+    ]
+  },
+  "exceptions_by_rule": {
+    "R007": [
+      "EX001",
+      "EX004"
+    ],
+    "R004": [
+      "EX002",
+      "EX005"
+    ],
+    "R006": [
+      "EX003"
+    ]
+  },
+  "details": {
+    "healthy": [
+      {
+        "exception_id": "EX001",
+        "rule_id": "R007",
+        "owner": "architecture",
+        "debt_level": "low",
+        "debt_status": "healthy",
+        "debt_reason": "正常生效"
+      }
+    ],
+    "stale": [
+      {
+        "exception_id": "EX004",
+        "rule_id": "R007",
+        "owner": "governance",
+        "debt_level": "medium",
+        "debt_status": "stale",
+        "debt_reason": "距离过期仅剩 1 天"
+      }
+    ],
+    "overused": [
+      {
+        "exception_id": "EX005",
+        "rule_id": "R004",
+        "owner": "architecture",
+        "debt_level": "high",
+        "debt_status": "overused",
+        "debt_reason": "续期次数 2/2 已达上限"
+      }
+    ],
+    "expired": [
+      {
+        "exception_id": "EX002",
+        "rule_id": "R004",
+        "owner": "governance",
+        "debt_level": "high",
+        "debt_status": "expired",
+        "debt_reason": "状态为 expired/revoked"
+      }
+    ]
+  }
+}

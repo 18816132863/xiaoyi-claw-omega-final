@@ -63,7 +63,7 @@
     },
     "openai-whisper-api": {
       "version": "1.0.0",
-      "installedAt": 1775388010280
+      "installedAt": 1776126725911
     },
     "clawdhub": {
       "version": "1.0.0",
@@ -171,11 +171,11 @@
     },
     "ocr-local": {
       "version": "1.0.0",
-      "installedAt": 1775392862567
+      "installedAt": 1776126782732
     },
     "paddleocr-doc-parsing": {
       "version": "2.0.16",
-      "installedAt": 1775392922502
+      "installedAt": 1776126784904
     },
     "deepread-ocr": {
       "version": "1.1.0",
@@ -294,12 +294,12 @@
       "installedAt": 1775401930623
     },
     "beauty-generation-api": {
-      "version": "1.2.47",
-      "installedAt": 1775402102683
+      "version": "1.2.49",
+      "installedAt": 1776126843835
     },
     "video-subtitles": {
       "version": "1.0.0",
-      "installedAt": 1775405347736
+      "installedAt": 1776126845867
     },
     "video-cog": {
       "version": "1.0.7",
@@ -427,7 +427,7 @@
     },
     "nutrient-openclaw": {
       "version": "1.2.5",
-      "installedAt": 1775408281480
+      "installedAt": 1776126901975
     },
     "clawsec-suite": {
       "version": "0.1.4",
@@ -540,6 +540,10 @@
     "today-task": {
       "version": "1.0.17",
       "installedAt": 1775705296415
+    },
+    "llm-memory-integration": {
+      "version": "5.1.5",
+      "installedAt": 1776127939872
     }
   }
 }

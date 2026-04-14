@@ -6,7 +6,7 @@ set -e
 
 # 配置
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-VERSION="v4.3.2"
+VERSION="v4.3.3"
 OUTPUT_DIR="${1:-/home/sandbox}"
 OUTPUT_FILE="${OUTPUT_DIR}/openclaw_${VERSION}_${TIMESTAMP}.tar.gz"
 BASE_DIR="/home/sandbox/.openclaw"
@@ -39,6 +39,9 @@ echo "  ✓ NPM 缓存 (.openclaw/npm-cache/)"
 echo "  ✓ 历史会话快照 (*.jsonl.reset.*, *.jsonl.deleted.*)"
 echo "  ✓ 大型工具 (magika, git-lfs)"
 echo "  ✓ 旧备份文件 (*.tar.gz, *.zip)"
+echo "  ✓ Python 库 (repo/lib/, repo/include/, repo/bin/)"
+echo "  ✓ 向量索引 (memory_context/index/)"
+echo "  ✓ Node modules (extensions/*/node_modules/)"
 
 # 执行打包
 echo ""

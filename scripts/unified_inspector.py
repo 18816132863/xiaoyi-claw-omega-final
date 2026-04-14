@@ -214,9 +214,11 @@ def print_summary_fast(results: Dict):
     passed = results['summary']['passed']
     failed = results['summary']['failed']
     cached = results['summary']['cached']
-    total_ms = results['summary']['total_duration_ms']
     
-    print(f"✅ {passed} | ❌ {failed} | 📦 {cached} | ⏱️ {total_ms}ms")
+    # 计算实际耗时（最长任务的耗时，因为并行）
+    max_duration = max(c.get('duration_ms', 0) for c in results['checks']) if results['checks'] else 0
+    
+    print(f"✅ {passed} | ❌ {failed} | 📦 {cached} | ⏱️ ~{max_duration}ms (并行)")
     
     status = "✅ 全部通过" if failed == 0 else "❌ 存在失败"
     print(f"状态: {status}")

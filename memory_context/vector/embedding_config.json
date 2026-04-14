@@ -1,199 +1,22 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "EMBEDDING_CONFIG",
-  "description": "Embedding 系统配置",
-  "version": "1.0.0",
-  "updated_at": "2026-04-07T12:40:00+08:00",
-
-  "providers": {
-    "qwen_1024": {
-      "name": "Qwen3-Embedding-8B (1024)",
-      "provider": "qwen",
-      "model": "Qwen3-Embedding-8B",
-      "dimension": 1024,
-      "max_tokens": 8192,
-      "batch_size": 32,
-      "api_base": "https://ai.gitee.com/v1",
-      "api_key_env": "GITEE_AI_API_KEY",
-      "free_quota": 100,
-      "free_quota_period": "daily",
-      "languages": ["zh", "en"],
-      "features": {
-        "chinese_optimized": true,
-        "long_context": true,
-        "multilingual": true
-      },
-      "cost": {
-        "free": true
-      }
-    },
-    "qwen_2048": {
-      "name": "Qwen3-Embedding-8B (2048)",
-      "provider": "qwen",
-      "model": "Qwen3-Embedding-8B",
-      "dimension": 2048,
-      "max_tokens": 8192,
-      "batch_size": 32,
-      "api_base": "https://ai.gitee.com/v1",
-      "api_key_env": "GITEE_AI_API_KEY",
-      "free_quota": 100,
-      "free_quota_period": "daily",
-      "languages": ["zh", "en"],
-      "features": {
-        "chinese_optimized": true,
-        "long_context": true,
-        "multilingual": true,
-        "high_precision": true
-      },
-      "cost": {
-        "free": true
-      }
-    },
-    "qwen_4096": {
-      "name": "Qwen3-Embedding-8B (4096)",
-      "provider": "qwen",
-      "model": "Qwen3-Embedding-8B",
-      "dimension": 4096,
-      "max_tokens": 8192,
-      "batch_size": 32,
-      "api_base": "https://ai.gitee.com/v1",
-      "api_key_env": "GITEE_AI_API_KEY",
-      "free_quota": 100,
-      "free_quota_period": "daily",
-      "languages": ["zh", "en"],
-      "features": {
-        "chinese_optimized": true,
-        "long_context": true,
-        "multilingual": true,
-        "ultra_high_precision": true
-      },
-      "cost": {
-        "free": true
-      }
-    },
-    "voyage": {
-      "name": "Voyage-4-Large",
-      "provider": "voyage",
-      "model": "voyage-4-large",
-      "dimension": 1024,
-      "max_tokens": 32000,
-      "batch_size": 32,
-      "api_base": "https://api.voyageai.com/v1/embeddings",
-      "api_key_env": "VOYAGE_API_KEY",
-      "languages": ["en", "zh", "multi"],
-      "features": {
-        "chinese_optimized": false,
-        "long_context": true,
-        "multilingual": true
-      },
-      "cost": {
-        "free": false,
-        "input_per_1k_tokens": 0.00012
-      }
-    },
-    "openai": {
-      "name": "OpenAI text-embedding-3-large",
-      "provider": "openai",
-      "model": "text-embedding-3-large",
-      "dimension": 3072,
-      "max_tokens": 8191,
-      "batch_size": 32,
-      "api_base": "https://api.openai.com/v1/embeddings",
-      "api_key_env": "OPENAI_API_KEY",
-      "languages": ["en", "multi"],
-      "features": {
-        "chinese_optimized": false,
-        "long_context": false,
-        "multilingual": true
-      },
-      "cost": {
-        "free": false,
-        "input_per_1k_tokens": 0.00013
-      }
-    },
-    "local_minilm": {
-      "name": "all-MiniLM-L6-v2",
-      "provider": "local",
-      "model": "sentence-transformers/all-MiniLM-L6-v2",
-      "dimension": 384,
-      "max_tokens": 256,
-      "batch_size": 64,
-      "languages": ["en"],
-      "features": {
-        "chinese_optimized": false,
-        "long_context": false,
-        "multilingual": false,
-        "offline": true
-      },
-      "cost": {
-        "free": true
-      }
-    },
-    "local_chinese": {
-      "name": "text2vec-base-chinese",
-      "provider": "local",
-      "model": "shibing624/text2vec-base-chinese",
-      "dimension": 768,
-      "max_tokens": 512,
-      "batch_size": 32,
-      "languages": ["zh"],
-      "features": {
-        "chinese_optimized": true,
-        "long_context": false,
-        "multilingual": false,
-        "offline": true
-      },
-      "cost": {
-        "free": true
-      }
-    }
+  "embedding": {
+    "provider": "gitee",
+    "base_url": "https://ai.gitee.com/v1",
+    "api_key": "JEHMRUUDOKBQQLCSWIIA0EYHKDZJ3KORM2NEVLPM",
+    "model": "Qwen3-Embedding-8B",
+    "dimensions": 1024
   },
-
-  "default_provider": "qwen_4096",
-
-  "fallback_chain": ["qwen_4096", "qwen_2048", "qwen_1024", "voyage", "local_chinese"],
-
-  "cache": {
-    "enabled": true,
-    "size": 10000,
-    "ttl_seconds": 86400
+  "llm": {
+    "provider": "gitee",
+    "base_url": "https://ai.gitee.com/v1",
+    "api_key": "JEHMRUUDOKBQQLCSWIIA0EYHKDZJ3KORM2NEVLPM",
+    "model": "Qwen3-235B-A22B",
+    "max_tokens": 150,
+    "temperature": 0.5
   },
-
-  "comparison": {
-    "dimensions": {
-      "qwen_1024": 1024,
-      "qwen_2048": 2048,
-      "qwen_4096": 4096,
-      "voyage": 1024,
-      "openai": 3072,
-      "local_minilm": 384,
-      "local_chinese": 768
-    },
-    "dimension_visual": {
-      "qwen_4096": "████████████████████████████████████████",
-      "openai": "███████████████████████████████",
-      "qwen_2048": "███████████████████",
-      "qwen_1024": "██████████",
-      "voyage": "██████████",
-      "local_chinese": "███████",
-      "local_minilm": "███"
-    },
-    "performance": {
-      "qwen_1024": {"speed": "fast", "accuracy": "high", "chinese": "excellent"},
-      "qwen_2048": {"speed": "medium", "accuracy": "very_high", "chinese": "excellent"},
-      "qwen_4096": {"speed": "medium", "accuracy": "ultra_high", "chinese": "excellent"},
-      "voyage": {"speed": "medium", "accuracy": "high", "chinese": "good"},
-      "openai": {"speed": "medium", "accuracy": "high", "chinese": "fair"},
-      "local_minilm": {"speed": "fast", "accuracy": "medium", "chinese": "poor"},
-      "local_chinese": {"speed": "fast", "accuracy": "medium", "chinese": "good"}
-    },
-    "recommendations": {
-      "chinese_primary": "qwen_4096",
-      "english_primary": "voyage",
-      "offline_required": "local_chinese",
-      "cost_sensitive": "qwen_1024",
-      "highest_accuracy": "qwen_4096",
-      "balanced": "qwen_2048"
-    }
+  "vector_search": {
+    "top_k": 20,
+    "max_distance": 0.8,
+    "score_threshold": 0.2
   }
 }

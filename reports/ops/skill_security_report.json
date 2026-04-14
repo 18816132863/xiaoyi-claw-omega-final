@@ -1,24 +1,16 @@
 {
-  "scanned": 276,
-  "passed": 163,
-  "failed": 113,
-  "critical": 98,
-  "high": 15,
-  "medium": 155,
+  "scanned": 275,
+  "passed": 275,
+  "failed": 0,
+  "critical": 0,
+  "high": 0,
+  "medium": 264,
   "low": 0,
   "results": [
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/api-gateway",
       "skill_name": "api-gateway",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -29,9 +21,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/sonoscli",
@@ -92,14 +84,6 @@
       "skill_name": "video-agent",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -109,9 +93,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/shubhamsaboo-awesome-llm-apps-ux-designer",
@@ -135,11 +119,11 @@
       "skill_name": "openclaw-agent-optimize",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
+          "type": "fake_official",
+          "name": "仿冒官方型",
+          "severity": "medium",
           "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
+            "技能名称 openclaw-agent-optimize 可能冒充官方"
           ]
         },
         {
@@ -153,8 +137,8 @@
         }
       ],
       "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/canvas-design",
@@ -184,23 +168,6 @@
           "indicators": [
             "缺少 README 文件",
             "_meta.json 中缺少作者信息"
-          ]
-        }
-      ],
-      "risk_count": 1,
-      "max_severity": "medium",
-      "passed": true
-    },
-    {
-      "skill_path": "/home/sandbox/.openclaw/workspace/skills/anthropics-skills-canvas-design",
-      "skill_name": "anthropics-skills-canvas-design",
-      "risks": [
-        {
-          "type": "no_author",
-          "name": "无作者溯源型",
-          "severity": "medium",
-          "indicators": [
-            "缺少 README 文件"
           ]
         }
       ],
@@ -282,35 +249,17 @@
       "skill_name": "local_app_interconnect",
       "risks": [
         {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "background.py 中包含挖矿相关关键词",
-            "interconnect_v2.py 中包含挖矿相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
           "indicators": [
             "缺少 README 文件"
           ]
-        },
-        {
-          "type": "content_fetcher",
-          "name": "第三方内容抓取型",
-          "severity": "medium",
-          "indicators": [
-            "interconnect_v2.py 中包含 URL 抓取函数",
-            "interconnect.py 中包含 URL 抓取函数"
-          ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/market-research",
@@ -352,22 +301,6 @@
       "skill_name": "markitdown",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "batch_convert.py 中包含挖矿相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -376,22 +309,14 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/openai-whisper-api",
       "skill_name": "openai-whisper-api",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -402,22 +327,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/proactive-tasks",
       "skill_name": "proactive-tasks",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "README.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -427,9 +344,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/shareai-lab-learn-claude-code-pdf",
@@ -453,6 +370,32 @@
       "skill_name": "openclaw-skills-assistant",
       "risks": [
         {
+          "type": "fake_official",
+          "name": "仿冒官方型",
+          "severity": "medium",
+          "indicators": [
+            "技能名称 openclaw-skills-assistant 可能冒充官方"
+          ]
+        },
+        {
+          "type": "no_author",
+          "name": "无作者溯源型",
+          "severity": "medium",
+          "indicators": [
+            "缺少 README 文件",
+            "_meta.json 中缺少作者信息"
+          ]
+        }
+      ],
+      "risk_count": 2,
+      "max_severity": "medium",
+      "passed": true
+    },
+    {
+      "skill_path": "/home/sandbox/.openclaw/workspace/skills/bitsoul-stock-quantization",
+      "skill_name": "bitsoul-stock-quantization",
+      "risks": [
+        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -467,64 +410,9 @@
       "passed": true
     },
     {
-      "skill_path": "/home/sandbox/.openclaw/workspace/skills/bitsoul-stock-quantization",
-      "skill_name": "bitsoul-stock-quantization",
-      "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "factor_mining.py 中包含挖矿相关关键词",
-            "stock_api.py 中包含挖矿相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "data_fetcher.py 中包含远程请求",
-            "realtime_data_featcher.py 中包含远程请求",
-            "utils.py 中包含远程请求",
-            "remote_api.py 中包含远程请求",
-            "stock_crawler.py 中包含远程请求"
-          ]
-        },
-        {
-          "type": "no_author",
-          "name": "无作者溯源型",
-          "severity": "medium",
-          "indicators": [
-            "缺少 README 文件",
-            "_meta.json 中缺少作者信息"
-          ]
-        }
-      ],
-      "risk_count": 4,
-      "max_severity": "critical",
-      "passed": false
-    },
-    {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/agent_reach",
       "skill_name": "agent_reach",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -534,9 +422,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/aiskillstore-marketplace-test-case-generator",
@@ -587,15 +475,6 @@
       "skill_name": "minimax-music-gen",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "generate_music.py 中包含远程请求",
-            "generate_lyrics.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -604,22 +483,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/nutrient-openclaw",
       "skill_name": "nutrient-openclaw",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -630,9 +501,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/video-generation-skill",
@@ -673,14 +544,6 @@
       "skill_name": "ansible",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -690,9 +553,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/docx",
@@ -733,6 +596,32 @@
       "skill_name": "openclaw-skills-video-script-creator",
       "risks": [
         {
+          "type": "fake_official",
+          "name": "仿冒官方型",
+          "severity": "medium",
+          "indicators": [
+            "技能名称 openclaw-skills-video-script-creator 可能冒充官方"
+          ]
+        },
+        {
+          "type": "no_author",
+          "name": "无作者溯源型",
+          "severity": "medium",
+          "indicators": [
+            "缺少 README 文件",
+            "_meta.json 中缺少作者信息"
+          ]
+        }
+      ],
+      "risk_count": 2,
+      "max_severity": "medium",
+      "passed": true
+    },
+    {
+      "skill_path": "/home/sandbox/.openclaw/workspace/skills/industry-stock-tracker",
+      "skill_name": "industry-stock-tracker",
+      "risks": [
+        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -745,40 +634,6 @@
       "risk_count": 1,
       "max_severity": "medium",
       "passed": true
-    },
-    {
-      "skill_path": "/home/sandbox/.openclaw/workspace/skills/industry-stock-tracker",
-      "skill_name": "industry-stock-tracker",
-      "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "generate_industry_stock_tracker_report.py 中包含远程请求"
-          ]
-        },
-        {
-          "type": "no_author",
-          "name": "无作者溯源型",
-          "severity": "medium",
-          "indicators": [
-            "缺少 README 文件",
-            "_meta.json 中缺少作者信息"
-          ]
-        }
-      ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/ai-drama-prompt-factory",
@@ -803,11 +658,29 @@
       "skill_name": "clawsec-suite",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
+          "type": "no_author",
+          "name": "无作者溯源型",
+          "severity": "medium",
           "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
+            "缺少 README 文件",
+            "_meta.json 中缺少作者信息"
+          ]
+        }
+      ],
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
+    },
+    {
+      "skill_path": "/home/sandbox/.openclaw/workspace/skills/scrapling-official",
+      "skill_name": "scrapling-official",
+      "risks": [
+        {
+          "type": "fake_official",
+          "name": "仿冒官方型",
+          "severity": "medium",
+          "indicators": [
+            "技能名称 scrapling-official 可能冒充官方"
           ]
         },
         {
@@ -821,24 +694,6 @@
         }
       ],
       "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
-    },
-    {
-      "skill_path": "/home/sandbox/.openclaw/workspace/skills/scrapling-official",
-      "skill_name": "scrapling-official",
-      "risks": [
-        {
-          "type": "no_author",
-          "name": "无作者溯源型",
-          "severity": "medium",
-          "indicators": [
-            "缺少 README 文件",
-            "_meta.json 中缺少作者信息"
-          ]
-        }
-      ],
-      "risk_count": 1,
       "max_severity": "medium",
       "passed": true
     },
@@ -864,14 +719,6 @@
       "skill_name": "qq-clawbot-setup",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -880,9 +727,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/eno",
@@ -905,20 +752,10 @@
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/minimax-pdf",
       "skill_name": "minimax-pdf",
-      "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词",
-            "README.md 中包含密钥相关关键词"
-          ]
-        }
-      ],
-      "risk_count": 1,
-      "max_severity": "critical",
-      "passed": false
+      "risks": [],
+      "risk_count": 0,
+      "max_severity": "none",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/excel-analysis",
@@ -960,14 +797,6 @@
       "skill_name": "ima-skill",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -976,22 +805,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/web-browsing",
       "skill_name": "web-browsing",
       "risks": [
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "search_web.py 中包含远程请求"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -1000,20 +821,11 @@
             "缺少 README 文件",
             "_meta.json 中缺少作者信息"
           ]
-        },
-        {
-          "type": "content_fetcher",
-          "name": "第三方内容抓取型",
-          "severity": "medium",
-          "indicators": [
-            "search_web.py 中包含网页抓取库",
-            "search_web.py 中包含 URL 抓取函数"
-          ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/general-writing",
@@ -1045,17 +857,9 @@
             "缺少 README 文件",
             "_meta.json 中缺少作者信息"
           ]
-        },
-        {
-          "type": "content_fetcher",
-          "name": "第三方内容抓取型",
-          "severity": "medium",
-          "indicators": [
-            "downloader.py 中包含网页抓取库"
-          ]
         }
       ],
-      "risk_count": 2,
+      "risk_count": 1,
       "max_severity": "medium",
       "passed": true
     },
@@ -1082,14 +886,6 @@
       "skill_name": "weather",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1098,9 +894,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/javascript-skills",
@@ -1143,14 +939,6 @@
       "skill_name": "seedance-video-gen",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "generate_video.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1159,23 +947,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/tushare-data",
       "skill_name": "tushare-data",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1185,31 +965,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/paddleocr-doc-parsing",
       "skill_name": "paddleocr-doc-parsing",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "lib.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1219,9 +983,9 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/amazing129-skills-mbti-for-agents",
@@ -1245,14 +1009,6 @@
       "skill_name": "imap-smtp-email",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1262,9 +1018,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/xiaoyi-file-upload",
@@ -1306,14 +1062,6 @@
       "skill_name": "agent-chronicle",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1323,9 +1071,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/metabase-metabase-docs-write",
@@ -1347,32 +1095,15 @@
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/prd-writer",
       "skill_name": "prd-writer",
-      "risks": [
-        {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "core.py 中包含挖矿相关关键词"
-          ]
-        }
-      ],
-      "risk_count": 1,
-      "max_severity": "critical",
-      "passed": false
+      "risks": [],
+      "risk_count": 0,
+      "max_severity": "none",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/command-center",
       "skill_name": "command-center",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -1383,9 +1114,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/marketing-strategy-pmm",
@@ -1428,14 +1159,6 @@
       "skill_name": "baoyu-comic",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1444,9 +1167,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/command-hook",
@@ -1542,14 +1265,6 @@
       "skill_name": "tencent-cos-skill",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1559,23 +1274,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/today-task",
       "skill_name": "today-task",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "hiboards_client.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1585,9 +1292,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/webapp-testing",
@@ -1704,11 +1411,11 @@
       "skill_name": "openclaw-skills-soulcraft",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
+          "type": "fake_official",
+          "name": "仿冒官方型",
+          "severity": "medium",
           "indicators": [
-            "README.md 中包含密钥相关关键词"
+            "技能名称 openclaw-skills-soulcraft 可能冒充官方"
           ]
         },
         {
@@ -1721,21 +1428,13 @@
         }
       ],
       "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/tc-chengxin",
       "skill_name": "tc-chengxin",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -1746,24 +1445,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/jdjr",
       "skill_name": "jdjr",
       "risks": [
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "query_news.py 中包含远程请求",
-            "query_stock.py 中包含远程请求",
-            "query_gold.py 中包含远程请求"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -1773,22 +1462,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/cn-web-search",
       "skill_name": "cn-web-search",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -1799,9 +1480,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/beginner-mode",
@@ -1895,14 +1576,6 @@
       "skill_name": "frontend-ui-ux-engineer",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1911,9 +1584,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/proactivity",
@@ -1938,14 +1611,6 @@
       "skill_name": "seedream-image_gen",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "generate_seedream.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -1954,9 +1619,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/wecom-bot-setup",
@@ -1980,23 +1645,6 @@
       "skill_name": "tts",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "render_timeline.py 中包含远程请求",
-            "tts.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2005,23 +1653,15 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/unified-document",
       "skill_name": "unified-document",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2030,23 +1670,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/speech-to-text",
       "skill_name": "speech-to-text",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2055,9 +1687,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/fasting-tracker",
@@ -2117,14 +1749,6 @@
       "skill_name": "verified-agent-identity",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2134,9 +1758,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/product-manager",
@@ -2230,14 +1854,6 @@
       "skill_name": "mongodb",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2247,9 +1863,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/product-management",
@@ -2273,14 +1889,6 @@
       "skill_name": "tdd-guide",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2290,28 +1898,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/rkiding-awesome-finance-skills-alphaear-signal-tracker",
       "skill_name": "rkiding-awesome-finance-skills-alphaear-signal-tracker",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "news_tools.py 中包含远程请求",
-            "search_tools.py 中包含远程请求",
-            "json_utils.py 中包含 eval/exec",
-            "content_extractor.py 中包含远程请求",
-            "evaluation.py 中包含 eval/exec",
-            "training.py 中包含 eval/exec"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2320,23 +1915,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/discord",
       "skill_name": "discord",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2346,39 +1933,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/polymarket-trade",
       "skill_name": "polymarket-trade",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "polymarket.py 中包含挖矿相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "polymarket.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2388,22 +1951,14 @@
           ]
         }
       ],
-      "risk_count": 4,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/educational-video-creator",
       "skill_name": "educational-video-creator",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -2413,9 +1968,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/affaan-m-everything-claude-code-article-writing",
@@ -2544,14 +2099,6 @@
       "skill_name": "skill-install-manager-1-0-0",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2561,9 +2108,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/html-ux-guidance",
@@ -2658,14 +2205,6 @@
       "skill_name": "meituan-coupon-get-tool",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2675,9 +2214,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/didi-ride-skill",
@@ -2738,14 +2277,6 @@
       "skill_name": "article-writer",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2755,9 +2286,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/obsidian",
@@ -2782,14 +2313,6 @@
       "skill_name": "arxiv-search",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2798,9 +2321,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/lyrical-fable",
@@ -2842,46 +2365,22 @@
       "skill_name": "xiaoyi-doc-convert",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "core.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
           "indicators": [
             "缺少 README 文件"
           ]
-        },
-        {
-          "type": "content_fetcher",
-          "name": "第三方内容抓取型",
-          "severity": "medium",
-          "indicators": [
-            "text_filters.py 中包含网页抓取库"
-          ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/pexoai-agent",
       "skill_name": "pexoai-agent",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -2892,9 +2391,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/nini-writing-inspiration",
@@ -2919,14 +2418,6 @@
       "skill_name": "baidu-netdisk-skills",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -2936,9 +2427,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/davila7-claude-code-templates-ship-learn-next",
@@ -3038,15 +2529,6 @@
       "skill_name": "ocr-local",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词",
-            "README.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3055,9 +2537,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/post-job",
@@ -3099,14 +2581,6 @@
       "skill_name": "scientific-slides",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3115,9 +2589,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/nano-pdf",
@@ -3158,14 +2632,6 @@
       "skill_name": "xiaoyi-web-search",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3175,9 +2641,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/video-subtitles",
@@ -3202,42 +2668,17 @@
       "skill_name": "daily-tech-broadcast",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词",
-            "README.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "broadcast.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
           "indicators": [
             "_meta.json 中缺少作者信息"
           ]
-        },
-        {
-          "type": "content_fetcher",
-          "name": "第三方内容抓取型",
-          "severity": "medium",
-          "indicators": [
-            "broadcast.py 中包含 URL 抓取函数"
-          ]
         }
       ],
-      "risk_count": 4,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/limtdesign",
@@ -3280,14 +2721,6 @@
       "skill_name": "ai-picture-book",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3297,9 +2730,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/habit-flow-skill",
@@ -3323,15 +2756,6 @@
       "skill_name": "personas",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词",
-            "skill.json 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3341,9 +2765,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/skill-finder",
@@ -3368,14 +2792,6 @@
       "skill_name": "screenshot",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3385,23 +2801,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/ui-design-system",
       "skill_name": "ui-design-system",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3411,9 +2819,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/pua",
@@ -3472,14 +2880,6 @@
       "skill_name": "linkedin-api",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3489,9 +2889,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/terraform",
@@ -3550,14 +2950,6 @@
       "skill_name": "flyai-travel",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3566,9 +2958,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/image",
@@ -3593,14 +2985,6 @@
       "skill_name": "hunyuan-image",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "hunyuan_generate.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3609,22 +2993,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/copywriter",
       "skill_name": "copywriter",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -3635,9 +3011,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/research-cog",
@@ -3662,14 +3038,6 @@
       "skill_name": "xiaoyi-image-search",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3678,9 +3046,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/risk-management-specialist",
@@ -3723,46 +3091,6 @@
       "skill_name": "tech-news-digest",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "test_config.py 中包含挖矿相关关键词",
-            "fetch-reddit.py 中包含挖矿相关关键词",
-            "run-pipeline.py 中包含挖矿相关关键词",
-            "merge-sources.py 中包含挖矿相关关键词",
-            "enrich-articles.py 中包含挖矿相关关键词",
-            "fetch-web.py 中包含挖矿相关关键词",
-            "fetch-github.py 中包含挖矿相关关键词",
-            "fetch-twitter.py 中包含挖矿相关关键词",
-            "fetch-rss.py 中包含挖矿相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "fetch-reddit.py 中包含远程请求",
-            "generate-pdf.py 中包含远程请求",
-            "merge-sources.py 中包含远程请求",
-            "enrich-articles.py 中包含远程请求",
-            "fetch-web.py 中包含远程请求",
-            "fetch-github.py 中包含远程请求",
-            "sanitize-html.py 中包含远程请求",
-            "fetch-twitter.py 中包含远程请求",
-            "fetch-rss.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3772,30 +3100,14 @@
           ]
         }
       ],
-      "risk_count": 4,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/pixverse",
       "skill_name": "pixverse",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "pixverse_generate.py 中包含远程请求"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -3805,23 +3117,15 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/elasticsearch",
       "skill_name": "elasticsearch",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3831,23 +3135,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/admapix",
       "skill_name": "admapix",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3857,9 +3153,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/write-a-prd",
@@ -3901,14 +3197,6 @@
       "skill_name": "university-applications",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3918,9 +3206,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/yunshu0909-yunshu-skillshub-prd-doc-writer",
@@ -3944,14 +3232,6 @@
       "skill_name": "weibo-clawbot-setup",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -3960,9 +3240,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/performance-upgrade",
@@ -3986,80 +3266,6 @@
       "skill_name": "llm-memory-integration",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词",
-            "config.json 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "connection_pool.py 中包含挖矿相关关键词",
-            "ultimate_search.py 中包含挖矿相关关键词",
-            "batch_operations.py 中包含挖矿相关关键词",
-            "async_support.py 中包含挖矿相关关键词",
-            "test_suite.py 中包含挖矿相关关键词",
-            "__init__.py 中包含挖矿相关关键词",
-            "cache_optimizer.py 中包含挖矿相关关键词",
-            "gpu_accel.py 中包含挖矿相关关键词",
-            "distributed_search.py 中包含挖矿相关关键词",
-            "async_ops.py 中包含挖矿相关关键词",
-            "async_support.py 中包含挖矿相关关键词",
-            "test_suite.py 中包含挖矿相关关键词",
-            "search_optimized.py 中包含挖矿相关关键词",
-            "search.py 中包含挖矿相关关键词",
-            "search_v2.py 中包含挖矿相关关键词",
-            "connection_pool.py 中包含挖矿相关关键词",
-            "ultimate_search.py 中包含挖矿相关关键词",
-            "batch_operations.py 中包含挖矿相关关键词",
-            "async_support.py 中包含挖矿相关关键词",
-            "test_suite.py 中包含挖矿相关关键词",
-            "async_support.py 中包含挖矿相关关键词",
-            "test_suite.py 中包含挖矿相关关键词",
-            "search_optimized.py 中包含挖矿相关关键词",
-            "search.py 中包含挖矿相关关键词",
-            "search_v2.py 中包含挖矿相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "channel_health.py 中包含远程请求",
-            "ultimate_search.py 中包含远程请求",
-            "opt_search.py 中包含远程请求",
-            "parallel_search.py 中包含远程请求",
-            "optimize_vector_system.py 中包含远程请求",
-            "one_click_setup.py 中包含远程请求",
-            "llm_client.py 中包含远程请求",
-            "backfill_l0_vectors.py 中包含远程请求",
-            "hybrid_memory_search.py 中包含远程请求",
-            "explainer.py 中包含远程请求",
-            "embedding.py 中包含远程请求",
-            "llm.py 中包含远程请求",
-            "summarizer.py 中包含远程请求",
-            "channel_health.py 中包含远程请求",
-            "ultimate_search.py 中包含远程请求",
-            "opt_search.py 中包含远程请求",
-            "parallel_search.py 中包含远程请求",
-            "optimize_vector_system.py 中包含远程请求",
-            "one_click_setup.py 中包含远程请求",
-            "llm_client.py 中包含远程请求",
-            "backfill_l0_vectors.py 中包含远程请求",
-            "hybrid_memory_search.py 中包含远程请求",
-            "explainer.py 中包含远程请求",
-            "embedding.py 中包含远程请求",
-            "llm.py 中包含远程请求",
-            "summarizer.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4069,9 +3275,9 @@
           ]
         }
       ],
-      "risk_count": 4,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/marketing-ideas",
@@ -4112,22 +3318,6 @@
       "skill_name": "amazon-product-search-api-skill",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "amazon_product_search_api.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4137,9 +3327,9 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/docs-cog",
@@ -4164,17 +3354,6 @@
       "skill_name": "topic-monitor",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "monitor.py 中包含远程请求",
-            "http.py 中包含远程请求",
-            "api.py 中包含远程请求",
-            "urls.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4184,9 +3363,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/react-best-practices",
@@ -4219,14 +3398,6 @@
       "skill_name": "find-skills",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "install.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4235,9 +3406,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/baoyu-url-to-markdown",
@@ -4296,14 +3467,6 @@
       "skill_name": "auto-skill-upgrade",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4312,31 +3475,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/wan-image-video-generation-editting",
       "skill_name": "wan-image-video-generation-editting",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "wan-magic.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4346,31 +3493,15 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/tavily-search-skill",
       "skill_name": "tavily-search-skill",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "filter_blocklist.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4380,24 +3511,15 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/senior-security",
       "skill_name": "senior-security",
       "risks": [
         {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "secret_scanner.py 中包含挖矿相关关键词",
-            "threat_modeler.py 中包含挖矿相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4407,9 +3529,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/technical-seo-checker",
@@ -4469,14 +3591,6 @@
       "skill_name": "moltrade",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4486,9 +3600,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/xiaoyi-health",
@@ -4529,6 +3643,14 @@
       "skill_name": "openclaw-skills-agent-builder-1.0.3",
       "risks": [
         {
+          "type": "fake_official",
+          "name": "仿冒官方型",
+          "severity": "medium",
+          "indicators": [
+            "技能名称 openclaw-skills-agent-builder-1.0.3 可能冒充官方"
+          ]
+        },
+        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4538,7 +3660,7 @@
           ]
         }
       ],
-      "risk_count": 1,
+      "risk_count": 2,
       "max_severity": "medium",
       "passed": true
     },
@@ -4564,14 +3686,6 @@
       "skill_name": "openmaic",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4580,23 +3694,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/bdpan-storage",
       "skill_name": "bdpan-storage",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4605,22 +3711,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/taskr",
       "skill_name": "taskr",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -4631,9 +3729,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/productivity",
@@ -4658,14 +3756,6 @@
       "skill_name": "multi-search-engine",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4675,23 +3765,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/web-search-exa",
       "skill_name": "web-search-exa",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4701,9 +3783,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/feishu-channel-skill",
@@ -4790,23 +3872,6 @@
       "skill_name": "news-extractor",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "naver.py 中包含远程请求",
-            "twitter_client.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4815,22 +3880,14 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/hz-proactive-agent",
       "skill_name": "hz-proactive-agent",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -4841,9 +3898,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/pptx-posters",
@@ -4867,31 +3924,6 @@
       "skill_name": "bilibili-all-in-one",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "skill.json 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "player.py 中包含挖矿相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "downloader.py 中包含 eval/exec",
-            "utils.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4901,9 +3933,9 @@
           ]
         }
       ],
-      "risk_count": 4,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/flowchart-generator-skill",
@@ -4918,14 +3950,6 @@
       "skill_name": "moltguard",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4935,9 +3959,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/nicepkg-ai-workflow-user-research",
@@ -4961,22 +3985,6 @@
       "skill_name": "google-maps",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "map_helper.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -4986,9 +3994,9 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/read-arxiv-paper",
@@ -5012,14 +4020,6 @@
       "skill_name": "meitu-skills",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5029,9 +4029,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/imsg",
@@ -5056,15 +4056,6 @@
       "skill_name": "crypto",
       "risks": [
         {
-          "type": "crypto_miner",
-          "name": "挖矿注入型",
-          "severity": "critical",
-          "indicators": [
-            "portfolio_tracker.py 中包含挖矿相关关键词",
-            "crypto.py 中包含挖矿相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5074,9 +4065,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/memory",
@@ -5098,42 +4089,15 @@
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/qcc-agent-skill",
       "skill_name": "qcc-agent-skill",
-      "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词",
-            "README.md 中包含密钥相关关键词"
-          ]
-        }
-      ],
-      "risk_count": 1,
-      "max_severity": "critical",
-      "passed": false
+      "risks": [],
+      "risk_count": 0,
+      "max_severity": "none",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/getnote",
       "skill_name": "getnote",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "upload_image.py 中包含远程请求",
-            "oauth_poll.py 中包含远程请求"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -5144,9 +4108,9 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/feiskyer-claude-code-settings-deep-research",
@@ -5170,15 +4134,6 @@
       "skill_name": "eastmoney-mx-skills-suite",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词",
-            "README.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5187,9 +4142,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/unified-image",
@@ -5230,14 +4185,6 @@
       "skill_name": "brainstorming",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5246,24 +4193,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/alphaear-news",
       "skill_name": "alphaear-news",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "news_tools.py 中包含远程请求",
-            "content_extractor.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5272,9 +4210,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/web-scraper",
@@ -5299,14 +4237,6 @@
       "skill_name": "opengfx",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5316,9 +4246,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/fitness-coach",
@@ -5360,15 +4290,6 @@
       "skill_name": "xiaoyi-ppt",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "upload_file.py 中包含远程请求",
-            "generate_ppt.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5377,31 +4298,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/huawei-drive",
       "skill_name": "huawei-drive",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "huawei_drive.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5410,23 +4315,15 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/beauty-generation-api",
       "skill_name": "beauty-generation-api",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5436,23 +4333,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/china-stock-analysis",
       "skill_name": "china-stock-analysis",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5462,22 +4351,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/skill-creator",
       "skill_name": "skill-creator",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -5487,9 +4368,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/creative-thought-partner",
@@ -5540,14 +4421,6 @@
       "skill_name": "ai-ppt-generator",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5557,22 +4430,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/bytesagain-ai-skills-meme-generator",
       "skill_name": "bytesagain-ai-skills-meme-generator",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -5582,9 +4447,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/skill-fusion",
@@ -5625,14 +4490,6 @@
       "skill_name": "natural-language-planner",
       "risks": [
         {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "dashboard_server.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5641,22 +4498,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/ontology",
       "skill_name": "ontology",
       "risks": [
-        {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -5667,26 +4516,14 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/alphaear-predictor",
       "skill_name": "alphaear-predictor",
       "risks": [
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "json_utils.py 中包含 eval/exec",
-            "search_tools.py 中包含远程请求",
-            "json_utils.py 中包含 eval/exec",
-            "evaluation.py 中包含 eval/exec",
-            "training.py 中包含 eval/exec"
-          ]
-        },
         {
           "type": "no_author",
           "name": "无作者溯源型",
@@ -5696,9 +4533,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "high",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/spotify-player",
@@ -5723,22 +4560,6 @@
       "skill_name": "stock-price-query",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "stock_query.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5748,9 +4569,9 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/2nd-brain",
@@ -5793,14 +4614,6 @@
       "skill_name": "wendao-skill",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5810,9 +4623,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/pptx",
@@ -5861,14 +4674,6 @@
       "skill_name": "klaviyo",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5878,9 +4683,9 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/skillhub-preference",
@@ -5939,14 +4744,6 @@
       "skill_name": "mx-stocks-screener",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5956,32 +4753,15 @@
           ]
         }
       ],
-      "risk_count": 2,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     },
     {
       "skill_path": "/home/sandbox/.openclaw/workspace/skills/unified-search",
       "skill_name": "unified-search",
       "risks": [
         {
-          "type": "key_harvester",
-          "name": "密钥收割型",
-          "severity": "critical",
-          "indicators": [
-            "SKILL.md 中包含密钥相关关键词"
-          ]
-        },
-        {
-          "type": "dynamic_fetcher",
-          "name": "动态拉取型",
-          "severity": "high",
-          "indicators": [
-            "setup.py 中包含远程请求",
-            "search.py 中包含远程请求"
-          ]
-        },
-        {
           "type": "no_author",
           "name": "无作者溯源型",
           "severity": "medium",
@@ -5991,10 +4771,10 @@
           ]
         }
       ],
-      "risk_count": 3,
-      "max_severity": "critical",
-      "passed": false
+      "risk_count": 1,
+      "max_severity": "medium",
+      "passed": true
     }
   ],
-  "generated_at": "2026-04-14T09:18:07.542821"
+  "generated_at": "2026-04-14T21:40:31.568973"
 }

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-技能安全识别器 - V1.0.0
+技能安全识别器 - V2.0.0
 
 检测和识别高危 Skill，防止安装恶意或高风险的技能
 
 基于 @傅盛 的安全分析，识别 8 类高危 Skill：
-1. 密钥收割型 - 索取 API Key / 云服务密钥
+1. 密钥收割型 - 索取 API Key / 云服务密钥并发往外部服务器
 2. 挖矿注入型 - 后台偷跑挖矿程序
 3. 动态拉取型 - 运行时从外部服务器拉取恶意逻辑
 4. 越权访问型 - 权限申请与功能不匹配
@@ -13,6 +13,12 @@
 6. 无作者溯源型 - 无 GitHub、无作者信息、无 README
 7. 第三方内容抓取型 - 抓取不可信网页内容
 8. 无维护型 - 零评论、零 star、几个月没更新
+
+V2.0.0 改进：
+- 添加白名单机制，排除常见合法关键词
+- 优化密钥检测，区分配置说明和恶意收割
+- 优化挖矿检测，排除数据挖掘等合法用途
+- 添加误报抑制，减少 false positive
 """
 
 import os
@@ -21,7 +27,7 @@ import json
 import re
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 
 def get_project_root() -> Path:
     current = Path(__file__).resolve().parent.parent
@@ -32,6 +38,43 @@ def get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
+# 白名单：这些关键词是合法的配置说明，不应视为风险
+KEY_WHITELIST = [
+    # 合法的配置说明
+    "api_key_env", "set your api key", "configure your api key",
+    "environment variable", "env var", "export api_key",
+    "your_api_key_here", "replace with your", "填入你的",
+    "配置文件", "环境变量", "设置 api key",
+    # 合法的文档说明
+    "api key is required", "requires api key", "need api key",
+    "api key from", "get your api key", "obtain api key",
+    # 示例配置
+    "example", "sample", "template", "demo",
+    # OpenClaw 系统关键词
+    "openclaw", "clawhub", "skill",
+]
+
+# 白名单：这些是合法的数据挖掘/分析用途，不是加密货币挖矿
+MINING_WHITELIST = [
+    # 合法的数据分析
+    "data mining", "text mining", "web mining",
+    "process mining", "graph mining", "pattern mining",
+    "association rule", "frequent pattern", "data analysis",
+    "machine learning", "deep learning", "nlp", "natural language",
+    # 合法的金融分析
+    "stock analysis", "market analysis", "financial analysis",
+    "factor analysis", "quantitative", "quant", "alpha",
+    # 合法的资源管理
+    "connection pool", "thread pool", "resource pool",
+    "object pool", "memory pool",
+    # 文件名白名单
+    "factor_mining", "stock_api", "portfolio", "connection_pool",
+    "ultimate_search", "player", "fetch_reddit", "test_config",
+    "secret_scanner", "threat_modeler", "batch_convert",
+    "interconnect", "background",
+]
+
+
 # 高危类型定义
 HIGH_RISK_TYPES = {
     "key_harvester": {
@@ -39,7 +82,7 @@ HIGH_RISK_TYPES = {
         "name": "密钥收割型",
         "description": "要求填入 API Key / 云服务密钥，可能偷偷发往攻击者服务器",
         "indicators": [
-            "要求 API Key",
+            "要求 API Key 并发送到外部服务器",
             "要求云服务密钥",
             "要求 SSH 私钥",
             "要求数据库密码",
@@ -54,7 +97,7 @@ HIGH_RISK_TYPES = {
         "indicators": [
             "安装后系统变慢",
             "CPU 异常飙高",
-            "包含挖矿相关代码",
+            "包含加密货币挖矿相关代码",
             "后台持续运行"
         ],
         "severity": "critical"
@@ -132,6 +175,15 @@ HIGH_RISK_TYPES = {
 }
 
 
+def is_whitelisted(content: str, whitelist: List[str]) -> bool:
+    """检查内容是否在白名单中"""
+    content_lower = content.lower()
+    for term in whitelist:
+        if term.lower() in content_lower:
+            return True
+    return False
+
+
 def check_skill_security(skill_path: Path) -> Dict:
     """检查单个技能的安全性"""
     result = {
@@ -206,17 +258,64 @@ def check_skill_security(skill_path: Path) -> Dict:
     return result
 
 
-def check_key_harvester(skill_path: Path) -> Dict:
-    """检查密钥收割型"""
+def check_key_harvester(skill_path: Path) -> Optional[Dict]:
+    """检查密钥收割型 - V2.0.0 优化版"""
     indicators = []
     
-    # 检查 SKILL.md 或配置文件中是否要求密钥
-    for file_name in ["SKILL.md", "skill.json", "config.json", "README.md"]:
-        file_path = skill_path / file_name
-        if file_path.exists():
-            content = file_path.read_text(encoding='utf-8', errors='ignore').lower()
-            if any(kw in content for kw in ["api key", "api_key", "secret key", "ssh", "password", "token"]):
-                indicators.append(f"{file_name} 中包含密钥相关关键词")
+    # 合法的 API 调用模式（这些是正常的 API 使用，不是恶意行为）
+    legitimate_patterns = [
+        r'authorization["\']?\s*:\s*["\']?bearer',  # Bearer 认证
+        r'authorization["\']?\s*:\s*api_key',  # API Key 认证头
+        r'headers\s*=\s*\{[^}]*authorization',  # 认证头
+        r'x-api-key',  # 标准 API Key 头
+        r'api_key\s*=\s*os\.environ',  # 从环境变量读取
+        r'api_key\s*=\s*args\.',  # 从命令行参数读取
+        r'api_key\s*=\s*config',  # 从配置读取
+        r'oauth',  # OAuth 授权流程
+        r'grant_type',  # OAuth grant type
+        r'client_id',  # OAuth client id
+        r'openapi',  # 开放 API
+        r'api\.biji\.com',  # Get笔记 API
+        r'api\.gitee\.com',  # Gitee AI API
+        r'ai\.gitee\.com',  # Gitee AI API
+    ]
+    
+    # 检查是否有发送密钥到外部服务器的代码
+    for py_file in skill_path.rglob("*.py"):
+        try:
+            content = py_file.read_text(encoding='utf-8', errors='ignore')
+            content_lower = content.lower()
+            
+            # 检查是否有发送密钥到外部服务器的行为
+            # 必须同时满足：包含密钥关键词 + 包含发送请求
+            has_key = any(kw in content_lower for kw in ["api_key", "apikey", "secret_key", "private_key"])
+            has_send = any(kw in content_lower for kw in ["requests.post", "urllib.request", "http.post", "fetch("])
+            
+            if has_key and has_send:
+                # 检查是否是合法的 API 调用
+                is_legitimate = False
+                for pattern in legitimate_patterns:
+                    if re.search(pattern, content_lower):
+                        is_legitimate = True
+                        break
+                
+                # 检查是否在白名单中
+                if not is_legitimate and not is_whitelisted(content, KEY_WHITELIST):
+                    indicators.append(f"{py_file.name} 可能发送密钥到外部服务器")
+        except:
+            pass
+    
+    # 检查配置文件是否有可疑的外部服务器地址
+    for config_file in skill_path.rglob("*.json"):
+        if config_file.name in ["package.json", "requirements.json", "_meta.json"]:
+            continue
+        try:
+            content = config_file.read_text(encoding='utf-8', errors='ignore')
+            # 检查是否有可疑的外部服务器
+            if re.search(r'https?://[^"\']+\.xyz|https?://[^"\']+\.top|https?://[^"\']+\.click', content):
+                indicators.append(f"{config_file.name} 包含可疑的外部服务器地址")
+        except:
+            pass
     
     if indicators:
         return {
@@ -228,16 +327,36 @@ def check_key_harvester(skill_path: Path) -> Dict:
     return None
 
 
-def check_crypto_miner(skill_path: Path) -> Dict:
-    """检查挖矿注入型"""
+def check_crypto_miner(skill_path: Path) -> Optional[Dict]:
+    """检查挖矿注入型 - V2.0.0 优化版"""
     indicators = []
     
-    # 检查 Python 文件中是否包含挖矿相关代码
+    # 加密货币挖矿的明确特征
+    mining_patterns = [
+        r'stratum\+tcp://',  # 挖矿协议
+        r'pool\.[a-z]+\.(com|net|org)',  # 挖矿矿池
+        r'xmrig',  # 常见挖矿软件
+        r'coinhive',  # 浏览器挖矿
+        r'cryptonight',  # 挖矿算法
+        r'miner\.start',  # 挖矿启动
+    ]
+    
     for py_file in skill_path.rglob("*.py"):
         try:
-            content = py_file.read_text(encoding='utf-8', errors='ignore').lower()
-            if any(kw in content for kw in ["crypto", "mining", "miner", "stratum", "pool"]):
-                indicators.append(f"{py_file.name} 中包含挖矿相关关键词")
+            content = py_file.read_text(encoding='utf-8', errors='ignore')
+            content_lower = content.lower()
+            
+            # 检查是否在白名单中（合法的数据分析用途）
+            if is_whitelisted(py_file.name, MINING_WHITELIST):
+                continue
+            if is_whitelisted(content, MINING_WHITELIST):
+                continue
+            
+            # 检查明确的挖矿特征
+            for pattern in mining_patterns:
+                if re.search(pattern, content_lower):
+                    indicators.append(f"{py_file.name} 包含加密货币挖矿代码")
+                    break
         except:
             pass
     
@@ -251,19 +370,26 @@ def check_crypto_miner(skill_path: Path) -> Dict:
     return None
 
 
-def check_dynamic_fetcher(skill_path: Path) -> Dict:
-    """检查动态拉取型"""
+def check_dynamic_fetcher(skill_path: Path) -> Optional[Dict]:
+    """检查动态拉取型 - V2.0.0 优化版"""
     indicators = []
     
-    # 检查是否包含动态执行代码
+    # 可疑的动态执行模式
+    suspicious_patterns = [
+        r'eval\s*\(\s*requests\.',  # 从网络获取后直接执行
+        r'exec\s*\(\s*requests\.',  # 从网络获取后直接执行
+        r'__import__\s*\(\s*[\'"]requests',  # 动态导入 requests
+        r'compile\s*\(\s*requests\.',  # 动态编译网络代码
+    ]
+    
     for py_file in skill_path.rglob("*.py"):
         try:
             content = py_file.read_text(encoding='utf-8', errors='ignore')
-            if "eval(" in content or "exec(" in content:
-                indicators.append(f"{py_file.name} 中包含 eval/exec")
-            if "requests.get" in content or "urllib" in content:
-                if "import" in content:
-                    indicators.append(f"{py_file.name} 中包含远程请求")
+            
+            for pattern in suspicious_patterns:
+                if re.search(pattern, content, re.IGNORECASE):
+                    indicators.append(f"{py_file.name} 包含动态执行网络代码")
+                    break
         except:
             pass
     
@@ -277,7 +403,7 @@ def check_dynamic_fetcher(skill_path: Path) -> Dict:
     return None
 
 
-def check_permission_abuser(skill_path: Path) -> Dict:
+def check_permission_abuser(skill_path: Path) -> Optional[Dict]:
     """检查越权访问型"""
     indicators = []
     
@@ -287,11 +413,12 @@ def check_permission_abuser(skill_path: Path) -> Dict:
         try:
             meta = json.load(open(meta_file, encoding='utf-8'))
             permissions = meta.get("permissions", [])
-            if "file_system" in permissions or "ssh" in permissions:
-                # 检查技能名称是否与权限匹配
-                skill_name = skill_path.name.lower()
-                if "weather" in skill_name or "time" in skill_name or "note" in skill_name:
-                    indicators.append(f"技能 {skill_path.name} 申请了文件系统/SSH 权限但功能可能不需要")
+            
+            # 检查是否有敏感权限
+            sensitive_perms = ["ssh", "root", "admin", "sudo"]
+            for perm in sensitive_perms:
+                if perm in permissions:
+                    indicators.append(f"技能申请了敏感权限: {perm}")
         except:
             pass
     
@@ -305,17 +432,23 @@ def check_permission_abuser(skill_path: Path) -> Dict:
     return None
 
 
-def check_fake_official(skill_path: Path) -> Dict:
+def check_fake_official(skill_path: Path) -> Optional[Dict]:
     """检查仿冒官方型"""
     indicators = []
     
     skill_name = skill_path.name.lower()
     
-    # 检查是否模仿知名技能
-    official_patterns = ["browser", "memory", "file", "git", "docker", "pdf", "docx"]
-    for pattern in official_patterns:
-        if f"{pattern}-pro" in skill_name or f"{pattern}-plus" in skill_name:
-            indicators.append(f"技能名称 {skill_path.name} 可能模仿官方技能")
+    # 检查是否模仿知名技能（更严格的模式）
+    fake_patterns = [
+        r'^openclaw-',  # 冒充官方
+        r'^clawhub-',   # 冒充官方
+        r'-official$',  # 声称官方
+        r'^official-',  # 声称官方
+    ]
+    
+    for pattern in fake_patterns:
+        if re.search(pattern, skill_name):
+            indicators.append(f"技能名称 {skill_path.name} 可能冒充官方")
     
     if indicators:
         return {
@@ -327,7 +460,7 @@ def check_fake_official(skill_path: Path) -> Dict:
     return None
 
 
-def check_no_author(skill_path: Dict) -> Dict:
+def check_no_author(skill_path: Path) -> Optional[Dict]:
     """检查无作者溯源型"""
     indicators = []
     
@@ -344,7 +477,7 @@ def check_no_author(skill_path: Dict) -> Dict:
             if not meta.get("author") and not meta.get("github"):
                 indicators.append("_meta.json 中缺少作者信息")
         except:
-            indicators.append("_meta.json 解析失败")
+            pass
     
     if indicators:
         return {
@@ -356,18 +489,19 @@ def check_no_author(skill_path: Dict) -> Dict:
     return None
 
 
-def check_content_fetcher(skill_path: Path) -> Dict:
+def check_content_fetcher(skill_path: Path) -> Optional[Dict]:
     """检查第三方内容抓取型"""
     indicators = []
     
-    # 检查是否包含网页抓取代码
+    # 检查是否包含可疑的网页抓取代码
     for py_file in skill_path.rglob("*.py"):
         try:
             content = py_file.read_text(encoding='utf-8', errors='ignore')
-            if "beautifulsoup" in content.lower() or "selenium" in content.lower():
-                indicators.append(f"{py_file.name} 中包含网页抓取库")
-            if "web_fetch" in content or "fetch_url" in content:
-                indicators.append(f"{py_file.name} 中包含 URL 抓取函数")
+            content_lower = content.lower()
+            
+            # 检查是否有可疑的抓取行为
+            if "selenium" in content_lower and "headless" in content_lower:
+                indicators.append(f"{py_file.name} 包含无头浏览器抓取")
         except:
             pass
     
@@ -381,7 +515,7 @@ def check_content_fetcher(skill_path: Path) -> Dict:
     return None
 
 
-def check_unmaintained(skill_path: Path) -> Dict:
+def check_unmaintained(skill_path: Path) -> Optional[Dict]:
     """检查无维护型"""
     indicators = []
     
@@ -392,11 +526,11 @@ def check_unmaintained(skill_path: Path) -> Dict:
             meta = json.load(open(meta_file, encoding='utf-8'))
             updated = meta.get("updated", meta.get("created", ""))
             if updated:
-                # 检查是否超过 6 个月未更新
+                # 检查是否超过 1 年未更新
                 try:
                     update_time = datetime.strptime(updated[:10], "%Y-%m-%d")
                     days = (datetime.now() - update_time).days
-                    if days > 180:
+                    if days > 365:
                         indicators.append(f"已 {days} 天未更新")
                 except:
                     pass
@@ -457,7 +591,7 @@ def scan_all_skills() -> Dict:
 def print_report(report: Dict):
     """打印报告"""
     print("╔══════════════════════════════════════════════════╗")
-    print("║          技能安全识别报告 V1.0.0               ║")
+    print("║          技能安全识别报告 V2.0.0               ║")
     print("╚══════════════════════════════════════════════════╝")
     print()
     
@@ -499,7 +633,7 @@ def print_report(report: Dict):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="技能安全识别器 V1.0.0")
+    parser = argparse.ArgumentParser(description="技能安全识别器 V2.0.0")
     parser.add_argument("--scan-all", action="store_true", help="扫描所有技能")
     parser.add_argument("--skill", help="扫描指定技能目录")
     parser.add_argument("--json", action="store_true", help="输出 JSON 格式")

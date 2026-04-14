@@ -50,7 +50,16 @@
       "ultra_minimal": {
         "tokens": 2762,
         "description": "极简注入"
+      },
+      "smart": {
+        "tokens": 2000,
+        "description": "智能注入 - 自动压缩"
       }
+    },
+    "tools": {
+      "compressor": "scripts/smart_compressor.py",
+      "updater": "scripts/incremental_updater.py",
+      "summarizer": "scripts/auto_summarizer.py"
     }
   }
 }

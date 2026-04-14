@@ -1,5 +1,5 @@
 {
-  "version": "2.1.0",
+  "version": "3.0.0",
   "updated": "2026-04-14",
   "description": "架构融合索引 - 统一入口",
   "indexes": {
@@ -60,6 +60,31 @@
       "compressor": "scripts/smart_compressor.py",
       "updater": "scripts/incremental_updater.py",
       "summarizer": "scripts/auto_summarizer.py"
+    }
+  },
+  "inspector": {
+    "version": "5.0.0",
+    "checks": 8,
+    "workers": 8,
+    "target_time_ms": 6000
+  },
+  "token_optimization": {
+    "modes": [
+      "full",
+      "minimal",
+      "ultra_minimal",
+      "smart"
+    ],
+    "tools": [
+      "smart_compressor.py",
+      "incremental_updater.py",
+      "auto_summarizer.py"
+    ],
+    "estimated_tokens": {
+      "full": 13000000,
+      "minimal": 5000,
+      "ultra_minimal": 2800,
+      "smart": 2000
     }
   }
 }

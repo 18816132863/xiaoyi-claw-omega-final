@@ -4,7 +4,7 @@
 
 ## 项目状态
 
-- **版本**: V5.4.0
+- **版本**: V6.0.0
 - **状态**: 全面整合完成
 - **更新时间**: 2026-04-14
 
@@ -85,22 +85,22 @@
 | torch | 2.11.0 | 深度学习 |
 | transformers | 5.5.4 | NLP 模型 |
 
-## V5.4.0 新增/更新
+## V6.0.0 新增/更新
 
 ### 技能注册表
 - `infrastructure/inventory/skill_registry.json`: V5.0.0，275 个技能
 - `infrastructure/inventory/skill_inverted_index.json`: 倒排索引
 
 ### 统一巡检器
-- `scripts/unified_inspector.py`: V4.0.0
+- `scripts/unified_inspector.py`: V5.0.0
 - 6 项检查，并行执行
 
 ### 技能安全识别
-- `scripts/check_skill_security.py`: V4.0.0
+- `scripts/check_skill_security.py`: V5.0.0
 - 白名单机制，误报抑制
 
 ### 架构文档
-- `core/ARCHITECTURE.md`: V5.4.0，技能生态章节
+- `core/ARCHITECTURE.md`: V6.0.0，技能生态章节
 
 ## Git 认证
 
@@ -116,6 +116,14 @@
 | numpy | 1.26.4 | 向量化计算 |
 | numexpr | 2.14.1 | 表达式加速 |
 | bottleneck | 1.6.0 | 瓶颈优化 |
+
+
+
+### 巡检器 V5.0.0
+- 检查项: 8 项
+- Workers: 8
+- 目标耗时: < 6s
+- 新增: Token优化检查、注入配置检查
 
 ## 注意事项
 

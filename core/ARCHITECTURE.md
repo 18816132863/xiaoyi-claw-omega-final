@@ -1,4 +1,4 @@
-# 六层架构定义 V5.4.0
+# 六层架构定义 V6.0.0
 
 > **唯一主架构定义** - 本文档是项目唯一正式运行架构定义
 > 
@@ -443,3 +443,41 @@ python scripts/run_release_gate.py release
 - 全量巡检: < 15s
 - 4096维 Embedding: < 500ms
 - 向量搜索: < 100ms
+
+---
+
+## Token 优化体系
+
+### 注入模式
+
+| 模式 | Token | 用途 |
+|------|-------|------|
+| 全量注入 | 13,000,000 | 完整分析 |
+| 精简注入 | ~5,000 | 日常使用 |
+| 极简注入 | ~2,800 | 快速响应 |
+| 智能注入 | ~2,000 | 自动压缩 |
+
+### 配置文件
+
+| 文件 | 模式 |
+|------|------|
+| injection_config.json | 精简模式 |
+| injection_config_minimal.json | 极简模式 |
+| injection_config_smart.json | 智能模式 |
+
+### 工具
+
+| 工具 | 功能 |
+|------|------|
+| smart_compressor.py | 智能压缩 |
+| incremental_updater.py | 增量更新 |
+| auto_summarizer.py | 自动摘要 |
+
+### 懒加载
+
+| 资源 | 方式 |
+|------|------|
+| 技能 | find-skills |
+| 记忆 | memory_search |
+| 配置 | read 按需 |
+| 报告 | read 按需 |

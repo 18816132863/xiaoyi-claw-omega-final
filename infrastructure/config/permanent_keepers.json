@@ -1,0 +1,124 @@
+{
+  "keepers": {
+    "fusion_engine": {
+      "name": "融合引擎",
+      "type": "engine",
+      "priority": "critical",
+      "files": [
+        "infrastructure/inventory/fusion_index.json",
+        "infrastructure/config/unified.json"
+      ],
+      "refresh_interval_hours": 1,
+      "auto_restore": true,
+      "description": "统一融合索引，保证技能路由和模块发现"
+    },
+    "memory_engine": {
+      "name": "记忆引擎",
+      "type": "engine",
+      "priority": "critical",
+      "files": [
+        "MEMORY.md",
+        "memory_context/vector/embedding_config.json",
+        "memory_context/index/",
+        "skills/llm-memory-integration/config/llm_config.json"
+      ],
+      "refresh_interval_hours": 1,
+      "auto_restore": true,
+      "description": "长期记忆和向量索引，保证上下文连续性"
+    },
+    "rule_engine": {
+      "name": "规则引擎",
+      "type": "engine",
+      "priority": "critical",
+      "files": [
+        "core/RULE_REGISTRY.json",
+        "core/RULE_EXCEPTIONS.json",
+        "scripts/run_rule_engine.py"
+      ],
+      "refresh_interval_hours": 1,
+      "auto_restore": true,
+      "description": "规则注册和执行，保证门禁行为一致"
+    },
+    "exception_manager": {
+      "name": "例外管理器",
+      "type": "module",
+      "priority": "high",
+      "files": [
+        "scripts/exception_manager.py",
+        "reports/ops/rule_exception_history.json",
+        "reports/ops/rule_exception_status.json"
+      ],
+      "refresh_interval_hours": 1,
+      "auto_restore": true,
+      "description": "例外操作和历史，保证例外状态连续"
+    },
+    "dependency_manager": {
+      "name": "依赖管理器",
+      "type": "module",
+      "priority": "high",
+      "files": [
+        "scripts/dependency_manager.py",
+        "infrastructure/config/dependency_manifest.json",
+        "reports/ops/dependency_status.json"
+      ],
+      "refresh_interval_hours": 24,
+      "auto_restore": true,
+      "description": "依赖状态，保证环境一致性"
+    },
+    "delete_manager": {
+      "name": "删除管理器",
+      "type": "module",
+      "priority": "high",
+      "files": [
+        "scripts/delete_manager.py",
+        "archive/trash/",
+        "reports/ops/delete_log.json"
+      ],
+      "refresh_interval_hours": 24,
+      "auto_restore": true,
+      "description": "删除确认和回收站，防止误删"
+    },
+    "skill_registry": {
+      "name": "技能注册表",
+      "type": "registry",
+      "priority": "critical",
+      "files": [
+        "infrastructure/inventory/skill_registry.json",
+        "infrastructure/inventory/skill_registry_summary.json"
+      ],
+      "refresh_interval_hours": 1,
+      "auto_restore": true,
+      "description": "技能发现和路由，保证技能可用"
+    },
+    "core_identity": {
+      "name": "核心身份",
+      "type": "identity",
+      "priority": "critical",
+      "files": [
+        "SOUL.md",
+        "USER.md",
+        "IDENTITY.md",
+        "AGENTS.md",
+        "TOOLS.md"
+      ],
+      "refresh_interval_hours": 24,
+      "auto_restore": true,
+      "description": "身份和规则，保证行为一致"
+    },
+    "architecture": {
+      "name": "架构文档",
+      "type": "docs",
+      "priority": "critical",
+      "files": [
+        "core/ARCHITECTURE.md",
+        "core/LAYER_DEPENDENCY_MATRIX.md",
+        "core/LAYER_DEPENDENCY_RULES.json",
+        "core/LAYER_IO_CONTRACTS.md"
+      ],
+      "refresh_interval_hours": 24,
+      "auto_restore": true,
+      "description": "架构定义，保证结构一致"
+    }
+  },
+  "version": "1.0.0"
+}

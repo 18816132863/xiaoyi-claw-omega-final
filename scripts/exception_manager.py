@@ -59,6 +59,98 @@ class ExceptionManager:
         """保存例外真源"""
         with open(self.exceptions_file, 'w') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
+        # 自动刷新状态快照
+        self._refresh_status_snapshot()
+    
+    def _refresh_status_snapshot(self):
+        """刷新例外状态快照"""
+        data = self._load_exceptions()
+        exceptions = data.get("exceptions", {})
+        
+        now = datetime.now()
+        
+        # 统计各状态
+        active_count = 0
+        soon_expiring_count = 0
+        expired_count = 0
+        revoked_count = 0
+        stale_count = 0
+        overused_count = 0
+        high_debt_count = 0
+        
+        by_owner = {}
+        
+        for exc_id, exc in exceptions.items():
+            status = exc.get("status", "")
+            owner = exc.get("owner", "unknown")
+            debt_level = exc.get("debt_level", "low")
+            renewal_count = exc.get("renewal_count", 0)
+            max_renewals = exc.get("max_renewals", 2)
+            
+            # 按状态统计
+            if status == "active":
+                active_count += 1
+                
+                # 检查即将过期
+                expires_at_str = exc.get("expires_at")
+                if expires_at_str:
+                    try:
+                        expires_at = datetime.fromisoformat(expires_at_str)
+                        days_left = (expires_at - now).days
+                        if days_left <= 7:
+                            soon_expiring_count += 1
+                    except:
+                        pass
+                
+                # 检查 stale (超过 30 天未更新)
+                created_at_str = exc.get("created_at")
+                if created_at_str:
+                    try:
+                        created_at = datetime.fromisoformat(created_at_str)
+                        if (now - created_at).days > 30:
+                            stale_count += 1
+                    except:
+                        pass
+                
+                # 检查 overused
+                if renewal_count >= max_renewals:
+                    overused_count += 1
+                
+                # 检查 high debt
+                if debt_level == "high":
+                    high_debt_count += 1
+            
+            elif status == "expired":
+                expired_count += 1
+            elif status == "revoked":
+                revoked_count += 1
+            
+            # 按负责人统计
+            if owner not in by_owner:
+                by_owner[owner] = {"active": 0, "expired": 0, "revoked": 0}
+            if status in by_owner[owner]:
+                by_owner[owner][status] += 1
+        
+        # 保存快照
+        snapshot = {
+            "active_count": active_count,
+            "soon_expiring_count": soon_expiring_count,
+            "stale_count": stale_count,
+            "overused_count": overused_count,
+            "expired_count": expired_count,
+            "revoked_count": revoked_count,
+            "high_debt_count": high_debt_count,
+            "by_owner": by_owner,
+            "generated_at": now.isoformat()
+        }
+        
+        snapshot_path = self.root / "reports/ops/rule_exception_status.json"
+        snapshot_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(snapshot_path, 'w') as f:
+            json.dump(snapshot, f, ensure_ascii=False, indent=2)
+        
+        return snapshot
     
     def _load_history(self) -> List[Dict]:
         """加载操作历史"""

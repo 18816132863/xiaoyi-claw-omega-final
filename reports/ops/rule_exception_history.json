@@ -68,5 +68,61 @@
     "new_expires_at": "2026-05-14T23:48:50.052889",
     "reason": "续期 30 天",
     "timestamp": "2026-04-14T23:48:50.053845"
+  },
+  {
+    "event_id": "exc_evt_20260415_001618_fdb4d6cf",
+    "exception_id": "EXC-R004-20260415-87a0d7",
+    "action": "create",
+    "rule_id": "R004",
+    "approved_by": "test",
+    "owner": "test",
+    "old_status": "none",
+    "new_status": "active",
+    "old_expires_at": "none",
+    "new_expires_at": "2026-04-14T00:16:18.266666",
+    "reason": "测试过期检查",
+    "timestamp": "2026-04-15T00:16:18.268461"
+  },
+  {
+    "event_id": "exc_evt_20260415_001621_bba12599",
+    "exception_id": "EXC-R004-20260415-87a0d7",
+    "action": "expire",
+    "rule_id": "R004",
+    "approved_by": "system",
+    "owner": "test",
+    "old_status": "active",
+    "new_status": "expired",
+    "old_expires_at": "2026-04-14T00:16:18.266666",
+    "new_expires_at": "2026-04-14T00:16:18.266666",
+    "reason": "自动过期",
+    "timestamp": "2026-04-15T00:16:21.619021"
+  },
+  {
+    "event_id": "exc_evt_20260415_001632_92a5fad9",
+    "exception_id": "EXC-R004-20260415-a6dd2f",
+    "action": "create",
+    "rule_id": "R004",
+    "approved_by": "test",
+    "owner": "test",
+    "old_status": "none",
+    "new_status": "active",
+    "old_expires_at": "none",
+    "new_expires_at": "2026-05-15T00:16:32.668597",
+    "reason": "测试高风险阻断",
+    "timestamp": "2026-04-15T00:16:32.670330"
+  },
+  {
+    "event_id": "exc_evt_20260415_001637_e1dec92c",
+    "exception_id": "EXC-R004-20260415-a6dd2f",
+    "action": "renew",
+    "rule_id": "R004",
+    "approved_by": "test",
+    "owner": "test",
+    "old_status": "active",
+    "new_status": "active",
+    "old_expires_at": "2026-05-15T00:16:32.668597",
+    "new_expires_at": "2026-05-15T00:16:37.554446",
+    "reason": "续期 30 天",
+    "timestamp": "2026-04-15T00:16:37.556118"
   }
 ]

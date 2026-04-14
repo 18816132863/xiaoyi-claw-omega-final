@@ -329,11 +329,116 @@ def print_impact_enforcement_summary(enforcement_result: dict):
     print("=" * 50)
 
 
+def run_expire_check() -> dict:
+    """运行例外过期检查 - 门禁前置步骤"""
+    root = get_project_root()
+    
+    print("\n" + "=" * 50)
+    print("【Exception Expire Check】")
+    print("=" * 50)
+    
+    result = subprocess.run(
+        [sys.executable, str(root / "scripts/exception_manager.py"), "expire-check"],
+        capture_output=True,
+        text=True,
+        cwd=root
+    )
+    
+    try:
+        data = json.loads(result.stdout)
+        expired_count = data.get("expired_count", 0)
+        print(f"  Expired exceptions: {expired_count}")
+        if expired_count > 0:
+            print(f"  Expired: {', '.join(data.get('expired', []))}")
+        print("=" * 50)
+        return data
+    except:
+        print("  ⚠️ 无法解析结果")
+        print("=" * 50)
+        return {"status": "error", "expired_count": 0}
+
+
+def check_exception_constraints(profile: str) -> dict:
+    """检查例外约束 - release 门禁特有"""
+    root = get_project_root()
+    
+    result = {
+        "passed": True,
+        "blocked_exceptions": [],
+        "reason": ""
+    }
+    
+    if profile != "release":
+        return result
+    
+    # 读取例外状态快照
+    status_path = root / "reports/ops/rule_exception_status.json"
+    if not status_path.exists():
+        return result
+    
+    try:
+        status = json.load(open(status_path, encoding='utf-8'))
+    except:
+        return result
+    
+    # 读取例外真源
+    exceptions_path = root / "core/RULE_EXCEPTIONS.json"
+    if not exceptions_path.exists():
+        return result
+    
+    try:
+        exceptions_data = json.load(open(exceptions_path, encoding='utf-8'))
+        exceptions = exceptions_data.get("exceptions", {})
+    except:
+        return result
+    
+    # 读取规则注册表
+    rules_path = root / "core/RULE_REGISTRY.json"
+    blocking_rules = set()
+    if rules_path.exists():
+        try:
+            rules_data = json.load(open(rules_path, encoding='utf-8'))
+            for rule_id, rule in rules_data.get("rules", {}).items():
+                if rule.get("enforcement") == "blocking":
+                    blocking_rules.add(rule_id)
+        except:
+            pass
+    
+    # 检查高风险例外
+    for exc_id, exc in exceptions.items():
+        if exc.get("status") != "active":
+            continue
+        
+        debt_level = exc.get("debt_level", "low")
+        renewal_count = exc.get("renewal_count", 0)
+        max_renewals = exc.get("max_renewals", 2)
+        rule_id = exc.get("rule_id", "")
+        
+        # 高债务 + 超续期 + blocking rule = 阻断
+        if debt_level == "high" and renewal_count >= max_renewals and rule_id in blocking_rules:
+            result["passed"] = False
+            result["blocked_exceptions"].append({
+                "exception_id": exc_id,
+                "rule_id": rule_id,
+                "debt_level": debt_level,
+                "renewal_count": renewal_count,
+                "max_renewals": max_renewals
+            })
+    
+    if not result["passed"]:
+        result["reason"] = "存在高风险例外：high debt + overused + blocking rule"
+    
+    return result
+
+
 def verify_premerge():
     """premerge 门禁"""
     root = get_project_root()
     
-    # 0. 规则检查 - 通过统一规则引擎
+    # 0. 例外过期检查 - 门禁前置
+    run_expire_check()
+    
+    # 1. 规则检查 - 通过统一规则引擎
     rule_results = run_rule_checks("premerge")
     print_rule_summary(rule_results)
     
@@ -421,7 +526,10 @@ def verify_nightly():
     """nightly 门禁"""
     root = get_project_root()
     
-    # 0. 规则检查 - 通过统一规则引擎
+    # 0. 例外过期检查 - 门禁前置
+    run_expire_check()
+    
+    # 1. 规则检查 - 通过统一规则引擎
     rule_results = run_rule_checks("nightly")
     print_rule_summary(rule_results)
     
@@ -483,7 +591,24 @@ def verify_release():
     """release 门禁"""
     root = get_project_root()
     
-    # 0. 规则检查 - 通过统一规则引擎
+    # 0. 例外过期检查 - 门禁前置
+    run_expire_check()
+    
+    # 1. 例外约束检查 - release 特有
+    exception_result = check_exception_constraints("release")
+    if not exception_result["passed"]:
+        print("\n" + "=" * 50)
+        print("【Exception Constraint Violation】")
+        print("=" * 50)
+        print(f"  Reason: {exception_result['reason']}")
+        for exc in exception_result["blocked_exceptions"]:
+            print(f"  - {exc['exception_id']}: {exc['rule_id']}")
+            print(f"    debt_level: {exc['debt_level']}, renewals: {exc['renewal_count']}/{exc['max_renewals']}")
+        print("=" * 50)
+        print("❌ Release blocked by high-risk exceptions")
+        return 1
+    
+    # 2. 规则检查 - 通过统一规则引擎
     rule_results = run_rule_checks("release")
     print_rule_summary(rule_results)
     

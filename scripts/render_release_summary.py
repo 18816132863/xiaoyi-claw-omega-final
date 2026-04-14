@@ -117,6 +117,20 @@ def main():
                     print()
                 except:
                     pass
+            
+            # Exception Status
+            status_path = root / "reports/ops/rule_exception_status.json"
+            if status_path.exists():
+                try:
+                    status = json.load(open(status_path, encoding='utf-8'))
+                    print("**Exception Status**:")
+                    print(f"- Active Exceptions: {status.get('active_count', 0)}")
+                    print(f"- Soon Expiring Exceptions: {status.get('soon_expiring_count', 0)}")
+                    print(f"- Expired Exceptions: {status.get('expired_count', 0)}")
+                    print(f"- Revoked Exceptions: {status.get('revoked_count', 0)}")
+                    print()
+                except:
+                    pass
         except:
             print("**Rule Checks**: ⚠️ 无法读取")
             print()

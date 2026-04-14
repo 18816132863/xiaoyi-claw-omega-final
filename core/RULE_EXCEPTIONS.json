@@ -158,6 +158,34 @@
       "ticket_ref": "",
       "last_renewed_at": "2026-04-14T23:48:50.052889",
       "last_renewed_by": "test"
+    },
+    "EXC-R004-20260415-87a0d7": {
+      "rule_id": "R004",
+      "reason": "测试过期检查",
+      "owner": "test",
+      "approved_by": "test",
+      "status": "expired",
+      "created_at": "2026-04-15T00:16:18.266666",
+      "expires_at": "2026-04-14T00:16:18.266666",
+      "renewal_count": 0,
+      "max_renewals": 2,
+      "ticket_ref": "",
+      "expired_at": "2026-04-15T00:16:21.618699"
+    },
+    "EXC-R004-20260415-a6dd2f": {
+      "rule_id": "R004",
+      "reason": "测试高风险阻断",
+      "owner": "test",
+      "approved_by": "test",
+      "status": "active",
+      "created_at": "2026-04-15T00:16:32.668597",
+      "expires_at": "2026-05-15T00:16:37.554446",
+      "renewal_count": 1,
+      "max_renewals": 1,
+      "ticket_ref": "",
+      "last_renewed_at": "2026-04-15T00:16:37.554446",
+      "last_renewed_by": "test",
+      "debt_level": "high"
     }
   },
   "policies": {

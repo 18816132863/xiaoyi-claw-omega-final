@@ -1,41 +1,25 @@
 {
   "changed_files": [
-    "MEMORY.md",
+    "core/RULE_EXCEPTIONS.json",
+    "core/RULE_EXCEPTION_OPERATIONS.md",
+    "memory/2026-04-14.md",
     "reports/git_commits.json",
-    "reports/inspection_20260414_220448.json",
-    "reports/ops/rule_engine_report.json",
-    "reports/ops/rule_exception_debt.json",
-    "reports/ops/rule_execution_index.json",
+    "reports/inspection_20260414_233846.json",
+    "reports/ops/rule_exception_history.json",
     "reports/ops/rule_registry_snapshot.json",
     "reports/ops/unified_inspection.json",
+    "scripts/exception_manager.py",
     "scripts/render_nightly_summary.py",
     "scripts/render_premerge_summary.py",
-    "scripts/render_release_summary.py"
+    "scripts/render_release_summary.py",
+    "scripts/run_release_gate.py"
   ],
   "changed_categories": [
     "reports/ops"
   ],
   "matched_rules": [
     {
-      "file": "reports/ops/rule_engine_report.json",
-      "pattern": "reports/ops/*",
-      "description": "控制平面报告变更，建议验证 JSON 契约",
-      "blocking_commands": [
-        "python scripts/check_json_contracts.py"
-      ],
-      "followup_profiles": []
-    },
-    {
-      "file": "reports/ops/rule_exception_debt.json",
-      "pattern": "reports/ops/*",
-      "description": "控制平面报告变更，建议验证 JSON 契约",
-      "blocking_commands": [
-        "python scripts/check_json_contracts.py"
-      ],
-      "followup_profiles": []
-    },
-    {
-      "file": "reports/ops/rule_execution_index.json",
+      "file": "reports/ops/rule_exception_history.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
       "blocking_commands": [
@@ -67,5 +51,5 @@
   ],
   "followup_required_profiles": [],
   "followup_reason_by_profile": {},
-  "generated_at": "2026-04-14T22:27:55.543964"
+  "generated_at": "2026-04-15T00:17:01.750620"
 }

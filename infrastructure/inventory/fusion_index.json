@@ -86,5 +86,29 @@
       "ultra_minimal": 2800,
       "smart": 2000
     }
+  },
+  "llm_memory_integration": {
+    "version": "5.1.5",
+    "path": "skills/llm-memory-integration",
+    "category": "memory",
+    "features": {
+      "embedding_dimensions": 4096,
+      "embedding_model": "Qwen3-Embedding-8B",
+      "llm_model": "Qwen3-235B-A22B",
+      "provider": "Gitee AI",
+      "three_engines": [
+        "sqlite-vec",
+        "qdrant",
+        "tfidf"
+      ],
+      "auto_update": true,
+      "sync_enabled": true
+    },
+    "config_files": [
+      "config/llm_config.json",
+      "config/three_engine_config.json",
+      "config/persona_update.json",
+      "config/progressive_config.json"
+    ]
   }
 }

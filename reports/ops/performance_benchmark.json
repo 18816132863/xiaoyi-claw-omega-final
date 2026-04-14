@@ -44,5 +44,11 @@
     "original_tokens": 13000000,
     "optimized_tokens": 2000,
     "reduction": "99.98%"
+  },
+  "llm_integration": {
+    "embedding_dimensions": 4096,
+    "embedding_model": "Qwen3-Embedding-8B",
+    "embedding_latency_ms": 500,
+    "vector_search_latency_ms": 100
   }
 }

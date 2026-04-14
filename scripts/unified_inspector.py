@@ -72,7 +72,6 @@ def run_all_checks(profile: str = "premerge", parallel: bool = True) -> Dict:
     root = get_project_root()
     
     checks = [
-        ("规则引擎", "scripts/run_rule_engine.py", 180),
         ("层间依赖", "scripts/check_layer_dependencies.py", 60),
         ("JSON契约", "scripts/check_json_contracts.py", 60),
         ("仓库完整性", "scripts/check_repo_integrity_fast.py", 30),

@@ -4,7 +4,8 @@
     "base_url": "https://ai.gitee.com/v1",
     "api_key": "JEHMRUUDOKBQQLCSWIIA0EYHKDZJ3KORM2NEVLPM",
     "model": "Qwen3-Embedding-8B",
-    "dimensions": 1024
+    "dimensions": 4096,
+    "description": "最高维度配置 - 4096维"
   },
   "llm": {
     "provider": "gitee",

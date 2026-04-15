@@ -1,13 +1,13 @@
 {
   "version": "5.0.0",
-  "updated": "2026-04-14",
+  "updated": "2026-04-15",
   "source": "唯一真源 - 自动生成",
   "skills": {
     "api-gateway": {
       "name": "api-gateway",
       "display_name": "Api Gateway",
       "description": "name: api-gateway",
-      "category": "other",
+      "category": "utility",
       "risk_level": "medium",
       "dependencies": [],
       "timeout": 60,
@@ -21,7 +21,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "sonoscli": {
       "name": "sonoscli",
@@ -67,7 +68,7 @@
       "name": "senior-architect",
       "display_name": "Senior Architect",
       "description": "name: \"senior-architect\"",
-      "category": "other",
+      "category": "data",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -81,7 +82,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.6666666666666666
     },
     "video-agent": {
       "name": "video-agent",
@@ -207,7 +209,7 @@
       "name": "omni-channel-ecommerce",
       "display_name": "Omni Channel Ecommerce",
       "description": "name: omni-channel-ecommerce",
-      "category": "other",
+      "category": "ecommerce",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -221,7 +223,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "kuaishou-shop-operation": {
       "name": "kuaishou-shop-operation",
@@ -247,7 +250,7 @@
       "name": "frontend-design-pro",
       "display_name": "Frontend Design Pro",
       "description": "name: frontend-design-pro",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -261,7 +264,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "local_app_interconnect": {
       "name": "local_app_interconnect",
@@ -307,7 +311,7 @@
       "name": "ecommerce-analytics",
       "display_name": "Ecommerce Analytics",
       "description": "name: ecommerce-analytics",
-      "category": "other",
+      "category": "data",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -321,7 +325,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "markitdown": {
       "name": "markitdown",
@@ -507,7 +512,7 @@
       "name": "yanxue-course-manager",
       "display_name": "Yanxue Course Manager",
       "description": "name: yanxue-course-manager",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -521,7 +526,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "minimax-music-gen": {
       "name": "minimax-music-gen",
@@ -640,8 +646,8 @@
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
       "testable": true,
-      "smoke_test": false,
-      "test_mode": "integration"
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "bytedance-deer-flow-vercel-deploy-claimable": {
       "name": "bytedance-deer-flow-vercel-deploy-claimable",
@@ -727,7 +733,7 @@
       "name": "clawsec-suite",
       "display_name": "Clawsec Suite",
       "description": "name: clawsec-suite",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -741,13 +747,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "scrapling-official": {
       "name": "scrapling-official",
       "display_name": "Scrapling Official",
       "description": "name: scrapling-official",
-      "category": "other",
+      "category": "search",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -761,13 +768,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "guide": {
       "name": "guide",
       "display_name": "Guide",
       "description": "帮助用户快速了解和使用系统的全部功能，每次对话自动加载。",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -781,13 +789,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "qq-clawbot-setup": {
       "name": "qq-clawbot-setup",
       "display_name": "Qq Clawbot Setup",
       "description": "name: qq-clawbot-setup",
-      "category": "other",
+      "category": "communication",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -801,7 +810,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "eno": {
       "name": "eno",
@@ -867,7 +877,7 @@
       "name": "superdesign",
       "display_name": "Superdesign",
       "description": "name: frontend-design",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -881,7 +891,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "ima-skill": {
       "name": "ima-skill",
@@ -927,7 +938,7 @@
       "name": "general-writing",
       "display_name": "General Writing",
       "description": "name: general-writing",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -941,7 +952,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "juejin-skills": {
       "name": "juejin-skills",
@@ -967,7 +979,7 @@
       "name": "clawdhub",
       "display_name": "Clawdhub",
       "description": "name: clawdhub",
-      "category": "other",
+      "category": "search",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -981,13 +993,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "weather": {
       "name": "weather",
       "display_name": "Weather",
       "description": "name: weather",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -999,9 +1012,10 @@
       "path": "skills/weather",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external",
+      "category_confidence": 1.0
     },
     "javascript-skills": {
       "name": "javascript-skills",
@@ -1027,7 +1041,7 @@
       "name": "news-writing",
       "display_name": "News Writing",
       "description": "name: news-writing",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1041,7 +1055,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "seedance-video-gen": {
       "name": "seedance-video-gen",
@@ -1087,7 +1102,7 @@
       "name": "paddleocr-doc-parsing",
       "display_name": "Paddleocr Doc Parsing",
       "description": "name: paddleocr-doc-parsing",
-      "category": "other",
+      "category": "document",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1101,7 +1116,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "amazing129-skills-mbti-for-agents": {
       "name": "amazing129-skills-mbti-for-agents",
@@ -1147,7 +1163,7 @@
       "name": "xiaoyi-file-upload",
       "display_name": "Xiaoyi File Upload",
       "description": "name: xiaoyi-file-upload",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1161,7 +1177,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "claw-art": {
       "name": "claw-art",
@@ -1200,14 +1217,14 @@
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
       "testable": true,
-      "smoke_test": false,
-      "test_mode": "integration"
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "metabase-metabase-docs-write": {
       "name": "metabase-metabase-docs-write",
       "display_name": "Metabase Metabase Docs Write",
       "description": "name: docs-write",
-      "category": "other",
+      "category": "document",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1221,13 +1238,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "prd-writer": {
       "name": "prd-writer",
       "display_name": "Prd Writer",
       "description": "name: prd-writer",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1241,13 +1259,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "command-center": {
       "name": "command-center",
       "display_name": "Command Center",
       "description": "name: command-center",
-      "category": "other",
+      "category": "ai",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1261,13 +1280,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "marketing-strategy-pmm": {
       "name": "marketing-strategy-pmm",
       "display_name": "Marketing Strategy Pmm",
       "description": "name: \"marketing-strategy-pmm\"",
-      "category": "other",
+      "category": "finance",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1281,13 +1301,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "hot-news-aggregator": {
       "name": "hot-news-aggregator",
       "display_name": "Hot News Aggregator",
       "description": "name: hot-news-aggregator",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1301,13 +1322,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "baoyu-comic": {
       "name": "baoyu-comic",
       "display_name": "Baoyu Comic",
       "description": "name: baoyu-comic",
-      "category": "other",
+      "category": "image",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1321,13 +1343,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "command-hook": {
       "name": "command-hook",
       "display_name": "Command Hook",
       "description": "name: command-hook",
-      "category": "other",
+      "category": "automation",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1341,7 +1364,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "dingtalk-ai-table": {
       "name": "dingtalk-ai-table",
@@ -1367,7 +1391,7 @@
       "name": "xiaohongshu-all-in-one",
       "display_name": "Xiaohongshu All In One",
       "description": "name: xiaohongshu-all-in-one",
-      "category": "other",
+      "category": "search",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1381,7 +1405,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "docker": {
       "name": "docker",
@@ -1399,15 +1424,15 @@
       "path": "skills/docker",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "writing-style-iterator": {
       "name": "writing-style-iterator",
       "display_name": "Writing Style Iterator",
       "description": "name: writing-style-iterator",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1421,7 +1446,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "tencent-cos-skill": {
       "name": "tencent-cos-skill",
@@ -1547,7 +1573,7 @@
       "name": "kids-book-writer",
       "display_name": "Kids Book Writer",
       "description": "name: kids-book-writer",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1561,7 +1587,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "agentmcmillan-brain-and-co-plan-ceo-review": {
       "name": "agentmcmillan-brain-and-co-plan-ceo-review",
@@ -1607,7 +1634,7 @@
       "name": "openclaw-skills-soulcraft",
       "display_name": "Openclaw Skills Soulcraft",
       "description": "name: soulcraft",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1621,13 +1648,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "tc-chengxin": {
       "name": "tc-chengxin",
       "display_name": "Tc Chengxin",
       "description": "name: tc-chengxin",
-      "category": "other",
+      "category": "search",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1641,7 +1669,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "jdjr": {
       "name": "jdjr",
@@ -1707,7 +1736,7 @@
       "name": "camsnap",
       "display_name": "Camsnap",
       "description": "name: camsnap",
-      "category": "other",
+      "category": "video",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1721,7 +1750,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "xiaoyi-report": {
       "name": "xiaoyi-report",
@@ -1767,7 +1797,7 @@
       "name": "xiaoyi-xlsx",
       "display_name": "Xiaoyi Xlsx",
       "description": "name: xiaoyi-xlsx",
-      "category": "other",
+      "category": "data",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1781,13 +1811,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "frontend-ui-ux-engineer": {
       "name": "frontend-ui-ux-engineer",
       "display_name": "Frontend Ui Ux Engineer",
       "description": "name: frontend-ui-ux-engineer",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1801,7 +1832,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "proactivity": {
       "name": "proactivity",
@@ -1847,7 +1879,7 @@
       "name": "wecom-bot-setup",
       "display_name": "Wecom Bot Setup",
       "description": "name: wecom-bot-setup",
-      "category": "other",
+      "category": "communication",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1861,7 +1893,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "tts": {
       "name": "tts",
@@ -1881,7 +1914,7 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "external"
     },
     "unified-document": {
       "name": "unified-document",
@@ -1927,7 +1960,7 @@
       "name": "fasting-tracker",
       "display_name": "Fasting Tracker",
       "description": "name: fasting-tracker",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1941,13 +1974,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "best-minds": {
       "name": "best-minds",
       "display_name": "Best Minds",
       "description": "name: best-minds",
-      "category": "other",
+      "category": "ai",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1961,13 +1995,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "ceo-advisor": {
       "name": "ceo-advisor",
       "display_name": "Ceo Advisor",
       "description": "name: \"ceo-advisor\"",
-      "category": "other",
+      "category": "ai",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -1981,7 +2016,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "verified-agent-identity": {
       "name": "verified-agent-identity",
@@ -2027,7 +2063,7 @@
       "name": "poetry",
       "display_name": "Poetry",
       "description": "name: poetry",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2041,13 +2077,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "utils": {
       "name": "utils",
       "display_name": "Utils",
       "description": "name: utils",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2061,7 +2098,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "supply-chain-management": {
       "name": "supply-chain-management",
@@ -2119,9 +2157,9 @@
       "path": "skills/mongodb",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "product-management": {
       "name": "product-management",
@@ -2147,7 +2185,7 @@
       "name": "tdd-guide",
       "display_name": "Tdd Guide",
       "description": "name: \"tdd-guide\"",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2161,7 +2199,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "rkiding-awesome-finance-skills-alphaear-signal-tracker": {
       "name": "rkiding-awesome-finance-skills-alphaear-signal-tracker",
@@ -2287,7 +2326,7 @@
       "name": "engines",
       "display_name": "Engines",
       "description": "name: engines",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2301,7 +2340,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "pdf": {
       "name": "pdf",
@@ -2320,8 +2360,8 @@
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
       "testable": true,
-      "smoke_test": false,
-      "test_mode": "integration"
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "git": {
       "name": "git",
@@ -2339,15 +2379,15 @@
       "path": "skills/git",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
-      "smoke_test": false,
-      "test_mode": "none"
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "story-cog": {
       "name": "story-cog",
       "display_name": "Story Cog",
       "description": "name: story-cog",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2361,7 +2401,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "voice-synthesis": {
       "name": "voice-synthesis",
@@ -2387,7 +2428,7 @@
       "name": "skill-install-manager-1-0-0",
       "display_name": "Skill Install Manager 1 0 0",
       "description": "name: skill-safe-install",
-      "category": "other",
+      "category": "ai",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2401,13 +2442,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "html-ux-guidance": {
       "name": "html-ux-guidance",
       "display_name": "Html Ux Guidance",
       "description": "name: html-ux-guidance",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2421,7 +2463,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "aigc_marker": {
       "name": "aigc_marker",
@@ -2527,7 +2570,7 @@
       "name": "didi-ride-skill",
       "display_name": "Didi Ride Skill",
       "description": "name: didi-ride-skill",
-      "category": "other",
+      "category": "search",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2541,7 +2584,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "video-cog": {
       "name": "video-cog",
@@ -2607,7 +2651,7 @@
       "name": "obsidian",
       "display_name": "Obsidian",
       "description": "name: obsidian",
-      "category": "other",
+      "category": "memory",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2621,7 +2665,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "arxiv-search": {
       "name": "arxiv-search",
@@ -2639,15 +2684,15 @@
       "path": "skills/arxiv-search",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "lyrical-fable": {
       "name": "lyrical-fable",
       "display_name": "Lyrical Fable",
       "description": "name: lyrical-fable",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2661,7 +2706,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "dealer-leader-cooperation": {
       "name": "dealer-leader-cooperation",
@@ -2687,7 +2733,7 @@
       "name": "xiaoyi-doc-convert",
       "display_name": "Xiaoyi Doc Convert",
       "description": "name: xiaoyi-doc-convert",
-      "category": "other",
+      "category": "document",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2701,7 +2747,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "pexoai-agent": {
       "name": "pexoai-agent",
@@ -2727,7 +2774,7 @@
       "name": "nini-writing-inspiration",
       "display_name": "Nini Writing Inspiration",
       "description": "name: writing-inspiration",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2741,7 +2788,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "baidu-netdisk-skills": {
       "name": "baidu-netdisk-skills",
@@ -2847,7 +2895,7 @@
       "name": "ab-test-setup",
       "display_name": "Ab Test Setup",
       "description": "name: ab-test-setup",
-      "category": "other",
+      "category": "data",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2861,13 +2909,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "customer-service": {
       "name": "customer-service",
       "display_name": "Customer Service",
       "description": "name: customer-service",
-      "category": "other",
+      "category": "communication",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2881,13 +2930,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "ocr-local": {
       "name": "ocr-local",
       "display_name": "Ocr Local",
       "description": "name: ocr-local",
-      "category": "other",
+      "category": "image",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2901,7 +2951,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "post-job": {
       "name": "post-job",
@@ -2947,7 +2998,7 @@
       "name": "scientific-slides",
       "display_name": "Scientific Slides",
       "description": "name: scientific-slides",
-      "category": "other",
+      "category": "document",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -2961,7 +3012,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.6666666666666666
     },
     "nano-pdf": {
       "name": "nano-pdf",
@@ -3067,7 +3119,7 @@
       "name": "limtdesign",
       "display_name": "Limtdesign",
       "description": "name: visual-creative",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3081,7 +3133,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "chart-image": {
       "name": "chart-image",
@@ -3147,7 +3200,7 @@
       "name": "personas",
       "display_name": "Personas",
       "description": "name: personas",
-      "category": "other",
+      "category": "ai",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3161,7 +3214,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "skill-finder": {
       "name": "skill-finder",
@@ -3187,7 +3241,7 @@
       "name": "screenshot",
       "display_name": "Screenshot",
       "description": "name: Screenshot",
-      "category": "other",
+      "category": "image",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3201,13 +3255,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "ui-design-system": {
       "name": "ui-design-system",
       "display_name": "Ui Design System",
       "description": "name: \"ui-design-system\"",
-      "category": "other",
+      "category": "design",
       "risk_level": "high",
       "dependencies": [],
       "timeout": 60,
@@ -3221,7 +3276,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "pua": {
       "name": "pua",
@@ -3247,7 +3303,7 @@
       "name": "core",
       "display_name": "Core",
       "description": "description: 核心技能模块",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3261,7 +3317,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "cron": {
       "name": "cron",
@@ -3280,14 +3337,14 @@
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
       "testable": true,
-      "smoke_test": false,
-      "test_mode": "integration"
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "linkedin-api": {
       "name": "linkedin-api",
       "display_name": "Linkedin Api",
       "description": "name: linkedin",
-      "category": "other",
+      "category": "search",
       "risk_level": "medium",
       "dependencies": [],
       "timeout": 60,
@@ -3301,13 +3358,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "terraform": {
       "name": "terraform",
       "display_name": "Terraform",
       "description": "name: Terraform",
-      "category": "other",
+      "category": "code",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3321,7 +3379,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "bytedance-deer-flow-surprise-me": {
       "name": "bytedance-deer-flow-surprise-me",
@@ -3427,7 +3486,7 @@
       "name": "copywriter",
       "display_name": "Copywriter",
       "description": "name: copywriter",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3441,7 +3500,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "research-cog": {
       "name": "research-cog",
@@ -3507,7 +3567,7 @@
       "name": "novel-generator",
       "display_name": "Novel Generator",
       "description": "name: novel-generator",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3521,13 +3581,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "tech-news-digest": {
       "name": "tech-news-digest",
       "display_name": "Tech News Digest",
       "description": "name: tech-news-digest",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3541,7 +3602,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "pixverse": {
       "name": "pixverse",
@@ -3587,7 +3649,7 @@
       "name": "admapix",
       "display_name": "Admapix",
       "description": "name: admapix",
-      "category": "other",
+      "category": "data",
       "risk_level": "medium",
       "dependencies": [],
       "timeout": 60,
@@ -3601,13 +3663,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "write-a-prd": {
       "name": "write-a-prd",
       "display_name": "Write A Prd",
       "description": "name: write-a-prd",
-      "category": "other",
+      "category": "code",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3621,7 +3684,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "mysql": {
       "name": "mysql",
@@ -3639,9 +3703,9 @@
       "path": "skills/mysql",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "university-applications": {
       "name": "university-applications",
@@ -3687,7 +3751,7 @@
       "name": "weibo-clawbot-setup",
       "display_name": "Weibo Clawbot Setup",
       "description": "name: weibo-clawbot-setup",
-      "category": "other",
+      "category": "communication",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3701,7 +3765,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "performance-upgrade": {
       "name": "performance-upgrade",
@@ -3741,13 +3806,13 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "external"
     },
     "marketing-ideas": {
       "name": "marketing-ideas",
       "display_name": "Marketing Ideas",
       "description": "name: marketing-ideas",
-      "category": "other",
+      "category": "finance",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3761,7 +3826,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "amap-jsapi-skill": {
       "name": "amap-jsapi-skill",
@@ -3807,7 +3873,7 @@
       "name": "docs-cog",
       "display_name": "Docs Cog",
       "description": "name: docs-cog",
-      "category": "other",
+      "category": "document",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3821,13 +3887,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "topic-monitor": {
       "name": "topic-monitor",
       "display_name": "Topic Monitor",
       "description": "name: topic-monitor",
-      "category": "other",
+      "category": "search",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3841,13 +3908,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.6666666666666666
     },
     "react-best-practices": {
       "name": "react-best-practices",
       "display_name": "React Best Practices",
       "description": "name: vercel-react-best-practices",
-      "category": "other",
+      "category": "code",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3861,7 +3929,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "quality-documentation-manager": {
       "name": "quality-documentation-manager",
@@ -3900,8 +3969,8 @@
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
       "testable": true,
-      "smoke_test": false,
-      "test_mode": "integration"
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "baoyu-url-to-markdown": {
       "name": "baoyu-url-to-markdown",
@@ -3947,7 +4016,7 @@
       "name": "weixin-clawbot-setup",
       "display_name": "Weixin Clawbot Setup",
       "description": "name: weixin-clawbot-setup",
-      "category": "other",
+      "category": "communication",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -3961,7 +4030,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "auto-skill-upgrade": {
       "name": "auto-skill-upgrade",
@@ -4027,7 +4097,7 @@
       "name": "senior-security",
       "display_name": "Senior Security",
       "description": "name: \"senior-security\"",
-      "category": "other",
+      "category": "security",
       "risk_level": "high",
       "dependencies": [],
       "timeout": 60,
@@ -4041,7 +4111,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "technical-seo-checker": {
       "name": "technical-seo-checker",
@@ -4087,7 +4158,7 @@
       "name": "file-manager",
       "display_name": "File Manager",
       "description": "name: file-manager",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4101,7 +4172,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "moltrade": {
       "name": "moltrade",
@@ -4127,7 +4199,7 @@
       "name": "xiaoyi-health",
       "display_name": "Xiaoyi Health",
       "description": "name: xiaoyi-health-cli-index",
-      "category": "other",
+      "category": "data",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4141,13 +4213,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "browser-control": {
       "name": "browser-control",
       "display_name": "Browser Control",
       "description": "浏览器自动化控制技能，支持启动浏览器、打开页面、截图、点击、输入等操作。",
-      "category": "other",
+      "category": "automation",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4161,7 +4234,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "openclaw-skills-agent-builder-1.0.3": {
       "name": "openclaw-skills-agent-builder-1.0.3",
@@ -4187,7 +4261,7 @@
       "name": "platform-comparison",
       "display_name": "Platform Comparison",
       "description": "name: platform-comparison",
-      "category": "other",
+      "category": "ecommerce",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4201,7 +4275,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "openmaic": {
       "name": "openmaic",
@@ -4227,7 +4302,7 @@
       "name": "bdpan-storage",
       "display_name": "Bdpan Storage",
       "description": "name: bdpan-storage",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4241,7 +4316,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "taskr": {
       "name": "taskr",
@@ -4327,7 +4403,7 @@
       "name": "feishu-channel-skill",
       "display_name": "Feishu Channel Skill",
       "description": "name: feishu-channel-setup",
-      "category": "other",
+      "category": "communication",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4341,7 +4417,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "playwright": {
       "name": "playwright",
@@ -4427,7 +4504,7 @@
       "name": "news-extractor",
       "display_name": "News Extractor",
       "description": "name: news-extractor",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4441,7 +4518,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "hz-proactive-agent": {
       "name": "hz-proactive-agent",
@@ -4487,7 +4565,7 @@
       "name": "bilibili-all-in-one",
       "display_name": "Bilibili All In One",
       "description": "name: bilibili-all-in-one",
-      "category": "other",
+      "category": "search",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4501,7 +4579,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "flowchart-generator-skill": {
       "name": "flowchart-generator-skill",
@@ -4567,7 +4646,7 @@
       "name": "google-maps",
       "display_name": "Google Maps",
       "description": "name: google-maps",
-      "category": "other",
+      "category": "search",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4581,13 +4660,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "read-arxiv-paper": {
       "name": "read-arxiv-paper",
       "display_name": "Read Arxiv Paper",
       "description": "name: read-arxiv-paper",
-      "category": "other",
+      "category": "search",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4601,13 +4681,14 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.9
     },
     "meitu-skills": {
       "name": "meitu-skills",
       "display_name": "Meitu Skills",
       "description": "name: meitu-skills",
-      "category": "other",
+      "category": "image",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4621,7 +4702,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "imsg": {
       "name": "imsg",
@@ -4661,7 +4743,7 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "external"
     },
     "memory": {
       "name": "memory",
@@ -4747,7 +4829,7 @@
       "name": "eastmoney-mx-skills-suite",
       "display_name": "Eastmoney Mx Skills Suite",
       "description": "name: mx-skills-suite",
-      "category": "other",
+      "category": "design",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4761,7 +4843,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "unified-image": {
       "name": "unified-image",
@@ -4827,7 +4910,7 @@
       "name": "alphaear-news",
       "display_name": "Alphaear News",
       "description": "name: alphaear-news",
-      "category": "other",
+      "category": "writing",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4841,7 +4924,8 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "web-scraper": {
       "name": "web-scraper",
@@ -4887,7 +4971,7 @@
       "name": "fitness-coach",
       "display_name": "Fitness Coach",
       "description": "name: fitness-coach",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4901,13 +4985,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "planning-with-files": {
       "name": "planning-with-files",
       "display_name": "Planning With Files",
       "description": "name: planning-with-files",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4921,13 +5006,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.9
     },
     "xiaoyi-ppt": {
       "name": "xiaoyi-ppt",
       "display_name": "Xiaoyi Ppt",
       "description": "name: xiaoyi-ppt",
-      "category": "other",
+      "category": "document",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4941,13 +5027,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.6666666666666666
     },
     "huawei-drive": {
       "name": "huawei-drive",
       "display_name": "Huawei Drive",
       "description": "name: huawei-drive",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -4961,13 +5048,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "beauty-generation-api": {
       "name": "beauty-generation-api",
       "display_name": "Beauty Generation Api",
       "description": "name: beauty-generation-api",
-      "category": "other",
+      "category": "design",
       "risk_level": "medium",
       "dependencies": [],
       "timeout": 60,
@@ -4981,7 +5069,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "china-stock-analysis": {
       "name": "china-stock-analysis",
@@ -5059,15 +5148,15 @@
       "path": "skills/image-gen",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "slidevjs-slidev-slidev": {
       "name": "slidevjs-slidev-slidev",
       "display_name": "Slidevjs Slidev Slidev",
       "description": "name: slidev",
-      "category": "other",
+      "category": "document",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -5081,7 +5170,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 0.6666666666666666
     },
     "ai-ppt-generator": {
       "name": "ai-ppt-generator",
@@ -5167,7 +5257,7 @@
       "name": "natural-language-planner",
       "display_name": "Natural Language Planner",
       "description": "slug: natural-language-planner",
-      "category": "other",
+      "category": "ai",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -5181,13 +5271,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "ontology": {
       "name": "ontology",
       "display_name": "Ontology",
       "description": "name: ontology",
-      "category": "other",
+      "category": "ai",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -5201,13 +5292,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.6666666666666666
     },
     "alphaear-predictor": {
       "name": "alphaear-predictor",
       "display_name": "Alphaear Predictor",
       "description": "name: alphaear-predictor",
-      "category": "other",
+      "category": "finance",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -5221,13 +5313,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 0.6666666666666666
     },
     "spotify-player": {
       "name": "spotify-player",
       "display_name": "Spotify Player",
       "description": "name: spotify-player",
-      "category": "other",
+      "category": "audio",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -5241,7 +5334,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "stock-price-query": {
       "name": "stock-price-query",
@@ -5287,7 +5381,7 @@
       "name": "sqlite",
       "display_name": "Sqlite",
       "description": "name: SQLite",
-      "category": "other",
+      "category": "data",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -5301,7 +5395,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "wendao-skill": {
       "name": "wendao-skill",
@@ -5340,8 +5435,8 @@
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
       "testable": true,
-      "smoke_test": false,
-      "test_mode": "integration"
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "web-content-fetcher": {
       "name": "web-content-fetcher",
@@ -5367,7 +5462,7 @@
       "name": "architecture-inspector",
       "display_name": "Architecture Inspector",
       "description": "name: architecture-inspector",
-      "category": "other",
+      "category": "utility",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -5381,13 +5476,14 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "integration",
+      "category_confidence": 1.0
     },
     "klaviyo": {
       "name": "klaviyo",
       "display_name": "Klaviyo",
       "description": "name: klaviyo",
-      "category": "other",
+      "category": "ecommerce",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -5401,7 +5497,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "skillhub-preference": {
       "name": "skillhub-preference",
@@ -5427,7 +5524,7 @@
       "name": "sheet-cog",
       "display_name": "Sheet Cog",
       "description": "name: sheet-cog",
-      "category": "other",
+      "category": "data",
       "risk_level": "low",
       "dependencies": [],
       "timeout": 60,
@@ -5441,7 +5538,8 @@
       "executor_type": "skill_md",
       "testable": false,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "none",
+      "category_confidence": 1.0
     },
     "su-lan-paper-daily-skill": {
       "name": "su-lan-paper-daily-skill",

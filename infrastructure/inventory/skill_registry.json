@@ -1,5 +1,5 @@
 {
-  "version": "5.0.0",
+  "version": "7.0.0",
   "updated": "2026-04-15",
   "source": "唯一真源 - 自动生成",
   "skills": {
@@ -242,9 +242,9 @@
       "path": "skills/kuaishou-shop-operation",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "frontend-design-pro": {
       "name": "frontend-design-pro",
@@ -535,8 +535,10 @@
       "description": "name: minimax-music-gen",
       "category": "audio",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "minimax"
+      ],
+      "timeout": 180,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -547,7 +549,7 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "external"
     },
     "nutrient-openclaw": {
       "name": "nutrient-openclaw",
@@ -584,7 +586,7 @@
       "callable": false,
       "path": "skills/video-generation-skill",
       "entry_point": "",
-      "executor_type": "none",
+      "executor_type": "python",
       "testable": false,
       "smoke_test": false,
       "test_mode": "none"
@@ -615,7 +617,9 @@
       "description": "name: Ansible",
       "category": "code",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "ansible"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -635,8 +639,10 @@
       "description": "description: \"Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or reques",
       "category": "document",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "python-docx"
+      ],
+      "timeout": 30,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -859,7 +865,10 @@
       "description": "name: Excel Analysis",
       "category": "data",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "pandas",
+        "openpyxl"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -869,9 +878,9 @@
       "path": "skills/excel-analysis",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
-      "smoke_test": false,
-      "test_mode": "none"
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "superdesign": {
       "name": "superdesign",
@@ -1003,7 +1012,7 @@
       "category": "utility",
       "risk_level": "low",
       "dependencies": [],
-      "timeout": 60,
+      "timeout": 30,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -1186,7 +1195,10 @@
       "description": "name: claw-art",
       "category": "image",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "openai",
+        "pillow"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -1196,9 +1208,9 @@
       "path": "skills/claw-art",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "agent-chronicle": {
       "name": "agent-chronicle",
@@ -1206,8 +1218,10 @@
       "description": "name: agent-chronicle",
       "category": "ai",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "openai"
+      ],
+      "timeout": 120,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -1414,7 +1428,9 @@
       "description": "name: Docker",
       "category": "code",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "docker"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -1699,7 +1715,7 @@
       "category": "search",
       "risk_level": "low",
       "dependencies": [],
-      "timeout": 60,
+      "timeout": 90,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -1710,7 +1726,7 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "external"
     },
     "beginner-mode": {
       "name": "beginner-mode",
@@ -1810,8 +1826,8 @@
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
       "testable": true,
-      "smoke_test": false,
-      "test_mode": "integration",
+      "smoke_test": true,
+      "test_mode": "local",
       "category_confidence": 1.0
     },
     "frontend-ui-ux-engineer": {
@@ -1902,7 +1918,10 @@
       "description": "description: \"Use this skill whenever the user wants to convert text into speech, generate audio from text, or produce voiceovers. Triggers include: any mention of 'TTS', 'text to speech', 'speak', 's",
       "category": "audio",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "openai",
+        "elevenlabs"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -2147,7 +2166,9 @@
       "description": "name: MongoDB",
       "category": "data",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "pymongo"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -2349,8 +2370,11 @@
       "description": "description: Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDF",
       "category": "document",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "pypdf",
+        "reportlab"
+      ],
+      "timeout": 30,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -2369,8 +2393,10 @@
       "description": "version: 1.0.8",
       "category": "code",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "gitpython"
+      ],
+      "timeout": 30,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -2532,7 +2558,11 @@
       "description": "name: Data Analysis",
       "category": "data",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "pandas",
+        "numpy",
+        "matplotlib"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -2542,9 +2572,9 @@
       "path": "skills/data-analysis",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
-      "smoke_test": false,
-      "test_mode": "none"
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "meituan-coupon-get-tool": {
       "name": "meituan-coupon-get-tool",
@@ -2643,9 +2673,9 @@
       "path": "skills/article-writer",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
-      "smoke_test": false,
-      "test_mode": "none"
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "obsidian": {
       "name": "obsidian",
@@ -2653,7 +2683,9 @@
       "description": "name: obsidian",
       "category": "memory",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "watchdog"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -2663,9 +2695,9 @@
       "path": "skills/obsidian",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
-      "smoke_test": false,
-      "test_mode": "none",
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local",
       "category_confidence": 1.0
     },
     "arxiv-search": {
@@ -2675,7 +2707,7 @@
       "category": "search",
       "risk_level": "low",
       "dependencies": [],
-      "timeout": 60,
+      "timeout": 90,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -2746,8 +2778,8 @@
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
       "testable": true,
-      "smoke_test": false,
-      "test_mode": "integration",
+      "smoke_test": true,
+      "test_mode": "local",
       "category_confidence": 1.0
     },
     "pexoai-agent": {
@@ -2797,8 +2829,10 @@
       "description": "name: baidu-netdisk-skills",
       "category": "ai",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "requests"
+      ],
+      "timeout": 90,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -2807,9 +2841,9 @@
       "path": "skills/baidu-netdisk-skills",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "davila7-claude-code-templates-ship-learn-next": {
       "name": "davila7-claude-code-templates-ship-learn-next",
@@ -2867,9 +2901,9 @@
       "path": "skills/douyin-shop-operation",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "xiaoyi-HarmonyOSSmartHome-skill": {
       "name": "xiaoyi-HarmonyOSSmartHome-skill",
@@ -3191,7 +3225,7 @@
       "callable": false,
       "path": "skills/habit-flow-skill",
       "entry_point": "",
-      "executor_type": "none",
+      "executor_type": "python",
       "testable": false,
       "smoke_test": false,
       "test_mode": "none"
@@ -3327,7 +3361,7 @@
       "category": "automation",
       "risk_level": "low",
       "dependencies": [],
-      "timeout": 60,
+      "timeout": 30,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -3468,8 +3502,10 @@
       "description": "name: hunyuan-image",
       "category": "image",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "tencentcloud-sdk-python"
+      ],
+      "timeout": 120,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -3480,7 +3516,7 @@
       "executor_type": "skill_md",
       "testable": true,
       "smoke_test": false,
-      "test_mode": "integration"
+      "test_mode": "external"
     },
     "copywriter": {
       "name": "copywriter",
@@ -3498,9 +3534,9 @@
       "path": "skills/copywriter",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
-      "smoke_test": false,
-      "test_mode": "none",
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local",
       "category_confidence": 0.9
     },
     "research-cog": {
@@ -3631,7 +3667,9 @@
       "description": "name: Elasticsearch",
       "category": "search",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "elasticsearch"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -3693,7 +3731,10 @@
       "description": "name: MySQL",
       "category": "data",
       "risk_level": "low",
-      "dependencies": [],
+      "dependencies": [
+        "pymysql",
+        "sqlalchemy"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -3794,8 +3835,13 @@
       "description": "name: llm-memory-integration",
       "category": "memory",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "openai",
+        "qdrant-client",
+        "chromadb",
+        "faiss-cpu"
+      ],
+      "timeout": 120,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -4366,7 +4412,7 @@
       "category": "search",
       "risk_level": "low",
       "dependencies": [],
-      "timeout": 60,
+      "timeout": 90,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -4375,9 +4421,9 @@
       "path": "skills/multi-search-engine",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
+      "testable": true,
       "smoke_test": false,
-      "test_mode": "none"
+      "test_mode": "external"
     },
     "web-search-exa": {
       "name": "web-search-exa",
@@ -4731,7 +4777,9 @@
       "description": "name: Crypto Market",
       "category": "finance",
       "risk_level": "medium",
-      "dependencies": [],
+      "dependencies": [
+        "ccxt"
+      ],
       "timeout": 60,
       "layer": 4,
       "status": "healthy",
@@ -4902,9 +4950,9 @@
       "path": "skills/brainstorming",
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
-      "testable": false,
-      "smoke_test": false,
-      "test_mode": "none"
+      "testable": true,
+      "smoke_test": true,
+      "test_mode": "local"
     },
     "alphaear-news": {
       "name": "alphaear-news",
@@ -5026,8 +5074,8 @@
       "entry_point": "SKILL.md",
       "executor_type": "skill_md",
       "testable": true,
-      "smoke_test": false,
-      "test_mode": "integration",
+      "smoke_test": true,
+      "test_mode": "local",
       "category_confidence": 0.6666666666666666
     },
     "huawei-drive": {
@@ -5138,8 +5186,11 @@
       "description": "name: image-gen",
       "category": "image",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "openai",
+        "pillow"
+      ],
+      "timeout": 120,
       "layer": 4,
       "status": "healthy",
       "registered": true,
@@ -5424,8 +5475,10 @@
       "description": "description: \"Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracti",
       "category": "document",
       "risk_level": "low",
-      "dependencies": [],
-      "timeout": 60,
+      "dependencies": [
+        "python-pptx"
+      ],
+      "timeout": 30,
       "layer": 4,
       "status": "healthy",
       "registered": true,

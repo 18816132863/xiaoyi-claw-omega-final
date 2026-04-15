@@ -1,73 +1,181 @@
 #!/usr/bin/env python3
-"""技能健康检查 V1.0.0"""
+"""
+技能健康检查脚本 - V1.0.0
+
+检查技能的完整性和配置正确性。
+"""
 
 import json
+import sys
 from pathlib import Path
+from typing import Dict, List, Tuple
+from dataclasses import dataclass
 
-def check_skill_health():
-    """检查技能健康状态"""
-    reg_path = Path('infrastructure/inventory/skill_registry.json')
-    with open(reg_path) as f:
-        reg = json.load(f)
+@dataclass
+class HealthIssue:
+    skill: str
+    severity: str  # critical, warning, info
+    category: str
+    message: str
+
+
+def check_skill_md(skill_name: str, skill_path: Path) -> List[HealthIssue]:
+    """检查 SKILL.md 文件"""
+    issues = []
+    skill_md = skill_path / "SKILL.md"
     
-    skills = reg.get('skills', {})
+    if not skill_md.exists():
+        issues.append(HealthIssue(skill_name, "critical", "missing_file", "缺少 SKILL.md"))
+        return issues
     
-    results = {
-        'total': len(skills),
-        'active': 0,
-        'inactive': 0,
-        'missing_skill_md': 0,
-        'missing_config': 0,
-        'issues': []
-    }
+    content = skill_md.read_text(encoding='utf-8', errors='ignore')
     
-    for skill_name, skill_data in skills.items():
-        if skill_data.get('callable'):
-            results['active'] += 1
-        else:
-            results['inactive'] += 1
-        
-        # 检查 SKILL.md
-        skill_path = Path('skills') / skill_name
-        if skill_path.exists():
-            if not (skill_path / 'SKILL.md').exists():
-                results['missing_skill_md'] += 1
-                results['issues'].append(f"{skill_name}: 缺少 SKILL.md")
-            
-            # 检查 config.json
-            if not (skill_path / 'config.json').exists():
-                results['missing_config'] += 1
+    # 检查必要字段
+    if 'name:' not in content:
+        issues.append(HealthIssue(skill_name, "warning", "missing_field", "SKILL.md 缺少 name 字段"))
+    if 'description:' not in content:
+        issues.append(HealthIssue(skill_name, "warning", "missing_field", "SKILL.md 缺少 description 字段"))
     
-    return results
+    return issues
+
+
+def check_skill_py(skill_name: str, skill_path: Path, registry_info: Dict) -> List[HealthIssue]:
+    """检查 skill.py 文件"""
+    issues = []
+    skill_py = skill_path / "skill.py"
+    executor_type = registry_info.get('executor_type', 'skill_md')
+    
+    if executor_type == 'skill_md':
+        # skill_md 类型不需要 skill.py
+        return issues
+    
+    if not skill_py.exists():
+        issues.append(HealthIssue(skill_name, "critical", "missing_file", "缺少 skill.py"))
+        return issues
+    
+    content = skill_py.read_text(encoding='utf-8', errors='ignore')
+    
+    # 检查 run 函数
+    if 'def run(' not in content:
+        issues.append(HealthIssue(skill_name, "critical", "missing_function", "skill.py 缺少 run 函数"))
+    
+    return issues
+
+
+def check_registry_config(skill_name: str, registry_info: Dict) -> List[HealthIssue]:
+    """检查注册表配置"""
+    issues = []
+    
+    required_fields = ['name', 'category', 'risk_level', 'timeout', 'layer']
+    for field in required_fields:
+        if field not in registry_info:
+            issues.append(HealthIssue(skill_name, "warning", "missing_config", f"注册表缺少 {field} 字段"))
+    
+    # 检查分类
+    if registry_info.get('category') == 'other':
+        issues.append(HealthIssue(skill_name, "info", "uncategorized", "技能未分类"))
+    
+    # 检查测试配置
+    if not registry_info.get('testable'):
+        issues.append(HealthIssue(skill_name, "info", "no_test", "未配置测试"))
+    
+    return issues
+
+
+def check_requirements(skill_name: str, skill_path: Path, registry_info: Dict) -> List[HealthIssue]:
+    """检查依赖配置"""
+    issues = []
+    
+    deps = registry_info.get('dependencies', [])
+    req_file = skill_path / "requirements.txt"
+    
+    if deps and not req_file.exists():
+        issues.append(HealthIssue(skill_name, "warning", "missing_requirements", 
+                                  f"注册表有依赖但缺少 requirements.txt"))
+    
+    return issues
+
 
 def main():
-    print("=" * 50)
-    print("技能健康检查 V1.0.0")
-    print("=" * 50)
+    print("╔══════════════════════════════════════════════════╗")
+    print("║          技能健康检查 V1.0.0                    ║")
+    print("╚══════════════════════════════════════════════════╝")
+    print()
     
-    results = check_skill_health()
+    # 加载注册表
+    registry_path = Path("infrastructure/inventory/skill_registry.json")
+    if not registry_path.exists():
+        print("错误: 技能注册表不存在")
+        return 1
     
-    print(f"\n总技能: {results['total']}")
-    print(f"活跃技能: {results['active']} ({results['active']/results['total']*100:.1f}%)")
-    print(f"非活跃技能: {results['inactive']}")
-    print(f"缺少 SKILL.md: {results['missing_skill_md']}")
-    print(f"缺少 config.json: {results['missing_config']}")
+    with open(registry_path, 'r', encoding='utf-8') as f:
+        registry = json.load(f)
     
-    if results['issues']:
-        print(f"\n问题列表 (前 10 个):")
-        for issue in results['issues'][:10]:
-            print(f"  - {issue}")
+    skills_dir = Path("skills")
+    all_issues: List[HealthIssue] = []
     
-    # 健康评分
-    health = results['active'] / results['total']
-    if health >= 0.3:
-        status = "✅ 良好"
-    elif health >= 0.1:
-        status = "⚠️ 一般"
-    else:
-        status = "❌ 需改进"
+    # 检查每个技能
+    for skill_name, skill_info in registry.get('skills', {}).items():
+        if not isinstance(skill_info, dict):
+            continue
+        
+        skill_path = skills_dir / skill_name
+        
+        # 检查目录存在
+        if not skill_path.exists():
+            all_issues.append(HealthIssue(skill_name, "critical", "missing_dir", "技能目录不存在"))
+            continue
+        
+        # 运行各项检查
+        all_issues.extend(check_skill_md(skill_name, skill_path))
+        all_issues.extend(check_skill_py(skill_name, skill_path, skill_info))
+        all_issues.extend(check_registry_config(skill_name, skill_info))
+        all_issues.extend(check_requirements(skill_name, skill_path, skill_info))
     
-    print(f"\n健康状态: {status}")
+    # 统计
+    critical = [i for i in all_issues if i.severity == 'critical']
+    warning = [i for i in all_issues if i.severity == 'warning']
+    info = [i for i in all_issues if i.severity == 'info']
+    
+    print(f"【检查结果】")
+    print(f"  总技能数: {len(registry.get('skills', {}))}")
+    print(f"  总问题数: {len(all_issues)}")
+    print()
+    
+    print(f"【严重程度分布】")
+    print(f"  🔴 严重: {len(critical)}")
+    print(f"  🟡 警告: {len(warning)}")
+    print(f"  🔵 信息: {len(info)}")
+    print()
+    
+    # 显示严重问题
+    if critical:
+        print("【严重问题】")
+        for issue in critical[:20]:
+            print(f"  🔴 {issue.skill}: {issue.message}")
+        if len(critical) > 20:
+            print(f"  ... 还有 {len(critical) - 20} 个")
+        print()
+    
+    # 显示警告
+    if warning:
+        print("【警告问题】")
+        for issue in warning[:10]:
+            print(f"  🟡 {issue.skill}: {issue.message}")
+        if len(warning) > 10:
+            print(f"  ... 还有 {len(warning) - 10} 个")
+        print()
+    
+    # 按类别统计
+    print("【问题类别分布】")
+    from collections import Counter
+    categories = Counter(i.category for i in all_issues)
+    for cat, count in categories.most_common():
+        print(f"  {cat}: {count}")
+    
+    # 返回码
+    return 1 if critical else 0
 
-if __name__ == '__main__':
-    main()
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -223,8 +223,30 @@ class ExceptionManager:
     
     def create(self, rule_id: str, reason: str, owner: str,
                approved_by: str, duration_days: int = 30,
-               ticket_ref: str = "", max_renewals: int = 2) -> Dict:
+               ticket_ref: str = "", max_renewals: int = 2,
+               debt_level: str = "low") -> Dict:
         """创建新例外"""
+        # 检查策略
+        policy_check = self._validate_exception_policy(
+            rule_id=rule_id,
+            duration_days=duration_days,
+            approved_by=approved_by,
+            ticket_ref=ticket_ref
+        )
+        if not policy_check["ok"]:
+            return {
+                "status": "error",
+                "message": policy_check["reason"]
+            }
+        
+        # 检查配额
+        quota_check = self.check_quota_before_create(owner, rule_id, debt_level)
+        if not quota_check["allowed"]:
+            return {
+                "status": "error",
+                "message": quota_check["reason"]
+            }
+        
         data = self._load_exceptions()
         
         # 生成例外 ID
@@ -245,7 +267,8 @@ class ExceptionManager:
             "expires_at": expires_at,
             "renewal_count": 0,
             "max_renewals": max_renewals,
-            "ticket_ref": ticket_ref
+            "ticket_ref": ticket_ref,
+            "debt_level": debt_level
         }
         
         data["exceptions"][exception_id] = exception
@@ -302,6 +325,28 @@ class ExceptionManager:
             return {
                 "status": "error",
                 "message": f"已达到最大续期次数 ({max_renewals})，无法续期"
+            }
+        
+        # 检查配额（续期后是否会导致超限）
+        owner = exception.get("owner", "unknown")
+        rule_id = exception.get("rule_id", "unknown")
+        debt_level = exception.get("debt_level", "low")
+        
+        # 续期不增加新的例外，但需要检查是否已有配额违规
+        quota_status = self.quota_check()
+        
+        # 如果 owner 已超限，拒绝续期
+        if owner in quota_status.get("exceeded_owners", []):
+            return {
+                "status": "error",
+                "message": f"Owner '{owner}' 配额已超限，无法续期"
+            }
+        
+        # 如果 rule 已超限，拒绝续期
+        if rule_id in quota_status.get("exceeded_rules", []):
+            return {
+                "status": "error",
+                "message": f"Rule '{rule_id}' 配额已超限，无法续期"
             }
         
         # 记录旧值
@@ -502,6 +547,362 @@ class ExceptionManager:
             "window_hours": hours,
             "actions": stats
         }
+    
+    def quota_check(self) -> Dict:
+        """检查配额使用情况"""
+        data = self._load_exceptions()
+        exceptions = data.get("exceptions", {})
+        
+        # Owner 级配额
+        owner_quotas = {
+            "architecture": {"max_active": 5, "max_high_debt": 2},
+            "governance": {"max_active": 5, "max_high_debt": 2},
+            "infrastructure": {"max_active": 3, "max_high_debt": 1},
+            "_default": {"max_active": 2, "max_high_debt": 1}
+        }
+        
+        # Rule 级配额
+        rule_quotas = {
+            "R004": 2,
+            "R006": 2,
+            "R007": 3,
+            "_default": 2
+        }
+        
+        # 统计使用情况
+        owner_usage = {}
+        owner_high_debt = {}
+        rule_usage = {}
+        
+        for exc_id, exc in exceptions.items():
+            if exc.get("status") != "active":
+                continue
+            
+            owner = exc.get("owner", "unknown")
+            rule_id = exc.get("rule_id", "unknown")
+            debt_level = exc.get("debt_level", "low")
+            
+            # Owner 统计
+            if owner not in owner_usage:
+                owner_usage[owner] = 0
+                owner_high_debt[owner] = 0
+            owner_usage[owner] += 1
+            
+            if debt_level == "high":
+                owner_high_debt[owner] += 1
+            
+            # Rule 统计
+            if rule_id not in rule_usage:
+                rule_usage[rule_id] = 0
+            rule_usage[rule_id] += 1
+        
+        # 构建配额报告
+        owner_report = {}
+        for owner, used in owner_usage.items():
+            config = owner_quotas.get(owner, owner_quotas["_default"])
+            limit = config["max_active"]
+            high_debt_limit = config["max_high_debt"]
+            high_debt_used = owner_high_debt.get(owner, 0)
+            
+            owner_report[owner] = {
+                "used": used,
+                "limit": limit,
+                "available": max(0, limit - used),
+                "exceeded": used > limit,
+                "high_debt_used": high_debt_used,
+                "high_debt_limit": high_debt_limit,
+                "high_debt_exceeded": high_debt_used > high_debt_limit
+            }
+        
+        rule_report = {}
+        for rule_id, used in rule_usage.items():
+            limit = rule_quotas.get(rule_id, rule_quotas["_default"])
+            rule_report[rule_id] = {
+                "used": used,
+                "limit": limit,
+                "available": max(0, limit - used),
+                "exceeded": used > limit
+            }
+        
+        # 检查超限
+        exceeded_owners = [o for o, r in owner_report.items() if r["exceeded"] or r["high_debt_exceeded"]]
+        exceeded_rules = [r for r, rep in rule_report.items() if rep["exceeded"]]
+        
+        # 保存配额快照
+        self._save_quota_snapshot(owner_report, rule_report, exceeded_owners, exceeded_rules)
+        
+        return {
+            "status": "success",
+            "owner_quotas": owner_report,
+            "rule_quotas": rule_report,
+            "exceeded_owners": exceeded_owners,
+            "exceeded_rules": exceeded_rules,
+            "has_violations": len(exceeded_owners) > 0 or len(exceeded_rules) > 0
+        }
+    
+    def _save_quota_snapshot(self, owner_report: Dict, rule_report: Dict,
+                             exceeded_owners: List, exceeded_rules: List):
+        """保存配额快照"""
+        snapshot = {
+            "generated_at": datetime.now().isoformat(),
+            "owners": {
+                "architecture": {"max_active": 5, "max_high_debt": 2},
+                "governance": {"max_active": 5, "max_high_debt": 2},
+                "infrastructure": {"max_active": 3, "max_high_debt": 1},
+                "_default": {"max_active": 2, "max_high_debt": 1}
+            },
+            "rules": {
+                "R004": 2,
+                "R006": 2,
+                "R007": 3,
+                "_default": 2
+            },
+            "owner_usage": owner_report,
+            "rule_usage": rule_report,
+            "violations": {
+                "owner_violations": exceeded_owners,
+                "rule_violations": exceeded_rules
+            }
+        }
+        
+        snapshot_path = self.root / "reports/ops/rule_exception_quota.json"
+        snapshot_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(snapshot_path, 'w') as f:
+            json.dump(snapshot, f, ensure_ascii=False, indent=2)
+    
+    def _load_policy(self) -> Dict:
+        """加载例外策略"""
+        data = self._load_exceptions()
+        return data.get("policies", {})
+    
+    def _validate_exception_policy(self, rule_id: str, duration_days: int,
+                                   approved_by: str, ticket_ref: str = "") -> Dict:
+        """校验例外策略"""
+        policies = self._load_policy()
+        allowed = set(policies.get("allowed_for_rules", []))
+        forbidden = set(policies.get("forbidden_for_rules", []))
+        max_duration_days = policies.get("max_duration_days", 30)
+        require_approval = policies.get("require_approval", True)
+        
+        if rule_id in forbidden:
+            return {"ok": False, "reason": f"规则 {rule_id} 禁止创建例外"}
+        
+        if allowed and rule_id not in allowed:
+            return {"ok": False, "reason": f"规则 {rule_id} 不在允许例外清单中"}
+        
+        if duration_days > max_duration_days:
+            return {"ok": False, "reason": f"例外时长超限: {duration_days}/{max_duration_days} 天"}
+        
+        if require_approval and not approved_by:
+            return {"ok": False, "reason": "缺少审批人"}
+        
+        return {"ok": True, "reason": "策略校验通过"}
+    
+    def check_quota_before_create(self, owner: str, rule_id: str, debt_level: str = "low") -> Dict:
+        """创建前检查配额"""
+        quota_status = self.quota_check()
+        
+        # Owner 配额定义
+        owner_quotas = {
+            "architecture": {"max_active": 5, "max_high_debt": 2},
+            "governance": {"max_active": 5, "max_high_debt": 2},
+            "infrastructure": {"max_active": 3, "max_high_debt": 1},
+            "_default": {"max_active": 2, "max_high_debt": 1}
+        }
+        
+        # Rule 配额定义
+        rule_quotas = {
+            "R004": 2,
+            "R006": 2,
+            "R007": 3,
+            "_default": 2
+        }
+        
+        # 检查 owner 活跃例外配额
+        owner_config = owner_quotas.get(owner, owner_quotas["_default"])
+        owner_limit = owner_config["max_active"]
+        owner_used = quota_status["owner_quotas"].get(owner, {}).get("used", 0)
+        
+        if owner_used >= owner_limit:
+            return {
+                "allowed": False,
+                "reason": f"Owner '{owner}' 活跃例外配额已满: {owner_used}/{owner_limit}"
+            }
+        
+        # 检查 owner 高债务例外配额
+        if debt_level == "high":
+            high_debt_limit = owner_config["max_high_debt"]
+            high_debt_used = quota_status["owner_quotas"].get(owner, {}).get("high_debt_used", 0)
+            
+            if high_debt_used >= high_debt_limit:
+                return {
+                    "allowed": False,
+                    "reason": f"Owner '{owner}' 高债务例外配额已满: {high_debt_used}/{high_debt_limit}"
+                }
+        
+        # 检查 rule 配额
+        rule_limit = rule_quotas.get(rule_id, rule_quotas["_default"])
+        rule_used = quota_status["rule_quotas"].get(rule_id, {}).get("used", 0)
+        
+        if rule_used >= rule_limit:
+            return {
+                "allowed": False,
+                "reason": f"Rule '{rule_id}' 配额已满: {rule_used}/{rule_limit}"
+            }
+        
+        return {
+            "allowed": True,
+            "reason": "配额检查通过"
+        }
+    
+    def create_request(self, rule_id: str, reason: str, owner: str,
+                       requested_by: str, duration_days: int = 30,
+                       ticket_ref: str = "", max_renewals: int = 2) -> Dict:
+        """创建例外申请（进入审批队列）"""
+        # 检查配额
+        quota_check = self.check_quota_before_create(owner, rule_id)
+        if not quota_check["allowed"]:
+            return {
+                "status": "error",
+                "message": quota_check["reason"]
+            }
+        
+        # 生成申请 ID
+        request_id = f"EXC_REQ_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
+        
+        # 加载审批队列
+        queue_path = self.root / "reports/ops/exception_approval_queue.json"
+        queue_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        if queue_path.exists():
+            queue = json.load(open(queue_path))
+        else:
+            queue = {"pending": [], "approved": [], "denied": []}
+        
+        # 创建申请
+        request = {
+            "request_id": request_id,
+            "rule_id": rule_id,
+            "reason": reason,
+            "owner": owner,
+            "requested_by": requested_by,
+            "duration_days": duration_days,
+            "ticket_ref": ticket_ref,
+            "max_renewals": max_renewals,
+            "status": "pending",
+            "created_at": datetime.now().isoformat(),
+            "approved_at": None,
+            "approved_by": None,
+            "denied_at": None,
+            "denied_by": None,
+            "denied_reason": None,
+            "exception_id": None
+        }
+        
+        queue["pending"].append(request)
+        
+        with open(queue_path, 'w') as f:
+            json.dump(queue, f, ensure_ascii=False, indent=2)
+        
+        return {
+            "status": "success",
+            "request_id": request_id,
+            "message": f"例外申请已提交，等待审批: {request_id}"
+        }
+    
+    def approve_request(self, request_id: str, approved_by: str) -> Dict:
+        """批准例外申请"""
+        queue_path = self.root / "reports/ops/exception_approval_queue.json"
+        if not queue_path.exists():
+            return {"status": "error", "message": "审批队列不存在"}
+        
+        queue = json.load(open(queue_path))
+        
+        # 查找申请
+        request = None
+        for i, r in enumerate(queue["pending"]):
+            if r["request_id"] == request_id:
+                request = queue["pending"].pop(i)
+                break
+        
+        if not request:
+            return {"status": "error", "message": f"申请不存在: {request_id}"}
+        
+        # 更新申请状态
+        request["status"] = "approved"
+        request["approved_at"] = datetime.now().isoformat()
+        request["approved_by"] = approved_by
+        
+        # 创建例外
+        result = self.create(
+            rule_id=request["rule_id"],
+            reason=request["reason"],
+            owner=request["owner"],
+            approved_by=approved_by,
+            duration_days=request["duration_days"],
+            ticket_ref=request.get("ticket_ref", ""),
+            max_renewals=request.get("max_renewals", 2)
+        )
+        
+        request["exception_id"] = result.get("exception_id")
+        
+        # 移动到已批准列表
+        queue["approved"].append(request)
+        
+        with open(queue_path, 'w') as f:
+            json.dump(queue, f, ensure_ascii=False, indent=2)
+        
+        return {
+            "status": "success",
+            "request_id": request_id,
+            "exception_id": request["exception_id"],
+            "message": f"申请已批准，例外已创建: {request['exception_id']}"
+        }
+    
+    def deny_request(self, request_id: str, denied_by: str, reason: str) -> Dict:
+        """拒绝例外申请"""
+        queue_path = self.root / "reports/ops/exception_approval_queue.json"
+        if not queue_path.exists():
+            return {"status": "error", "message": "审批队列不存在"}
+        
+        queue = json.load(open(queue_path))
+        
+        # 查找申请
+        request = None
+        for i, r in enumerate(queue["pending"]):
+            if r["request_id"] == request_id:
+                request = queue["pending"].pop(i)
+                break
+        
+        if not request:
+            return {"status": "error", "message": f"申请不存在: {request_id}"}
+        
+        # 更新申请状态
+        request["status"] = "denied"
+        request["denied_at"] = datetime.now().isoformat()
+        request["denied_by"] = denied_by
+        request["denied_reason"] = reason
+        
+        # 移动到已拒绝列表
+        queue["denied"].append(request)
+        
+        with open(queue_path, 'w') as f:
+            json.dump(queue, f, ensure_ascii=False, indent=2)
+        
+        return {
+            "status": "success",
+            "request_id": request_id,
+            "message": f"申请已拒绝: {reason}"
+        }
+    
+    def list_approval_queue(self) -> Dict:
+        """列出审批队列"""
+        queue_path = self.root / "reports/ops/exception_approval_queue.json"
+        if not queue_path.exists():
+            return {"pending": [], "approved": [], "denied": []}
+        
+        return json.load(open(queue_path))
 
 
 def main():
@@ -524,6 +925,7 @@ def main():
     create_parser.add_argument("--duration-days", type=int, default=30, help="有效期(天)")
     create_parser.add_argument("--ticket-ref", default="", help="关联工单")
     create_parser.add_argument("--max-renewals", type=int, default=2, help="最大续期次数")
+    create_parser.add_argument("--debt-level", default="low", choices=["low", "medium", "high"], help="债务级别")
     
     # renew
     renew_parser = subparsers.add_parser("renew", help="续期例外")
@@ -550,6 +952,32 @@ def main():
     recent_parser = subparsers.add_parser("recent-actions", help="获取最近操作统计")
     recent_parser.add_argument("--hours", type=int, default=24, help="时间窗口(小时)")
     
+    # quota-check
+    subparsers.add_parser("quota-check", help="检查配额使用情况")
+    
+    # create-request
+    cr_parser = subparsers.add_parser("create-request", help="创建例外申请")
+    cr_parser.add_argument("--rule-id", required=True, help="规则ID")
+    cr_parser.add_argument("--reason", required=True, help="申请原因")
+    cr_parser.add_argument("--owner", required=True, help="负责人")
+    cr_parser.add_argument("--requested-by", required=True, help="申请人")
+    cr_parser.add_argument("--duration-days", type=int, default=30, help="有效期(天)")
+    cr_parser.add_argument("--ticket-ref", default="", help="关联工单")
+    
+    # approve-request
+    ar_parser = subparsers.add_parser("approve-request", help="批准例外申请")
+    ar_parser.add_argument("--request-id", required=True, help="申请ID")
+    ar_parser.add_argument("--approved-by", required=True, help="审批人")
+    
+    # deny-request
+    dr_parser = subparsers.add_parser("deny-request", help="拒绝例外申请")
+    dr_parser.add_argument("--request-id", required=True, help="申请ID")
+    dr_parser.add_argument("--denied-by", required=True, help="拒绝人")
+    dr_parser.add_argument("--reason", required=True, help="拒绝原因")
+    
+    # list-approval-queue
+    subparsers.add_parser("list-approval-queue", help="列出审批队列")
+    
     args = parser.parse_args()
     
     manager = ExceptionManager()
@@ -564,7 +992,8 @@ def main():
             approved_by=args.approved_by,
             duration_days=args.duration_days,
             ticket_ref=args.ticket_ref,
-            max_renewals=args.max_renewals
+            max_renewals=args.max_renewals,
+            debt_level=args.debt_level
         )
     elif args.command == "renew":
         result = manager.renew(
@@ -585,6 +1014,30 @@ def main():
         result = manager.history(args.exception_id, args.limit)
     elif args.command == "recent-actions":
         result = manager.get_recent_actions(args.hours)
+    elif args.command == "quota-check":
+        result = manager.quota_check()
+    elif args.command == "create-request":
+        result = manager.create_request(
+            rule_id=args.rule_id,
+            reason=args.reason,
+            owner=args.owner,
+            requested_by=args.requested_by,
+            duration_days=args.duration_days,
+            ticket_ref=args.ticket_ref
+        )
+    elif args.command == "approve-request":
+        result = manager.approve_request(
+            request_id=args.request_id,
+            approved_by=args.approved_by
+        )
+    elif args.command == "deny-request":
+        result = manager.deny_request(
+            request_id=args.request_id,
+            denied_by=args.denied_by,
+            reason=args.reason
+        )
+    elif args.command == "list-approval-queue":
+        result = manager.list_approval_queue()
     else:
         parser.print_help()
         return

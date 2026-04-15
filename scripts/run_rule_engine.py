@@ -73,6 +73,30 @@ def load_rule_exceptions() -> Dict:
         return _exceptions_cache
 
 
+def normalize_exceptions(exceptions_data: Dict) -> List[Dict]:
+    """将例外注册表统一规范化为 list[dict]，并补齐 exception_id"""
+    raw = exceptions_data.get("exceptions", {})
+    normalized: List[Dict] = []
+    
+    if isinstance(raw, dict):
+        for exc_id, exc in raw.items():
+            if not isinstance(exc, dict):
+                continue
+            item = dict(exc)
+            item.setdefault("exception_id", exc_id)
+            normalized.append(item)
+    elif isinstance(raw, list):
+        for exc in raw:
+            if not isinstance(exc, dict):
+                continue
+            item = dict(exc)
+            if not item.get("exception_id"):
+                item["exception_id"] = f"auto_{len(normalized)+1}"
+            normalized.append(item)
+    
+    return normalized
+
+
 def classify_exception_debt(exception: Dict) -> Tuple[str, str]:
     """
     分类例外债务状态
@@ -195,7 +219,7 @@ def save_exception_debt_snapshot(exceptions_data: Dict, debt_analysis: Dict, roo
     exceptions_by_owner = {}
     exceptions_by_rule = {}
     
-    for exc in exceptions_data.get("exceptions", []):
+    for exc in normalize_exceptions(exceptions_data):
         owner = exc.get("owner", "unknown")
         rule_id = exc.get("rule_id", "unknown")
         
@@ -239,7 +263,7 @@ def run_rule_engine(profile: str) -> Dict:
     root = get_project_root()
     registry = load_rule_registry()
     exceptions_data = load_rule_exceptions()
-    exceptions = exceptions_data.get("exceptions", [])
+    exceptions = normalize_exceptions(exceptions_data)
     
     if not registry:
         return {
@@ -521,9 +545,15 @@ def save_reports(report: Dict):
     with open(report_path, 'w', encoding='utf-8') as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
     
+    # 保存 profile 专属快照
+    profile_report_path = root / f"reports/ops/rule_engine_report_{report['profile']}.json"
+    with open(profile_report_path, 'w', encoding='utf-8') as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    
     print(f"\n报告已保存:")
     print(f"  - {index_path}")
     print(f"  - {report_path}")
+    print(f"  - {profile_report_path}")
 
 
 def print_summary(report: Dict):

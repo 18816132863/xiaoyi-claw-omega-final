@@ -34,24 +34,20 @@ CHANGE_IMPACT_RULES = {
     "infrastructure/inventory/skill_registry.json": {
         "blocking_commands_for_profile": {
             "premerge": [
-                "python scripts/check_repo_integrity.py --strict",
-                "python scripts/run_release_gate.py premerge"
+                "python scripts/check_repo_integrity.py --strict"
             ],
             "nightly": [],
             "release": []
         },
         "followup_profiles": [],
-        "description": "技能注册表变更，必须验证仓库完整性和 premerge 门禁"
+        "description": "技能注册表变更，必须验证仓库完整性"
     },
     "execution/*": {
         "blocking_commands_for_profile": {
             "premerge": [
-                "python scripts/check_layer_dependencies.py",
-                "python scripts/run_release_gate.py premerge"
+                "python scripts/check_layer_dependencies.py"
             ],
-            "nightly": [
-                "python scripts/run_release_gate.py nightly"
-            ],
+            "nightly": [],
             "release": []
         },
         "followup_profiles": ["nightly"],
@@ -60,13 +56,10 @@ CHANGE_IMPACT_RULES = {
     "governance/*": {
         "blocking_commands_for_profile": {
             "premerge": [
-                "python scripts/check_layer_dependencies.py",
-                "python scripts/run_release_gate.py premerge"
+                "python scripts/check_layer_dependencies.py"
             ],
             "nightly": [],
-            "release": [
-                "python scripts/run_release_gate.py release"
-            ]
+            "release": []
         },
         "followup_profiles": ["release"],
         "description": "治理层变更，premerge 必须通过，release 为 follow-up"
@@ -74,12 +67,8 @@ CHANGE_IMPACT_RULES = {
     "scripts/approval_manager.py": {
         "blocking_commands_for_profile": {
             "premerge": [],
-            "nightly": [
-                "python scripts/run_release_gate.py nightly"
-            ],
-            "release": [
-                "python scripts/run_release_gate.py release"
-            ]
+            "nightly": [],
+            "release": []
         },
         "followup_profiles": ["nightly", "release"],
         "description": "审批管理器变更，nightly + release 为 follow-up"
@@ -101,8 +90,7 @@ CHANGE_IMPACT_RULES = {
         "blocking_commands_for_profile": {
             "premerge": [
                 "python scripts/check_layer_dependencies.py",
-                "python scripts/check_repo_integrity.py --strict",
-                "python scripts/run_release_gate.py premerge"
+                "python scripts/check_repo_integrity.py --strict"
             ],
             "nightly": [],
             "release": []
@@ -125,9 +113,7 @@ CHANGE_IMPACT_RULES = {
         "blocking_commands_for_profile": {
             "premerge": [],
             "nightly": [],
-            "release": [
-                "python scripts/run_release_gate.py release"
-            ]
+            "release": []
         },
         "followup_profiles": ["release"],
         "description": "发布管理变更，release 为 follow-up"

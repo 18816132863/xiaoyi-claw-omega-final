@@ -198,13 +198,28 @@
       "outputs": []
     },
     "R009": {
-      "id": "R009",
+      "rule_id": "R009",
       "name": "删除确认规则",
       "description": "所有删除操作必须经过 delete_manager.py",
-      "status": "active",
+      "version": "1.0.0",
       "owner": "governance",
-      "checker": "scripts/delete_manager.py",
-      "enforcement": "blocking"
+      "status": "active",
+      "introduced_in": "13B",
+      "deprecated_in": null,
+      "rollout_stage": "all",
+      "owner_layer": "L4",
+      "source_files": [
+        "scripts/delete_manager.py"
+      ],
+      "checker_script": "scripts/delete_manager.py",
+      "enforcement_stage": [
+        "premerge",
+        "nightly",
+        "release"
+      ],
+      "severity": "error",
+      "blocking": true,
+      "outputs": []
     }
   },
   "profiles": {
@@ -217,7 +232,8 @@
         "R005",
         "R006",
         "R007",
-        "R008"
+        "R008",
+        "R009"
       ],
       "description": "Premerge 门禁规则集"
     },
@@ -229,7 +245,9 @@
         "R005",
         "R006",
         "R007",
-        "R008"
+        "R008",
+        "R004",
+        "R009"
       ],
       "description": "Nightly 门禁规则集"
     },
@@ -241,7 +259,9 @@
         "R005",
         "R006",
         "R007",
-        "R008"
+        "R008",
+        "R004",
+        "R009"
       ],
       "description": "Release 门禁规则集"
     }

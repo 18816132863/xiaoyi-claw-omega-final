@@ -86,7 +86,7 @@
       "owner": "governance",
       "created_at": "2026-04-01T00:00:00",
       "expires_at": "2026-04-15T23:59:59",
-      "status": "active",
+      "status": "expired",
       "debt_level": "medium",
       "max_renewals": 2,
       "renewal_count": 1,
@@ -99,33 +99,8 @@
         ],
         "paths": [],
         "files": []
-      }
-    },
-    "EX005": {
-      "exception_id": "EX005",
-      "rule_id": "R004",
-      "scope": "global",
-      "reason": "演示：超续期例外（overused）",
-      "approved_by": "architecture",
-      "owner": "architecture",
-      "created_at": "2026-04-01T00:00:00",
-      "expires_at": "2026-05-01T23:59:59",
-      "status": "active",
-      "debt_level": "high",
-      "max_renewals": 2,
-      "renewal_count": 2,
-      "escalation_after_days": 7,
-      "ticket_ref": "TICKET-003",
-      "note": "演示 overused exception - 已达续期上限",
-      "applies_to": {
-        "profiles": [
-          "premerge",
-          "nightly",
-          "release"
-        ],
-        "paths": [],
-        "files": []
-      }
+      },
+      "expired_at": "2026-04-16T00:08:35.105770"
     },
     "EXC-R001-20260414-54730e": {
       "rule_id": "R001",
@@ -172,20 +147,30 @@
       "ticket_ref": "",
       "expired_at": "2026-04-15T00:16:21.618699"
     },
-    "EXC-R004-20260415-a6dd2f": {
-      "rule_id": "R004",
-      "reason": "测试高风险阻断",
-      "owner": "test",
-      "approved_by": "test",
+    "EXC-R007-20260415-c84fbc": {
+      "rule_id": "R007",
+      "reason": "测试审批流程",
+      "owner": "governance",
+      "approved_by": "admin",
       "status": "active",
-      "created_at": "2026-04-15T00:16:32.668597",
-      "expires_at": "2026-05-15T00:16:37.554446",
-      "renewal_count": 1,
-      "max_renewals": 1,
+      "created_at": "2026-04-15T13:18:00.625976",
+      "expires_at": "2026-05-15T13:18:00.625976",
+      "renewal_count": 0,
+      "max_renewals": 2,
+      "ticket_ref": ""
+    },
+    "EXC-R007-20260415-51ac99": {
+      "rule_id": "R007",
+      "reason": "演示过期",
+      "owner": "test",
+      "approved_by": "admin",
+      "status": "expired",
+      "created_at": "2026-04-15T14:01:39.717485",
+      "expires_at": "2026-04-15T14:01:39.717485",
+      "renewal_count": 0,
+      "max_renewals": 2,
       "ticket_ref": "",
-      "last_renewed_at": "2026-04-15T00:16:37.554446",
-      "last_renewed_by": "test",
-      "debt_level": "high"
+      "expired_at": "2026-04-15T14:01:48.283811"
     }
   },
   "policies": {

@@ -1,0 +1,107 @@
+{
+  "profile": "premerge",
+  "changed_files": [
+    "CHANGELOG.md",
+    "Makefile",
+    "archive/architecture_html/architecture_v27.html",
+    "archive/architecture_html/architecture_v27_cn.html",
+    "archive/architecture_html/architecture_v27_embed_font.html",
+    "archive/architecture_html/architecture_v27_font_fix.html",
+    "archive/architecture_html/architecture_v27_full_cn.html",
+    "archive/architecture_html/architecture_v27_v2.html",
+    "archive/backups/backup_20260414_224833.tar.gz.xz",
+    "archive/backups/backup_20260414_225104.tar.gz.xz",
+    "archive/backups/backup_20260414_225711.tar.gz.xz",
+    "archive/backups/backup_20260414_230454.tar.gz.xz",
+    "archive/backups/backup_20260414_231125.tar.gz.xz",
+    "core/CAPABILITY_MAP.md",
+    "core/RULE_EXCEPTIONS.json",
+    "core/RULE_EXCEPTION_DEBT_POLICY.md",
+    "core/RULE_REGISTRY.json",
+    "core/UNIFIED_ARCHITECTURE.md",
+    "governance/quality_gate.py",
+    "infrastructure/release/release_manager.py",
+    "infrastructure/verify_runtime_integrity.py",
+    "memory/2026-04-15.md",
+    "memory_context/README.md",
+    "memory_context/__init__.py",
+    "memory_context/unified_search.py",
+    "reports/alerts/latest_alerts.json",
+    "reports/git_commits.json",
+    "reports/ops/change_impact.json",
+    "reports/ops/change_impact_enforcement.json",
+    "reports/ops/control_plane_audit.json",
+    "reports/ops/control_plane_state.json",
+    "reports/ops/executed_checks.json",
+    "reports/ops/followup_requirements.json",
+    "reports/ops/rule_engine_report.json",
+    "reports/ops/rule_exception_debt.json",
+    "reports/ops/rule_exception_history.json",
+    "reports/ops/rule_exception_status.json",
+    "reports/ops/rule_execution_index.json",
+    "reports/ops/rule_registry_snapshot.json",
+    "reports/quality_gate.json",
+    "reports/release_gate.json",
+    "reports/remediation/approval_history.json",
+    "reports/remediation/latest_remediation.json",
+    "reports/runtime_integrity.json",
+    "reports/runtime_integrity_release.json",
+    "scripts/check_change_impact.py",
+    "scripts/check_change_impact_enforcement.py",
+    "scripts/check_rule_guards.py",
+    "scripts/control_plane.py",
+    "scripts/exception_manager.py",
+    "scripts/ops_center.py",
+    "scripts/render_nightly_summary.py",
+    "scripts/render_premerge_summary.py",
+    "scripts/render_release_summary.py",
+    "scripts/run_release_gate.py",
+    "scripts/run_rule_engine.py",
+    "tests/fixtures/smoke/sample.txt",
+    "tests/rule_violations/contract_violation.json",
+    "tests/rule_violations/layer_dependency_violation.py"
+  ],
+  "blocking_commands_current_profile": [
+    "python scripts/check_layer_dependencies.py",
+    "python scripts/check_repo_integrity.py --strict",
+    "python scripts/check_json_contracts.py"
+  ],
+  "executed_commands": [
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/infrastructure/verify_runtime_integrity.py --profile premerge --report-json reports/runtime_integrity.json",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T07:35:18.886377"
+    },
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/governance/quality_gate.py --profile premerge --report-json reports/quality_gate.json",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T07:35:19.119519"
+    },
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/scripts/check_layer_dependencies.py",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T07:35:19.414652"
+    },
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/scripts/check_repo_integrity.py --strict",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T07:35:24.103943"
+    },
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/scripts/check_json_contracts.py",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T07:35:25.919327"
+    }
+  ],
+  "missing_required_checks": [],
+  "followup_required_profiles": [
+    "release"
+  ],
+  "enforcement_passed": true,
+  "generated_at": "2026-04-16T07:35:25.923166"
+}

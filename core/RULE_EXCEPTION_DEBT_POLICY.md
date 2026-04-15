@@ -115,5 +115,163 @@
 
 ---
 
+## 七、配额管理
+
+### Owner 级配额
+
+| Owner 类型 | 最大活跃例外数 | 说明 |
+|------------|----------------|------|
+| architecture | 5 | 架构团队配额 |
+| governance | 5 | 治理团队配额 |
+| infrastructure | 3 | 基础设施团队配额 |
+| 其他 | 2 | 默认配额 |
+
+### Rule 级配额
+
+| 规则类型 | 最大例外数 | 说明 |
+|----------|------------|------|
+| R004 | 2 | 变更影响规则 |
+| R006 | 2 | 仓库完整性规则 |
+| R007 | 3 | 技能安全规则 |
+
+### 配额检查
+
+```bash
+# 检查配额
+python scripts/exception_manager.py quota-check
+
+# 返回示例
+{
+  "owner_quotas": {
+    "architecture": {"used": 2, "limit": 5, "available": 3},
+    "governance": {"used": 1, "limit": 5, "available": 4}
+  },
+  "rule_quotas": {
+    "R004": {"used": 1, "limit": 2, "available": 1},
+    "R007": {"used": 2, "limit": 3, "available": 1}
+  }
+}
+```
+
+### 超限行为
+
+| Profile | 超限行为 |
+|---------|----------|
+| premerge | ⚠️ warning |
+| nightly | ⚠️ warning + debt summary |
+| release | ❌ 高风险时 blocking |
+
+---
+
+## 八、升级策略
+
+### stale 升级
+
+| Profile | 行为 |
+|---------|------|
+| premerge | warning，提醒续期或关闭 |
+| nightly | warning + debt summary |
+| release | warning，不阻断 |
+
+### overused 升级
+
+| Profile | 行为 |
+|---------|------|
+| premerge | warning，提醒问题未解决 |
+| nightly | warning + debt summary |
+| release | 高风险时 blocking |
+
+### high debt 升级
+
+| Profile | 行为 |
+|---------|------|
+| premerge | warning |
+| nightly | warning + debt summary |
+| release | ❌ blocking（需满足阻断条件）|
+
+---
+
 **维护者**: OpenClaw 架构团队
-**更新日期**: 2026-04-14
+**更新日期**: 2026-04-15
+
+---
+
+## 七、配额管理
+
+### Owner 级配额
+
+| Owner 类型 | max_active_exceptions | max_high_debt_exceptions |
+|------------|----------------------|--------------------------|
+| architecture | 5 | 2 |
+| governance | 5 | 2 |
+| infrastructure | 3 | 1 |
+| 其他 | 2 | 1 |
+
+### Rule 级配额
+
+| 规则类型 | max_active_exceptions_per_rule |
+|----------|-------------------------------|
+| R004 | 2 |
+| R006 | 2 |
+| R007 | 3 |
+| 其他 | 2 |
+
+### 配额检查
+
+```bash
+# 检查配额
+python scripts/exception_manager.py quota-check
+
+# 返回示例
+{
+  "owner_quotas": {
+    "architecture": {"used": 2, "limit": 5, "available": 3},
+    "governance": {"used": 1, "limit": 5, "available": 4}
+  },
+  "rule_quotas": {
+    "R004": {"used": 1, "limit": 2, "available": 1},
+    "R007": {"used": 2, "limit": 3, "available": 1}
+  }
+}
+```
+
+### 超限行为
+
+| Profile | 超限行为 |
+|---------|----------|
+| premerge | ⚠️ warning |
+| nightly | ⚠️ warning + debt summary |
+| release | ❌ 高风险时 blocking |
+
+---
+
+## 八、升级策略
+
+### stale 升级
+
+| Profile | 行为 |
+|---------|------|
+| premerge | warning，提醒续期或关闭 |
+| nightly | warning + debt summary |
+| release | warning，不阻断 |
+
+### overused 升级
+
+| Profile | 行为 |
+|---------|------|
+| premerge | warning，提醒问题未解决 |
+| nightly | warning + debt summary |
+| release | 高风险时 blocking |
+
+### high debt 升级
+
+| Profile | 行为 |
+|---------|------|
+| premerge | warning |
+| nightly | warning + debt summary |
+| release | ❌ blocking（需满足阻断条件）|
+
+---
+
+**维护者**: OpenClaw 架构团队
+**更新日期**: 2026-04-15

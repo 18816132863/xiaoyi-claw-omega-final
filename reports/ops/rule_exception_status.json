@@ -1,20 +1,20 @@
 {
-  "active_count": 5,
-  "soon_expiring_count": 1,
+  "active_count": 3,
+  "soon_expiring_count": 0,
   "stale_count": 0,
-  "overused_count": 3,
-  "expired_count": 2,
+  "overused_count": 1,
+  "expired_count": 4,
   "revoked_count": 2,
-  "high_debt_count": 1,
+  "high_debt_count": 0,
   "by_owner": {
     "architecture": {
-      "active": 2,
+      "active": 1,
       "expired": 0,
       "revoked": 0
     },
     "governance": {
       "active": 1,
-      "expired": 1,
+      "expired": 2,
       "revoked": 0
     },
     "infrastructure": {
@@ -28,10 +28,10 @@
       "revoked": 1
     },
     "test": {
-      "active": 2,
-      "expired": 1,
+      "active": 1,
+      "expired": 2,
       "revoked": 0
     }
   },
-  "generated_at": "2026-04-15T00:16:37.555350"
+  "generated_at": "2026-04-16T00:08:35.107483"
 }

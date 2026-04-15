@@ -81,7 +81,22 @@ inspect:
 # 快速检查
 quick:
 	@echo "快速检查..."
-	python scripts/check_repo_integrity.py --fast
+	python scripts/check_repo_integrity.py
+
+# 门禁检查 - premerge
+verify-premerge:
+	@echo "运行 premerge 门禁..."
+	python scripts/run_release_gate.py premerge
+
+# 门禁检查 - nightly
+verify-nightly:
+	@echo "运行 nightly 门禁..."
+	python scripts/run_release_gate.py nightly
+
+# 门禁检查 - release
+verify-release:
+	@echo "运行 release 门禁..."
+	python scripts/run_release_gate.py release
 
 # 完整备份
 backup:
@@ -100,3 +115,36 @@ status:
 	@echo ""
 	@echo "技能健康:"
 	python scripts/skill_health_check.py
+
+# 一键满验收
+verify-all-final:
+	@echo "=== 开始一键满验收 ==="
+	@echo ""
+	@echo "1. 检查仓库完整性..."
+	python scripts/check_repo_integrity.py --strict
+	@echo ""
+	@echo "2. 运行 premerge 规则引擎..."
+	python scripts/run_rule_engine.py --profile premerge --save
+	@echo ""
+	@echo "3. 运行 premerge 门禁..."
+	python scripts/run_release_gate.py premerge
+	@echo ""
+	@echo "4. 运行 nightly 规则引擎..."
+	python scripts/run_rule_engine.py --profile nightly --save
+	@echo ""
+	@echo "5. 运行 nightly 门禁..."
+	python scripts/run_release_gate.py nightly
+	@echo ""
+	@echo "6. 运行 release 规则引擎..."
+	python scripts/run_rule_engine.py --profile release --save
+	@echo ""
+	@echo "7. 运行 release 门禁..."
+	python scripts/run_release_gate.py release
+	@echo ""
+	@echo "8. 快速检查..."
+	python scripts/check_repo_integrity.py
+	@echo ""
+	@echo "=== 生成最终验收包 ==="
+	python scripts/generate_final_verification_bundle.py
+	@echo ""
+	@echo "=== 一键满验收完成 ==="

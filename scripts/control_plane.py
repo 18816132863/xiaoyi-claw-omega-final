@@ -45,7 +45,7 @@ class ControlPlaneAggregator:
         """聚合所有状态"""
         state = {
             "generated_at": datetime.now().isoformat(),
-            "version": "1.0.0",
+            "version": "1.1.0",
             "overview": self._build_overview(),
             "gates": self._build_gates(),
             "alerts": self._build_alerts(),
@@ -55,9 +55,70 @@ class ControlPlaneAggregator:
             "notifications": self._build_notifications(),
             "dashboard": self._build_dashboard(),
             "trends": self._build_trends(),
-            "audit": self._build_audit_summary()
+            "audit": self._build_audit_summary(),
+            "rules": self._build_rules(),
+            "exceptions": self._build_exceptions(),
+            "exception_debt": self._build_exception_debt(),
+            "exception_approvals": self._build_exception_approvals()
         }
         return state
+    
+    def _build_rules(self) -> Dict:
+        """构建规则状态"""
+        rule_report = load_json(self.reports_dir / "ops/rule_engine_report.json") or {}
+        rule_snapshot = load_json(self.reports_dir / "ops/rule_registry_snapshot.json") or {}
+        
+        return {
+            "total_rules": rule_report.get("total_rules", 0),
+            "passed_count": rule_report.get("passed_count", 0),
+            "failed_count": rule_report.get("failed_count", 0),
+            "warning_count": rule_report.get("warning_count", 0),
+            "waived_count": rule_report.get("waived_count", 0),
+            "blocking_failures": len(rule_report.get("blocking_failures", [])),
+            "active_rules": len(rule_snapshot.get("rules", [])),
+            "generated_at": rule_report.get("generated_at", "")
+        }
+    
+    def _build_exceptions(self) -> Dict:
+        """构建例外状态"""
+        status = load_json(self.reports_dir / "ops/rule_exception_status.json") or {}
+        
+        return {
+            "active_count": status.get("active_count", 0),
+            "soon_expiring_count": status.get("soon_expiring_count", 0),
+            "expired_count": status.get("expired_count", 0),
+            "revoked_count": status.get("revoked_count", 0),
+            "high_debt_count": status.get("high_debt_count", 0),
+            "by_owner": status.get("by_owner", {}),
+            "generated_at": status.get("generated_at", "")
+        }
+    
+    def _build_exception_debt(self) -> Dict:
+        """构建例外债务状态"""
+        debt = load_json(self.reports_dir / "ops/rule_exception_debt.json") or {}
+        summary = debt.get("summary", {})
+        
+        return {
+            "healthy_count": summary.get("healthy_count", 0),
+            "stale_count": summary.get("stale_count", 0),
+            "overused_count": summary.get("overused_count", 0),
+            "high_debt_count": summary.get("high_debt_count", 0),
+            "by_owner": debt.get("exceptions_by_owner", {}),
+            "by_rule": debt.get("exceptions_by_rule", {}),
+            "generated_at": debt.get("generated_at", "")
+        }
+    
+    def _build_exception_approvals(self) -> Dict:
+        """构建例外审批状态"""
+        queue = load_json(self.reports_dir / "ops/exception_approval_queue.json") or {}
+        
+        return {
+            "pending_count": len(queue.get("pending", [])),
+            "approved_count": len(queue.get("approved", [])),
+            "denied_count": len(queue.get("denied", [])),
+            "latest_pending": queue.get("pending", [{}])[0].get("request_id") if queue.get("pending") else None,
+            "latest_approved": queue.get("approved", [{}])[-1].get("request_id") if queue.get("approved") else None
+        }
 
     def _build_overview(self) -> Dict:
         """构建概览"""

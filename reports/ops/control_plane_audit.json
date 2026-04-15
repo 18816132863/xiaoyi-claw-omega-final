@@ -1,55 +1,11 @@
 {
-  "generated_at": "2026-04-13T21:48:00.000000",
-  "version": "1.0.0",
-  "release_runs": [
-    {
-      "timestamp": "20260412_224737",
-      "can_release": true,
-      "runtime_passed": true,
-      "quality_passed": true
-    }
-  ],
-  "nightly_runs": [
-    {
-      "timestamp": "20260412_232158",
-      "passed": true,
-      "p0_count": 0,
-      "p1_count": 0
-    }
-  ],
-  "blocking_alerts": [
-    {
-      "alert_type": "WEAK_REGRESSION",
-      "severity": "warning",
-      "message": "检测到 1 个弱回归"
-    }
-  ],
-  "incident_events": [
-    {
-      "incident_id": "INC-20260412174545",
-      "alert_type": "P0_BLOCKED",
-      "status": "resolved"
-    }
-  ],
-  "remediation_events": [
-    {
-      "action_id": "rem_20260412_233446_386",
-      "action_type": "toggle_incident",
-      "success": true
-    }
-  ],
-  "approvals": [
-    {
-      "approval_id": "apr_20260412_233426_382",
-      "action_type": "toggle_incident",
-      "status": "executed"
-    }
-  ],
-  "timeline": [
-    {
-      "type": "release_gate",
-      "timestamp": "20260412_224737",
-      "result": "pass"
-    }
-  ]
+  "generated_at": "2026-04-15T00:00:00",
+  "audit_entries": [],
+  "nightly_runs": [],
+  "release_runs": [],
+  "blocking_alerts": [],
+  "warning_alerts": [],
+  "incident_events": [],
+  "remediation_events": [],
+  "approvals": []
 }

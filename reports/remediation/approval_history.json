@@ -1,18 +1,4 @@
 {
-  "approvals": [
-    {
-      "approval_id": "apr_20260412_233426_382",
-      "action_type": "toggle_incident",
-      "reason": "semi_auto action: toggle_incident",
-      "source": "remediation_center",
-      "status": "executed",
-      "final_status": "executed",
-      "created_at": "2026-04-12T23:34:26.678610",
-      "approved_at": "2026-04-12T23:34:45.941322",
-      "approved_by": "admin",
-      "executed_at": "2026-04-12T23:34:46.372425",
-      "execute_record_id": "rem_20260412_233446_386"
-    }
-  ],
-  "generated_at": "2026-04-13T21:55:00.000000"
+  "history": [],
+  "generated_at": "2026-04-15T00:00:00"
 }

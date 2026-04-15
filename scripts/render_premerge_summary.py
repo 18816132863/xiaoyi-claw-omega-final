@@ -168,3 +168,23 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Exception Quota
+quota_path = root / "reports/ops/rule_exception_quota.json"
+if quota_path.exists():
+    try:
+        quota = json.load(open(quota_path, encoding='utf-8'))
+        violations = quota.get("violations", {})
+        owner_violations = violations.get("owner_violations", [])
+        rule_violations = violations.get("rule_violations", [])
+        
+        print("**Exception Quota**:")
+        print(f"- Owner Quota Violations: {len(owner_violations)}")
+        print(f"- Rule Quota Violations: {len(rule_violations)}")
+        if owner_violations:
+            print(f"  - Owners: {', '.join(owner_violations)}")
+        if rule_violations:
+            print(f"  - Rules: {', '.join(rule_violations)}")
+        print()
+    except:
+        pass

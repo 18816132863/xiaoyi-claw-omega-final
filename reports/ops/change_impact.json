@@ -1,28 +1,188 @@
 {
   "changed_files": [
-    "infrastructure/inventory/skill_registry.json",
+    "CHANGELOG.md",
+    "Makefile",
+    "archive/architecture_html/architecture_v27.html",
+    "archive/architecture_html/architecture_v27_cn.html",
+    "archive/architecture_html/architecture_v27_embed_font.html",
+    "archive/architecture_html/architecture_v27_font_fix.html",
+    "archive/architecture_html/architecture_v27_full_cn.html",
+    "archive/architecture_html/architecture_v27_v2.html",
+    "archive/backups/backup_20260414_224833.tar.gz.xz",
+    "archive/backups/backup_20260414_225104.tar.gz.xz",
+    "archive/backups/backup_20260414_225711.tar.gz.xz",
+    "archive/backups/backup_20260414_230454.tar.gz.xz",
+    "archive/backups/backup_20260414_231125.tar.gz.xz",
+    "core/CAPABILITY_MAP.md",
+    "core/RULE_EXCEPTIONS.json",
+    "core/RULE_EXCEPTION_DEBT_POLICY.md",
+    "core/RULE_REGISTRY.json",
+    "core/UNIFIED_ARCHITECTURE.md",
+    "governance/quality_gate.py",
+    "infrastructure/release/release_manager.py",
+    "infrastructure/verify_runtime_integrity.py",
+    "memory/2026-04-15.md",
     "memory_context/README.md",
+    "memory_context/__init__.py",
+    "memory_context/unified_search.py",
+    "reports/alerts/latest_alerts.json",
     "reports/git_commits.json",
-    "reports/inspection_20260415_075808.json",
+    "reports/ops/change_impact.json",
+    "reports/ops/change_impact_enforcement.json",
+    "reports/ops/control_plane_audit.json",
+    "reports/ops/control_plane_state.json",
+    "reports/ops/executed_checks.json",
+    "reports/ops/followup_requirements.json",
+    "reports/ops/rule_engine_report.json",
+    "reports/ops/rule_exception_debt.json",
+    "reports/ops/rule_exception_history.json",
+    "reports/ops/rule_exception_status.json",
+    "reports/ops/rule_execution_index.json",
     "reports/ops/rule_registry_snapshot.json",
-    "scripts/auto_classify_skills.py",
-    "scripts/cleanup_reports.py",
-    "tests/fixtures/smoke/blank.pdf",
-    "tests/fixtures/smoke/sample.docx",
-    "tests/fixtures/smoke/sample.txt"
+    "reports/quality_gate.json",
+    "reports/release_gate.json",
+    "reports/remediation/approval_history.json",
+    "reports/remediation/latest_remediation.json",
+    "reports/runtime_integrity.json",
+    "reports/runtime_integrity_release.json",
+    "scripts/check_change_impact.py",
+    "scripts/check_change_impact_enforcement.py",
+    "scripts/check_rule_guards.py",
+    "scripts/control_plane.py",
+    "scripts/exception_manager.py",
+    "scripts/ops_center.py",
+    "scripts/render_nightly_summary.py",
+    "scripts/render_premerge_summary.py",
+    "scripts/render_release_summary.py",
+    "scripts/run_release_gate.py",
+    "scripts/run_rule_engine.py",
+    "tests/fixtures/smoke/sample.txt",
+    "tests/rule_violations/contract_violation.json",
+    "tests/rule_violations/layer_dependency_violation.py"
   ],
   "changed_categories": [
-    "infrastructure/inventory/skill_registry.json",
+    "scripts/check_*.py",
+    "infrastructure/release",
+    "governance",
     "reports/ops"
   ],
   "matched_rules": [
     {
-      "file": "infrastructure/inventory/skill_registry.json",
-      "pattern": "infrastructure/inventory/skill_registry.json",
-      "description": "技能注册表变更，必须验证仓库完整性和 premerge 门禁",
+      "file": "governance/quality_gate.py",
+      "pattern": "governance/*",
+      "description": "治理层变更，premerge 必须通过，release 为 follow-up",
       "blocking_commands": [
-        "python scripts/check_repo_integrity.py --strict",
-        "python scripts/run_release_gate.py premerge"
+        "python scripts/check_layer_dependencies.py"
+      ],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
+      "file": "infrastructure/release/release_manager.py",
+      "pattern": "infrastructure/release/*",
+      "description": "发布管理变更，release 为 follow-up",
+      "blocking_commands": [],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
+      "file": "reports/ops/change_impact.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/change_impact_enforcement.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/control_plane_audit.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/control_plane_state.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/executed_checks.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/followup_requirements.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/rule_engine_report.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/rule_exception_debt.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/rule_exception_history.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/rule_exception_status.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/rule_execution_index.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
       ],
       "followup_profiles": []
     },
@@ -34,14 +194,48 @@
         "python scripts/check_json_contracts.py"
       ],
       "followup_profiles": []
+    },
+    {
+      "file": "scripts/check_change_impact.py",
+      "pattern": "scripts/check_*.py",
+      "description": "检查脚本变更，建议验证仓库完整性",
+      "blocking_commands": [
+        "python scripts/check_repo_integrity.py --strict"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "scripts/check_change_impact_enforcement.py",
+      "pattern": "scripts/check_*.py",
+      "description": "检查脚本变更，建议验证仓库完整性",
+      "blocking_commands": [
+        "python scripts/check_repo_integrity.py --strict"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "scripts/check_rule_guards.py",
+      "pattern": "scripts/check_*.py",
+      "description": "检查脚本变更，建议验证仓库完整性",
+      "blocking_commands": [
+        "python scripts/check_repo_integrity.py --strict"
+      ],
+      "followup_profiles": []
     }
   ],
   "blocking_commands_current_profile": [
+    "python scripts/check_layer_dependencies.py",
     "python scripts/check_repo_integrity.py --strict",
-    "python scripts/check_json_contracts.py",
-    "python scripts/run_release_gate.py premerge"
+    "python scripts/check_json_contracts.py"
   ],
-  "followup_required_profiles": [],
-  "followup_reason_by_profile": {},
-  "generated_at": "2026-04-15T08:05:35.234499"
+  "followup_required_profiles": [
+    "release"
+  ],
+  "followup_reason_by_profile": {
+    "release": [
+      "governance/quality_gate.py changed",
+      "infrastructure/release/release_manager.py changed"
+    ]
+  },
+  "generated_at": "2026-04-16T07:35:12.039859"
 }

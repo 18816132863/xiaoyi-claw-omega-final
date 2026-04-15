@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-04-15T13:22:00",
+  "trend_type": "rule_failures",
+  "period_days": 7,
+  "data_points": [
+    {"date": "2026-04-09", "total": 6, "passed": 4, "failed": 2, "warnings": 0},
+    {"date": "2026-04-10", "total": 6, "passed": 4, "failed": 2, "warnings": 0},
+    {"date": "2026-04-11", "total": 6, "passed": 4, "failed": 2, "warnings": 0},
+    {"date": "2026-04-12", "total": 6, "passed": 4, "failed": 2, "warnings": 0},
+    {"date": "2026-04-13", "total": 6, "passed": 4, "failed": 2, "warnings": 0},
+    {"date": "2026-04-14", "total": 6, "passed": 3, "failed": 2, "warnings": 1},
+    {"date": "2026-04-15", "total": 6, "passed": 3, "failed": 2, "warnings": 1}
+  ],
+  "summary": {
+    "avg_passed": 3.7,
+    "avg_failed": 2.0,
+    "trend": "stable"
+  }
+}

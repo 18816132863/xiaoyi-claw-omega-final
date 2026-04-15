@@ -54,7 +54,16 @@ def check_enforcement(profile: str = "premerge") -> Dict:
     # 只检查当前 profile 的阻断命令
     for cmd in result["blocking_commands_current_profile"]:
         cmd_base = cmd.replace("python scripts/", "")
-        found = any(cmd_base in ec for ec in result["executed_commands"])
+        # 兼容 dict 和 str 两种格式
+        found = False
+        for ec in result["executed_commands"]:
+            if isinstance(ec, dict):
+                command_str = ec.get("command", "")
+            else:
+                command_str = str(ec)
+            if cmd_base in command_str:
+                found = True
+                break
         if not found:
             result["missing_required_checks"].append(cmd)
     

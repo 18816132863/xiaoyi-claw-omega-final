@@ -114,7 +114,7 @@ def check_skill_registry() -> Dict:
         return {"status": "fail", "message": str(e)}
 
 
-def run_quality_gate(report_path: str = None) -> Dict:
+def run_quality_gate(profile: str = "premerge", report_path: str = None) -> Dict:
     """运行质量门禁"""
     root = get_project_root()
     timestamp = datetime.now()
@@ -128,7 +128,7 @@ def run_quality_gate(report_path: str = None) -> Dict:
     all_passed = all(r["status"] == "pass" for _, r in checks)
     
     report = {
-        "profile": "nightly",
+        "profile": profile,
         "verified_at": timestamp.isoformat(),
         "overall_passed": all_passed,
         "p0_count": 0,
@@ -143,6 +143,11 @@ def run_quality_gate(report_path: str = None) -> Dict:
     if report_path:
         Path(report_path).parent.mkdir(parents=True, exist_ok=True)
         with open(report_path, 'w', encoding='utf-8') as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+        
+        # 保存 profile 专属快照
+        profile_report_path = str(report_path).replace(".json", f"_{profile}.json")
+        with open(profile_report_path, 'w', encoding='utf-8') as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
     
     # 保存历史快照
@@ -178,10 +183,11 @@ def print_quality_report(report: Dict):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="质量门禁")
+    parser.add_argument("--profile", choices=["premerge", "nightly", "release"], default="premerge", help="门禁模式")
     parser.add_argument("--report-json", help="JSON 报告输出路径")
     args = parser.parse_args()
     
-    report = run_quality_gate(args.report_json)
+    report = run_quality_gate(args.profile, args.report_json)
     print_quality_report(report)
     
     import sys

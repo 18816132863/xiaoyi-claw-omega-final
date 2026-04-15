@@ -24,6 +24,14 @@ def run_command(cmd: list) -> int:
     """运行命令并返回退出码"""
     print(f"执行: {' '.join(cmd)}")
     result = subprocess.run(cmd, cwd=get_project_root())
+    
+    # 记录执行
+    record_executed_command(
+        command=' '.join(cmd),
+        returncode=result.returncode,
+        success=(result.returncode == 0)
+    )
+    
     return result.returncode
 
 
@@ -50,12 +58,27 @@ def run_rule_checks(profile: str = "premerge") -> dict:
     else:
         report = {}
     
-    # 转换为兼容格式
+    engine_failed = result.returncode != 0 or not report
+    
+    # 转换为兼容格式（fail closed）
     results = {
-        "layer_dependency": {"passed": True, "output": ""},
-        "json_contract": {"passed": True, "output": ""},
-        "_engine_report": report
+        "layer_dependency": {
+            "passed": False,
+            "output": (result.stdout or "") + (result.stderr or "")
+        },
+        "json_contract": {
+            "passed": False,
+            "output": (result.stdout or "") + (result.stderr or "")
+        },
+        "_engine_report": report,
+        "_engine_returncode": result.returncode,
+        "_engine_failed": engine_failed
     }
+    
+    if report and not engine_failed:
+        overall_passed = not bool(report.get("blocking_failures"))
+        results["layer_dependency"]["passed"] = overall_passed
+        results["json_contract"]["passed"] = overall_passed
     
     # 从报告提取状态
     for rule in report.get("executed_rules", []):
@@ -145,23 +168,34 @@ def print_change_impact_summary():
     print("=" * 50)
 
 
+# 全局执行记录
+_executed_commands = []
+
+def record_executed_command(command: str, returncode: int, success: bool):
+    """记录已执行的命令"""
+    global _executed_commands
+    _executed_commands.append({
+        "command": command,
+        "returncode": returncode,
+        "success": success,
+        "timestamp": datetime.now().isoformat()
+    })
+
 def save_executed_checks(profile: str, rule_results: dict, gate_results: dict):
-    """保存已执行的检查记录"""
+    """保存已执行的检查记录 - 基于真实执行记录"""
     root = get_project_root()
     
+    # 使用真实执行记录
     executed = {
         "current_profile": profile,
-        "executed_commands": [
-            "python scripts/check_layer_dependencies.py",
-            "python scripts/check_json_contracts.py",
-            "python scripts/check_repo_integrity.py --strict",
-            f"python scripts/run_release_gate.py {profile}"
-        ],
+        "executed_commands": _executed_commands,  # 真实执行记录
         "executed_rule_checks": {
             "layer_dependency": rule_results.get("layer_dependency", {}).get("passed", False),
             "json_contract": rule_results.get("json_contract", {}).get("passed", False)
         },
         "executed_gate_checks": gate_results,
+        "engine_failed": rule_results.get("_engine_failed", False),
+        "blocking_failures": rule_results.get("_engine_report", {}).get("blocking_failures", []),
         "timestamp": datetime.now().isoformat()
     }
     
@@ -169,6 +203,11 @@ def save_executed_checks(profile: str, rule_results: dict, gate_results: dict):
     path.parent.mkdir(parents=True, exist_ok=True)
     
     with open(path, 'w', encoding='utf-8') as f:
+        json.dump(executed, f, ensure_ascii=False, indent=2)
+    
+    # 保存 profile 专属快照
+    profile_path = root / f"reports/ops/executed_checks_{profile}.json"
+    with open(profile_path, 'w', encoding='utf-8') as f:
         json.dump(executed, f, ensure_ascii=False, indent=2)
 
 
@@ -258,6 +297,11 @@ def save_enforcement_report(profile: str, impact_data: dict, executed_data: dict
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
     
+    # 保存 profile 专属快照
+    profile_path = root / f"reports/ops/change_impact_enforcement_{profile}.json"
+    with open(profile_path, 'w', encoding='utf-8') as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    
     return report
 
 
@@ -300,7 +344,16 @@ def check_impact_enforcement() -> dict:
     for cmd in blocking_commands:
         # 简化匹配：检查命令是否在已执行列表中
         cmd_base = cmd.replace("python scripts/", "")
-        found = any(cmd_base in ec for ec in executed_commands)
+        # 兼容 dict 和 str 两种格式
+        found = False
+        for ec in executed_commands:
+            if isinstance(ec, dict):
+                command_str = ec.get("command", "")
+            else:
+                command_str = str(ec)
+            if cmd_base in command_str:
+                found = True
+                break
         if not found:
             result["missing_commands"].append(cmd)
     
@@ -365,6 +418,7 @@ def check_exception_constraints(profile: str) -> dict:
     result = {
         "passed": True,
         "blocked_exceptions": [],
+        "quota_violations": [],
         "reason": ""
     }
     
@@ -399,8 +453,21 @@ def check_exception_constraints(profile: str) -> dict:
         try:
             rules_data = json.load(open(rules_path, encoding='utf-8'))
             for rule_id, rule in rules_data.get("rules", {}).items():
-                if rule.get("enforcement") == "blocking":
-                    blocking_rules.add(rule_id)
+                # 检查 enforcement 或 blocking 字段
+                if rule.get("enforcement") == "blocking" or rule.get("blocking") == True:
+                    blocking_rules.add(rule.get("rule_id", rule_id))
+        except:
+            pass
+    
+    # 读取配额快照
+    quota_path = root / "reports/ops/rule_exception_quota.json"
+    quota_violations = {"owners": [], "rules": []}
+    if quota_path.exists():
+        try:
+            quota_data = json.load(open(quota_path, encoding='utf-8'))
+            violations = quota_data.get("violations", {})
+            quota_violations["owners"] = violations.get("owner_violations", [])
+            quota_violations["rules"] = violations.get("rule_violations", [])
         except:
             pass
     
@@ -413,6 +480,7 @@ def check_exception_constraints(profile: str) -> dict:
         renewal_count = exc.get("renewal_count", 0)
         max_renewals = exc.get("max_renewals", 2)
         rule_id = exc.get("rule_id", "")
+        owner = exc.get("owner", "")
         
         # 高债务 + 超续期 + blocking rule = 阻断
         if debt_level == "high" and renewal_count >= max_renewals and rule_id in blocking_rules:
@@ -424,9 +492,32 @@ def check_exception_constraints(profile: str) -> dict:
                 "renewal_count": renewal_count,
                 "max_renewals": max_renewals
             })
+        
+        # 检查 owner quota violation
+        if owner in quota_violations["owners"]:
+            result["passed"] = False
+            result["quota_violations"].append({
+                "type": "owner",
+                "owner": owner,
+                "exception_id": exc_id
+            })
+        
+        # 检查 rule quota violation (仅 blocking rules)
+        if rule_id in quota_violations["rules"] and rule_id in blocking_rules:
+            result["passed"] = False
+            result["quota_violations"].append({
+                "type": "rule",
+                "rule_id": rule_id,
+                "exception_id": exc_id
+            })
     
     if not result["passed"]:
-        result["reason"] = "存在高风险例外：high debt + overused + blocking rule"
+        reasons = []
+        if result["blocked_exceptions"]:
+            reasons.append("高风险例外")
+        if result["quota_violations"]:
+            reasons.append("配额违规")
+        result["reason"] = "存在" + " + ".join(reasons)
     
     return result
 
@@ -434,6 +525,7 @@ def check_exception_constraints(profile: str) -> dict:
 def verify_premerge():
     """premerge 门禁"""
     root = get_project_root()
+    global _executed_commands
     
     # 0. 例外过期检查 - 门禁前置
     run_expire_check()
@@ -464,10 +556,41 @@ def verify_premerge():
     rc = run_command([
         sys.executable,
         str(root / "governance/quality_gate.py"),
+        "--profile", "premerge",
         "--report-json", "reports/quality_gate.json"
     ])
     
     gate_results["quality"] = rc == 0
+    
+    # 2.1 执行 required blocking commands - 基于当前进程内存状态判断
+    impact_path = root / "reports/ops/change_impact.json"
+    if impact_path.exists():
+        try:
+            impact_data = json.load(open(impact_path, encoding='utf-8'))
+            blocking_commands = impact_data.get("blocking_commands_current_profile", [])
+            
+            # 只基于当前进程本轮执行记录判断，不读取旧文件
+            for cmd in blocking_commands:
+                cmd_base = cmd.replace("python scripts/", "")
+                found = False
+                for ec in _executed_commands:
+                    if isinstance(ec, dict):
+                        command_str = ec.get("command", "")
+                    else:
+                        command_str = str(ec)
+                    if cmd_base in command_str:
+                        found = True
+                        break
+                
+                if not found:
+                    # 执行命令
+                    print(f"执行 required command: {cmd}")
+                    if cmd.startswith("python scripts/"):
+                        script_path = cmd.replace("python scripts/", "scripts/")
+                        parts = script_path.split()
+                        rc2 = run_command([sys.executable, str(root / parts[0])] + parts[1:])
+        except:
+            pass
     
     # 保存执行记录
     save_executed_checks("premerge", rule_results, gate_results)
@@ -511,6 +634,15 @@ def verify_premerge():
                 print(f"    {p}: {', '.join(reasons[:3])}")
         print("=" * 50)
     
+    # 规则引擎失败直接返回错误
+    if rule_results.get("_engine_failed"):
+        print("❌ 规则引擎执行失败")
+        return 1
+    
+    if rule_results.get("_engine_report", {}).get("blocking_failures"):
+        print("❌ 存在阻断性规则失败")
+        return 1
+    
     # 规则检查失败也返回错误
     if not rule_results["layer_dependency"]["passed"] or not rule_results["json_contract"]["passed"]:
         return 1
@@ -525,6 +657,7 @@ def verify_premerge():
 def verify_nightly():
     """nightly 门禁"""
     root = get_project_root()
+    global _executed_commands
     
     # 0. 例外过期检查 - 门禁前置
     run_expire_check()
@@ -549,11 +682,53 @@ def verify_nightly():
     rc = run_command([
         sys.executable,
         str(root / "governance/quality_gate.py"),
+        "--profile", "nightly",
         "--report-json", "reports/quality_gate.json"
     ])
     
     gate_results["quality"] = rc == 0
+    
+    # 执行 required blocking commands - 基于当前进程内存状态判断
+    impact_path = root / "reports/ops/change_impact.json"
+    impact_data = {}  # 初始化
+    if impact_path.exists():
+        try:
+            impact_data = json.load(open(impact_path, encoding='utf-8'))
+            blocking_commands = impact_data.get("blocking_commands_current_profile", [])
+            
+            for cmd in blocking_commands:
+                cmd_base = cmd.replace("python scripts/", "")
+                found = False
+                for ec in _executed_commands:
+                    if isinstance(ec, dict):
+                        command_str = ec.get("command", "")
+                    else:
+                        command_str = str(ec)
+                    if cmd_base in command_str:
+                        found = True
+                        break
+                
+                if not found:
+                    print(f"执行 required command: {cmd}")
+                    if cmd.startswith("python scripts/"):
+                        script_path = cmd.replace("python scripts/", "scripts/")
+                        parts = script_path.split()
+                        rc2 = run_command([sys.executable, str(root / parts[0])] + parts[1:])
+        except:
+            pass
+    
     save_executed_checks("nightly", rule_results, gate_results)
+    
+    # 检查变更影响强制门禁并保存报告
+    enforcement_result = check_impact_enforcement()
+    executed_path = root / "reports/ops/executed_checks.json"
+    executed_data = {}
+    if executed_path.exists():
+        try:
+            executed_data = json.load(open(executed_path, encoding='utf-8'))
+        except:
+            pass
+    save_enforcement_report("nightly", impact_data, executed_data, enforcement_result["missing_commands"])
     
     # 更新 follow-up 状态
     followup_path = root / "reports/ops/followup_requirements.json"
@@ -579,6 +754,15 @@ def verify_nightly():
                 print("=" * 50)
         except:
             pass
+    
+    # 规则引擎失败直接返回错误 (nightly)
+    if rule_results.get("_engine_failed"):
+        print("❌ 规则引擎执行失败")
+        return 1
+    
+    if rule_results.get("_engine_report", {}).get("blocking_failures"):
+        print("❌ 存在阻断性规则失败")
+        return 1
     
     # 规则检查失败也返回错误
     if not rule_results["layer_dependency"]["passed"] or not rule_results["json_contract"]["passed"]:
@@ -630,6 +814,7 @@ def verify_release():
     rc = run_command([
         sys.executable,
         str(root / "governance/quality_gate.py"),
+        "--profile", "release",
         "--report-json", "reports/quality_gate.json"
     ])
     
@@ -638,6 +823,36 @@ def verify_release():
     if rc != 0:
         save_executed_checks("release", rule_results, gate_results)
         return rc
+    
+    # 执行 required blocking commands - 基于当前进程内存状态判断
+    global _executed_commands
+    impact_path = root / "reports/ops/change_impact.json"
+    impact_data = {}  # 初始化
+    if impact_path.exists():
+        try:
+            impact_data = json.load(open(impact_path, encoding='utf-8'))
+            blocking_commands = impact_data.get("blocking_commands_current_profile", [])
+            
+            for cmd in blocking_commands:
+                cmd_base = cmd.replace("python scripts/", "")
+                found = False
+                for ec in _executed_commands:
+                    if isinstance(ec, dict):
+                        command_str = ec.get("command", "")
+                    else:
+                        command_str = str(ec)
+                    if cmd_base in command_str:
+                        found = True
+                        break
+                
+                if not found:
+                    print(f"执行 required command: {cmd}")
+                    if cmd.startswith("python scripts/"):
+                        script_path = cmd.replace("python scripts/", "scripts/")
+                        parts = script_path.split()
+                        rc2 = run_command([sys.executable, str(root / parts[0])] + parts[1:])
+        except:
+            pass
     
     # 3. 发布门禁检查
     rc = run_command([
@@ -649,6 +864,17 @@ def verify_release():
     
     gate_results["release"] = rc == 0
     save_executed_checks("release", rule_results, gate_results)
+    
+    # 检查变更影响强制门禁并保存报告
+    enforcement_result = check_impact_enforcement()
+    executed_path = root / "reports/ops/executed_checks.json"
+    executed_data = {}
+    if executed_path.exists():
+        try:
+            executed_data = json.load(open(executed_path, encoding='utf-8'))
+        except:
+            pass
+    save_enforcement_report("release", impact_data, executed_data, enforcement_result["missing_commands"])
     
     # 更新 follow-up 状态
     followup_path = root / "reports/ops/followup_requirements.json"
@@ -676,6 +902,15 @@ def verify_release():
                 print("=" * 50)
         except:
             pass
+    
+    # 规则引擎失败直接返回错误 (release)
+    if rule_results.get("_engine_failed"):
+        print("❌ 规则引擎执行失败")
+        return 1
+    
+    if rule_results.get("_engine_report", {}).get("blocking_failures"):
+        print("❌ 存在阻断性规则失败")
+        return 1
     
     # 规则检查失败也返回错误
     if not rule_results["layer_dependency"]["passed"] or not rule_results["json_contract"]["passed"]:

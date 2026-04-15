@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-04-16T02:55:17.927112",
+  "repo_integrity_passed": true,
+  "profiles": {
+    "premerge": {
+      "rule_engine_passed": true,
+      "gate_passed": true,
+      "enforcement_passed": true,
+      "runtime_passed": true,
+      "quality_passed": true
+    },
+    "nightly": {
+      "rule_engine_passed": true,
+      "gate_passed": true,
+      "enforcement_passed": true,
+      "runtime_passed": true,
+      "quality_passed": true
+    },
+    "release": {
+      "rule_engine_passed": true,
+      "gate_passed": true,
+      "enforcement_passed": true,
+      "runtime_passed": true,
+      "quality_passed": true
+    }
+  },
+  "report_files": {
+    "premerge": {
+      "rule_engine": "reports/ops/rule_engine_report_premerge.json",
+      "executed_checks": "reports/ops/executed_checks_premerge.json",
+      "enforcement": "reports/ops/change_impact_enforcement_premerge.json",
+      "runtime": "reports/runtime_integrity_premerge.json",
+      "quality": "reports/quality_gate_premerge.json"
+    },
+    "nightly": {
+      "rule_engine": "reports/ops/rule_engine_report_nightly.json",
+      "executed_checks": "reports/ops/executed_checks_nightly.json",
+      "enforcement": "reports/ops/change_impact_enforcement_nightly.json",
+      "runtime": "reports/runtime_integrity_nightly.json",
+      "quality": "reports/quality_gate_nightly.json"
+    },
+    "release": {
+      "rule_engine": "reports/ops/rule_engine_report_release.json",
+      "executed_checks": "reports/ops/executed_checks_release.json",
+      "enforcement": "reports/ops/change_impact_enforcement_release.json",
+      "runtime": "reports/runtime_integrity_release.json",
+      "quality": "reports/quality_gate_release.json"
+    }
+  },
+  "overall_passed": true
+}

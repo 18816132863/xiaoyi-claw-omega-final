@@ -1,39 +1,55 @@
 {
-  "generated_at": "2026-04-14T22:28:47.489361",
+  "generated_at": "2026-04-16T07:35:01.727507",
   "version": "2.0.0",
   "summary": {
     "active_count": 3,
-    "healthy_count": 1,
-    "stale_count": 1,
+    "healthy_count": 2,
+    "stale_count": 0,
     "overused_count": 1,
-    "expired_count": 1,
-    "revoked_count": 1,
-    "high_debt_count": 1
+    "expired_count": 4,
+    "revoked_count": 2,
+    "high_debt_count": 0
   },
   "exceptions_by_owner": {
     "architecture": [
-      "EX001",
-      "EX005"
+      "EX001"
     ],
     "governance": [
       "EX002",
-      "EX004"
+      "EX004",
+      "EXC-R007-20260415-c84fbc"
     ],
     "infrastructure": [
       "EX003"
+    ],
+    "alice": [
+      "EXC-R001-20260414-54730e"
+    ],
+    "test": [
+      "EXC-R002-20260414-e92d07",
+      "EXC-R004-20260415-87a0d7",
+      "EXC-R007-20260415-51ac99"
     ]
   },
   "exceptions_by_rule": {
     "R007": [
       "EX001",
-      "EX004"
+      "EX004",
+      "EXC-R007-20260415-c84fbc",
+      "EXC-R007-20260415-51ac99"
     ],
     "R004": [
       "EX002",
-      "EX005"
+      "EXC-R004-20260415-87a0d7"
     ],
     "R006": [
       "EX003"
+    ],
+    "R001": [
+      "EXC-R001-20260414-54730e"
+    ],
+    "R002": [
+      "EXC-R002-20260414-e92d07"
     ]
   },
   "details": {
@@ -45,26 +61,25 @@
         "debt_level": "low",
         "debt_status": "healthy",
         "debt_reason": "正常生效"
-      }
-    ],
-    "stale": [
+      },
       {
-        "exception_id": "EX004",
+        "exception_id": "EXC-R007-20260415-c84fbc",
         "rule_id": "R007",
         "owner": "governance",
         "debt_level": "medium",
-        "debt_status": "stale",
-        "debt_reason": "距离过期仅剩 1 天"
+        "debt_status": "healthy",
+        "debt_reason": "正常生效"
       }
     ],
+    "stale": [],
     "overused": [
       {
-        "exception_id": "EX005",
-        "rule_id": "R004",
-        "owner": "architecture",
-        "debt_level": "high",
+        "exception_id": "EXC-R002-20260414-e92d07",
+        "rule_id": "R002",
+        "owner": "test",
+        "debt_level": "medium",
         "debt_status": "overused",
-        "debt_reason": "续期次数 2/2 已达上限"
+        "debt_reason": "续期次数 1/1 已达上限"
       }
     ],
     "expired": [
@@ -73,6 +88,30 @@
         "rule_id": "R004",
         "owner": "governance",
         "debt_level": "high",
+        "debt_status": "expired",
+        "debt_reason": "状态为 expired/revoked"
+      },
+      {
+        "exception_id": "EX004",
+        "rule_id": "R007",
+        "owner": "governance",
+        "debt_level": "medium",
+        "debt_status": "expired",
+        "debt_reason": "状态为 expired/revoked"
+      },
+      {
+        "exception_id": "EXC-R004-20260415-87a0d7",
+        "rule_id": "R004",
+        "owner": "test",
+        "debt_level": "medium",
+        "debt_status": "expired",
+        "debt_reason": "状态为 expired/revoked"
+      },
+      {
+        "exception_id": "EXC-R007-20260415-51ac99",
+        "rule_id": "R007",
+        "owner": "test",
+        "debt_level": "medium",
         "debt_status": "expired",
         "debt_reason": "状态为 expired/revoked"
       }

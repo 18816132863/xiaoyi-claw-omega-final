@@ -1,6 +1,6 @@
 {
-  "profile": "nightly",
-  "verified_at": "2026-04-15T08:05:43.114812",
+  "profile": "premerge",
+  "verified_at": "2026-04-16T07:35:19.106006",
   "overall_passed": true,
   "p0_count": 0,
   "local_status": "passed",

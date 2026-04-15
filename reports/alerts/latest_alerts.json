@@ -1,20 +1,6 @@
 {
-  "generated_at": "2026-04-13T21:55:00.000000",
-  "source_workflow": "nightly",
-  "profile": "nightly",
-  "triggered_at": "2026-04-13T21:55:00.000000",
-  "has_blocking_alerts": false,
-  "has_warning_alerts": false,
-  "total_alerts": 0,
   "blocking_count": 0,
   "warning_count": 0,
-  "alerts": [],
-  "blocked_reasons": [],
-  "strong_regressions": [],
-  "weak_regressions": [],
-  "skipped_external": [],
-  "source_reports": {},
-  "recommended_actions": [],
-  "incident_created": false,
-  "incident_resolved": true
+  "generated_at": "2026-04-15T00:00:00",
+  "alerts": []
 }

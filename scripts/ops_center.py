@@ -52,6 +52,38 @@ class OpsCenter:
     
     # ==================== Status ====================
     
+    def rules_status(self) -> Dict:
+        """规则状态"""
+        rule_report = load_json(self.reports_dir / "ops/rule_engine_report.json") or {}
+        return {
+            "status": "success",
+            "rules": rule_report
+        }
+    
+    def exceptions_status(self) -> Dict:
+        """例外状态"""
+        status = load_json(self.reports_dir / "ops/rule_exception_status.json") or {}
+        return {
+            "status": "success",
+            "exceptions": status
+        }
+    
+    def exceptions_debt(self) -> Dict:
+        """例外债务"""
+        debt = load_json(self.reports_dir / "ops/rule_exception_debt.json") or {}
+        return {
+            "status": "success",
+            "debt": debt
+        }
+    
+    def exceptions_approvals(self) -> Dict:
+        """例外审批"""
+        queue = load_json(self.reports_dir / "ops/exception_approval_queue.json") or {}
+        return {
+            "status": "success",
+            "queue": queue
+        }
+    
     def get_state(self) -> Dict:
         """获取统一状态"""
         # 加载各报告
@@ -528,6 +560,10 @@ def main():
         print("  approval list             - 列出待审批项")
         print("  approval grant <id> <owner> - 批准")
         print("  approval deny <id> <owner> <reason> - 拒绝")
+        print("  rules status              - 规则状态")
+        print("  exceptions status         - 例外状态")
+        print("  exceptions debt           - 例外债务")
+        print("  exceptions approvals      - 例外审批")
         return 0
 
     root = get_project_root()
@@ -578,6 +614,22 @@ def main():
     elif command == "approval":
         # 审批命令
         return ops.cmd_approval(args)
+    elif command == "rules":
+        # 规则状态
+        result = ops.rules_status()
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    elif command == "exceptions":
+        # 例外状态
+        subcmd = args[0] if args else "status"
+        if subcmd == "status":
+            result = ops.exceptions_status()
+        elif subcmd == "debt":
+            result = ops.exceptions_debt()
+        elif subcmd == "approvals":
+            result = ops.exceptions_approvals()
+        else:
+            result = ops.exceptions_status()
+        print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
         print(f"未知命令: {command}")
 

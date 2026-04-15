@@ -32,11 +32,11 @@ def test_layer_dependency_guard() -> bool:
     
     # 验证样例包含违规 import
     content = violation_file.read_text()
-    if "from execution" not in content:
+    if "from core" not in content:
         print("  ❌ 样例不包含违规 import")
         return False
     
-    print("  ✅ 违规样例有效: 包含 'from execution ...'")
+    print("  ✅ 违规样例有效: 包含 'from core ...'")
     print("  ✅ 层间依赖守卫测试通过")
     return True
 

@@ -1,0 +1,46 @@
+{
+  "current_profile": "nightly",
+  "executed_commands": [
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/infrastructure/verify_runtime_integrity.py --profile nightly --report-json reports/runtime_integrity.json",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T02:53:18.441404"
+    },
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/governance/quality_gate.py --profile nightly --report-json reports/quality_gate.json",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T02:53:18.667410"
+    },
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/scripts/check_repo_integrity.py --strict",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T02:53:23.308701"
+    },
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/scripts/check_layer_dependencies.py",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T02:53:23.604661"
+    },
+    {
+      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/scripts/check_json_contracts.py",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-16T02:53:25.393147"
+    }
+  ],
+  "executed_rule_checks": {
+    "layer_dependency": true,
+    "json_contract": true
+  },
+  "executed_gate_checks": {
+    "runtime": true,
+    "quality": true
+  },
+  "engine_failed": false,
+  "blocking_failures": [],
+  "timestamp": "2026-04-16T02:53:25.393594"
+}

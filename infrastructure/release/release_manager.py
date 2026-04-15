@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-发布管理器 - V1.0.0
+发布管理器 - V1.1.0
 
 管理发布流程，确保门禁通过后才能发布
+V1.1.0 新增：发布证据包打包
 """
 
 import os
 import json
+import zipfile
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional
@@ -255,6 +257,63 @@ def print_gate_status(gate: Dict):
     print("══════════════════════════════════════════════════")
 
 
+def build_release_evidence_bundle() -> Dict:
+    """构建发布证据包"""
+    root = get_project_root()
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    bundle_dir = root / "reports/bundles"
+    bundle_dir.mkdir(parents=True, exist_ok=True)
+    
+    bundle_path = bundle_dir / f"release_evidence_{timestamp}.zip"
+    
+    # 证据文件列表
+    evidence_files = [
+        "reports/runtime_integrity.json",
+        "reports/quality_gate.json",
+        "reports/release_gate.json",
+        "reports/ops/rule_engine_report.json",
+        "reports/ops/rule_execution_index.json",
+        "reports/ops/rule_registry_snapshot.json",
+        "reports/ops/rule_exception_status.json",
+        "reports/ops/rule_exception_debt.json",
+        "reports/ops/rule_exception_history.json",
+        "reports/ops/control_plane_state.json",
+        "reports/ops/control_plane_audit.json",
+        "reports/ops/exception_approval_queue.json",
+    ]
+    
+    included = []
+    missing = []
+    
+    with zipfile.ZipFile(bundle_path, 'w', zipfile.ZIP_DEFLATED) as zf:
+        for file_path in evidence_files:
+            full_path = root / file_path
+            if full_path.exists():
+                zf.write(full_path, file_path)
+                included.append(file_path)
+            else:
+                missing.append(file_path)
+        
+        # 添加清单
+        manifest = {
+            "generated_at": datetime.now().isoformat(),
+            "bundle_path": str(bundle_path),
+            "included": included,
+            "missing": missing,
+            "total_files": len(included)
+        }
+        zf.writestr("manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2))
+    
+    return {
+        "status": "success",
+        "bundle_path": str(bundle_path),
+        "included_count": len(included),
+        "missing_count": len(missing),
+        "included": included,
+        "missing": missing
+    }
+
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="发布管理器")
@@ -262,7 +321,14 @@ if __name__ == "__main__":
     parser.add_argument("--report-json", help="JSON 报告输出路径")
     parser.add_argument("--release", type=str, help="创建发布 (版本号)")
     parser.add_argument("--notes", type=str, default="", help="发布说明")
+    parser.add_argument("--bundle", action="store_true", help="构建发布证据包")
     args = parser.parse_args()
+    
+    if args.bundle:
+        result = build_release_evidence_bundle()
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        import sys
+        sys.exit(0 if result["status"] == "success" else 1)
     
     if args.release:
         result = create_release(args.release, args.notes)

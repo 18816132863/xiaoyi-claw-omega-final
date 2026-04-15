@@ -207,7 +207,7 @@ def run_integration_tests() -> Dict:
         except Exception as e:
             results.append({"skill": skill_name, "status": "error", "message": str(e)[:100]})
     
-    pass_count = sum(1 for r in results if r["status"] == "pass")
+    pass_count = sum(1 for r in results if r["status"] == "passed")
     return {
         "status": "passed" if pass_count == len(results) else "failed",
         "results": results,
@@ -344,6 +344,11 @@ def run_profile(profile: str, report_path: str = None) -> Dict:
     if report_path:
         Path(report_path).parent.mkdir(parents=True, exist_ok=True)
         with open(report_path, 'w', encoding='utf-8') as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+        
+        # 保存 profile 专属快照
+        profile_report_path = str(report_path).replace(".json", f"_{profile}.json")
+        with open(profile_report_path, 'w', encoding='utf-8') as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
     
     # 保存历史快照

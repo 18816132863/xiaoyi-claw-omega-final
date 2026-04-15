@@ -1,71 +1,640 @@
 {
   "profile": "release",
   "scope": "all",
-  "verified_at": "2026-04-12T16:35:41.789062",
+  "verified_at": "2026-04-16T02:53:46.567383",
   "overall_passed": true,
   "failure_reasons": [],
   "p0_count": 0,
   "p1_count": 0,
-  "p2_count": 27,
-  "local_status": "pass",
+  "p2_count": 207,
+  "local_status": "passed",
   "local_results": [
     {
       "skill": "docx",
-      "status": "pass",
+      "status": "passed",
       "message": ""
     },
     {
-      "skill": "cron",
-      "status": "pass",
+      "skill": "excel-analysis",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "agent-chronicle",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "xiaoyi-xlsx",
+      "status": "passed",
       "message": ""
     },
     {
       "skill": "pdf",
-      "status": "pass",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "git",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "data-analysis",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "article-writer",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "obsidian",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "xiaoyi-doc-convert",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "cron",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "copywriter",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "find-skills",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "brainstorming",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "xiaoyi-ppt",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "pptx",
+      "status": "passed",
       "message": ""
     }
   ],
-  "integration_status": "pass",
+  "integration_status": "passed",
   "integration_results": [
     {
       "skill": "file-manager",
-      "status": "pass",
+      "status": "passed",
       "message": ""
     }
   ],
-  "external_status": "pass",
+  "external_status": "failed",
   "external_results": [
     {
-      "skill": "find-skills",
-      "status": "skipped",
-      "message": "缺少: ['SKILLHUB_TOKEN']"
+      "skill": "movie-producer-scene",
+      "status": "passed",
+      "message": ""
     },
     {
-      "skill": "huawei-drive",
-      "status": "skipped",
-      "message": "缺少: ['HUAWEI_DRIVE_TOKEN']"
+      "skill": "video-agent",
+      "status": "passed",
+      "message": ""
     },
     {
-      "skill": "xiaoyi-image-understanding",
-      "status": "skipped",
-      "message": "缺少: ['XIAOYI_TOKEN']"
+      "skill": "shubhamsaboo-awesome-llm-apps-ux-designer",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "openclaw-agent-optimize",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "canvas-design",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "calcom-cal.com-web-design-guidelines-1.0.2",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "omni-channel-ecommerce",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "kuaishou-shop-operation",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "market-research",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "openai-whisper-api",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "agent_reach",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "aiskillstore-marketplace-test-case-generator",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "minimax-music-gen",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "deep-search-and-insight-synthesize",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "bytedance-deer-flow-vercel-deploy-claimable",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "openclaw-skills-video-script-creator",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "scrapling-official",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "qq-clawbot-setup",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "clawdhub",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "weather",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "amazing129-skills-mbti-for-agents",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "imap-smtp-email",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "claw-art",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "command-center",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "marketing-strategy-pmm",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "baoyu-comic",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "dingtalk-ai-table",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "xiaohongshu-all-in-one",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "docker",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "Humanizer-zh-main",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "tc-chengxin",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "cn-web-search",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "camsnap",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "tts",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "best-minds",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "verified-agent-identity",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "product-manager",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "supply-chain-management",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "keyword-research",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "mongodb",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "product-management",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "discord",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "educational-video-creator",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "affaan-m-everything-claude-code-article-writing",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "agent-browser-clawdbot",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "voice-synthesis",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "skill-install-manager-1-0-0",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "self-improving-agent",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "t-trading",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "didi-ride-skill",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "video-cog",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "audio-cog",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "arxiv-search",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "pexoai-agent",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "baidu-netdisk-skills",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "daily-hot-news",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "douyin-shop-operation",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "xiaoyi-HarmonyOSSmartHome-skill",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "customer-service",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "ocr-local",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "marketing-campaign",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "xiaoyi-web-search",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "chart-image",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "skill-finder",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "screenshot",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "linkedin-api",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "xiao-gui-agent",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "flyai-travel",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "image",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "hunyuan-image",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "research-cog",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "xiaoyi-image-search",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "elasticsearch",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "mysql",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "weibo-clawbot-setup",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "llm-memory-integration",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "marketing-ideas",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "weixin-clawbot-setup",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "tavily-search-skill",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "moltrade",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "openclaw-skills-agent-builder-1.0.3",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "platform-comparison",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "openmaic",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "productivity",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "multi-search-engine",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "web-search-exa",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "feishu-channel-skill",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "remotion-video-toolkit",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "hz-proactive-agent",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "bilibili-all-in-one",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "moltguard",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "google-maps",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "read-arxiv-paper",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "meitu-skills",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "imsg",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "crypto",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "qcc-agent-skill",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "feiskyer-claude-code-settings-deep-research",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "unified-image",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "web-scraper",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "creative-thought-partner",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "image-gen",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "bytesagain-ai-skills-meme-generator",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "axton-obsidian-visual-skills-excalidraw-diagram",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "spotify-player",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "klaviyo",
+      "status": "passed",
+      "message": ""
+    },
+    {
+      "skill": "su-lan-paper-daily-skill",
+      "status": "passed",
+      "message": ""
     }
   ],
-  "skipped_skills": [
-    {
-      "skill": "find-skills",
-      "status": "skipped",
-      "message": "缺少: ['SKILLHUB_TOKEN']"
-    },
-    {
-      "skill": "huawei-drive",
-      "status": "skipped",
-      "message": "缺少: ['HUAWEI_DRIVE_TOKEN']"
-    },
-    {
-      "skill": "xiaoyi-image-understanding",
-      "status": "skipped",
-      "message": "缺少: ['XIAOYI_TOKEN']"
-    }
-  ]
+  "skipped_skills": []
 }

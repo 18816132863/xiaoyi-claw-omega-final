@@ -1,3 +1,8 @@
+---
+name: qcc-agent-skill
+description: qcc-agent-skill 技能模块
+---
+
 # QCC Agent CLI - 企查查智能体数据平台
 
 企业信息查询 CLI 工具，提供 65 项工具，覆盖企业工商、风险、知识产权、经营信息。

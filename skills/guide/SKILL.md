@@ -1,3 +1,8 @@
+---
+name: guide
+description: guide 技能模块
+---
+
 # 引导技能
 
 ## 功能说明

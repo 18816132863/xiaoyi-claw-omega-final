@@ -1,3 +1,8 @@
+---
+name: local_app_interconnect
+description: local_app_interconnect 技能模块
+---
+
 # Search-Phone Interconnect Skill
 
 ## 目的

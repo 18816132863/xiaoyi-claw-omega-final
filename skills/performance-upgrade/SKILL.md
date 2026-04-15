@@ -1,3 +1,8 @@
+---
+name: performance-upgrade
+description: performance-upgrade 技能模块
+---
+
 # Performance Upgrade - 性能升级
 
 ## 简介

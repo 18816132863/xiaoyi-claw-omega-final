@@ -1,3 +1,8 @@
+---
+name: auto-skill-upgrade
+description: auto-skill-upgrade 技能模块
+---
+
 # Auto Skill Upgrade - 自动技能升级系统
 
 ## 版本信息

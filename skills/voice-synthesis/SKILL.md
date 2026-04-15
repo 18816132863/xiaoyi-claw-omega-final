@@ -1,3 +1,8 @@
+---
+name: voice-synthesis
+description: voice-synthesis 技能模块
+---
+
 # Voice Synthesis Skill
 
 语音合成技能，使用 edge-tts 生成语音，支持转换为飞书原生格式。

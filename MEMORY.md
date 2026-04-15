@@ -112,7 +112,16 @@
 ### 技能测试配置
 - 核心技能添加 `testable`, `test_mode`, `smoke_test` 配置
 - 创建测试固件目录 `tests/fixtures/`
-- 可测试技能从 29.1% 提升至 31.6%
+- 可测试技能从 29.1% 提升至 35.6%
+- 冒烟测试从 0% 提升至 5.8%
+
+### 技能依赖配置
+- 21 个核心技能添加 `dependencies` 字段
+- 支持依赖检查和自动安装
+
+### 技能超时配置
+- 15 个技能添加自定义超时配置
+- 超时范围: 30s - 180s
 
 ### 目录结构说明
 - 添加 `memory_context/README.md` 明确 memory 与 memory_context 职责
@@ -121,6 +130,20 @@
 ### 报告清理自动化
 - 创建 `scripts/cleanup_reports.py` 自动清理脚本
 - 支持按模式、按年龄清理和压缩
+
+### 技能健康检查
+- 创建 `scripts/skill_health_check.py` 健康检查脚本
+- 检查 SKILL.md、skill.py、注册表配置、依赖配置
+- 严重问题: 0, 警告: 43, 信息: 208
+
+### 文档完善
+- 创建 `MAINTENANCE_GUIDE.md` 维护指南
+- 创建 `CONTRIBUTING.md` 贡献指南
+- 修复断裂链接
+
+### 版本一致性
+- 统一版本号为 V7.0.0
+- 更新 skill_registry.json 版本
 
 ### 门禁状态
 - ✅ JSON 契约检查通过

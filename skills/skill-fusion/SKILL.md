@@ -1,3 +1,8 @@
+---
+name: skill-fusion
+description: skill-fusion 技能模块
+---
+
 # 技能融合能力
 
 ## 基本信息

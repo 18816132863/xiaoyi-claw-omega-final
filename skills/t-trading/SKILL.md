@@ -1,3 +1,8 @@
+---
+name: t-trading
+description: t-trading 技能模块
+---
+
 # SKILL: 维加斯通道多维时空共振体系
 
 ## 元信息

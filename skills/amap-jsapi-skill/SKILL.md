@@ -1,3 +1,8 @@
+---
+name: amap-jsapi-skill
+description: amap-jsapi-skill 技能模块
+---
+
 | 属性 | 值 |
 | --- | --- |
 | **name** | amap-jsapi-skill |

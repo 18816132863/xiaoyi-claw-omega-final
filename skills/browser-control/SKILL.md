@@ -1,3 +1,8 @@
+---
+name: browser-control
+description: browser-control 技能模块
+---
+
 # Browser Control Skill
 
 浏览器自动化控制技能，支持启动浏览器、打开页面、截图、点击、输入等操作。

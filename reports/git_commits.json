@@ -1264,6 +1264,23 @@
         "deleted": [],
         "renamed": []
       }
+    },
+    {
+      "hash": "5ec5ec23",
+      "message": "架构巡检: 5/6 通过, 246 文件",
+      "timestamp": "2026-04-15T08:22:14.640658",
+      "changes": {
+        "modified": [
+          "infrastructure/inventory/skill_registry.json",
+          "reports/git_commits.json",
+          "scripts/skill_health_check.py"
+        ],
+        "added": [],
+        "deleted": [
+          "rchive/deprecated/skills-inventory.json"
+        ],
+        "renamed": []
+      }
     }
   ]
 }

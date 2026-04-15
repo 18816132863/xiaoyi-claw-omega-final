@@ -1,3 +1,8 @@
+---
+name: backup-cleaner
+description: backup-cleaner 技能模块
+---
+
 # backup-cleaner
 
 自动清理 OpenClaw 工作空间中的老旧备份文件，释放磁盘空间。

@@ -104,6 +104,24 @@
 - `skill_adapter_gateway.py`: 支持 `skill_md` 执行器类型
 - 正确处理 SKILL.md 文档型技能
 
+### 技能分类完善
+- 创建 `scripts/auto_classify_skills.py` 自动分类脚本
+- 未分类技能从 46.9% 降至 11.3%
+- 已分类技能达 88.7%
+
+### 技能测试配置
+- 核心技能添加 `testable`, `test_mode`, `smoke_test` 配置
+- 创建测试固件目录 `tests/fixtures/`
+- 可测试技能从 29.1% 提升至 31.6%
+
+### 目录结构说明
+- 添加 `memory_context/README.md` 明确 memory 与 memory_context 职责
+- memory/ 存储会话数据，memory_context/ 存储策略文档
+
+### 报告清理自动化
+- 创建 `scripts/cleanup_reports.py` 自动清理脚本
+- 支持按模式、按年龄清理和压缩
+
 ### 门禁状态
 - ✅ JSON 契约检查通过
 - ✅ 唯一真源检查通过

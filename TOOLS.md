@@ -156,3 +156,43 @@ tar -czvf backup.tar.gz \
 - `safety/TOOL_GUARDRAILS.json` - 工具护栏配置
 - `runtime/EXECUTION_POLICY.md` - 执行策略
 - `runtime/SKILL_ROUTER.json` - 技能路由
+
+## V7.1.0 新增工具
+
+### 认知工具
+| 工具 | 功能 |
+|------|------|
+| ReasoningEngine | 推理引擎，支持6种推理模式 |
+| DecisionMaker | 决策系统，支持3种决策方法 |
+| PlanningEngine | 规划引擎，任务分解与执行 |
+| ReflectionSystem | 反思系统，自我评估与改进 |
+| LearningSystem | 学习系统，知识积累与迁移 |
+
+### 恢复工具
+| 工具 | 功能 |
+|------|------|
+| StateRecovery | 状态恢复，恢复点管理 |
+| FaultRecovery | 故障恢复，故障检测与处理 |
+| RollbackManager | 回滚管理，变更回滚 |
+
+### 审查工具
+| 工具 | 功能 |
+|------|------|
+| ChangeReviewer | 变更审查，风险评级 |
+| DecisionReviewer | 决策审查，推理质量评估 |
+| ComplianceReviewer | 合规审查，规则检查 |
+
+### 规则工具
+| 工具 | 功能 |
+|------|------|
+| RuleEngine | 规则引擎，规则执行 |
+| RuleMonitor | 规则监控，执行统计 |
+| RuleLifecycle | 规则生命周期，版本管理 |
+
+### 自动化工具
+| 工具 | 功能 |
+|------|------|
+| TaskAutomator | 任务自动化器，队列管理 |
+| EventTrigger | 事件触发器，事件驱动 |
+| SmartScheduler | 智能调度器，周期调度 |
+| PipelineExecutor | 流水线执行器，阶段管理 |

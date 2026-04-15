@@ -195,3 +195,21 @@ python scripts/run_release_gate.py release
 ---
 
 **版本**: V5.0.0 | 规则平台化 + 变更影响强制门禁 + 技能安全识别
+
+## V7.1.0 新增模块
+
+### L1 Core 扩展
+- `core/cognition/` - 认知系统
+  - 推理引擎、决策系统、规划引擎、反思系统、学习系统
+
+### L5 Governance 扩展
+- `governance/recovery/` - 恢复性模块
+  - 状态恢复、故障恢复、回滚管理
+- `governance/review/` - 审查性模块
+  - 变更审查、决策审查、合规审查
+- `governance/rules/` - 规则管控模块
+  - 规则引擎、规则监控、规则生命周期
+
+### L6 Infrastructure 扩展
+- `infrastructure/automation/` - 自动化模块
+  - 任务自动化器、事件触发器、智能调度器、流水线执行器

@@ -187,3 +187,42 @@
 - Token 等敏感信息不要写入文件
 - 规则检查失败会阻断门禁
 - 4096 维 Embedding 已是业界最高
+
+## V7.1.0 融合更新
+
+### 认知系统 (core/cognition/)
+- `reasoning.py` - 推理引擎（6种推理模式）
+- `decision.py` - 决策系统（3种决策方法）
+- `planning.py` - 规划引擎（任务分解与执行）
+- `reflection.py` - 反思系统（自我评估与改进）
+- `learning.py` - 学习系统（知识积累与迁移）
+
+### 恢复性模块 (governance/recovery/)
+- `state_recovery.py` - 状态恢复（恢复点管理）
+- `fault_recovery.py` - 故障恢复（故障检测与处理）
+- `rollback_manager.py` - 回滚管理（变更回滚）
+
+### 审查性模块 (governance/review/)
+- `change_review.py` - 变更审查（风险评级）
+- `decision_review.py` - 决策审查（推理质量评估）
+- `compliance_review.py` - 合规审查（规则检查）
+
+### 规则管控模块 (governance/rules/)
+- `rule_engine.py` - 规则引擎（规则执行）
+- `rule_monitor.py` - 规则监控（执行统计）
+- `rule_lifecycle.py` - 规则生命周期（版本管理）
+
+### 自动化模块 (infrastructure/automation/)
+- `task_automator.py` - 任务自动化器
+- `event_trigger.py` - 事件触发器
+- `smart_scheduler.py` - 智能调度器
+- `pipeline_executor.py` - 流水线执行器
+
+### 能力提升汇总
+| 能力 | 模块数 | 状态 |
+|------|--------|------|
+| 认知能力 | 5 | ✅ |
+| 恢复性 | 3 | ✅ |
+| 审查性 | 3 | ✅ |
+| 规则管控 | 3 | ✅ |
+| 自动化 | 4 | ✅ |

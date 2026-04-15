@@ -4,40 +4,86 @@ __pycache__/
 *$py.class
 *.so
 .Python
-*.egg-info/
-dist/
 build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Node
-node_modules/
-npm-debug.log
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Linting
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log
+
+# Cache
+cache/
+.cache/
+
+# Backup
+*.bak
+*.backup
+*.tar.gz
+*.zip
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-logs/
+# Project specific
+.openclaw/backup/
+.openclaw/browser/
+.openclaw/npm-cache/
+*.jsonl.reset.*
+*.jsonl.deleted.*
 
-# Temp
-tmp/
-temp/
-*.tmp
-
-# Large files
-repo/
-*.tar.gz
-*.zip
+# Reports (keep structure)
+reports/inspection_*.json
+reports/history/
+reports/archive/
 
 # Secrets
 .env
-*.env
-*.bak
+.env.local
+*.pem
+*.key
 secrets/

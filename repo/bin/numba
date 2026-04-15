@@ -1,0 +1,8 @@
+#!/home/slave1/.conanbuild/.conan/data/Python/v3.12.10-h7.b2/ccs.WiseFunction.WiseFunctionService.python/release/package/8abf6d2587d6464c2379b8df7af1c48f097cf95d/bin/python3.12
+# -*- coding: UTF-8 -*-
+from __future__ import print_function, division, absolute_import
+
+from numba.misc.numba_entry import main
+
+if __name__ == "__main__":
+    main()

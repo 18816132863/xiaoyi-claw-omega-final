@@ -426,8 +426,8 @@ class WorkflowEngine:
             try:
                 return self.skill_router.execute(action, step_input)
             except Exception as e:
-                # 技能路由失败，继续检查是否允许默认行为
-                pass
+                # 保留原始错误语义，不要吞掉
+                raise RuntimeError(f"skill_router_error:{e}")
         
         # 3. 只允许显式测试动作（test/noop/mock）走默认成功
         if action.lower() in ["test", "noop", "mock"]:

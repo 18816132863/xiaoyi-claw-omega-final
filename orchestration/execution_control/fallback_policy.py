@@ -162,6 +162,19 @@ class FallbackPolicy:
         """推断错误类型"""
         error_lower = error.lower()
         
+        # 支持下划线格式
+        if "skill_not_found" in error_lower:
+            return "skill_not_found"
+        if "skill_disabled" in error_lower:
+            return "skill_disabled"
+        if "skill_deprecated" in error_lower:
+            return "skill_deprecated"
+        if "budget_exceeded" in error_lower:
+            return "budget_exceeded"
+        if "permission_denied" in error_lower:
+            return "permission_denied"
+        
+        # 支持空格格式
         if "timeout" in error_lower:
             return "timeout"
         if "network" in error_lower or "connection" in error_lower:
@@ -174,6 +187,10 @@ class FallbackPolicy:
             return "budget_exceeded"
         if "validation" in error_lower or "invalid" in error_lower:
             return "validation_error"
+        if "disabled" in error_lower:
+            return "skill_disabled"
+        if "deprecated" in error_lower:
+            return "skill_deprecated"
         
         return "unknown"
     

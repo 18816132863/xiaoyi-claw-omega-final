@@ -39,9 +39,38 @@ class SkillRouter:
     - 参考 metrics 做决策
     """
     
-    def __init__(self, registry: SkillRegistry):
+    def __init__(self, registry: SkillRegistry, metrics_path: str = "reports/metrics/skill_metrics.json"):
         self.registry = registry
         self._skill_metrics: Dict[str, Dict[str, Any]] = {}
+        self._metrics_path = metrics_path
+        self._metrics_mtime: float = 0
+        
+        # 自动加载 metrics
+        self._auto_load_metrics()
+    
+    def _auto_load_metrics(self):
+        """自动加载 metrics"""
+        import os
+        
+        if os.path.exists(self._metrics_path):
+            try:
+                self._metrics_mtime = os.path.getmtime(self._metrics_path)
+                self.load_metrics(self._metrics_path)
+            except:
+                pass
+    
+    def _check_metrics_reload(self):
+        """检查并重新加载 metrics"""
+        import os
+        
+        if os.path.exists(self._metrics_path):
+            try:
+                mtime = os.path.getmtime(self._metrics_path)
+                if mtime > self._metrics_mtime:
+                    self._metrics_mtime = mtime
+                    self.load_metrics(self._metrics_path)
+            except:
+                pass
     
     def load_metrics(self, metrics_path: str = "reports/metrics/skill_metrics.json"):
         """加载技能指标"""
@@ -98,6 +127,12 @@ class SkillRouter:
             选择结果
         """
         constraints = constraints or {}
+        
+        # 检查并重新加载 metrics
+        self._check_metrics_reload()
+        
+        # 重新加载 registry 以获取最新状态
+        self.registry.reload()
         governance_decision = governance_decision or {}
         
         # 重新加载 registry 以获取最新状态

@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SkillManifest",
+  "type": "object",
+  "required": ["skill_id", "name", "version", "description", "category", "executor_type"],
+  "properties": {
+    "skill_id": {
+      "type": "string",
+      "description": "Unique skill identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable skill name"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version (e.g., 1.0.0)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Skill description"
+    },
+    "category": {
+      "enum": ["ai", "search", "image", "document", "video", "finance", "code", "ecommerce", "data", "memory", "audio", "automation", "communication", "utility", "other"],
+      "description": "Skill category"
+    },
+    "status": {
+      "enum": ["experimental", "beta", "stable", "deprecated", "retired"],
+      "default": "stable",
+      "description": "Skill lifecycle status"
+    },
+    "executor_type": {
+      "enum": ["skill_md", "python", "http", "subprocess"],
+      "description": "How to execute this skill"
+    },
+    "entry_point": {
+      "type": "string",
+      "description": "Entry point (file path or function reference)"
+    },
+    "timeout_seconds": {
+      "type": "integer",
+      "default": 60,
+      "minimum": 1,
+      "maximum": 1800
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Required skill IDs"
+    },
+    "required_permissions": {
+      "type": "array",
+      "items": {"enum": ["read", "write", "execute", "network", "admin"]},
+      "default": []
+    },
+    "input_contract": {
+      "type": "object",
+      "description": "Expected input schema"
+    },
+    "output_contract": {
+      "type": "object",
+      "description": "Expected output schema"
+    },
+    "risk_level": {
+      "enum": ["low", "medium", "high", "critical"],
+      "default": "low"
+    },
+    "cost_profile": {
+      "type": "object",
+      "properties": {
+        "avg_tokens": {"type": "integer"},
+        "avg_latency_ms": {"type": "integer"},
+        "requires_network": {"type": "boolean", "default": false}
+      }
+    },
+    "compatible_profiles": {
+      "type": "array",
+      "items": {"type": "string"},
+      "default": ["default"],
+      "description": "Compatible execution profiles"
+    },
+    "tags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "default": []
+    },
+    "author": {
+      "type": "string",
+      "default": ""
+    },
+    "metadata": {
+      "type": "object",
+      "default": {}
+    }
+  }
+}

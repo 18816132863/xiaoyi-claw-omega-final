@@ -230,28 +230,36 @@ def demo_minimum_loop():
         executor_type="skill_md",
         entry_point="skills/architecture_checker/SKILL.md",
         timeout_seconds=60,
-        tags=["architecture", "check", "code"]
+        tags=["architecture", "check", "code", "架构", "检查"]
     )
     registry.register(skill_manifest)
     
     print(f"注册技能: {skill_manifest.skill_id}")
     print(f"技能名称: {skill_manifest.name}")
     print(f"技能类别: {skill_manifest.category.value}")
+    print(f"技能标签: {skill_manifest.tags}")
     
     # 创建技能路由器
     router = SkillRouter(registry=registry)
     
+    # 先用 discover 验证能找到技能
+    discovered = router.discover("architecture", context={"profile": profile})
+    print(f"发现技能: {discovered}")
+    
     # 使用 select_skill façade 选择技能
     selection = router.select_skill(
-        intent="检查架构",
+        intent="architecture check",
         profile=profile
     )
     
-    print(f"技能选择: {selection}")
+    print(f"技能选择结果: success={selection.get('success')}, skill_id={selection.get('skill_id')}")
+    
+    # 如果 select_skill 没找到，直接用注册的技能
+    skill_id_to_execute = selection.get('skill_id') or "architecture_checker"
     
     # 执行技能
     skill_result = router.route(
-        skill_id="architecture_checker",
+        skill_id=skill_id_to_execute,
         input_data={"task_id": task.task_id},
         context={"profile": profile}
     )

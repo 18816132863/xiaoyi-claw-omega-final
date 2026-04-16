@@ -317,16 +317,9 @@ class WorkflowEngine:
                 # 技能路由失败，继续检查是否允许默认行为
                 pass
         
-        # 3. 检查是否是测试/模拟动作（允许默认通过）
-        allowed_test_actions = [
-            "test", "noop", "mock", "prepare_context", 
-            "check_architecture_integrity", "generate_report",
-            "prepare", "build", "deploy"
-        ]
-        
-        action_lower = action.lower()
-        if any(allowed in action_lower for allowed in allowed_test_actions):
-            # 测试动作允许默认成功
+        # 3. 只允许显式测试动作（test/noop/mock）走默认成功
+        # 其他动作必须通过 handler 或 skill_router 真实执行
+        if action.lower() in ["test", "noop", "mock"]:
             return {
                 "executed": True,
                 "action": action,

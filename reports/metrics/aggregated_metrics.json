@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-16T12:36:02.973578",
+  "timestamp": "2026-04-16T12:36:34.569445",
   "summary": {
     "task_success_rate": 0.7,
     "skill_failure_rate": 0.2,
@@ -12,7 +12,7 @@
     "failed": 3,
     "success_rate": 0.7,
     "avg_duration_ms": 139.0,
-    "timestamp": "2026-04-16T12:36:02.970593",
+    "timestamp": "2026-04-16T12:36:34.567244",
     "details": {
       "error_types": {
         "timeout": 1,
@@ -29,7 +29,7 @@
       "avg_latency_ms": 63.0,
       "max_latency_ms": 120,
       "failure_rate": 0.2,
-      "timestamp": "2026-04-16T12:36:02.971342",
+      "timestamp": "2026-04-16T12:36:34.567870",
       "details": {
         "error_types": {
           "timeout": 1,
@@ -73,7 +73,7 @@
     "avg_token_usage": 123.75,
     "avg_source_count": 2.125,
     "avg_latency_ms": 0.0,
-    "timestamp": "2026-04-16T12:36:02.972179",
+    "timestamp": "2026-04-16T12:36:34.568377",
     "details": {
       "source_distribution": {
         "3_sources": 3,

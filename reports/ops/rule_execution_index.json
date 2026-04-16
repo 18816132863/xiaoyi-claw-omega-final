@@ -29,7 +29,7 @@
       "rule_id": "R003",
       "status": "active",
       "owner": "architecture",
-      "passed": true,
+      "passed": false,
       "blocking": true,
       "skipped": false,
       "skip_reason": null,
@@ -112,8 +112,8 @@
   ],
   "summary": {
     "total": 8,
-    "passed": 7,
-    "failed": 0,
+    "passed": 6,
+    "failed": 1,
     "warnings": 0,
     "skipped": 1,
     "waived": 1
@@ -182,5 +182,5 @@
       "high_debt_count": 0
     }
   },
-  "timestamp": "2026-04-16T07:59:55.806546"
+  "timestamp": "2026-04-16T12:36:34.301400"
 }

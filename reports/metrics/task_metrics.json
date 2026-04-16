@@ -4,7 +4,7 @@
   "failed": 3,
   "success_rate": 0.7,
   "avg_duration_ms": 139.0,
-  "timestamp": "2026-04-16T12:36:02.970593",
+  "timestamp": "2026-04-16T12:36:34.567244",
   "details": {
     "error_types": {
       "timeout": 1,

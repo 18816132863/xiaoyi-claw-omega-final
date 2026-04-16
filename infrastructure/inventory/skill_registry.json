@@ -5,7 +5,7 @@
       "skill_id": "architecture_checker",
       "name": "Architecture Checker",
       "version": "1.0.0",
-      "description": "\u68c0\u67e5\u9879\u76ee\u67b6\u6784\u5b8c\u6574\u6027",
+      "description": "检查项目架构完整性",
       "category": "code",
       "status": "active",
       "author": "",
@@ -26,7 +26,7 @@
       "skill_id": "test_skill",
       "name": "Test Skill",
       "version": "1.0.0",
-      "description": "\u6d4b\u8bd5\u6280\u80fd",
+      "description": "测试技能",
       "category": "utility",
       "status": "active",
       "author": "",
@@ -42,6 +42,42 @@
       "created_at": "2026-04-16T08:12:45.881758",
       "updated_at": "2026-04-16T08:12:45.881760",
       "metadata": {}
+    },
+    {
+      "skill_id": "llm-memory-integration",
+      "name": "LLM Memory Integration",
+      "version": "5.1.5",
+      "description": "LLM + 向量模型集成方案，支持混合检索、智能路由、渐进式启用",
+      "category": "memory",
+      "status": "active",
+      "author": "xkzs2007",
+      "tags": [
+        "llm",
+        "embedding",
+        "vector",
+        "memory",
+        "search"
+      ],
+      "executor_type": "skill_md",
+      "entry_point": "skills/llm-memory-integration/SKILL.md",
+      "timeout_seconds": 60,
+      "dependencies": [
+        "pysqlite3-binary",
+        "aiosqlite"
+      ],
+      "required_skills": [],
+      "required_permissions": [
+        "EMBEDDING_API_KEY"
+      ],
+      "input_contract": {},
+      "output_contract": {},
+      "created_at": "2026-04-16T13:12:29.396359",
+      "updated_at": "2026-04-16T13:12:29.396375",
+      "metadata": {
+        "homepage": "https://clawhub.ai/skill/llm-memory-integration",
+        "core_modules": 32,
+        "size": "2.2M"
+      }
     }
   ]
 }

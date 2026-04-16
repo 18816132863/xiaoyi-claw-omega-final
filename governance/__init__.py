@@ -6,9 +6,14 @@ from .control_plane.policy_engine import (
 from .budget.budget_manager import (
     BudgetManager, Budget, ResourceType, BudgetPeriod
 )
+from .budget.token_budget_manager import TokenBudgetManager
+from .budget.cost_budget_manager import CostBudgetManager
 from .risk.risk_manager import (
     RiskManager, RiskAssessment, RiskLevel, RiskCategory
 )
+from .risk.risk_classifier import RiskClassifier
+from .risk.high_risk_guard import HighRiskGuard, GuardAction, GuardDecision
+from .permissions.permission_engine import PermissionEngine, Permission, PermissionCheck
 from .degradation.degradation_manager import (
     DegradationManager, DegradationLevel, DegradationTrigger, KillSwitch
 )
@@ -25,10 +30,19 @@ __all__ = [
     "Budget",
     "ResourceType",
     "BudgetPeriod",
+    "TokenBudgetManager",
+    "CostBudgetManager",
     "RiskManager",
     "RiskAssessment",
     "RiskLevel",
     "RiskCategory",
+    "RiskClassifier",
+    "HighRiskGuard",
+    "GuardAction",
+    "GuardDecision",
+    "PermissionEngine",
+    "Permission",
+    "PermissionCheck",
     "DegradationManager",
     "DegradationLevel",
     "DegradationTrigger",

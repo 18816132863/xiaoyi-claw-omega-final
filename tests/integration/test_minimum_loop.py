@@ -88,8 +88,11 @@ class TestMinimumLoop(unittest.TestCase):
         )
         
         self.assertIn("allowed", result)
-        self.assertIn("effect", result)
+        self.assertIn("decision", result)
         self.assertIn("reason", result)
+        self.assertIn("risk_level", result)
+        self.assertIn("token_budget", result)
+        self.assertIn("cost_budget", result)
     
     def test_04_context_building(self):
         """测试上下文构建"""

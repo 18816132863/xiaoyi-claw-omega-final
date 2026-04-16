@@ -89,8 +89,11 @@ def demo_minimum_loop():
         requested_capabilities=["read", "write"]
     )
     
-    print(f"策略决策: {policy_result['effect']}")
+    print(f"策略决策: {policy_result['decision']}")
     print(f"是否允许: {policy_result['allowed']}")
+    print(f"风险等级: {policy_result['risk_level']}")
+    print(f"Token 预算: {policy_result['token_budget']}")
+    print(f"成本预算: {policy_result['cost_budget']}")
     print(f"原因: {policy_result['reason']}")
     
     if not policy_result['allowed']:
@@ -303,7 +306,7 @@ def demo_minimum_loop():
     
     # 发送事件
     event_bus.emit(EventType.TASK_CREATED, "demo", {"task_id": task.task_id})
-    event_bus.emit(EventType.POLICY_APPLIED, "demo", {"effect": policy_result['effect']})
+    event_bus.emit(EventType.POLICY_APPLIED, "demo", {"decision": policy_result['decision']})
     event_bus.emit(EventType.CONTEXT_BUILT, "demo", {"token_count": context_bundle.token_count})
     event_bus.emit(EventType.WORKFLOW_STARTED, "demo", {"workflow_id": workflow_spec["workflow_id"]})
     event_bus.emit(EventType.WORKFLOW_COMPLETED, "demo", {"status": workflow_result.status.value})
@@ -328,7 +331,7 @@ def demo_minimum_loop():
     print("=" * 60)
     print()
     print("验证结果:")
-    print(f"  ✅ Policy Engine 决策: {policy_result['effect']}")
+    print(f"  ✅ Policy Engine 决策: {policy_result['decision']}")
     print(f"  ✅ Context Bundle 生成: {context_bundle.token_count} tokens, {len(context_bundle.sources)} sources")
     print(f"  ✅ Workflow 执行: {workflow_result.status.value}")
     print(f"  ✅ Skill 调用: {'成功' if skill_result.success else '失败'}")
@@ -338,7 +341,7 @@ def demo_minimum_loop():
     
     return {
         "task_id": task.task_id,
-        "policy_decision": policy_result['effect'],
+        "policy_decision": policy_result['decision'],
         "context_tokens": context_bundle.token_count,
         "context_sources": len(context_bundle.sources),
         "workflow_status": workflow_result.status.value,

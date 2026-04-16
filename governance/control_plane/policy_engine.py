@@ -203,55 +203,124 @@ class PolicyEngine:
         requested_capabilities: List[str] = None
     ) -> Dict:
         """
-        统一策略评估入口（正式 façade）
+        统一策略评估入口（正式控制平面）
+        
+        接入组件：
+        1. risk_classifier - 风险分类
+        2. permission_engine - 权限检查
+        3. token_budget_manager - Token 预算
+        4. cost_budget_manager - 成本预算
+        5. high_risk_guard - 高风险守卫
         
         Args:
-            task_meta: 任务元数据（包含 intent, risk_level 等）
+            task_meta: 任务元数据（包含 intent, action 等）
             profile: 执行配置
             requested_capabilities: 请求的能力列表
         
         Returns:
-            评估结果，包含 allowed, effect, applied_policies, reason 等
+            正式 decision object，包含：
+            - decision: allow / deny / degrade / review
+            - allowed: bool
+            - risk_level: str
+            - token_budget: int
+            - cost_budget: float
+            - allowed_capabilities: list
+            - blocked_capabilities: list
+            - requires_review: bool
+            - reason: str
         """
+        from ..risk.risk_classifier import RiskClassifier
+        from ..risk.high_risk_guard import HighRiskGuard
+        from ..permissions.permission_engine import PermissionEngine
+        from ..budget.token_budget_manager import TokenBudgetManager
+        from ..budget.cost_budget_manager import CostBudgetManager, CostType
+        
         requested_capabilities = requested_capabilities or []
         
-        # 构建评估上下文
-        context = {
-            "profile": profile,
-            "intent": task_meta.get("intent", ""),
-            "risk_level": task_meta.get("risk_level", "low"),
-            "approved": task_meta.get("approved", False),
-            "requested_capabilities": requested_capabilities
+        # 1. 风险分类
+        risk_classifier = RiskClassifier()
+        risk_assessment = risk_classifier.classify(task_meta, profile)
+        
+        # 2. 权限检查
+        permission_engine = PermissionEngine()
+        perm_check = permission_engine.check_permissions(
+            profile,
+            requested_permissions=["read", "write", "execute"],
+            requested_capabilities=requested_capabilities
+        )
+        
+        # 3. Token 预算
+        token_budget_mgr = TokenBudgetManager()
+        token_budget_info = token_budget_mgr.get_decision_budget(profile)
+        
+        # 4. 成本预算
+        cost_budget_mgr = CostBudgetManager()
+        cost_budget_info = cost_budget_mgr.get_decision_budget(profile)
+        
+        # 5. 高风险守卫
+        high_risk_guard = HighRiskGuard()
+        guard_decision = high_risk_guard.guard(
+            assessment=risk_assessment,
+            profile=profile,
+            requested_capabilities=requested_capabilities,
+            approved=task_meta.get("approved", False)
+        )
+        
+        # 6. 综合决策
+        decision = guard_decision.action.value
+        allowed = guard_decision.action.value in ["allow", "degrade"]
+        requires_review = guard_decision.review_required
+        
+        # 获取允许/禁止的能力
+        allowed_capabilities = permission_engine.get_allowed_capabilities(profile)
+        blocked_capabilities = permission_engine.get_blocked_capabilities(profile)
+        
+        # 获取预算
+        profile_budgets = permission_engine.get_profile_budgets(profile)
+        token_budget = min(
+            token_budget_info["remaining"],
+            profile_budgets["max_token_budget"]
+        )
+        cost_budget = min(
+            cost_budget_info["api_call"]["remaining"],
+            profile_budgets["max_cost_budget"]
+        )
+        
+        # 构建决策对象
+        result = {
+            "decision": decision,
+            "allowed": allowed,
+            "risk_level": risk_assessment.risk_level.value,
+            "risk_score": risk_assessment.risk_score,
+            "risk_factors": risk_assessment.factors,
+            "token_budget": token_budget,
+            "cost_budget": cost_budget,
+            "allowed_capabilities": allowed_capabilities,
+            "blocked_capabilities": blocked_capabilities,
+            "requires_review": requires_review,
+            "reason": guard_decision.reason,
+            "mitigations": risk_assessment.mitigations,
+            "details": {
+                "risk_assessment": {
+                    "level": risk_assessment.risk_level.value,
+                    "score": risk_assessment.risk_score,
+                    "factors": risk_assessment.factors
+                },
+                "permission_check": {
+                    "allowed": perm_check.allowed,
+                    "granted": perm_check.granted,
+                    "denied": perm_check.denied
+                },
+                "token_budget": token_budget_info,
+                "cost_budget": cost_budget_info,
+                "guard_decision": {
+                    "action": guard_decision.action.value,
+                    "reason": guard_decision.reason,
+                    "degraded_capabilities": guard_decision.degraded_capabilities,
+                    "fallback_profile": guard_decision.fallback_profile
+                }
+            }
         }
-        
-        # 评估权限策略
-        perm_effect, perm_policies = self.evaluate(PolicyType.PERMISSION, context, log_decision=False)
-        
-        # 评估风险策略
-        risk_effect, risk_policies = self.evaluate(PolicyType.RISK, context, log_decision=False)
-        
-        # 评估工具选择策略
-        tool_effect, tool_policies = self.evaluate(PolicyType.TOOL_SELECTION, context, log_decision=False)
-        
-        # 综合决策
-        all_policies = perm_policies + risk_policies + tool_policies
-        
-        if perm_effect == PolicyEffect.DENY or risk_effect == PolicyEffect.DENY:
-            final_allowed = False
-            final_effect = "deny"
-            reason = f"Denied by policies: {all_policies}"
-        elif tool_effect == PolicyEffect.DENY:
-            final_allowed = False
-            final_effect = "deny"
-            reason = f"Tool selection denied: {tool_policies}"
-        elif perm_effect == PolicyEffect.CONDITIONAL or risk_effect == PolicyEffect.CONDITIONAL:
-            final_allowed = True
-            final_effect = "conditional"
-            reason = f"Conditional approval: {all_policies}"
-        else:
-            final_allowed = True
-            final_effect = "allow"
-            reason = "All policies passed"
         
         # 记录决策
         self._decision_log.append({
@@ -259,22 +328,12 @@ class PolicyEngine:
             "task_meta": task_meta,
             "profile": profile,
             "requested_capabilities": requested_capabilities,
-            "effect": final_effect,
-            "applied_policies": all_policies,
-            "reason": reason
+            "decision": decision,
+            "allowed": allowed,
+            "risk_level": risk_assessment.risk_level.value
         })
         
-        return {
-            "allowed": final_allowed,
-            "effect": final_effect,
-            "applied_policies": all_policies,
-            "reason": reason,
-            "details": {
-                "permission": {"effect": perm_effect.value, "policies": perm_policies},
-                "risk": {"effect": risk_effect.value, "policies": risk_policies},
-                "tool": {"effect": tool_effect.value, "policies": tool_policies}
-            }
-        }
+        return result
 
 
 # Pre-defined policies

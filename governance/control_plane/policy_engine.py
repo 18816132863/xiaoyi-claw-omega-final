@@ -1,6 +1,9 @@
-"""Policy engine - central policy management and enforcement."""
+"""
+Policy Engine - 策略引擎 Façade
+仅作为兼容入口，真实逻辑在 ControlPlaneService
+"""
 
-from typing import Dict, List, Optional, Any, Callable
+from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
@@ -79,16 +82,10 @@ class Policy:
 
 class PolicyEngine:
     """
-    Central policy management and enforcement.
+    策略引擎 Façade
     
-    Manages policies for:
-    - Routing decisions
-    - Model selection
-    - Tool/skill access
-    - Budget limits
-    - Permissions
-    - Risk controls
-    - Degradation modes
+    仅作为兼容入口，真实逻辑委托给 ControlPlaneService。
+    所有决策统一通过 ControlPlaneService.decide() 处理。
     """
     
     def __init__(self):
@@ -203,202 +200,32 @@ class PolicyEngine:
         requested_capabilities: List[str] = None
     ) -> Dict:
         """
-        统一策略评估入口（正式控制平面）
+        统一策略评估入口（Façade）
         
-        接入组件：
-        1. risk_classifier - 风险分类
-        2. permission_engine - 权限检查
-        3. token_budget_manager - Token 预算
-        4. cost_budget_manager - 成本预算
-        5. high_risk_guard - 高风险守卫
-        6. metrics - 指标反哺
+        委托给 ControlPlaneService.decide()，返回正式 ControlDecision。
         
         Args:
-            task_meta: 任务元数据（包含 intent, action 等）
+            task_meta: 任务元数据
             profile: 执行配置
             requested_capabilities: 请求的能力列表
         
         Returns:
-            正式 decision object，包含：
-            - decision: allow / deny / degrade / review
-            - allowed: bool
-            - risk_level: str
-            - token_budget: int
-            - cost_budget: float
-            - allowed_capabilities: list
-            - blocked_capabilities: list
-            - requires_review: bool
-            - reason: str
+            ControlDecision.to_dict() 结果
         """
-        from ..risk.risk_classifier import RiskClassifier
-        from ..risk.high_risk_guard import HighRiskGuard
-        from ..permissions.permission_engine import PermissionEngine
-        from ..budget.token_budget_manager import TokenBudgetManager
-        from ..budget.cost_budget_manager import CostBudgetManager, CostType
+        from .control_plane_service import get_control_plane_service
         
-        requested_capabilities = requested_capabilities or []
+        # 获取控制平面服务
+        service = get_control_plane_service()
         
-        # 0. 加载 metrics
-        metrics = self._load_metrics()
-        
-        # 1. 风险分类
-        risk_classifier = RiskClassifier()
-        risk_assessment = risk_classifier.classify(task_meta, profile)
-        
-        # 2. 权限检查
-        permission_engine = PermissionEngine()
-        perm_check = permission_engine.check_permissions(
-            profile,
-            requested_permissions=["read", "write", "execute"],
-            requested_capabilities=requested_capabilities
+        # 调用统一决策入口
+        decision = service.decide(
+            task_meta=task_meta,
+            requested_capabilities=requested_capabilities or [],
+            context_summary=None
         )
         
-        # 3. Token 预算
-        token_budget_mgr = TokenBudgetManager()
-        token_budget_info = token_budget_mgr.get_decision_budget(profile)
-        
-        # 4. 成本预算
-        cost_budget_mgr = CostBudgetManager()
-        cost_budget_info = cost_budget_mgr.get_decision_budget(profile)
-        
-        # 5. 高风险守卫
-        high_risk_guard = HighRiskGuard()
-        guard_decision = high_risk_guard.guard(
-            assessment=risk_assessment,
-            profile=profile,
-            requested_capabilities=requested_capabilities,
-            approved=task_meta.get("approved", False)
-        )
-        
-        # 6. 综合决策
-        decision = guard_decision.action.value
-        allowed = guard_decision.action.value in ["allow", "degrade"]
-        requires_review = guard_decision.review_required
-        
-        # 7. 基于 metrics 调整决策
-        if metrics and allowed:
-            metrics_adjustment = self._adjust_by_metrics(metrics, profile)
-            if metrics_adjustment["degrade"]:
-                decision = "degrade"
-                requires_review = True
-                if metrics_adjustment["reason"]:
-                    guard_decision.reason += f" | {metrics_adjustment['reason']}"
-        
-        # 获取允许/禁止的能力
-        allowed_capabilities = permission_engine.get_allowed_capabilities(profile)
-        blocked_capabilities = permission_engine.get_blocked_capabilities(profile)
-        
-        # 获取预算
-        profile_budgets = permission_engine.get_profile_budgets(profile)
-        token_budget = min(
-            token_budget_info["remaining"],
-            profile_budgets["max_token_budget"]
-        )
-        cost_budget = min(
-            cost_budget_info["api_call"]["remaining"],
-            profile_budgets["max_cost_budget"]
-        )
-        
-        # 构建决策对象
-        result = {
-            "decision": decision,
-            "allowed": allowed,
-            "risk_level": risk_assessment.risk_level.value,
-            "risk_score": risk_assessment.risk_score,
-            "risk_factors": risk_assessment.factors,
-            "token_budget": token_budget,
-            "cost_budget": cost_budget,
-            "allowed_capabilities": allowed_capabilities,
-            "blocked_capabilities": blocked_capabilities,
-            "requires_review": requires_review,
-            "reason": guard_decision.reason,
-            "mitigations": risk_assessment.mitigations,
-            "metrics": metrics.get("summary", {}) if metrics else {},
-            "details": {
-                "risk_assessment": {
-                    "level": risk_assessment.risk_level.value,
-                    "score": risk_assessment.risk_score,
-                    "factors": risk_assessment.factors
-                },
-                "permission_check": {
-                    "allowed": perm_check.allowed,
-                    "granted": perm_check.granted,
-                    "denied": perm_check.denied
-                },
-                "token_budget": token_budget_info,
-                "cost_budget": cost_budget_info,
-                "guard_decision": {
-                    "action": guard_decision.action.value,
-                    "reason": guard_decision.reason,
-                    "degraded_capabilities": guard_decision.degraded_capabilities,
-                    "fallback_profile": guard_decision.fallback_profile
-                }
-            }
-        }
-        
-        # 记录决策
-        self._decision_log.append({
-            "timestamp": datetime.now().isoformat(),
-            "task_meta": task_meta,
-            "profile": profile,
-            "requested_capabilities": requested_capabilities,
-            "decision": decision,
-            "allowed": allowed,
-            "risk_level": risk_assessment.risk_level.value
-        })
-        
-        return result
-    
-    def _load_metrics(self) -> Optional[Dict]:
-        """加载聚合指标"""
-        import os
-        
-        metrics_path = "reports/metrics/aggregated_metrics.json"
-        if not os.path.exists(metrics_path):
-            return None
-        
-        try:
-            with open(metrics_path, 'r') as f:
-                return json.load(f)
-        except:
-            return None
-    
-    def _adjust_by_metrics(self, metrics: Dict, profile: str) -> Dict:
-        """基于指标调整决策"""
-        summary = metrics.get("summary", {})
-        
-        task_success_rate = summary.get("task_success_rate", 1.0)
-        skill_failure_rate = summary.get("skill_failure_rate", 0.0)
-        memory_hit_rate = summary.get("memory_hit_rate", 1.0)
-        overall_health = summary.get("overall_health", "good")
-        
-        degrade = False
-        reason = ""
-        
-        # 任务成功率过低
-        if task_success_rate < 0.5:
-            degrade = True
-            reason = f"Low task success rate: {task_success_rate:.1%}"
-        
-        # 技能失败率过高
-        if skill_failure_rate > 0.3:
-            degrade = True
-            reason = f"High skill failure rate: {skill_failure_rate:.1%}"
-        
-        # 记忆命中率过低
-        if memory_hit_rate < 0.3:
-            degrade = True
-            reason = f"Low memory hit rate: {memory_hit_rate:.1%}"
-        
-        # 整体健康状态差
-        if overall_health == "poor":
-            degrade = True
-            reason = "System health is poor"
-        
-        return {
-            "degrade": degrade,
-            "reason": reason
-        }
+        # 返回字典格式
+        return decision.to_dict()
 
 
 # Pre-defined policies

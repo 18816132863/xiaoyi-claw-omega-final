@@ -2,12 +2,18 @@
 
 from .planner.task_planner import TaskPlanner, ExecutionPlan, PlanStep, TaskComplexity
 from .workflow.workflow_engine import (
-    WorkflowEngine, WorkflowResult, StepResult,
-    WorkflowStatus, StepStatus, run_workflow
+    WorkflowEngine, WorkflowResult, StepResult, run_workflow
 )
-from .workflow.dag_builder import DAGBuilder, DAG, DAGNode
-from .workflow.dependency_resolver import DependencyResolver
-from .workflow.state_machine import WorkflowStateMachine, State, Event
+from .workflow.state_machine import (
+    WorkflowStateMachine, WorkflowState, StepState,
+    get_workflow_state_machine
+)
+from .workflow.dependency_resolver import (
+    DependencyResolver, get_dependency_resolver
+)
+from .workflow.workflow_registry import (
+    WorkflowTemplate, WorkflowStep, get_workflow_registry
+)
 from .execution_control.retry_policy import RetryPolicy
 from .execution_control.fallback_policy import FallbackPolicy, FallbackAction, FallbackDecision
 from .execution_control.rollback_manager import RollbackManager, RollbackPoint, RollbackResult
@@ -21,16 +27,16 @@ __all__ = [
     "WorkflowEngine",
     "WorkflowResult",
     "StepResult",
-    "WorkflowStatus",
-    "StepStatus",
     "run_workflow",
-    "DAGBuilder",
-    "DAG",
-    "DAGNode",
-    "DependencyResolver",
     "WorkflowStateMachine",
-    "State",
-    "Event",
+    "WorkflowState",
+    "StepState",
+    "get_workflow_state_machine",
+    "DependencyResolver",
+    "get_dependency_resolver",
+    "WorkflowTemplate",
+    "WorkflowStep",
+    "get_workflow_registry",
     "RetryPolicy",
     "FallbackPolicy",
     "FallbackAction",

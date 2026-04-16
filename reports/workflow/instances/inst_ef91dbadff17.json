@@ -1,0 +1,16 @@
+{
+  "instance_id": "inst_ef91dbadff17",
+  "workflow_id": "fallback_verify",
+  "version": "1.0.0",
+  "task_id": "",
+  "profile": "default",
+  "status": "completed",
+  "started_at": "2026-04-17T06:55:44.890967",
+  "completed_at": "2026-04-17T06:55:44.895914",
+  "failed_step_id": null,
+  "recovery_summary": {},
+  "control_decision_id": null,
+  "input": {},
+  "output": {},
+  "metadata": {}
+}

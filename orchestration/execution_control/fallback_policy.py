@@ -37,15 +37,17 @@ class FallbackPolicy:
     def __init__(self):
         # 默认最大重试次数
         self.default_max_retries = 3
-        
+
         # 错误类型映射
         self.error_actions = {
             "timeout": FallbackAction.RETRY,
             "network_error": FallbackAction.RETRY,
+            "exception": FallbackAction.RETRY,  # 默认异常重试
             "skill_not_found": FallbackAction.FALLBACK,
             "permission_denied": FallbackAction.ABORT,
             "budget_exceeded": FallbackAction.ABORT,
             "validation_error": FallbackAction.SKIP,
+            "unknown": FallbackAction.RETRY,  # 未知错误也重试
         }
         
         # 技能回退映射

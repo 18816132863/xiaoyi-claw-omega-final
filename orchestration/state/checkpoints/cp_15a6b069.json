@@ -1,0 +1,25 @@
+{
+  "checkpoint_id": "cp_15a6b069",
+  "workflow_id": "recovery_chain_test",
+  "step_id": "step_1_init",
+  "timestamp": "2026-04-17T06:54:30.361191",
+  "state": {
+    "instance_id": "inst_07f7a7ba3911",
+    "step_input": {
+      "context": {},
+      "dependencies": {},
+      "params": {}
+    },
+    "step_results": {}
+  },
+  "completed_steps": [],
+  "pending_steps": [
+    "step_1_init",
+    "step_2_will_fail",
+    "step_3_finalize"
+  ],
+  "metadata": {
+    "phase": "before_step",
+    "attempt": 0
+  }
+}

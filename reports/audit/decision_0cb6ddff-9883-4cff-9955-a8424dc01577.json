@@ -1,0 +1,23 @@
+{
+  "decision_id": "0cb6ddff-9883-4cff-9955-a8424dc01577",
+  "task_id": "task_004",
+  "profile": "default",
+  "decision": "review",
+  "risk_level": "critical",
+  "requires_review": true,
+  "degradation_mode": null,
+  "allowed_capabilities": [
+    "skill.install"
+  ],
+  "blocked_capabilities": [
+    "system.config",
+    "system.config"
+  ],
+  "reasons": [
+    "Blocked by permission: ['system.config']",
+    "Blocked by high risk guard: ['system.config']",
+    "Requires review due to risk level or capability"
+  ],
+  "timestamp": "2026-04-16T17:02:02.193947",
+  "policy_snapshot_id": "snap_59dcc4c4d25b"
+}

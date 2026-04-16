@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WorkflowInstance",
+  "description": "Workflow 实例记录 Schema",
+  "type": "object",
+  "required": [
+    "instance_id",
+    "workflow_id",
+    "version",
+    "task_id",
+    "profile",
+    "status",
+    "started_at"
+  ],
+  "properties": {
+    "instance_id": {
+      "type": "string",
+      "description": "实例唯一标识"
+    },
+    "workflow_id": {
+      "type": "string",
+      "description": "Workflow 模板 ID"
+    },
+    "version": {
+      "type": "string",
+      "description": "Workflow 版本"
+    },
+    "task_id": {
+      "type": "string",
+      "description": "关联的任务 ID"
+    },
+    "profile": {
+      "type": "string",
+      "description": "执行配置"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "running", "completed", "failed", "cancelled", "paused"],
+      "description": "实例状态"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "开始时间"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "完成时间"
+    },
+    "failed_step_id": {
+      "type": "string",
+      "description": "失败的步骤 ID"
+    },
+    "recovery_summary": {
+      "type": "object",
+      "properties": {
+        "retry_count": { "type": "integer" },
+        "fallback_used": { "type": "boolean" },
+        "rollback_used": { "type": "boolean" },
+        "checkpoint_id": { "type": "string" }
+      }
+    },
+    "control_decision_id": {
+      "type": "string",
+      "description": "Control Plane 决策 ID"
+    },
+    "input": {
+      "type": "object",
+      "description": "输入参数"
+    },
+    "output": {
+      "type": "object",
+      "description": "输出结果"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "元数据"
+    }
+  }
+}

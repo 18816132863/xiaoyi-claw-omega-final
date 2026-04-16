@@ -1,151 +1,203 @@
-"""Token Budget Manager - Token 预算管理"""
+"""
+Token Budget Manager - Token 预算管理器
+管理不同 profile 的 token 预算
+"""
 
-from dataclasses import dataclass, field
-from datetime import datetime, timedelta
-from typing import Dict, Optional, List
-from enum import Enum
-import json
-import os
-
-
-class BudgetPeriod(Enum):
-    PER_REQUEST = "per_request"
-    HOURLY = "hourly"
-    DAILY = "daily"
+from dataclasses import dataclass
+from typing import Dict, Any
+from datetime import datetime
 
 
 @dataclass
 class TokenBudget:
     """Token 预算"""
     profile: str
-    limit: int
-    used: int = 0
-    period: BudgetPeriod = BudgetPeriod.PER_REQUEST
-    reset_at: Optional[datetime] = None
+    total: int
+    used: int
+    available: int
+    reset_at: str
     
-    def remaining(self) -> int:
-        return max(0, self.limit - self.used)
-    
-    def is_exceeded(self) -> bool:
-        return self.used >= self.limit
-    
-    def use(self, amount: int) -> bool:
-        if self.used + amount > self.limit:
-            return False
-        self.used += amount
-        return True
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "profile": self.profile,
+            "total": self.total,
+            "used": self.used,
+            "available": self.available,
+            "reset_at": self.reset_at
+        }
 
 
 class TokenBudgetManager:
     """
     Token 预算管理器
     
-    职责：
-    - 按 profile 分配预算
-    - 追踪使用量
-    - 支持周期重置
+    管理不同 profile 的 token 预算
     """
     
-    def __init__(self, store_path: str = "governance/budget/token_budgets.json"):
-        self.store_path = store_path
+    # Profile 预算配置
+    PROFILE_BUDGETS = {
+        "development": 500000,
+        "performance": 200000,
+        "default": 100000,
+        "production": 80000,
+        "safe": 50000,
+        "restricted": 10000
+    }
+    
+    def __init__(self):
         self._budgets: Dict[str, TokenBudget] = {}
-        self._profile_limits = {
-            "admin": 32000,
-            "developer": 16000,
-            "default": 8000,
-            "operator": 4000,
-            "auditor": 2000,
-            "restricted": 1000
-        }
-        self._load()
+        self._custom_budgets: Dict[str, int] = {}
+        self._init_budgets()
     
-    def _load(self):
-        """加载预算"""
-        if os.path.exists(self.store_path):
-            try:
-                with open(self.store_path, 'r') as f:
-                    data = json.load(f)
-                    for profile, budget_data in data.get("budgets", {}).items():
-                        self._budgets[profile] = TokenBudget(
-                            profile=profile,
-                            limit=budget_data.get("limit", 8000),
-                            used=budget_data.get("used", 0),
-                            period=BudgetPeriod(budget_data.get("period", "per_request"))
-                        )
-            except:
-                pass
-    
-    def _save(self):
-        """保存预算"""
-        os.makedirs(os.path.dirname(self.store_path) or ".", exist_ok=True)
-        data = {
-            "budgets": {
-                profile: {
-                    "limit": budget.limit,
-                    "used": budget.used,
-                    "period": budget.period.value
-                }
-                for profile, budget in self._budgets.items()
-            }
-        }
-        with open(self.store_path, 'w') as f:
-            json.dump(data, f, indent=2)
-    
-    def get_budget(self, profile: str) -> TokenBudget:
-        """获取预算"""
-        if profile not in self._budgets:
-            limit = self._profile_limits.get(profile, 8000)
+    def _init_budgets(self):
+        """初始化预算"""
+        for profile, total in self.PROFILE_BUDGETS.items():
             self._budgets[profile] = TokenBudget(
                 profile=profile,
-                limit=limit,
-                period=BudgetPeriod.PER_REQUEST
+                total=total,
+                used=0,
+                available=total,
+                reset_at=self._get_reset_time()
             )
-        return self._budgets[profile]
     
-    def allocate(self, profile: str, limit: int = None) -> TokenBudget:
-        """分配预算"""
-        limit = limit or self._profile_limits.get(profile, 8000)
-        budget = TokenBudget(
-            profile=profile,
-            limit=limit,
-            period=BudgetPeriod.PER_REQUEST
-        )
-        self._budgets[profile] = budget
-        self._save()
-        return budget
+    def get_budget(self, profile: str) -> int:
+        """
+        获取预算
+        
+        Args:
+            profile: 配置文件名
+            
+        Returns:
+            预算值
+        """
+        if profile in self._custom_budgets:
+            return self._custom_budgets[profile]
+        return self.PROFILE_BUDGETS.get(profile, 100000)
     
-    def use_tokens(self, profile: str, amount: int) -> tuple[bool, int]:
-        """使用 Token"""
-        budget = self.get_budget(profile)
-        success = budget.use(amount)
-        self._save()
-        return success, budget.remaining()
+    def get_available(self, profile: str) -> int:
+        """
+        获取可用预算
+        
+        Args:
+            profile: 配置文件名
+            
+        Returns:
+            可用预算
+        """
+        budget = self._budgets.get(profile)
+        if budget:
+            return budget.available
+        return self.get_budget(profile)
     
-    def check_budget(self, profile: str, required: int = 0) -> tuple[bool, int]:
-        """检查预算"""
-        budget = self.get_budget(profile)
-        remaining = budget.remaining()
-        return remaining >= required, remaining
+    def check_available(self, profile: str) -> bool:
+        """
+        检查是否有可用预算
+        
+        Args:
+            profile: 配置文件名
+            
+        Returns:
+            是否有可用预算
+        """
+        return self.get_available(profile) > 0
+    
+    def consume(self, profile: str, amount: int) -> bool:
+        """
+        消耗预算
+        
+        Args:
+            profile: 配置文件名
+            amount: 消耗量
+            
+        Returns:
+            是否成功
+        """
+        budget = self._budgets.get(profile)
+        if not budget:
+            return False
+        
+        if budget.available < amount:
+            return False
+        
+        budget.used += amount
+        budget.available -= amount
+        return True
     
     def reset(self, profile: str):
-        """重置预算"""
-        if profile in self._budgets:
-            self._budgets[profile].used = 0
-            self._save()
+        """
+        重置预算
+        
+        Args:
+            profile: 配置文件名
+        """
+        total = self.get_budget(profile)
+        self._budgets[profile] = TokenBudget(
+            profile=profile,
+            total=total,
+            used=0,
+            available=total,
+            reset_at=self._get_reset_time()
+        )
     
-    def set_profile_limit(self, profile: str, limit: int):
-        """设置 profile 限制"""
-        self._profile_limits[profile] = limit
-        if profile in self._budgets:
-            self._budgets[profile].limit = limit
-            self._save()
+    def set_budget(self, profile: str, total: int):
+        """
+        设置预算
+        
+        Args:
+            profile: 配置文件名
+            total: 总预算
+        """
+        self._custom_budgets[profile] = total
+        self._budgets[profile] = TokenBudget(
+            profile=profile,
+            total=total,
+            used=0,
+            available=total,
+            reset_at=self._get_reset_time()
+        )
     
-    def get_decision_budget(self, profile: str) -> Dict:
-        """获取决策预算信息"""
-        budget = self.get_budget(profile)
+    def get_status(self, profile: str) -> Dict[str, Any]:
+        """
+        获取预算状态
+        
+        Args:
+            profile: 配置文件名
+            
+        Returns:
+            预算状态
+        """
+        budget = self._budgets.get(profile)
+        if budget:
+            return budget.to_dict()
+        return {"profile": profile, "total": 0, "used": 0, "available": 0}
+    
+    def reload(self) -> Dict[str, Any]:
+        """
+        重新加载
+        
+        Returns:
+            重载结果
+        """
+        self._init_budgets()
         return {
-            "limit": budget.limit,
-            "used": budget.used,
-            "remaining": budget.remaining(),
-            "is_exceeded": budget.is_exceeded()
+            "status": "reloaded",
+            "profiles": len(self._budgets)
         }
+    
+    def _get_reset_time(self) -> str:
+        """获取重置时间（明天 0 点）"""
+        now = datetime.now()
+        tomorrow = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        tomorrow = tomorrow.replace(day=now.day + 1)
+        return tomorrow.isoformat()
+
+
+# 全局单例
+_token_budget_manager = None
+
+def get_token_budget_manager() -> TokenBudgetManager:
+    """获取 Token 预算管理器单例"""
+    global _token_budget_manager
+    if _token_budget_manager is None:
+        _token_budget_manager = TokenBudgetManager()
+    return _token_budget_manager

@@ -1,0 +1,19 @@
+{
+  "decision_id": "59e27e58-1b7f-4b7e-89dc-79d5031bd545",
+  "task_id": "task_003",
+  "profile": "performance",
+  "decision": "review",
+  "risk_level": "high",
+  "requires_review": true,
+  "degradation_mode": null,
+  "allowed_capabilities": [
+    "skill.execute",
+    "external.access"
+  ],
+  "blocked_capabilities": [],
+  "reasons": [
+    "Requires review due to risk level or capability"
+  ],
+  "timestamp": "2026-04-16T17:02:02.193519",
+  "policy_snapshot_id": "snap_77099ddd090f"
+}

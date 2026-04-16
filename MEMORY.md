@@ -190,6 +190,46 @@
 
 ## V7.2.0 融合更新
 
+### Phase3 第二组收口 (2026-04-17)
+
+**完成内容：**
+
+1. **checkpoint_store 接入主链**
+   - step 开始前保存 checkpoint
+   - step 成功后保存 checkpoint
+   - step 失败后保存 checkpoint
+   - WorkflowResult.checkpoint_id 写入最后 checkpoint
+   - workflow_event_store 记录 checkpoint_saved 事件
+
+2. **fallback_policy 接入主链**
+   - step 失败后调用 fallback_policy.decide()
+   - 支持 retry / fallback / skip / abort 四种决策
+   - 根据 decision 执行对应恢复动作
+   - 记录 retry_triggered / fallback_triggered 事件
+
+3. **rollback_manager 接入主链**
+   - step 执行前创建 rollback point
+   - fallback 失败或 abort 时调用 rollback_manager.rollback()
+   - 记录 rollback_triggered 事件
+   - WorkflowResult 记录 rollback_to_step / rollback_point_id
+
+4. **修复 fallback_policy**
+   - 添加 "exception" 和 "unknown" 错误类型默认 RETRY
+   - 确保异常场景正确触发重试
+
+5. **Integration 测试**
+   - tests/integration/test_recovery_chain.py
+   - tests/integration/test_phase3_group2_final.py
+   - 完整验证恢复链生效
+
+**通过标准：**
+- ✅ workflow_engine.py 真实调用 checkpoint_store.save()
+- ✅ workflow_engine.py 真实调用 fallback_policy.decide()
+- ✅ workflow_engine.py 真实调用 rollback_manager.rollback()
+- ✅ workflow_event_store 记录 checkpoint/fallback/rollback 事件
+- ✅ recovery_store 记录恢复记录
+- ✅ 有正式 integration 示例证明恢复链生效
+
 ### 认知系统 (core/cognition/)
 - `reasoning.py` - 推理引擎（6种推理模式）
 - `decision.py` - 决策系统（3种决策方法）

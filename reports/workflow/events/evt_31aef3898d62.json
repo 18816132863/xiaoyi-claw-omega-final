@@ -1,0 +1,15 @@
+{
+  "event_id": "evt_31aef3898d62",
+  "instance_id": "inst_07f7a7ba3911",
+  "event_type": "step_completed",
+  "timestamp": "2026-04-17T06:54:30.368207",
+  "step_id": "step_2_will_fail",
+  "data": {
+    "output": {
+      "recovered": true,
+      "attempts": 3
+    },
+    "duration_ms": 4
+  },
+  "metadata": {}
+}

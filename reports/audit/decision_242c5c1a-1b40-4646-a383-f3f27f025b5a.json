@@ -1,0 +1,23 @@
+{
+  "decision_id": "242c5c1a-1b40-4646-a383-f3f27f025b5a",
+  "task_id": "task_002",
+  "profile": "default",
+  "decision": "deny",
+  "risk_level": "critical",
+  "requires_review": true,
+  "degradation_mode": null,
+  "allowed_capabilities": [],
+  "blocked_capabilities": [
+    "high_risk.delete",
+    "system.restart",
+    "high_risk.delete",
+    "system.restart"
+  ],
+  "reasons": [
+    "Blocked by permission: ['high_risk.delete', 'system.restart']",
+    "Blocked by high risk guard: ['high_risk.delete', 'system.restart']",
+    "Requires review due to risk level or capability"
+  ],
+  "timestamp": "2026-04-16T17:02:02.193020",
+  "policy_snapshot_id": "snap_59dcc4c4d25b"
+}

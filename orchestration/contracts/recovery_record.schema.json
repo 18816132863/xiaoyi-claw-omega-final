@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RecoveryRecord",
+  "description": "Workflow 恢复记录 Schema",
+  "type": "object",
+  "required": [
+    "record_id",
+    "instance_id",
+    "step_id",
+    "error_type",
+    "recovery_action",
+    "timestamp"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "记录唯一标识"
+    },
+    "instance_id": {
+      "type": "string",
+      "description": "实例 ID"
+    },
+    "step_id": {
+      "type": "string",
+      "description": "步骤 ID"
+    },
+    "error_type": {
+      "type": "string",
+      "enum": ["timeout", "exception", "validation_error", "capability_blocked", "resource_exhausted", "dependency_failed", "unknown"],
+      "description": "错误类型"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "错误消息"
+    },
+    "recovery_action": {
+      "type": "string",
+      "enum": ["retry", "fallback", "rollback", "skip", "abort", "checkpoint"],
+      "description": "恢复动作"
+    },
+    "retry_count": {
+      "type": "integer",
+      "description": "重试次数"
+    },
+    "max_retries": {
+      "type": "integer",
+      "description": "最大重试次数"
+    },
+    "fallback_used": {
+      "type": "boolean",
+      "description": "是否使用了 fallback"
+    },
+    "fallback_skill": {
+      "type": "string",
+      "description": "Fallback 技能"
+    },
+    "rollback_used": {
+      "type": "boolean",
+      "description": "是否使用了 rollback"
+    },
+    "rollback_to_step": {
+      "type": "string",
+      "description": "回滚到的步骤 ID"
+    },
+    "checkpoint_id": {
+      "type": "string",
+      "description": "检查点 ID"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "时间戳"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "元数据"
+    }
+  }
+}

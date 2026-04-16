@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_effce1e39aac",
+  "instance_id": "inst_7c4ea57bb3e9",
+  "event_type": "step_failed",
+  "timestamp": "2026-04-17T06:54:30.381937",
+  "step_id": "step_2",
+  "data": {
+    "error_type": "exception",
+    "error_message": "硬失败 - 触发 rollback"
+  },
+  "metadata": {}
+}

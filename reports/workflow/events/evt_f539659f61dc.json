@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_f539659f61dc",
+  "instance_id": "inst_c4c2be12e566",
+  "event_type": "step_started",
+  "timestamp": "2026-04-17T06:54:11.818326",
+  "step_id": "step_2",
+  "data": {
+    "step_name": "步骤2 - 将失败",
+    "action": "fail_hard"
+  },
+  "metadata": {}
+}

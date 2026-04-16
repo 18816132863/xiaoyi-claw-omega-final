@@ -1,0 +1,16 @@
+{
+  "decision_id": "7c68cad6-51c4-4896-b275-831dd4207f16",
+  "task_id": "audit_task_001",
+  "profile": "default",
+  "decision": "allow",
+  "risk_level": "low",
+  "requires_review": false,
+  "degradation_mode": null,
+  "allowed_capabilities": [
+    "skill.execute"
+  ],
+  "blocked_capabilities": [],
+  "reasons": [],
+  "timestamp": "2026-04-16T17:03:19.006770",
+  "policy_snapshot_id": "snap_6fc153158867"
+}

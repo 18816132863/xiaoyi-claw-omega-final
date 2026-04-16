@@ -1,0 +1,16 @@
+{
+  "instance_id": "inst_e6d0c5504601",
+  "workflow_id": "minimum_loop",
+  "version": "1.0.0",
+  "task_id": "task_002",
+  "profile": "default",
+  "status": "pending",
+  "started_at": "2026-04-16T21:01:04.043258",
+  "completed_at": null,
+  "failed_step_id": null,
+  "recovery_summary": {},
+  "control_decision_id": null,
+  "input": {},
+  "output": {},
+  "metadata": {}
+}

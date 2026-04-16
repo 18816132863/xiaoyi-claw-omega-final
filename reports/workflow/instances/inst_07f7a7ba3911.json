@@ -1,0 +1,16 @@
+{
+  "instance_id": "inst_07f7a7ba3911",
+  "workflow_id": "recovery_chain_test",
+  "version": "1.0.0",
+  "task_id": "",
+  "profile": "default",
+  "status": "completed",
+  "started_at": "2026-04-17T06:54:30.359470",
+  "completed_at": "2026-04-17T06:54:30.371183",
+  "failed_step_id": null,
+  "recovery_summary": {},
+  "control_decision_id": null,
+  "input": {},
+  "output": {},
+  "metadata": {}
+}

@@ -1,0 +1,49 @@
+{
+  "event_id": "evt_d13cf6584be3",
+  "instance_id": "inst_e0604dcdc74a",
+  "event_type": "step_completed",
+  "timestamp": "2026-04-16T21:47:48.245284",
+  "step_id": "step_3",
+  "data": {
+    "output": {
+      "executed": true,
+      "action": "finalize",
+      "input": {
+        "context": {
+          "task_id": "test_002"
+        },
+        "dependencies": {
+          "step_2": {
+            "executed": true,
+            "action": "execute",
+            "input": {
+              "context": {
+                "task_id": "test_002"
+              },
+              "dependencies": {
+                "step_1": {
+                  "executed": true,
+                  "action": "initialize",
+                  "input": {
+                    "context": {
+                      "task_id": "test_002"
+                    },
+                    "dependencies": {},
+                    "params": {}
+                  },
+                  "message": "Action 'initialize' executed (test mode)"
+                }
+              },
+              "params": {}
+            },
+            "message": "Action 'execute' executed (test mode)"
+          }
+        },
+        "params": {}
+      },
+      "message": "Action 'finalize' executed (test mode)"
+    },
+    "duration_ms": 0
+  },
+  "metadata": {}
+}

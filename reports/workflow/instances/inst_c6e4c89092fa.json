@@ -1,0 +1,18 @@
+{
+  "instance_id": "inst_c6e4c89092fa",
+  "workflow_id": "integration_test",
+  "version": "1.0.0",
+  "task_id": "test_001",
+  "profile": "default",
+  "status": "completed",
+  "started_at": "2026-04-16T21:47:48.235396",
+  "completed_at": "2026-04-16T21:47:48.240151",
+  "failed_step_id": null,
+  "recovery_summary": {},
+  "control_decision_id": "dec_test_001",
+  "input": {
+    "task_id": "test_001"
+  },
+  "output": {},
+  "metadata": {}
+}

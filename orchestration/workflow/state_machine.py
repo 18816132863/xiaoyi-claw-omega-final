@@ -1,194 +1,372 @@
-"""State Machine - 工作流状态机"""
+"""
+State Machine - Workflow 状态机
+统一管理 workflow 和 step 的状态流转
+"""
 
-from typing import Dict, List, Optional, Callable, Set
+from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
+import json
 
 
-class State(Enum):
-    """工作流状态"""
-    IDLE = "idle"
-    PLANNING = "planning"
-    READY = "ready"
+class WorkflowState(Enum):
+    """Workflow 状态"""
+    PENDING = "pending"
     RUNNING = "running"
-    PAUSED = "paused"
     COMPLETED = "completed"
     FAILED = "failed"
+    PAUSED = "paused"
     CANCELLED = "cancelled"
 
 
-class Event(Enum):
-    """工作流事件"""
-    START = "start"
-    PLAN_COMPLETE = "plan_complete"
-    STEP_COMPLETE = "step_complete"
-    STEP_FAIL = "step_fail"
-    PAUSE = "pause"
-    RESUME = "resume"
-    CANCEL = "cancel"
-    ALL_COMPLETE = "all_complete"
-    FATAL_ERROR = "fatal_error"
+class StepState(Enum):
+    """Step 状态"""
+    PENDING = "pending"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    SKIPPED = "skipped"
+    RETRYING = "retrying"
+
+
+# 状态转换规则
+WORKFLOW_TRANSITIONS = {
+    WorkflowState.PENDING: [WorkflowState.RUNNING, WorkflowState.CANCELLED],
+    WorkflowState.RUNNING: [WorkflowState.COMPLETED, WorkflowState.FAILED, WorkflowState.PAUSED, WorkflowState.CANCELLED],
+    WorkflowState.PAUSED: [WorkflowState.RUNNING, WorkflowState.CANCELLED],
+    WorkflowState.COMPLETED: [],
+    WorkflowState.FAILED: [],
+    WorkflowState.CANCELLED: []
+}
+
+STEP_TRANSITIONS = {
+    StepState.PENDING: [StepState.RUNNING, StepState.SKIPPED],
+    StepState.RUNNING: [StepState.COMPLETED, StepState.FAILED, StepState.RETRYING],
+    StepState.RETRYING: [StepState.COMPLETED, StepState.FAILED],
+    StepState.COMPLETED: [],
+    StepState.FAILED: [StepState.SKIPPED],  # 允许跳过失败的步骤
+    StepState.SKIPPED: []
+}
 
 
 @dataclass
-class Transition:
-    """状态转换"""
-    from_state: State
-    to_state: State
-    event: Event
-    action: Optional[Callable] = None
-    guard: Optional[Callable] = None
+class WorkflowStateRecord:
+    """Workflow 状态记录"""
+    instance_id: str
+    state: WorkflowState
+    previous_state: Optional[WorkflowState] = None
+    timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
+    reason: str = ""
+    
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "instance_id": self.instance_id,
+            "state": self.state.value,
+            "previous_state": self.previous_state.value if self.previous_state else None,
+            "timestamp": self.timestamp,
+            "reason": self.reason
+        }
 
 
 @dataclass
-class StateHistory:
-    """状态历史"""
-    from_state: State
-    to_state: State
-    event: Event
-    timestamp: datetime = field(default_factory=datetime.now)
-    metadata: Dict = field(default_factory=dict)
+class StepStateRecord:
+    """Step 状态记录"""
+    instance_id: str
+    step_id: str
+    state: StepState
+    previous_state: Optional[StepState] = None
+    timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
+    reason: str = ""
+    
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "instance_id": self.instance_id,
+            "step_id": self.step_id,
+            "state": self.state.value,
+            "previous_state": self.previous_state.value if self.previous_state else None,
+            "timestamp": self.timestamp,
+            "reason": self.reason
+        }
 
 
 class WorkflowStateMachine:
     """
-    工作流状态机
+    Workflow 状态机
     
-    管理：
-    - 状态转换
-    - 转换条件
-    - 转换动作
-    - 状态历史
+    统一管理 workflow 和 step 的状态流转：
+    - pending -> running
+    - running -> completed / failed / paused / cancelled
+    - 状态转换验证
+    - 状态历史记录
     """
     
     def __init__(self):
-        self.current_state = State.IDLE
-        self.history: List[StateHistory] = []
-        self._transitions: Dict[tuple, Transition] = {}
-        self._enter_actions: Dict[State, Callable] = {}
-        self._exit_actions: Dict[State, Callable] = {}
-        self._setup_default_transitions()
+        # 当前状态
+        self._workflow_states: Dict[str, WorkflowState] = {}
+        self._step_states: Dict[str, Dict[str, StepState]] = {}  # instance_id -> {step_id -> state}
+        
+        # 状态历史
+        self._workflow_history: Dict[str, List[WorkflowStateRecord]] = {}
+        self._step_history: Dict[str, List[StepStateRecord]] = {}
     
-    def _setup_default_transitions(self):
-        """设置默认转换"""
-        self.add_transition(Transition(State.IDLE, State.PLANNING, Event.START))
-        self.add_transition(Transition(State.PLANNING, State.READY, Event.PLAN_COMPLETE))
-        self.add_transition(Transition(State.READY, State.RUNNING, Event.START))
-        self.add_transition(Transition(State.RUNNING, State.PAUSED, Event.PAUSE))
-        self.add_transition(Transition(State.PAUSED, State.RUNNING, Event.RESUME))
-        self.add_transition(Transition(State.RUNNING, State.COMPLETED, Event.ALL_COMPLETE))
-        self.add_transition(Transition(State.RUNNING, State.FAILED, Event.FATAL_ERROR))
-        self.add_transition(Transition(State.RUNNING, State.CANCELLED, Event.CANCEL))
-        self.add_transition(Transition(State.PAUSED, State.CANCELLED, Event.CANCEL))
-        self.add_transition(Transition(State.FAILED, State.RUNNING, Event.RESUME))
+    def init_workflow(self, instance_id: str) -> WorkflowState:
+        """
+        初始化 workflow 状态
+        
+        Args:
+            instance_id: 实例 ID
+            
+        Returns:
+            初始状态
+        """
+        self._workflow_states[instance_id] = WorkflowState.PENDING
+        self._step_states[instance_id] = {}
+        self._workflow_history[instance_id] = []
+        self._step_history[instance_id] = []
+        
+        record = WorkflowStateRecord(
+            instance_id=instance_id,
+            state=WorkflowState.PENDING,
+            reason="Workflow initialized"
+        )
+        self._workflow_history[instance_id].append(record)
+        
+        return WorkflowState.PENDING
     
-    def add_transition(self, transition: Transition):
-        """添加转换规则"""
-        key = (transition.from_state, transition.event)
-        self._transitions[key] = transition
-    
-    def set_enter_action(self, state: State, action: Callable):
-        """设置进入状态动作"""
-        self._enter_actions[state] = action
-    
-    def set_exit_action(self, state: State, action: Callable):
-        """设置退出状态动作"""
-        self._exit_actions[state] = action
-    
-    def can_transition(self, event: Event) -> bool:
-        """检查是否可转换"""
-        key = (self.current_state, event)
-        if key not in self._transitions:
+    def transition_workflow(
+        self,
+        instance_id: str,
+        new_state: WorkflowState,
+        reason: str = ""
+    ) -> bool:
+        """
+        转换 workflow 状态
+        
+        Args:
+            instance_id: 实例 ID
+            new_state: 新状态
+            reason: 原因
+            
+        Returns:
+            是否转换成功
+        """
+        current_state = self._workflow_states.get(instance_id)
+        if not current_state:
+            # 自动初始化
+            self.init_workflow(instance_id)
+            current_state = WorkflowState.PENDING
+        
+        # 验证转换
+        if new_state not in WORKFLOW_TRANSITIONS.get(current_state, []):
             return False
         
-        transition = self._transitions[key]
-        if transition.guard:
-            return transition.guard()
-        
-        return True
-    
-    def transition(self, event: Event, metadata: Dict = None) -> bool:
-        """执行状态转换"""
-        key = (self.current_state, event)
-        if key not in self._transitions:
-            return False
-        
-        transition = self._transitions[key]
-        
-        # 检查守卫条件
-        if transition.guard and not transition.guard():
-            return False
-        
-        from_state = self.current_state
-        
-        # 执行退出动作
-        if from_state in self._exit_actions:
-            try:
-                self._exit_actions[from_state]()
-            except Exception as e:
-                print(f"Warning: Exit action failed: {e}")
-        
-        # 更新状态
-        self.current_state = transition.to_state
+        # 执行转换
+        previous_state = current_state
+        self._workflow_states[instance_id] = new_state
         
         # 记录历史
-        self.history.append(StateHistory(
-            from_state=from_state,
-            to_state=self.current_state,
-            event=event,
-            metadata=metadata or {}
-        ))
-        
-        # 执行转换动作
-        if transition.action:
-            try:
-                transition.action()
-            except Exception as e:
-                # 回滚状态
-                self.current_state = from_state
-                raise e
-        
-        # 执行进入动作
-        if self.current_state in self._enter_actions:
-            try:
-                self._enter_actions[self.current_state]()
-            except Exception as e:
-                print(f"Warning: Enter action failed: {e}")
+        record = WorkflowStateRecord(
+            instance_id=instance_id,
+            state=new_state,
+            previous_state=previous_state,
+            reason=reason
+        )
+        self._workflow_history[instance_id].append(record)
         
         return True
     
-    def get_valid_events(self) -> List[Event]:
-        """获取有效事件"""
-        valid = []
-        for (state, event) in self._transitions.keys():
-            if state == self.current_state:
-                valid.append(event)
-        return valid
+    def get_workflow_state(self, instance_id: str) -> Optional[WorkflowState]:
+        """
+        获取 workflow 当前状态
+        
+        Args:
+            instance_id: 实例 ID
+            
+        Returns:
+            当前状态
+        """
+        return self._workflow_states.get(instance_id)
     
-    def get_history(self, limit: int = None) -> List[StateHistory]:
-        """获取历史"""
-        if limit:
-            return self.history[-limit:]
-        return self.history
+    def init_step(self, instance_id: str, step_id: str) -> StepState:
+        """
+        初始化 step 状态
+        
+        Args:
+            instance_id: 实例 ID
+            step_id: 步骤 ID
+            
+        Returns:
+            初始状态
+        """
+        if instance_id not in self._step_states:
+            self._step_states[instance_id] = {}
+        
+        self._step_states[instance_id][step_id] = StepState.PENDING
+        
+        record = StepStateRecord(
+            instance_id=instance_id,
+            step_id=step_id,
+            state=StepState.PENDING,
+            reason="Step initialized"
+        )
+        
+        if instance_id not in self._step_history:
+            self._step_history[instance_id] = []
+        self._step_history[instance_id].append(record)
+        
+        return StepState.PENDING
     
-    def reset(self):
-        """重置"""
-        self.current_state = State.IDLE
-        self.history.clear()
+    def transition_step(
+        self,
+        instance_id: str,
+        step_id: str,
+        new_state: StepState,
+        reason: str = ""
+    ) -> bool:
+        """
+        转换 step 状态
+        
+        Args:
+            instance_id: 实例 ID
+            step_id: 步骤 ID
+            new_state: 新状态
+            reason: 原因
+            
+        Returns:
+            是否转换成功
+        """
+        if instance_id not in self._step_states:
+            self._step_states[instance_id] = {}
+        
+        current_state = self._step_states[instance_id].get(step_id)
+        if not current_state:
+            # 自动初始化
+            self.init_step(instance_id, step_id)
+            current_state = StepState.PENDING
+        
+        # 验证转换
+        if new_state not in STEP_TRANSITIONS.get(current_state, []):
+            return False
+        
+        # 执行转换
+        previous_state = current_state
+        self._step_states[instance_id][step_id] = new_state
+        
+        # 记录历史
+        record = StepStateRecord(
+            instance_id=instance_id,
+            step_id=step_id,
+            state=new_state,
+            previous_state=previous_state,
+            reason=reason
+        )
+        self._step_history[instance_id].append(record)
+        
+        return True
     
-    def is_terminal(self) -> bool:
-        """是否终止状态"""
-        return self.current_state in [State.COMPLETED, State.FAILED, State.CANCELLED]
+    def get_step_state(self, instance_id: str, step_id: str) -> Optional[StepState]:
+        """
+        获取 step 当前状态
+        
+        Args:
+            instance_id: 实例 ID
+            step_id: 步骤 ID
+            
+        Returns:
+            当前状态
+        """
+        if instance_id not in self._step_states:
+            return None
+        return self._step_states[instance_id].get(step_id)
     
-    def is_running(self) -> bool:
-        """是否运行中"""
-        return self.current_state == State.RUNNING
+    def get_all_step_states(self, instance_id: str) -> Dict[str, StepState]:
+        """
+        获取所有 step 状态
+        
+        Args:
+            instance_id: 实例 ID
+            
+        Returns:
+            step_id -> state 映射
+        """
+        return dict(self._step_states.get(instance_id, {}))
     
-    def is_paused(self) -> bool:
-        """是否暂停"""
-        return self.current_state == State.PAUSED
+    def get_workflow_history(self, instance_id: str) -> List[Dict[str, Any]]:
+        """
+        获取 workflow 状态历史
+        
+        Args:
+            instance_id: 实例 ID
+            
+        Returns:
+            状态历史列表
+        """
+        records = self._workflow_history.get(instance_id, [])
+        return [r.to_dict() for r in records]
     
-    def get_state(self) -> State:
-        """获取当前状态"""
-        return self.current_state
+    def get_step_history(self, instance_id: str) -> List[Dict[str, Any]]:
+        """
+        获取 step 状态历史
+        
+        Args:
+            instance_id: 实例 ID
+            
+        Returns:
+            状态历史列表
+        """
+        records = self._step_history.get(instance_id, [])
+        return [r.to_dict() for r in records]
+    
+    def can_transition(self, current: WorkflowState, target: WorkflowState) -> bool:
+        """
+        检查是否可以转换
+        
+        Args:
+            current: 当前状态
+            target: 目标状态
+            
+        Returns:
+            是否可以转换
+        """
+        return target in WORKFLOW_TRANSITIONS.get(current, [])
+    
+    def can_transition_step(self, current: StepState, target: StepState) -> bool:
+        """
+        检查 step 是否可以转换
+        
+        Args:
+            current: 当前状态
+            target: 目标状态
+            
+        Returns:
+            是否可以转换
+        """
+        return target in STEP_TRANSITIONS.get(current, [])
+    
+    def reset(self, instance_id: str):
+        """
+        重置状态
+        
+        Args:
+            instance_id: 实例 ID
+        """
+        if instance_id in self._workflow_states:
+            del self._workflow_states[instance_id]
+        if instance_id in self._step_states:
+            del self._step_states[instance_id]
+        if instance_id in self._workflow_history:
+            del self._workflow_history[instance_id]
+        if instance_id in self._step_history:
+            del self._step_history[instance_id]
+
+
+# 全局单例
+_workflow_state_machine = None
+
+def get_workflow_state_machine() -> WorkflowStateMachine:
+    """获取状态机单例"""
+    global _workflow_state_machine
+    if _workflow_state_machine is None:
+        _workflow_state_machine = WorkflowStateMachine()
+    return _workflow_state_machine

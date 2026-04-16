@@ -1,0 +1,23 @@
+{
+  "event_id": "evt_4619b75c27fe",
+  "instance_id": "inst_06592832e55a",
+  "event_type": "step_completed",
+  "timestamp": "2026-04-16T21:47:48.248627",
+  "step_id": "step_1",
+  "data": {
+    "output": {
+      "executed": true,
+      "action": "initialize",
+      "input": {
+        "context": {
+          "task_id": "test_003"
+        },
+        "dependencies": {},
+        "params": {}
+      },
+      "message": "Action 'initialize' executed (test mode)"
+    },
+    "duration_ms": 0
+  },
+  "metadata": {}
+}

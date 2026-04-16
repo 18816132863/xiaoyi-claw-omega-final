@@ -1,0 +1,17 @@
+{
+  "record_id": "rec_5d5d630b0ab9",
+  "instance_id": "inst_54414cec5d79",
+  "step_id": "s1",
+  "error_type": "exception",
+  "recovery_action": "rollback",
+  "timestamp": "2026-04-17T06:55:44.900211",
+  "error_message": "硬失败",
+  "retry_count": 0,
+  "max_retries": 3,
+  "fallback_used": false,
+  "fallback_skill": null,
+  "rollback_used": true,
+  "rollback_to_step": "s1",
+  "checkpoint_id": null,
+  "metadata": {}
+}

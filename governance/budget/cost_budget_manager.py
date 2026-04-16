@@ -1,171 +1,203 @@
-"""Cost Budget Manager - 成本预算管理"""
+"""
+Cost Budget Manager - 成本预算管理器
+管理不同 profile 的成本预算
+"""
 
-from dataclasses import dataclass, field
-from datetime import datetime, timedelta
-from typing import Dict, Optional, List
-from enum import Enum
-import json
-import os
-
-
-class CostType(Enum):
-    API_CALL = "api_call"
-    COMPUTE = "compute"
-    STORAGE = "storage"
-    NETWORK = "network"
+from dataclasses import dataclass
+from typing import Dict, Any
+from datetime import datetime
 
 
 @dataclass
 class CostBudget:
     """成本预算"""
     profile: str
-    cost_type: CostType
-    limit: float  # 成本限制（单位：元或其他）
-    used: float = 0.0
-    period: str = "daily"  # daily, weekly, monthly
+    total: float
+    used: float
+    available: float
+    reset_at: str
     
-    def remaining(self) -> float:
-        return max(0.0, self.limit - self.used)
-    
-    def is_exceeded(self) -> bool:
-        return self.used >= self.limit
-    
-    def use(self, amount: float) -> bool:
-        if self.used + amount > self.limit:
-            return False
-        self.used += amount
-        return True
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "profile": self.profile,
+            "total": self.total,
+            "used": self.used,
+            "available": self.available,
+            "reset_at": self.reset_at
+        }
 
 
 class CostBudgetManager:
     """
     成本预算管理器
     
-    职责：
-    - 按 profile 和成本类型分配预算
-    - 追踪成本使用
-    - 支持多维度成本控制
+    管理不同 profile 的成本预算
     """
     
-    def __init__(self, store_path: str = "governance/budget/cost_budgets.json"):
-        self.store_path = store_path
+    # Profile 预算配置
+    PROFILE_BUDGETS = {
+        "development": 50.0,
+        "performance": 20.0,
+        "default": 10.0,
+        "production": 8.0,
+        "safe": 5.0,
+        "restricted": 1.0
+    }
+    
+    def __init__(self):
         self._budgets: Dict[str, CostBudget] = {}
-        self._default_limits = {
-            ("admin", CostType.API_CALL): 100.0,
-            ("admin", CostType.COMPUTE): 50.0,
-            ("developer", CostType.API_CALL): 50.0,
-            ("developer", CostType.COMPUTE): 20.0,
-            ("default", CostType.API_CALL): 20.0,
-            ("default", CostType.COMPUTE): 10.0,
-            ("operator", CostType.API_CALL): 10.0,
-            ("auditor", CostType.API_CALL): 5.0,
-            ("restricted", CostType.API_CALL): 1.0,
-        }
-        self._load()
+        self._custom_budgets: Dict[str, float] = {}
+        self._init_budgets()
     
-    def _load(self):
-        """加载预算"""
-        if os.path.exists(self.store_path):
-            try:
-                with open(self.store_path, 'r') as f:
-                    data = json.load(f)
-                    for key, budget_data in data.get("budgets", {}).items():
-                        self._budgets[key] = CostBudget(
-                            profile=budget_data.get("profile", "default"),
-                            cost_type=CostType(budget_data.get("cost_type", "api_call")),
-                            limit=budget_data.get("limit", 10.0),
-                            used=budget_data.get("used", 0.0),
-                            period=budget_data.get("period", "daily")
-                        )
-            except:
-                pass
-    
-    def _save(self):
-        """保存预算"""
-        os.makedirs(os.path.dirname(self.store_path) or ".", exist_ok=True)
-        data = {
-            "budgets": {
-                key: {
-                    "profile": budget.profile,
-                    "cost_type": budget.cost_type.value,
-                    "limit": budget.limit,
-                    "used": budget.used,
-                    "period": budget.period
-                }
-                for key, budget in self._budgets.items()
-            }
-        }
-        with open(self.store_path, 'w') as f:
-            json.dump(data, f, indent=2)
-    
-    def _make_key(self, profile: str, cost_type: CostType) -> str:
-        return f"{profile}_{cost_type.value}"
-    
-    def get_budget(self, profile: str, cost_type: CostType) -> CostBudget:
-        """获取预算"""
-        key = self._make_key(profile, cost_type)
-        
-        if key not in self._budgets:
-            limit = self._default_limits.get((profile, cost_type), 10.0)
-            self._budgets[key] = CostBudget(
+    def _init_budgets(self):
+        """初始化预算"""
+        for profile, total in self.PROFILE_BUDGETS.items():
+            self._budgets[profile] = CostBudget(
                 profile=profile,
-                cost_type=cost_type,
-                limit=limit
+                total=total,
+                used=0.0,
+                available=total,
+                reset_at=self._get_reset_time()
             )
+    
+    def get_budget(self, profile: str) -> float:
+        """
+        获取预算
         
-        return self._budgets[key]
+        Args:
+            profile: 配置文件名
+            
+        Returns:
+            预算值
+        """
+        if profile in self._custom_budgets:
+            return self._custom_budgets[profile]
+        return self.PROFILE_BUDGETS.get(profile, 10.0)
     
-    def use_cost(
-        self,
-        profile: str,
-        cost_type: CostType,
-        amount: float
-    ) -> tuple[bool, float]:
-        """使用成本"""
-        budget = self.get_budget(profile, cost_type)
-        success = budget.use(amount)
-        self._save()
-        return success, budget.remaining()
-    
-    def check_budget(
-        self,
-        profile: str,
-        cost_type: CostType,
-        required: float = 0
-    ) -> tuple[bool, float]:
-        """检查预算"""
-        budget = self.get_budget(profile, cost_type)
-        remaining = budget.remaining()
-        return remaining >= required, remaining
-    
-    def get_decision_budget(self, profile: str) -> Dict:
-        """获取决策预算信息"""
-        api_budget = self.get_budget(profile, CostType.API_CALL)
-        compute_budget = self.get_budget(profile, CostType.COMPUTE)
+    def get_available(self, profile: str) -> float:
+        """
+        获取可用预算
         
+        Args:
+            profile: 配置文件名
+            
+        Returns:
+            可用预算
+        """
+        budget = self._budgets.get(profile)
+        if budget:
+            return budget.available
+        return self.get_budget(profile)
+    
+    def check_available(self, profile: str) -> bool:
+        """
+        检查是否有可用预算
+        
+        Args:
+            profile: 配置文件名
+            
+        Returns:
+            是否有可用预算
+        """
+        return self.get_available(profile) > 0.0
+    
+    def consume(self, profile: str, amount: float) -> bool:
+        """
+        消耗预算
+        
+        Args:
+            profile: 配置文件名
+            amount: 消耗量
+            
+        Returns:
+            是否成功
+        """
+        budget = self._budgets.get(profile)
+        if not budget:
+            return False
+        
+        if budget.available < amount:
+            return False
+        
+        budget.used += amount
+        budget.available -= amount
+        return True
+    
+    def reset(self, profile: str):
+        """
+        重置预算
+        
+        Args:
+            profile: 配置文件名
+        """
+        total = self.get_budget(profile)
+        self._budgets[profile] = CostBudget(
+            profile=profile,
+            total=total,
+            used=0.0,
+            available=total,
+            reset_at=self._get_reset_time()
+        )
+    
+    def set_budget(self, profile: str, total: float):
+        """
+        设置预算
+        
+        Args:
+            profile: 配置文件名
+            total: 总预算
+        """
+        self._custom_budgets[profile] = total
+        self._budgets[profile] = CostBudget(
+            profile=profile,
+            total=total,
+            used=0.0,
+            available=total,
+            reset_at=self._get_reset_time()
+        )
+    
+    def get_status(self, profile: str) -> Dict[str, Any]:
+        """
+        获取预算状态
+        
+        Args:
+            profile: 配置文件名
+            
+        Returns:
+            预算状态
+        """
+        budget = self._budgets.get(profile)
+        if budget:
+            return budget.to_dict()
+        return {"profile": profile, "total": 0.0, "used": 0.0, "available": 0.0}
+    
+    def reload(self) -> Dict[str, Any]:
+        """
+        重新加载
+        
+        Returns:
+            重载结果
+        """
+        self._init_budgets()
         return {
-            "api_call": {
-                "limit": api_budget.limit,
-                "used": api_budget.used,
-                "remaining": api_budget.remaining(),
-                "is_exceeded": api_budget.is_exceeded()
-            },
-            "compute": {
-                "limit": compute_budget.limit,
-                "used": compute_budget.used,
-                "remaining": compute_budget.remaining(),
-                "is_exceeded": compute_budget.is_exceeded()
-            }
+            "status": "reloaded",
+            "profiles": len(self._budgets)
         }
     
-    def reset(self, profile: str, cost_type: CostType = None):
-        """重置预算"""
-        if cost_type:
-            key = self._make_key(profile, cost_type)
-            if key in self._budgets:
-                self._budgets[key].used = 0.0
-        else:
-            for key in list(self._budgets.keys()):
-                if key.startswith(f"{profile}_"):
-                    self._budgets[key].used = 0.0
-        self._save()
+    def _get_reset_time(self) -> str:
+        """获取重置时间（明天 0 点）"""
+        now = datetime.now()
+        tomorrow = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        tomorrow = tomorrow.replace(day=now.day + 1)
+        return tomorrow.isoformat()
+
+
+# 全局单例
+_cost_budget_manager = None
+
+def get_cost_budget_manager() -> CostBudgetManager:
+    """获取成本预算管理器单例"""
+    global _cost_budget_manager
+    if _cost_budget_manager is None:
+        _cost_budget_manager = CostBudgetManager()
+    return _cost_budget_manager

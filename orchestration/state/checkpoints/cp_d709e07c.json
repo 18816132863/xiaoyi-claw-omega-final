@@ -1,0 +1,20 @@
+{
+  "checkpoint_id": "cp_d709e07c",
+  "workflow_id": "rollback_verify",
+  "step_id": "s1",
+  "timestamp": "2026-04-17T07:41:49.903311",
+  "state": {
+    "instance_id": "inst_7b52c6ce1dcd",
+    "error": "\u786c\u5931\u8d25",
+    "attempt": 0,
+    "step_results": {}
+  },
+  "completed_steps": [],
+  "pending_steps": [
+    "s1"
+  ],
+  "metadata": {
+    "phase": "on_error",
+    "attempt": 0
+  }
+}

@@ -227,12 +227,24 @@
    - 计算健康指标
    - 判断健康状态
 
-**验证结果：**
-- ✅ Skill Package 示例
-- ✅ Dependency Resolution 示例
-- ✅ Version Selection 示例
-- ✅ Compatibility Check 示例
-- ✅ Health Routing 示例
+7. **SkillRouter 主链接线**
+   - `skills/runtime/skill_router.py` 重写
+   - 正式调用 package_loader → dependency_resolver → compatibility_manager → version_selector → health_monitor → governance_filter
+   - 不再只是 manifest/registry 路由器
+
+**主链验证结果：**
+- ✅ Install + Router 发现
+- ✅ 多版本选择
+- ✅ Compatibility 路由
+- ✅ Lifecycle 影响 Router
+- ✅ 依赖阻止移除
+
+**通过标准：**
+- ✅ SkillRouter.select_skill() 已正式调用平台主链
+- ✅ contracts 两个 schema 已存在
+- ✅ compatibility / health index 已存在并会刷新
+- ✅ lifecycle manager 已影响 router 默认结果
+- ✅ 有正式 integration proof 证明平台主链生效
 
 **新增文件：**
 - `skills/contracts/skill_package.schema.json`

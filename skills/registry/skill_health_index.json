@@ -10,7 +10,7 @@
     "failure_rate": 0.0,
     "avg_latency_ms": 100.0,
     "recent_errors": [],
-    "last_success_at": "2026-04-17T07:12:56.827319",
+    "last_success_at": "2026-04-17T07:41:45.307620",
     "last_failure_at": null,
     "health_status": "healthy",
     "health_score": 1.0
@@ -27,48 +27,48 @@
     "avg_latency_ms": 5000.0,
     "recent_errors": [
       {
-        "timestamp": "2026-04-17T07:12:56.828368",
+        "timestamp": "2026-04-17T07:41:45.309484",
         "error": "timeout",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T07:12:56.830326",
+        "timestamp": "2026-04-17T07:41:45.311364",
         "error": "timeout",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T07:12:56.831556",
+        "timestamp": "2026-04-17T07:41:45.313496",
         "error": "timeout",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T07:12:56.832965",
+        "timestamp": "2026-04-17T07:41:45.315221",
         "error": "timeout",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T07:12:56.834281",
+        "timestamp": "2026-04-17T07:41:45.317156",
         "error": "timeout",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T07:12:56.836128",
+        "timestamp": "2026-04-17T07:41:45.319070",
         "error": "timeout",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T07:12:56.837614",
+        "timestamp": "2026-04-17T07:41:45.321055",
         "error": "timeout",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T07:12:56.838959",
+        "timestamp": "2026-04-17T07:41:45.323011",
         "error": "timeout",
         "error_type": "unknown"
       }
     ],
-    "last_success_at": "2026-04-17T07:12:56.841262",
-    "last_failure_at": "2026-04-17T07:12:56.838959",
+    "last_success_at": "2026-04-17T07:41:45.326937",
+    "last_failure_at": "2026-04-17T07:41:45.323011",
     "health_status": "unhealthy",
     "health_score": 0.35
   }

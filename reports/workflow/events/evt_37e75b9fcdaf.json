@@ -1,0 +1,13 @@
+{
+  "event_id": "evt_37e75b9fcdaf",
+  "instance_id": "inst_7b52c6ce1dcd",
+  "event_type": "rollback_triggered",
+  "timestamp": "2026-04-17T07:41:49.904506",
+  "step_id": "s1",
+  "data": {
+    "rollback_point_id": "rb_ea0de0b4",
+    "rollback_to_step": "s1",
+    "reason": "abort"
+  },
+  "metadata": {}
+}

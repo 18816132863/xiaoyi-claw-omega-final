@@ -211,6 +211,7 @@ class PolicyEngine:
         3. token_budget_manager - Token 预算
         4. cost_budget_manager - 成本预算
         5. high_risk_guard - 高风险守卫
+        6. metrics - 指标反哺
         
         Args:
             task_meta: 任务元数据（包含 intent, action 等）
@@ -236,6 +237,9 @@ class PolicyEngine:
         from ..budget.cost_budget_manager import CostBudgetManager, CostType
         
         requested_capabilities = requested_capabilities or []
+        
+        # 0. 加载 metrics
+        metrics = self._load_metrics()
         
         # 1. 风险分类
         risk_classifier = RiskClassifier()
@@ -271,6 +275,15 @@ class PolicyEngine:
         allowed = guard_decision.action.value in ["allow", "degrade"]
         requires_review = guard_decision.review_required
         
+        # 7. 基于 metrics 调整决策
+        if metrics and allowed:
+            metrics_adjustment = self._adjust_by_metrics(metrics, profile)
+            if metrics_adjustment["degrade"]:
+                decision = "degrade"
+                requires_review = True
+                if metrics_adjustment["reason"]:
+                    guard_decision.reason += f" | {metrics_adjustment['reason']}"
+        
         # 获取允许/禁止的能力
         allowed_capabilities = permission_engine.get_allowed_capabilities(profile)
         blocked_capabilities = permission_engine.get_blocked_capabilities(profile)
@@ -300,6 +313,7 @@ class PolicyEngine:
             "requires_review": requires_review,
             "reason": guard_decision.reason,
             "mitigations": risk_assessment.mitigations,
+            "metrics": metrics.get("summary", {}) if metrics else {},
             "details": {
                 "risk_assessment": {
                     "level": risk_assessment.risk_level.value,
@@ -334,6 +348,57 @@ class PolicyEngine:
         })
         
         return result
+    
+    def _load_metrics(self) -> Optional[Dict]:
+        """加载聚合指标"""
+        import os
+        
+        metrics_path = "reports/metrics/aggregated_metrics.json"
+        if not os.path.exists(metrics_path):
+            return None
+        
+        try:
+            with open(metrics_path, 'r') as f:
+                return json.load(f)
+        except:
+            return None
+    
+    def _adjust_by_metrics(self, metrics: Dict, profile: str) -> Dict:
+        """基于指标调整决策"""
+        summary = metrics.get("summary", {})
+        
+        task_success_rate = summary.get("task_success_rate", 1.0)
+        skill_failure_rate = summary.get("skill_failure_rate", 0.0)
+        memory_hit_rate = summary.get("memory_hit_rate", 1.0)
+        overall_health = summary.get("overall_health", "good")
+        
+        degrade = False
+        reason = ""
+        
+        # 任务成功率过低
+        if task_success_rate < 0.5:
+            degrade = True
+            reason = f"Low task success rate: {task_success_rate:.1%}"
+        
+        # 技能失败率过高
+        if skill_failure_rate > 0.3:
+            degrade = True
+            reason = f"High skill failure rate: {skill_failure_rate:.1%}"
+        
+        # 记忆命中率过低
+        if memory_hit_rate < 0.3:
+            degrade = True
+            reason = f"Low memory hit rate: {memory_hit_rate:.1%}"
+        
+        # 整体健康状态差
+        if overall_health == "poor":
+            degrade = True
+            reason = "System health is poor"
+        
+        return {
+            "degrade": degrade,
+            "reason": reason
+        }
 
 
 # Pre-defined policies

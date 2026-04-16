@@ -1,4 +1,4 @@
-"""Workflow engine - executes DAG-based workflows."""
+"""Workflow engine - executes DAG-based workflows with recovery chain."""
 
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -39,6 +39,7 @@ class StepResult:
     retry_count: int = 0
     duration_ms: int = 0
     fallback_used: bool = False
+    rollback_used: bool = False
 
 
 @dataclass
@@ -52,6 +53,13 @@ class WorkflowResult:
     final_output: Dict = field(default_factory=dict)
     error: Optional[str] = None
     total_duration_ms: int = 0
+    # 恢复链字段
+    failed_step_id: Optional[str] = None
+    reason: Optional[str] = None
+    total_retry_count: int = 0
+    fallback_used: bool = False
+    rollback_used: bool = False
+    checkpoint_id: Optional[str] = None
 
 
 class WorkflowEngine:
@@ -61,6 +69,7 @@ class WorkflowEngine:
     - Retry policies
     - Fallback actions
     - Checkpointing
+    - Rollback
     - State management
     """
     
@@ -69,11 +78,15 @@ class WorkflowEngine:
         skill_router=None,
         state_store=None,
         checkpoint_store=None,
+        fallback_policy=None,
+        rollback_manager=None,
         max_parallel_steps: int = 4
     ):
         self.skill_router = skill_router
         self.state_store = state_store
         self.checkpoint_store = checkpoint_store
+        self.fallback_policy = fallback_policy
+        self.rollback_manager = rollback_manager
         self.max_parallel_steps = max_parallel_steps
         self._action_handlers: Dict[str, Callable] = {}
         self._executor = ThreadPoolExecutor(max_workers=max_parallel_steps)
@@ -115,22 +128,48 @@ class WorkflowEngine:
         dag = self._build_dag(steps)
         
         # Load checkpoint if resuming
+        completed_steps = []
+        pending_steps = [s.get("step_id") for s in steps]
+        
         if resume_from_checkpoint and self.checkpoint_store:
             checkpoint = self.checkpoint_store.load(resume_from_checkpoint)
             if checkpoint:
-                result.step_results = checkpoint.get("step_results", {})
+                result.checkpoint_id = resume_from_checkpoint
+                # 恢复状态
+                for step_id in checkpoint.completed_steps:
+                    step_result = StepResult(
+                        step_id=step_id,
+                        status=StepStatus.COMPLETED,
+                        started_at=datetime.now(),
+                        completed_at=datetime.now()
+                    )
+                    result.step_results[step_id] = step_result
+                    completed_steps.append(step_id)
+                pending_steps = checkpoint.pending_steps
         
         try:
             # Execute DAG
-            self._execute_dag(dag, result, context_bundle)
+            self._execute_dag(dag, result, context_bundle, completed_steps)
             
             # Mark completed
             result.status = WorkflowStatus.COMPLETED
             result.completed_at = datetime.now()
             
+            # Save final checkpoint
+            if self.checkpoint_store:
+                cp = self.checkpoint_store.save(
+                    workflow_id=workflow_id,
+                    step_id="_completed",
+                    state={"status": "completed"},
+                    completed_steps=list(result.step_results.keys()),
+                    pending_steps=[]
+                )
+                result.checkpoint_id = cp.checkpoint_id
+            
         except Exception as e:
             result.status = WorkflowStatus.FAILED
             result.error = str(e)
+            result.reason = str(e)
             result.completed_at = datetime.now()
         
         # Calculate duration
@@ -138,6 +177,14 @@ class WorkflowEngine:
             result.total_duration_ms = int(
                 (result.completed_at - result.started_at).total_seconds() * 1000
             )
+        
+        # 汇总重试次数
+        for step_result in result.step_results.values():
+            result.total_retry_count += step_result.retry_count
+            if step_result.fallback_used:
+                result.fallback_used = True
+            if step_result.rollback_used:
+                result.rollback_used = True
         
         return result
     
@@ -177,9 +224,15 @@ class WorkflowEngine:
         
         return dag
     
-    def _execute_dag(self, dag: Dict, result: WorkflowResult, context: Dict):
+    def _execute_dag(
+        self,
+        dag: Dict,
+        result: WorkflowResult,
+        context: Dict,
+        completed: List[str] = None
+    ):
         """Execute DAG with proper dependency handling."""
-        completed = set(result.step_results.keys())
+        completed = set(completed or [])
         pending = set(dag["nodes"].keys()) - completed
         running = set()
         
@@ -205,6 +258,16 @@ class WorkflowEngine:
                 pending.remove(step_id)
                 running.add(step_id)
                 
+                # Save checkpoint before step
+                if self.checkpoint_store:
+                    self.checkpoint_store.save(
+                        workflow_id=result.workflow_id,
+                        step_id=step_id,
+                        state={"phase": "before"},
+                        completed_steps=list(completed),
+                        pending_steps=list(pending)
+                    )
+                
                 # Execute step
                 step_result = self._execute_step(
                     dag["nodes"][step_id]["step"],
@@ -217,8 +280,22 @@ class WorkflowEngine:
                 
                 if step_result.status == StepStatus.COMPLETED:
                     completed.add(step_id)
+                    
+                    # Save checkpoint after step
+                    if self.checkpoint_store:
+                        self.checkpoint_store.save(
+                            workflow_id=result.workflow_id,
+                            step_id=step_id,
+                            state={"phase": "after", "output": step_result.output},
+                            completed_steps=list(completed),
+                            pending_steps=list(pending)
+                        )
+                        
                 elif step_result.status == StepStatus.FAILED:
-                    # Handle failure
+                    result.failed_step_id = step_id
+                    result.reason = step_result.error
+                    
+                    # Handle failure with recovery chain
                     if not self._handle_step_failure(step_id, dag, result):
                         raise RuntimeError(f"Step {step_id} failed: {step_result.error}")
                     completed.add(step_id)  # Fallback succeeded
@@ -246,6 +323,7 @@ class WorkflowEngine:
         
         # Execute with retry
         max_retries = retry_policy.get("max_retries", 3)
+        
         for attempt in range(max_retries + 1):
             try:
                 # Execute action
@@ -261,21 +339,55 @@ class WorkflowEngine:
                 
                 if attempt < max_retries:
                     result.status = StepStatus.RETRYING
-                    # TODO: Apply backoff
                 else:
-                    # Try fallback
-                    fallback = step.get("fallback")
-                    if fallback:
-                        try:
-                            output = self._execute_action(fallback, step_input, timeout)
-                            result.status = StepStatus.COMPLETED
-                            result.output = output
-                            result.fallback_used = True
-                        except Exception as fe:
+                    # 使用 FallbackPolicy 决定下一步
+                    if self.fallback_policy:
+                        from orchestration.execution_control.fallback_policy import FallbackAction
+                        
+                        decision = self.fallback_policy.decide(
+                            step_id=step_id,
+                            error=str(e),
+                            retry_count=attempt,
+                            context=context
+                        )
+                        
+                        if decision.action == FallbackAction.FALLBACK:
+                            # 尝试回退技能
+                            if decision.fallback_skill_id:
+                                try:
+                                    output = self._execute_action(
+                                        decision.fallback_skill_id,
+                                        step_input,
+                                        timeout
+                                    )
+                                    result.status = StepStatus.COMPLETED
+                                    result.output = output
+                                    result.fallback_used = True
+                                except Exception as fe:
+                                    result.status = StepStatus.FAILED
+                                    result.error = f"Primary: {e}, Fallback: {fe}"
+                            else:
+                                result.status = StepStatus.FAILED
+                                
+                        elif decision.action == FallbackAction.SKIP:
+                            result.status = StepStatus.SKIPPED
+                            
+                        elif decision.action == FallbackAction.ABORT:
                             result.status = StepStatus.FAILED
-                            result.error = f"Primary: {e}, Fallback: {fe}"
                     else:
-                        result.status = StepStatus.FAILED
+                        # 没有 FallbackPolicy，尝试 step 定义的 fallback
+                        fallback = step.get("fallback")
+                        if fallback:
+                            try:
+                                output = self._execute_action(fallback, step_input, timeout)
+                                result.status = StepStatus.COMPLETED
+                                result.output = output
+                                result.fallback_used = True
+                            except Exception as fe:
+                                result.status = StepStatus.FAILED
+                                result.error = f"Primary: {e}, Fallback: {fe}"
+                        else:
+                            result.status = StepStatus.FAILED
         
         result.completed_at = datetime.now()
         result.duration_ms = int(
@@ -318,7 +430,6 @@ class WorkflowEngine:
                 pass
         
         # 3. 只允许显式测试动作（test/noop/mock）走默认成功
-        # 其他动作必须通过 handler 或 skill_router 真实执行
         if action.lower() in ["test", "noop", "mock"]:
             return {
                 "executed": True,
@@ -334,13 +445,32 @@ class WorkflowEngine:
         )
     
     def _handle_step_failure(self, step_id: str, dag: Dict, result: WorkflowResult) -> bool:
-        """Handle step failure. Returns True if recovered."""
+        """Handle step failure with recovery chain. Returns True if recovered."""
         step_result = result.step_results[step_id]
         step = dag["nodes"][step_id]["step"]
         
         # Check if step has fallback
         if step_result.fallback_used:
             return True  # Already tried fallback
+        
+        # 尝试 rollback
+        if self.rollback_manager and step.get("rollback", False):
+            # 创建回滚点
+            point = self.rollback_manager.create_point(
+                step_id=step_id,
+                state={"step_results": {k: v.__dict__ for k, v in result.step_results.items()}}
+            )
+            
+            # 执行回滚
+            rollback_result = self.rollback_manager.rollback(point.point_id)
+            if rollback_result.success:
+                step_result.rollback_used = True
+                result.rollback_used = True
+                # 恢复状态
+                for k, v in rollback_result.restored_state.get("step_results", {}).items():
+                    if k in result.step_results:
+                        result.step_results[k].status = StepStatus.COMPLETED
+                return True
         
         # Check if step is critical
         if step.get("criticality") == "critical":

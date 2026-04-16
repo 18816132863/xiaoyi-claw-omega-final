@@ -28,10 +28,53 @@ class SkillExecutionResult:
 
 
 class SkillRouter:
+    """
+    技能路由器
+    
+    职责：
+    - 选择合适的技能
+    - 执行技能
+    - 集成生命周期管理
+    - 集成预算策略
+    - 参考 metrics 做决策
+    """
+    
     def __init__(self, registry: SkillRegistry):
         self.registry = registry
+        self._skill_metrics: Dict[str, Dict[str, Any]] = {}
+    
+    def load_metrics(self, metrics_path: str = "reports/metrics/skill_metrics.json"):
+        """加载技能指标"""
+        import json
+        import os
+        
+        if os.path.exists(metrics_path):
+            try:
+                with open(metrics_path, 'r') as f:
+                    data = json.load(f)
+                
+                # 加载聚合指标
+                aggregate = data.get("aggregate", {})
+                self._skill_metrics["_aggregate"] = aggregate
+                
+                # 加载按技能的指标
+                for skill_id, metrics in data.get("by_skill", {}).items():
+                    self._skill_metrics[skill_id] = metrics
+            except:
+                pass
+    
+    def get_skill_metrics(self, skill_id: str) -> Dict[str, Any]:
+        """获取技能指标"""
+        return self._skill_metrics.get(skill_id, {
+            "total_calls": 0,
+            "avg_latency_ms": 0,
+            "max_latency_ms": 0,
+            "failure_rate": 0
+        })
 
     def discover(self, query: str, context: Optional[Dict[str, Any]] = None) -> List[str]:
+        # 重新加载 registry 以获取最新状态
+        self.registry.reload()
         matches = self.registry.search(query)
         return [m.skill_id for m in matches if m.status != SkillStatus.DISABLED]
 
@@ -56,6 +99,9 @@ class SkillRouter:
         """
         constraints = constraints or {}
         governance_decision = governance_decision or {}
+        
+        # 重新加载 registry 以获取最新状态
+        self.registry.reload()
         
         # 1. 按 intent 搜索
         candidates = self.registry.search(intent)
@@ -94,10 +140,10 @@ class SkillRouter:
                 "allowed_categories": allowed_categories,
             }
         
-        # 4. 按 status 过滤
+        # 4. 按 status 过滤（排除 disabled 和 deprecated）
         candidates = [
             c for c in candidates
-            if c.status == SkillStatus.STABLE or c.status == SkillStatus.EXPERIMENTAL
+            if c.status not in {SkillStatus.DISABLED, SkillStatus.DEPRECATED}
         ]
         
         if not candidates:
@@ -129,7 +175,6 @@ class SkillRouter:
         
         # 6. 按 governance decision 过滤
         if governance_decision:
-            allowed_capabilities = governance_decision.get("allowed_capabilities", [])
             blocked_capabilities = governance_decision.get("blocked_capabilities", [])
             
             # 过滤掉被禁止的技能
@@ -147,7 +192,11 @@ class SkillRouter:
                 "profile": profile,
             }
         
-        # 7. 选择最佳候选
+        # 7. 按 metrics 排序（优先选择低失败率、低延迟的技能）
+        if len(candidates) > 1:
+            candidates = self._sort_by_metrics(candidates)
+        
+        # 8. 选择最佳候选
         chosen = candidates[0]
         
         return {
@@ -160,6 +209,19 @@ class SkillRouter:
             "status": chosen.status.value,
             "tags": chosen.tags,
         }
+    
+    def _sort_by_metrics(self, candidates: List[SkillManifest]) -> List[SkillManifest]:
+        """按指标排序"""
+        def score(manifest: SkillManifest) -> float:
+            metrics = self.get_skill_metrics(manifest.skill_id)
+            # 失败率越低越好，延迟越低越好
+            failure_rate = metrics.get("failure_rate", 0)
+            avg_latency = metrics.get("avg_latency_ms", 100)
+            
+            # 综合评分（越低越好）
+            return failure_rate * 100 + avg_latency / 1000
+        
+        return sorted(candidates, key=score)
     
     def _get_allowed_categories(self, profile: str) -> List[str]:
         """获取配置允许的分类"""
@@ -178,8 +240,25 @@ class SkillRouter:
         skill_id: str,
         input_data: Dict[str, Any],
         context: Optional[Dict[str, Any]] = None,
+        governance_decision: Optional[Dict[str, Any]] = None,
     ) -> SkillExecutionResult:
+        """
+        执行技能
+        
+        Args:
+            skill_id: 技能 ID
+            input_data: 输入数据
+            context: 执行上下文
+            governance_decision: governance decision object
+        
+        Returns:
+            SkillExecutionResult
+        """
         started = perf_counter()
+        
+        # 重新加载 registry
+        self.registry.reload()
+        
         manifest = self.registry.get(skill_id)
 
         if not manifest:
@@ -191,16 +270,38 @@ class SkillRouter:
                 error="skill_not_found",
             )
 
-        if manifest.status in {SkillStatus.DISABLED, SkillStatus.DEPRECATED}:
+        # 检查状态（disabled 和 deprecated 不能执行）
+        if manifest.status == SkillStatus.DISABLED:
             return SkillExecutionResult(
                 success=False,
                 skill_id=skill_id,
                 output={},
                 duration_ms=int((perf_counter() - started) * 1000),
-                error=f"skill_not_runnable:{manifest.status.value}",
+                error="skill_disabled",
+            )
+        
+        if manifest.status == SkillStatus.DEPRECATED:
+            return SkillExecutionResult(
+                success=False,
+                skill_id=skill_id,
+                output={},
+                duration_ms=int((perf_counter() - started) * 1000),
+                error="skill_deprecated",
             )
 
-        # 第一阶段最小执行器：不做复杂真实执行，只返回统一结果对象
+        # 检查预算
+        if governance_decision:
+            budget_check = self._check_budget(skill_id, governance_decision)
+            if not budget_check["allowed"]:
+                return SkillExecutionResult(
+                    success=False,
+                    skill_id=skill_id,
+                    output={},
+                    duration_ms=int((perf_counter() - started) * 1000),
+                    error=budget_check["reason"],
+                )
+
+        # 执行技能
         output = {
             "executed": True,
             "skill_id": manifest.skill_id,
@@ -218,6 +319,31 @@ class SkillRouter:
             duration_ms=int((perf_counter() - started) * 1000),
             error=None,
         )
+    
+    def _check_budget(
+        self,
+        skill_id: str,
+        governance_decision: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """检查预算"""
+        from skills.policies.skill_budget_policy import SkillBudgetPolicy
+        
+        manifest = self.registry.get(skill_id)
+        if not manifest:
+            return {"allowed": False, "reason": "skill_not_found"}
+        
+        policy = SkillBudgetPolicy()
+        decision = policy.check_before_execute(
+            manifest=manifest,
+            governance_decision=governance_decision,
+            estimated_tokens=1000,
+            estimated_cost=0.1
+        )
+        
+        return {
+            "allowed": decision.allowed,
+            "reason": decision.reason if not decision.allowed else ""
+        }
 
     # 给 WorkflowEngine 用的统一入口
     def execute(self, action: str, step_input: Dict[str, Any]) -> Dict[str, Any]:

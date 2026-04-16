@@ -1,5 +1,5 @@
 {
-  "version": "4.2.0",
+  "version": "7.2.0",
   "description": "分层懒加载配置",
   "layers": {
     "P0_CORE": {
@@ -9,7 +9,7 @@
       "max_size_kb": 50,
       "files": [
         "AGENTS.md",
-        "SOUL.md", 
+        "SOUL.md",
         "TOOLS.md",
         "USER.md",
         "IDENTITY.md",

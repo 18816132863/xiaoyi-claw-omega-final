@@ -1,5 +1,5 @@
 {
-  "version": "4.0",
+  "version": "7.2.0",
   "updated": "2026-04-12",
   "description": "受保护文件清单 - 只包含真实存在的文件",
   "core": [

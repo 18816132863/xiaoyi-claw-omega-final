@@ -40,19 +40,33 @@ class SkillRouter:
         intent: str,
         profile: str,
         constraints: Optional[Dict[str, Any]] = None,
+        governance_decision: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
+        """
+        选择技能
+        
+        Args:
+            intent: 意图
+            profile: 执行配置
+            constraints: 约束条件
+            governance_decision: governance decision object
+        
+        Returns:
+            选择结果
+        """
         constraints = constraints or {}
-
-        # 先按 intent 搜
+        governance_decision = governance_decision or {}
+        
+        # 1. 按 intent 搜索
         candidates = self.registry.search(intent)
-
-        # 没搜到就退化为所有可用技能
+        
+        # 2. 没搜到就退化为所有可用技能
         if not candidates:
             candidates = [
                 s for s in self.registry.list()
                 if s.status not in {SkillStatus.DISABLED, SkillStatus.DEPRECATED}
             ]
-
+        
         if not candidates:
             return {
                 "success": False,
@@ -61,15 +75,103 @@ class SkillRouter:
                 "reason": "no_available_skill",
                 "profile": profile,
             }
-
+        
+        # 3. 按 profile 过滤
+        allowed_categories = self._get_allowed_categories(profile)
+        if "*" not in allowed_categories:
+            candidates = [
+                c for c in candidates
+                if c.category.value in allowed_categories
+            ]
+        
+        if not candidates:
+            return {
+                "success": False,
+                "skill_id": None,
+                "confidence": 0.0,
+                "reason": "no_skill_in_allowed_categories",
+                "profile": profile,
+                "allowed_categories": allowed_categories,
+            }
+        
+        # 4. 按 status 过滤
+        candidates = [
+            c for c in candidates
+            if c.status == SkillStatus.STABLE or c.status == SkillStatus.EXPERIMENTAL
+        ]
+        
+        if not candidates:
+            return {
+                "success": False,
+                "skill_id": None,
+                "confidence": 0.0,
+                "reason": "no_stable_or_experimental_skill",
+                "profile": profile,
+            }
+        
+        # 5. 按 tags 过滤
+        required_tags = constraints.get("required_tags", [])
+        if required_tags:
+            candidates = [
+                c for c in candidates
+                if any(tag in c.tags for tag in required_tags)
+            ]
+        
+        if not candidates:
+            return {
+                "success": False,
+                "skill_id": None,
+                "confidence": 0.0,
+                "reason": "no_skill_with_required_tags",
+                "profile": profile,
+                "required_tags": required_tags,
+            }
+        
+        # 6. 按 governance decision 过滤
+        if governance_decision:
+            allowed_capabilities = governance_decision.get("allowed_capabilities", [])
+            blocked_capabilities = governance_decision.get("blocked_capabilities", [])
+            
+            # 过滤掉被禁止的技能
+            candidates = [
+                c for c in candidates
+                if c.skill_id not in blocked_capabilities
+            ]
+        
+        if not candidates:
+            return {
+                "success": False,
+                "skill_id": None,
+                "confidence": 0.0,
+                "reason": "no_skill_after_governance_filter",
+                "profile": profile,
+            }
+        
+        # 7. 选择最佳候选
         chosen = candidates[0]
+        
         return {
             "success": True,
             "skill_id": chosen.skill_id,
             "confidence": 0.9,
             "reason": "matched_by_intent" if self.registry.search(intent) else "fallback_first_available",
             "profile": profile,
+            "category": chosen.category.value,
+            "status": chosen.status.value,
+            "tags": chosen.tags,
         }
+    
+    def _get_allowed_categories(self, profile: str) -> List[str]:
+        """获取配置允许的分类"""
+        profile_categories = {
+            "admin": ["*"],
+            "developer": ["code", "git", "docker", "utility", "search", "document", "data"],
+            "default": ["utility", "search", "document"],
+            "operator": ["search", "document", "data"],
+            "auditor": ["search", "document"],
+            "restricted": ["utility"]
+        }
+        return profile_categories.get(profile, ["utility"])
 
     def route(
         self,

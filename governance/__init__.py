@@ -13,7 +13,7 @@ from .degradation.degradation_manager import (
     DegradationManager, DegradationLevel, DegradationTrigger, KillSwitch
 )
 from .evaluation.evaluation_aggregator import (
-    EvaluationAggregator, Metric, MetricType, RegressionAlert
+    EvaluationAggregator, AggregatedMetrics
 )
 
 __all__ = [
@@ -34,7 +34,5 @@ __all__ = [
     "DegradationTrigger",
     "KillSwitch",
     "EvaluationAggregator",
-    "Metric",
-    "MetricType",
-    "RegressionAlert"
+    "AggregatedMetrics"
 ]

@@ -1,0 +1,42 @@
+{
+  "aggregate": {
+    "total_calls": 10,
+    "avg_latency_ms": 63.0,
+    "max_latency_ms": 120,
+    "failure_rate": 0.2,
+    "timestamp": "2026-04-16T11:24:06.000614",
+    "details": {
+      "error_types": {
+        "timeout": 1,
+        "validation_error": 1
+      },
+      "unique_skills": 4
+    }
+  },
+  "by_skill": {
+    "search": {
+      "total_calls": 3,
+      "avg_latency_ms": 35.0,
+      "max_latency_ms": 50,
+      "failure_rate": 0.3333333333333333
+    },
+    "document": {
+      "total_calls": 3,
+      "avg_latency_ms": 81.66666666666667,
+      "max_latency_ms": 90,
+      "failure_rate": 0.0
+    },
+    "code": {
+      "total_calls": 3,
+      "avg_latency_ms": 83.33333333333333,
+      "max_latency_ms": 120,
+      "failure_rate": 0.3333333333333333
+    },
+    "utility": {
+      "total_calls": 1,
+      "avg_latency_ms": 30.0,
+      "max_latency_ms": 30,
+      "failure_rate": 0.0
+    }
+  }
+}

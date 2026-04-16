@@ -1,0 +1,95 @@
+{
+  "timestamp": "2026-04-16T11:24:06.002712",
+  "summary": {
+    "task_success_rate": 0.7,
+    "skill_failure_rate": 0.2,
+    "memory_hit_rate": 0.75,
+    "overall_health": "good"
+  },
+  "task_metrics": {
+    "total": 10,
+    "passed": 7,
+    "failed": 3,
+    "success_rate": 0.7,
+    "avg_duration_ms": 139.0,
+    "timestamp": "2026-04-16T11:24:05.999966",
+    "details": {
+      "error_types": {
+        "timeout": 1,
+        "skill_not_found": 1,
+        "permission_denied": 1
+      },
+      "min_duration_ms": 30,
+      "max_duration_ms": 220
+    }
+  },
+  "skill_metrics": {
+    "aggregate": {
+      "total_calls": 10,
+      "avg_latency_ms": 63.0,
+      "max_latency_ms": 120,
+      "failure_rate": 0.2,
+      "timestamp": "2026-04-16T11:24:06.000614",
+      "details": {
+        "error_types": {
+          "timeout": 1,
+          "validation_error": 1
+        },
+        "unique_skills": 4
+      }
+    },
+    "by_skill": {
+      "search": {
+        "total_calls": 3,
+        "avg_latency_ms": 35.0,
+        "max_latency_ms": 50,
+        "failure_rate": 0.3333333333333333
+      },
+      "document": {
+        "total_calls": 3,
+        "avg_latency_ms": 81.66666666666667,
+        "max_latency_ms": 90,
+        "failure_rate": 0.0
+      },
+      "code": {
+        "total_calls": 3,
+        "avg_latency_ms": 83.33333333333333,
+        "max_latency_ms": 120,
+        "failure_rate": 0.3333333333333333
+      },
+      "utility": {
+        "total_calls": 1,
+        "avg_latency_ms": 30.0,
+        "max_latency_ms": 30,
+        "failure_rate": 0.0
+      }
+    }
+  },
+  "memory_metrics": {
+    "total_queries": 8,
+    "hits": 6,
+    "misses": 2,
+    "hit_rate": 0.75,
+    "avg_token_usage": 123.75,
+    "avg_source_count": 2.125,
+    "avg_latency_ms": 0.0,
+    "timestamp": "2026-04-16T11:24:06.001221",
+    "details": {
+      "source_distribution": {
+        "3_sources": 3,
+        "4_sources": 1,
+        "0_sources": 2,
+        "2_sources": 2
+      },
+      "min_token_usage": 30,
+      "max_token_usage": 200,
+      "min_source_count": 0,
+      "max_source_count": 4
+    }
+  },
+  "details": {
+    "task_total": 10,
+    "skill_total_calls": 10,
+    "memory_total_queries": 8
+  }
+}

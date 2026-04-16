@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TaskNode",
+  "type": "object",
+  "required": ["step_id", "action"],
+  "properties": {
+    "step_id": {"type": "string", "description": "Unique step identifier"},
+    "name": {"type": "string", "description": "Human-readable step name"},
+    "action": {"type": "string", "description": "Action to execute"},
+    "depends_on": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of step_ids this step depends on"
+    },
+    "input_contract": {
+      "type": "object",
+      "description": "Expected input schema"
+    },
+    "output_contract": {
+      "type": "object",
+      "description": "Expected output schema"
+    },
+    "retry_policy": {
+      "type": "object",
+      "properties": {
+        "max_retries": {"type": "integer", "default": 3},
+        "backoff_seconds": {"type": "integer", "default": 1},
+        "backoff_multiplier": {"type": "number", "default": 2},
+        "retry_on": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "timeout_seconds": {"type": "integer", "default": 300},
+    "fallback": {"type": "string", "description": "Fallback action if step fails"},
+    "can_run_parallel": {"type": "boolean", "default": false},
+    "criticality": {
+      "enum": ["low", "medium", "high", "critical"],
+      "default": "medium"
+    }
+  }
+}

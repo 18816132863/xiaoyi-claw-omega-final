@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StepResult",
+  "type": "object",
+  "required": ["step_id", "status", "started_at"],
+  "properties": {
+    "step_id": {"type": "string"},
+    "status": {"enum": ["pending", "running", "completed", "failed", "skipped", "retrying"]},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "output": {"type": "object"},
+    "error": {"type": "string"},
+    "retry_count": {"type": "integer", "default": 0},
+    "duration_ms": {"type": "integer"},
+    "fallback_used": {"type": "boolean", "default": false}
+  }
+}

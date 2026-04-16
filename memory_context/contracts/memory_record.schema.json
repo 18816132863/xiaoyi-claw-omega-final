@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MemoryRecord",
+  "type": "object",
+  "required": ["id", "type", "content", "created_at", "source"],
+  "properties": {
+    "id": {"type": "string"},
+    "type": {"enum": ["session", "user_preference", "project_history", "decision_log", "architecture_record", "rule_exception"]},
+    "content": {"type": "string"},
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "relevance_score": {"type": "number", "minimum": 0, "maximum": 1},
+        "importance": {"enum": ["low", "medium", "high", "critical"]},
+        "decay_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "tags": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "expires_at": {"type": "string", "format": "date-time"},
+    "source": {"type": "string"},
+    "embedding": {"type": "array", "items": {"type": "number"}}
+  }
+}

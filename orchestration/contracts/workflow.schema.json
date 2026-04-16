@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Workflow",
+  "type": "object",
+  "required": ["workflow_id", "name", "steps"],
+  "properties": {
+    "workflow_id": {"type": "string"},
+    "name": {"type": "string"},
+    "description": {"type": "string"},
+    "version": {"type": "string"},
+    "profile": {"type": "string"},
+    "steps": {
+      "type": "array",
+      "items": {"$ref": "#/definitions/TaskNode"}
+    },
+    "metadata": {"type": "object"}
+  },
+  "definitions": {
+    "TaskNode": {
+      "type": "object",
+      "required": ["step_id", "action"],
+      "properties": {
+        "step_id": {"type": "string"},
+        "name": {"type": "string"},
+        "action": {"type": "string"},
+        "depends_on": {"type": "array", "items": {"type": "string"}},
+        "input_contract": {"type": "object"},
+        "output_contract": {"type": "object"},
+        "retry_policy": {"$ref": "#/definitions/RetryPolicy"},
+        "timeout_seconds": {"type": "integer", "default": 300},
+        "fallback": {"type": "string"},
+        "can_run_parallel": {"type": "boolean", "default": false},
+        "criticality": {"enum": ["low", "medium", "high", "critical"], "default": "medium"}
+      }
+    },
+    "RetryPolicy": {
+      "type": "object",
+      "properties": {
+        "max_retries": {"type": "integer", "default": 3},
+        "backoff_seconds": {"type": "integer", "default": 1},
+        "backoff_multiplier": {"type": "number", "default": 2},
+        "retry_on": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

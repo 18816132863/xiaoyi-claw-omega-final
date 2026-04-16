@@ -1,6 +1,6 @@
 {
   "changed_files": [
-    "CHANGELOG.md",
+    ".github/workflows/ci.yml",
     "Makefile",
     "archive/architecture_html/architecture_v27.html",
     "archive/architecture_html/architecture_v27_cn.html",
@@ -13,62 +13,252 @@
     "archive/backups/backup_20260414_225711.tar.gz.xz",
     "archive/backups/backup_20260414_230454.tar.gz.xz",
     "archive/backups/backup_20260414_231125.tar.gz.xz",
-    "core/CAPABILITY_MAP.md",
+    "core/ARCHITECTURE_FREEZE_1_0.md",
+    "core/RELEASE_EVIDENCE_POLICY.md",
     "core/RULE_EXCEPTIONS.json",
     "core/RULE_EXCEPTION_DEBT_POLICY.md",
+    "core/RULE_EXCEPTION_QUOTA_POLICY.md",
     "core/RULE_REGISTRY.json",
-    "core/UNIFIED_ARCHITECTURE.md",
+    "governance/MAINTENANCE_MODE_POLICY.md",
+    "governance/README.md",
+    "governance/__init__.py",
     "governance/quality_gate.py",
+    "governance/recovery/__init__.py",
+    "governance/review/__init__.py",
+    "governance/rules/__init__.py",
+    "governance/security/__init__.py",
+    "governance/validators/__init__.py",
     "infrastructure/release/release_manager.py",
     "infrastructure/verify_runtime_integrity.py",
     "memory/2026-04-15.md",
+    "memory/2026-04-16.md",
     "memory_context/README.md",
     "memory_context/__init__.py",
+    "memory_context/cache/__init__.py",
+    "memory_context/data/__init__.py",
+    "memory_context/ecommerce/__init__.py",
+    "memory_context/feedback/__init__.py",
+    "memory_context/index/__init__.py",
+    "memory_context/search/__init__.py",
     "memory_context/unified_search.py",
+    "memory_context/vector/__init__.py",
+    "orchestration/README.md",
+    "orchestration/__init__.py",
+    "orchestration/workflows/__init__.py",
     "reports/alerts/latest_alerts.json",
+    "reports/bundles/final_verification_bundle.json",
     "reports/git_commits.json",
     "reports/ops/change_impact.json",
     "reports/ops/change_impact_enforcement.json",
+    "reports/ops/change_impact_enforcement_nightly.json",
+    "reports/ops/change_impact_enforcement_premerge.json",
+    "reports/ops/change_impact_enforcement_release.json",
     "reports/ops/control_plane_audit.json",
     "reports/ops/control_plane_state.json",
+    "reports/ops/exception_approval_queue.json",
     "reports/ops/executed_checks.json",
+    "reports/ops/executed_checks_nightly.json",
+    "reports/ops/executed_checks_premerge.json",
+    "reports/ops/executed_checks_release.json",
     "reports/ops/followup_requirements.json",
     "reports/ops/rule_engine_report.json",
+    "reports/ops/rule_engine_report_nightly.json",
+    "reports/ops/rule_engine_report_premerge.json",
+    "reports/ops/rule_engine_report_release.json",
     "reports/ops/rule_exception_debt.json",
     "reports/ops/rule_exception_history.json",
+    "reports/ops/rule_exception_quota.json",
     "reports/ops/rule_exception_status.json",
     "reports/ops/rule_execution_index.json",
     "reports/ops/rule_registry_snapshot.json",
     "reports/quality_gate.json",
+    "reports/quality_gate_nightly.json",
+    "reports/quality_gate_premerge.json",
+    "reports/quality_gate_release.json",
     "reports/release_gate.json",
     "reports/remediation/approval_history.json",
     "reports/remediation/latest_remediation.json",
     "reports/runtime_integrity.json",
+    "reports/runtime_integrity_nightly.json",
+    "reports/runtime_integrity_premerge.json",
     "reports/runtime_integrity_release.json",
+    "reports/trends/exception_trend.json",
+    "reports/trends/rule_trend.json",
     "scripts/check_change_impact.py",
     "scripts/check_change_impact_enforcement.py",
     "scripts/check_rule_guards.py",
     "scripts/control_plane.py",
     "scripts/exception_manager.py",
+    "scripts/generate_final_verification_bundle.py",
     "scripts/ops_center.py",
     "scripts/render_nightly_summary.py",
     "scripts/render_premerge_summary.py",
     "scripts/render_release_summary.py",
     "scripts/run_release_gate.py",
     "scripts/run_rule_engine.py",
+    "skills/aigc_marker/scripts/__init__.py",
+    "skills/aigc_marker/scripts/decorators/__init__.py",
+    "skills/aigc_marker/scripts/docx_extend/__init__.py",
+    "skills/aigc_marker/scripts/docx_extend/opc/__init__.py",
+    "skills/aigc_marker/scripts/docx_extend/opc/parts/__init__.py",
+    "skills/aigc_marker/scripts/docx_extend/oxml/__init__.py",
+    "skills/aigc_marker/scripts/pdf_extend/__init__.py",
+    "skills/aigc_marker/scripts/ppt_extend/__init__.py",
+    "skills/aigc_marker/scripts/ppt_extend/opc/__init__.py",
+    "skills/aigc_marker/scripts/ppt_extend/oxml/__init__.py",
+    "skills/aigc_marker/scripts/ppt_extend/parts/__init__.py",
+    "skills/alphaear-news/scripts/__init__.py",
+    "skills/alphaear-predictor/scripts/__init__.py",
+    "skills/alphaear-predictor/scripts/predictor/model/__init__.py",
+    "skills/alphaear-predictor/scripts/utils/__init__.py",
+    "skills/alphaear-predictor/scripts/utils/predictor/model/__init__.py",
+    "skills/anthropics-skills-pptx/scripts/__init__.py",
+    "skills/anthropics-skills-pptx/scripts/office/helpers/__init__.py",
+    "skills/anthropics-skills-pptx/scripts/office/validators/__init__.py",
+    "skills/bilibili-all-in-one/src/__init__.py",
+    "skills/bitsoul-stock-quantization/scripts/formulaicAlphas/__init__.py",
+    "skills/code-analysis-skills/src/__init__.py",
+    "skills/code-analysis-skills/src/analyzers/__init__.py",
+    "skills/code-analysis-skills/src/evaluator/__init__.py",
+    "skills/code-analysis-skills/src/reporters/__init__.py",
+    "skills/code-analysis-skills/src/utils/__init__.py",
+    "skills/code-analysis-skills/tests/__init__.py",
+    "skills/daily-hot-news/__init__.py",
+    "skills/docx/scripts/office/helpers/__init__.py",
+    "skills/docx/scripts/office/validators/__init__.py",
+    "skills/guide/__init__.py",
+    "skills/juejin-skills/juejin_skill/__init__.py",
+    "skills/natural-language-planner/scripts/__init__.py",
+    "skills/news-extractor/scripts/crawlers/__init__.py",
+    "skills/pptx/scripts/__init__.py",
+    "skills/pptx/scripts/office/helpers/__init__.py",
+    "skills/pptx/scripts/office/validators/__init__.py",
+    "skills/rkiding-awesome-finance-skills-alphaear-sentiment/scripts/__init__.py",
+    "skills/rkiding-awesome-finance-skills-alphaear-signal-tracker/scripts/__init__.py",
+    "skills/rkiding-awesome-finance-skills-alphaear-signal-tracker/scripts/tools/__init__.py",
+    "skills/rkiding-awesome-finance-skills-alphaear-signal-tracker/scripts/utils/__init__.py",
+    "skills/rkiding-awesome-finance-skills-alphaear-signal-tracker/scripts/utils/predictor/model/__init__.py",
+    "skills/topic-monitor/scripts/_vendor/feedparser/__init__.py",
+    "skills/topic-monitor/scripts/_vendor/feedparser/datetimes/__init__.py",
+    "skills/topic-monitor/scripts/_vendor/feedparser/namespaces/__init__.py",
+    "skills/topic-monitor/scripts/_vendor/feedparser/parsers/__init__.py",
+    "skills/xiaoyi-doc-convert/scripts/__init__.py",
+    "skills/xiaoyi-doc-convert/scripts/adapters/__init__.py",
+    "skills/xiaoyi-doc-convert/scripts/html2pdf/__init__.py",
+    "skills/xiaoyi-doc-convert/scripts/md2doc/__init__.py",
+    "skills/xiaoyi-doc-convert/scripts/md2doc/config/__init__.py",
+    "skills/xiaoyi-doc-convert/scripts/md2doc/converters/__init__.py",
+    "skills/xiaoyi-doc-convert/scripts/md2doc/filters/__init__.py",
+    "skills/xiaoyi-doc-convert/scripts/md2doc/logger/__init__.py",
+    "skills/xiaoyi-doc-convert/scripts/md2doc/utils/__init__.py",
+    "skills/xiaoyi-xlsx/scripts/office/helpers/__init__.py",
+    "skills/xiaoyi-xlsx/scripts/office/validators/__init__.py",
+    "tests/__init__.py",
+    "tests/fixtures/integration/__init__.py",
+    "tests/fixtures/smoke/__init__.py",
+    "tests/fixtures/smoke/blank.txt",
     "tests/fixtures/smoke/sample.txt",
+    "tests/rule_violations/__init__.py",
     "tests/rule_violations/contract_violation.json",
     "tests/rule_violations/layer_dependency_violation.py"
   ],
   "changed_categories": [
-    "scripts/check_*.py",
-    "infrastructure/release",
     "governance",
-    "reports/ops"
+    "infrastructure/release",
+    "reports/ops",
+    "scripts/check_*.py"
   ],
   "matched_rules": [
     {
+      "file": "governance/MAINTENANCE_MODE_POLICY.md",
+      "pattern": "governance/*",
+      "description": "治理层变更，premerge 必须通过，release 为 follow-up",
+      "blocking_commands": [
+        "python scripts/check_layer_dependencies.py"
+      ],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
+      "file": "governance/README.md",
+      "pattern": "governance/*",
+      "description": "治理层变更，premerge 必须通过，release 为 follow-up",
+      "blocking_commands": [
+        "python scripts/check_layer_dependencies.py"
+      ],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
+      "file": "governance/__init__.py",
+      "pattern": "governance/*",
+      "description": "治理层变更，premerge 必须通过，release 为 follow-up",
+      "blocking_commands": [
+        "python scripts/check_layer_dependencies.py"
+      ],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
       "file": "governance/quality_gate.py",
+      "pattern": "governance/*",
+      "description": "治理层变更，premerge 必须通过，release 为 follow-up",
+      "blocking_commands": [
+        "python scripts/check_layer_dependencies.py"
+      ],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
+      "file": "governance/recovery/__init__.py",
+      "pattern": "governance/*",
+      "description": "治理层变更，premerge 必须通过，release 为 follow-up",
+      "blocking_commands": [
+        "python scripts/check_layer_dependencies.py"
+      ],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
+      "file": "governance/review/__init__.py",
+      "pattern": "governance/*",
+      "description": "治理层变更，premerge 必须通过，release 为 follow-up",
+      "blocking_commands": [
+        "python scripts/check_layer_dependencies.py"
+      ],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
+      "file": "governance/rules/__init__.py",
+      "pattern": "governance/*",
+      "description": "治理层变更，premerge 必须通过，release 为 follow-up",
+      "blocking_commands": [
+        "python scripts/check_layer_dependencies.py"
+      ],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
+      "file": "governance/security/__init__.py",
+      "pattern": "governance/*",
+      "description": "治理层变更，premerge 必须通过，release 为 follow-up",
+      "blocking_commands": [
+        "python scripts/check_layer_dependencies.py"
+      ],
+      "followup_profiles": [
+        "release"
+      ]
+    },
+    {
+      "file": "governance/validators/__init__.py",
       "pattern": "governance/*",
       "description": "治理层变更，premerge 必须通过，release 为 follow-up",
       "blocking_commands": [
@@ -106,6 +296,33 @@
       "followup_profiles": []
     },
     {
+      "file": "reports/ops/change_impact_enforcement_nightly.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/change_impact_enforcement_premerge.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/change_impact_enforcement_release.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
       "file": "reports/ops/control_plane_audit.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
@@ -124,7 +341,43 @@
       "followup_profiles": []
     },
     {
+      "file": "reports/ops/exception_approval_queue.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
       "file": "reports/ops/executed_checks.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/executed_checks_nightly.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/executed_checks_premerge.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/executed_checks_release.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
       "blocking_commands": [
@@ -151,6 +404,33 @@
       "followup_profiles": []
     },
     {
+      "file": "reports/ops/rule_engine_report_nightly.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/rule_engine_report_premerge.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/rule_engine_report_release.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
       "file": "reports/ops/rule_exception_debt.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
@@ -161,6 +441,15 @@
     },
     {
       "file": "reports/ops/rule_exception_history.json",
+      "pattern": "reports/ops/*",
+      "description": "控制平面报告变更，建议验证 JSON 契约",
+      "blocking_commands": [
+        "python scripts/check_json_contracts.py"
+      ],
+      "followup_profiles": []
+    },
+    {
+      "file": "reports/ops/rule_exception_quota.json",
       "pattern": "reports/ops/*",
       "description": "控制平面报告变更，建议验证 JSON 契约",
       "blocking_commands": [
@@ -225,17 +514,25 @@
   ],
   "blocking_commands_current_profile": [
     "python scripts/check_layer_dependencies.py",
-    "python scripts/check_repo_integrity.py --strict",
-    "python scripts/check_json_contracts.py"
+    "python scripts/check_json_contracts.py",
+    "python scripts/check_repo_integrity.py --strict"
   ],
   "followup_required_profiles": [
     "release"
   ],
   "followup_reason_by_profile": {
     "release": [
+      "governance/MAINTENANCE_MODE_POLICY.md changed",
+      "governance/README.md changed",
+      "governance/__init__.py changed",
       "governance/quality_gate.py changed",
+      "governance/recovery/__init__.py changed",
+      "governance/review/__init__.py changed",
+      "governance/rules/__init__.py changed",
+      "governance/security/__init__.py changed",
+      "governance/validators/__init__.py changed",
       "infrastructure/release/release_manager.py changed"
     ]
   },
-  "generated_at": "2026-04-16T07:35:12.039859"
+  "generated_at": "2026-04-16T07:59:56.178618"
 }

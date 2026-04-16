@@ -1,9 +1,22 @@
-"""
-Memory Context Module - L2 Layer
+# L2 Memory Context Layer
 
-Provides memory context, knowledge base, and vector storage capabilities.
-"""
+from .builder.context_builder import ContextBuilder, ContextBundle, build_context
+from .retrieval.retrieval_router import RetrievalRouter, RetrievalRequest, RetrievalResult
+from .session.session_state import SessionState, SessionStateStore
+from .session.session_history import SessionHistory, HistoryEntry
+from .session.session_summary import SessionSummary, SessionSummarizer
 
-from .unified_search import UnifiedSearch
-
-__all__ = ["UnifiedSearch"]
+__all__ = [
+    "ContextBuilder",
+    "ContextBundle",
+    "build_context",
+    "RetrievalRouter",
+    "RetrievalRequest",
+    "RetrievalResult",
+    "SessionState",
+    "SessionStateStore",
+    "SessionHistory",
+    "HistoryEntry",
+    "SessionSummary",
+    "SessionSummarizer"
+]

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RetrievalResult",
+  "type": "object",
+  "required": ["query", "results", "total_count", "retrieved_at"],
+  "properties": {
+    "query": {"type": "string"},
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "content", "score"],
+        "properties": {
+          "id": {"type": "string"},
+          "content": {"type": "string"},
+          "score": {"type": "number"},
+          "source_type": {"type": "string"},
+          "metadata": {"type": "object"}
+        }
+      }
+    },
+    "total_count": {"type": "integer"},
+    "engine": {"enum": ["vector", "tfidf", "hybrid"]},
+    "latency_ms": {"type": "number"},
+    "retrieved_at": {"type": "string", "format": "date-time"}
+  }
+}

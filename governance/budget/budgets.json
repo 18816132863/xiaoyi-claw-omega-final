@@ -1,0 +1,12 @@
+{
+  "budgets": [
+    {
+      "budget_id": "test_budget",
+      "resource_type": "tokens",
+      "period": "daily",
+      "limit": 10000,
+      "current_usage": 1000,
+      "reset_at": "2026-04-17T00:00:00"
+    }
+  ]
+}

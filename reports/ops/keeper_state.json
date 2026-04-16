@@ -1,5 +1,10 @@
 {
-  "states": {},
+  "states": {
+    "fusion_engine": {
+      "last_refreshed": "2026-04-16T12:36:17.981205",
+      "refresh_count": 1
+    }
+  },
   "last_check": "2026-04-15T00:24:34.807578",
   "version": "1.0.0",
   "summary": {

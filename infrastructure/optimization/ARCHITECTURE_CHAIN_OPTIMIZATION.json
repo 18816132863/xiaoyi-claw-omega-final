@@ -1,5 +1,5 @@
 {
-  "version": "2.6.0",
+  "version": "7.2.0",
   "updated": "2026-04-10",
   "description": "架构链优化方案 - Token 消耗优化",
   
@@ -46,7 +46,7 @@
     "2_delete_reports": {
       "description": "删除旧报告文件",
       "files": [
-        "REPORT_V20.0.5.md",
+        "REPORT_V7.2.0.md",
         "reports/V28_CORE_SKILLS.md",
         "reports/V28_ROLLBACK_PLAN.md",
         "reports/EVOLUTION_UPGRADE_V28.md",

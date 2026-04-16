@@ -1,5 +1,5 @@
 {
-  "version": "2.3.0",
+  "version": "7.2.0",
   "updated": "2026-04-10",
   "layers": {
     "L1": {
@@ -89,7 +89,7 @@
   },
   "integrations": {
     "llm-memory-integration": {
-      "version": "2.2.0",
+      "version": "7.2.0",
       "author": "@xkzs2007",
       "url": "https://clawhub.ai/xkzs2007/llm-memory-integration",
       "integrated_at": "2026-04-10"

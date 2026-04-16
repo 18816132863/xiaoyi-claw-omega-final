@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "7.2.0",
   "updated": "2026-04-13",
   "strategy": "lazy_load_inactive_skills",
   "active_skills": [

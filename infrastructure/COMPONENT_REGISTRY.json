@@ -1,10 +1,10 @@
 {
-  "version": "2.7.0",
+  "version": "7.2.0",
   "updated": "2026-04-10",
   "components": {
     "fast_bridge": {
       "name": "FastBridge",
-      "version": "2.7.0",
+      "version": "7.2.0",
       "layer": 1,
       "type": "core",
       "entry": "core/layer_bridge/fast_bridge.py",
@@ -20,7 +20,7 @@
     },
     "zero_copy": {
       "name": "ZeroCopyManager",
-      "version": "2.7.0",
+      "version": "7.2.0",
       "layer": 2,
       "type": "memory",
       "entry": "core/layer_bridge/zero_copy.py",
@@ -36,7 +36,7 @@
     },
     "layer_cache": {
       "name": "LayerCache",
-      "version": "2.7.0",
+      "version": "7.2.0",
       "layer": 2,
       "type": "memory",
       "entry": "core/layer_bridge/layer_cache.py",
@@ -54,7 +54,7 @@
     },
     "async_queue": {
       "name": "AsyncCallQueue",
-      "version": "2.7.0",
+      "version": "7.2.0",
       "layer": 3,
       "type": "orchestration",
       "entry": "core/layer_bridge/async_queue.py",
@@ -70,7 +70,7 @@
     },
     "smart_router": {
       "name": "SmartRouter",
-      "version": "2.7.0",
+      "version": "7.2.0",
       "layer": 3,
       "type": "orchestration",
       "entry": "infrastructure/performance/smart_router.py",
@@ -86,7 +86,7 @@
     },
     "unified_optimizer": {
       "name": "UnifiedOptimizer",
-      "version": "2.7.0",
+      "version": "7.2.0",
       "layer": 4,
       "type": "execution",
       "entry": "infrastructure/performance/unified_optimizer.py",
@@ -106,7 +106,7 @@
     },
     "performance_monitor": {
       "name": "PerformanceMonitor",
-      "version": "2.7.0",
+      "version": "7.2.0",
       "layer": 5,
       "type": "governance",
       "entry": "infrastructure/performance/performance_monitor.py",

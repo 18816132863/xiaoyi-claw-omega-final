@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "7.2.0",
   "updated": "2026-04-13",
   "performance_targets": {
     "startup_time_ms": 5000,

@@ -52,7 +52,7 @@ class HeartbeatExecutor:
             {
                 "id": "permanent_keeper",
                 "name": "永久守护器刷新",
-                "command": [sys.executable, str(self.root / "scripts/permanent_keeper.py"), "--refresh"],
+                "command": [sys.executable, str(self.root / "scripts/permanent_keeper.py"), "refresh"],
                 "timeout": 60,
                 "priority": 1,
                 "enabled": True

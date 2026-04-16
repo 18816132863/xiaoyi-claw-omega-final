@@ -4,7 +4,7 @@
     "avg_latency_ms": 63.0,
     "max_latency_ms": 120,
     "failure_rate": 0.2,
-    "timestamp": "2026-04-16T11:54:13.468792",
+    "timestamp": "2026-04-16T12:36:02.971342",
     "details": {
       "error_types": {
         "timeout": 1,

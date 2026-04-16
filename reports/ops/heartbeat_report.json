@@ -1,0 +1,49 @@
+{
+  "version": "V7.2.0",
+  "start_time": "2026-04-16T12:36:01.108160",
+  "end_time": "2026-04-16T12:36:02.987024",
+  "total_duration_ms": 1878,
+  "success_count": 2,
+  "total_count": 4,
+  "results": [
+    {
+      "id": "auto_git",
+      "name": "自动 Git 同步",
+      "start_time": "2026-04-16T12:36:01.108234",
+      "success": true,
+      "output": "❌ 推送失败: fatal: The current branch master has no upstream branch.\nTo push the current branch and set the remote as upstream, use\n\n    git push --set-upstream origin master\n\n\n",
+      "error": null,
+      "duration_ms": 1383,
+      "end_time": "2026-04-16T12:36:02.491572"
+    },
+    {
+      "id": "permanent_keeper",
+      "name": "永久守护器刷新",
+      "start_time": "2026-04-16T12:36:02.491665",
+      "success": false,
+      "output": "",
+      "error": "usage: permanent_keeper.py [-h]\n                           {init,check,refresh,list,add,remove,restore} ...\npermanent_keeper.py: error: unrecognized arguments: --refresh\n",
+      "duration_ms": 253,
+      "end_time": "2026-04-16T12:36:02.745108"
+    },
+    {
+      "id": "metrics_generator",
+      "name": "Metrics 生成",
+      "start_time": "2026-04-16T12:36:02.745232",
+      "success": true,
+      "output": "\n   - 未命中: 2\n   - 命中率: 75.00%\n   - 平均 token: 123.8\n   - 平均源数: 2.1\n\n✅ 聚合报告已生成:\n   - 路径: reports/metrics/aggregated_metrics.json\n   - 健康状态: good\n   - 任务成功率: 70.00%\n   - 技能失败率: 20.00%\n   - 记忆命中率: 75.00%\n\n============================================================\n✅ 所有 Metrics 报告已生成\n============================================================\n\n生成的文件:\n   - skill_metrics.json (908 bytes)\n   - aggregated_metrics.json (2187 bytes)\n   - memory_metrics.json (451 bytes)\n   - task_metrics.json (322 bytes)\n",
+      "error": null,
+      "duration_ms": 241,
+      "end_time": "2026-04-16T12:36:02.986909"
+    },
+    {
+      "id": "quick_inspection",
+      "name": "快速巡检",
+      "start_time": "2026-04-16T12:36:02.987017",
+      "success": false,
+      "output": "任务已禁用",
+      "error": null,
+      "duration_ms": 0
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "point_id": "rb_522f46d4",
+  "step_id": "s2",
+  "timestamp": "2026-04-17T07:13:01.593256",
+  "state": {
+    "instance_id": "inst_a5b20b996681",
+    "step_input": {
+      "context": {},
+      "dependencies": {},
+      "params": {}
+    },
+    "completed_steps": [
+      "s1"
+    ],
+    "step_results": {
+      "s1": {
+        "step_id": "s1",
+        "status": "completed",
+        "started_at": "2026-04-17T07:13:01.589818",
+        "completed_at": "2026-04-17T07:13:01.591116",
+        "output": {
+          "step1": "done"
+        },
+        "error": null,
+        "retry_count": 0,
+        "duration_ms": 1,
+        "fallback_used": false,
+        "rollback_used": false,
+        "checkpoint_id": "cp_dd3316eb",
+        "rollback_point_id": "rb_20b4a3e5",
+        "fallback_decision": null
+      }
+    }
+  },
+  "metadata": {
+    "phase": "before_step"
+  }
+}

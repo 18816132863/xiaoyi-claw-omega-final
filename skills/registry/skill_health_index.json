@@ -1,0 +1,75 @@
+{
+  "health_skill@1.0.0": {
+    "skill_id": "health_skill",
+    "version": "1.0.0",
+    "total_executions": 10,
+    "success_count": 10,
+    "failure_count": 0,
+    "timeout_count": 0,
+    "success_rate": 1.0,
+    "failure_rate": 0.0,
+    "avg_latency_ms": 100.0,
+    "recent_errors": [],
+    "last_success_at": "2026-04-17T07:12:56.827319",
+    "last_failure_at": null,
+    "health_status": "healthy",
+    "health_score": 1.0
+  },
+  "health_skill@2.0.0": {
+    "skill_id": "health_skill",
+    "version": "2.0.0",
+    "total_executions": 10,
+    "success_count": 2,
+    "failure_count": 8,
+    "timeout_count": 0,
+    "success_rate": 0.2,
+    "failure_rate": 0.8,
+    "avg_latency_ms": 5000.0,
+    "recent_errors": [
+      {
+        "timestamp": "2026-04-17T07:12:56.828368",
+        "error": "timeout",
+        "error_type": "unknown"
+      },
+      {
+        "timestamp": "2026-04-17T07:12:56.830326",
+        "error": "timeout",
+        "error_type": "unknown"
+      },
+      {
+        "timestamp": "2026-04-17T07:12:56.831556",
+        "error": "timeout",
+        "error_type": "unknown"
+      },
+      {
+        "timestamp": "2026-04-17T07:12:56.832965",
+        "error": "timeout",
+        "error_type": "unknown"
+      },
+      {
+        "timestamp": "2026-04-17T07:12:56.834281",
+        "error": "timeout",
+        "error_type": "unknown"
+      },
+      {
+        "timestamp": "2026-04-17T07:12:56.836128",
+        "error": "timeout",
+        "error_type": "unknown"
+      },
+      {
+        "timestamp": "2026-04-17T07:12:56.837614",
+        "error": "timeout",
+        "error_type": "unknown"
+      },
+      {
+        "timestamp": "2026-04-17T07:12:56.838959",
+        "error": "timeout",
+        "error_type": "unknown"
+      }
+    ],
+    "last_success_at": "2026-04-17T07:12:56.841262",
+    "last_failure_at": "2026-04-17T07:12:56.838959",
+    "health_status": "unhealthy",
+    "health_score": 0.35
+  }
+}

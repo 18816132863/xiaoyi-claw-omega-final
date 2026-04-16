@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "skill_runtime_result.schema.json",
+  "title": "Skill Runtime Result Schema",
+  "description": "技能运行结果定义",
+  "type": "object",
+  "required": [
+    "skill_id",
+    "version",
+    "status",
+    "started_at",
+    "completed_at"
+  ],
+  "properties": {
+    "skill_id": {
+      "type": "string",
+      "description": "技能 ID"
+    },
+    "version": {
+      "type": "string",
+      "description": "执行的技能版本"
+    },
+    "instance_id": {
+      "type": "string",
+      "description": "执行实例 ID"
+    },
+    "status": {
+      "type": "string",
+      "description": "执行状态",
+      "enum": ["success", "failure", "timeout", "cancelled", "skipped"]
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "开始时间"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "完成时间"
+    },
+    "duration_ms": {
+      "type": "integer",
+      "description": "执行时长（毫秒）"
+    },
+    "input": {
+      "type": "object",
+      "description": "输入参数"
+    },
+    "output": {
+      "type": "object",
+      "description": "输出结果"
+    },
+    "error": {
+      "type": "object",
+      "description": "错误信息",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "错误类型"
+        },
+        "message": {
+          "type": "string",
+          "description": "错误消息"
+        },
+        "stack_trace": {
+          "type": "string",
+          "description": "堆栈跟踪"
+        },
+        "retry_count": {
+          "type": "integer",
+          "description": "重试次数"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "description": "执行指标",
+      "properties": {
+        "tokens_used": {
+          "type": "integer",
+          "description": "使用的 token 数"
+        },
+        "api_calls": {
+          "type": "integer",
+          "description": "API 调用次数"
+        },
+        "memory_peak_mb": {
+          "type": "number",
+          "description": "内存峰值（MB）"
+        }
+      }
+    },
+    "health_impact": {
+      "type": "object",
+      "description": "对健康状态的影响",
+      "properties": {
+        "previous_health": {
+          "type": "string",
+          "description": "之前的健康状态"
+        },
+        "new_health": {
+          "type": "string",
+          "description": "新的健康状态"
+        },
+        "health_changed": {
+          "type": "boolean",
+          "description": "健康状态是否改变"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "扩展元数据"
+    }
+  },
+  "additionalProperties": true
+}

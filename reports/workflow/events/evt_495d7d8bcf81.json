@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_495d7d8bcf81",
+  "instance_id": "inst_a5b20b996681",
+  "event_type": "step_started",
+  "timestamp": "2026-04-17T07:13:01.589839",
+  "step_id": "s1",
+  "data": {
+    "step_name": "步骤1",
+    "action": "step1"
+  },
+  "metadata": {}
+}

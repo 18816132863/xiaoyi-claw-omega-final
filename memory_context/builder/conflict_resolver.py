@@ -1,13 +1,13 @@
-"""Conflict resolver for context sources."""
+"""Conflict Resolver - 上下文冲突解决"""
 
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Any, Tuple, Optional
 from dataclasses import dataclass
 from datetime import datetime
 
 
 @dataclass
 class Conflict:
-    """Represents a conflict between sources."""
+    """冲突记录"""
     source_a: str
     source_b: str
     conflict_type: str  # contradiction, overlap, outdated
@@ -17,7 +17,14 @@ class Conflict:
 
 
 class ConflictResolver:
-    """Resolves conflicts between context sources."""
+    """
+    上下文冲突解决器
+    
+    处理：
+    - 内容矛盾
+    - 内容重叠
+    - 过时信息
+    """
     
     def __init__(self):
         self.resolution_strategies = {
@@ -25,10 +32,23 @@ class ConflictResolver:
             "overlap": self._resolve_overlap,
             "outdated": self._resolve_outdated
         }
+        
+        self.importance_order = {
+            "critical": 4,
+            "high": 3,
+            "medium": 2,
+            "low": 1
+        }
     
-    def resolve(self, sources: List[Dict]) -> Tuple[List[Dict], List[Dict]]:
+    def resolve(
+        self,
+        sources: List[Dict[str, Any]]
+    ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
         """
-        Resolve conflicts between sources.
+        解决冲突
+        
+        Args:
+            sources: 源列表
         
         Returns:
             Tuple of (resolved_sources, conflicts)
@@ -43,15 +63,22 @@ class ConflictResolver:
             if source_id_a in seen:
                 continue
             
-            # Check against remaining sources
+            # 检查与后续源的冲突
             for j, source_b in enumerate(sources[i+1:], i+1):
                 source_id_b = source_b.get("source_id", str(j))
                 
                 conflict = self._detect_conflict(source_a, source_b)
                 if conflict:
-                    conflicts.append(conflict)
+                    conflicts.append({
+                        "source_a": conflict.source_a,
+                        "source_b": conflict.source_b,
+                        "conflict_type": conflict.conflict_type,
+                        "description": conflict.description,
+                        "resolution": conflict.resolution,
+                        "winner": conflict.winner
+                    })
                     
-                    # Mark loser as seen (don't include)
+                    # 标记失败者
                     if conflict.winner == source_id_a:
                         seen.add(source_id_b)
                     else:
@@ -61,65 +88,105 @@ class ConflictResolver:
             if source_id_a not in seen:
                 resolved.append(source_a)
         
-        return resolved, [c.__dict__ for c in conflicts]
+        return resolved, conflicts
     
-    def _detect_conflict(self, source_a: Dict, source_b: Dict) -> Optional[Conflict]:
-        """Detect conflict between two sources."""
-        # Check for contradiction
+    def _detect_conflict(
+        self,
+        source_a: Dict[str, Any],
+        source_b: Dict[str, Any]
+    ) -> Optional[Conflict]:
+        """检测冲突"""
+        # 检查内容矛盾
         if self._is_contradiction(source_a, source_b):
             return self._resolve_contradiction(source_a, source_b)
         
-        # Check for overlap
+        # 检查内容重叠
         if self._is_overlap(source_a, source_b):
             return self._resolve_overlap(source_a, source_b)
         
-        # Check for outdated
+        # 检查过时信息
         if self._is_outdated(source_a, source_b):
             return self._resolve_outdated(source_a, source_b)
         
         return None
     
-    def _is_contradiction(self, source_a: Dict, source_b: Dict) -> bool:
-        """Check if sources contradict each other."""
-        # Simple heuristic: check for negation patterns
+    def _is_contradiction(
+        self,
+        source_a: Dict[str, Any],
+        source_b: Dict[str, Any]
+    ) -> bool:
+        """检查是否矛盾"""
+        # 简单实现：检查是否有明确的否定词
         content_a = source_a.get("content", "").lower()
         content_b = source_b.get("content", "").lower()
         
-        # TODO: Implement more sophisticated contradiction detection
+        # TODO: 实现更复杂的矛盾检测
         return False
     
-    def _is_overlap(self, source_a: Dict, source_b: Dict) -> bool:
-        """Check if sources overlap significantly."""
+    def _is_overlap(
+        self,
+        source_a: Dict[str, Any],
+        source_b: Dict[str, Any]
+    ) -> bool:
+        """检查是否重叠"""
         content_a = set(source_a.get("content", "").lower().split())
         content_b = set(source_b.get("content", "").lower().split())
         
         if not content_a or not content_b:
             return False
         
-        overlap = len(content_a & content_b) / min(len(content_a), len(content_b))
-        return overlap > 0.8
+        # 计算重叠比例
+        intersection = content_a & content_b
+        min_size = min(len(content_a), len(content_b))
+        
+        return len(intersection) / min_size > 0.8 if min_size > 0 else False
     
-    def _is_outdated(self, source_a: Dict, source_b: Dict) -> bool:
-        """Check if one source is outdated compared to another."""
+    def _is_outdated(
+        self,
+        source_a: Dict[str, Any],
+        source_b: Dict[str, Any]
+    ) -> bool:
+        """检查是否过时"""
         time_a = source_a.get("created_at")
         time_b = source_b.get("created_at")
         
         if not time_a or not time_b:
             return False
         
-        # If same source type and one is much older
-        if source_a.get("source_type") == source_b.get("source_type"):
-            # TODO: Compare timestamps
-            pass
+        # 如果同类型且时间差距大
+        if source_a.get("type") == source_b.get("type"):
+            try:
+                if isinstance(time_a, str):
+                    dt_a = datetime.fromisoformat(time_a)
+                else:
+                    dt_a = time_a
+                
+                if isinstance(time_b, str):
+                    dt_b = datetime.fromisoformat(time_b)
+                else:
+                    dt_b = time_b
+                
+                # 如果差距超过 30 天
+                from datetime import timedelta
+                return abs((dt_a - dt_b).days) > 30
+            except:
+                pass
         
         return False
     
-    def _resolve_contradiction(self, source_a: Dict, source_b: Dict) -> Conflict:
-        """Resolve contradiction between sources."""
-        # Prefer higher importance
-        importance_order = {"critical": 4, "high": 3, "medium": 2, "low": 1}
-        imp_a = importance_order.get(source_a.get("metadata", {}).get("importance", "medium"), 2)
-        imp_b = importance_order.get(source_b.get("metadata", {}).get("importance", "medium"), 2)
+    def _resolve_contradiction(
+        self,
+        source_a: Dict[str, Any],
+        source_b: Dict[str, Any]
+    ) -> Conflict:
+        """解决矛盾"""
+        # 按重要性选择
+        imp_a = self.importance_order.get(
+            source_a.get("importance", "medium"), 2
+        )
+        imp_b = self.importance_order.get(
+            source_b.get("importance", "medium"), 2
+        )
         
         if imp_a >= imp_b:
             winner = source_a.get("source_id", "a")
@@ -130,16 +197,20 @@ class ConflictResolver:
             source_a=source_a.get("source_id", "a"),
             source_b=source_b.get("source_id", "b"),
             conflict_type="contradiction",
-            description="Sources contradict each other",
-            resolution="Selected higher importance source",
+            description="内容矛盾",
+            resolution="选择重要性更高的源",
             winner=winner
         )
     
-    def _resolve_overlap(self, source_a: Dict, source_b: Dict) -> Conflict:
-        """Resolve overlap between sources."""
-        # Prefer more recent or higher relevance
-        rel_a = source_a.get("relevance", 0)
-        rel_b = source_b.get("relevance", 0)
+    def _resolve_overlap(
+        self,
+        source_a: Dict[str, Any],
+        source_b: Dict[str, Any]
+    ) -> Conflict:
+        """解决重叠"""
+        # 按相关性选择
+        rel_a = source_a.get("relevance", 0.5)
+        rel_b = source_b.get("relevance", 0.5)
         
         winner = source_a.get("source_id", "a") if rel_a >= rel_b else source_b.get("source_id", "b")
         
@@ -147,21 +218,44 @@ class ConflictResolver:
             source_a=source_a.get("source_id", "a"),
             source_b=source_b.get("source_id", "b"),
             conflict_type="overlap",
-            description="Sources overlap significantly",
-            resolution="Selected higher relevance source",
+            description="内容重叠",
+            resolution="选择相关性更高的源",
             winner=winner
         )
     
-    def _resolve_outdated(self, source_a: Dict, source_b: Dict) -> Conflict:
-        """Resolve outdated source."""
-        # Prefer more recent
-        winner = source_b.get("source_id", "b")  # Assume b is newer
+    def _resolve_outdated(
+        self,
+        source_a: Dict[str, Any],
+        source_b: Dict[str, Any]
+    ) -> Conflict:
+        """解决过时"""
+        # 选择更新的
+        time_a = source_a.get("created_at")
+        time_b = source_b.get("created_at")
+        
+        winner = source_b.get("source_id", "b")  # 假设 b 更新
+        
+        if time_a and time_b:
+            try:
+                if isinstance(time_a, str):
+                    dt_a = datetime.fromisoformat(time_a)
+                else:
+                    dt_a = time_a
+                
+                if isinstance(time_b, str):
+                    dt_b = datetime.fromisoformat(time_b)
+                else:
+                    dt_b = time_b
+                
+                winner = source_a.get("source_id", "a") if dt_a >= dt_b else source_b.get("source_id", "b")
+            except:
+                pass
         
         return Conflict(
             source_a=source_a.get("source_id", "a"),
             source_b=source_b.get("source_id", "b"),
             conflict_type="outdated",
-            description="One source is outdated",
-            resolution="Selected more recent source",
+            description="信息过时",
+            resolution="选择更新的源",
             winner=winner
         )

@@ -1,13 +1,13 @@
-"""State machine for workflow execution."""
+"""State Machine - 工作流状态机"""
 
-from enum import Enum
-from typing import Dict, Optional, Callable, List
+from typing import Dict, List, Optional, Callable, Set
 from dataclasses import dataclass, field
 from datetime import datetime
+from enum import Enum
 
 
 class State(Enum):
-    """Workflow states."""
+    """工作流状态"""
     IDLE = "idle"
     PLANNING = "planning"
     READY = "ready"
@@ -19,7 +19,7 @@ class State(Enum):
 
 
 class Event(Enum):
-    """Workflow events."""
+    """工作流事件"""
     START = "start"
     PLAN_COMPLETE = "plan_complete"
     STEP_COMPLETE = "step_complete"
@@ -33,7 +33,7 @@ class Event(Enum):
 
 @dataclass
 class Transition:
-    """State transition."""
+    """状态转换"""
     from_state: State
     to_state: State
     event: Event
@@ -43,7 +43,7 @@ class Transition:
 
 @dataclass
 class StateHistory:
-    """History of state changes."""
+    """状态历史"""
     from_state: State
     to_state: State
     event: Event
@@ -53,19 +53,25 @@ class StateHistory:
 
 class WorkflowStateMachine:
     """
-    State machine for workflow execution.
+    工作流状态机
     
-    Manages state transitions and ensures valid workflow lifecycle.
+    管理：
+    - 状态转换
+    - 转换条件
+    - 转换动作
+    - 状态历史
     """
     
     def __init__(self):
         self.current_state = State.IDLE
         self.history: List[StateHistory] = []
         self._transitions: Dict[tuple, Transition] = {}
+        self._enter_actions: Dict[State, Callable] = {}
+        self._exit_actions: Dict[State, Callable] = {}
         self._setup_default_transitions()
     
     def _setup_default_transitions(self):
-        """Setup default state transitions."""
+        """设置默认转换"""
         self.add_transition(Transition(State.IDLE, State.PLANNING, Event.START))
         self.add_transition(Transition(State.PLANNING, State.READY, Event.PLAN_COMPLETE))
         self.add_transition(Transition(State.READY, State.RUNNING, Event.START))
@@ -75,15 +81,23 @@ class WorkflowStateMachine:
         self.add_transition(Transition(State.RUNNING, State.FAILED, Event.FATAL_ERROR))
         self.add_transition(Transition(State.RUNNING, State.CANCELLED, Event.CANCEL))
         self.add_transition(Transition(State.PAUSED, State.CANCELLED, Event.CANCEL))
-        self.add_transition(Transition(State.FAILED, State.RUNNING, Event.RESUME))  # Retry
+        self.add_transition(Transition(State.FAILED, State.RUNNING, Event.RESUME))
     
     def add_transition(self, transition: Transition):
-        """Add a transition rule."""
+        """添加转换规则"""
         key = (transition.from_state, transition.event)
         self._transitions[key] = transition
     
+    def set_enter_action(self, state: State, action: Callable):
+        """设置进入状态动作"""
+        self._enter_actions[state] = action
+    
+    def set_exit_action(self, state: State, action: Callable):
+        """设置退出状态动作"""
+        self._exit_actions[state] = action
+    
     def can_transition(self, event: Event) -> bool:
-        """Check if transition is possible."""
+        """检查是否可转换"""
         key = (self.current_state, event)
         if key not in self._transitions:
             return False
@@ -95,26 +109,30 @@ class WorkflowStateMachine:
         return True
     
     def transition(self, event: Event, metadata: Dict = None) -> bool:
-        """
-        Execute a state transition.
-        
-        Returns:
-            True if transition succeeded, False otherwise
-        """
+        """执行状态转换"""
         key = (self.current_state, event)
         if key not in self._transitions:
             return False
         
         transition = self._transitions[key]
         
-        # Check guard
+        # 检查守卫条件
         if transition.guard and not transition.guard():
             return False
         
-        # Record history
         from_state = self.current_state
+        
+        # 执行退出动作
+        if from_state in self._exit_actions:
+            try:
+                self._exit_actions[from_state]()
+            except Exception as e:
+                print(f"Warning: Exit action failed: {e}")
+        
+        # 更新状态
         self.current_state = transition.to_state
         
+        # 记录历史
         self.history.append(StateHistory(
             from_state=from_state,
             to_state=self.current_state,
@@ -122,19 +140,26 @@ class WorkflowStateMachine:
             metadata=metadata or {}
         ))
         
-        # Execute action
+        # 执行转换动作
         if transition.action:
             try:
                 transition.action()
             except Exception as e:
-                # Rollback state
+                # 回滚状态
                 self.current_state = from_state
                 raise e
+        
+        # 执行进入动作
+        if self.current_state in self._enter_actions:
+            try:
+                self._enter_actions[self.current_state]()
+            except Exception as e:
+                print(f"Warning: Enter action failed: {e}")
         
         return True
     
     def get_valid_events(self) -> List[Event]:
-        """Get events that can be triggered from current state."""
+        """获取有效事件"""
         valid = []
         for (state, event) in self._transitions.keys():
             if state == self.current_state:
@@ -142,24 +167,28 @@ class WorkflowStateMachine:
         return valid
     
     def get_history(self, limit: int = None) -> List[StateHistory]:
-        """Get state transition history."""
+        """获取历史"""
         if limit:
             return self.history[-limit:]
         return self.history
     
     def reset(self):
-        """Reset to initial state."""
+        """重置"""
         self.current_state = State.IDLE
         self.history.clear()
     
     def is_terminal(self) -> bool:
-        """Check if current state is terminal."""
+        """是否终止状态"""
         return self.current_state in [State.COMPLETED, State.FAILED, State.CANCELLED]
     
     def is_running(self) -> bool:
-        """Check if workflow is running."""
+        """是否运行中"""
         return self.current_state == State.RUNNING
     
     def is_paused(self) -> bool:
-        """Check if workflow is paused."""
+        """是否暂停"""
         return self.current_state == State.PAUSED
+    
+    def get_state(self) -> State:
+        """获取当前状态"""
+        return self.current_state

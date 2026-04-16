@@ -56,13 +56,15 @@ class ContextBuilder:
         reranker=None,
         budgeter=None,
         conflict_resolver=None,
-        priority_ranker=None
+        priority_ranker=None,
+        session_history=None
     ):
         self.retrieval_router = retrieval_router
         self.reranker = reranker
         self.budgeter = budgeter
         self.conflict_resolver = conflict_resolver
         self.priority_ranker = priority_ranker
+        self.session_history = session_history
     
     def build_context(
         self,
@@ -87,32 +89,82 @@ class ContextBuilder:
         Returns:
             ContextBundle ready for task execution
         """
-        # 1. Retrieve relevant information
-        raw_sources = self._retrieve(intent, sources, token_budget)
+        all_sources = []
         
-        # 2. Rerank by relevance
-        ranked_sources = self._rerank(raw_sources, intent)
+        # 1. 始终添加任务意图作为核心上下文
+        all_sources.append({
+            "type": "intent",
+            "content": f"任务意图: {intent}",
+            "relevance": 1.0,
+            "source_id": "task_intent"
+        })
         
-        # 3. Resolve conflicts
+        # 2. 添加配置信息
+        all_sources.append({
+            "type": "profile",
+            "content": f"执行配置: {profile}",
+            "relevance": 0.9,
+            "source_id": "profile_info"
+        })
+        
+        # 3. 添加任务ID
+        all_sources.append({
+            "type": "task",
+            "content": f"任务ID: {task_id}",
+            "relevance": 0.8,
+            "source_id": "task_id"
+        })
+        
+        # 4. 如果有会话历史，添加最近的上下文
+        if self.session_history:
+            history_context = self.session_history.to_context_string(max_tokens=1000)
+            if history_context:
+                all_sources.append({
+                    "type": "session",
+                    "content": f"会话历史:\n{history_context}",
+                    "relevance": 0.7,
+                    "source_id": "session_history"
+                })
+        
+        # 5. 尝试从检索系统获取更多上下文
+        retrieved_sources = self._retrieve(intent, sources, token_budget)
+        all_sources.extend(retrieved_sources)
+        
+        # 6. 添加额外上下文
+        if additional_context:
+            for key, value in additional_context.items():
+                all_sources.append({
+                    "type": "additional",
+                    "content": f"{key}: {value}",
+                    "relevance": 0.6,
+                    "source_id": f"additional_{key}"
+                })
+        
+        # 7. 重排序
+        ranked_sources = self._rerank(all_sources, intent)
+        
+        # 8. 解决冲突
         resolved_sources, conflicts = self._resolve_conflicts(ranked_sources)
         
-        # 4. Apply token budget
+        # 9. 应用 token 预算
         budgeted_sources, actual_tokens = self._apply_budget(
             resolved_sources, token_budget
         )
         
-        # 5. Prioritize
-        priority_order = self._prioritize(budgeted_sources)
-        
-        # 6. Add additional context if provided
-        if additional_context:
-            for key, value in additional_context.items():
-                budgeted_sources.append({
-                    "type": "additional",
-                    "content": f"{key}: {value}",
+        # 10. 确保至少有基本上下文
+        if not budgeted_sources:
+            budgeted_sources = [
+                {
+                    "type": "fallback",
+                    "content": f"任务: {intent} (配置: {profile})",
                     "relevance": 1.0,
-                    "source_id": f"additional_{key}"
-                })
+                    "source_id": "fallback_context"
+                }
+            ]
+            actual_tokens = len(intent) // 4 + 10
+        
+        # 11. 生成优先级顺序
+        priority_order = self._prioritize(budgeted_sources)
         
         return ContextBundle(
             task_id=task_id,
@@ -135,25 +187,30 @@ class ContextBuilder:
         if not self.retrieval_router:
             return []
         
-        from .retrieval.retrieval_router import RetrievalRequest
-        
-        request = RetrievalRequest(
-            query=intent,
-            sources=sources or ["memory", "document", "rule"],
-            max_results=20,
-            token_budget=token_budget
-        )
-        
-        result = self.retrieval_router.route(request)
-        return result.results
+        # 正确导入
+        try:
+            from memory_context.retrieval.retrieval_router import RetrievalRequest
+            
+            request = RetrievalRequest(
+                query=intent,
+                sources=sources or ["memory", "document", "rule"],
+                max_results=20,
+                token_budget=token_budget
+            )
+            
+            result = self.retrieval_router.route(request)
+            return result.results
+        except ImportError:
+            return []
     
     def _rerank(self, sources: List[Dict], intent: str) -> List[Dict]:
         """Rerank sources by relevance."""
         if not self.reranker:
-            return sources
+            # 简单排序：按 relevance 降序
+            return sorted(sources, key=lambda s: s.get("relevance", 0), reverse=True)
         return self.reranker.rerank(sources, intent)
     
-    def _resolve_conflicts(self, sources: List[Dict]) -> tuple[List[Dict], List[Dict]]:
+    def _resolve_conflicts(self, sources: List[Dict]) -> tuple:
         """Resolve conflicts between sources."""
         if not self.conflict_resolver:
             return sources, []
@@ -163,21 +220,26 @@ class ContextBuilder:
         self,
         sources: List[Dict],
         token_budget: int
-    ) -> tuple[List[Dict], int]:
+    ) -> tuple:
         """Apply token budget constraint."""
-        if not self.budgeter:
-            # Simple estimation
-            budgeted = []
-            total = 0
-            for source in sources:
-                content = source.get("content", "")
-                estimated = len(content) // 4  # Rough token estimate
-                if total + estimated <= token_budget:
+        budgeted = []
+        total = 0
+        
+        for source in sources:
+            content = source.get("content", "")
+            # 估算 token 数量（约 4 字符 = 1 token）
+            estimated = max(len(content) // 4, 1)
+            
+            if total + estimated <= token_budget:
+                budgeted.append(source)
+                total += estimated
+            else:
+                # 如果预算不够，至少保留高相关性的源
+                if source.get("relevance", 0) >= 0.8 and total < token_budget * 0.5:
                     budgeted.append(source)
                     total += estimated
-            return budgeted, total
         
-        return self.budgeter.apply(sources, token_budget)
+        return budgeted, total
     
     def _prioritize(self, sources: List[Dict]) -> List[str]:
         """Generate priority order."""

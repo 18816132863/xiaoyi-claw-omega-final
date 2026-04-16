@@ -195,6 +195,86 @@ class PolicyEngine:
     def clear_decision_log(self):
         """Clear decision log."""
         self._decision_log.clear()
+    
+    def evaluate_policy(
+        self,
+        task_meta: Dict,
+        profile: str,
+        requested_capabilities: List[str] = None
+    ) -> Dict:
+        """
+        统一策略评估入口（正式 façade）
+        
+        Args:
+            task_meta: 任务元数据（包含 intent, risk_level 等）
+            profile: 执行配置
+            requested_capabilities: 请求的能力列表
+        
+        Returns:
+            评估结果，包含 allowed, effect, applied_policies, reason 等
+        """
+        requested_capabilities = requested_capabilities or []
+        
+        # 构建评估上下文
+        context = {
+            "profile": profile,
+            "intent": task_meta.get("intent", ""),
+            "risk_level": task_meta.get("risk_level", "low"),
+            "approved": task_meta.get("approved", False),
+            "requested_capabilities": requested_capabilities
+        }
+        
+        # 评估权限策略
+        perm_effect, perm_policies = self.evaluate(PolicyType.PERMISSION, context, log_decision=False)
+        
+        # 评估风险策略
+        risk_effect, risk_policies = self.evaluate(PolicyType.RISK, context, log_decision=False)
+        
+        # 评估工具选择策略
+        tool_effect, tool_policies = self.evaluate(PolicyType.TOOL_SELECTION, context, log_decision=False)
+        
+        # 综合决策
+        all_policies = perm_policies + risk_policies + tool_policies
+        
+        if perm_effect == PolicyEffect.DENY or risk_effect == PolicyEffect.DENY:
+            final_allowed = False
+            final_effect = "deny"
+            reason = f"Denied by policies: {all_policies}"
+        elif tool_effect == PolicyEffect.DENY:
+            final_allowed = False
+            final_effect = "deny"
+            reason = f"Tool selection denied: {tool_policies}"
+        elif perm_effect == PolicyEffect.CONDITIONAL or risk_effect == PolicyEffect.CONDITIONAL:
+            final_allowed = True
+            final_effect = "conditional"
+            reason = f"Conditional approval: {all_policies}"
+        else:
+            final_allowed = True
+            final_effect = "allow"
+            reason = "All policies passed"
+        
+        # 记录决策
+        self._decision_log.append({
+            "timestamp": datetime.now().isoformat(),
+            "task_meta": task_meta,
+            "profile": profile,
+            "requested_capabilities": requested_capabilities,
+            "effect": final_effect,
+            "applied_policies": all_policies,
+            "reason": reason
+        })
+        
+        return {
+            "allowed": final_allowed,
+            "effect": final_effect,
+            "applied_policies": all_policies,
+            "reason": reason,
+            "details": {
+                "permission": {"effect": perm_effect.value, "policies": perm_policies},
+                "risk": {"effect": risk_effect.value, "policies": risk_policies},
+                "tool": {"effect": tool_effect.value, "policies": tool_policies}
+            }
+        }
 
 
 # Pre-defined policies

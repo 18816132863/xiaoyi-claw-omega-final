@@ -1,14 +1,18 @@
-"""Skill lifecycle management."""
+"""Lifecycle Manager - 技能生命周期管理
 
-from typing import Dict, Optional, List
+管理技能从实验到退役的完整生命周期。
+"""
+
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from dataclasses import dataclass
+from typing import Dict, List, Optional
 from enum import Enum
 import json
 import os
 
 
 class LifecycleState(Enum):
+    """生命周期状态"""
     EXPERIMENTAL = "experimental"
     BETA = "beta"
     STABLE = "stable"
@@ -18,56 +22,54 @@ class LifecycleState(Enum):
 
 @dataclass
 class LifecycleEvent:
-    """Event in skill lifecycle."""
+    """生命周期事件"""
     skill_id: str
-    event_type: str
+    event_type: str  # promote, deprecate, retire, rollback
     from_state: LifecycleState
     to_state: LifecycleState
     reason: str
-    timestamp: datetime
-    metadata: Dict = None
+    timestamp: datetime = field(default_factory=datetime.now)
+    metadata: Dict = field(default_factory=dict)
 
 
 class LifecycleManager:
     """
-    Manages skill lifecycle from experimental to retired.
+    技能生命周期管理器
     
-    Lifecycle stages:
-    1. experimental - New skill, limited usage
-    2. beta - Testing phase, broader usage
-    3. stable - Production ready
-    4. deprecated - Scheduled for removal
-    5. retired - No longer available
+    管理技能从实验到退役的完整生命周期。
     """
     
-    def __init__(self, registry=None, history_path: str = "skills/registry/lifecycle_history.json"):
+    def __init__(self, registry=None, history_path: str = None):
         self.registry = registry
         self.history_path = history_path
         self._history: List[LifecycleEvent] = []
-        self._load_history()
+        
+        if history_path and os.path.exists(history_path):
+            self._load_history()
     
     def _load_history(self):
-        """Load lifecycle history."""
-        if os.path.exists(self.history_path):
-            try:
-                with open(self.history_path, 'r') as f:
-                    data = json.load(f)
-                    for event_data in data.get("events", []):
-                        self._history.append(LifecycleEvent(
-                            skill_id=event_data["skill_id"],
-                            event_type=event_data["event_type"],
-                            from_state=LifecycleState(event_data["from_state"]),
-                            to_state=LifecycleState(event_data["to_state"]),
-                            reason=event_data["reason"],
-                            timestamp=datetime.fromisoformat(event_data["timestamp"]),
-                            metadata=event_data.get("metadata")
-                        ))
-            except Exception as e:
-                print(f"Warning: Failed to load lifecycle history: {e}")
+        """加载历史记录"""
+        try:
+            with open(self.history_path, 'r') as f:
+                data = json.load(f)
+                for event_data in data.get("events", []):
+                    self._history.append(LifecycleEvent(
+                        skill_id=event_data["skill_id"],
+                        event_type=event_data["event_type"],
+                        from_state=LifecycleState(event_data["from_state"]),
+                        to_state=LifecycleState(event_data["to_state"]),
+                        reason=event_data["reason"],
+                        timestamp=datetime.fromisoformat(event_data["timestamp"]),
+                        metadata=event_data.get("metadata", {})
+                    ))
+        except Exception as e:
+            print(f"Warning: Failed to load lifecycle history: {e}")
     
     def _save_history(self):
-        """Save lifecycle history."""
-        os.makedirs(os.path.dirname(self.history_path), exist_ok=True)
+        """保存历史记录"""
+        if not self.history_path:
+            return
+        os.makedirs(os.path.dirname(self.history_path) or ".", exist_ok=True)
         data = {
             "events": [
                 {
@@ -86,7 +88,7 @@ class LifecycleManager:
             json.dump(data, f, indent=2)
     
     def promote(self, skill_id: str, reason: str = "") -> bool:
-        """Promote skill to next lifecycle stage."""
+        """推广技能到下一阶段"""
         manifest = self._get_manifest(skill_id)
         if not manifest:
             return False
@@ -100,18 +102,18 @@ class LifecycleManager:
         return self._transition(skill_id, current, next_state, "promote", reason)
     
     def deprecate(self, skill_id: str, reason: str, deprecation_period_days: int = 90) -> bool:
-        """Deprecate a skill."""
+        """废弃技能"""
         manifest = self._get_manifest(skill_id)
         if not manifest:
             return False
         
         current = self._get_lifecycle_state(manifest)
         
-        if current == LifecycleState.DEPRECATED or current == LifecycleState.RETIRED:
+        if current in [LifecycleState.DEPRECATED, LifecycleState.RETIRED]:
             return False
         
-        # Set deprecation metadata
-        if manifest:
+        # 设置废弃元数据
+        if hasattr(manifest, 'metadata'):
             manifest.metadata["deprecation_date"] = datetime.now().isoformat()
             manifest.metadata["removal_date"] = (datetime.now() + timedelta(days=deprecation_period_days)).isoformat()
             manifest.metadata["deprecation_reason"] = reason
@@ -119,7 +121,7 @@ class LifecycleManager:
         return self._transition(skill_id, current, LifecycleState.DEPRECATED, "deprecate", reason)
     
     def retire(self, skill_id: str, reason: str = "") -> bool:
-        """Retire a deprecated skill."""
+        """退役技能"""
         manifest = self._get_manifest(skill_id)
         if not manifest:
             return False
@@ -132,14 +134,13 @@ class LifecycleManager:
         return self._transition(skill_id, current, LifecycleState.RETIRED, "retire", reason)
     
     def rollback(self, skill_id: str, reason: str = "") -> bool:
-        """Rollback to previous lifecycle state."""
-        # Find last event for this skill
+        """回滚到上一状态"""
+        # 找到该技能的最后一个事件
         skill_events = [e for e in self._history if e.skill_id == skill_id]
         if not skill_events:
             return False
         
         last_event = skill_events[-1]
-        
         return self._transition(
             skill_id,
             last_event.to_state,
@@ -156,21 +157,22 @@ class LifecycleManager:
         event_type: str,
         reason: str
     ) -> bool:
-        """Execute a lifecycle transition."""
-        # Update manifest
+        """执行状态转换"""
+        # 更新清单
         manifest = self._get_manifest(skill_id)
         if manifest:
-            manifest.metadata["lifecycle_state"] = to_state.value
-            manifest.updated_at = datetime.now()
+            if hasattr(manifest, 'metadata'):
+                manifest.metadata["lifecycle_state"] = to_state.value
+            if hasattr(manifest, 'updated_at'):
+                manifest.updated_at = datetime.now()
         
-        # Record event
+        # 记录事件
         event = LifecycleEvent(
             skill_id=skill_id,
             event_type=event_type,
             from_state=from_state,
             to_state=to_state,
-            reason=reason,
-            timestamp=datetime.now()
+            reason=reason
         )
         self._history.append(event)
         self._save_history()
@@ -178,18 +180,20 @@ class LifecycleManager:
         return True
     
     def _get_manifest(self, skill_id: str):
-        """Get skill manifest."""
+        """获取技能清单"""
         if not self.registry:
             return None
         return self.registry.get(skill_id)
     
     def _get_lifecycle_state(self, manifest) -> LifecycleState:
-        """Get lifecycle state from manifest."""
-        state_value = manifest.metadata.get("lifecycle_state", "stable")
-        return LifecycleState(state_value)
+        """获取生命周期状态"""
+        if hasattr(manifest, 'metadata') and manifest.metadata:
+            state_value = manifest.metadata.get("lifecycle_state", "stable")
+            return LifecycleState(state_value)
+        return LifecycleState.STABLE
     
     def _get_next_state(self, current: LifecycleState) -> Optional[LifecycleState]:
-        """Get next lifecycle state."""
+        """获取下一状态"""
         transitions = {
             LifecycleState.EXPERIMENTAL: LifecycleState.BETA,
             LifecycleState.BETA: LifecycleState.STABLE,
@@ -200,35 +204,37 @@ class LifecycleManager:
         return transitions.get(current)
     
     def get_deprecated_skills(self) -> List[str]:
-        """Get all deprecated skills."""
+        """获取已废弃的技能"""
         deprecated = []
         if self.registry:
-            for manifest in self.registry.list_all():
+            from ..registry.skill_registry import SkillStatus
+            for manifest in self.registry.list():
                 state = self._get_lifecycle_state(manifest)
                 if state == LifecycleState.DEPRECATED:
                     deprecated.append(manifest.skill_id)
         return deprecated
     
     def get_expiring_skills(self, days: int = 30) -> List[Dict]:
-        """Get skills expiring within N days."""
+        """获取即将过期的技能"""
         expiring = []
         if self.registry:
-            for manifest in self.registry.list_all():
+            for manifest in self.registry.list():
                 state = self._get_lifecycle_state(manifest)
                 if state == LifecycleState.DEPRECATED:
-                    removal_date = manifest.metadata.get("removal_date")
-                    if removal_date:
-                        removal = datetime.fromisoformat(removal_date)
-                        if removal <= datetime.now() + timedelta(days=days):
-                            expiring.append({
-                                "skill_id": manifest.skill_id,
-                                "removal_date": removal_date,
-                                "reason": manifest.metadata.get("deprecation_reason", "")
-                            })
+                    if hasattr(manifest, 'metadata') and manifest.metadata:
+                        removal_date = manifest.metadata.get("removal_date")
+                        if removal_date:
+                            removal = datetime.fromisoformat(removal_date)
+                            if removal <= datetime.now() + timedelta(days=days):
+                                expiring.append({
+                                    "skill_id": manifest.skill_id,
+                                    "removal_date": removal_date,
+                                    "reason": manifest.metadata.get("deprecation_reason", "")
+                                })
         return expiring
     
     def get_history(self, skill_id: str = None) -> List[LifecycleEvent]:
-        """Get lifecycle history."""
+        """获取历史记录"""
         if skill_id:
             return [e for e in self._history if e.skill_id == skill_id]
         return self._history

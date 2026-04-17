@@ -1,0 +1,21 @@
+{
+  "event_id": "evt_569db598fd0a",
+  "instance_id": "inst_f8b50d6ebc53",
+  "event_type": "step_completed",
+  "timestamp": "2026-04-17T20:25:28.954958",
+  "step_id": "step_3_finalize",
+  "data": {
+    "output": {
+      "executed": true,
+      "action": "finalize",
+      "input": {
+        "context": {},
+        "dependencies": {},
+        "params": {}
+      },
+      "message": "Action 'finalize' executed (test mode)"
+    },
+    "duration_ms": 1
+  },
+  "metadata": {}
+}

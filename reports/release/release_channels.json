@@ -1,0 +1,22 @@
+{
+  "channels": {
+    "dev": {
+      "current_baseline_id": null,
+      "current_version": null,
+      "health_status": "unknown",
+      "promoted_at": null
+    },
+    "staging": {
+      "current_baseline_id": null,
+      "current_version": null,
+      "health_status": "unknown",
+      "promoted_at": null
+    },
+    "stable": {
+      "current_baseline_id": null,
+      "current_version": null,
+      "health_status": "unknown",
+      "promoted_at": null
+    }
+  }
+}

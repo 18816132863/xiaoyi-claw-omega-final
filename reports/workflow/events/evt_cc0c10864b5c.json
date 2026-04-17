@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_cc0c10864b5c",
+  "instance_id": "inst_f8b50d6ebc53",
+  "event_type": "step_started",
+  "timestamp": "2026-04-17T20:25:28.952723",
+  "step_id": "step_3_finalize",
+  "data": {
+    "step_name": "收尾",
+    "action": "finalize"
+  },
+  "metadata": {}
+}

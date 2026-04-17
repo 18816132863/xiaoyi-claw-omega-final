@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_8ae5b6c41191",
+  "instance_id": "inst_f8b50d6ebc53",
+  "event_type": "step_started",
+  "timestamp": "2026-04-17T20:25:28.944890",
+  "step_id": "step_1_init",
+  "data": {
+    "step_name": "初始化",
+    "action": "initialize"
+  },
+  "metadata": {}
+}

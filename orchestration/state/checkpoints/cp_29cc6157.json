@@ -1,0 +1,30 @@
+{
+  "checkpoint_id": "cp_29cc6157",
+  "workflow_id": "recovery_chain_test",
+  "step_id": "step_1_init",
+  "timestamp": "2026-04-17T20:25:28.946280",
+  "state": {
+    "instance_id": "inst_f8b50d6ebc53",
+    "output": {
+      "executed": true,
+      "action": "initialize",
+      "input": {
+        "context": {},
+        "dependencies": {},
+        "params": {}
+      },
+      "message": "Action 'initialize' executed (test mode)"
+    },
+    "step_results": {}
+  },
+  "completed_steps": [
+    "step_1_init"
+  ],
+  "pending_steps": [
+    "step_2_will_fail",
+    "step_3_finalize"
+  ],
+  "metadata": {
+    "phase": "after_step"
+  }
+}

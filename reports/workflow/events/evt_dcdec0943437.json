@@ -1,0 +1,14 @@
+{
+  "event_id": "evt_dcdec0943437",
+  "instance_id": "inst_f8b50d6ebc53",
+  "event_type": "workflow_started",
+  "timestamp": "2026-04-17T20:25:28.943278",
+  "step_id": null,
+  "data": {
+    "workflow_id": "recovery_chain_test",
+    "version": "1.0.0",
+    "profile": "default",
+    "control_decision_id": null
+  },
+  "metadata": {}
+}

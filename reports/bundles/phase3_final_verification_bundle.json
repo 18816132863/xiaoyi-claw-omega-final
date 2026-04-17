@@ -1,0 +1,199 @@
+{
+  "bundle_id": "bundle_c2b4cc05",
+  "timestamp": "2026-04-17T20:25:30.752551",
+  "overall_passed": true,
+  "phase1_baseline_passed": true,
+  "group2_passed": true,
+  "group3_passed": true,
+  "group4_passed": true,
+  "group5_passed": true,
+  "group6_passed": true,
+  "benchmarks_passed": true,
+  "verification_results": [
+    {
+      "name": "test_minimum_loop",
+      "passed": true,
+      "duration_ms": 662,
+      "error": null,
+      "details": {}
+    },
+    {
+      "name": "demo_minimum_loop",
+      "passed": true,
+      "duration_ms": 579,
+      "error": null,
+      "details": {}
+    },
+    {
+      "name": "test_phase1_baseline",
+      "passed": false,
+      "duration_ms": 15,
+      "error": "/bin/sh: line 1: make: command not found\n",
+      "details": {}
+    },
+    {
+      "name": "test_phase3_group2",
+      "passed": true,
+      "duration_ms": 563,
+      "error": null,
+      "details": {}
+    },
+    {
+      "name": "test_recovery_chain",
+      "passed": true,
+      "duration_ms": 557,
+      "error": null,
+      "details": {}
+    },
+    {
+      "name": "test_skill_platform",
+      "passed": true,
+      "duration_ms": 288,
+      "error": null,
+      "details": {}
+    },
+    {
+      "name": "test_skill_platform_main_chain",
+      "passed": true,
+      "duration_ms": 287,
+      "error": null,
+      "details": {}
+    },
+    {
+      "name": "test_memory_context",
+      "passed": true,
+      "duration_ms": 222,
+      "error": null,
+      "details": {}
+    },
+    {
+      "name": "bench_task_success",
+      "passed": true,
+      "duration_ms": 453,
+      "error": null,
+      "details": {}
+    },
+    {
+      "name": "bench_skill_latency",
+      "passed": true,
+      "duration_ms": 223,
+      "error": null,
+      "details": {}
+    },
+    {
+      "name": "bench_memory_retrieval",
+      "passed": true,
+      "duration_ms": 236,
+      "error": null,
+      "details": {}
+    }
+  ],
+  "metrics_summary": {
+    "timestamp": "2026-04-16T12:36:34.569445",
+    "summary": {
+      "task_success_rate": 0.7,
+      "skill_failure_rate": 0.2,
+      "memory_hit_rate": 0.75,
+      "overall_health": "good"
+    },
+    "task_metrics": {
+      "total": 10,
+      "passed": 7,
+      "failed": 3,
+      "success_rate": 0.7,
+      "avg_duration_ms": 139.0,
+      "timestamp": "2026-04-16T12:36:34.567244",
+      "details": {
+        "error_types": {
+          "timeout": 1,
+          "skill_not_found": 1,
+          "permission_denied": 1
+        },
+        "min_duration_ms": 30,
+        "max_duration_ms": 220
+      }
+    },
+    "skill_metrics": {
+      "aggregate": {
+        "total_calls": 10,
+        "avg_latency_ms": 63.0,
+        "max_latency_ms": 120,
+        "failure_rate": 0.2,
+        "timestamp": "2026-04-16T12:36:34.567870",
+        "details": {
+          "error_types": {
+            "timeout": 1,
+            "validation_error": 1
+          },
+          "unique_skills": 4
+        }
+      },
+      "by_skill": {
+        "search": {
+          "total_calls": 3,
+          "avg_latency_ms": 35.0,
+          "max_latency_ms": 50,
+          "failure_rate": 0.3333333333333333
+        },
+        "document": {
+          "total_calls": 3,
+          "avg_latency_ms": 81.66666666666667,
+          "max_latency_ms": 90,
+          "failure_rate": 0.0
+        },
+        "code": {
+          "total_calls": 3,
+          "avg_latency_ms": 83.33333333333333,
+          "max_latency_ms": 120,
+          "failure_rate": 0.3333333333333333
+        },
+        "utility": {
+          "total_calls": 1,
+          "avg_latency_ms": 30.0,
+          "max_latency_ms": 30,
+          "failure_rate": 0.0
+        }
+      }
+    },
+    "memory_metrics": {
+      "total_queries": 8,
+      "hits": 6,
+      "misses": 2,
+      "hit_rate": 0.75,
+      "avg_token_usage": 123.75,
+      "avg_source_count": 2.125,
+      "avg_latency_ms": 0.0,
+      "timestamp": "2026-04-16T12:36:34.568377",
+      "details": {
+        "source_distribution": {
+          "3_sources": 3,
+          "4_sources": 1,
+          "0_sources": 2,
+          "2_sources": 2
+        },
+        "min_token_usage": 30,
+        "max_token_usage": 200,
+        "min_source_count": 0,
+        "max_source_count": 4
+      }
+    },
+    "details": {
+      "task_total": 10,
+      "skill_total_calls": 10,
+      "memory_total_queries": 8
+    }
+  },
+  "alerts_summary": {
+    "total_alerts": 0,
+    "unacknowledged": 0
+  },
+  "current_baseline": {
+    "baseline_id": "baseline_v7.2.0",
+    "version": "7.2.0",
+    "channel": "dev"
+  },
+  "current_channel": "dev",
+  "recommendations": [
+    "Fix 1 failing tests: ['test_phase1_baseline']"
+  ]
+}

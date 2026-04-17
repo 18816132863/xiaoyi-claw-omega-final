@@ -93,19 +93,32 @@ class Phase3FinalVerifier:
         # 运行各项验证
         self._run_test("test_minimum_loop", "python tests/integration/test_minimum_loop.py")
         self._run_test("demo_minimum_loop", "python scripts/demo_minimum_loop.py")
+        self._run_test("test_phase1_baseline", "make verify-phase1-baseline")
         self._run_test("test_phase3_group2", "python tests/integration/test_phase3_group2_final.py")
-        self._run_test("test_skill_platform", "python tests/integration/test_skill_platform_main_chain.py")
+        self._run_test("test_recovery_chain", "python tests/integration/test_recovery_chain.py")
+        self._run_test("test_skill_platform", "python tests/integration/test_skill_platform.py")
+        self._run_test("test_skill_platform_main_chain", "python tests/integration/test_skill_platform_main_chain.py")
         self._run_test("test_memory_context", "python tests/integration/test_memory_context_kernel.py")
+        self._run_test("bench_task_success", "python tests/benchmarks/task_success_bench.py")
+        self._run_test("bench_skill_latency", "python tests/benchmarks/skill_latency_bench.py")
+        self._run_test("bench_memory_retrieval", "python tests/benchmarks/memory_retrieval_bench.py")
         
         # 汇总结果
-        phase1_passed = self._get_result("test_minimum_loop")?.passed or False
-        group2_passed = self._get_result("test_phase3_group2")?.passed or False
-        group3_passed = self._get_result("test_skill_platform")?.passed or False
-        group4_passed = self._get_result("test_memory_context")?.passed or False
+        phase1_passed = self._passed("test_minimum_loop") and self._passed("demo_minimum_loop")
+        group2_passed = self._passed("test_phase3_group2") and self._passed("test_recovery_chain")
+        group3_passed = self._passed("test_skill_platform") and self._passed("test_skill_platform_main_chain")
+        group4_passed = self._passed("test_memory_context")
         
         # Group5/6 验证
         group5_passed = self._verify_group5()
         group6_passed = self._verify_group6()
+        
+        # Benchmarks
+        benchmarks_passed = (
+            self._passed("bench_task_success") and
+            self._passed("bench_skill_latency") and
+            self._passed("bench_memory_retrieval")
+        )
         
         # 获取 metrics 和 alerts
         metrics_summary = self._get_metrics_summary()
@@ -125,7 +138,8 @@ class Phase3FinalVerifier:
             group3_passed,
             group4_passed,
             group5_passed,
-            group6_passed
+            group6_passed,
+            benchmarks_passed
         ])
         
         bundle = Phase3FinalBundle(
@@ -138,7 +152,7 @@ class Phase3FinalVerifier:
             group4_passed=group4_passed,
             group5_passed=group5_passed,
             group6_passed=group6_passed,
-            benchmarks_passed=True,  # 简化
+            benchmarks_passed=benchmarks_passed,
             verification_results=self.results,
             metrics_summary=metrics_summary,
             alerts_summary=alerts_summary,
@@ -189,11 +203,17 @@ class Phase3FinalVerifier:
                 return r
         return None
     
+    def _passed(self, name: str) -> bool:
+        result = self._get_result(name)
+        return bool(result and result.passed)
+    
     def _verify_group5(self) -> bool:
         """验证 Group5"""
         # 检查 observability 文件是否存在
         paths = [
-            "reports/observability/events.jsonl",
+            "reports/observability/workflow_timeline.json",
+            "reports/observability/skill_timeline.json",
+            "reports/observability/policy_timeline.json",
             "reports/observability/system_health_report.json"
         ]
         
@@ -215,7 +235,8 @@ class Phase3FinalVerifier:
         # 检查 release 文件是否存在
         paths = [
             "reports/release/release_channels.json",
-            "reports/release/baseline_registry.json"
+            "reports/release/baseline_registry.json",
+            "reports/release/promotion_history.json"
         ]
         
         for path in paths:

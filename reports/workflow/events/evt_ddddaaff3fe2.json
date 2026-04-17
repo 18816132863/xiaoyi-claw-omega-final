@@ -1,0 +1,14 @@
+{
+  "event_id": "evt_ddddaaff3fe2",
+  "instance_id": "inst_339eb6a2ca6c",
+  "event_type": "workflow_started",
+  "timestamp": "2026-04-17T20:25:27.292637",
+  "step_id": null,
+  "data": {
+    "workflow_id": "loop_task_067b6f18",
+    "version": "1.0.0",
+    "profile": "default",
+    "control_decision_id": null
+  },
+  "metadata": {}
+}

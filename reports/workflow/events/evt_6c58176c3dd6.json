@@ -1,0 +1,15 @@
+{
+  "event_id": "evt_6c58176c3dd6",
+  "instance_id": "inst_690f8495b911",
+  "event_type": "step_completed",
+  "timestamp": "2026-04-17T20:25:47.287333",
+  "step_id": "report",
+  "data": {
+    "output": {
+      "reported": true,
+      "message": "报告已生成"
+    },
+    "duration_ms": 1
+  },
+  "metadata": {}
+}

@@ -1,0 +1,39 @@
+{
+  "week_start": "2026-04-13",
+  "week_end": "2026-04-19",
+  "most_frequent_tasks": [
+    {
+      "task_id": "task_001",
+      "task_name": "个人项目日报生成",
+      "count": 1
+    }
+  ],
+  "highest_success_tasks": [
+    {
+      "task_id": "task_001",
+      "task_name": "个人项目日报生成",
+      "rate": 1.0
+    }
+  ],
+  "most_failed_tasks": [],
+  "workflows_to_optimize": [],
+  "skills_to_upgrade": [],
+  "skills_to_downgrade": [],
+  "next_week_priorities": [
+    {
+      "task_id": "task_001",
+      "priority": 1,
+      "why": "高频+低风险+成功标准清晰，日报是每天必做任务，最适合先接"
+    },
+    {
+      "task_id": "task_002",
+      "priority": 2,
+      "why": "高频+低风险，会议提醒是日常刚需，workflow简单明确"
+    },
+    {
+      "task_id": "task_003",
+      "priority": 3,
+      "why": "高频+低风险，重要日期提醒价值高，规则清晰"
+    }
+  ]
+}

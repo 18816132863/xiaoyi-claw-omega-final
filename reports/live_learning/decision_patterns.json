@@ -1,7 +1,14 @@
 {
   "description": "决策模式沉淀 - 记录用户决策习惯",
   "created_at": "2026-04-17T21:50:00+08:00",
-  "patterns": [],
+  "patterns": [
+    {
+      "date": "2026-04-17",
+      "task": "个人项目日报生成",
+      "decision": "按计划推进",
+      "source": "daily_review"
+    }
+  ],
   "rules": {
     "update_rules": [
       "只沉淀真正高价值、可复用的信息",

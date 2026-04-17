@@ -27,6 +27,7 @@
 6. ✅ 新增技能滥用防护模块 (`governance/risk/skill_abuse_guard.py`)
 7. ✅ 升级文档同步引擎 V2.0 (`infrastructure/doc_sync_engine.py`)
 8. ✅ 升级自动融合钩子 V7.2.2 (`scripts/auto_fusion_hook.py`)
+9. ✅ 新增自动备份上传器 (`infrastructure/auto_backup_uploader.py`)
 
 **技能滥用防护 V2.0**:
 - 检测类型: 内存泄漏、DDoS、资源耗尽、递归炸弹、无限循环、恶意调用链、快速连发、载荷炸弹、CPU炸弹、IO炸弹、网络滥用、数据泄露、可疑模式、配额超限、并发溢出

@@ -1,4 +1,4 @@
-.PHONY: verify-phase1-baseline verify-phase3-final fusion-check fusion-auto inspect verify-premerge verify-nightly verify-release
+.PHONY: verify-phase1-baseline verify-phase3-final fusion-check fusion-auto inspect verify-premerge verify-nightly verify-release daily-growth-personal daily-growth-enterprise midday-check daily-review weekly-review
 
 # ═══════════════════════════════════════════════════════════════
 # Phase 1 基线验证
@@ -81,3 +81,26 @@ verify-release:
 	@python scripts/run_release_gate.py release
 	@echo ""
 	@echo "=== Release Gate PASSED ==="
+
+# ═══════════════════════════════════════════════════════════════
+# Daily Growth Loop - 日引导养成层
+# ═══════════════════════════════════════════════════════════════
+daily-growth-personal:
+	@echo "=== Daily Growth Loop (Personal) ==="
+	@python scripts/run_daily_growth_loop.py --mode personal
+
+daily-growth-enterprise:
+	@echo "=== Daily Growth Loop (Enterprise) ==="
+	@python scripts/run_daily_growth_loop.py --mode enterprise
+
+midday-check:
+	@echo "=== Midday Check ==="
+	@python scripts/run_midday_check.py
+
+daily-review:
+	@echo "=== End of Day Review ==="
+	@python scripts/run_end_of_day_review.py
+
+weekly-review:
+	@echo "=== Weekly Growth Review ==="
+	@python scripts/run_weekly_growth_review.py

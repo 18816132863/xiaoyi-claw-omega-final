@@ -1,0 +1,83 @@
+{
+  "description": "真实任务优先级排序",
+  "created_at": "2026-04-17T22:30:00+08:00",
+  "priority_order": [
+    {
+      "task_id": "task_001",
+      "priority": 1,
+      "stage": "connect_now",
+      "why_now": "高频+低风险+成功标准清晰，日报是每天必做任务，最适合先接"
+    },
+    {
+      "task_id": "task_002",
+      "priority": 2,
+      "stage": "connect_now",
+      "why_now": "高频+低风险，会议提醒是日常刚需，workflow简单明确"
+    },
+    {
+      "task_id": "task_003",
+      "priority": 3,
+      "stage": "connect_now",
+      "why_now": "高频+低风险，重要日期提醒价值高，规则清晰"
+    },
+    {
+      "task_id": "task_004",
+      "priority": 4,
+      "stage": "connect_now",
+      "why_now": "高频+低风险，快速记录是基础能力，后续任务依赖它"
+    },
+    {
+      "task_id": "task_005",
+      "priority": 5,
+      "stage": "prepare_next",
+      "why_now": "高频但需要确认联系人搜索能力稳定性"
+    },
+    {
+      "task_id": "task_006",
+      "priority": 6,
+      "stage": "prepare_next",
+      "why_now": "中频+低风险，需要补充冲突检测规则"
+    },
+    {
+      "task_id": "task_007",
+      "priority": 7,
+      "stage": "prepare_next",
+      "why_now": "周频+低风险，需要确认文档转换skill可用性"
+    },
+    {
+      "task_id": "task_008",
+      "priority": 8,
+      "stage": "observe_only",
+      "why_now": "周频+低风险，但图库搜索依赖手机端能力，需观察稳定性"
+    },
+    {
+      "task_id": "task_009",
+      "priority": 9,
+      "stage": "observe_only",
+      "why_now": "高频+低风险，但定时任务需要长期观察是否稳定触发"
+    },
+    {
+      "task_id": "task_010",
+      "priority": 10,
+      "stage": "observe_only",
+      "why_now": "周频+中风险+需人工复核，企业任务需更谨慎，先观察个人任务跑稳后再接"
+    }
+  ],
+  "stage_summary": {
+    "connect_now": {
+      "count": 4,
+      "task_ids": ["task_001", "task_002", "task_003", "task_004"],
+      "description": "立刻接入：高频+低风险+成功标准清楚"
+    },
+    "prepare_next": {
+      "count": 3,
+      "task_ids": ["task_005", "task_006", "task_007"],
+      "description": "准备接入：中频+中低风险+需补一点规则或skill"
+    },
+    "observe_only": {
+      "count": 3,
+      "task_ids": ["task_008", "task_009", "task_010"],
+      "description": "观察中：有价值但暂时不适合直接接stable"
+    }
+  }
+}

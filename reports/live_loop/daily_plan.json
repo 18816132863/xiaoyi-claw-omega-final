@@ -1,0 +1,94 @@
+{
+  "date": "2026-04-17",
+  "today_mode": "personal",
+  "primary_task": {
+    "task_id": "task_001",
+    "task_name": "个人项目日报生成",
+    "owner": "personal",
+    "frequency": "daily",
+    "risk_level": "low",
+    "workflow_id": "personal_daily_report_v1",
+    "required_capabilities": [
+      "workflow.execute",
+      "skill.execute",
+      "memory.read",
+      "report.write"
+    ],
+    "success_criteria": [
+      "生成日报内容",
+      "输出结构固定",
+      "保留workflow replay",
+      "写入report文件"
+    ],
+    "input_example": "根据今天的任务执行记录生成个人项目日报",
+    "expected_output": "一份结构化日报文本和对应report文件",
+    "review_required": false
+  },
+  "secondary_tasks": [
+    {
+      "task_id": "task_002",
+      "task_name": "会议提醒与准备",
+      "owner": "personal",
+      "frequency": "daily",
+      "risk_level": "low",
+      "workflow_id": "personal_meeting_prep_v1",
+      "required_capabilities": [
+        "workflow.execute",
+        "calendar.read",
+        "contact.search",
+        "note.write"
+      ],
+      "success_criteria": [
+        "会议前30分钟触发提醒",
+        "自动提取会议相关信息",
+        "生成会议准备清单",
+        "写入备忘录"
+      ],
+      "input_example": "检查今天下午的会议并提前准备",
+      "expected_output": "会议提醒通知和准备清单",
+      "review_required": false
+    },
+    {
+      "task_id": "task_003",
+      "task_name": "重要日期提醒",
+      "owner": "personal",
+      "frequency": "daily",
+      "risk_level": "low",
+      "workflow_id": "personal_date_reminder_v1",
+      "required_capabilities": [
+        "workflow.execute",
+        "calendar.read",
+        "note.read",
+        "alarm.create"
+      ],
+      "success_criteria": [
+        "提前7天/1天/当天提醒",
+        "提醒内容准确",
+        "创建对应闹钟或日程",
+        "记录提醒历史"
+      ],
+      "input_example": "检查未来一周的重要日期并设置提醒",
+      "expected_output": "重要日期提醒列表和已创建的提醒",
+      "review_required": false
+    }
+  ],
+  "recommended_workflow_id": "personal_daily_report_v1",
+  "required_capabilities": [
+    "workflow.execute",
+    "skill.execute",
+    "memory.read",
+    "report.write"
+  ],
+  "estimated_time": "2-4小时",
+  "risk_notes": [
+    "无"
+  ],
+  "success_criteria": [
+    "生成日报内容",
+    "输出结构固定",
+    "保留workflow replay",
+    "写入report文件"
+  ],
+  "review_required": false,
+  "safe_mode_recommended": true
+}

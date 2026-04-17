@@ -19,6 +19,7 @@ python scripts/heartbeat_executor.py
 | Metrics 生成 | 生成最新指标 | 60s |
 | 快速巡检 | 架构快速巡检 | 120s |
 | 自动备份上传 | 自动提交推送变更 | 60s |
+| 每日引导检查 | 检查是否需要启动日引导 | 30s |
 
 ## 心跳间隔
 

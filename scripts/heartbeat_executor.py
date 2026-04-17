@@ -58,11 +58,19 @@ class HeartbeatExecutor:
                 "enabled": True
             },
             {
+                "id": "daily_growth_check",
+                "name": "每日引导检查",
+                "command": [sys.executable, str(self.root / "scripts/run_daily_growth_check.py")],
+                "timeout": 30,
+                "priority": 2,
+                "enabled": True
+            },
+            {
                 "id": "permanent_keeper",
                 "name": "永久守护器刷新",
                 "command": [sys.executable, str(self.root / "scripts/permanent_keeper.py"), "refresh"],
                 "timeout": 60,
-                "priority": 2,
+                "priority": 3,
                 "enabled": True
             },
             {
@@ -70,7 +78,7 @@ class HeartbeatExecutor:
                 "name": "Metrics 生成",
                 "command": [sys.executable, str(self.root / "scripts/generate_metrics.py")],
                 "timeout": 60,
-                "priority": 3,
+                "priority": 4,
                 "enabled": True
             },
             {
@@ -78,7 +86,7 @@ class HeartbeatExecutor:
                 "name": "快速巡检",
                 "command": [sys.executable, str(self.root / "scripts/unified_inspector_v7.py"), "--quick"],
                 "timeout": 120,
-                "priority": 4,
+                "priority": 5,
                 "enabled": False  # 默认关闭，避免耗时过长
             }
         ]

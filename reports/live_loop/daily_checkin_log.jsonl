@@ -1,0 +1,4 @@
+{"timestamp": "placeholder", "event": "init", "data": {}}
+{"timestamp": "2026-04-17T22:50:48.478247", "event": "morning_checkin", "answers": {"mode": "personal", "available_time": "2-4小时", "priority": "推进主任务", "risk_to_avoid": "无", "style": "稳定推进"}}
+{"timestamp": "2026-04-17T22:50:53.140698", "event": "midday_check", "answers": {"progress": "进行中", "blocked": false, "switch_task": false, "safe_mode": true}}
+{"timestamp": "2026-04-17T22:50:57.462728", "event": "end_of_day_review", "answers": {"completed": ["主任务"], "not_completed": [], "failure_reasons": [], "best_decision": "按计划推进", "keep_doing": "继续推进主任务", "avoid_doing": "避免分心", "learnings": []}}

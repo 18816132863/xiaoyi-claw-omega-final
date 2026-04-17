@@ -1,0 +1,16 @@
+{
+  "instance_id": "inst_ad8afea752b2",
+  "workflow_id": "loop_task_ae77ad7c",
+  "version": "1.0.0",
+  "task_id": "",
+  "profile": "default",
+  "status": "completed",
+  "started_at": "2026-04-17T21:35:36.328337",
+  "completed_at": "2026-04-17T21:35:36.331116",
+  "failed_step_id": null,
+  "recovery_summary": {},
+  "control_decision_id": null,
+  "input": {},
+  "output": {},
+  "metadata": {}
+}

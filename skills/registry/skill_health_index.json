@@ -1,6 +1,6 @@
 {
-  "architecture_checker@1.0.0": {
-    "skill_id": "architecture_checker",
+  "test_skill@1.0.0": {
+    "skill_id": "test_skill",
     "version": "1.0.0",
     "total_executions": 1,
     "success_count": 1,
@@ -8,9 +8,9 @@
     "timeout_count": 0,
     "success_rate": 1.0,
     "failure_rate": 0.0,
-    "avg_latency_ms": 0.0,
+    "avg_latency_ms": 104.0,
     "recent_errors": [],
-    "last_success_at": "2026-04-17T20:55:02.246971",
+    "last_success_at": "2026-04-17T22:22:37.415386",
     "last_failure_at": null,
     "health_status": "unknown",
     "health_score": 0.5

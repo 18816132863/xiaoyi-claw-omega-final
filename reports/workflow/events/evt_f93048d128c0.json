@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_f93048d128c0",
+  "instance_id": "inst_dce2260778aa",
+  "event_type": "step_started",
+  "timestamp": "2026-04-17T21:20:48.170057",
+  "step_id": "step1",
+  "data": {
+    "step_name": "step1",
+    "action": "test_action"
+  },
+  "metadata": {}
+}

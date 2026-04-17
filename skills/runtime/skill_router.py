@@ -510,6 +510,37 @@ class SkillRouter:
         """
         started = perf_counter()
 
+        # ========== 滥用防护检查 ==========
+        from governance.risk.skill_abuse_guard import get_abuse_guard
+        abuse_guard = get_abuse_guard()
+        
+        # 计算载荷大小
+        payload_size = len(str(input_data).encode('utf-8')) if input_data else 0
+        
+        # 获取调用链
+        call_chain = context.get("call_chain", []) if context else []
+        
+        # 调用前检查
+        allowed, abuse_detection = abuse_guard.check_before_call(
+            skill_id=skill_id,
+            payload_size=payload_size,
+            call_chain=call_chain
+        )
+        
+        if not allowed:
+            return SkillExecutionResult(
+                success=False,
+                skill_id=skill_id,
+                version=version or "unknown",
+                output={},
+                duration_ms=int((perf_counter() - started) * 1000),
+                error=f"abuse_blocked: {abuse_detection.message}",
+            )
+        
+        # 记录调用开始
+        execution_id = abuse_guard.record_call_start(skill_id)
+        # ========== 滥用防护检查结束 ==========
+
         # 重新加载 registry
         self.registry.reload()
 
@@ -520,6 +551,14 @@ class SkillRouter:
             # 降级到 registry
             manifest = self.registry.get(skill_id)
             if not manifest:
+                # 记录失败
+                abuse_guard.record_call_end(
+                    skill_id=skill_id,
+                    execution_id=execution_id,
+                    duration_ms=int((perf_counter() - started) * 1000),
+                    success=False,
+                    error="skill_not_found"
+                )
                 return SkillExecutionResult(
                     success=False,
                     skill_id=skill_id,
@@ -536,6 +575,13 @@ class SkillRouter:
 
         # 检查状态
         if status in ["disabled", "deprecated", "retired"]:
+            abuse_guard.record_call_end(
+                skill_id=skill_id,
+                execution_id=execution_id,
+                duration_ms=int((perf_counter() - started) * 1000),
+                success=False,
+                error=f"skill_{status}"
+            )
             return SkillExecutionResult(
                 success=False,
                 skill_id=skill_id,
@@ -549,6 +595,13 @@ class SkillRouter:
         if governance_decision:
             budget_check = self._check_budget(skill_id, governance_decision)
             if not budget_check["allowed"]:
+                abuse_guard.record_call_end(
+                    skill_id=skill_id,
+                    execution_id=execution_id,
+                    duration_ms=int((perf_counter() - started) * 1000),
+                    success=False,
+                    error=budget_check["reason"]
+                )
                 return SkillExecutionResult(
                     success=False,
                     skill_id=skill_id,
@@ -581,6 +634,15 @@ class SkillRouter:
             success=True,
             latency_ms=duration_ms
         )
+        
+        # ========== 记录滥用防护 ==========
+        abuse_guard.record_call_end(
+            skill_id=skill_id,
+            execution_id=execution_id,
+            duration_ms=duration_ms,
+            success=True
+        )
+        # ========== 滥用防护记录结束 ==========
 
         return SkillExecutionResult(
             success=True,

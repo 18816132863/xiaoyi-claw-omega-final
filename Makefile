@@ -1,4 +1,4 @@
-.PHONY: verify-phase1-baseline verify-phase3-final fusion-check fusion-auto inspect
+.PHONY: verify-phase1-baseline verify-phase3-final fusion-check fusion-auto inspect verify-premerge verify-nightly verify-release
 
 # ═══════════════════════════════════════════════════════════════
 # Phase 1 基线验证
@@ -36,6 +36,10 @@ fusion-auto:
 	@echo "=== 自动融合 ==="
 	@python infrastructure/fusion_engine.py --execute
 
+fusion-sync:
+	@echo "=== 文档同步 ==="
+	@python scripts/auto_fusion_hook.py --execute
+
 # ═══════════════════════════════════════════════════════════════
 # 统一巡检
 # ═══════════════════════════════════════════════════════════════
@@ -56,3 +60,24 @@ metrics:
 verify-all: verify-phase1-baseline fusion-check inspect
 	@echo ""
 	@echo "=== 所有验证通过 ==="
+
+# ═══════════════════════════════════════════════════════════════
+# 门禁验证 (Gate Targets)
+# ═══════════════════════════════════════════════════════════════
+verify-premerge:
+	@echo "=== Pre-merge Gate ==="
+	@python scripts/run_release_gate.py premerge
+	@echo ""
+	@echo "=== Pre-merge Gate PASSED ==="
+
+verify-nightly:
+	@echo "=== Nightly Gate ==="
+	@python scripts/run_release_gate.py nightly
+	@echo ""
+	@echo "=== Nightly Gate PASSED ==="
+
+verify-release:
+	@echo "=== Release Gate ==="
+	@python scripts/run_release_gate.py release
+	@echo ""
+	@echo "=== Release Gate PASSED ==="

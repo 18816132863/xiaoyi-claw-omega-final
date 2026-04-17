@@ -1,0 +1,29 @@
+{
+  "description": "决策模式沉淀 - 记录用户决策习惯",
+  "created_at": "2026-04-17T21:50:00+08:00",
+  "patterns": [],
+  "rules": {
+    "update_rules": [
+      "只沉淀真正高价值、可复用的信息",
+      "不要把所有临时噪音都写进长期记忆",
+      "长期记忆更新必须带 reason 和 task_id"
+    ],
+    "quality_criteria": {
+      "min_occurrences": 3,
+      "min_confidence": 0.8,
+      "requires_user_confirmation": true
+    }
+  },
+  "schema": {
+    "pattern_id": "唯一标识",
+    "pattern_type": "decision/preference/rule",
+    "context": "触发上下文",
+    "action": "用户选择的行动",
+    "reason": "选择原因",
+    "confidence": "置信度",
+    "occurrences": "出现次数",
+    "first_seen": "首次发现时间",
+    "last_seen": "最近发现时间",
+    "source_task_id": "来源任务ID"
+  }
+}

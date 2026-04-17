@@ -1,7 +1,42 @@
 {
-  "baselines": [],
+  "baselines": [
+    {
+      "baseline_id": "baseline_v7.2.0_phase3_final",
+      "version": "7.2.0",
+      "stage": "stable",
+      "channel": "stable",
+      "registered_at": "2026-04-17T21:10:00+08:00",
+      "git_commit": "eaea10a",
+      "verification": {
+        "verify_phase3_final": "passed",
+        "verify_phase1_baseline": "passed",
+        "test_minimum_loop": "passed",
+        "demo_minimum_loop": "passed"
+      },
+      "features": [
+        "Phase1: Control Plane + Context Builder + Workflow Engine",
+        "Phase2: Memory Context Kernel + Skill Platform",
+        "Phase3 Group1: Workflow Kernel 恢复链接线",
+        "Phase3 Group2: Checkpoint + Fallback + Rollback",
+        "Phase3 Group3: Skill Package Platform",
+        "Phase3 Group4: 主链生效验证",
+        "Phase3 Group5: Observability 事件系统",
+        "Phase3 Group6: Release 发布系统"
+      ],
+      "protected_files": [
+        "governance/control_plane/",
+        "orchestration/workflow/",
+        "skills/runtime/",
+        "skills/lifecycle/",
+        "memory_context/",
+        "core/events/",
+        "governance/release/"
+      ]
+    }
+  ],
+  "current_stable": "baseline_v7.2.0_phase3_final",
   "regression_guard": {
-    "last_check": null,
+    "last_check": "2026-04-17T21:10:00+08:00",
     "regressions_found": 0,
     "details": []
   }

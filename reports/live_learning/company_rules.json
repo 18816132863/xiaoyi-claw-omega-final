@@ -1,0 +1,51 @@
+{
+  "description": "企业规则沉淀 - 记录企业 SOP 和规则",
+  "created_at": "2026-04-17T21:50:00+08:00",
+  "company_info": {
+    "name": "待填写",
+    "industry": "待填写",
+    "scale": "待填写"
+  },
+  "rules": {
+    "security": {
+      "data_classification": [],
+      "access_control": [],
+      "audit_requirements": []
+    },
+    "workflow": {
+      "approval_flows": [],
+      "escalation_rules": [],
+      "sla_definitions": []
+    },
+    "communication": {
+      "internal_channels": [],
+      "external_channels": [],
+      "response_time_expectations": []
+    }
+  },
+  "sop": [],
+  "risk_boundaries": {
+    "conservative": [
+      "涉及财务数据",
+      "涉及客户隐私",
+      "涉及合同签署"
+    ],
+    "moderate": [
+      "内部文档处理",
+      "日程安排",
+      "信息查询"
+    ],
+    "aggressive": [
+      "个人笔记整理",
+      "格式转换",
+      "提醒设置"
+    ]
+  },
+  "rules": {
+    "update_rules": [
+      "企业规则变更需审批",
+      "新增规则需说明原因",
+      "删除规则需归档记录"
+    ]
+  }
+}

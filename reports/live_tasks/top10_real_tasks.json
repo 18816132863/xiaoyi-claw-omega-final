@@ -1,0 +1,123 @@
+{
+  "description": "真实使用清单 - Top 10 真实任务",
+  "created_at": "2026-04-17T21:50:00+08:00",
+  "principle": "先从高频、低风险、规则明确的任务开始",
+  "tasks": [
+    {
+      "task_id": "task_001",
+      "task_name": "每日工作总结生成",
+      "owner": "个人",
+      "frequency": "daily",
+      "risk_level": "low",
+      "workflow_id": "workflow_daily_summary",
+      "required_capabilities": ["memory.read", "note.read", "calendar.read"],
+      "success_criteria": "自动生成当日工作总结，包含日程、备忘录、关键事件",
+      "status": "pending"
+    },
+    {
+      "task_id": "task_002",
+      "task_name": "会议提醒与准备",
+      "owner": "个人",
+      "frequency": "daily",
+      "risk_level": "low",
+      "workflow_id": "workflow_meeting_prep",
+      "required_capabilities": ["calendar.read", "contact.search", "note.write"],
+      "success_criteria": "会议前30分钟提醒，自动准备会议相关资料",
+      "status": "pending"
+    },
+    {
+      "task_id": "task_003",
+      "task_name": "重要日期提醒",
+      "owner": "个人",
+      "frequency": "daily",
+      "risk_level": "low",
+      "workflow_id": "workflow_date_reminder",
+      "required_capabilities": ["calendar.read", "note.read", "alarm.create"],
+      "success_criteria": "提前提醒生日、纪念日、重要截止日期",
+      "status": "pending"
+    },
+    {
+      "task_id": "task_004",
+      "task_name": "文档格式转换",
+      "owner": "个人",
+      "frequency": "weekly",
+      "risk_level": "low",
+      "workflow_id": "workflow_doc_convert",
+      "required_capabilities": ["skill.markitdown", "skill.docx", "skill.pdf"],
+      "success_criteria": "PDF/Word/Markdown 互转，保留格式",
+      "status": "pending"
+    },
+    {
+      "task_id": "task_005",
+      "task_name": "信息快速记录",
+      "owner": "个人",
+      "frequency": "daily",
+      "risk_level": "low",
+      "workflow_id": "workflow_quick_note",
+      "required_capabilities": ["note.create", "note.search", "memory.write"],
+      "success_criteria": "语音/文字快速记录，自动分类，可检索",
+      "status": "pending"
+    },
+    {
+      "task_id": "task_006",
+      "task_name": "日程冲突检测",
+      "owner": "个人",
+      "frequency": "daily",
+      "risk_level": "low",
+      "workflow_id": "workflow_conflict_detect",
+      "required_capabilities": ["calendar.read", "calendar.create"],
+      "success_criteria": "创建日程时自动检测冲突，给出建议",
+      "status": "pending"
+    },
+    {
+      "task_id": "task_007",
+      "task_name": "联系人信息查询",
+      "owner": "个人",
+      "frequency": "daily",
+      "risk_level": "low",
+      "workflow_id": "workflow_contact_query",
+      "required_capabilities": ["contact.search"],
+      "success_criteria": "快速查询联系人电话、邮箱、公司",
+      "status": "pending"
+    },
+    {
+      "task_id": "task_008",
+      "task_name": "照片快速查找",
+      "owner": "个人",
+      "frequency": "weekly",
+      "risk_level": "low",
+      "workflow_id": "workflow_photo_search",
+      "required_capabilities": ["gallery.search", "gallery.upload"],
+      "success_criteria": "按时间、地点、人物快速找到照片",
+      "status": "pending"
+    },
+    {
+      "task_id": "task_009",
+      "task_name": "定时提醒任务",
+      "owner": "个人",
+      "frequency": "daily",
+      "risk_level": "low",
+      "workflow_id": "workflow_scheduled_reminder",
+      "required_capabilities": ["alarm.create", "alarm.search", "note.read"],
+      "success_criteria": "按设定时间提醒待办事项",
+      "status": "pending"
+    },
+    {
+      "task_id": "task_010",
+      "task_name": "工作周报生成",
+      "owner": "企业",
+      "frequency": "weekly",
+      "risk_level": "medium",
+      "workflow_id": "workflow_weekly_report",
+      "required_capabilities": ["memory.read", "note.read", "calendar.read", "doc.write"],
+      "success_criteria": "自动汇总本周工作，生成周报文档",
+      "status": "pending"
+    }
+  ],
+  "next_steps": [
+    "按 task_id 顺序逐个接入",
+    "每个任务先在 dev 通道验证",
+    "通过后晋升 staging",
+    "稳定运行后晋升 stable"
+  ]
+}

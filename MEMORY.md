@@ -4,9 +4,75 @@
 
 ## 项目状态
 
-- **版本**: V7.2.0
+- **版本**: V7.2.1
+- **阶段**: 长期养成阶段 (POST RELEASE)
 - **状态**: 全面整合完成，门禁通过
-- **更新时间**: 2026-04-15
+- **更新时间**: 2026-04-17
+
+## 最近变更
+### 2026-04-17 自动同步
+
+- **run_doc_sync**: 新增方法: run_doc_sync(root, execute)
+
+### 2026-04-17 POST RELEASE - 进入长期养成阶段
+
+**里程碑**: 架构收官，不再大改，开始用真实任务养系统
+
+**已完成**:
+1. ✅ 冻结当前正式主基线 (V7.2.0 Phase3 Final)
+2. ✅ 标记 stable 通道
+3. ✅ 创建 `reports/POST_RELEASE_BASELINE.md`
+4. ✅ 创建 `reports/live_tasks/top10_real_tasks.json` (10个真实任务)
+5. ✅ 创建 `reports/live_learning/` (决策模式、用户偏好、企业规则)
+6. ✅ 新增技能滥用防护模块 (`governance/risk/skill_abuse_guard.py`)
+7. ✅ 升级文档同步引擎 V2.0 (`infrastructure/doc_sync_engine.py`)
+8. ✅ 升级自动融合钩子 V7.2.2 (`scripts/auto_fusion_hook.py`)
+
+**技能滥用防护 V2.0**:
+- 检测类型: 内存泄漏、DDoS、资源耗尽、递归炸弹、无限循环、恶意调用链、快速连发、载荷炸弹、CPU炸弹、IO炸弹、网络滥用、数据泄露、可疑模式、配额超限、并发溢出
+- 防护措施: 调用前检查、执行监控、自适应限流、智能熔断、自动封禁
+- 新增能力: 系统资源监控、攻击模式学习、实时告警、审计日志
+- 集成位置: `skills/runtime/skill_router.py`
+
+**文档同步引擎 V2.0**:
+- 检测类型: 新模块、新能力、架构更新需求、新方法、新 Makefile 目标、新文件类型
+- 自动同步: 高优先级 + 可自动同步的建议
+- 手动确认: 低优先级或需要人工判断的建议
+- 噪音过滤: 排除 traces、checkpoints、events 等运行时文件
+
+**原则**:
+- 不再大改架构
+- 只做：新任务接入、问题修补、小优化
+- 每次改动必须带：目标、影响、验收、是否影响 stable
+
+### 2026-04-17 融合机制升级 (V7.2.1)
+
+- **新增文档同步引擎** (`infrastructure/doc_sync_engine.py`)
+  - 自动检测代码变更是否需要同步到文档
+  - 支持新增方法、新增 Makefile 目标检测
+  - 只检测真正新增的内容（对比 git HEAD~1）
+
+- **升级自动融合钩子** (`scripts/auto_fusion_hook.py`)
+  - 新增 `--execute` 参数执行文档同步
+  - 集成文档同步检查到融合流程
+
+- **新增 Makefile 目标**
+  - `fusion-sync`: 执行文档同步
+
+### 2026-04-17 巡检修复
+1. **Makefile 门禁目标**
+   - 新增 `verify-premerge`: premerge 门禁
+   - 新增 `verify-nightly`: nightly 门禁
+   - 新增 `verify-release`: release 门禁
+
+2. **PolicyEngine.get_metrics()**
+   - 新增 `get_metrics()` 方法，返回策略引擎指标
+   - 用于 Metrics 反哺主链检查
+
+3. **统一巡检器修复**
+   - `check_recovery_chain`: 更新 WorkflowResult 字段检查 (`reason` → `error`, `rollback_used` → `rollback_point_id`)
+   - `check_metrics_chain`: 更新 PolicyEngine 检查 (`_load_metrics` → `get_metrics`)
+   - `change_impact`: 添加 `expect_code=1` 支持有变更文件时正常通过
 
 ## 架构概览
 
@@ -154,6 +220,7 @@
 - ✅ 仓库完整性检查通过
 - ✅ 技能安全检查通过
 - ✅ 架构完整性检查通过
+- ✅ 统一巡检 34/34 通过 (2026-04-17)
 
 ## Git 认证
 

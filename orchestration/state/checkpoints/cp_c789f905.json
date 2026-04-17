@@ -1,0 +1,23 @@
+{
+  "checkpoint_id": "cp_c789f905",
+  "workflow_id": "loop_task_88655690",
+  "step_id": "main",
+  "timestamp": "2026-04-17T22:22:37.427022",
+  "state": {
+    "instance_id": "inst_64581d65ace5",
+    "step_input": {
+      "context": {},
+      "dependencies": {},
+      "params": {}
+    },
+    "step_results": {}
+  },
+  "completed_steps": [],
+  "pending_steps": [
+    "main"
+  ],
+  "metadata": {
+    "phase": "before_step",
+    "attempt": 0
+  }
+}

@@ -18,6 +18,7 @@ python scripts/heartbeat_executor.py
 | 永久守护器刷新 | 刷新关键模块状态 | 60s |
 | Metrics 生成 | 生成最新指标 | 60s |
 | 快速巡检 | 架构快速巡检 | 120s |
+| 自动备份上传 | 自动提交推送变更 | 60s |
 
 ## 心跳间隔
 

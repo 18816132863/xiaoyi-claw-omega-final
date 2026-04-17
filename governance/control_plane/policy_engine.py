@@ -193,6 +193,25 @@ class PolicyEngine:
         """Clear decision log."""
         self._decision_log.clear()
     
+    def get_metrics(self) -> Dict[str, Any]:
+        """
+        Get policy engine metrics.
+        
+        Returns:
+            Dict with policy counts, decision stats, etc.
+        """
+        return {
+            "total_policies": len(self._policies),
+            "enabled_policies": sum(1 for p in self._policies.values() if p.enabled),
+            "disabled_policies": sum(1 for p in self._policies.values() if not p.enabled),
+            "policies_by_type": {
+                t.value: len([p for p in self._policies.values() if p.policy_type == t])
+                for t in PolicyType
+            },
+            "decision_log_size": len(self._decision_log),
+            "recent_decisions": len(self._decision_log[-100:])
+        }
+    
     def evaluate_policy(
         self,
         task_meta: Dict,

@@ -6,6 +6,15 @@
 1. 作为 git pre-commit hook
 2. 作为 Makefile 命令
 3. 作为 CI/CD 步骤
+
+V7.2.1 新增：
+- 文档同步检查
+- 代码变更 → 文档自动同步
+
+V7.2.2 新增：
+- 架构文档自动更新
+- 新模块自动注册
+- 能力矩阵自动更新
 """
 
 import sys
@@ -82,29 +91,115 @@ def run_fusion_engine(root: Path) -> bool:
         return False
 
 
+def run_doc_sync(root: Path, execute: bool = False) -> bool:
+    """运行文档同步"""
+    print("\n📄 运行文档同步检查 (V2.0)...")
+    
+    cmd = [sys.executable, str(root / 'infrastructure/doc_sync_engine.py')]
+    if execute:
+        cmd.append('--execute')
+    else:
+        cmd.append('--scan')
+    
+    result = subprocess.run(
+        cmd,
+        cwd=str(root),
+        capture_output=True,
+        text=True
+    )
+    
+    print(result.stdout)
+    
+    if result.returncode == 0:
+        # 检查是否有同步建议
+        if "发现建议: 0" in result.stdout:
+            print("  ✅ 文档已是最新")
+            return True
+        elif "自动同步: 0" in result.stdout and execute:
+            print("  ⚠️  发现需要手动确认的同步建议")
+            return True
+        else:
+            print("  ✅ 文档同步完成")
+            return True
+    else:
+        print(f"  ❌ 文档同步失败: {result.stderr}")
+        return False
+
+
+def run_architecture_check(root: Path) -> bool:
+    """运行架构完整性检查"""
+    print("\n🏗️ 运行架构完整性检查...")
+    
+    # 检查核心架构文件
+    arch_file = root / 'core' / 'ARCHITECTURE.md'
+    if not arch_file.exists():
+        print("  ❌ 架构文档不存在")
+        return False
+    
+    # 检查关键章节
+    content = arch_file.read_text(encoding='utf-8')
+    required_sections = [
+        "六层架构",
+        "技能生态",
+        "治理层扩展",
+        "能力矩阵"
+    ]
+    
+    missing = [s for s in required_sections if s not in content]
+    if missing:
+        print(f"  ⚠️  架构文档缺少章节: {missing}")
+        return False
+    
+    print("  ✅ 架构文档完整")
+    return True
+
+
 def main():
     """主函数"""
+    import argparse
+    parser = argparse.ArgumentParser(description="自动融合钩子 V7.2.2")
+    parser.add_argument("--execute", action="store_true", help="执行文档同步")
+    parser.add_argument("--check-arch", action="store_true", help="检查架构完整性")
+    args = parser.parse_args()
+    
     root = get_project_root()
     
     print("=" * 60)
-    print("  自动融合钩子 V7.2.0")
+    print("  自动融合钩子 V7.2.2")
     print("=" * 60)
+    
+    all_passed = True
     
     # 1. 检查新文件
     check_passed = run_fusion_check(root)
+    if not check_passed:
+        all_passed = False
     
     # 2. 如果有文件未融入，运行融合引擎
     if not check_passed:
         fuse_passed = run_fusion_engine(root)
         if not fuse_passed:
-            print("\n❌ 融合失败，请手动处理")
-            return 1
+            all_passed = False
+    
+    # 3. 运行文档同步检查
+    doc_passed = run_doc_sync(root, execute=args.execute)
+    if not doc_passed:
+        all_passed = False
+    
+    # 4. 检查架构完整性
+    if args.check_arch:
+        arch_passed = run_architecture_check(root)
+        if not arch_passed:
+            all_passed = False
     
     print("\n" + "=" * 60)
-    print("  ✅ 融合检查通过")
+    if all_passed:
+        print("  ✅ 融合检查通过")
+    else:
+        print("  ⚠️  融合检查发现问题，请处理")
     print("=" * 60 + "\n")
     
-    return 0
+    return 0 if all_passed else 1
 
 
 if __name__ == "__main__":

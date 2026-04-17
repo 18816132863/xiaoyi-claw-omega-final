@@ -58,10 +58,10 @@ class HeartbeatExecutor:
                 "enabled": True
             },
             {
-                "id": "daily_growth_check",
-                "name": "每日引导检查",
-                "command": [sys.executable, str(self.root / "scripts/run_daily_growth_check.py")],
-                "timeout": 30,
+                "id": "auto_trigger",
+                "name": "自动触发器",
+                "command": [sys.executable, str(self.root / "scripts/auto_trigger.py")],
+                "timeout": 120,
                 "priority": 2,
                 "enabled": True
             },

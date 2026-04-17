@@ -183,7 +183,7 @@ class AutoBackupUploader:
             
             # 3. git push
             result = subprocess.run(
-                ["git", "push"],
+                ["git", "push", "--set-upstream", "origin", "master"],
                 cwd=str(self.root),
                 capture_output=True,
                 text=True,

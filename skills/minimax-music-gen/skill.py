@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-educational-video-creator 技能执行脚本
-Create educational videos using Remotion with Kurzgesagt/回形针 style. Use when users want to: (1) create teaching or educational videos, (2) design video storyboards, (3) produce animated explainer videos, (4) build SVG-based animations for learning content, (5) visualize complex concepts with motion graphics, (6) make science/tech explainer videos, (7) create 可视化讲解视频 or 科普视频. Triggers on requests like '帮我做一个教学视频', 'create an explainer video about X', '制作科普动画', 'make a video explaining Y'. This skill requires remotion-best-practices skill for technical implementation.
+minimax-music-gen 技能执行脚本
+>
 """
 
 import sys
@@ -10,7 +10,7 @@ from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Optional
 
-class EducationalVideoCreator:
+class MinimaxMusicGen:
     """技能主类"""
     
     def __init__(self):
@@ -21,7 +21,7 @@ class EducationalVideoCreator:
     def help(self) -> str:
         """返回帮助信息"""
         return """
-educational-video-creator 技能
+minimax-music-gen 技能
 
 命令:
   help      显示帮助
@@ -92,7 +92,7 @@ def main():
         return 1
     
     command = sys.argv[1]
-    skill = EducationalVideoCreator()
+    skill = MinimaxMusicGen()
     
     if command == "help":
         print(skill.help())
@@ -106,7 +106,7 @@ def main():
         for t in templates:
             print(f"  - {t}")
     elif command == "version":
-        print("educational-video-creator v1.0.0")
+        print("minimax-music-gen v1.0.0")
     else:
         print(f"未知命令: {command}")
         return 1

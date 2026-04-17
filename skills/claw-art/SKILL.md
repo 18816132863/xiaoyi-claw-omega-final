@@ -88,3 +88,36 @@ When generating, provide:
 - The polished prompt
 - Style recommendations
 - Aspect ratio suggestions based on use case
+
+
+## 使用方法
+
+### 命令行调用
+
+```bash
+# 查看帮助
+python skill.py help
+
+# 执行技能
+python skill.py run --template default
+
+# 列出模板
+python skill.py list
+```
+
+### 参数说明
+
+| 参数 | 说明 | 默认值 |
+|------|------|--------|
+| --template | 模板名称 | default |
+| --output | 输出格式 | json |
+
+## 示例
+
+```bash
+# 使用默认模板
+python skill.py run
+
+# 使用指定模板
+python skill.py run --template custom
+```

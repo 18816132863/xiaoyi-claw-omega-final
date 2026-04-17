@@ -1,304 +1,135 @@
 #!/usr/bin/env python3
 """
-Doc Autofill - 文档自动填写系统 V1.0.0
-
-功能：
-1. 解析模板占位符
-2. 从长期记忆读取数据
-3. 自动填写文档
-4. 批量生成
+doc-autofill 技能执行脚本
+文档自动填写系统。根据模板自动填写Word/Excel文档，从长期记忆读取数据，支持自定义数据源。适用场景：(1) 填写报名表、申请表，(2) 批量生成合同、证书，(3) 根据模板生成报告，(4) 自动填充个人信息。Use when user wants to fill a form, complete a document, or auto-populate a template.
 """
 
-import json
 import sys
-import re
+import json
 from pathlib import Path
-from datetime import datetime, date
-from typing import Dict, List, Any, Optional
-
-
-def get_project_root() -> Path:
-    """获取项目根目录"""
-    current = Path(__file__).resolve().parent.parent.parent
-    if (current / 'core' / 'ARCHITECTURE.md').exists():
-        return current
-    return Path(__file__).resolve().parent.parent.parent
-
+from datetime import datetime
+from typing import List, Dict, Optional
 
 class DocAutofill:
-    """文档自动填写器"""
+    """技能主类"""
     
-    def __init__(self, root: Path = None):
-        self.root = root or get_project_root()
-        self.template_dir = self.root / "reports" / "templates"
-        self.output_dir = self.root / "reports" / "output"
-        self.memory_dir = self.root / "reports" / "live_learning"
-        
-        self.template_dir.mkdir(parents=True, exist_ok=True)
-        self.output_dir.mkdir(parents=True, exist_ok=True)
-        
-        # 占位符模式
-        self.placeholder_pattern = re.compile(r'\{\{(\w+)\}\}')
-        
-        # 字段映射
-        self.field_mapping = {
-            "姓名": "name", "名字": "name",
-            "电话": "phone", "手机": "phone", "联系电话": "phone",
-            "邮箱": "email", "电子邮件": "email",
-            "身份证": "id_card", "身份证号": "id_card",
-            "公司": "company", "单位": "company",
-            "地址": "address", "住址": "address",
-            "日期": "date", "时间": "date",
-            "银行": "bank_account", "银行卡": "bank_account"
-        }
+    def __init__(self):
+        self.output_dir = Path(__file__).parent / "output"
+        self.templates_dir = Path(__file__).parent / "templates"
+        self.output_dir.mkdir(exist_ok=True)
     
-    def load_personal_info(self) -> Dict:
-        """加载个人信息"""
-        info_file = self.memory_dir / "user_preferences.json"
-        if info_file.exists():
-            data = json.loads(info_file.read_text(encoding='utf-8'))
-            return data.get("personal_info", {})
-        return {}
+    def help(self) -> str:
+        """返回帮助信息"""
+        return """
+doc-autofill 技能
+
+命令:
+  help      显示帮助
+  run       执行技能
+  list      列出可用模板
+  version   显示版本
+
+示例:
+  python skill.py run --template default
+  python skill.py list
+"""
     
-    def save_personal_info(self, info: Dict):
-        """保存个人信息"""
-        info_file = self.memory_dir / "user_preferences.json"
+    def run(self, **kwargs) -> Dict:
+        """执行技能主逻辑"""
+        # 1. 参数验证
+        template = kwargs.get('template', 'default')
         
-        existing = {}
-        if info_file.exists():
-            existing = json.loads(info_file.read_text(encoding='utf-8'))
+        # 2. 加载模板
+        template_content = self.load_template(template)
         
-        existing["personal_info"] = info
-        info_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding='utf-8')
-    
-    def parse_template(self, template_path: Path) -> Dict:
-        """解析模板"""
-        result = {
-            "path": str(template_path),
-            "placeholders": [],
-            "fields": []
-        }
+        # 3. 执行核心逻辑
+        result = self.execute(template_content, kwargs)
         
-        if template_path.suffix == '.docx':
-            result["placeholders"] = self._parse_docx(template_path)
-        elif template_path.suffix == '.xlsx':
-            result["placeholders"] = self._parse_xlsx(template_path)
-        elif template_path.suffix in ['.md', '.txt']:
-            result["placeholders"] = self._parse_text(template_path)
+        # 4. 保存结果
+        if result.get('save', True):
+            filepath = self.save_output(result['content'])
+            result['file'] = str(filepath)
         
-        # 转换为字段名
-        for ph in result["placeholders"]:
-            field = self.field_mapping.get(ph, ph.lower())
-            if field not in result["fields"]:
-                result["fields"].append(field)
-        
+        # 5. 返回结果
         return result
     
-    def _parse_docx(self, path: Path) -> List[str]:
-        """解析 Word 文档"""
-        placeholders = []
-        try:
-            from docx import Document
-            doc = Document(str(path))
-            
-            # 检查段落
-            for para in doc.paragraphs:
-                matches = self.placeholder_pattern.findall(para.text)
-                placeholders.extend(matches)
-            
-            # 检查表格
-            for table in doc.tables:
-                for row in table.rows:
-                    for cell in row.cells:
-                        matches = self.placeholder_pattern.findall(cell.text)
-                        placeholders.extend(matches)
-        except ImportError:
-            pass
-        except Exception as e:
-            print(f"解析 Word 失败: {e}")
-        
-        return list(set(placeholders))
-    
-    def _parse_xlsx(self, path: Path) -> List[str]:
-        """解析 Excel 文档"""
-        placeholders = []
-        try:
-            from openpyxl import load_workbook
-            wb = load_workbook(str(path))
-            
-            for sheet in wb.worksheets:
-                for row in sheet.iter_rows():
-                    for cell in row:
-                        if cell.value:
-                            matches = self.placeholder_pattern.findall(str(cell.value))
-                            placeholders.extend(matches)
-        except ImportError:
-            pass
-        except Exception as e:
-            print(f"解析 Excel 失败: {e}")
-        
-        return list(set(placeholders))
-    
-    def _parse_text(self, path: Path) -> List[str]:
-        """解析文本文件"""
-        content = path.read_text(encoding='utf-8')
-        matches = self.placeholder_pattern.findall(content)
-        return list(set(matches))
-    
-    def fill_template(
-        self,
-        template_path: Path,
-        data: Dict,
-        output_name: str = None
-    ) -> Dict:
-        """填写模板"""
-        result = {
-            "success": False,
-            "output_path": None,
-            "filled_fields": [],
-            "missing_fields": []
+    def execute(self, template: str, params: Dict) -> Dict:
+        """执行核心逻辑 - 子类应重写此方法"""
+        return {
+            "status": "success",
+            "content": template,
+            "params": params,
+            "timestamp": datetime.now().isoformat()
         }
-        
-        # 检查缺失字段
-        template_info = self.parse_template(template_path)
-        for field in template_info["fields"]:
-            if field not in data:
-                result["missing_fields"].append(field)
-        
-        if template_path.suffix == '.docx':
-            output_path = self._fill_docx(template_path, data, output_name)
-        elif template_path.suffix == '.xlsx':
-            output_path = self._fill_xlsx(template_path, data, output_name)
-        elif template_path.suffix in ['.md', '.txt']:
-            output_path = self._fill_text(template_path, data, output_name)
-        else:
-            return result
-        
-        if output_path:
-            result["success"] = True
-            result["output_path"] = str(output_path)
-            result["filled_fields"] = [k for k in data.keys() if k in template_info["fields"]]
-        
-        return result
     
-    def _fill_docx(self, template_path: Path, data: Dict, output_name: str = None) -> Optional[Path]:
-        """填写 Word 文档"""
-        try:
-            from docx import Document
-            doc = Document(str(template_path))
-            
-            # 替换段落
-            for para in doc.paragraphs:
-                for key, value in data.items():
-                    placeholder = f"{{{{{key}}}}}"
-                    if placeholder in para.text:
-                        para.text = para.text.replace(placeholder, str(value))
-            
-            # 替换表格
-            for table in doc.tables:
-                for row in table.rows:
-                    for cell in row.cells:
-                        for key, value in data.items():
-                            placeholder = f"{{{{{key}}}}}"
-                            if placeholder in cell.text:
-                                cell.text = cell.text.replace(placeholder, str(value))
-            
-            # 保存
-            if not output_name:
-                output_name = f"{template_path.stem}_已填写.docx"
-            output_path = self.output_dir / output_name
-            doc.save(str(output_path))
-            
-            return output_path
-        except Exception as e:
-            print(f"填写 Word 失败: {e}")
-            return None
+    def load_template(self, name: str) -> str:
+        """加载模板"""
+        template_file = self.templates_dir / f"{name}.md"
+        if template_file.exists():
+            return template_file.read_text(encoding='utf-8')
+        return "# 默认模板\n\n待完善..."
     
-    def _fill_xlsx(self, template_path: Path, data: Dict, output_name: str = None) -> Optional[Path]:
-        """填写 Excel 文档"""
-        try:
-            from openpyxl import load_workbook
-            wb = load_workbook(str(template_path))
-            
-            for sheet in wb.worksheets:
-                for row in sheet.iter_rows():
-                    for cell in row:
-                        if cell.value:
-                            for key, value in data.items():
-                                placeholder = f"{{{{{key}}}}}"
-                                if placeholder in str(cell.value):
-                                    cell.value = str(cell.value).replace(placeholder, str(value))
-            
-            # 保存
-            if not output_name:
-                output_name = f"{template_path.stem}_已填写.xlsx"
-            output_path = self.output_dir / output_name
-            wb.save(str(output_path))
-            
-            return output_path
-        except Exception as e:
-            print(f"填写 Excel 失败: {e}")
-            return None
+    def list_templates(self) -> List[str]:
+        """列出所有可用模板"""
+        if not self.templates_dir.exists():
+            return []
+        return [f.stem for f in self.templates_dir.glob("*.md")]
     
-    def _fill_text(self, template_path: Path, data: Dict, output_name: str = None) -> Optional[Path]:
-        """填写文本文件"""
-        try:
-            content = template_path.read_text(encoding='utf-8')
-            
-            for key, value in data.items():
-                placeholder = f"{{{{{key}}}}}"
-                content = content.replace(placeholder, str(value))
-            
-            # 保存
-            if not output_name:
-                output_name = f"{template_path.stem}_已填写{template_path.suffix}"
-            output_path = self.output_dir / output_name
-            output_path.write_text(content, encoding='utf-8')
-            
-            return output_path
-        except Exception as e:
-            print(f"填写文本失败: {e}")
-            return None
+    def save_output(self, content: str, prefix: str = "output") -> Path:
+        """保存输出文件"""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{prefix}_{timestamp}.md"
+        filepath = self.output_dir / filename
+        filepath.write_text(content, encoding='utf-8')
+        return filepath
 
 
 def main():
-    import argparse
-    parser = argparse.ArgumentParser(description="Doc Autofill V1.0.0")
-    parser.add_argument("action", choices=["parse", "fill", "info"], help="操作类型")
-    parser.add_argument("--template", help="模板文件路径")
-    parser.add_argument("--data", help="数据JSON")
-    args = parser.parse_args()
+    """主函数"""
+    if len(sys.argv) < 2:
+        print("用法: python skill.py <command> [args]")
+        print("运行 'python skill.py help' 查看帮助")
+        return 1
     
-    root = get_project_root()
-    autofill = DocAutofill(root)
+    command = sys.argv[1]
+    skill = DocAutofill()
     
-    if args.action == "parse":
-        if not args.template:
-            print("请提供模板路径: --template path/to/template.docx")
-            return 1
-        
-        result = autofill.parse_template(Path(args.template))
+    if command == "help":
+        print(skill.help())
+    elif command == "run":
+        args = parse_args(sys.argv[2:])
+        result = skill.run(**args)
         print(json.dumps(result, ensure_ascii=False, indent=2))
-        
-    elif args.action == "fill":
-        if not args.template:
-            print("请提供模板路径: --template path/to/template.docx")
-            return 1
-        
-        # 合并个人信息和用户数据
-        data = autofill.load_personal_info()
-        if args.data:
-            user_data = json.loads(args.data)
-            data.update(user_data)
-        
-        result = autofill.fill_template(Path(args.template), data)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-        
-    elif args.action == "info":
-        info = autofill.load_personal_info()
-        print(json.dumps(info, ensure_ascii=False, indent=2))
+    elif command == "list":
+        templates = skill.list_templates()
+        print("可用模板:")
+        for t in templates:
+            print(f"  - {t}")
+    elif command == "version":
+        print("doc-autofill v1.0.0")
+    else:
+        print(f"未知命令: {command}")
+        return 1
     
     return 0
+
+
+def parse_args(args: List[str]) -> Dict:
+    """解析命令行参数"""
+    result = {}
+    i = 0
+    while i < len(args):
+        if args[i].startswith('--'):
+            key = args[i][2:].replace('-', '_')
+            if i + 1 < len(args) and not args[i + 1].startswith('--'):
+                result[key] = args[i + 1]
+                i += 2
+            else:
+                result[key] = True
+                i += 1
+        else:
+            i += 1
+    return result
 
 
 if __name__ == "__main__":

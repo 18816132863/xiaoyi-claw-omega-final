@@ -1,0 +1,18 @@
+{
+  "instance_id": "inst_06dca8607c69",
+  "workflow_id": "rollback_verify",
+  "version": "1.0.0",
+  "task_id": "",
+  "profile": "default",
+  "status": "failed",
+  "started_at": "2026-04-17T13:16:48.390410",
+  "completed_at": "2026-04-17T13:16:48.394987",
+  "failed_step_id": null,
+  "recovery_summary": {},
+  "control_decision_id": null,
+  "input": {},
+  "output": {
+    "error": "Step s1 failed: 硬失败"
+  },
+  "metadata": {}
+}

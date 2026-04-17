@@ -1,0 +1,15 @@
+{
+  "event_id": "evt_95af58c67a2a",
+  "instance_id": "inst_48f173b20b7c",
+  "event_type": "step_completed",
+  "timestamp": "2026-04-17T13:16:30.185212",
+  "step_id": "step1",
+  "data": {
+    "output": {
+      "executed": true,
+      "action": "test_action"
+    },
+    "duration_ms": 1
+  },
+  "metadata": {}
+}

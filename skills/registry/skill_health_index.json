@@ -1,75 +1,18 @@
 {
-  "multi_v_skill@1.0.0": {
-    "skill_id": "multi_v_skill",
+  "architecture_checker@1.0.0": {
+    "skill_id": "architecture_checker",
     "version": "1.0.0",
-    "total_executions": 10,
-    "success_count": 10,
+    "total_executions": 1,
+    "success_count": 1,
     "failure_count": 0,
     "timeout_count": 0,
     "success_rate": 1.0,
     "failure_rate": 0.0,
-    "avg_latency_ms": 100.0,
-    "recent_errors": [],
-    "last_success_at": "2026-04-17T13:04:21.387630",
-    "last_failure_at": null,
-    "health_status": "healthy",
-    "health_score": 1.0
-  },
-  "multi_v_skill@2.0.0": {
-    "skill_id": "multi_v_skill",
-    "version": "2.0.0",
-    "total_executions": 8,
-    "success_count": 0,
-    "failure_count": 8,
-    "timeout_count": 0,
-    "success_rate": 0.0,
-    "failure_rate": 1.0,
     "avg_latency_ms": 0.0,
-    "recent_errors": [
-      {
-        "timestamp": "2026-04-17T13:04:21.389663",
-        "error": "error",
-        "error_type": "unknown"
-      },
-      {
-        "timestamp": "2026-04-17T13:04:21.391621",
-        "error": "error",
-        "error_type": "unknown"
-      },
-      {
-        "timestamp": "2026-04-17T13:04:21.392991",
-        "error": "error",
-        "error_type": "unknown"
-      },
-      {
-        "timestamp": "2026-04-17T13:04:21.394510",
-        "error": "error",
-        "error_type": "unknown"
-      },
-      {
-        "timestamp": "2026-04-17T13:04:21.395278",
-        "error": "error",
-        "error_type": "unknown"
-      },
-      {
-        "timestamp": "2026-04-17T13:04:21.396981",
-        "error": "error",
-        "error_type": "unknown"
-      },
-      {
-        "timestamp": "2026-04-17T13:04:21.398207",
-        "error": "error",
-        "error_type": "unknown"
-      },
-      {
-        "timestamp": "2026-04-17T13:04:21.399530",
-        "error": "error",
-        "error_type": "unknown"
-      }
-    ],
-    "last_success_at": null,
-    "last_failure_at": "2026-04-17T13:04:21.399530",
-    "health_status": "unhealthy",
-    "health_score": 0.3
+    "recent_errors": [],
+    "last_success_at": "2026-04-17T13:16:38.437659",
+    "last_failure_at": null,
+    "health_status": "unknown",
+    "health_score": 0.5
   }
 }

@@ -1,0 +1,15 @@
+{
+  "event_id": "evt_39ee14a2268c",
+  "instance_id": "inst_249512f4c755",
+  "event_type": "step_completed",
+  "timestamp": "2026-04-17T13:16:38.430546",
+  "step_id": "check",
+  "data": {
+    "output": {
+      "checked": true,
+      "result": "架构完整"
+    },
+    "duration_ms": 1
+  },
+  "metadata": {}
+}

@@ -40,6 +40,8 @@ class RetrievalRequest:
     filters: Dict[str, Any] = field(default_factory=dict)
     risk_level: str = "low"
     capabilities: List[str] = field(default_factory=list)
+    trace_id: Optional[str] = None  # 支持传入 trace_id
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -241,6 +243,50 @@ class RetrievalRouter:
             final_results = self._apply_token_budget(final_results, request.token_budget)
         
         latency = (time.time() - start_time) * 1000
+        
+        # ========== 第七步：如果存在 trace_id，保存到 retrieval_trace_store ==========
+        if request.trace_id:
+            from memory_context.retrieval.retrieval_trace_store import SourceResult
+            
+            # 更新或创建 trace
+            existing_trace = self.retrieval_trace_store.get_trace(request.trace_id)
+            
+            if existing_trace:
+                # 更新现有 trace
+                existing_trace.allowed_sources = allowed_sources
+                existing_trace.denied_sources = denied_sources
+                existing_trace.source_results = source_results
+                existing_trace.ranking_result = {
+                    "total_items": len(all_results),
+                    "ranked_items": len(final_results)
+                }
+                existing_trace.budget_result = {
+                    "budget_tokens": request.token_budget or 0,
+                    "used_tokens": sum(len(r.get("content", "")) // 4 for r in final_results)
+                }
+                existing_trace.final_result = {
+                    "total_results": len(final_results),
+                    "source_counts": source_counts,
+                    "latency_ms": latency
+                }
+                self.retrieval_trace_store.update_trace(existing_trace)
+            else:
+                # 创建新 trace
+                new_trace = self.retrieval_trace_store.create_trace(
+                    task_id=request.metadata.get("task_id", "unknown"),
+                    original_query=request.query,
+                    profile=request.profile,
+                    risk_level=request.risk_level
+                )
+                new_trace.allowed_sources = allowed_sources
+                new_trace.denied_sources = denied_sources
+                new_trace.source_results = source_results
+                new_trace.final_result = {
+                    "total_results": len(final_results),
+                    "source_counts": source_counts,
+                    "latency_ms": latency
+                }
+                self.retrieval_trace_store.update_trace(new_trace)
         
         return RetrievalResult(
             query=request.query,

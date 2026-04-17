@@ -199,6 +199,17 @@ def test_memory_version():
     print("测试 4: Memory Version 示例")
     print("=" * 60)
 
+    # ========== 清理旧测试文件，保证测试隔离 ==========
+    import os
+    for f in [
+        "/tmp/test_memory_versions.json",
+        "/tmp/test_memory_store.json", 
+        "/tmp/test_memory_archive.json"
+    ]:
+        if os.path.exists(f):
+            os.remove(f)
+            print(f"  已清理: {f}")
+
     from memory_context.long_term.memory_version_store import (
         MemoryVersionStore
     )

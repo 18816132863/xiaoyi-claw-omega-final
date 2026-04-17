@@ -1,0 +1,21 @@
+{
+  "checkpoint_id": "cp_71a4b866",
+  "workflow_id": "test_workflow",
+  "step_id": "step1",
+  "timestamp": "2026-04-17T23:10:41.149264",
+  "state": {
+    "instance_id": "inst_f710ace113b1",
+    "output": {
+      "executed": true,
+      "action": "test_action"
+    },
+    "step_results": {}
+  },
+  "completed_steps": [
+    "step1"
+  ],
+  "pending_steps": [],
+  "metadata": {
+    "phase": "after_step"
+  }
+}

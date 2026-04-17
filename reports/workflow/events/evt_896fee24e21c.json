@@ -1,0 +1,14 @@
+{
+  "event_id": "evt_896fee24e21c",
+  "instance_id": "inst_dc01ab151517",
+  "event_type": "workflow_started",
+  "timestamp": "2026-04-17T22:59:54.527140",
+  "step_id": null,
+  "data": {
+    "workflow_id": "test_workflow",
+    "version": "1.0.0",
+    "profile": "developer",
+    "control_decision_id": null
+  },
+  "metadata": {}
+}

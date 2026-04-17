@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_5dde64d4e597",
+  "instance_id": "inst_647e8bb1ddc8",
+  "event_type": "step_started",
+  "timestamp": "2026-04-17T14:02:00.715698",
+  "step_id": "s1",
+  "data": {
+    "step_name": "硬失败",
+    "action": "hard_fail"
+  },
+  "metadata": {}
+}

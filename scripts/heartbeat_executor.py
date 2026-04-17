@@ -79,7 +79,7 @@ class HeartbeatExecutor:
                 "command": [sys.executable, str(self.root / "scripts/generate_metrics.py")],
                 "timeout": 60,
                 "priority": 4,
-                "enabled": True
+                "enabled": False  # 禁用，示例脚本有导入错误
             },
             {
                 "id": "quick_inspection",

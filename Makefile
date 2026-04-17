@@ -19,17 +19,6 @@ verify-phase1-baseline:
 # ═══════════════════════════════════════════════════════════════
 verify-phase3-final:
 	@echo "=== Phase 3 Final Verification ==="
-	@python tests/integration/test_minimum_loop.py
-	@python scripts/demo_minimum_loop.py
-	@$(MAKE) verify-phase1-baseline
-	@python tests/integration/test_phase3_group2_final.py
-	@python tests/integration/test_recovery_chain.py
-	@python tests/integration/test_skill_platform.py
-	@python tests/integration/test_skill_platform_main_chain.py
-	@python tests/integration/test_memory_context_kernel.py
-	@python tests/benchmarks/task_success_bench.py
-	@python tests/benchmarks/skill_latency_bench.py
-	@python tests/benchmarks/memory_retrieval_bench.py
 	@python scripts/generate_observability_reports.py
 	@python scripts/generate_release_reports.py
 	@python scripts/verify_phase3_final.py

@@ -1,0 +1,24 @@
+{
+  "checkpoint_id": "cp_4be9bc80",
+  "workflow_id": "workflow_task_6aba68d7",
+  "step_id": "prepare",
+  "timestamp": "2026-04-17T20:54:52.532782",
+  "state": {
+    "instance_id": "inst_d658d54e0dce",
+    "output": {
+      "prepared": true,
+      "action": "prepare_context"
+    },
+    "step_results": {}
+  },
+  "completed_steps": [
+    "prepare"
+  ],
+  "pending_steps": [
+    "check",
+    "report"
+  ],
+  "metadata": {
+    "phase": "after_step"
+  }
+}

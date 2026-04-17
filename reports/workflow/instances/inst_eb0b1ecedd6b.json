@@ -1,0 +1,18 @@
+{
+  "instance_id": "inst_eb0b1ecedd6b",
+  "workflow_id": "rollback_test",
+  "version": "1.0.0",
+  "task_id": "",
+  "profile": "default",
+  "status": "failed",
+  "started_at": "2026-04-17T20:54:53.612808",
+  "completed_at": "2026-04-17T20:54:53.619914",
+  "failed_step_id": null,
+  "recovery_summary": {},
+  "control_decision_id": null,
+  "input": {},
+  "output": {
+    "error": "Step step_2 failed: 硬失败 - 触发 rollback"
+  },
+  "metadata": {}
+}

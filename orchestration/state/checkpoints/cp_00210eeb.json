@@ -1,0 +1,48 @@
+{
+  "checkpoint_id": "cp_00210eeb",
+  "workflow_id": "recovery_chain_test",
+  "step_id": "step_2_will_fail",
+  "timestamp": "2026-04-17T20:54:53.547188",
+  "state": {
+    "instance_id": "inst_4ca913ff2c18",
+    "error": "\u6545\u610f\u5931\u8d25 - \u6d4b\u8bd5\u91cd\u8bd5",
+    "attempt": 0,
+    "step_results": {
+      "step_1_init": {
+        "step_id": "step_1_init",
+        "status": "completed",
+        "started_at": "2026-04-17T20:54:53.543657",
+        "completed_at": "2026-04-17T20:54:53.545001",
+        "output": {
+          "executed": true,
+          "action": "initialize",
+          "input": {
+            "context": {},
+            "dependencies": {},
+            "params": {}
+          },
+          "message": "Action 'initialize' executed (test mode)"
+        },
+        "error": null,
+        "retry_count": 0,
+        "duration_ms": 1,
+        "fallback_used": false,
+        "rollback_used": false,
+        "checkpoint_id": "cp_4461291e",
+        "rollback_point_id": "rb_38998474",
+        "fallback_decision": null
+      }
+    }
+  },
+  "completed_steps": [
+    "step_1_init"
+  ],
+  "pending_steps": [
+    "step_2_will_fail",
+    "step_3_finalize"
+  ],
+  "metadata": {
+    "phase": "on_error",
+    "attempt": 0
+  }
+}

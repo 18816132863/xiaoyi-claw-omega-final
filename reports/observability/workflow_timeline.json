@@ -1,5 +1,5 @@
 {
-  "total_events": 18,
+  "total_events": 39,
   "items": [
     {
       "event_id": "evt_65a59239",
@@ -250,6 +250,300 @@
       },
       "task_id": null,
       "workflow_instance_id": "inst_d67a2295718d",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_a41de512",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:27.278148",
+      "payload": {
+        "workflow_id": "test_workflow",
+        "version": "1.0.0",
+        "profile": "developer"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_2a20fccb40fd",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_9b501293",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:27.292967",
+      "payload": {
+        "workflow_id": "loop_task_067b6f18",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_339eb6a2ca6c",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_d237bb06",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:27.865057",
+      "payload": {
+        "workflow_id": "workflow_task_c7a45c4e",
+        "version": "1.0.0",
+        "profile": "developer"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_5bb048d91634",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_92194a57",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:28.386660",
+      "payload": {
+        "workflow_id": "checkpoint_verify",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_e1f9eed1dcda",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_1b535748",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:28.444581",
+      "payload": {
+        "workflow_id": "fallback_verify",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_041f0e00a37b",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_74db51b2",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:28.450406",
+      "payload": {
+        "workflow_id": "rollback_verify",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_b0dfeb1aca45",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_af28df45",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:28.455517",
+      "payload": {
+        "workflow_id": "event_verify",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_f69e25113f75",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_5dc5bd60",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:28.944145",
+      "payload": {
+        "workflow_id": "recovery_chain_test",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_f8b50d6ebc53",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_542a4919",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:29.012062",
+      "payload": {
+        "workflow_id": "rollback_test",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_f9c817752ba6",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_8728143a",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:43.818899",
+      "payload": {
+        "workflow_id": "test_workflow",
+        "version": "1.0.0",
+        "profile": "developer"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_d241431fd587",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_8cdf7601",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:43.833238",
+      "payload": {
+        "workflow_id": "loop_task_9e70fd60",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_17ba9fa29145",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_a3ef4880",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:25:47.277418",
+      "payload": {
+        "workflow_id": "workflow_task_a5fcd001",
+        "version": "1.0.0",
+        "profile": "developer"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_690f8495b911",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_2d753d21",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:54:39.920408",
+      "payload": {
+        "workflow_id": "test_workflow",
+        "version": "1.0.0",
+        "profile": "developer"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_96bad8c44c87",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_1688f922",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:54:39.934764",
+      "payload": {
+        "workflow_id": "loop_task_1abc94b6",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_b3469ef9819d",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_699bfdab",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:54:40.502035",
+      "payload": {
+        "workflow_id": "workflow_task_109ec810",
+        "version": "1.0.0",
+        "profile": "developer"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_f0108de5e83f",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_b39b3bc8",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:54:41.008934",
+      "payload": {
+        "workflow_id": "checkpoint_verify",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_f23da00bdae2",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_e2340c1c",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:54:41.077737",
+      "payload": {
+        "workflow_id": "fallback_verify",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_f237c66baa27",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_e58a49ca",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:54:41.083608",
+      "payload": {
+        "workflow_id": "rollback_verify",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_1d5d1c6b92f8",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_0538bce1",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:54:41.088685",
+      "payload": {
+        "workflow_id": "event_verify",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_9f6d81f05587",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_0f74c399",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:54:41.584601",
+      "payload": {
+        "workflow_id": "recovery_chain_test",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_a87bc5ffd2b2",
+      "skill_id": null,
+      "decision_id": null
+    },
+    {
+      "event_id": "evt_be9fcd49",
+      "event_type": "workflow_started",
+      "timestamp": "2026-04-17T20:54:41.664487",
+      "payload": {
+        "workflow_id": "rollback_test",
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "task_id": null,
+      "workflow_instance_id": "inst_9467a1ed0338",
       "skill_id": null,
       "decision_id": null
     }

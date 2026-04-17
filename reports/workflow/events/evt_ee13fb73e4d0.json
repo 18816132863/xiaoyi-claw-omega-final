@@ -1,0 +1,14 @@
+{
+  "event_id": "evt_ee13fb73e4d0",
+  "instance_id": "inst_9467a1ed0338",
+  "event_type": "workflow_completed",
+  "timestamp": "2026-04-17T20:54:41.682012",
+  "step_id": null,
+  "data": {
+    "status": "failed",
+    "output": {
+      "error": "Step step_2 failed: 硬失败 - 触发 rollback"
+    }
+  },
+  "metadata": {}
+}

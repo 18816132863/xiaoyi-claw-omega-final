@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_71aad785e48e",
+  "instance_id": "inst_4ca913ff2c18",
+  "event_type": "step_started",
+  "timestamp": "2026-04-17T20:54:53.545926",
+  "step_id": "step_2_will_fail",
+  "data": {
+    "step_name": "故意失败的步骤",
+    "action": "fail_on_purpose"
+  },
+  "metadata": {}
+}

@@ -1,0 +1,14 @@
+{
+  "event_id": "evt_a542b53d577d",
+  "instance_id": "inst_1084d8050786",
+  "event_type": "workflow_started",
+  "timestamp": "2026-04-17T20:54:53.004935",
+  "step_id": null,
+  "data": {
+    "workflow_id": "checkpoint_verify",
+    "version": "1.0.0",
+    "profile": "default",
+    "control_decision_id": null
+  },
+  "metadata": {}
+}

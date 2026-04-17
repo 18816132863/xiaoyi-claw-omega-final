@@ -1,0 +1,60 @@
+{
+  "checkpoint_id": "cp_accb093c",
+  "workflow_id": "workflow_task_109ec810",
+  "step_id": "report",
+  "timestamp": "2026-04-17T20:54:40.511262",
+  "state": {
+    "instance_id": "inst_f0108de5e83f",
+    "output": {
+      "reported": true,
+      "message": "\u62a5\u544a\u5df2\u751f\u6210"
+    },
+    "step_results": {
+      "prepare": {
+        "step_id": "prepare",
+        "status": "completed",
+        "started_at": "2026-04-17T20:54:40.502867",
+        "completed_at": "2026-04-17T20:54:40.505643",
+        "output": {
+          "prepared": true,
+          "action": "prepare_context"
+        },
+        "error": null,
+        "retry_count": 0,
+        "duration_ms": 2,
+        "fallback_used": false,
+        "rollback_used": false,
+        "checkpoint_id": "cp_8db19632",
+        "rollback_point_id": "rb_59dfb68a",
+        "fallback_decision": null
+      },
+      "check": {
+        "step_id": "check",
+        "status": "completed",
+        "started_at": "2026-04-17T20:54:40.506723",
+        "completed_at": "2026-04-17T20:54:40.508430",
+        "output": {
+          "checked": true,
+          "result": "\u67b6\u6784\u5b8c\u6574"
+        },
+        "error": null,
+        "retry_count": 0,
+        "duration_ms": 1,
+        "fallback_used": false,
+        "rollback_used": false,
+        "checkpoint_id": "cp_297fe99d",
+        "rollback_point_id": "rb_87267a22",
+        "fallback_decision": null
+      }
+    }
+  },
+  "completed_steps": [
+    "prepare",
+    "check",
+    "report"
+  ],
+  "pending_steps": [],
+  "metadata": {
+    "phase": "after_step"
+  }
+}

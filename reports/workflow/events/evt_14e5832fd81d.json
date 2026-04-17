@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_14e5832fd81d",
+  "instance_id": "inst_e1fd35df2cf6",
+  "event_type": "retry_triggered",
+  "timestamp": "2026-04-17T20:54:53.075326",
+  "step_id": "s1",
+  "data": {
+    "retry_count": 1,
+    "max_retries": 1
+  },
+  "metadata": {}
+}

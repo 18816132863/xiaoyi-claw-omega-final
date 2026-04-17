@@ -1,0 +1,69 @@
+{
+  "checkpoint_id": "cp_75292f94",
+  "workflow_id": "recovery_chain_test",
+  "step_id": "step_3_finalize",
+  "timestamp": "2026-04-17T20:54:53.550511",
+  "state": {
+    "instance_id": "inst_4ca913ff2c18",
+    "step_input": {
+      "context": {},
+      "dependencies": {},
+      "params": {}
+    },
+    "step_results": {
+      "step_1_init": {
+        "step_id": "step_1_init",
+        "status": "completed",
+        "started_at": "2026-04-17T20:54:53.543657",
+        "completed_at": "2026-04-17T20:54:53.545001",
+        "output": {
+          "executed": true,
+          "action": "initialize",
+          "input": {
+            "context": {},
+            "dependencies": {},
+            "params": {}
+          },
+          "message": "Action 'initialize' executed (test mode)"
+        },
+        "error": null,
+        "retry_count": 0,
+        "duration_ms": 1,
+        "fallback_used": false,
+        "rollback_used": false,
+        "checkpoint_id": "cp_4461291e",
+        "rollback_point_id": "rb_38998474",
+        "fallback_decision": null
+      },
+      "step_2_will_fail": {
+        "step_id": "step_2_will_fail",
+        "status": "completed",
+        "started_at": "2026-04-17T20:54:53.545917",
+        "completed_at": "2026-04-17T20:54:53.549356",
+        "output": {
+          "recovered": true,
+          "attempts": 3
+        },
+        "error": "\u6545\u610f\u5931\u8d25 - \u6d4b\u8bd5\u91cd\u8bd5",
+        "retry_count": 1,
+        "duration_ms": 3,
+        "fallback_used": false,
+        "rollback_used": false,
+        "checkpoint_id": "cp_ee94e26b",
+        "rollback_point_id": "rb_c35eb1a0",
+        "fallback_decision": "retry"
+      }
+    }
+  },
+  "completed_steps": [
+    "step_1_init",
+    "step_2_will_fail"
+  ],
+  "pending_steps": [
+    "step_3_finalize"
+  ],
+  "metadata": {
+    "phase": "before_step",
+    "attempt": 0
+  }
+}

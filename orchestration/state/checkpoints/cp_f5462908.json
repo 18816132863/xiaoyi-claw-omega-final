@@ -1,0 +1,128 @@
+{
+  "checkpoint_id": "cp_f5462908",
+  "workflow_id": "workflow_task_6aba68d7",
+  "step_id": "prepare",
+  "timestamp": "2026-04-17T20:54:52.530840",
+  "state": {
+    "instance_id": "inst_d658d54e0dce",
+    "step_input": {
+      "context": {
+        "task_id": "task_6aba68d7",
+        "profile": "developer",
+        "intent": "\u68c0\u67e5\u9879\u76ee\u67b6\u6784\u5b8c\u6574\u6027",
+        "sources": [
+          {
+            "type": "intent",
+            "content": "\u4efb\u52a1\u610f\u56fe: \u68c0\u67e5\u9879\u76ee\u67b6\u6784\u5b8c\u6574\u6027",
+            "relevance": 1.0,
+            "source_id": "task_intent",
+            "source_type": "session_history",
+            "tokens": 7
+          },
+          {
+            "type": "profile",
+            "content": "\u6267\u884c\u914d\u7f6e: developer",
+            "relevance": 0.9,
+            "source_id": "profile_info",
+            "source_type": "session_history",
+            "tokens": 10
+          },
+          {
+            "type": "task",
+            "content": "\u4efb\u52a1ID: task_6aba68d7",
+            "relevance": 0.8,
+            "source_id": "task_id",
+            "source_type": "session_history",
+            "tokens": 5
+          },
+          {
+            "type": "session",
+            "content": "\u4f1a\u8bdd\u5386\u53f2:\n[user] \u68c0\u67e5\u9879\u76ee\u67b6\u6784\u5b8c\u6574\u6027\n[system] \u5f00\u59cb\u5904\u7406\u4efb\u52a1",
+            "relevance": 0.7,
+            "source_id": "session_history",
+            "source_type": "session_history",
+            "tokens": 8
+          }
+        ],
+        "token_count": 30,
+        "token_budget": 4000,
+        "conflicts_resolved": [],
+        "priority_order": [
+          "task_intent",
+          "profile_info",
+          "task_id",
+          "session_history"
+        ],
+        "trace_id": "trace_ad2066ec",
+        "injection_plan": {
+          "task_id": "task_6aba68d7",
+          "required_sources": [
+            {
+              "source_id": "task_intent",
+              "source_type": "session_history",
+              "priority": "required",
+              "confidence": 0.6575,
+              "tokens": 7,
+              "reason": "Required source type",
+              "injection_order": 1
+            },
+            {
+              "source_id": "profile_info",
+              "source_type": "session_history",
+              "priority": "required",
+              "confidence": 0.5325,
+              "tokens": 10,
+              "reason": "Required source type",
+              "injection_order": 2
+            },
+            {
+              "source_id": "task_id",
+              "source_type": "session_history",
+              "priority": "required",
+              "confidence": 0.5325,
+              "tokens": 5,
+              "reason": "Required source type",
+              "injection_order": 3
+            },
+            {
+              "source_id": "session_history",
+              "source_type": "session_history",
+              "priority": "required",
+              "confidence": 0.6575,
+              "tokens": 8,
+              "reason": "Required source type",
+              "injection_order": 4
+            }
+          ],
+          "optional_sources": [],
+          "suppressed_sources": [],
+          "trimmed_sources": [],
+          "conflict_sources": [],
+          "final_injection_order": [
+            "task_intent",
+            "profile_info",
+            "task_id",
+            "session_history"
+          ],
+          "total_budget": 4000,
+          "allocated_budget": 30,
+          "timestamp": "2026-04-17T20:54:52.527679"
+        },
+        "built_at": "2026-04-17T20:54:52.528253"
+      },
+      "dependencies": {},
+      "params": {}
+    },
+    "step_results": {}
+  },
+  "completed_steps": [],
+  "pending_steps": [
+    "prepare",
+    "check",
+    "report"
+  ],
+  "metadata": {
+    "phase": "before_step",
+    "attempt": 0
+  }
+}

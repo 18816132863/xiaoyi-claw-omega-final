@@ -229,7 +229,9 @@ class PolicyEngine:
 
         # ========== 兼容旧接口 ==========
         # 添加旧接口期望的字段
-        result["allowed"] = decision.decision == "allow"
+        # decision.decision 是 DecisionType 枚举
+        from .control_plane_service import DecisionType
+        result["allowed"] = decision.decision == DecisionType.ALLOW
         result["reason"] = "; ".join(decision.reasons) if decision.reasons else ""
 
         return result

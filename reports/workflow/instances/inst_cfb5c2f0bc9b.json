@@ -1,0 +1,16 @@
+{
+  "instance_id": "inst_cfb5c2f0bc9b",
+  "workflow_id": "event_verify",
+  "version": "1.0.0",
+  "task_id": "",
+  "profile": "default",
+  "status": "completed",
+  "started_at": "2026-04-17T08:11:00.094905",
+  "completed_at": "2026-04-17T08:11:00.102178",
+  "failed_step_id": null,
+  "recovery_summary": {},
+  "control_decision_id": null,
+  "input": {},
+  "output": {},
+  "metadata": {}
+}

@@ -1,0 +1,58 @@
+{
+  "point_id": "rb_84e971ea",
+  "step_id": "prepare",
+  "timestamp": "2026-04-17T08:09:58.094521",
+  "state": {
+    "instance_id": "inst_579f4e17ad71",
+    "step_input": {
+      "context": {
+        "task_id": "task_1d9041ad",
+        "profile": "developer",
+        "intent": "\u68c0\u67e5\u9879\u76ee\u67b6\u6784\u5b8c\u6574\u6027",
+        "sources": [
+          {
+            "type": "intent",
+            "content": "\u4efb\u52a1\u610f\u56fe: \u68c0\u67e5\u9879\u76ee\u67b6\u6784\u5b8c\u6574\u6027",
+            "relevance": 1.0,
+            "source_id": "task_intent"
+          },
+          {
+            "type": "profile",
+            "content": "\u6267\u884c\u914d\u7f6e: developer",
+            "relevance": 0.9,
+            "source_id": "profile_info"
+          },
+          {
+            "type": "task",
+            "content": "\u4efb\u52a1ID: task_1d9041ad",
+            "relevance": 0.8,
+            "source_id": "task_id"
+          },
+          {
+            "type": "session",
+            "content": "\u4f1a\u8bdd\u5386\u53f2:\n[user] \u68c0\u67e5\u9879\u76ee\u67b6\u6784\u5b8c\u6574\u6027\n[system] \u5f00\u59cb\u5904\u7406\u4efb\u52a1",
+            "relevance": 0.7,
+            "source_id": "session_history"
+          }
+        ],
+        "token_count": 19,
+        "token_budget": 4000,
+        "conflicts_resolved": [],
+        "priority_order": [
+          "task_intent",
+          "profile_info",
+          "task_id",
+          "session_history"
+        ],
+        "built_at": "2026-04-17T08:09:58.091379"
+      },
+      "dependencies": {},
+      "params": {}
+    },
+    "completed_steps": [],
+    "step_results": {}
+  },
+  "metadata": {
+    "phase": "before_step"
+  }
+}

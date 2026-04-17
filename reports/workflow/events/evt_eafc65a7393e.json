@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_eafc65a7393e",
+  "instance_id": "inst_579f4e17ad71",
+  "event_type": "step_started",
+  "timestamp": "2026-04-17T08:09:58.093274",
+  "step_id": "prepare",
+  "data": {
+    "step_name": "准备阶段",
+    "action": "prepare_context"
+  },
+  "metadata": {}
+}

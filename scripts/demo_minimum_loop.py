@@ -86,7 +86,7 @@ def demo_minimum_loop():
     policy_result = policy_engine.evaluate_policy(
         task_meta={"intent": task_intent, "risk_level": "low"},
         profile=profile,
-        requested_capabilities=["read", "write"]
+        requested_capabilities=["memory.read", "report.write"]
     )
     
     print(f"策略决策: {policy_result['decision']}")

@@ -1,0 +1,20 @@
+{
+  "checkpoint_id": "cp_b37df957",
+  "workflow_id": "fallback_verify",
+  "step_id": "s1",
+  "timestamp": "2026-04-17T08:11:00.088021",
+  "state": {
+    "instance_id": "inst_df5ef1d72d66",
+    "output": {
+      "recovered": true
+    },
+    "step_results": {}
+  },
+  "completed_steps": [
+    "s1"
+  ],
+  "pending_steps": [],
+  "metadata": {
+    "phase": "after_step"
+  }
+}

@@ -10,7 +10,7 @@
     "failure_rate": 0.0,
     "avg_latency_ms": 100.0,
     "recent_errors": [],
-    "last_success_at": "2026-04-17T08:02:01.722414",
+    "last_success_at": "2026-04-17T08:10:50.822714",
     "last_failure_at": null,
     "health_status": "healthy",
     "health_score": 1.0
@@ -27,48 +27,48 @@
     "avg_latency_ms": 0.0,
     "recent_errors": [
       {
-        "timestamp": "2026-04-17T08:02:01.723788",
+        "timestamp": "2026-04-17T08:10:50.824794",
         "error": "error",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T08:02:01.725547",
+        "timestamp": "2026-04-17T08:10:50.826642",
         "error": "error",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T08:02:01.727550",
+        "timestamp": "2026-04-17T08:10:50.828577",
         "error": "error",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T08:02:01.729637",
+        "timestamp": "2026-04-17T08:10:50.830323",
         "error": "error",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T08:02:01.731145",
+        "timestamp": "2026-04-17T08:10:50.832296",
         "error": "error",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T08:02:01.733378",
+        "timestamp": "2026-04-17T08:10:50.833777",
         "error": "error",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T08:02:01.735583",
+        "timestamp": "2026-04-17T08:10:50.834896",
         "error": "error",
         "error_type": "unknown"
       },
       {
-        "timestamp": "2026-04-17T08:02:01.737547",
+        "timestamp": "2026-04-17T08:10:50.836986",
         "error": "error",
         "error_type": "unknown"
       }
     ],
     "last_success_at": null,
-    "last_failure_at": "2026-04-17T08:02:01.737547",
+    "last_failure_at": "2026-04-17T08:10:50.836986",
     "health_status": "unhealthy",
     "health_score": 0.3
   }

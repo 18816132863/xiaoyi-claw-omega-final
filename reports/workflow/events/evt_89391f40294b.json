@@ -1,0 +1,14 @@
+{
+  "event_id": "evt_89391f40294b",
+  "instance_id": "inst_3cbdaf9c96e1",
+  "event_type": "workflow_started",
+  "timestamp": "2026-04-17T08:11:00.090225",
+  "step_id": null,
+  "data": {
+    "workflow_id": "rollback_verify",
+    "version": "1.0.0",
+    "profile": "default",
+    "control_decision_id": null
+  },
+  "metadata": {}
+}

@@ -230,7 +230,10 @@ class ControlPlaneService:
         snapshot = self.snapshot_store.get_or_create(profile)
         
         # 10. 确定最终决策类型
-        if len(allowed_capabilities) == 0 and len(validated_capabilities) > 0:
+        # 如果有未知能力，直接拒绝
+        if unknown_capabilities:
+            decision_type = DecisionType.DENY
+        elif len(allowed_capabilities) == 0 and len(requested_capabilities) > 0:
             decision_type = DecisionType.DENY
         elif requires_review:
             decision_type = DecisionType.REVIEW

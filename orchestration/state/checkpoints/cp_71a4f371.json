@@ -1,0 +1,23 @@
+{
+  "checkpoint_id": "cp_71a4f371",
+  "workflow_id": "fallback_verify",
+  "step_id": "s1",
+  "timestamp": "2026-04-17T08:02:11.227192",
+  "state": {
+    "instance_id": "inst_4356cbc8df85",
+    "step_input": {
+      "context": {},
+      "dependencies": {},
+      "params": {}
+    },
+    "step_results": {}
+  },
+  "completed_steps": [],
+  "pending_steps": [
+    "s1"
+  ],
+  "metadata": {
+    "phase": "before_step",
+    "attempt": 0
+  }
+}

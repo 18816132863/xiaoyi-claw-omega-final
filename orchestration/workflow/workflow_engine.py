@@ -46,6 +46,11 @@ from orchestration.execution_control.fallback_policy import FallbackPolicy, Fall
 from orchestration.execution_control.rollback_manager import RollbackManager
 
 
+# ========== 兼容性别名 ==========
+# WorkflowStatus 是旧接口名称，保持向后兼容
+WorkflowStatus = WorkflowState
+
+
 @dataclass
 class StepResult:
     """步骤执行结果"""
@@ -173,7 +178,37 @@ class WorkflowEngine:
     def register_action_handler(self, action_type: str, handler: Callable):
         """注册动作处理器"""
         self._action_handlers[action_type] = handler
-    
+
+    def _create_template_from_spec(self, spec: Dict) -> WorkflowTemplate:
+        """从旧格式 spec 创建 WorkflowTemplate"""
+        from orchestration.workflow.workflow_registry import RecoveryPolicy, RecoveryPolicyType
+
+        steps = []
+        for step_spec in spec.get("steps", []):
+            step = WorkflowStep(
+                step_id=step_spec.get("step_id", "unknown"),
+                name=step_spec.get("name", step_spec.get("step_id", "unknown")),
+                action=step_spec.get("action", "noop"),
+                description=step_spec.get("description", ""),
+                depends_on=step_spec.get("depends_on", []),
+                params=step_spec.get("params", {}),
+                timeout_ms=step_spec.get("timeout_ms", 30000)
+            )
+            steps.append(step)
+
+        return WorkflowTemplate(
+            workflow_id=spec.get("workflow_id", "compat_workflow"),
+            version=spec.get("version", "1.0.0"),
+            name=spec.get("name", spec.get("workflow_id", "Compat Workflow")),
+            description=spec.get("description", ""),
+            steps=steps,
+            profile_compatibility=spec.get("profile_compatibility", ["default", "developer", "admin"]),
+            recovery_policy=RecoveryPolicy(
+                policy_type=RecoveryPolicyType.RETRY,
+                max_retries=spec.get("max_retries", 3)
+            )
+        )
+
     def run_workflow(
         self,
         workflow_id: str = None,
@@ -182,11 +217,12 @@ class WorkflowEngine:
         profile: str = "default",
         context_bundle: Dict = None,
         control_decision: Dict = None,
-        resume_from_checkpoint: str = None
+        resume_from_checkpoint: str = None,
+        workflow_spec: Dict = None  # 兼容旧接口
     ) -> WorkflowResult:
         """
         执行 workflow
-        
+
         Args:
             workflow_id: Workflow ID（与 version 配合使用）
             version: 版本（可选，默认最新）
@@ -195,10 +231,25 @@ class WorkflowEngine:
             context_bundle: 执行上下文
             control_decision: Control Plane 决策
             resume_from_checkpoint: 恢复检查点 ID
-            
+            workflow_spec: 兼容旧接口的 workflow 规格字典
+
         Returns:
             WorkflowResult
         """
+        # ========== 兼容旧接口 ==========
+        # 如果第一个参数是 dict，当作 workflow_spec 处理
+        if isinstance(workflow_id, dict):
+            workflow_spec = workflow_id
+            workflow_id = None
+
+        if workflow_spec and isinstance(workflow_spec, dict):
+            # 从 dict 创建 template
+            template = self._create_template_from_spec(workflow_spec)
+            # 注册到 registry（兼容旧接口）
+            self._registry.register(template)
+            workflow_id = template.workflow_id
+            version = template.version
+
         # 1. 解析模板
         if template is None:
             template = self._registry.get(workflow_id, version)
@@ -796,3 +847,18 @@ def run_workflow(
         context_bundle=context_bundle,
         control_decision=control_decision
     )
+
+
+# ========== 对外导出 ==========
+__all__ = [
+    # 核心类
+    "WorkflowEngine",
+    "WorkflowResult",
+    "StepResult",
+    # 状态枚举
+    "WorkflowState",
+    "WorkflowStatus",  # 兼容旧接口
+    "StepState",
+    # 便捷函数
+    "run_workflow",
+]

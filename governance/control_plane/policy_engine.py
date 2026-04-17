@@ -201,31 +201,38 @@ class PolicyEngine:
     ) -> Dict:
         """
         统一策略评估入口（Façade）
-        
+
         委托给 ControlPlaneService.decide()，返回正式 ControlDecision。
-        
+
         Args:
             task_meta: 任务元数据
             profile: 执行配置
             requested_capabilities: 请求的能力列表
-        
+
         Returns:
-            ControlDecision.to_dict() 结果
+            ControlDecision.to_dict() 结果（含兼容字段）
         """
         from .control_plane_service import get_control_plane_service
-        
+
         # 获取控制平面服务
         service = get_control_plane_service()
-        
+
         # 调用统一决策入口
         decision = service.decide(
             task_meta=task_meta,
             requested_capabilities=requested_capabilities or [],
             context_summary=None
         )
-        
+
         # 返回字典格式
-        return decision.to_dict()
+        result = decision.to_dict()
+
+        # ========== 兼容旧接口 ==========
+        # 添加旧接口期望的字段
+        result["allowed"] = decision.decision == "allow"
+        result["reason"] = "; ".join(decision.reasons) if decision.reasons else ""
+
+        return result
 
 
 # Pre-defined policies

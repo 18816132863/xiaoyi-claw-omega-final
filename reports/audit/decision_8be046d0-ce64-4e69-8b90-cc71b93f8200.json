@@ -1,0 +1,20 @@
+{
+  "decision_id": "8be046d0-ce64-4e69-8b90-cc71b93f8200",
+  "task_id": "1ccf9f59-a7b5-4a86-8d9b-a1a7e4859553",
+  "profile": "default",
+  "decision": "allow",
+  "risk_level": "low",
+  "requires_review": false,
+  "degradation_mode": null,
+  "allowed_capabilities": [],
+  "blocked_capabilities": [
+    "read",
+    "write"
+  ],
+  "reasons": [
+    "Unknown capability: read",
+    "Unknown capability: write"
+  ],
+  "timestamp": "2026-04-17T08:01:43.320332",
+  "policy_snapshot_id": "snap_60ee4a9cc628"
+}

@@ -1,0 +1,15 @@
+{
+  "event_id": "evt_806db514404b",
+  "instance_id": "inst_fd4ebe2c86ef",
+  "event_type": "step_completed",
+  "timestamp": "2026-04-17T19:29:55.006867",
+  "step_id": "prepare",
+  "data": {
+    "output": {
+      "prepared": true,
+      "action": "prepare_context"
+    },
+    "duration_ms": 2
+  },
+  "metadata": {}
+}

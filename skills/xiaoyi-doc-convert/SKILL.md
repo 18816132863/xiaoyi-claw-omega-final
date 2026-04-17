@@ -1,135 +1,251 @@
 ---
 name: xiaoyi-doc-convert
-description: 专业文档格式转换技能。支持 Docx, PDF, Xlsx, Pptx, Markdown等多种格式互转。**核心能力**：具备自动路径规划功能，可通过中间格式（如 PDF）实现间接转换（例如 pptx -> pdf -> md）。**特色功能**：支持HTML批量转PPT，将多个HTML文件打包为zip即可一键生成演示文稿。**强制规则**：本地文件必须先调用 `xiaoyi-file-upload` 获取 URL。
+description: |
+  统一的文档格式转换工具。
+  支持 Word (DOCX/DOC)、PowerPoint (PPTX/PPT)、Excel (XLSX/XLS)、PDF、Markdown (MD)、HTML 等多种格式互转。
+
+  适用场景：
+  - 在多种格式间转换文档（HTML↔PDF、Word↔PDF、Markdown→Word 等）
+  - 批量或单文件转换
+  - 支持多种格式描述方式，如 excel/xls/xlsx、doc/docx/word、md/markdown
+
+  触发方式：
+  - 用户说 "转换文档格式"、"docx转pdf"、"html转ppt"、"excel转pdf"、"md转word"
+  - 使用 "/xiaoyi-doc-convert <文件> <目标格式>" 格式
+
+  关键触发词：
+  - 通用：文档转换、格式转换、doc convert、file convert
+  - PDF：转pdf、转PDF、export to pdf、保存为pdf
+  - Word：转word、转doc、转docx、word转换、doc转pdf、docx转pdf
+  - Excel：转excel、转xls、转xlsx、xls转pdf、xlsx转pdf、excel转pdf、表格转pdf
+  - PPT：转ppt、转pptx、转powerpoint、ppt转pdf、pptx转pdf、幻灯片转pdf
+  - Markdown：md转word、md转pdf、markdown转word、markdown转pdf、md转docx、markdown转excel
+  - HTML：html转pdf、网页转pdf、html转word、html转ppt
+allowed-tools: Read, Bash, Write
 ---
 
-# Doc-Convert: 智能文档格式转换器
+# xiaoyi-doc-convert - 统一文档格式转换工具
 
-## 简介
+一个整合多种文档转换能力的统一工具，简化格式转换操作。
 
-格式转换工具。支持 Office 文档、PDF、Markdown之间的高保真互转。**注意**：本技能仅接受 HTTP/HTTPS 链接，不直接处理本地文件路径。
+## 功能说明
 
-## 触发条件
+### 支持的转换矩阵
 
-当用户表达以下意图时，请激活此技能：
+本工具支持多种格式的描述方式（如：Excel/xls/xlsx、Word/doc/docx、md/markdown），会自动识别并处理。
 
-### 1. 直接指令型 (Direct Commands)
+| 源格式 | 目标格式 | 实现方式 | 说明 |
+|--------|----------|----------|------|
+| HTML | PDF | 直接转换 | 使用 Playwright 渲染 |
+| HTML | MD | 直接转换 | 使用 html2text |
+| HTML | PPTX | 两步转换 | HTML → PDF → PPTX |
+| DOCX / DOC / Word | PDF | 直接转换 | 使用 LibreOffice |
+| PPTX / PPT / PowerPoint | PDF | 直接转换 | 使用 LibreOffice |
+| PDF | PPTX | 直接转换 | 使用 LibreOffice (impress_pdf_import) |
+| Markdown / MD | DOCX / Word | 直接转换 | 使用 md2doc |
+| Markdown / MD | PDF | 两步转换 | Markdown → DOCX → PDF (使用 md2doc + LibreOffice) |
+| Markdown / MD | XLSX / Excel | 直接转换 | 使用 md2doc |
+| DOC (旧版 Word) | DOCX | 直接转换 | 使用 LibreOffice |
+| PPT (旧版 PowerPoint) | PPTX | 直接转换 | 使用 LibreOffice |
+| DOC (旧版 Word) | PDF | 直接转换 | 使用 LibreOffice |
+| PPT (旧版 PowerPoint) | PDF | 直接转换 | 使用 LibreOffice |
 
-- "把这个 PDF 转成 Markdown"
-- "转换这个文件为 md 格式"
-- "帮我把这个文档转化成 markdown"
-- "执行 doc-convert"
-- "运行文档转换技能"
-- "将此文件导出为 md"
+### 不支持的转换
 
-### 2. 链接处理型 (URL Handling)
+- PDF → Word (PDF 转 DOCX) - 暂不支持
+- 其他未在矩阵中列出的转换组合
 
-- "把这篇在线论文转成 Markdown"
-- "读取这个 PDF 链接的内容并转化成md"
-- "把这个 URL 里的文档变成可编辑的文本"
-
-### 3. 自然语言型 (Natural Language Intent)
-
-- "我想编辑这个 PDF，有办法转成文本吗？"
-- "能不能把这个报告弄成 md 格式？"
-- "我需要这个文件的 markdown 版本"
-- "把这几个 HTML 文件转成 PPT"
-- "将 HTML 压缩包转成演示文稿"
-- "批量转换 HTML 为 PowerPoint"
-
-## 特性
-
-- ✅ **链式协作** - 自动配合 `xiaoyi-file-upload` 处理本地文件
-- ✅ **格式丰富** - 支持 Docx, PDF, Xlsx, Pptx, Md, Txt等主流格式
-- ✅ **HTML转PPT** - 支持将多个HTML文件打包成zip后直接转换为PPT演示文稿
-
-## 文件结构
+## 脚本结构
 
 ```
-doc-convert/
-    ├── scripts         # 转换程序文件夹
-    │ ├── index.js      # 主程序（函数入口）
-    │ ├── env_loader.js # 加载环境变量
-    │ ├── doc_convert.js # 请求服务（执行转换逻辑）
-    │ └── packaage.json # node依赖
-    └── SKILL.md # 使用说明（本文档）
+xiaoyi-doc-convert/
+├── SKILL.md                  # 本说明文档
+└── scripts/
+    ├── __init__.py           # 包初始化
+    ├── main.py               # 主入口脚本
+    ├── converter.py          # 转换调度核心
+    ├── routing.py            # 转换路径规划
+    ├── adapters/             # 外部工具适配器
+    │   ├── __init__.py
+    │   └── soffice_adapter.py    # DOCX/PPTX ↔ PDF (LibreOffice)
+    ├── html2pdf/             # 内部集成的 html2pdf 模块
+    │   ├── __init__.py
+    │   ├── core.py           # HTML 转 PDF 核心实现
+    │   └── pdfmerge.py       # PDF 合并工具
+    └── md2doc/               # 内部集成的 md2doc 模块
+        ├── converter.py      # Markdown 转换统一入口
+        ├── config/           # 配置和模板文件
+        ├── converters/       # 格式转换器
+        ├── filters/          # 内容过滤器
+        ├── utils/            # 工具函数
+        └── ...
 ```
-## 支持格式矩阵
 
-| 输入格式 (Source)            | 推荐输出格式 (Target)                                        | 备注            |
-|:-------------------------|:-------------------------------------------------------|:--------------|
-| **xls**                  | xlsx                                                   | Excel老版转新版    |
-| **doc**                  | docx                                                   | Word老版转新版     |
-| **ppt**                  | pptx                                                   | Ppt老版转新版      |
-| **doc, docx, ppt, pptx** | pdf                                                    | Word/Ppt 转Pdf |
-| **pdf**                  | docx, md                                               | PDF 转可编辑      |
-| **md**                   | docx, pdf, xlsx, txt, py, cpp, java, c, js, html, emmx | md 转其他        |
-| **zip** (含HTML文件)      | pptx                                                   | HTML批量转PPT     |
+### 模块依赖关系
 
-##  自动规划逻辑：
-当用户请求 `Source -> Target` 时：
-检查矩阵是否支持直达？
-- ✅ **是**：执行单步转换。
-- ❌ **否**：启动**多步规划引擎**。
-  - 寻找中间格式 `X`，使得 `Source -> X` 且 `X -> Target` 均合法。
-  - *典型场景*：`pptx` 转 `md` 无直达 ➔ 自动规划：`pptx` → `pdf` → `md`。
-  - *典型场景*：`doc` 转 `md` 无直达 ➔ 自动规划：`doc` → `docx` → `pdf` → `md` (或 doc->docx->md 若支持)。
+```
+main.py
+├── converter.py
+│   ├── routing.py (转换路径规划)
+│   ├── html2pdf/core.py (HTML → PDF)
+│   ├── md2doc/converter.py (Markdown → DOCX/PDF/XLSX)
+│   └── adapters/soffice_adapter.py (DOCX/PPTX ↔ PDF)
+```
 
+## 用法
 
-## 核心逻辑
+### 执行命令
 
-本技能执行实际的格式转换操作。**它不直接处理本地文件上传**。
-**标准工作流**：
+所有操作都在 skill 目录的 `scripts/` 子目录中执行：
 
-### 第一阶段：智能规划 (Planning)
-1. **解析意图**：提取 `源文件` (URL 或 本地路径) 和 `目标格式`。
-2. **文件预处理**：若是本地文件，调用 `xiaoyi-file-upload` 获得 `current_url`。
-3. **路径计算**：
-    - 查询【支持格式矩阵】。
-    - 生成执行计划列表 `Plan = [Step1, Step2, ...]`。
-    - *示例计划*：`[ {from: 'pptx', to: 'pdf'}, {from: 'pdf', to: 'md'} ]`。
-    - 若无法规划出合法路径，立即停止并告知用户支持的格式范围。
-
-### 第二阶段：链式执行 (Execution Loop)
-对 `Plan` 中的每一步进行循环处理：
-1. **执行转换**：调用底层脚本 `node index.js <input_url> <target_format>`。
-2. **获取结果**：捕获返回的新文件 URL (`output_url`)。
-3. **状态更新**：将 `output_url` 设为下一步的 `input_url`。
-4. **进度反馈**：(可选) 向用户通报当前进度（如：“已完成第 1/2 步：PPT 转 PDF”）。
-
-### 第三阶段：最终交付 (Delivery)
-1. **下载文件**：当所有步骤完成，使用最终 `output_url` 下载文件到本地。
-2. **智能命名**：文件名格式为 `原文件名_converted.扩展名` (避免覆盖原文件)。
-
-## 使用方法
-
-### 前置准备
-# 首次运行前，务必先在脚本所在目录执行以下命令安装依赖
 ```bash
-cd /path/to/current/skill/scripts  # 切换到脚本目录（根据实际路径调整）
-npm install                       # 安装所需依赖包（仅首次运行需要）
-````
-
-### 命令行调用
-```bash
-# 基本用法：node index.js <file_url> <target_format>
-# 示例：将在线 PDF 转为 Word
-node /path/to/current/skill/scripts/index.js "https://example.com/report.pdf" "docx"
-
-# 示例：将在线 Markdown 转为 PDF
-node /path/to/current/skill/index.js "https://example.com/notes.md" "pdf"
-
-# 示例：将 HTML zip 包转为 PPT（zip包内需包含HTML文件）
-node /path/to/current/skill/index.js "https://example.com/slides.zip" "pptx"
+cd <skill_dir>/scripts && python main.py <input_file> <target_format> [options]
 ```
 
-### HTML 转 PPT 特别说明
+其中 `<skill_dir>` 是 xiaoyi-doc-convert skill 的根目录。
 
-当需要将 HTML 文件转换为 PPT 时：
-1. 将多个 HTML 文件打包成一个 zip 压缩包
-2. zip 包中的每个 HTML 文件将被转换为一页 PPT 幻灯片
-3. 上传 zip 包到 NSP 获取下载链接
-4. 调用转换：`node index.js "<zip_url>" "pptx"`
+### 基本用法
 
-### ⚠️ 重要执行协议 
-必须先进行规划，再按规划路径执行脚本
+```bash
+# HTML 转 PDF
+cd <skill_dir>/scripts && python main.py report.html pdf
+
+# HTML 转 Markdown
+cd <skill_dir>/scripts && python main.py page.html md
+
+# HTML 转 PPTX (自动使用 html→pdf→pptx 路径)
+cd <skill_dir>/scripts && python main.py slides.html pptx
+
+# DOCX 转 PDF (Word 转 PDF)
+cd <skill_dir>/scripts && python main.py document.docx pdf
+
+# Markdown 转 Word (MD 转 DOCX)
+cd <skill_dir>/scripts && python main.py notes.md docx
+
+# Markdown 转 PDF (MD 转 PDF)
+cd <skill_dir>/scripts && python main.py notes.md pdf
+
+# Markdown 转 Excel (MD 转 XLSX)
+cd <skill_dir>/scripts && python main.py table.md xlsx
+
+# 旧版 Word 转新版 DOCX (DOC 转 DOCX)
+cd <skill_dir>/scripts && python main.py old_document.doc docx
+
+# 旧版 PowerPoint 转新版 PPTX (PPT 转 PPTX)
+cd <skill_dir>/scripts && python main.py old_slides.ppt pptx
+
+# Excel 转 PDF (XLSX 转 PDF)
+cd <skill_dir>/scripts && python main.py data.xlsx pdf
+
+# PDF 转 PPTX
+cd <skill_dir>/scripts && python main.py slides.pdf pptx
+```
+
+### 自定义页面尺寸 (HTML 相关转换)
+
+默认使用 A4 尺寸 (21cm x 29.7cm)。
+
+```bash
+# 默认 A4 尺寸
+cd <skill_dir>/scripts && python main.py report.html pdf
+
+# 指定 16:9 屏幕尺寸 (用于演示文稿)
+cd <skill_dir>/scripts && python main.py slides.html pptx --width 33.9cm --height 19.1cm
+```
+
+### 查看支持的转换
+
+```bash
+cd <skill_dir>/scripts && python main.py --list
+```
+
+输出示例：
+```
+Supported Conversions:
+==================================================
+Source       -> Target       | Path
+--------------------------------------------------
+doc          -> pdf          | soffice
+docx         -> pdf          | soffice
+html         -> md           | html2md
+html         -> pdf          | html2pdf
+html         -> pptx         | html2pdf -> soffice
+md           -> docx         | md2doc
+md           -> pdf          | md2doc -> soffice
+md           -> xlsx         | md2doc
+pdf          -> pptx         | soffice
+ppt          -> pdf          | soffice
+pptx         -> pdf          | soffice
+==================================================
+```
+
+## 参数说明
+
+| 参数 | 位置 | 必填 | 说明 |
+|------|------|------|------|
+| `input` | 第1个 | 是 | 输入文件路径 |
+| `target` | 第2个 | 是 | 目标格式 (pdf/docx/pptx/xlsx) |
+| `--width` | 选项 | 否 | PDF 页面宽度 (HTML 转换时有效) |
+| `--height` | 选项 | 否 | PDF 页面高度 (HTML 转换时有效) |
+| `-l, --list` | 标志 | 否 | 显示支持的转换列表 |
+
+## 转换路径说明
+
+### 单步转换
+
+直接使用内部模块完成转换：
+
+- `html → pdf`: 使用内部 html2pdf 模块 (Playwright)
+- `docx → pdf`: 调用 soffice (LibreOffice)
+- `md → docx/xlsx`: 使用内部 md2doc 模块 (Pandoc)
+
+### 多步转换
+
+自动规划为多步骤转换，使用中间格式：
+
+- `html → pptx`:
+  1. HTML → PDF (内部 html2pdf)
+  2. PDF → PPTX (soffice)
+  3. 自动清理中间 PDF 文件
+
+- `md → pdf`:
+  1. Markdown → DOCX (内部 md2doc)
+  2. DOCX → PDF (soffice)
+  3. 自动清理中间 DOCX 文件
+
+## 依赖要求
+
+### 必需依赖
+
+| 转换类型 | 依赖 | 安装命令                      |
+|----------|------|---------------------------|
+| DOCX/PPTX 相关 | LibreOffice | 系统包管理器安装                  |
+| Markdown 相关 | Pandoc + Python 依赖 | 见 md2doc skill            |
+
+### 检查依赖
+
+适配器会在运行时检查依赖是否可用，如果缺少依赖会提示具体安装方法。
+
+## 错误处理
+
+### 常见错误
+
+| 错误信息 | 原因 | 解决方法 |
+|----------|------|----------|
+| "soffice command not found" | LibreOffice 未安装 | 安装 LibreOffice 并确保 soffice 在 PATH 中 |
+| "Conversion from X to Y is not supported" | 不支持的转换组合 | 使用 `--list` 查看支持的转换 |
+| "Input file not found" | 输入文件不存在 | 检查文件路径 |
+
+## 文件名约定
+
+转换后的输出文件遵循以下命名规则：
+- **文件名保持不变，仅扩展名修改为对应的目标格式**
+- 示例：`document.doc` → `document.pdf`，`slides.ppt` → `slides.pdf`
+
+## 注意事项
+
+1. **文件名保持**: 转换后的文件保持原文件名不变，仅修改扩展名
+   - 示例：`report.docx` → `report.pdf`，`data.md` → `data.docx`
+2. **临时文件**: 多步转换的中间文件自动创建和清理
+3. **输出目录**: 自动创建不存在的输出目录
+4. **文件覆盖**: 输出文件已存在时会自动覆盖

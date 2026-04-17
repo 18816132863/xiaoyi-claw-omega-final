@@ -1,0 +1,17 @@
+{
+  "decision_id": "bf672464-18ec-4694-8a78-5b8cca516322",
+  "task_id": "c01fff22-9a58-4eee-b41a-2c8d2381df19",
+  "profile": "default",
+  "decision": "allow",
+  "risk_level": "low",
+  "requires_review": false,
+  "degradation_mode": null,
+  "allowed_capabilities": [
+    "memory.read",
+    "report.write"
+  ],
+  "blocked_capabilities": [],
+  "reasons": [],
+  "timestamp": "2026-04-17T19:58:26.266316",
+  "policy_snapshot_id": "snap_ba95959fb34f"
+}

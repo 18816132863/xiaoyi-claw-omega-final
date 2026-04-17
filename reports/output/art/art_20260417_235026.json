@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "description": "一个穿着汉服的少女站在古建筑前",
+  "prompts": [
+    {
+      "type": "main",
+      "prompt": "一个穿着汉服的少女站在古建筑前, chinese traditional art, ink wash painting, ancient china, golden hour lighting, warm sunlight, masterpiece, intricate details, traditional chinese art style",
+      "style": "国风",
+      "aspect_ratio": "1:1"
+    },
+    {
+      "type": "variant",
+      "prompt": "一个穿着汉服的少女站在古建筑前, chinese traditional art, ink wash painting, ancient china, cinematic lighting, dramatic shadows, masterpiece, intricate details, traditional chinese art style",
+      "style": "国风",
+      "lighting": "cinematic"
+    },
+    {
+      "type": "variant",
+      "prompt": "一个穿着汉服的少女站在古建筑前, chinese traditional art, ink wash painting, ancient china, soft lighting, diffused light, masterpiece, intricate details, traditional chinese art style",
+      "style": "国风",
+      "lighting": "soft"
+    }
+  ],
+  "created_at": "2026-04-17T23:50:26.377909"
+}

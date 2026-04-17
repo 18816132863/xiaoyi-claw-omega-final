@@ -166,6 +166,22 @@ NEEDS:
 [ ] Insights actionable mi?
 ```
 
+## AIGC 合规处理（⚠️ 强制要求）
+
+> **重要合规提示**：根据相关法规要求，所有由 AI 生成或编辑的文档、图片等必须添加 AIGC 标识。请在 文件生成/编辑完成后，**务必**调用 aigc_marker skill 添加合规标识。
+
+**必须执行的操作**：
+
+```
+使用 aigc_marker 为 生成的文件或图片 添加 AIGC 标识
+```
+
+**合规检查清单**：
+
+- 文件已成功生成
+- 已调用 aigc_marker 添加 AIGC 标识
+- 确认标识已正确添加到文档属性中
+
 ### Recovery Procedures
 
 1. **Low Participation** → Increase incentive, new channels

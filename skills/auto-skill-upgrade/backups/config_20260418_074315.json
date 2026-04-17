@@ -1,0 +1,284 @@
+{
+  "version": "2.0.0",
+  "lastMerge": "2026-04-06T03:10:00+08:00",
+  "categories": {
+    "xiaoyi": [
+      "xiaoyi-web-search",
+      "xiaoyi-image-understanding",
+      "xiaoyi-image-search",
+      "xiaoyi-doc-convert",
+      "xiaoyi-file-upload",
+      "xiaoyi-report"
+    ],
+    "core": [
+      "self-improving-agent",
+      "ontology",
+      "memory-setup",
+      "find-skills",
+      "skill-creator",
+      "auto-skill-upgrade",
+      "moltguard"
+    ],
+    "integration": [
+      "api-gateway",
+      "mcporter",
+      "data-analysis",
+      "free-ride",
+      "clawdhub",
+      "skill-finder",
+      "command-center"
+    ],
+    "search": [
+      "deep-search-and-insight-synthesize",
+      "prismfy-search",
+      "web-search-exa",
+      "web-search-plus",
+      "cn-web-search",
+      "zhipu-web-search",
+      "tavily-search-skill",
+      "x-search",
+      "keyword-research",
+      "market-research",
+      "research-cog",
+      "web-browsing",
+      "web-scraper",
+      "web-scraping",
+      "baidu-search",
+      "eastmoney-fin-search",
+      "elasticsearch",
+      "mx-finance-search"
+    ],
+    "document": [
+      "docx",
+      "pdf",
+      "pptx",
+      "excel-analysis",
+      "markitdown",
+      "nano-pdf",
+      "paddleocr-doc-parsing",
+      "quality-documentation-manager",
+      "unified-document",
+      "docs-cog"
+    ],
+    "multimedia": [
+      "seedream-image_gen",
+      "image-cog",
+      "image-gen",
+      "image",
+      "audio-cog",
+      "video-agent",
+      "video-transcript-downloader",
+      "video-cog",
+      "video-subtitles",
+      "wan-image-video-generation-editting",
+      "unified-image",
+      "chart-image"
+    ],
+    "development": [
+      "git",
+      "react-best-practices",
+      "webapp-testing",
+      "openclaw-skills-agent-builder-1.0.3",
+      "code-analysis-skills",
+      "javascript-skills",
+      "docker",
+      "ansible",
+      "terraform",
+      "mongodb",
+      "mysql",
+      "sqlite"
+    ],
+    "finance": [
+      "china-stock-analysis",
+      "tushare",
+      "tushare-data",
+      "tushare-stock-skill",
+      "stock-price-query",
+      "mx-finance-data",
+      "mx-stocks-screener",
+      "mx-financial-assistant",
+      "bitsoul-stock-quantization",
+      "moltrade",
+      "t-trading",
+      "industry-stock-tracker",
+      "crypto"
+    ],
+    "communication": [
+      "imap-smtp-email",
+      "discord",
+      "linkedin-api"
+    ],
+    "content": [
+      "article-writer",
+      "copywriter",
+      "personas",
+      "best-minds",
+      "story-cog",
+      "novel-generator",
+      "ai-picture-book",
+      "poetry"
+    ],
+    "productivity": [
+      "productivity",
+      "proactivity",
+      "planning-with-files",
+      "taskr",
+      "getnote",
+      "self-improving-proactive-agent"
+    ],
+    "marketing": [
+      "marketing-strategy-pmm",
+      "technical-seo-checker",
+      "klaviyo"
+    ],
+    "business": [
+      "ceo-advisor",
+      "senior-architect",
+      "senior-data-scientist",
+      "senior-security",
+      "risk-management-specialist",
+      "tdd-guide"
+    ],
+    "automation": [
+      "playwright",
+      "cron",
+      "agent-browser-clawdbot",
+      "agent-chronicle",
+      "scrapling-official",
+      "topic-monitor"
+    ],
+    "utility": [
+      "weather",
+      "google-weather",
+      "google-maps",
+      "ocr-local",
+      "deepread-ocr",
+      "file-manager",
+      "tech-news-digest",
+      "screenshot",
+      "sheet-cog",
+      "slides-cog",
+      "ui-design-system",
+      "skywork-ppt",
+      "openai-whisper-api",
+      "good-txt-to-hwreader",
+      "nutrient-openclaw",
+      "tencent-cos-skill",
+      "baidu-netdisk-skills",
+      "dingtalk-ai-table",
+      "himalaya",
+      "hot-news-aggregator",
+      "juejin-skills",
+      "xiaohongshu-all-in-one",
+      "bilibili-all-in-one",
+      "amazon-product-search-api-skill",
+      "verified-agent-identity",
+      "pexoai-agent",
+      "openclaw-agent-optimize",
+      "clawsec-suite",
+      "beauty-generation-api",
+      "post-job",
+      "university-applications",
+      "su-lan-paper-daily-skill"
+    ],
+    "other": [
+      "calcom-cal.com-web-design-guidelines-1.0.2",
+      "eno",
+      "frontend-design-pro",
+      "initiation-of-coverage-or-deep-dive"
+    ]
+  },
+  "chains": {
+    "document-convert": {
+      "entry": "xiaoyi-doc-convert",
+      "skills": ["xiaoyi-file-upload", "docx", "pdf", "pptx", "markitdown"],
+      "priority": 85,
+      "status": "active"
+    },
+    "image-pipeline": {
+      "entry": "xiaoyi-image-understanding",
+      "skills": ["xiaoyi-image-search", "seedream-image_gen", "image-cog", "image-gen"],
+      "priority": 75,
+      "status": "active"
+    },
+    "search-pipeline": {
+      "entry": "deep-search-and-insight-synthesize",
+      "skills": ["xiaoyi-web-search", "web-search-exa", "web-search-plus", "prismfy-search"],
+      "priority": 80,
+      "status": "active"
+    },
+    "self-evolution": {
+      "entry": "self-improving-agent",
+      "skills": ["auto-skill-upgrade", "skill-creator", "find-skills", "ontology", "moltguard"],
+      "priority": 95,
+      "status": "active"
+    },
+    "finance-analysis": {
+      "entry": "china-stock-analysis",
+      "skills": ["tushare", "mx-finance-data", "stock-price-query", "mx-stocks-screener"],
+      "priority": 70,
+      "status": "active"
+    },
+    "content-creation": {
+      "entry": "article-writer",
+      "skills": ["copywriter", "story-cog", "personas", "best-minds"],
+      "priority": 60,
+      "status": "active"
+    },
+    "devops": {
+      "entry": "git",
+      "skills": ["docker", "terraform", "ansible", "clawsec-suite"],
+      "priority": 65,
+      "status": "active"
+    },
+    "multimedia-edit": {
+      "entry": "video-cog",
+      "skills": ["video-agent", "video-subtitles", "audio-cog", "seedream-image_gen"],
+      "priority": 55,
+      "status": "active"
+    }
+  },
+  "priority": {
+    "xiaoyi": 100,
+    "core": 95,
+    "integration": 90,
+    "search": 85,
+    "document": 80,
+    "multimedia": 75,
+    "development": 70,
+    "finance": 65,
+    "communication": 60,
+    "content": 55,
+    "productivity": 50,
+    "marketing": 45,
+    "business": 40,
+    "automation": 35,
+    "utility": 30,
+    "other": 25
+  },
+  "usageStats": {
+    "enabled": true,
+    "lastUpdate": "2026-04-06T03:10:00+08:00",
+    "statsFile": "usage-stats.json"
+  },
+  "integrations": [
+    {
+      "name": "unified-document",
+      "type": "entry_point",
+      "replaces": ["docx", "pdf", "pptx", "markitdown"],
+      "priority": 100
+    },
+    {
+      "name": "unified-image",
+      "type": "entry_point",
+      "replaces": ["image-cog", "image-gen", "seedream-image_gen"],
+      "priority": 100
+    },
+    {
+      "name": "unified-search",
+      "type": "entry_point",
+      "replaces": ["web-search-exa", "web-search-plus", "prismfy-search"],
+      "priority": 100
+    }
+  ]
+}

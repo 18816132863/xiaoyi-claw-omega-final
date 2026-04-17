@@ -1,0 +1,10 @@
+{
+  "timestamp": "20260418_075101",
+  "description": "一个穿着汉服的少女站在桃花树下",
+  "style": "国风",
+  "chinese_prompt": "一个穿着汉服的少女站在桃花树下\n风格: 国风\n氛围: 古典、优雅、意境深远\n关键词: 水墨, 山水, 古建筑, 仙鹤, 祥云\n色调: 青色, 金色, 红色, 白色\n比例: 16:9\n质量: high\n",
+  "english_prompt": "一个穿着汉服的少女站在桃花树下, 国风 style, 古典、优雅、意境深远 atmosphere,\n水墨, 山水, 古建筑, 仙鹤, 祥云, 青色, 金色, 红色, 白色 color palette,\naspect ratio 16:9, high quality, highly detailed, masterpiece\n",
+  "aspect_ratio": "16:9",
+  "quality": "high",
+  "count": 1
+}

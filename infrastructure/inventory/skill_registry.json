@@ -78,6 +78,26 @@
         "core_modules": 32,
         "size": "2.2M"
       }
+    },
+    {
+      "id": "data-tracker",
+      "name": "data-tracker",
+      "version": "1.0.0",
+      "description": "数据记录与复盘系统",
+      "category": "productivity",
+      "enabled": true,
+      "testable": true,
+      "test_mode": "smoke"
+    },
+    {
+      "id": "doc-autofill",
+      "name": "doc-autofill",
+      "version": "1.0.0",
+      "description": "文档自动填写系统",
+      "category": "productivity",
+      "enabled": true,
+      "testable": true,
+      "test_mode": "smoke"
     }
   ]
 }

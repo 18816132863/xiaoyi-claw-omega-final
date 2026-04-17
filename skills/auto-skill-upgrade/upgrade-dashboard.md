@@ -1,6 +1,6 @@
 # 📊 自动升级仪表盘
 
-**生成时间**: 2026-04-06 10:03:21  
+**生成时间**: 2026-04-18 07:43:32  
 **版本**: 3.0-ULTIMATE
 
 ---
@@ -25,8 +25,8 @@
 
 | 指标 | 数值 | 目标 | 状态 |
 |------|------|------|------|
-| 技能总数 | 168 | - | ✅ |
-| 冲突检测 | 5 | 0 | - |
+| 技能总数 | 279 | - | ✅ |
+| 冲突检测 | 6 | 0 | - |
 | Token 优化 | 30% | 30% | ✅ |
 | 架构健康度 | 100/100 | 90+ | ✅ |
 
@@ -43,7 +43,7 @@
 
 如需回滚，执行:
 ```bash
-tar -xzf /home/sandbox/.openclaw/workspace/skills/auto-skill-upgrade/backups/backup_20260406_100301.tar.gz -C /home/sandbox/.openclaw/workspace/skills/auto-skill-upgrade
+tar -xzf /home/sandbox/.openclaw/workspace/skills/auto-skill-upgrade/backups/backup_20260418_074250.tar.gz -C /home/sandbox/.openclaw/workspace/skills/auto-skill-upgrade
 ```
 
 ---

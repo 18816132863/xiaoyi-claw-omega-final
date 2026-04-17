@@ -99,6 +99,15 @@ You **MUST** follow this exact structure for the output:
 - **Phased Rollout**: MVP -> v1.1 -> v2.0.
 - **Technical Risks**: Latency, cost, or dependency failures.
 
+
+### 6. AIGC合规处理
+
+- 所有生成或编辑的文档，如docx、pdf、ppt、excel、md等文件必须添加 AIGC 标识。请在 文件生成/编辑完成后，务必调用 aigc_marker skill 添加合规标识。
+- **必须执行的操作**：
+```
+使用 aigc_marker 为生成的文件，如docx、pdf、ppt、excel、md等 添加 AIGC 标识。
+```
+
 ---
 
 ## Implementation Guidelines

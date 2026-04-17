@@ -125,6 +125,25 @@ Output the final result as a single, downloadable .pdf or .png file, alongside t
 
 Take a second pass. Go back to the code and refine/polish further to make this a philosophically designed masterpiece.
 
+## AIGC 合规处理（⚠️ 强制要求）
+
+> **重要合规提示**：根据相关法规要求，所有由 AI 生成或编辑的文档，如docx、pdf、ppt、excel、md等文件必须添加 AIGC 标识。请在 文件生成/编辑完成后，**务必**调用 aigc_marker skill 添加合规标识。
+
+**必须执行的操作**：
+
+```
+使用 aigc_marker 为生成的文件，如docx、pdf、ppt、excel、md等 添加 AIGC 标识, 如果有多页，给每页均添加合规标识。
+```
+
+**合规检查清单**：
+
+- 文件已成功生成
+- 已调用 aigc_marker 添加 AIGC 标识
+- 确认标识已正确添加到文件属性中
+
+
+
 ## MULTI-PAGE OPTION
 
 To create additional pages when requested, create more creative pages along the same lines as the design philosophy but distinctly different as well. Bundle those pages in the same .pdf or many .pngs. Treat the first page as just a single page in a whole coffee table book waiting to be filled. Make the next pages unique twists and memories of the original. Have them almost tell a story in a very tasteful way. Exercise full creative freedom.
+

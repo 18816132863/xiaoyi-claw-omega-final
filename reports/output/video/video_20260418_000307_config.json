@@ -1,0 +1,26 @@
+{
+  "project_id": "video_20260418_000307",
+  "title": "AI是如何学习的",
+  "video_type": "explainer",
+  "video_type_name": "科普讲解",
+  "style": "kurzgesagt",
+  "style_name": "Kurzgesagt风格",
+  "topic": "机器学习基础",
+  "target_audience": "general",
+  "duration": "medium",
+  "structure": [
+    "钩子",
+    "问题引入",
+    "核心解释",
+    "案例说明",
+    "总结"
+  ],
+  "colors": [
+    "#1A1A2E",
+    "#16213E",
+    "#0F3460",
+    "#E94560"
+  ],
+  "created_at": "2026-04-18T00:03:07.569235",
+  "status": "draft"
+}

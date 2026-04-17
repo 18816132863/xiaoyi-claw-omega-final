@@ -1,66 +1,36 @@
 ---
-name: x-search
-description: Search X (Twitter) posts using the xAI API. Use when the user wants to find tweets, search X/Twitter, look up what people are saying on X, or find social media posts about a topic.
-homepage: https://docs.x.ai/developers/tools/x-search
-metadata:
-  {
-    "openclaw":
-      {
-        "emoji": "𝕏",
-        "requires": { "bins": ["python3"], "env": ["XAI_API_KEY"] },
-        "primaryEnv": "XAI_API_KEY",
-        "install":
-          [
-            {
-              "id": "python-brew",
-              "kind": "brew",
-              "formula": "python",
-              "bins": ["python3"],
-              "label": "Install Python (brew)",
-            },
-          ],
-      },
-  }
+name: unified-search
+description: 搜索统一入口。自动路由到最佳搜索技能。支持联网搜索、深度调研、多引擎搜索。触发词：搜索、查一下、调研、找资料。
 ---
 
-# X Search
+# 搜索统一入口
 
-Search X (Twitter) posts using the xAI Grok API with real-time access to X content.
+自动路由到最佳搜索技能。
 
-## Setup
+## 工作流
 
-1. Get your API key: https://console.x.ai
-2. Set environment variable:
-   ```bash
-   export XAI_API_KEY="xai-your-key-here"
-   ```
-3. Or set `skills."x-search".apiKey` / `skills."x-search".env.XAI_API_KEY` in `~/.openclaw/openclaw.json`
-
-## Usage
-
-```bash
-python3 {baseDir}/scripts/search.py "what is trending in AI right now"
+```
+用户请求
+    ↓
+判断搜索类型
+    ↓
+┌─────────────────────────────────┐
+│ 快速搜索 → xiaoyi-web-search    │
+│ 深度调研 → deep-search          │
+│ 多引擎 → prismfy-search         │
+│ 专业搜索 → tavily-search        │
+└─────────────────────────────────┘
 ```
 
-Useful flags:
+## 优先级
 
-```bash
-# Filter by handles (max 10)
-python3 {baseDir}/scripts/search.py --handles jaaneek,OpenClaw "latest posts"
+1. xiaoyi-web-search (快速)
+2. deep-search (深度)
+3. prismfy-search (多引擎)
 
-# Exclude handles (max 10)
-python3 {baseDir}/scripts/search.py --exclude spambot,crypto_shill "trending AI"
+## 使用
 
-# Date range (YYYY-MM-DD)
-python3 {baseDir}/scripts/search.py --from 2026-03-01 --to 2026-03-20 "xAI grok updates"
-
-# Enable image/video understanding in posts
-python3 {baseDir}/scripts/search.py --images --video "product demos"
-```
-
-## Notes
-
-- Uses the xAI Responses API with `x_search` tool (Grok performs the search and summarizes results)
-- Cannot use `--handles` and `--exclude` at the same time
-- Results include citations with links to original X posts
-- Present results in a readable format with post content, authors, and citations
+直接描述需求：
+- "搜索一下 xxx"
+- "深度调研 xxx"
+- "帮我查资料"

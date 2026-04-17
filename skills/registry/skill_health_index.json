@@ -8,9 +8,9 @@
     "timeout_count": 0,
     "success_rate": 1.0,
     "failure_rate": 0.0,
-    "avg_latency_ms": 103.0,
+    "avg_latency_ms": 101.0,
     "recent_errors": [],
-    "last_success_at": "2026-04-17T23:15:42.601630",
+    "last_success_at": "2026-04-17T23:15:55.325818",
     "last_failure_at": null,
     "health_status": "unknown",
     "health_score": 0.5

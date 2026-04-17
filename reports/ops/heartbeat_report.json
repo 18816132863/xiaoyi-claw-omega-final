@@ -1,65 +1,64 @@
 {
   "version": "V7.2.0",
-  "start_time": "2026-04-17T23:10:36.225983",
-  "end_time": "2026-04-17T23:11:40.580060",
-  "total_duration_ms": 64354,
+  "start_time": "2026-04-17T23:15:28.397576",
+  "end_time": "2026-04-17T23:16:08.906233",
+  "total_duration_ms": 40508,
   "success_count": 4,
   "total_count": 6,
   "results": [
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-17T23:10:36.226079",
+      "start_time": "2026-04-17T23:15:28.397666",
       "success": true,
-      "output": "------------------------\nRan 12 tests in 0.138s\n\nOK\n\n\n======================================================================\n  ✅ 所有巡检项通过\n======================================================================\n\n  报告已保存: /home/sandbox/.openclaw/workspace/reports/ops/unified_inspection_v7.2.0.json\n\n✅ 检查通过，继续推送...\nerror: RPC failed; curl 16 Error in the HTTP2 framing layer\nsend-pack: unexpected disconnect while reading sideband packet\nfatal: the remote end hung up unexpectedly\nEverything up-to-date\n\n",
+      "output": "✅ 推送成功\n",
       "error": null,
-      "duration_ms": 32697,
-      "end_time": "2026-04-17T23:11:08.923553"
+      "duration_ms": 9494,
+      "end_time": "2026-04-17T23:15:37.892465"
     },
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-17T23:11:08.923618",
+      "start_time": "2026-04-17T23:15:37.892513",
       "success": true,
-      "output": "============================================================\n  自动备份上传器 V1.0.0\n============================================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: 1afd1ad 心跳自动提交\n  变更文件: 20 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-17 23:11:09\n  ✅ 推送成功\n\n============================================================\n  ✅ 自动备份上传完成\n============================================================\n\n",
+      "output": "============================================================\n  自动备份上传器 V1.0.0\n============================================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: 6463a1e 心跳自动提交\n  变更文件: 20 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-17 23:15:38\n  ✅ 推送成功\n\n============================================================\n  ✅ 自动备份上传完成\n============================================================\n\n",
       "error": null,
-      "duration_ms": 9791,
-      "end_time": "2026-04-17T23:11:18.715582"
+      "duration_ms": 9374,
+      "end_time": "2026-04-17T23:15:47.267386"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-17T23:11:18.715635",
+      "start_time": "2026-04-17T23:15:47.267438",
       "success": true,
       "output": "============================================================\n  自动触发器 V1.0.0\n============================================================\n\n⏰ 检查时间触发...\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
       "error": null,
-      "duration_ms": 276,
-      "end_time": "2026-04-17T23:11:18.992115"
+      "duration_ms": 281,
+      "end_time": "2026-04-17T23:15:47.548914"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-17T23:11:18.992177",
+      "start_time": "2026-04-17T23:15:47.548988",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 21493,
-      "end_time": "2026-04-17T23:11:40.486155"
+      "duration_ms": 21357,
+      "end_time": "2026-04-17T23:16:08.906173"
     },
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-17T23:11:40.486202",
+      "start_time": "2026-04-17T23:16:08.906219",
       "success": false,
-      "output": "",
-      "error": "_bench import TaskSuccessBench\nImportError: cannot import name 'TaskSuccessBench' from 'tests.benchmarks.task_success_bench' (/home/sandbox/.openclaw/workspace/tests/benchmarks/task_success_bench.py)\n",
-      "duration_ms": 93,
-      "end_time": "2026-04-17T23:11:40.580005"
+      "output": "任务已禁用",
+      "error": null,
+      "duration_ms": 0
     },
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-17T23:11:40.580054",
+      "start_time": "2026-04-17T23:16:08.906228",
       "success": false,
       "output": "任务已禁用",
       "error": null,

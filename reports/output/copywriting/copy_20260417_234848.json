@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "content_type": "product",
+  "platform": "douyin",
+  "outputs": [
+    {
+      "type": "main",
+      "content": "【产品推广】\n\n主题：智能手表\n\n结构参考：\n1. 痛点引入\n2. 产品介绍\n3. 核心卖点\n4. 使用场景\n5. 行动号召\n\n示例模板：\n还在为XX烦恼吗？\n\n我们的XX产品，专为解决XX问题设计。\n\n✅ 核心优势1\n✅ 核心优势2\n✅ 核心优势3\n\n适用场景：XX\n\n👇 点击链接，立即体验",
+      "word_count": 147
+    },
+    {
+      "type": "titles",
+      "content": [
+        "还在为智能手表烦恼？这个方法帮你解决",
+        "关于智能手表，90%的人都不知道的真相",
+        "3个技巧，让你的智能手表效率翻倍",
+        "我是如何通过智能手表改变人生的",
+        "普通人vs高手：智能手表的差距在哪里"
+      ],
+      "count": 5
+    },
+    {
+      "type": "tags",
+      "content": [
+        "智能手表",
+        "干货分享",
+        "实用技巧"
+      ],
+      "count": 3
+    },
+    {
+      "type": "variants",
+      "content": [
+        {
+          "name": "正式版",
+          "style": "professional",
+          "description": "适合商务场景，语气正式"
+        },
+        {
+          "name": "亲切版",
+          "style": "friendly",
+          "description": "适合日常分享，语气轻松"
+        },
+        {
+          "name": "紧迫版",
+          "style": "urgent",
+          "description": "适合促销活动，强调时效"
+        }
+      ],
+      "count": 3
+    }
+  ],
+  "created_at": "2026-04-17T23:48:48.520553"
+}

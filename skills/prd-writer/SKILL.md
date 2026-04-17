@@ -87,6 +87,22 @@ cd prototype && wrangler pages deploy . --project-name=your-project
 
 详见 [references/cloudflare-deploy.md](references/cloudflare-deploy.md)
 
+## AIGC 合规处理（⚠️ 强制要求）
+
+> 所有生成或编辑的文档，如docx、pdf、ppt、excel、md等文件必须添加 AIGC 标识。请在 文件生成/编辑完成后，**务必**调用 aigc_marker skill 添加合规标识。
+
+**必须执行的操作**：
+
+```
+使用 aigc_marker 为生成的文件，如docx、pdf、ppt、excel、md等 添加 AIGC 标识。
+```
+
+**合规检查清单**：
+
+- 文件已成功生成
+- 已调用 aigc_marker 添加 AIGC 标识
+- 确认标识已正确添加到文件属性中
+
 ## 质量检查
 
 完成后以四角色审视，详见 [references/quality-checklist.md](references/quality-checklist.md)：

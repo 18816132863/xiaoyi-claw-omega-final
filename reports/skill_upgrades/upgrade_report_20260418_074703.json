@@ -1,0 +1,167 @@
+{
+  "timestamp": "2026-04-18T07:47:03.745762",
+  "total": 12,
+  "success": 11,
+  "failed": 1,
+  "skills": [
+    {
+      "skill": "novel-generator",
+      "status": "success",
+      "category": "创作类",
+      "priority": "P0",
+      "enhancements": [
+        "添加中文场景模板",
+        "创建 skill.py 执行脚本",
+        "集成长期记忆",
+        "添加爽点节奏分析",
+        "支持多题材模板"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/novel-generator/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "claw-art",
+      "status": "success",
+      "category": "创作类",
+      "priority": "P0",
+      "enhancements": [
+        "添加中文提示词支持",
+        "创建 skill.py 执行脚本",
+        "添加风格预设",
+        "支持批量生成",
+        "集成主流绘图API"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/claw-art/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "minimax-music-gen",
+      "status": "success",
+      "category": "创作类",
+      "priority": "P1",
+      "enhancements": [
+        "添加更多风格模板",
+        "支持歌词续写",
+        "添加音乐风格混搭",
+        "支持纯音乐BGM",
+        "添加历史记录管理"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/minimax-music-gen/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "copywriter",
+      "status": "success",
+      "category": "创作类",
+      "priority": "P0",
+      "enhancements": [
+        "添加中文文案模板",
+        "支持短视频脚本",
+        "添加营销文案生成",
+        "支持多平台适配",
+        "添加A/B测试变体"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/copywriter/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "educational-video-creator",
+      "status": "success",
+      "category": "创作类",
+      "priority": "P1",
+      "enhancements": [
+        "添加视频脚本生成",
+        "支持多风格视频",
+        "添加字幕生成",
+        "支持批量生成",
+        "添加模板库"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/educational-video-creator/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "markitdown",
+      "status": "success",
+      "category": "文档类",
+      "priority": "P0",
+      "enhancements": [
+        "支持PDF/Word/Excel互转",
+        "添加批量转换",
+        "支持格式保留",
+        "添加OCR支持",
+        "支持云端文档"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/markitdown/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "doc-autofill",
+      "status": "success",
+      "category": "文档类",
+      "priority": "P0",
+      "enhancements": [
+        "添加更多模板",
+        "支持华为健康数据",
+        "添加表格智能识别",
+        "支持批量生成",
+        "添加历史记录"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/doc-autofill/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "data-tracker",
+      "status": "success",
+      "category": "文档类",
+      "priority": "P0",
+      "enhancements": [
+        "添加更多数据类型",
+        "支持华为健康同步",
+        "添加趋势图表",
+        "支持习惯追踪",
+        "添加周报/月报"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/data-tracker/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "xiaoyi-health",
+      "status": "success",
+      "category": "健康类",
+      "priority": "P1",
+      "enhancements": [
+        "添加症状分析",
+        "支持健康风险评估",
+        "添加中医体质辨识",
+        "支持用药提醒",
+        "添加算命娱乐功能"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/xiaoyi-health/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "fitness-coach",
+      "status": "success",
+      "category": "健康类",
+      "priority": "P1",
+      "enhancements": [
+        "添加食谱生成",
+        "支持营养计算",
+        "添加购物清单",
+        "支持饮食记录",
+        "添加体重管理"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/fitness-coach/enhancements/practical_upgrade.md"
+    },
+    {
+      "skill": "xiaoyi_gui_agent",
+      "status": "not_found",
+      "message": "技能目录不存在: /home/sandbox/.openclaw/workspace/skills/xiaoyi_gui_agent"
+    },
+    {
+      "skill": "xiaoyi-HarmonyOSSmartHome-skill",
+      "status": "success",
+      "category": "控制类",
+      "priority": "P1",
+      "enhancements": [
+        "添加场景联动",
+        "支持语音控制",
+        "添加自动化规则",
+        "支持设备监控",
+        "添加能耗统计"
+      ],
+      "file": "/home/sandbox/.openclaw/workspace/skills/xiaoyi-HarmonyOSSmartHome-skill/enhancements/practical_upgrade.md"
+    }
+  ]
+}

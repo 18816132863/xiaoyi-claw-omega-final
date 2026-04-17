@@ -111,3 +111,21 @@ echo "会话目录：$PPT_SESSION_DIR"
 - **已安装的文档解析 skill** — 当用户提供文档时使用
 - **已安装的网络搜索 skill** — 当需要在线搜索信息时使用
 - **`~/.openclaw/.xiaoyienv`** — OSMS 服务配置文件，必须包含 `SERVICE_URL`
+
+---
+
+## AIGC 合规处理（⚠️ 强制要求）
+
+> **重要合规提示**：根据相关法规要求，所有由 AI 生成或编辑的文档，如docx、pdf、ppt、excel、md等文件必须添加 AIGC 标识。请在 文件生成/编辑完成后，**务必**调用 aigc_marker skill 添加合规标识。
+
+**必须执行的操作**：
+
+```
+使用 aigc_marker 为生成的文件，如docx、pdf、ppt、excel、md等 添加 AIGC 标识。
+```
+
+**合规检查清单**：
+
+- 文件已成功生成
+- 已调用 aigc_marker 添加 AIGC 标识
+- 确认标识已正确添加到文件属性中

@@ -1,6 +1,6 @@
 """
 Workflow Engine - 正式任务编排内核主链入口
-Phase3 第二组核心模块
+Phase3 第二组核心模块 + Group5 事件接入
 """
 
 from dataclasses import dataclass, field
@@ -44,6 +44,28 @@ from orchestration.state.recovery_store import (
 from orchestration.state.checkpoint_store import CheckpointStore
 from orchestration.execution_control.fallback_policy import FallbackPolicy, FallbackAction
 from orchestration.execution_control.rollback_manager import RollbackManager
+
+# ========== Group5 事件系统接入 ==========
+try:
+    from core.events.event_persistence import get_event_persistence
+    _event_persistence = None
+except ImportError:
+    _event_persistence = None
+
+
+def _emit_event(event_type: str, payload: Dict[str, Any], **kwargs):
+    """发送事件到正式事件系统"""
+    global _event_persistence
+    if _event_persistence is None:
+        try:
+            _event_persistence = get_event_persistence()
+        except Exception:
+            return
+    
+    try:
+        _event_persistence.append(event_type, payload, validate=False, **kwargs)
+    except Exception:
+        pass
 
 
 # ========== 兼容性别名 ==========
@@ -292,6 +314,17 @@ class WorkflowEngine:
             version=version,
             profile=profile,
             control_decision_id=control_decision_id
+        )
+        
+        # ========== Group5: 发送正式事件 ==========
+        _emit_event(
+            "workflow_started",
+            {
+                "workflow_id": workflow_id,
+                "version": version,
+                "profile": profile
+            },
+            workflow_instance_id=instance.instance_id
         )
         
         # 5. 更新状态为 running

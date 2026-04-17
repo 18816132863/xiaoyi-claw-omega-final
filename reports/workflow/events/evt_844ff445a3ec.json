@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_844ff445a3ec",
+  "instance_id": "inst_a5fb0a1e7563",
+  "event_type": "step_failed",
+  "timestamp": "2026-04-17T13:43:23.779515",
+  "step_id": "s1",
+  "data": {
+    "error_type": "exception",
+    "error_message": "硬失败"
+  },
+  "metadata": {}
+}

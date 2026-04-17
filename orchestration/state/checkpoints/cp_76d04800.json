@@ -1,0 +1,40 @@
+{
+  "checkpoint_id": "cp_76d04800",
+  "workflow_id": "event_verify",
+  "step_id": "s2",
+  "timestamp": "2026-04-17T13:43:23.785617",
+  "state": {
+    "instance_id": "inst_a4af896c2b31",
+    "error": "\u5931\u8d25",
+    "attempt": 0,
+    "step_results": {
+      "s1": {
+        "step_id": "s1",
+        "status": "completed",
+        "started_at": "2026-04-17T13:43:23.781800",
+        "completed_at": "2026-04-17T13:43:23.783038",
+        "output": {
+          "step1": "done"
+        },
+        "error": null,
+        "retry_count": 0,
+        "duration_ms": 1,
+        "fallback_used": false,
+        "rollback_used": false,
+        "checkpoint_id": "cp_a4ef3e49",
+        "rollback_point_id": "rb_67ab0592",
+        "fallback_decision": null
+      }
+    }
+  },
+  "completed_steps": [
+    "s1"
+  ],
+  "pending_steps": [
+    "s2"
+  ],
+  "metadata": {
+    "phase": "on_error",
+    "attempt": 0
+  }
+}

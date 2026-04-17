@@ -1,0 +1,14 @@
+{
+  "event_id": "evt_faa8b9dd5d3a",
+  "instance_id": "inst_a5fb0a1e7563",
+  "event_type": "workflow_completed",
+  "timestamp": "2026-04-17T13:43:23.780177",
+  "step_id": null,
+  "data": {
+    "status": "failed",
+    "output": {
+      "error": "Step s1 failed: 硬失败"
+    }
+  },
+  "metadata": {}
+}

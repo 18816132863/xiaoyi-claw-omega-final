@@ -1,0 +1,23 @@
+{
+  "checkpoint_id": "cp_fe4b0390",
+  "workflow_id": "rollback_verify",
+  "step_id": "s1",
+  "timestamp": "2026-04-17T13:04:11.786943",
+  "state": {
+    "instance_id": "inst_5aa0060c191a",
+    "step_input": {
+      "context": {},
+      "dependencies": {},
+      "params": {}
+    },
+    "step_results": {}
+  },
+  "completed_steps": [],
+  "pending_steps": [
+    "s1"
+  ],
+  "metadata": {
+    "phase": "before_step",
+    "attempt": 0
+  }
+}

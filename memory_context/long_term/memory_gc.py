@@ -115,6 +115,10 @@ class MemoryGC:
 
         # 加载记忆
         memories = self._load_memories()
+        
+        # 过滤掉非对象
+        memories = [m for m in memories if not isinstance(m, str)]
+        
         report.total_processed = len(memories)
 
         to_decay = []
@@ -154,13 +158,27 @@ class MemoryGC:
 
         return report
 
-    def _evaluate_memory(self, memory: Dict[str, Any]) -> GCResult:
+    def _evaluate_memory(self, memory) -> GCResult:
         """评估记忆"""
-        memory_id = memory.get("memory_id", "")
-        importance = memory.get("importance", 0.5)
-        tags = memory.get("tags", [])
-        last_accessed = memory.get("last_accessed", "")
-        created_at = memory.get("created_at", "")
+        # 支持对象和 dict 两种格式
+        if hasattr(memory, 'memory_id'):
+            memory_id = memory.memory_id
+            importance = getattr(memory, 'importance', 0.5)
+            tags = getattr(memory, 'tags', [])
+            last_accessed = getattr(memory, 'last_accessed', None)
+            created_at = getattr(memory, 'created_at', None)
+            
+            # 转换 datetime
+            if last_accessed and hasattr(last_accessed, 'isoformat'):
+                last_accessed = last_accessed.isoformat()
+            if created_at and hasattr(created_at, 'isoformat'):
+                created_at = created_at.isoformat()
+        else:
+            memory_id = memory.get("memory_id", "")
+            importance = memory.get("importance", 0.5)
+            tags = memory.get("tags", [])
+            last_accessed = memory.get("last_accessed", "")
+            created_at = memory.get("created_at", "")
 
         # 检查是否需要保留
         for tag in self._config["preserve_tags"]:
@@ -220,17 +238,33 @@ class MemoryGC:
             original_score=importance
         )
 
-    def _apply_decay(self, memory: Dict[str, Any]):
+    def _apply_decay(self, memory):
         """应用衰减"""
-        importance = memory.get("importance", 0.5)
-        memory["importance"] = importance * self._config["decay_factor"]
-        memory["last_decayed"] = datetime.now().isoformat()
+        if hasattr(memory, 'importance'):
+            memory.importance = memory.importance * self._config["decay_factor"]
+            if hasattr(memory, 'last_decayed'):
+                memory.last_decayed = datetime.now().isoformat()
+        else:
+            importance = memory.get("importance", 0.5)
+            memory["importance"] = importance * self._config["decay_factor"]
+            memory["last_decayed"] = datetime.now().isoformat()
 
-    def _archive_memory(self, memory: Dict[str, Any]):
+    def _archive_memory(self, memory):
         """归档记忆"""
         archive = self._load_archive()
-        memory["archived_at"] = datetime.now().isoformat()
-        archive.append(memory)
+        
+        if hasattr(memory, 'memory_id'):
+            memory_dict = memory.to_dict() if hasattr(memory, 'to_dict') else {
+                "memory_id": memory.memory_id,
+                "content": getattr(memory, 'content', ''),
+                "importance": getattr(memory, 'importance', 0.5),
+                "archived_at": datetime.now().isoformat()
+            }
+        else:
+            memory_dict = dict(memory)
+            memory_dict["archived_at"] = datetime.now().isoformat()
+        
+        archive.append(memory_dict)
         self._save_archive(archive)
 
     def _load_memories(self) -> List[Dict[str, Any]]:

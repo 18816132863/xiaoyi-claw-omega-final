@@ -1,0 +1,212 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "retrieval_trace.schema.json",
+  "title": "Retrieval Trace Schema",
+  "description": "检索追踪记录",
+  "type": "object",
+  "required": ["trace_id", "task_id", "original_query", "timestamp"],
+  "properties": {
+    "trace_id": {
+      "type": "string",
+      "description": "追踪 ID"
+    },
+    "task_id": {
+      "type": "string",
+      "description": "任务 ID"
+    },
+    "original_query": {
+      "type": "string",
+      "description": "原始查询/意图"
+    },
+    "rewritten_query": {
+      "type": "string",
+      "description": "重写后的查询"
+    },
+    "query_rewrite_reason": {
+      "type": "string",
+      "description": "重写原因"
+    },
+    "profile": {
+      "type": "string",
+      "description": "执行配置"
+    },
+    "risk_level": {
+      "type": "string",
+      "description": "风险等级",
+      "enum": ["low", "medium", "high", "critical"]
+    },
+    "allowed_sources": {
+      "type": "array",
+      "description": "允许检索的来源列表",
+      "items": {
+        "type": "string"
+      }
+    },
+    "denied_sources": {
+      "type": "array",
+      "description": "被拒绝的来源列表",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_results": {
+      "type": "array",
+      "description": "各来源检索结果",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "description": "来源 ID"
+          },
+          "source_type": {
+            "type": "string",
+            "description": "来源类型"
+          },
+          "query_used": {
+            "type": "string",
+            "description": "实际使用的查询"
+          },
+          "hits_count": {
+            "type": "integer",
+            "description": "命中条数"
+          },
+          "filtered_count": {
+            "type": "integer",
+            "description": "过滤掉条数"
+          },
+          "returned_count": {
+            "type": "integer",
+            "description": "返回条数"
+          },
+          "tokens_used": {
+            "type": "integer",
+            "description": "使用 token 数"
+          },
+          "latency_ms": {
+            "type": "integer",
+            "description": "延迟（毫秒）"
+          },
+          "error": {
+            "type": "string",
+            "description": "错误信息"
+          }
+        }
+      }
+    },
+    "ranking_result": {
+      "type": "object",
+      "description": "排序结果",
+      "properties": {
+        "total_items": {
+          "type": "integer",
+          "description": "总条目数"
+        },
+        "ranked_items": {
+          "type": "array",
+          "description": "排序后的条目",
+          "items": {
+            "type": "object"
+          }
+        },
+        "ranking_method": {
+          "type": "string",
+          "description": "排序方法"
+        }
+      }
+    },
+    "injection_plan": {
+      "type": "object",
+      "description": "注入规划",
+      "properties": {
+        "required_sources": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "optional_sources": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "suppressed_sources": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "trimmed_sources": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "conflict_sources": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "final_injection_order": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "conflict_resolution": {
+      "type": "object",
+      "description": "冲突消解记录",
+      "properties": {
+        "conflicts_found": {
+          "type": "integer"
+        },
+        "resolutions": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "budget_result": {
+      "type": "object",
+      "description": "预算裁剪结果",
+      "properties": {
+        "budget_tokens": {
+          "type": "integer"
+        },
+        "used_tokens": {
+          "type": "integer"
+        },
+        "trimmed_tokens": {
+          "type": "integer"
+        },
+        "trimmed_items": {
+          "type": "array",
+          "items": {"type": "object"}
+        }
+      }
+    },
+    "final_result": {
+      "type": "object",
+      "description": "最终结果",
+      "properties": {
+        "injected_sources": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "total_items": {
+          "type": "integer"
+        },
+        "total_tokens": {
+          "type": "integer"
+        },
+        "compression_ratio": {
+          "type": "number"
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "时间戳"
+    },
+    "duration_ms": {
+      "type": "integer",
+      "description": "总耗时（毫秒）"
+    }
+  },
+  "additionalProperties": true
+}

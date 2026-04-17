@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "context_injection_record.schema.json",
+  "title": "Context Injection Record Schema",
+  "description": "上下文注入记录",
+  "type": "object",
+  "required": ["record_id", "task_id", "trace_id", "timestamp"],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "记录 ID"
+    },
+    "task_id": {
+      "type": "string",
+      "description": "任务 ID"
+    },
+    "trace_id": {
+      "type": "string",
+      "description": "关联的 retrieval trace ID"
+    },
+    "profile": {
+      "type": "string",
+      "description": "执行配置"
+    },
+    "injection_type": {
+      "type": "string",
+      "description": "注入类型",
+      "enum": ["full", "partial", "summary", "minimal"]
+    },
+    "sources_injected": {
+      "type": "array",
+      "description": "注入的来源列表",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": {"type": "string"},
+          "source_type": {"type": "string"},
+          "items_count": {"type": "integer"},
+          "tokens": {"type": "integer"},
+          "confidence": {"type": "number"},
+          "injection_order": {"type": "integer"}
+        }
+      }
+    },
+    "sources_suppressed": {
+      "type": "array",
+      "description": "被抑制的来源",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": {"type": "string"},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "conflicts_resolved": {
+      "type": "array",
+      "description": "已解决的冲突",
+      "items": {
+        "type": "object",
+        "properties": {
+          "conflict_type": {"type": "string"},
+          "sources_involved": {"type": "array", "items": {"type": "string"}},
+          "resolution": {"type": "string"},
+          "winner": {"type": "string"}
+        }
+      }
+    },
+    "budget_allocation": {
+      "type": "object",
+      "description": "预算分配",
+      "properties": {
+        "total_budget": {"type": "integer"},
+        "allocated": {"type": "integer"},
+        "used": {"type": "integer"},
+        "remaining": {"type": "integer"}
+      }
+    },
+    "compression_applied": {
+      "type": "boolean",
+      "description": "是否应用压缩"
+    },
+    "compression_ratio": {
+      "type": "number",
+      "description": "压缩比例"
+    },
+    "quality_score": {
+      "type": "number",
+      "description": "注入质量分数"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "时间戳"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "扩展元数据"
+    }
+  },
+  "additionalProperties": true
+}

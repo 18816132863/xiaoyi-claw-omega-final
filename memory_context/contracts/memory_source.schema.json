@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "memory_source.schema.json",
+  "title": "Memory Source Schema",
+  "description": "记忆来源定义",
+  "type": "object",
+  "required": ["source_id", "source_type", "name"],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "description": "来源唯一标识符"
+    },
+    "source_type": {
+      "type": "string",
+      "description": "来源类型",
+      "enum": [
+        "session_history",
+        "long_term_memory",
+        "report_memory",
+        "workflow_history",
+        "skill_history",
+        "user_preference",
+        "company_knowledge",
+        "external_knowledge"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "来源名称"
+    },
+    "description": {
+      "type": "string",
+      "description": "来源描述"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "优先级（越高越优先）",
+      "default": 50,
+      "minimum": 0,
+      "maximum": 100
+    },
+    "confidence_weight": {
+      "type": "number",
+      "description": "可信度权重",
+      "default": 1.0,
+      "minimum": 0,
+      "maximum": 2.0
+    },
+    "max_items": {
+      "type": "integer",
+      "description": "最大返回条数",
+      "default": 10
+    },
+    "max_tokens": {
+      "type": "integer",
+      "description": "最大 token 数"
+    },
+    "required_profiles": {
+      "type": "array",
+      "description": "允许访问的 profile 列表（空表示全部允许）",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_capabilities": {
+      "type": "array",
+      "description": "访问所需 capability",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk_level_limit": {
+      "type": "string",
+      "description": "允许的最高风险等级",
+      "enum": ["low", "medium", "high", "critical"],
+      "default": "high"
+    },
+    "cache_ttl_seconds": {
+      "type": "integer",
+      "description": "缓存 TTL（秒）",
+      "default": 300
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "是否启用",
+      "default": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "扩展元数据"
+    }
+  },
+  "additionalProperties": true
+}

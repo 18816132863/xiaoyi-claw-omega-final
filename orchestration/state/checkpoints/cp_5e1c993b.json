@@ -1,0 +1,43 @@
+{
+  "checkpoint_id": "cp_5e1c993b",
+  "workflow_id": "workflow_task_0100d7fc",
+  "step_id": "check",
+  "timestamp": "2026-04-17T08:28:25.547978",
+  "state": {
+    "instance_id": "inst_2f2884c1c126",
+    "output": {
+      "checked": true,
+      "result": "\u67b6\u6784\u5b8c\u6574"
+    },
+    "step_results": {
+      "prepare": {
+        "step_id": "prepare",
+        "status": "completed",
+        "started_at": "2026-04-17T08:28:25.543761",
+        "completed_at": "2026-04-17T08:28:25.545384",
+        "output": {
+          "prepared": true,
+          "action": "prepare_context"
+        },
+        "error": null,
+        "retry_count": 0,
+        "duration_ms": 1,
+        "fallback_used": false,
+        "rollback_used": false,
+        "checkpoint_id": "cp_2c9d4424",
+        "rollback_point_id": "rb_436d73cc",
+        "fallback_decision": null
+      }
+    }
+  },
+  "completed_steps": [
+    "prepare",
+    "check"
+  ],
+  "pending_steps": [
+    "report"
+  ],
+  "metadata": {
+    "phase": "after_step"
+  }
+}

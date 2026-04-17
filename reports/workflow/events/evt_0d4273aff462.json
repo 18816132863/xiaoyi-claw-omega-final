@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_0d4273aff462",
+  "instance_id": "inst_2f2884c1c126",
+  "event_type": "step_started",
+  "timestamp": "2026-04-17T08:28:25.546466",
+  "step_id": "check",
+  "data": {
+    "step_name": "检查架构",
+    "action": "check_architecture_integrity"
+  },
+  "metadata": {}
+}

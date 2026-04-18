@@ -24,3 +24,25 @@ Common tasks
 Notes
 - If SSDP fails, specify `--ip <speaker-ip>`.
 - Spotify Web API search is optional and requires `SPOTIFY_CLIENT_ID/SECRET`.
+
+
+## 使用方法
+
+### 命令行调用
+
+```bash
+# 查看帮助
+python skill.py help
+
+# 执行技能
+python skill.py run --template default
+
+# 列出模板
+python skill.py list
+```
+
+## 示例
+
+```bash
+python skill.py run --template default
+```

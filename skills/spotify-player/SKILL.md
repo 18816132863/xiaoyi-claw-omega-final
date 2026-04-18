@@ -32,3 +32,25 @@ Notes
 - Config folder: `~/.config/spotify-player` (e.g., `app.toml`).
 - For Spotify Connect integration, set a user `client_id` in config.
 - TUI shortcuts are available via `?` in the app.
+
+
+## 使用方法
+
+### 命令行调用
+
+```bash
+# 查看帮助
+python skill.py help
+
+# 执行技能
+python skill.py run --template default
+
+# 列出模板
+python skill.py list
+```
+
+## 示例
+
+```bash
+python skill.py run --template default
+```

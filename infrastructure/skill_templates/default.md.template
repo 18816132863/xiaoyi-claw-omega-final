@@ -1,0 +1,27 @@
+# {skill_name} 默认模板
+
+## 元数据
+- 类型: 默认
+- 适用场景: 通用
+- 创建时间: {date}
+
+## 模板内容
+
+这是一个默认模板，请根据技能特点进行定制。
+
+## 使用说明
+
+1. 调用技能: `python skill.py run --template default`
+2. 查看帮助: `python skill.py help`
+3. 列出模板: `python skill.py list`
+
+## 示例
+
+```bash
+python skill.py run --template default --param1 value1 --param2 value2
+```
+
+---
+
+**模板版本**: v1.0.0
+**维护者**: OpenClaw 架构团队

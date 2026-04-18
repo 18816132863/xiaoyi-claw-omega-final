@@ -1,0 +1,2459 @@
+{
+  "timestamp": "2026-04-18T08:09:07.242981",
+  "version": "2.0.0",
+  "architecture": "L4 Execution",
+  "dependencies": [
+    "L1 Core",
+    "L6 Infrastructure"
+  ],
+  "total": 272,
+  "success": 269,
+  "failed": 0,
+  "skipped": 3,
+  "details": [
+    {
+      "skill": "ui-design-system",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "amap-jsapi-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "story-cog",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "opengfx",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "prd-writer",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "general-writing",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "bitsoul-stock-quantization",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "docs-cog",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "clawdhub",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "natural-language-planner",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "paddleocr-doc-parsing",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "jdjr",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "deep-search-and-insight-synthesize",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "javascript-skills",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "write-a-prd",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "ima-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "linkedin-api",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "ocr-local",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "react-best-practices",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "senior-security",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "tts",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "affaan-m-everything-claude-code-article-writing",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "weibo-clawbot-setup",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "imsg",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "limtdesign",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "tech-news-digest",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "kids-book-writer",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "juejin-skills",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "tdd-guide",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "spotify-player",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "eno",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "habit-flow-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "su-lan-paper-daily-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "best-minds",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "quality-documentation-manager",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "terraform",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "github-awesome-copilot-prd",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "claw-art",
+      "status": "skipped",
+      "before": 5,
+      "after": 5,
+      "reason": "已达到最高实用性"
+    },
+    {
+      "skill": "agentmcmillan-brain-and-co-plan-ceo-review",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "kuaishou-shop-operation",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "rkiding-awesome-finance-skills-alphaear-sentiment",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "html-ux-guidance",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "find-skills",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "beauty-generation-api",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "aiskillstore-marketplace-test-case-generator",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "video-cog",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaoyi-ppt",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "humanize-chinese",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "git",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "alphaear-news",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "docx",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "amazon-product-search-api-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "pptx-posters",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "yunshu0909-yunshu-skillshub-prd-doc-writer",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "web-browsing",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "amazing129-skills-mbti-for-agents",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "mysql",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "eastmoney-mx-skills-suite",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "baoyu-url-to-markdown",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "minimax-pdf",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "post-job",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaoyi-image-understanding",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "llm-memory-integration",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "t-trading",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "self-improving-agent",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "agent_reach",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "hunyuan-image",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "aigc_marker",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "moltrade",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "getnote",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "openclaw-skills-video-script-creator",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "gesture-html",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "verified-agent-identity",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "clawsec-suite",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "hz-proactive-agent",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "frontend-ui-ux-engineer",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "slidevjs-slidev-slidev",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "huawei-drive",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "calcom-cal.com-web-design-guidelines-1.0.2",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "weather",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "bilibili-all-in-one",
+      "status": "success",
+      "before": 3,
+      "after": 3,
+      "actions": [
+        "创建 output/",
+        "增强 SKILL.md"
+      ]
+    },
+    {
+      "skill": "bytedance-deer-flow-surprise-me",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "customer-service",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "omni-channel-ecommerce",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "obsidian",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "product-manager",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "read-arxiv-paper",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "mx-stocks-screener",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "weixin-clawbot-setup",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "axton-obsidian-visual-skills-excalidraw-diagram",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "creative-thought-partner",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "web-scraper",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "novel-generator",
+      "status": "skipped",
+      "before": 5,
+      "after": 5,
+      "reason": "已达到最高实用性"
+    },
+    {
+      "skill": "ontology",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "command-center",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "utils",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "backup-cleaner",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "tc-chengxin",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "ai-picture-book",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "superdesign",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "markitdown",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "risk-management-specialist",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "dealer-leader-cooperation",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "camsnap",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "image-gen",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "movie-producer-scene",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "flowchart-generator-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "platform-comparison",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "article-writer",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "yanxue-course-manager",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "remotion-video-toolkit",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "beginner-mode",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "shubhamsaboo-awesome-llm-apps-ux-designer",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "nutrient-openclaw",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "lyrical-fable",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "personas",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "openclaw-skills-agent-builder-1.0.3",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "moltguard",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "supply-chain-management",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "memory",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "davila7-claude-code-templates-ship-learn-next",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "audio-cog",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaoyi-HarmonyOSSmartHome-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "ansible",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "sonoscli",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "marketing-campaign",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "shareai-lab-learn-claude-code-pdf",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "market-research",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "poetry",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "playwright",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "fasting-tracker",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "ab-test-setup",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "elasticsearch",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "news-writing",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "wendao-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "chart-image",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "industry-stock-tracker",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "screenshot",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "product-management",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "mongodb",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "openai-whisper-api",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "sqlite",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "canvas-design",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "feiskyer-claude-code-settings-deep-research",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "didi-ride-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "marketing-strategy-pmm",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaoyi-file-upload",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaohongshu-all-in-one",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "marketing-ideas",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "image",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "writing-style-iterator",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "sheet-cog",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "proactivity",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "auto-skill-upgrade",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "ceo-advisor",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "code-analysis-skills",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "nicepkg-ai-workflow-user-research",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "metabase-metabase-docs-write",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "autonomous-tasks",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "file-manager",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "klaviyo",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "web-content-fetcher",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "qq-clawbot-setup",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "webapp-testing",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "topic-monitor",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "architecture-inspector",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "productivity",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "core",
+      "status": "success",
+      "before": 3,
+      "after": 3,
+      "actions": [
+        "创建 output/",
+        "增强 SKILL.md"
+      ]
+    },
+    {
+      "skill": "china-stock-analysis",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "openclaw-agent-optimize",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "pexoai-agent",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "local_app_interconnect",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "google-maps",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "senior-architect",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "frontend-design-pro",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaoyi-image-search",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "scrapling-official",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "news-extractor",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "video-generation-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "admapix",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "performance-upgrade",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "taskr",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "arxiv-search",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "2nd-brain",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "ai-ppt-generator",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "docker",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "today-task",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "fitness-coach",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "tushare-data",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "openmaic",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "planning-with-files",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "excel-analysis",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "skillhub-preference",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "unified-image",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "cn-web-search",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "web-search-exa",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "imap-smtp-email",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "dingtalk-ai-table",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "ecommerce-analytics",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "senior-data-scientist",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "flyai-travel",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "meitu-skills",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "qcc-agent-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "wan-image-video-generation-editting",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "engines",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "polymarket-trade",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "meituan-coupon-get-tool",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "speech-to-text",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaoyi-doc-convert",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "doc-autofill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "video-agent",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "browser-control",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "voice-synthesis",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "university-applications",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "unified-search",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "tavily-search-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "ai-drama-prompt-factory",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "daily-tech-broadcast",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "keyword-research",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "agent-chronicle",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "Humanizer-zh-main",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "feishu-channel-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "baidu-netdisk-skills",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "research-cog",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "crypto",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "bytedance-deer-flow-vercel-deploy-claimable",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "seedream-image_gen",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "bdpan-storage",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "api-gateway",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "data-analysis",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "hot-news-aggregator",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "proactive-tasks",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "skill-creator",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "pua",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "nini-writing-inspiration",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "daily-hot-news",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "seedance-video-gen",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "openclaw-skills-assistant",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "good-txt-to-hwreader",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "rkiding-awesome-finance-skills-alphaear-signal-tracker",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "data-tracker",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "technical-seo-checker",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "unified-document",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaoyi-web-search",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "skill-fusion",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "pixverse",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "stock-price-query",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "educational-video-creator",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "agent-browser-clawdbot",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "baoyu-comic",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "anthropics-skills-pptx",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "tencent-cos-skill",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "bytesagain-ai-skills-meme-generator",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaoyi-health",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "skill-finder",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "discord",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "skill-install-manager-1-0-0",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "brainstorming",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "douyin-shop-operation",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "multi-search-engine",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "alphaear-predictor",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "brainhole-factory",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiaoyi-report",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "command-hook",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "xiao-gui-agent",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "openclaw-skills-soulcraft",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "minimax-music-gen",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "video-subtitles",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "cron",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "guide",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "wecom-bot-setup",
+      "status": "success",
+      "before": 4,
+      "after": 4,
+      "actions": [
+        "创建 output/"
+      ]
+    },
+    {
+      "skill": "copywriter",
+      "status": "skipped",
+      "before": 5,
+      "after": 5,
+      "reason": "已达到最高实用性"
+    }
+  ]
+}

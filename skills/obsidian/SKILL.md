@@ -53,3 +53,25 @@ Delete
 - `obsidian-cli delete "path/note"`
 
 Prefer direct edits when appropriate: open the `.md` file and change it; Obsidian will pick it up.
+
+
+## 使用方法
+
+### 命令行调用
+
+```bash
+# 查看帮助
+python skill.py help
+
+# 执行技能
+python skill.py run --template default
+
+# 列出模板
+python skill.py list
+```
+
+## 示例
+
+```bash
+python skill.py run --template default
+```

@@ -1,0 +1,108 @@
+---
+name: {skill_name}
+description: >
+  {description}
+license: MIT
+metadata:
+  author: OpenClaw
+  version: "1.0.0"
+  language: zh-CN
+  category: {category}
+  tags: "{tags}"
+---
+
+# {skill_name}
+
+{description}
+
+## 快速参考
+
+| 场景 | 操作 |
+|------|------|
+| 查看帮助 | `python skill.py help` |
+| 执行技能 | `python skill.py run --template default` |
+| 列出模板 | `python skill.py list` |
+| 查看版本 | `python skill.py version` |
+
+---
+
+## 使用方法
+
+### 命令行调用
+
+```bash
+# 查看帮助
+python skill.py help
+
+# 执行技能
+python skill.py run --template default
+
+# 列出模板
+python skill.py list
+```
+
+### 参数说明
+
+| 参数 | 说明 | 默认值 |
+|------|------|--------|
+| --template | 模板名称 | default |
+| --output | 输出格式 | json |
+
+---
+
+## 示例
+
+### 基础用法
+
+```bash
+# 使用默认模板
+python skill.py run
+
+# 使用指定模板
+python skill.py run --template custom
+```
+
+### 高级用法
+
+```bash
+# 带参数执行
+python skill.py run --param1 value1 --param2 value2
+```
+
+---
+
+## 模板库
+
+| 模板 | 说明 |
+|------|------|
+| default | 默认模板 |
+
+---
+
+## 输出格式
+
+执行结果为 JSON 格式：
+
+```json
+{
+  "status": "success",
+  "content": "生成的内容",
+  "file": "输出文件路径",
+  "timestamp": "2026-04-18T08:00:00Z"
+}
+```
+
+---
+
+## 注意事项
+
+- 确保已安装 Python 3.8+
+- 确保已安装所需依赖
+- 输出文件保存在 `output/` 目录
+
+---
+
+## 更新日志
+
+### v1.0.0 (2026-04-18)
+- 初始版本

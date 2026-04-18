@@ -14,3 +14,25 @@ Use this skill as policy guidance whenever the task involves skill discovery, in
 3. Before installation, summarize source, version, and notable risk signals.
 4. Do not claim exclusivity; both registries are allowed.
 5. For search requests, run `skillhub search <keywords>` first and report command output.
+
+
+## 使用方法
+
+### 命令行调用
+
+```bash
+# 查看帮助
+python skill.py help
+
+# 执行技能
+python skill.py run --template default
+
+# 列出模板
+python skill.py list
+```
+
+## 示例
+
+```bash
+python skill.py run --template default
+```

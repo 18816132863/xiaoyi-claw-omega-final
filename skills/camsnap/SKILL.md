@@ -23,3 +23,25 @@ Common commands
 Notes
 - Requires `ffmpeg` on PATH.
 - Prefer a short test capture before longer clips.
+
+
+## 使用方法
+
+### 命令行调用
+
+```bash
+# 查看帮助
+python skill.py help
+
+# 执行技能
+python skill.py run --template default
+
+# 列出模板
+python skill.py list
+```
+
+## 示例
+
+```bash
+python skill.py run --template default
+```

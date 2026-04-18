@@ -51,3 +51,25 @@ Notes
 - Default registry: https://clawdhub.com (override with CLAWDHUB_REGISTRY or --registry)
 - Default workdir: cwd; install dir: ./skills (override with --workdir / --dir)
 - Update command hashes local files, resolves matching version, and upgrades to latest unless --version is set
+
+
+## 使用方法
+
+### 命令行调用
+
+```bash
+# 查看帮助
+python skill.py help
+
+# 执行技能
+python skill.py run --template default
+
+# 列出模板
+python skill.py list
+```
+
+## 示例
+
+```bash
+python skill.py run --template default
+```

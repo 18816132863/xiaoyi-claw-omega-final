@@ -142,3 +142,7 @@ MIT License
 ---
 
 *小艺 Claw - OMEGA_FINAL 永久终极模式*
+
+## Download History
+
+[![Download History](https://skill-history.com/chart/18816132863/xiaoyi-claw-omega-final.svg)](https://skill-history.com/18816132863/xiaoyi-claw-omega-final)

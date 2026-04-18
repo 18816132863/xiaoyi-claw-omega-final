@@ -1,0 +1,36 @@
+{
+  "skill": "claw-art",
+  "level": "pre_commit",
+  "timestamp": "2026-04-18T09:18:33.361992",
+  "checks": [
+    {
+      "name": "skill_py_exists",
+      "result": "pass",
+      "message": ""
+    },
+    {
+      "name": "skill_md_exists",
+      "result": "pass",
+      "message": ""
+    },
+    {
+      "name": "templates_dir_exists",
+      "result": "pass",
+      "message": ""
+    },
+    {
+      "name": "output_dir_exists",
+      "result": "pass",
+      "message": ""
+    },
+    {
+      "name": "skill_md_quality",
+      "result": "pass",
+      "message": "文档质量: 20/20分"
+    }
+  ],
+  "passed": 5,
+  "failed": 0,
+  "warnings": 0,
+  "result": "pass"
+}

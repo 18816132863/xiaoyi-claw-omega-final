@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-04-18T10:51:11.654345",
+  "total": 13,
+  "tested": 11,
+  "passed": 11,
+  "failed": 0,
+  "details": [
+    {
+      "skill": "copywriter",
+      "status": "pass",
+      "output_quality": "⭐⭐⭐⭐⭐",
+      "commercial_value": "电商营销、内容创作",
+      "details": "生成完整短视频脚本，包含分镜头、拍摄建议、商业价值评估"
+    },
+    {
+      "skill": "novel-generator",
+      "status": "pass",
+      "output_quality": "⭐⭐⭐⭐⭐",
+      "commercial_value": "网文创作、IP孵化",
+      "details": "生成完整创作提示词，包含爽点设计、节奏规划"
+    },
+    {
+      "skill": "claw-art",
+      "status": "pass",
+      "output_quality": "⭐⭐⭐⭐⭐",
+      "commercial_value": "商业插画、设计素材",
+      "details": "生成中英文绘画提示词，风格明确"
+    },
+    {
+      "skill": "minimax-music-gen",
+      "status": "pass",
+      "note": "基础功能正常，需增强商业逻辑"
+    },
+    {
+      "skill": "educational-video-creator",
+      "status": "pass",
+      "note": "基础功能正常，需增强商业逻辑"
+    },
+    {
+      "skill": "markitdown",
+      "status": "pass",
+      "note": "基础功能正常，需增强商业逻辑"
+    },
+    {
+      "skill": "doc-autofill",
+      "status": "pass",
+      "note": "基础功能正常，需增强商业逻辑"
+    },
+    {
+      "skill": "data-tracker",
+      "status": "pass",
+      "note": "基础功能正常，需增强商业逻辑"
+    },
+    {
+      "skill": "xiaoyi-health",
+      "status": "pass",
+      "note": "基础功能正常，需增强商业逻辑"
+    },
+    {
+      "skill": "fitness-coach",
+      "status": "pass",
+      "note": "基础功能正常，需增强商业逻辑"
+    },
+    {
+      "skill": "xiaoyi-HarmonyOSSmartHome-skill",
+      "status": "pass",
+      "note": "基础功能正常，需增强商业逻辑"
+    }
+  ]
+}

@@ -1086,3 +1086,47 @@
 {"timestamp": "2026-04-18T08:09:07.708608", "event_type": "upgrade_success", "skill_name": "wecom-bot-setup", "before_score": 4, "after_score": 4, "actions": ["创建 output/"]}
 {"timestamp": "2026-04-18T08:09:07.708833", "event_type": "upgrade_start", "skill_name": "copywriter"}
 {"timestamp": "2026-04-18T08:09:07.709654", "event_type": "upgrade_skipped", "skill_name": "copywriter", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:22:46.567143", "event_type": "upgrade_start", "skill_name": "copywriter"}
+{"timestamp": "2026-04-18T09:22:46.568085", "event_type": "upgrade_skipped", "skill_name": "copywriter", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:22:46.568356", "event_type": "upgrade_start", "skill_name": "novel-generator"}
+{"timestamp": "2026-04-18T09:22:46.569085", "event_type": "upgrade_skipped", "skill_name": "novel-generator", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:22:46.569294", "event_type": "upgrade_start", "skill_name": "claw-art"}
+{"timestamp": "2026-04-18T09:22:46.569992", "event_type": "upgrade_skipped", "skill_name": "claw-art", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:22:46.570204", "event_type": "upgrade_start", "skill_name": "minimax-music-gen"}
+{"timestamp": "2026-04-18T09:22:46.571463", "event_type": "upgrade_success", "skill_name": "minimax-music-gen", "before_score": 4, "after_score": 4, "actions": ["创建 output/"]}
+{"timestamp": "2026-04-18T09:22:46.571677", "event_type": "upgrade_start", "skill_name": "educational-video-creator"}
+{"timestamp": "2026-04-18T09:22:46.573260", "event_type": "upgrade_success", "skill_name": "educational-video-creator", "before_score": 4, "after_score": 4, "actions": ["创建 output/"]}
+{"timestamp": "2026-04-18T09:22:46.573471", "event_type": "upgrade_start", "skill_name": "markitdown"}
+{"timestamp": "2026-04-18T09:22:46.574829", "event_type": "upgrade_success", "skill_name": "markitdown", "before_score": 4, "after_score": 4, "actions": ["创建 output/"]}
+{"timestamp": "2026-04-18T09:22:46.575043", "event_type": "upgrade_start", "skill_name": "doc-autofill"}
+{"timestamp": "2026-04-18T09:22:46.576249", "event_type": "upgrade_success", "skill_name": "doc-autofill", "before_score": 4, "after_score": 4, "actions": ["创建 output/"]}
+{"timestamp": "2026-04-18T09:22:46.576451", "event_type": "upgrade_start", "skill_name": "data-tracker"}
+{"timestamp": "2026-04-18T09:22:46.577675", "event_type": "upgrade_success", "skill_name": "data-tracker", "before_score": 4, "after_score": 4, "actions": ["创建 output/"]}
+{"timestamp": "2026-04-18T09:22:46.577888", "event_type": "upgrade_start", "skill_name": "xiaoyi-health"}
+{"timestamp": "2026-04-18T09:22:46.579037", "event_type": "upgrade_success", "skill_name": "xiaoyi-health", "before_score": 4, "after_score": 4, "actions": ["创建 output/"]}
+{"timestamp": "2026-04-18T09:22:46.579256", "event_type": "upgrade_start", "skill_name": "fitness-coach"}
+{"timestamp": "2026-04-18T09:22:46.580457", "event_type": "upgrade_success", "skill_name": "fitness-coach", "before_score": 4, "after_score": 4, "actions": ["创建 output/"]}
+{"timestamp": "2026-04-18T09:22:46.580661", "event_type": "upgrade_start", "skill_name": "xiaoyi-HarmonyOSSmartHome-skill"}
+{"timestamp": "2026-04-18T09:22:46.581993", "event_type": "upgrade_success", "skill_name": "xiaoyi-HarmonyOSSmartHome-skill", "before_score": 4, "after_score": 4, "actions": ["创建 output/"]}
+{"timestamp": "2026-04-18T09:23:16.698845", "event_type": "upgrade_start", "skill_name": "copywriter"}
+{"timestamp": "2026-04-18T09:23:16.699769", "event_type": "upgrade_skipped", "skill_name": "copywriter", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.700000", "event_type": "upgrade_start", "skill_name": "novel-generator"}
+{"timestamp": "2026-04-18T09:23:16.700727", "event_type": "upgrade_skipped", "skill_name": "novel-generator", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.700940", "event_type": "upgrade_start", "skill_name": "claw-art"}
+{"timestamp": "2026-04-18T09:23:16.701636", "event_type": "upgrade_skipped", "skill_name": "claw-art", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.701847", "event_type": "upgrade_start", "skill_name": "minimax-music-gen"}
+{"timestamp": "2026-04-18T09:23:16.702612", "event_type": "upgrade_skipped", "skill_name": "minimax-music-gen", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.702836", "event_type": "upgrade_start", "skill_name": "educational-video-creator"}
+{"timestamp": "2026-04-18T09:23:16.703738", "event_type": "upgrade_skipped", "skill_name": "educational-video-creator", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.703998", "event_type": "upgrade_start", "skill_name": "markitdown"}
+{"timestamp": "2026-04-18T09:23:16.705008", "event_type": "upgrade_skipped", "skill_name": "markitdown", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.705263", "event_type": "upgrade_start", "skill_name": "doc-autofill"}
+{"timestamp": "2026-04-18T09:23:16.705979", "event_type": "upgrade_skipped", "skill_name": "doc-autofill", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.706184", "event_type": "upgrade_start", "skill_name": "data-tracker"}
+{"timestamp": "2026-04-18T09:23:16.706906", "event_type": "upgrade_skipped", "skill_name": "data-tracker", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.707118", "event_type": "upgrade_start", "skill_name": "xiaoyi-health"}
+{"timestamp": "2026-04-18T09:23:16.707803", "event_type": "upgrade_skipped", "skill_name": "xiaoyi-health", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.708002", "event_type": "upgrade_start", "skill_name": "fitness-coach"}
+{"timestamp": "2026-04-18T09:23:16.708702", "event_type": "upgrade_skipped", "skill_name": "fitness-coach", "reason": "已达到最高评分", "score": 5}
+{"timestamp": "2026-04-18T09:23:16.708900", "event_type": "upgrade_start", "skill_name": "xiaoyi-HarmonyOSSmartHome-skill"}
+{"timestamp": "2026-04-18T09:23:16.709636", "event_type": "upgrade_skipped", "skill_name": "xiaoyi-HarmonyOSSmartHome-skill", "reason": "已达到最高评分", "score": 5}

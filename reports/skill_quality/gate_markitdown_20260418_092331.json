@@ -1,0 +1,26 @@
+{
+  "skill": "markitdown",
+  "level": "pre_merge",
+  "timestamp": "2026-04-18T09:23:31.057550",
+  "checks": [
+    {
+      "name": "skill_score",
+      "result": "pass",
+      "message": "技能评分: 5⭐"
+    },
+    {
+      "name": "test_passed",
+      "result": "pass",
+      "message": "检查未实现"
+    },
+    {
+      "name": "template_valid",
+      "result": "pass",
+      "message": "检查未实现"
+    }
+  ],
+  "passed": 3,
+  "failed": 0,
+  "warnings": 0,
+  "result": "pass"
+}

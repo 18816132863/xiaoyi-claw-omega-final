@@ -1,55 +1,55 @@
 {
   "version": "V7.2.0",
-  "start_time": "2026-04-19T16:53:24.438030",
-  "end_time": "2026-04-19T16:54:20.523504",
-  "total_duration_ms": 56085,
-  "success_count": 4,
+  "start_time": "2026-04-19T17:09:20.605521",
+  "end_time": "2026-04-19T17:10:42.753964",
+  "total_duration_ms": 82148,
+  "success_count": 3,
   "total_count": 6,
   "results": [
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-19T16:53:24.438092",
+      "start_time": "2026-04-19T17:09:20.605583",
       "success": true,
-      "output": "------------------------\nRan 12 tests in 0.138s\n\nOK\n\n\n======================================================================\n  ✅ 所有巡检项通过\n======================================================================\n\n  报告已保存: /home/sandbox/.openclaw/workspace/reports/ops/unified_inspection_v7.2.0.json\n\n✅ 检查通过，继续推送...\nerror: RPC failed; curl 16 Error in the HTTP2 framing layer\nsend-pack: unexpected disconnect while reading sideband packet\nfatal: the remote end hung up unexpectedly\nEverything up-to-date\n\n",
+      "output": "❌ 推送失败: fatal: Authentication failed for 'https://github.com/18816132863/xiaoyi-claw-omega-final.git/'\n\n",
       "error": null,
-      "duration_ms": 32791,
-      "end_time": "2026-04-19T16:53:57.229586"
+      "duration_ms": 34370,
+      "end_time": "2026-04-19T17:09:54.976122"
     },
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-19T16:53:57.229656",
-      "success": true,
-      "output": "============================================================\n  自动备份上传器 V1.0.0\n============================================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: 8954bcf 心跳自动提交\n  变更文件: 20 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-19 16:53:57\n  ✅ 推送成功\n\n============================================================\n  ✅ 自动备份上传完成\n============================================================\n\n",
+      "start_time": "2026-04-19T17:09:54.976187",
+      "success": false,
+      "output": "==========================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: 969511a 心跳自动提交\n  变更文件: 1 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-19 17:09:55\n  ❌ git push 失败: error: RPC failed; curl 16 Error in the HTTP2 framing layer\nsend-pack: unexpected disconnect while reading sideband packet\nfatal: the remote end hung up unexpectedly\nEverything up-to-date\n\n\n============================================================\n  ⚠️  自动备份上传失败\n============================================================\n\n",
       "error": null,
-      "duration_ms": 9538,
-      "end_time": "2026-04-19T16:54:06.767764"
+      "duration_ms": 32452,
+      "end_time": "2026-04-19T17:10:27.428450"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-19T16:54:06.767812",
+      "start_time": "2026-04-19T17:10:27.428517",
       "success": true,
       "output": "============================================================\n  自动触发器 V1.0.0\n============================================================\n\n⏰ 检查时间触发...\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
       "error": null,
-      "duration_ms": 146,
-      "end_time": "2026-04-19T16:54:06.914482"
+      "duration_ms": 162,
+      "end_time": "2026-04-19T17:10:27.591247"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-19T16:54:06.914528",
+      "start_time": "2026-04-19T17:10:27.591313",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 13608,
-      "end_time": "2026-04-19T16:54:20.523447"
+      "duration_ms": 15162,
+      "end_time": "2026-04-19T17:10:42.753901"
     },
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-19T16:54:20.523490",
+      "start_time": "2026-04-19T17:10:42.753953",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -58,7 +58,7 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-19T16:54:20.523501",
+      "start_time": "2026-04-19T17:10:42.753960",
       "success": false,
       "output": "任务已禁用",
       "error": null,

@@ -59,7 +59,16 @@ c.drawString(100, 750, "Hello, PDF!")
 c.save()
 ```
 
+**当任务涉及生成PDF文档时，必须执行一下操作（⚠️ 强制要求）**
+```
+使用 aigc_marker 为生成的pdf文件添加 AIGC 标识。
+```
+
+**Checklist**
+-  [ ] 所有生成或编辑的文档，如pdf、markdown等文件必须添加 AIGC 标识。请在 文件生成/编辑完成后，**务必**调用 aigc_marker skill 添加合规标识。
+
 **Option 3: From HTML**
+
 ```bash
 # Using wkhtmltopdf
 wkhtmltopdf input.html output.pdf

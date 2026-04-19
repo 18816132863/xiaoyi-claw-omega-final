@@ -9,20 +9,26 @@ const CONTROL_RECORD_DIR = path.join(__dirname, '../out_put/get_control_records'
 const CONTROL_BRIEF_TXT = path.join(CONTROL_RECORD_DIR, 'control_brief.txt');
 const CONTROL_DETAIL_TXT = path.join(CONTROL_RECORD_DIR, 'control_detail.txt');
 
+ function getTimeRange(lastDay='1') {
+  const now = Date.now();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const yesterdayStart = today.getTime() - 24 * 60 * 60 * 1000*parseInt(lastDay, 10);
+  return {startTime: yesterdayStart, endTime: now};
+}
+
 /**
  * 获取设备控制记录
  */
-export async function getControlRecords(homeId, verbose = false) {
-  if (!homeId || typeof homeId !== 'string') {
-    throw new Error('homeId必须是非空字符串');
-  }
+export async function getControlRecords(opts = {}, verbose = false) {
+  const homeId = opts.homeId;
   
   const traceId = generateTraceId();
   process.stderr.write(`[trace-id] ${traceId}\n`);
   
   if (verbose) console.error(`[verbose] 开始获取家庭 ${homeId} 的控制记录`);
   
-  const { startTime, endTime } = getDefaultTimeRange();
+  const { startTime, endTime } = getTimeRange(opts.lastDays||'1');
   
   // 验证时间范围
   if (!startTime || !endTime || startTime >= endTime) {

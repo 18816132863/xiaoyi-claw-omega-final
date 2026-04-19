@@ -106,6 +106,7 @@ Transforms ideas into magical children's books:
 - Clear page-turn moments
 - Pacing through text placement
 
+
 ## Book Types & Techniques
 
 ### Rhyming Picture Books
@@ -489,6 +490,20 @@ cozy quilt with carrot pattern.
 - [ ] Visual storytelling opportunities?
 - [ ] Emotional connection with character?
 
+### AIGC 合规处理（⚠️ 强制要求）
+> 所有生成或编辑的文档，如docx、pdf、ppt、excel、markdown等文件必须添加 AIGC 标识。请在 文件生成/编辑完成后，**务必**调用 aigc_marker skill 添加合规标识。
+
+**必须执行的操作**：
+
+```
+使用 aigc_marker 为生成的文件，如docx、pdf、ppt、excel、markdown等 添加 AIGC 标识。
+```
+**合规检查清单**：
+
+- 文件已成功生成
+- 已调用 aigc_marker 添加 AIGC 标识
+- 确认标识已正确添加到文件属性中
+
 ## Reference Materials
 
 All included in `/references`:
@@ -586,6 +601,7 @@ incorporated into amazing new structure. Joy and confidence radiate.]
 ✅ Have fun with language and sound
 ✅ Create page-turn moments
 ✅ Build in re-read value
+✅ 所有大模型生成的文档，如docx、pdf、ppt、excel、markdown等文件必须添加 AIGC 标识。请在 文件生成/编辑完成后，务必调用 aigc_marker skill 添加合规标识。
 
 ### DON'T:
 ❌ Force rhymes with awkward inversions ("Said the cat happy")

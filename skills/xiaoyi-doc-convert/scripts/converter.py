@@ -3,6 +3,7 @@ Document converter - main conversion dispatcher.
 """
 
 import os
+import shutil
 import tempfile
 from pathlib import Path
 from typing import Optional, List, Dict
@@ -77,6 +78,7 @@ class DocumentConverter:
         # Execute conversion(s)
         current_file = str(input_path)
         intermediate_files = []
+        temp_dirs = []
 
         try:
             for step in path:
@@ -95,6 +97,7 @@ class DocumentConverter:
                     temp_dir = Path(tempfile.mkdtemp(prefix="docconv_"))
                     step_output = str(temp_dir / f"intermediate.{to_fmt}")
                     intermediate_files.append(step_output)
+                    temp_dirs.append(temp_dir)
 
                 if adapter_name == 'html2pdf':
                     import html2pdf.core as html2pdf_core
@@ -147,9 +150,14 @@ class DocumentConverter:
                     f_path = Path(f)
                     if f_path.exists():
                         f_path.unlink()
-                        # Try to remove parent directory if empty
-                        if f_path.parent.exists() and not any(f_path.parent.iterdir()):
-                            f_path.parent.rmdir()
+                except Exception:
+                    pass  # Ignore cleanup errors
+
+            # Cleanup temp directories
+            for d in temp_dirs:
+                try:
+                    if d.exists():
+                        shutil.rmtree(d, ignore_errors=True)
                 except Exception:
                     pass  # Ignore cleanup errors
 

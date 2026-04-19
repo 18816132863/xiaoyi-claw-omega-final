@@ -31,7 +31,7 @@ def get_chrome_executable_path() -> Optional[str]:
     Returns:
         Chrome 浏览器可执行文件路径，或 None
     """
-    CHROME_HOME = os.getenv("CHROME_HOME", "/home/sandbox/chrome-linux")
+    CHROME_HOME = os.getenv("CHROME_HOME", "/opt/chrome-linux")
     if not CHROME_HOME:
         return None
 

@@ -115,30 +115,57 @@ def main():
     all_issues: List[HealthIssue] = []
     
     # 检查每个技能
-    for skill_name, skill_info in registry.get('skills', {}).items():
-        if not isinstance(skill_info, dict):
-            continue
-        
-        skill_path = skills_dir / skill_name
-        
-        # 检查目录存在
-        if not skill_path.exists():
-            all_issues.append(HealthIssue(skill_name, "critical", "missing_dir", "技能目录不存在"))
-            continue
-        
-        # 运行各项检查
-        all_issues.extend(check_skill_md(skill_name, skill_path))
-        all_issues.extend(check_skill_py(skill_name, skill_path, skill_info))
-        all_issues.extend(check_registry_config(skill_name, skill_info))
-        all_issues.extend(check_requirements(skill_name, skill_path, skill_info))
+    skills_data = registry.get('skills', {})
+    
+    # 兼容两种格式：数组格式和对象格式
+    if isinstance(skills_data, list):
+        # 数组格式
+        for skill_info in skills_data:
+            skill_name = skill_info.get('skill_id', 'unknown')
+            if not isinstance(skill_info, dict):
+                continue
+            
+            skill_path = skills_dir / skill_name
+            
+            # 检查目录存在
+            if not skill_path.exists():
+                all_issues.append(HealthIssue(skill_name, "critical", "missing_dir", "技能目录不存在"))
+                continue
+            
+            # 运行各项检查
+            all_issues.extend(check_skill_md(skill_name, skill_path))
+            all_issues.extend(check_skill_py(skill_name, skill_path, skill_info))
+            all_issues.extend(check_registry_config(skill_name, skill_info))
+            all_issues.extend(check_requirements(skill_name, skill_path, skill_info))
+    else:
+        # 对象格式
+        for skill_name, skill_info in skills_data.items():
+            if not isinstance(skill_info, dict):
+                continue
+            
+            skill_path = skills_dir / skill_name
+            
+            # 检查目录存在
+            if not skill_path.exists():
+                all_issues.append(HealthIssue(skill_name, "critical", "missing_dir", "技能目录不存在"))
+                continue
+            
+            # 运行各项检查
+            all_issues.extend(check_skill_md(skill_name, skill_path))
+            all_issues.extend(check_skill_py(skill_name, skill_path, skill_info))
+            all_issues.extend(check_registry_config(skill_name, skill_info))
+            all_issues.extend(check_requirements(skill_name, skill_path, skill_info))
     
     # 统计
     critical = [i for i in all_issues if i.severity == 'critical']
     warning = [i for i in all_issues if i.severity == 'warning']
     info = [i for i in all_issues if i.severity == 'info']
     
+    skills_data = registry.get('skills', {})
+    total_skills = len(skills_data) if isinstance(skills_data, list) else len(skills_data)
+    
     print(f"【检查结果】")
-    print(f"  总技能数: {len(registry.get('skills', {}))}")
+    print(f"  总技能数: {total_skills}")
     print(f"  总问题数: {len(all_issues)}")
     print()
     

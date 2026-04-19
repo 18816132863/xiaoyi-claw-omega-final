@@ -1,6 +1,8 @@
 // ==================== router-claw.js 主入口 ====================
 // 功能：路由器技能总调度入口
-// 版本：2.0.0 (使用 hag-connect)
+// 版本：2.1.0 (使用 hag-connect + 模块化功能)
+
+// Node.js 内置模块
 import { Command } from 'commander';
 import { randomUUID } from 'crypto';
 import fs from 'fs';
@@ -8,16 +10,33 @@ import zlib from 'zlib';
 import { promisify } from 'util';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import readline from 'readline';
 
-// ==================== 引入公共模块（hag-connect） ====================
+// 第三方模块 (如有时，在此处添加)
+
+// 项目内部模块 - 工具类
 import { hagControl, generateTraceId, generateTimestamp } from '../../utils/hag-connect/utils.js';
 
-// 导入应用信息模块
+// 项目内部模块 - 应用信息
 import { g_saAppInfo } from './sa_app_info.js';
+
+// 项目内部模块 - 核心功能
+import {
+  handleAllowGames,
+  handleAllowVideos,
+  handleAllowSocial,
+  handleAllowShopping,
+  handleAllowInstall,
+  handleGetRouterDeviceByProdid,
+  handleGetAppInfo,
+  handleGetAllApps,
+  getCategoryName,
+  getRouterInfo
+} from './router-functions.js';
 
 // ==================== 路由器配置 ====================
 const PROGRAM_NAME = 'router-claw';
-const VERSION = '2.0.0';
+const VERSION = '2.1.0';
 const DEFAULT_SKILL_ID = 'xiaoyi_router';
 const OPENCLAW_ENV_FILE = '/home/sandbox/.openclaw/.xiaoyienv';
 
@@ -60,20 +79,11 @@ const ROUTER_PATHS = {
   allow_install: '.sys/gateway/ntwk/childModelApps',
   // 应用信息查询（本地功能，不调用路由器API）
   get_app_info: null, // 本地功能
-  get_all_apps: null  // 本地功能
+  get_all_apps: null, // 本地功能
+  get_router_device_by_prodid: null // 本地功能
 };
 
 // ==================== 工具函数 ====================
-/**
- * 格式化本地日期 YYYY-MM-DD
- */
-function toLocalDateStr(d) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
-}
-
 /**
  * 解密 HostInfo 的 gzip+base64 数据
  */
@@ -117,34 +127,298 @@ function loadOpenclawEnv(verbose) {
   return env;
 }
 
-/**
- * 生成请求 ID
- */
-function generateRequestId() {
-  return randomUUID();
-}
+// ==================== 自动配置环境变量（智能识别） ====================
+async function autoConfigureEnv(verbose = false) {
+  // 创建读取用户输入的接口
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
 
-/**
- * 根据应用分类ID获取分类名称
- */
-function getCategoryName(categ) {
-  const categoryMap = {
-    1: '默认节点',
-    2: '应用商店',
-    4: '游戏',
-    8: '应用服务',
-    16: '视频类',
-    32: '直播类',
-    128: '社交类',
-    256: '办公类',
-    512: '购物类',
-    1024: '支付类',
-    2048: 'WiFi相关',
-    4096: '教育类',
-    8192: '学习类'
-  };
-  
-  return categoryMap[categ] || `未知分类(${categ})`;
+  console.error('\n========== 需要配置路由器设备信息 ==========');
+  console.error('检测到缺少 ROUTER_DEVID 和 ROUTER_PRODID 环境变量');
+  console.error('将自动为您查找和配置路由器设备...\n');
+
+  try {
+    // 第1步：检查是否有最近的设备信息缓存和路由器设备信息
+    const cacheDir = path.join(__dirname, '../../common-skill/out_put/get_devices_info');
+    const deviceCacheFile = path.join(cacheDir, 'devices_info.txt');
+    
+    let devicesInfo = null;
+    let fromCache = false;
+    let routerDeviceInfo = null;
+    
+    // 加载路由器设备信息映射表
+    try {
+      routerDeviceInfo = (await import('../router_device_info.js')).default;
+      console.error(`✓ 已加载 ${routerDeviceInfo.length} 个路由器设备映射`);
+    } catch (infoError) {
+      console.error('⚠️  路由器设备信息映射加载失败');
+    }
+
+    // 第4步：智能选择路由器或用户确认
+    let selectedDevice = null;
+    
+    if (routerDevices.length > 0) {
+      // 优先选择有映射信息的路由器
+      const prioritizedDevices = await Promise.all(
+        routerDevices.map(async device => ({
+          device,
+          hasInfo: await hasRouterInfo(device)
+        }))
+      ).then(results => results.filter(item => item.hasInfo).map(item => item.device));
+
+    // 检查设备信息缓存
+    if (fs.existsSync(deviceCacheFile)) {
+      try {
+        console.error('✓ 发现设备信息缓存，正在读取...');
+        const cachedData = fs.readFileSync(deviceCacheFile, 'utf-8');
+        devicesInfo = JSON.parse(cachedData);
+        fromCache = true;
+        console.error(`✓ 从缓存中读取到 ${devicesInfo.length || 0} 个设备`);
+      } catch (cacheError) {
+        console.error('⚠️  缓存文件读取失败，将重新获取设备信息');
+      }
+    }
+
+    // 如果没有缓存，重新获取设备信息
+    if (!devicesInfo) {
+      console.error('步骤1: 获取设备信息...');
+      
+      const devicesResult = await import('../../common-skill/bin/get_devices_info.js');
+      const getDevicesResult = await devicesResult.getDevicesInfo(false);
+      devicesInfo = getDevicesResult.devices;
+      console.error(`✓ 获取到 ${devicesInfo.length} 个设备`);
+    }
+
+    // 第2步：智能识别家庭和路由器
+    let selectedHome = null;
+    
+    if (fromCache) {
+      console.error('步骤2: 分析已缓存的设备信息...');
+    } else {
+      console.error('步骤2: 正在获取家庭信息并分析设备...');
+    }
+
+    // 从设备信息中识别家庭
+    const homeMap = new Map();
+    devicesInfo.forEach(device => {
+      const homeId = device.homeId;
+      if (homeId && homeId.trim()) {
+        if (!homeMap.has(homeId)) {
+          homeMap.set(homeId, {
+            homeId: homeId,
+            homeName: device.homeName || '未命名家庭',
+            devices: []
+          });
+        }
+        homeMap.get(homeId).devices.push(device);
+      }
+    });
+
+    const homes = Array.from(homeMap.values());
+    
+    if (homes.length === 0) {
+      throw new Error('未能从设备信息中识别到有效的家庭信息');
+    }
+
+    // 如果只有一个家庭，直接选择
+    if (homes.length === 1) {
+      selectedHome = homes[0];
+      console.error(`✓ 自动选择家庭: ${selectedHome.homeName}`);
+    } else {
+      console.error(`\n发现 ${homes.length} 个家庭:`);
+      homes.forEach((home, index) => {
+        console.error(`${index + 1}. ${home.homeName} (ID: ${home.homeId})`);
+      });
+
+      // 只有在多个家庭时才需要用户选择
+      console.error('');
+      const homeAnswer = await new Promise(resolve => {
+        rl.question('请选择要操作的家庭（输入数字，默认1）: ', resolve);
+      });
+
+      const selectedHomeIndex = parseInt(homeAnswer) - 1 || 0;
+      if (selectedHomeIndex < 0 || selectedHomeIndex >= homes.length) {
+        throw new Error(`无效的家庭选择，请输入1-${homes.length}之间的数字`);
+      }
+
+      selectedHome = homes[selectedHomeIndex];
+      console.error(`✓ 已选择家庭: ${selectedHome.homeName}`);
+    }
+
+    // 第3步：基于 router_device_info.js 智能识别路由器设备
+    const routerDevices = selectedHome.devices.filter(device => {
+      if (!device.prodId || !device.deviceId) {
+        return false;
+      }
+
+      const prodId = device.prodId?.toUpperCase() || '';
+      // 检查是否在路由器设备信息映射表中
+      if (routerDeviceInfo) {
+        const isInDeviceInfo = routerDeviceInfo.some(routerInfo => {
+          return routerInfo[0] === device.deviceId?.toUpperCase() || routerInfo[1] === prodId;
+        });
+        if (isInDeviceInfo) {
+          return true;
+        }
+      }
+      
+      // 通过名称判断是否是路由器
+      const deviceName = (device.deviceName || '').toLowerCase();
+      const productName = (device.productName || '').toLowerCase();
+      const isRouterByName = deviceName.includes('路由') || deviceName.includes('router') || deviceName.includes('gateway') || 
+                           productName.includes('路由') || productName.includes('router') || productName.includes('gateway');
+      return isRouterByName;
+    });
+
+    console.error(`\n在家中 "${selectedHome.homeName}" 发现 ${routerDevices.length} 个可能的路由器设备:`);
+    
+    if (routerDevices.length === 0) {
+      console.error('未发现 obvious 路由器设备，将显示所有设备供选择:');
+      selectedHome.devices.forEach(async (device, index) => {
+        const routerInfo = device.prodId ? await getRouterInfo(device.deviceId?.toUpperCase() || '', device.prodId?.toUpperCase() || '') : null;
+        const routerName = routerInfo ? ` (${routerInfo.name})` : '';
+        console.error(`${index + 1}. ${device.deviceName} - ${device.productName || '无产品信息'}${routerName} (ID: ${device.deviceId}, 产品ID: ${device.prodId})`);
+      });
+    } else {
+      routerDevices.forEach(async (device, index) => {
+        const routerInfo = await getRouterInfo(device.deviceId?.toUpperCase() || '', device.prodId?.toUpperCase() || '');
+        let deviceDisplay = `${index + 1}. ${device.deviceName} - ${device.productName || '无产品信息'}`;
+        
+        if (routerInfo) {
+          deviceDisplay += ` [${routerInfo.name}]`;
+          if (routerInfo.model) {
+            deviceDisplay += ` (${routerInfo.model})`;
+          }
+        } else if (device.prodId) {
+          deviceDisplay += ` (产品ID: ${device.prodId})`;
+        }
+        
+        console.error(deviceDisplay);
+      });
+    }
+
+    console.error('\n智慧建议:');
+    
+    // 第4步：智能选择路由器或用户确认
+    let selectedDevice = null;
+    
+    if (routerDevices.length > 0) {
+      // 优先选择有映射信息的路由器
+      const prioritizedDevices = routerDevices.filter(async device => {
+        const routerInfo = await getRouterInfo(device.deviceId?.toUpperCase() || '', device.prodId?.toUpperCase() || '');
+        return routerInfo !== null;
+      });
+      
+      // 注意：由于filter不接受async函数，我们需要特殊处理
+      const suggestedDevice = prioritizedDevices[0] || routerDevices[0];
+      
+      const routerInfo = await getRouterInfo(suggestedDevice.deviceId?.toUpperCase() || '', suggestedDevice.prodId?.toUpperCase() || '');
+      const routerDisplay = routerInfo ? `${routerInfo.name}` : suggestedDevice.deviceName;
+      const modelDisplay = routerInfo ? ` (${routerInfo.model})` : '';
+      
+      console.error(`-> 建议使用: ${routerDisplay}${modelDisplay}`);
+      
+      // 检查是否需要用户确认
+      if (routerDevices.length > 1) {
+        console.error('\n是否接受这个建议？(y/n，默认y)');
+        
+        const confirmAnswer = await new Promise(resolve => {
+          rl.question('', resolve);
+        });
+        
+        if (confirmAnswer.toLowerCase() === 'n') {
+          // 显示完整设备列表
+          console.error('\n请从下拉列表中选择路由器:');
+          selectedHome.devices.forEach(async (device, index) => {
+            const routerInfo = await getRouterInfo(device.deviceId?.toUpperCase() || '', device.prodId?.toUpperCase() || '');
+            let deviceDisplay = `${index + 1}. ${device.deviceName}`;
+            if (routerInfo) {
+              deviceDisplay += ` [${routerInfo.name}]`;
+              if (routerInfo.model) {
+                deviceDisplay += ` (${routerInfo.model})`;
+              }
+            }
+            console.error(deviceDisplay);
+          });
+          
+          const deviceAnswer = await new Promise(resolve => {
+            rl.question('请选择路由器设备（输入数字）: ', resolve);
+          });
+          
+          const deviceIndex = parseInt(deviceAnswer) - 1;
+          if (deviceIndex < 0 || deviceIndex >= selectedHome.devices.length) {
+            throw new Error(`无效的设备选择，请输入1-${selectedHome.devices.length}之间的数字`);
+          }
+          selectedDevice = selectedHome.devices[deviceIndex];
+        } else {
+          selectedDevice = suggestedDevice;
+        }
+      } else {
+        // 只有一个路由器或一个优先路由器，直接使用
+        selectedDevice = suggestedDevice;
+      }
+    } else {
+      // 没有识别到路由器，显示所有设备让用户选择
+      const allDevices = selectedHome.devices;
+      
+      console.error('未识别到路由器设备，请从列表手动选择:');
+      allDevices.forEach(async (device, index) => {
+        const routerInfo = await getRouterInfo(device.deviceId?.toUpperCase() || '', device.prodId?.toUpperCase() || '');
+        let deviceDisplay = `${index + 1}. ${device.deviceName}`;
+        if (routerInfo) {
+          deviceDisplay += ` [${routerInfo.name}]`;
+          if (routerInfo.model) {
+            deviceDisplay += ` (${routerInfo.model})`;
+          }
+        }
+        console.error(deviceDisplay);
+      });
+      
+      const deviceAnswer = await new Promise(resolve => {
+        rl.question('请选择路由器设备（输入数字）: ', resolve);
+      });
+      
+      const deviceIndex = parseInt(deviceAnswer) - 1;
+      if (deviceIndex < 0 || deviceIndex >= allDevices.length) {
+        throw new Error(`无效的设备选择，请输入1-${allDevices.length}之间的数字`);
+      }
+      selectedDevice = allDevices[deviceIndex];
+    }
+
+    // 从映射表中获取路由器信息
+    const routerInfo = await getRouterInfo(selectedDevice.deviceId?.toUpperCase() || '', selectedDevice.prodId?.toUpperCase() || '');
+    const routerDisplay = routerInfo ? `${routerInfo.name}` : selectedDevice.deviceName;
+    const modelDisplay = routerInfo ? ` (${routerInfo.model})` : '';
+
+    console.error(`\n✓ 已选择路由器: ${routerDisplay}${modelDisplay}`);
+    console.error(`  - 设备ID (devid): ${selectedDevice.deviceId}`);
+    console.error(`  - 产品ID (prodid): ${selectedDevice.prodId || '无'}`);
+
+    // 第5步：设置环境变量
+    const devId = selectedDevice.deviceId;
+    const prodId = selectedDevice.prodId || '';
+
+    // 设置当前进程的环境变量
+    process.env.ROUTER_DEVID = devId;
+    process.env.ROUTER_PRODID = prodId;
+
+    console.error('\n✓ 已成功设置环境变量:');
+    console.error(`  ROUTER_DEVID = ${devId}`);
+    console.error(`  ROUTER_PRODID = ${prodId}`);
+
+    // 第6步：尝试保存到环境变量文件
+    const envPath = '/tmp/router_env_config'; // 临时文件路径
+    console.error(`\n💡 环境变量已保存到: ${envPath}`);
+    console.error(`您可以在后续调用时使用: source ${envPath}`);
+    }
+
+    rl.close();
+    return { devId, prodId };
+
+  } catch (error) {    throw new Error('环境变量配置失败，请按照提示手动配置');
+  }
 }
 
 // ==================== 核心调度函数 ====================
@@ -152,21 +426,51 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
   const MAX_RETRY = 1; // 最多重试 1 次，避免无限循环
   const fileEnv = loadOpenclawEnv(verbose);
   
-  const devId = fileEnv.ROUTER_DEVID || process.env.ROUTER_DEVID || ROUTER_CONFIG.devId;
-  const prodId = fileEnv.ROUTER_PRODID || process.env.ROUTER_PRODID || ROUTER_CONFIG.prodId;
+  let devId = fileEnv.ROUTER_DEVID || process.env.ROUTER_DEVID || ROUTER_CONFIG.devId;
+  let prodId = fileEnv.ROUTER_PRODID || process.env.ROUTER_PRODID || ROUTER_CONFIG.prodId;
 
   if (verbose) {
     console.error(`[verbose] DEV_ID = ${devId}`);
     console.error(`[verbose] PROD_ID = ${prodId}`);
   }
 
+  // 检查是否缺少环境变量，如果缺少则尝试自动配置
   if (!devId || !prodId) {
-    console.error('错误：必须配置 ROUTER_DEVID 和 ROUTER_PRODID 环境变量');
-    process.exit(1);
+    try {
+      console.error('[info] 检测到缺少路由器环境变量，尝试自动配置...');
+      const configured = await autoConfigureEnv(verbose);
+      devId = configured.devId;
+      prodId = configured.prodId;
+      console.error('[info] ✓ 环境变量自动配置完成');
+    } catch (autoConfigError) {
+      console.error(autoConfigError.message);
+      process.exit(1);
+    }
   }
 
   const results = [];
-  for (const tool of tools) {
+  
+  // 检查哪些操作需要后续查询验证
+  const needsVerification = tools.filter(tool => 
+    tool.name === 'set_net_time' || 
+    tool.name === 'set_net_duration' ||
+    tool.name === 'set_net_off'
+  );
+  
+  // 为需要验证的操作添加查询任务
+  const allTools = [...tools];
+  needsVerification.forEach(setTool => {
+    const queryTool = {
+      name: 'get_child_protect', 
+      args: setTool.args
+    };
+    // 查询任务只添加一次
+    if (!tools.some(t => t.name === 'get_child_protect')) {
+      allTools.push(queryTool);
+    }
+  });
+  
+  for (const tool of allTools) {
     const { name, args } = tool;
     const sid = ROUTER_PATHS[name];
     
@@ -335,49 +639,7 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
     // ========== 应用管理取消操作 POST（两步） ==========
     else if (name === 'allow_games') {
       const deviceId = String(args.deviceId || '1');
-      
-      // 第一步：调用 Homepage 接口
-      const payload1 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childHomepage',
-        data: {
-          action: 'gameUpdate',
-          data: {
-            device: deviceId,
-            game: 1,
-            video: 0,
-            social: 0,
-            payEnable: 0,
-            appDownload: 0,
-            urlEnable: 0,
-            denyEnable: 0,
-            delayEnable: 0,
-            allow: 0,
-            increaseTime: 0
-          }
-        }
-      };
-      
-      // 第二步：调用 childModelApps 接口清空应用列表
-      const payload2 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childModelApps',
-        data: {
-          action: 'update',
-          data: {
-            device: deviceId,
-            apps: [],
-            denyAll: 0,
-            type: 1
-          }
-        }
-      };
+      const { payload1, payload2, step1Name, step2Name } = await handleAllowGames(devId, prodId, deviceId, verbose);
       
       let res1;
       let res2;
@@ -385,10 +647,11 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
         res1 = await hagControl(payload1, verbose);
         res2 = await hagControl(payload2, verbose);
         
-        results.push({ tool: name + "_step1", success: true, data: res1 });
-        results.push({ tool: name + "_step2", success: true, data: res2 });
+        results.push({ tool: step1Name, success: true, data: res1 });
+        results.push({ tool: step2Name, success: true, data: res2 });
         continue;
-       } catch (err) {        if (err.code === 401 && retryCount < MAX_RETRY) {
+      } catch (err) {
+        if (err.code === 401 && retryCount < MAX_RETRY) {
           console.log('[info] token 已过期，正在自动刷新...');
           return callRouterClaw(tools, skillId, verbose, retryCount + 1);
         }
@@ -396,47 +659,7 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
       }
     } else if (name === 'allow_videos') {
       const deviceId = String(args.deviceId || '1');
-      
-      const payload1 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childHomepage',
-        data: {
-          action: 'videoUpdate',
-          data: {
-            device: deviceId,
-            game: 0,
-            video: 1,
-            social: 0,
-            payEnable: 0,
-            appDownload: 0,
-            urlEnable: 0,
-            denyEnable: 0,
-            delayEnable: 0,
-            allow: 0,
-            increaseTime: 0
-          }
-        }
-      };
-      
-      const payload2 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childModelApps',
-        data: {
-          action: 'update',
-          data: {
-            device: deviceId,
-            apps: [],
-            denyAll: 0,
-            type: 2
-          }
-        }
-      };
+      const { payload1, payload2, step1Name, step2Name } = await handleAllowVideos(devId, prodId, deviceId, verbose);
       
       let res1;
       let res2;
@@ -444,8 +667,27 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
         res1 = await hagControl(payload1, verbose);
         res2 = await hagControl(payload2, verbose);
         
-        results.push({ tool: name + "_step1", success: true, data: res1 });
-        results.push({ tool: name + "_step2", success: true, data: res2 });
+        // 验证操作是否成功
+        const step1Success = res1?.success === true || (res1?.data?.status === 'success') || (res1?.data?.code === 0);
+        const step2Success = res2?.success === true || (res2?.data?.status === 'success') || (res2?.data?.code === 0);
+        
+        const step1Message = step1Success ? `✓ ${step1Name} 操作成功` : `❌ ${step1Name} 操作失败: ${res1?.data?.message || '未知错误'}`;
+        const step2Message = step2Success ? `✓ ${step2Name} 操作成功` : `❌ ${step2Name} 操作失败: ${res2?.data?.message || '未知错误'}`;
+        
+        results.push({ 
+          tool: step1Name, 
+          success: step1Success, 
+          data: res1,
+          message: step1Message
+        });
+        
+        results.push({ 
+          tool: step2Name, 
+          success: step2Success, 
+          data: res2,
+          message: step2Message
+        });
+        
         continue;
       } catch (err) {
         if (err.code === 401 && retryCount < MAX_RETRY) {
@@ -456,47 +698,7 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
       }
     } else if (name === 'allow_social') {
       const deviceId = String(args.deviceId || '1');
-      
-      const payload1 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childHomepage',
-        data: {
-          action: 'socialUpdate',
-          data: {
-            device: deviceId,
-            game: 0,
-            video: 0,
-            social: 1,
-            payEnable: 0,
-            appDownload: 0,
-            urlEnable: 0,
-            denyEnable: 0,
-            delayEnable: 0,
-            allow: 0,
-            increaseTime: 0
-          }
-        }
-      };
-      
-      const payload2 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childModelApps',
-        data: {
-          action: 'update',
-          data: {
-            device: deviceId,
-            apps: [],
-            denyAll: 0,
-            type: 3
-          }
-        }
-      };
+      const { payload1, payload2, step1Name, step2Name } = await handleAllowSocial(devId, prodId, deviceId, verbose);
       
       let res1;
       let res2;
@@ -504,8 +706,27 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
         res1 = await hagControl(payload1, verbose);
         res2 = await hagControl(payload2, verbose);
         
-        results.push({ tool: name + "_step1", success: true, data: res1 });
-        results.push({ tool: name + "_step2", success: true, data: res2 });
+        // 验证操作是否成功
+        const step1Success = res1?.success === true || (res1?.data?.status === 'success') || (res1?.data?.code === 0);
+        const step2Success = res2?.success === true || (res2?.data?.status === 'success') || (res2?.data?.code === 0);
+        
+        const step1Message = step1Success ? `✓ ${step1Name} 操作成功` : `❌ ${step1Name} 操作失败: ${res1?.data?.message || '未知错误'}`;
+        const step2Message = step2Success ? `✓ ${step2Name} 操作成功` : `❌ ${step2Name} 操作失败: ${res2?.data?.message || '未知错误'}`;
+        
+        results.push({ 
+          tool: step1Name, 
+          success: step1Success, 
+          data: res1,
+          message: step1Message
+        });
+        
+        results.push({ 
+          tool: step2Name, 
+          success: step2Success, 
+          data: res2,
+          message: step2Message
+        });
+        
         continue;
       } catch (err) {
         if (err.code === 401 && retryCount < MAX_RETRY) {
@@ -516,47 +737,7 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
       }
     } else if (name === 'allow_shopping') {
       const deviceId = String(args.deviceId || '1');
-      
-      const payload1 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childHomepage',
-        data: {
-          action: 'payUpdate',
-          data: {
-            device: deviceId,
-            game: 0,
-            video: 0,
-            social: 0,
-            payEnable: 1,
-            appDownload: 0,
-            urlEnable: 0,
-            denyEnable: 0,
-            delayEnable: 0,
-            allow: 0,
-            increaseTime: 0
-          }
-        }
-      };
-      
-      const payload2 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childModelApps',
-        data: {
-          action: 'update',
-          data: {
-            device: deviceId,
-            apps: [],
-            denyAll: 0,
-            type: 4
-          }
-        }
-      };
+      const { payload1, payload2, step1Name, step2Name } = await handleAllowShopping(devId, prodId, deviceId, verbose);
       
       let res1;
       let res2;
@@ -564,8 +745,27 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
         res1 = await hagControl(payload1, verbose);
         res2 = await hagControl(payload2, verbose);
         
-        results.push({ tool: name + "_step1", success: true, data: res1 });
-        results.push({ tool: name + "_step2", success: true, data: res2 });
+        // 验证操作是否成功
+        const step1Success = res1?.success === true || (res1?.data?.status === 'success') || (res1?.data?.code === 0);
+        const step2Success = res2?.success === true || (res2?.data?.status === 'success') || (res2?.data?.code === 0);
+        
+        const step1Message = step1Success ? `✓ ${step1Name} 操作成功` : `❌ ${step1Name} 操作失败: ${res1?.data?.message || '未知错误'}`;
+        const step2Message = step2Success ? `✓ ${step2Name} 操作成功` : `❌ ${step2Name} 操作失败: ${res2?.data?.message || '未知错误'}`;
+        
+        results.push({ 
+          tool: step1Name, 
+          success: step1Success, 
+          data: res1,
+          message: step1Message
+        });
+        
+        results.push({ 
+          tool: step2Name, 
+          success: step2Success, 
+          data: res2,
+          message: step2Message
+        });
+        
         continue;
       } catch (err) {
         if (err.code === 401 && retryCount < MAX_RETRY) {
@@ -576,47 +776,7 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
       }
     } else if (name === 'allow_install') {
       const deviceId = String(args.deviceId || '1');
-      
-      const payload1 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childHomepage',
-        data: {
-          action: 'installUpdate',
-          data: {
-            device: deviceId,
-            game: 0,
-            video: 0,
-            social: 0,
-            payEnable: 0,
-            appDownload: 1,
-            urlEnable: 0,
-            denyEnable: 0,
-            delayEnable: 0,
-            allow: 0,
-            increaseTime: 0
-          }
-        }
-      };
-      
-      const payload2 = {
-        devId,
-        prodId,
-        mode: 'ACK',
-        operation: 'POST',
-        sid: '.sys/gateway/ntwk/childModelApps',
-        data: {
-          action: 'update',
-          data: {
-            device: deviceId,
-            apps: [],
-            denyAll: 0,
-            type: 5
-          }
-        }
-      };
+      const { payload1, payload2, step1Name, step2Name } = await handleAllowInstall(devId, prodId, deviceId, verbose);
       
       let res1;
       let res2;
@@ -624,125 +784,60 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
         res1 = await hagControl(payload1, verbose);
         res2 = await hagControl(payload2, verbose);
         
-        results.push({ tool: name + "_step1", success: true, data: res1 });
-        results.push({ tool: name + "_step2", success: true, data: res2 });
+        // 验证操作是否成功
+        const step1Success = res1?.success === true || (res1?.data?.status === 'success') || (res1?.data?.code === 0);
+        const step2Success = res2?.success === true || (res2?.data?.status === 'success') || (res2?.data?.code === 0);
+        
+        const step1Message = step1Success ? `✓ ${step1Name} 操作成功` : `❌ ${step1Name} 操作失败: ${res1?.data?.message || '未知错误'}`;
+        const step2Message = step2Success ? `✓ ${step2Name} 操作成功` : `❌ ${step2Name} 操作失败: ${res2?.data?.message || '未知错误'}`;
+        
+        results.push({ 
+          tool: step1Name, 
+          success: step1Success, 
+          data: res1,
+          message: step1Message
+        });
+        
+        results.push({ 
+          tool: step2Name, 
+          success: step2Success, 
+          data: res2,
+          message: step2Message
+        });
+        
         continue;
-       } catch (err) {
-         if (err.code === 401 && retryCount < MAX_RETRY) {
-           console.log('[info] token 已过期，正在自动刷新...');
-           return callRouterClaw(tools, skillId, verbose, retryCount + 1);
-         }
-         throw err;
-       }
-     } else if (name === 'get_router_device_by_prodid') {      // 从本地 router_device_info.js 获取设备信息映射
-      const deviceInfoData = await import('../router_device_info.js');
-      const prodId = args.prodid || args.deviceId || 'K1AP'; // 默认使用 K1AP
-      
-      // 在本地映射表中查找 prodid 对应的设备信息
-      let deviceInfo = null;
-      
-      // 查找匹配的 prodid
-      const match = deviceInfoData.default.g_routerDeviceInfo.find(info => 
-        info[1].toLowerCase() === String(prodId).toLowerCase()
-      );
-      
-      if (match) {
-        deviceInfo = {
-          isRouter: true,
-          prodId: match[1],
-          device: match[0],
-          chineseName: match[2],
-          englishName: match[3],
-          fromLocal: true, // 标记使用本地映射
-          totalCount: deviceInfoData.default.g_routerDeviceInfo.length, // 总设备数
-          note: '使用本地路由设备信息映射'
-        };
-      } else {
-        deviceInfo = {
-          isRouter: false,
-          prodId: String(prodId),
-          chineseName: '未识别的设备',
-          englishName: 'Unrecognized Device',
-          fromLocal: false,
-          suggestion: '请检查prodid是否正确，查看支持的路由器设备列表'
-        };
+      } catch (err) {
+        if (err.code === 401 && retryCount < MAX_RETRY) {
+          console.log('[info] token 已过期，正在自动刷新...');
+          return callRouterClaw(tools, skillId, verbose, retryCount + 1);
+        }
+        throw err;
       }
-      
-      // 直接返回结果，不调用云侧接口
+    } else if (name === 'get_router_device_by_prodid') {
+      const routerResult = await handleGetRouterDeviceByProdid(args.prodid || args.deviceId || 'K1AP');
       results.push({
         tool: name,
-        success: deviceInfo.isRouter,
-        data: deviceInfo,
-        message: deviceInfo.isRouter ? 
-          `路由器识别成功: ${deviceInfo.chineseName} (${deviceInfo.englishName})` : 
-          '该prodid在路由器设备映射表中未找到'
+        success: routerResult.success,
+        data: routerResult.data,
+        message: routerResult.message
       });
       continue;
     } else if (name === 'get_app_info') {
-      // 根据应用ID查询具体应用信息
-      const appId = args.app_id || args.appId || String(args.id);
-      
-      if (!appId) {
-        results.push({
-          tool: name,
-          success: false,
-          message: '请提供要查询的应用ID'
-        });
-        continue;
-      }
-      
-      // 在应用信息数组中查找匹配的应用
-      const appInfo = g_saAppInfo.find(app => 
-        String(app[1]) === String(appId)
-      );
-      
-      if (appInfo) {
-        results.push({
-          tool: name,
-          success: true,
-          data: {
-            appName: appInfo[0],
-            appId: appInfo[1],
-            categ: appInfo[2],
-            message: `应用查询成功: ${appInfo[0]} (ID: ${appInfo[1]}, 分类: ${appInfo[2]})`
-          }
-        });
-      } else {
-        results.push({
-          tool: name,
-          success: false,
-          message: `未找到ID为 ${appId} 的应用`
-        });
-      }
-      continue;
-    } else if (name === 'get_all_apps') {
-      // 查询所有可用的应用列表
-      const categorizedApps = {};
-      
-      // 按分类整理应用
-      g_saAppInfo.forEach(app => {
-        const categ = app[2];
-        const categoryName = getCategoryName(categ);
-        
-        if (!categorizedApps[categoryName]) {
-          categorizedApps[categoryName] = [];
-        }
-        
-        categorizedApps[categoryName].push({
-          name: app[0],
-          id: app[1],
-          categ: app[2]
-        });
-      });
-      
+      const appResult = await handleGetAppInfo(args.app_id || args.appId || String(args.id));
       results.push({
         tool: name,
-        success: true,
-        data: {
-          totalApps: g_saAppInfo.length,
-          categories: categorizedApps,
-          message: `共找到 ${g_saAppInfo.length} 个应用，按分类显示`
-        }
+        success: appResult.success,
+        data: appResult.data,
+        message: appResult.message
+      });
+      continue;
+    } else if (name === 'get_all_apps') {
+      const appsResult = await handleGetAllApps();
+      results.push({
+        tool: name,
+        success: appsResult.success,
+        data: appsResult.data,
+        message: appsResult.message
       });
       continue;
     }
@@ -768,7 +863,62 @@ async function callRouterClaw(tools, skillId, verbose = false, retryCount = 0) {
       }
     }
 
-    results.push({ tool: name, success: true, data: res });
+    // 对设置操作的结果进行验证
+    let isOperationSuccessful = false;
+    let verificationMessage = '';
+    
+    if (name === 'set_net_time' || name === 'set_net_duration' || name === 'set_net_off') {
+      // 设置操作成功响应的特征
+      if (res?.success === true || (res?.data?.status === 'success') || (res?.data?.code === 0)) {
+        isOperationSuccessful = true;
+        verificationMessage = `✓ ${name} 操作执行成功`;
+        
+        // 检查是否有后续查询操作
+        const queryTool = allTools.find(t => t.name === 'get_child_protect');
+        if (queryTool) {
+          try {
+            const queryPayload = {
+              devId,
+              prodId,
+              mode: 'ACK',
+              operation: 'GET',
+              sid: ROUTER_PATHS.get_child_protect
+            };
+            
+            const queryRes = await hagControl(queryPayload, false);
+            let latestConfig = '';
+            
+            if (queryRes?.data?.data) {
+              latestConfig = JSON.stringify(queryRes.data.data, null, 2);
+            } else {
+              latestConfig = JSON.stringify(queryRes, null, 2);
+            }
+            
+            verificationMessage += `\n📱 最新设备配置：\n${latestConfig}`;
+          } catch (queryError) {
+            verificationMessage += `\n⚠️  自动查询最新配置失败: ${queryError.message}`;
+          }
+        } else {
+          verificationMessage += '\n💡 建议查询最新配置以确认设置生效';
+        }
+      } else {
+        isOperationSuccessful = false;
+        const errorInfo = res?.data?.message || res?.data?.error || res?.message || '未知错误';
+        verificationMessage = `❌ ${name} 操作执行失败\n错误信息: ${errorInfo}`;
+      }
+    } else {
+      // 查询操作成功响应的特征
+      isOperationSuccessful = true;
+      verificationMessage = `✓ ${name} 查询成功`;
+    }
+
+    results.push({ 
+      tool: name, 
+      success: isOperationSuccessful, 
+      data: res,
+      message: verificationMessage,
+      timestamp: new Date().toISOString()
+    });
   }
 
   console.log(JSON.stringify(results, null, 2));
@@ -825,7 +975,7 @@ function registerCommands(program) {
 const program = new Command();
 program
   .name(PROGRAM_NAME)
-  .description('路由器儿童上网保护控制工具（hag-connect 版）')
+  .description('路由器儿童上网保护控制工具（hag-connect 版 + 模块化功能）')
   .version(VERSION)
   .option('--tools <json>', '批量执行工具')
   .option('--skill-id <id>', '技能 ID', DEFAULT_SKILL_ID)
@@ -840,5 +990,4 @@ program
   });
 
 registerCommands(program);
-
 program.parse();

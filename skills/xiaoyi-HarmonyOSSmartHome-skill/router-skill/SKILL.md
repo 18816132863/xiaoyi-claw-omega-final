@@ -8,10 +8,10 @@ permissions: 发送get请求和post请求的权限、以及儿童上网保护操
 
 # router diag Skill（技能名称，可自定义）
 
-1. Description（技能详细说明）
+## 1. Description（技能详细说明）
 当用户反馈儿童上网保护使用问题时，使用此技能查询路由器的实时状态，执行儿童上网保护相关配置操作，以清晰、友好的中文格式返回结果，帮助用户了解路由当前儿童上网保护的配置状态、网络状态，并完成设备管控、上网时段设置、应用管理、断网控制等操作。
 
-2. When to use（触发场景：明确 AI 何时调用此技能）
+## 2. When to use（触发场景：明确 AI 何时调用此技能）
 用户说：“儿童上网保护”
 用户说：“上网时间太长了，需要休息一下”
 用户说：“不要再玩游戏了”
@@ -22,18 +22,19 @@ permissions: 发送get请求和post请求的权限、以及儿童上网保护操
 用户说：“查询家里连接的设备”
 用户说：“设置儿童上网时段”
 
-3. How to use（调用逻辑：教 AI 如何使用技能）
+## 3. How to use（调用逻辑：教 AI 如何使用技能）
 3.1 回复规则
 （1）当答复用户时，首先简短一句话告知用户，例如 “好的，已收到”“请稍等，正在帮您处理”，无需告知底层请求流程；
 （2）最终结果以简洁清晰的 checklist 形式统一展示给用户，不要对用户答复详细过程数据和过于专业的内部参数；
-（3）若不清楚用户具体要控制哪个家庭哪个路由，需要先获取家庭信息和对应设备信息；
+（3）【强制】在用户有多个家庭、多个路由场景下，需要明确询问用户具体选择，禁止随机、默认选择；
 （4）若设备未加入儿童保护，先询问用户是否添加，确认后执行操作；
 （5）若不能明确理解用户意图或指令，请详细追问用户，不要用没有依据的假设条件或编造参数去执行。
+（6）【强制】禁止在回复中展示命令执行过程/CLI调用/API请求等技术细节；
 
 3.2 前置必要条件（强制：不能跳过该步骤）
 # 【强制】【重要】【注意】获取家庭信息和设备device id，将获取的路由devid和prodid分别配置到ROUTER_DEVID和ROUTER_PRODID环境变量中，用于后续发送请求；
-（1）获取用户要控制的家庭信息，若有多个家庭，都列举出家庭名称，让用户自己选择具体的家庭信息；
-（2）在用户选择家庭后，将该家庭下的所有路由名称列出来，让用户选择具体要对接的路由，并获取该路由的device id，用于具体对接配置；
+（1）获取用户要控制的家庭信息，若有多个家庭，都列举出家庭名称，追问用户，让用户自己选择具体的家庭信息；
+（2）在用户选择家庭后，将该家庭下的所有路由名称列出来，追问用户，让用户选择具体要对接的路由，并获取该路由的device id，用于具体对接配置；
 （3）若用户说选择"XX路由"，但实际未找到路由，请根据在家庭中获取的设备prodid在router_device_info.js中进行查找对应路由；
 
 3.3 儿童上网保护具体操作逻辑
@@ -67,12 +68,20 @@ node router-skill/bin/router-claw.js get_router_device_by_prodid --prodid K1AP
 （1）路由相关状态、配置信息查询
 # 查询儿童上网保护信息
 node router-skill/bin/router-claw.js get_child_protect
-补充说明1：
-是否禁止或允许某类应用上网，可综合denyXxx和xxxDenyCount字段综合判断，例如：
-dengGame为1，gameDenyCount为153，说明所有游戏均被禁止；
-denyVideo为1，但videoDebyCount为0，说明实际未禁止影音设备；
-补充说明2：
-若查询到具体应用使用情况，可以通过应用id查询到具体应用名称并返回给用户实际应用名称，方法用get_app_info；
+
+**【关键判断逻辑 - 必须遵守】**
+判断某类应用是否真正被禁止，必须同时看两个字段：
+- `denyXxx = 1`：表示该类应用的限制开关已开启
+- `xxxDenyCount > 0`：表示实际被禁止的应用数量
+
+| denyXxx | xxxDenyCount | 实际状态                                   |
+|---------|--------------|----------------------------------------|
+| 1       | > 0          | ✅ 已禁止（如 gameDenyCount=153 表示153款游戏被禁止） |
+| 1       | = 0          | ❌ 未实际禁止（开关开启但无具体应用被拦截）                 |
+| 0       | 任意           | ❌ 未禁止                                  |
+
+**【强制】向用户展示应用管控状态时，必须使用上述判断逻辑，不能仅凭 denyXxx=1 就说"已开启"。**
+**【强制】若查询到具体应用使用情况，可以通过应用id查询到具体应用名称并返回给用户实际应用名称，方法用get_app_info；**
 
 # 查询路由下挂设备信息（自动解码gzip+base64）
 node router-skill/bin/router-claw.js get_host_info
@@ -104,6 +113,14 @@ node router-skill/bin/router-claw.js get_router_status
 node router-skill/bin/router-claw.js get_wifi_config
 
 （2）允许上网的时段设置
+**【重要】action 参数说明：**
+| action 值 | 功能 | 必须完全匹配 |
+|-----------|------|-------------|
+| `newCreate` | 创建新的上网时段规则 | ✅ 是 |
+| `newUpdate` | 更新已有的上网时段规则 | ✅ 是 |
+| `newDelete` | 删除已有的上网时段规则 | ✅ 是 |
+**⚠️ 注意：action 参数必须完全匹配上述值，使用 `delete`、`create`、`update` 等错误值会导致操作无效但返回成功！**
+
 # 添加允许上网时段（例如：周一到周五，每天早上8点到23点允许上网，周六周日不允许上网）
 node router-skill/bin/router-claw.js set_net_time --device-id 1 --action newCreate --data '{"id":"","enable":1,"timeFrom":"08:00","timeTo":"23:00","today":0,"device":"1","monday":1,"saturday":0,"sunday":0,"thursday":1,"friday":1,"tuesday":1,"wednesday":1}'
 
@@ -112,6 +129,10 @@ node router-skill/bin/router-claw.js set_net_time --device-id 1 --action newUpda
 
 # 删除上网时段配置（若出现上网时段规则冲突或重复的情况，可以执行该命令删除重复时段或冲突时段）
 node router-skill/bin/router-claw.js set_net_time --device-id 1 --action newDelete --data '{"id":"1","enable":0,"timeFrom":"08:00","timeTo":"10:30","today":1,"device":"1","monday":1,"saturday":1,"sunday":1,"thursday":1,"friday":1,"tuesday":1,"wednesday":1}'
+
+（3）不允许上网时段设置
+**⚠️ 注意：若需要设置不允许上网时段，请把除不允许时段以外，其他时段均设置为允许上网时段，反过来使用set_net_time**
+**【重要】需要将设备所有上网时段设置整体考虑,包括:新设置时段和已有配置，可以删除冲突的时段设置，避免实际不生效**
 
 （3）允许上网的时长设置
 # 添加允许上网时长（例如：从周一到周五，每天允许上网6小时）
@@ -125,6 +146,11 @@ node router-skill/bin/router-claw.js set_net_duration --device-id 1 --action upd
 
 # 删除上网时长（例如：删除周末允许上网时长的设置）
 node router-skill/bin/router-claw.js set_net_duration --device-id 1 --action update --data '{"daily":{"monday":90000,"tuesday":90000,"wednesday":90000,"thursday":90000,"friday":90000,"saturday":90000,"sunday":90000},"device":"1"}'
+**【重要】时长单位说明：**
+- `timeSummary.allowed` 字段单位为**秒**，表示**每天**的允许上网时长
+- 示例：`allowed: 21600` = 21600秒 = 6小时/天
+- 示例：`allowed: 90000` = 90000秒 = 25小时/天（相当于无限制，因为一天只有24小时）
+**【强制】25小时就相当于无上网时长限制，不要给用户展示25小时，直接展示“无时长限制”**
 
 （3）精细应用管理（禁止特定类型应用）
 # 禁止设备玩游戏（包括王者荣耀、和平精英等153款游戏）

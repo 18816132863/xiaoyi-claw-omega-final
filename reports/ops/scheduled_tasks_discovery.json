@@ -1,0 +1,726 @@
+{
+  "existing_tasks": {
+    "auto_trigger_tasks": [
+      "ai_api_check",
+      "exception_management",
+      "deep_inspection",
+      "layer_dependency_check",
+      "full_backup",
+      "daily_health_reminder",
+      "new_python_file",
+      "nightly_audit",
+      "continuous_improvement",
+      "skill_health_check",
+      "repo_integrity_check",
+      "governance_file_change",
+      "vector_optimization",
+      "weekly_skill_report",
+      "core_file_change",
+      "backup_cleanup",
+      "session_cleanup",
+      "auto_classify_skills",
+      "weekly_first_start",
+      "end_of_day_review",
+      "json_contract_check",
+      "cache_cleanup",
+      "daily_work_summary",
+      "report_cleanup",
+      "system_health_report",
+      "skill_usage_stats",
+      "dependency_check",
+      "control_plane_audit",
+      "daily_first_start",
+      "midday_check"
+    ],
+    "heartbeat_tasks": [
+      "| 自动 Git 同步 | 提交并推送变更 | 60s |",
+      "| 自动备份上传 | 自动提交推送变更 | 60s |",
+      "| 自动触发器 | 检测场景并自动触发任务 | 120s |",
+      "| 每周首次启动 | 周复盘 | 周一自动生成周报 |"
+    ]
+  },
+  "scripts_with_keywords": {
+    "daily": [
+      "auto_trigger.py",
+      "generate_charts.py",
+      "run_weekly_growth_review.py",
+      "run_end_of_day_review.py",
+      "run_daily_growth_check.py",
+      "run_daily_growth_loop.py",
+      "run_midday_check.py",
+      "generate_daily_work_summary.py"
+    ],
+    "audit": [
+      "control_plane_audit.py",
+      "check_repo_integrity.py",
+      "check_json_contracts.py",
+      "control_plane.py",
+      "build_ops_dashboard.py",
+      "render_nightly_summary.py"
+    ],
+    "schedule": [
+      "auto_classify_skills.py",
+      "find_scheduled_tasks.py",
+      "send_daily_health_reminder.py"
+    ],
+    "check": [
+      "run_rule_engine.py",
+      "demo_minimum_loop.py",
+      "check_repo_integrity_fast.py",
+      "skill_health_check.py",
+      "check_layer_dependencies.py",
+      "delete_manager.py",
+      "check_change_impact.py",
+      "check_rule_guards.py",
+      "check_skill_security.py",
+      "generate_final_verification_bundle.py",
+      "render_premerge_summary.py",
+      "render_release_summary.py",
+      "generate_release_reports.py",
+      "run_release_gate.py",
+      "check_change_impact_enforcement.py",
+      "check_ai_apis.py"
+    ],
+    "自动": [
+      "ops_center.py",
+      "component_classifier.py",
+      "upgrade_all_to_commercial.py",
+      "remediation_center.py",
+      "dependency_manager.py",
+      "cleanup_reports.py",
+      "auto_fusion_hook.py",
+      "smart_compressor.py",
+      "test_all_skills.py",
+      "auto_summarizer.py",
+      "unified_inspector_v7.py",
+      "exception_manager.py"
+    ],
+    "cron": [
+      "heartbeat_executor.py",
+      "continuous_improvement.py"
+    ],
+    "backup": [
+      "full_backup.py"
+    ],
+    "定时": [
+      "batch_skill_upgrade.py"
+    ],
+    "巡检": [
+      "unified_inspector.py",
+      "run_nightly_audit.py",
+      "deep_inspection.py"
+    ],
+    "weekly": [
+      "create_professional_docs.py",
+      "generate_weekly_skill_report.py"
+    ],
+    "定期": [
+      "permanent_keeper.py"
+    ],
+    "monitor": [
+      "verify_phase3_final.py",
+      "generate_observability_reports.py"
+    ]
+  },
+  "skills_with_scheduled_tasks": {
+    "bitsoul-stock-quantization": [
+      "SKILL.md contains '自动'"
+    ],
+    "natural-language-planner": [
+      "SKILL.md contains 'weekly'"
+    ],
+    "paddleocr-doc-parsing": [
+      "SKILL.md contains 'daily'"
+    ],
+    "ima-skill": [
+      "SKILL.md contains '自动'"
+    ],
+    "eno": [
+      "SKILL.md contains '自动'"
+    ],
+    "su-lan-paper-daily-skill": [
+      "SKILL.md contains 'daily'",
+      "skill.py contains 'daily'"
+    ],
+    "quality-documentation-manager": [
+      "SKILL.md contains 'schedule'"
+    ],
+    "kuaishou-shop-operation": [
+      "SKILL.md contains '监控'"
+    ],
+    "beauty-generation-api": [
+      "SKILL.md contains 'daily'",
+      "skill.py contains 'daily'"
+    ],
+    "aiskillstore-marketplace-test-case-generator": [
+      "SKILL.md contains '自动'"
+    ],
+    "xiaoyi-ppt": [
+      "SKILL.md contains '自动'"
+    ],
+    "git": [
+      "SKILL.md contains 'daily'"
+    ],
+    "eastmoney-mx-skills-suite": [
+      "SKILL.md contains '自动'"
+    ],
+    "xiaoyi-image-understanding": [
+      "SKILL.md contains '自动'"
+    ],
+    "llm-memory-integration": [
+      "SKILL.md contains 'cron'",
+      "skill.py contains '自动'"
+    ],
+    "t-trading": [
+      "SKILL.md contains '自动'"
+    ],
+    "hunyuan-image": [
+      "SKILL.md contains '自动'"
+    ],
+    "aigc_marker": [
+      "SKILL.md contains '自动'"
+    ],
+    "getnote": [
+      "SKILL.md contains '定时'"
+    ],
+    "clawsec-suite": [
+      "SKILL.md contains 'cron'"
+    ],
+    "hz-proactive-agent": [
+      "SKILL.md contains 'daily'",
+      "skill.py contains 'cron'"
+    ],
+    "omni-channel-ecommerce": [
+      "SKILL.md contains '监控'"
+    ],
+    "mx-stocks-screener": [
+      "SKILL.md contains '监控'",
+      "skill.py contains '监控'"
+    ],
+    "axton-obsidian-visual-skills-excalidraw-diagram": [
+      "SKILL.md contains '自动'"
+    ],
+    "novel-generator": [
+      "SKILL.md contains '自动'"
+    ],
+    "ontology": [
+      "SKILL.md contains 'schedule'"
+    ],
+    "command-center": [
+      "SKILL.md contains 'schedule'"
+    ],
+    "backup-cleaner": [
+      "SKILL.md contains 'cron'"
+    ],
+    "tc-chengxin": [
+      "SKILL.md contains '自动'"
+    ],
+    "dealer-leader-cooperation": [
+      "SKILL.md contains '自动'"
+    ],
+    "yanxue-course-manager": [
+      "SKILL.md contains '自动'"
+    ],
+    "remotion-video-toolkit": [
+      "SKILL.md contains 'daily'"
+    ],
+    "beginner-mode": [
+      "SKILL.md contains '定时'",
+      "skill.py contains '自动'"
+    ],
+    "memory": [
+      "SKILL.md contains 'daily'",
+      "skill.py contains 'daily'"
+    ],
+    "xiaoyi-HarmonyOSSmartHome-skill": [
+      "SKILL.md contains '自动'"
+    ],
+    "marketing-campaign": [
+      "SKILL.md contains '定期'"
+    ],
+    "fasting-tracker": [
+      "SKILL.md contains 'daily'"
+    ],
+    "wendao-skill": [
+      "SKILL.md contains '自动'"
+    ],
+    "industry-stock-tracker": [
+      "SKILL.md contains '定期'"
+    ],
+    "feiskyer-claude-code-settings-deep-research": [
+      "SKILL.md contains '监控'"
+    ],
+    "didi-ride-skill": [
+      "SKILL.md contains 'cron'"
+    ],
+    "xiaoyi-file-upload": [
+      "SKILL.md contains '自动'"
+    ],
+    "xiaohongshu-all-in-one": [
+      "SKILL.md contains '自动'"
+    ],
+    "writing-style-iterator": [
+      "SKILL.md contains '自动'"
+    ],
+    "sheet-cog": [
+      "SKILL.md contains 'daily'"
+    ],
+    "auto-skill-upgrade": [
+      "SKILL.md contains '定期'"
+    ],
+    "ceo-advisor": [
+      "SKILL.md contains 'weekly'"
+    ],
+    "autonomous-tasks": [
+      "SKILL.md contains 'schedule'"
+    ],
+    "file-manager": [
+      "SKILL.md contains '自动'"
+    ],
+    "web-content-fetcher": [
+      "SKILL.md contains '自动'"
+    ],
+    "qq-clawbot-setup": [
+      "SKILL.md contains '定时'"
+    ],
+    "topic-monitor": [
+      "SKILL.md contains 'daily'",
+      "skill.py contains 'weekly'"
+    ],
+    "productivity": [
+      "SKILL.md contains 'daily'"
+    ],
+    "china-stock-analysis": [
+      "SKILL.md contains 'daily'"
+    ],
+    "openclaw-agent-optimize": [
+      "SKILL.md contains 'cron'"
+    ],
+    "news-extractor": [
+      "SKILL.md contains '自动'"
+    ],
+    "performance-upgrade": [
+      "SKILL.md contains 'schedule'"
+    ],
+    "2nd-brain": [
+      "SKILL.md contains 'daily'"
+    ],
+    "today-task": [
+      "SKILL.md contains '定期'"
+    ],
+    "tushare-data": [
+      "SKILL.md contains 'daily'"
+    ],
+    "unified-image": [
+      "SKILL.md contains '自动'",
+      "skill.py contains '自动'"
+    ],
+    "ecommerce-analytics": [
+      "SKILL.md contains '监控'"
+    ],
+    "flyai-travel": [
+      "SKILL.md contains 'schedule'"
+    ],
+    "polymarket-trade": [
+      "SKILL.md contains 'daily'"
+    ],
+    "meituan-coupon-get-tool": [
+      "SKILL.md contains 'cron'"
+    ],
+    "xiaoyi-doc-convert": [
+      "SKILL.md contains '自动'"
+    ],
+    "doc-autofill": [
+      "SKILL.md contains '自动'",
+      "skill.py contains '自动'"
+    ],
+    "browser-control": [
+      "SKILL.md contains '自动'"
+    ],
+    "university-applications": [
+      "SKILL.md contains 'daily'"
+    ],
+    "unified-search": [
+      "SKILL.md contains '自动'",
+      "skill.py contains '自动'"
+    ],
+    "ai-drama-prompt-factory": [
+      "SKILL.md contains '自动'",
+      "skill.py contains '自动'"
+    ],
+    "daily-tech-broadcast": [
+      "SKILL.md contains 'daily'",
+      "skill.py contains 'daily'"
+    ],
+    "agent-chronicle": [
+      "SKILL.md contains 'daily'",
+      "skill.py contains 'weekly'"
+    ],
+    "baidu-netdisk-skills": [
+      "SKILL.md contains '自动'"
+    ],
+    "crypto": [
+      "SKILL.md contains 'daily'"
+    ],
+    "bdpan-storage": [
+      "SKILL.md contains '自动'"
+    ],
+    "hot-news-aggregator": [
+      "SKILL.md contains '自动'",
+      "skill.py contains '自动'"
+    ],
+    "proactive-tasks": [
+      "SKILL.md contains 'daily'"
+    ],
+    "pua": [
+      "SKILL.md contains '自动'"
+    ],
+    "daily-hot-news": [
+      "SKILL.md contains 'daily'",
+      "skill.py contains 'daily'"
+    ],
+    "seedance-video-gen": [
+      "SKILL.md contains '自动'"
+    ],
+    "good-txt-to-hwreader": [
+      "SKILL.md contains '自动'"
+    ],
+    "data-tracker": [
+      "SKILL.md contains 'daily'"
+    ],
+    "unified-document": [
+      "SKILL.md contains '自动'",
+      "skill.py contains '自动'"
+    ],
+    "skill-fusion": [
+      "SKILL.md contains '自动'"
+    ],
+    "pixverse": [
+      "SKILL.md contains '自动'"
+    ],
+    "stock-price-query": [
+      "SKILL.md contains '自动'"
+    ],
+    "educational-video-creator": [
+      "SKILL.md contains '定时'"
+    ],
+    "tencent-cos-skill": [
+      "SKILL.md contains '自动'"
+    ],
+    "xiaoyi-health": [
+      "SKILL.md contains 'weekly'",
+      "skill.py contains '监控'"
+    ],
+    "skill-finder": [
+      "SKILL.md contains '监控'"
+    ],
+    "douyin-shop-operation": [
+      "SKILL.md contains '监控'"
+    ],
+    "brainhole-factory": [
+      "SKILL.md contains '自动'"
+    ],
+    "xiao-gui-agent": [
+      "SKILL.md contains '自动'",
+      "skill.py contains '自动'"
+    ],
+    "minimax-music-gen": [
+      "SKILL.md contains '自动'"
+    ],
+    "cron": [
+      "SKILL.md contains 'daily'",
+      "skill.py contains 'cron'"
+    ],
+    "guide": [
+      "SKILL.md contains '自动'"
+    ],
+    "copywriter": [
+      "skill.py contains '自动'"
+    ]
+  },
+  "docs_with_scheduled_tasks": {
+    "docs/API_REFERENCE.md": "contains '自动'",
+    "docs/FUSION_REPORT.md": "contains '监控'",
+    "docs/FILE_INVENTORY.md": "contains '定时'",
+    "docs/MAINTENANCE_GUIDE.md": "contains '定期'",
+    "docs/COMPONENT_CLASSIFICATION_POLICY.md": "contains '巡检'",
+    "docs/V7.2.0_UNIFIED_ARCHITECTURE.md": "contains '自动'",
+    "docs/CHANGELOG.md": "contains '自动'",
+    "docs/SCHEDULED_TASKS_ANALYSIS.md": "contains '定时'",
+    "docs/SCHEDULED_TASKS.md": "contains '定时'",
+    "docs/TOKEN_OPTIMIZATION_STRATEGY.md": "contains '自动'",
+    "docs/LITE_VERSION_PLAN.md": "contains '自动'",
+    "docs/HEARTBEAT_INTERVAL_ANALYSIS.md": "contains '定时'",
+    "docs/SCHEDULED_TASKS_DISCOVERY_V3.md": "contains '定时'",
+    "docs/V7.2.0_ARCHITECTURE.md": "contains '自动'",
+    "docs/HEARTBEAT_ANALYSIS.md": "contains '定时'",
+    "docs/PERMANENT_KEEPER_MODULE.md": "contains '定期'",
+    "docs/抖店智能客服系统功能说明书_V1.0.md": "contains '自动'",
+    "docs/V7.2.0_架构中文完整版.md": "contains '定时'",
+    "docs/DELETE_CONFIRMATION_POLICY.md": "contains '自动'",
+    "docs/SCHEDULED_TASKS_COMPLETE.md": "contains '定时'",
+    "docs/loop_guard_design.md": "contains '自动'",
+    "docs/AUTO_RUN_COMPONENTS.md": "contains '定时'",
+    "docs/history/V4.3.1_UPGRADE_SUMMARY.md": "contains '自动'",
+    "docs/history/V4.3.2_ARCHITECTURE_SUMMARY.md": "contains '自动'",
+    "docs/history/V4.3.0_UPGRADE_SUMMARY.md": "contains '自动'",
+    "docs/scripts/README.md": "contains '定期'"
+  },
+  "suggestions": [
+    {
+      "script": "auto_trigger.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "generate_charts.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_weekly_growth_review.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_end_of_day_review.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_daily_growth_check.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_daily_growth_loop.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_midday_check.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "generate_daily_work_summary.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "check_repo_integrity.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "check_json_contracts.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "control_plane.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "build_ops_dashboard.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "render_nightly_summary.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "find_scheduled_tasks.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "send_daily_health_reminder.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "run_rule_engine.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "demo_minimum_loop.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_repo_integrity_fast.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_layer_dependencies.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "delete_manager.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_change_impact.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_rule_guards.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_skill_security.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "generate_final_verification_bundle.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "render_premerge_summary.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "render_release_summary.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "generate_release_reports.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "run_release_gate.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_change_impact_enforcement.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_ai_apis.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "ops_center.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "component_classifier.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "upgrade_all_to_commercial.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "remediation_center.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "dependency_manager.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "cleanup_reports.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "auto_fusion_hook.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "smart_compressor.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "test_all_skills.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "auto_summarizer.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "unified_inspector_v7.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "exception_manager.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "heartbeat_executor.py",
+      "keyword": "cron",
+      "reason": "脚本包含关键词 'cron'，可能需要定时执行"
+    },
+    {
+      "script": "batch_skill_upgrade.py",
+      "keyword": "定时",
+      "reason": "脚本包含关键词 '定时'，可能需要定时执行"
+    },
+    {
+      "script": "unified_inspector.py",
+      "keyword": "巡检",
+      "reason": "脚本包含关键词 '巡检'，可能需要定时执行"
+    },
+    {
+      "script": "run_nightly_audit.py",
+      "keyword": "巡检",
+      "reason": "脚本包含关键词 '巡检'，可能需要定时执行"
+    },
+    {
+      "script": "create_professional_docs.py",
+      "keyword": "weekly",
+      "reason": "脚本包含关键词 'weekly'，可能需要定时执行"
+    },
+    {
+      "script": "generate_weekly_skill_report.py",
+      "keyword": "weekly",
+      "reason": "脚本包含关键词 'weekly'，可能需要定时执行"
+    },
+    {
+      "script": "permanent_keeper.py",
+      "keyword": "定期",
+      "reason": "脚本包含关键词 '定期'，可能需要定时执行"
+    },
+    {
+      "script": "verify_phase3_final.py",
+      "keyword": "monitor",
+      "reason": "脚本包含关键词 'monitor'，可能需要定时执行"
+    },
+    {
+      "script": "generate_observability_reports.py",
+      "keyword": "monitor",
+      "reason": "脚本包含关键词 'monitor'，可能需要定时执行"
+    }
+  ]
+}

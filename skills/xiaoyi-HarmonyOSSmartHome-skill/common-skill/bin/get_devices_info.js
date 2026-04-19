@@ -29,30 +29,46 @@ export async function getDevicesInfo(verbose = false) {
     }
     
     const rawDevices = Array.isArray(rawData) ? rawData : (rawData.devices || []);
-    
+    const homes = rawData.homes;
+    const homeDict = {};
+    for (const home of homes) {
+      homeDict[home.homeId] = home.homeName;
+    }
     if (!Array.isArray(rawDevices)) {
       throw new Error('设备数据不是数组格式');
     }
     
-    const deviceList = rawDevices.map((item, index) => {
-      // 验证每个设备对象的基本结构
-      if (!item || typeof item !== 'object') {
-        console.warn(`[warning] 设备数据索引${index}不是有效对象，跳过`);
-        return null;
-      }
-      
-      return {
-        deviceId: item.devId || '',
-        deviceName: item.devName || '',
-        roomName: item.roomName || '未分类',
-        homeId: item.homeId || '',
-        homeName: item.homeName || '',
-        productName: item.devInfo?.deviceName || '',
-        deviceType: item.devInfo?.devType || '',
-        prodId: item.devInfo?.capabilityId || ''
-      };
-    }).filter(Boolean); // 过滤掉无效设备
-    
+     const deviceList = rawDevices.map((item, index) => {
+       // 验证每个设备对象的基本结构
+       if (!item || typeof item !== 'object') {
+         console.warn(`[warning] 设备数据索引${index}不是有效对象，跳过`);
+         return null;
+       }
+       
+       const prodId = item.capabilityId || '';
+       
+       // 过滤虚拟设备：prodId 为 'ZG28' 或 'ZG29' 的设备不会返回给用户
+       if (prodId === 'ZG28' || prodId === 'ZG29') {
+         if (verbose) {
+           console.error(`[filter] 已过滤虚拟设备: ${item.devName} (prodId: ${prodId})`);
+         }
+         return null;
+       }
+       // 过滤子系统设备
+       if (item.resourceType==='subSystem'){
+         return null;
+       }
+       return {
+         deviceId: item.devId || '',
+         deviceName: item.devName || '',
+         roomName: item.roomName || '未分类',
+         homeId: item.homeId || '',
+         homeName: homeDict[item.homeId] || '',
+         productName: item.deviceTypeName|| '',
+         deviceType: item.devType || '',
+         prodId: item.capabilityId || ''
+       };
+     }).filter(Boolean); // 过滤掉无效设备    
     saveDataToTxt(DEVICE_INFO_TXT, deviceList, '设备信息');
     
     if (verbose) console.error(`[verbose] 获取到 ${deviceList.length} 个设备`);

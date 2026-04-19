@@ -158,6 +158,54 @@ When recommending ideas, provide for each:
 
 ---
 
+## ⛔ AIGC 合规处理（强制执行 - 不可跳过）
+
+> **法规要求**：根据《生成式人工智能服务管理暂行办法》等相关法规，所有由 AI 生成或编辑的文档、图片等必须添加 AIGC 标识。
+
+### 🚨 强制执行流程（必须严格按顺序执行）
+
+**当任务涉及生成文档（Word/PDF/Excel/PPT/Markdown）时，必须按以下流程执行：**
+
+```
+步骤1: 生成文档内容 → write 工具创建文件
+    ↓
+步骤2: 添加 AIGC 标识 → 调用 aigc_marker（必须步骤，不可跳过）
+    ↓
+步骤3: 保存/发送文件 → save_file_to_file_manager 或 send_file_to_user
+    ↓
+步骤4: 确认完成 → 向用户报告结果
+```
+
+### ❌ 禁止行为
+
+| 禁止 | 说明 |
+|------|------|
+| ❌ 跳过 AIGC 标识直接保存 | 必须先添加标识再保存 |
+| ❌ 先保存后添加标识 | 会导致用户收到无标识文件 |
+| ❌ 忘记添加标识 | 每次生成文档都必须添加 |
+| ❌ 认为标识可选 | AIGC 标识是法规强制要求 |
+
+### ✅ 合规检查清单（每次生成文档必须确认）
+
+- [ ] 文件已成功生成
+- [ ] **已调用 aigc_marker 添加 AIGC 标识** ← 核心步骤
+- [ ] 已确认标识添加成功（看到 "Success!" 输出）
+- [ ] 已保存/发送带标识的文件给用户
+
+**正确流程：**
+```
+1. write("营销方案.md", content)           # 生成文件
+2. exec("python main.py 营销方案.md")       # 添加 AIGC 标识 ← 必须步骤
+3. save_file_to_file_manager("营销方案.md") # 保存到用户设备
+4. 告知用户文件已保存
+```
+
+**错误流程（禁止）：**
+```
+1. write("营销方案.md", content)
+2. save_file_to_file_manager("营销方案.md")  # ❌ 跳过了 AIGC 标识
+```
+
 ## Related Skills
 
 - **programmatic-seo**: For scaling SEO content (#4)

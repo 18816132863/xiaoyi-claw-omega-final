@@ -51,7 +51,7 @@ node common-skill/bin/smarthome-claw.js control_device --dev-id "xxx" --prod-id 
 - `--prod-id`: 产品ID（必填），从 get_devices_info 获取
 - `--operation`: 操作类型（必填），如 "GET"、"POST" 等
 - `--sid`: 服务ID（必填），如 "switch"、"brightness" 等
-- `--data`: 控制数据JSON字符串（必填），如 `{\"cid\":value}`
+- `--data`: 控制数据JSON字符串（必填），如 `{\"cid\":value}` "GET" 类型传'{}'即可
 
 在profile定义中定义了设备对外开放的服务能力，介绍，参数和参数类型，可选范围的介绍，可以参考查询到的设备状态和profile定义来组装控制报文，
 https://smartlife-sandbox-drcn.things.dbankcloud.cn/device/guide/<产品ID>/<产品ID>.json
@@ -63,7 +63,6 @@ https://smartlife-sandbox-drcn.things.dbankcloud.cn/device/guide/V0FW/V0FW.json
 ### POST 操作（控制）
 1. 远程控制设备开关
 2. 调节设备参数（亮度、温度等）
-3. 执行设备场景
 
 ### GET 操作（查询）
 1. 获取设备的实时精确状态

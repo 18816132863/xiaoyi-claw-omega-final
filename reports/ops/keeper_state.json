@@ -5,36 +5,36 @@
       "refresh_count": 10
     },
     "memory_engine": {
-      "last_refreshed": "2026-04-19T10:27:16.171028",
-      "refresh_count": 9
+      "last_refreshed": "2026-04-19T10:43:13.887418",
+      "refresh_count": 10
     },
     "rule_engine": {
-      "last_refreshed": "2026-04-19T10:27:16.171898",
-      "refresh_count": 9
+      "last_refreshed": "2026-04-19T10:43:13.888296",
+      "refresh_count": 10
     },
     "exception_manager": {
-      "last_refreshed": "2026-04-19T10:27:17.948925",
-      "refresh_count": 9
+      "last_refreshed": "2026-04-19T10:43:15.877981",
+      "refresh_count": 10
     },
     "dependency_manager": {
-      "last_refreshed": "2026-04-19T10:27:17.949754",
-      "refresh_count": 9
+      "last_refreshed": "2026-04-19T10:43:15.878982",
+      "refresh_count": 10
     },
     "delete_manager": {
-      "last_refreshed": "2026-04-19T10:27:17.950489",
-      "refresh_count": 9
+      "last_refreshed": "2026-04-19T10:43:15.879892",
+      "refresh_count": 10
     },
     "skill_registry": {
-      "last_refreshed": "2026-04-19T10:27:17.951249",
-      "refresh_count": 9
+      "last_refreshed": "2026-04-19T10:43:15.881205",
+      "refresh_count": 10
     },
     "core_identity": {
-      "last_refreshed": "2026-04-19T10:27:17.952014",
-      "refresh_count": 9
+      "last_refreshed": "2026-04-19T10:43:15.882158",
+      "refresh_count": 10
     },
     "architecture": {
-      "last_refreshed": "2026-04-19T10:27:17.952734",
-      "refresh_count": 9
+      "last_refreshed": "2026-04-19T10:43:15.883037",
+      "refresh_count": 10
     }
   },
   "last_check": "2026-04-15T00:24:34.807578",

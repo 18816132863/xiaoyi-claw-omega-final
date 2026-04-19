@@ -1,55 +1,55 @@
 {
   "version": "V7.2.0",
-  "start_time": "2026-04-19T17:09:20.605521",
-  "end_time": "2026-04-19T17:10:42.753964",
-  "total_duration_ms": 82148,
-  "success_count": 3,
+  "start_time": "2026-04-19T17:25:42.843247",
+  "end_time": "2026-04-19T17:27:29.727085",
+  "total_duration_ms": 106883,
+  "success_count": 2,
   "total_count": 6,
   "results": [
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-19T17:09:20.605583",
-      "success": true,
-      "output": "❌ 推送失败: fatal: Authentication failed for 'https://github.com/18816132863/xiaoyi-claw-omega-final.git/'\n\n",
-      "error": null,
-      "duration_ms": 34370,
-      "end_time": "2026-04-19T17:09:54.976122"
+      "start_time": "2026-04-19T17:25:42.843316",
+      "success": false,
+      "output": "",
+      "error": "超时 (60s)",
+      "duration_ms": 60024,
+      "end_time": "2026-04-19T17:26:42.867835"
     },
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-19T17:09:54.976187",
+      "start_time": "2026-04-19T17:26:42.867897",
       "success": false,
-      "output": "==========================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: 969511a 心跳自动提交\n  变更文件: 1 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-19 17:09:55\n  ❌ git push 失败: error: RPC failed; curl 16 Error in the HTTP2 framing layer\nsend-pack: unexpected disconnect while reading sideband packet\nfatal: the remote end hung up unexpectedly\nEverything up-to-date\n\n\n============================================================\n  ⚠️  自动备份上传失败\n============================================================\n\n",
+      "output": "==========================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: c37a88c 心跳自动提交\n  变更文件: 1 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-19 17:26:43\n  ❌ git push 失败: error: RPC failed; curl 16 Error in the HTTP2 framing layer\nsend-pack: unexpected disconnect while reading sideband packet\nfatal: the remote end hung up unexpectedly\nEverything up-to-date\n\n\n============================================================\n  ⚠️  自动备份上传失败\n============================================================\n\n",
       "error": null,
-      "duration_ms": 32452,
-      "end_time": "2026-04-19T17:10:27.428450"
+      "duration_ms": 32242,
+      "end_time": "2026-04-19T17:27:15.110011"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-19T17:10:27.428517",
+      "start_time": "2026-04-19T17:27:15.110087",
       "success": true,
       "output": "============================================================\n  自动触发器 V1.0.0\n============================================================\n\n⏰ 检查时间触发...\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
       "error": null,
-      "duration_ms": 162,
-      "end_time": "2026-04-19T17:10:27.591247"
+      "duration_ms": 170,
+      "end_time": "2026-04-19T17:27:15.280581"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-19T17:10:27.591313",
+      "start_time": "2026-04-19T17:27:15.280654",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 15162,
-      "end_time": "2026-04-19T17:10:42.753901"
+      "duration_ms": 14446,
+      "end_time": "2026-04-19T17:27:29.727019"
     },
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-19T17:10:42.753953",
+      "start_time": "2026-04-19T17:27:29.727071",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -58,7 +58,7 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-19T17:10:42.753960",
+      "start_time": "2026-04-19T17:27:29.727082",
       "success": false,
       "output": "任务已禁用",
       "error": null,

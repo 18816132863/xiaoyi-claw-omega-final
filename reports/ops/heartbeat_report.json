@@ -1,55 +1,55 @@
 {
   "version": "V7.2.0",
-  "start_time": "2026-04-19T16:04:29.475111",
-  "end_time": "2026-04-19T16:05:03.000882",
-  "total_duration_ms": 33525,
-  "success_count": 4,
+  "start_time": "2026-04-19T16:20:03.086128",
+  "end_time": "2026-04-19T16:21:44.981942",
+  "total_duration_ms": 101895,
+  "success_count": 3,
   "total_count": 6,
   "results": [
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-19T16:04:29.475178",
+      "start_time": "2026-04-19T16:20:03.086188",
       "success": true,
       "output": "✅ 推送成功\n",
       "error": null,
-      "duration_ms": 10079,
-      "end_time": "2026-04-19T16:04:39.554936"
+      "duration_ms": 9477,
+      "end_time": "2026-04-19T16:20:12.564057"
     },
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-19T16:04:39.554994",
-      "success": true,
-      "output": "============================================================\n  自动备份上传器 V1.0.0\n============================================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: 1d6bb32 心跳自动提交\n  变更文件: 20 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-19 16:04:39\n  ✅ 推送成功\n\n============================================================\n  ✅ 自动备份上传完成\n============================================================\n\n",
-      "error": null,
-      "duration_ms": 9758,
-      "end_time": "2026-04-19T16:04:49.313892"
+      "start_time": "2026-04-19T16:20:12.564109",
+      "success": false,
+      "output": "",
+      "error": "超时 (60s)",
+      "duration_ms": 60063,
+      "end_time": "2026-04-19T16:21:12.627150"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-19T16:04:49.313937",
+      "start_time": "2026-04-19T16:21:12.627221",
       "success": true,
       "output": "============================================================\n  自动触发器 V1.0.0\n============================================================\n\n⏰ 检查时间触发...\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
       "error": null,
-      "duration_ms": 148,
-      "end_time": "2026-04-19T16:04:49.462882"
+      "duration_ms": 164,
+      "end_time": "2026-04-19T16:21:12.792042"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-19T16:04:49.462930",
+      "start_time": "2026-04-19T16:21:12.792109",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 13537,
-      "end_time": "2026-04-19T16:05:03.000820"
+      "duration_ms": 32189,
+      "end_time": "2026-04-19T16:21:44.981874"
     },
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-19T16:05:03.000868",
+      "start_time": "2026-04-19T16:21:44.981928",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -58,7 +58,7 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-19T16:05:03.000879",
+      "start_time": "2026-04-19T16:21:44.981939",
       "success": false,
       "output": "任务已禁用",
       "error": null,

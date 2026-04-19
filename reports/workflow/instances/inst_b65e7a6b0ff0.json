@@ -1,0 +1,16 @@
+{
+  "instance_id": "inst_b65e7a6b0ff0",
+  "workflow_id": "test_workflow",
+  "version": "1.0.0",
+  "task_id": "",
+  "profile": "developer",
+  "status": "completed",
+  "started_at": "2026-04-19T11:14:35.740142",
+  "completed_at": "2026-04-19T11:14:35.746639",
+  "failed_step_id": null,
+  "recovery_summary": {},
+  "control_decision_id": null,
+  "input": {},
+  "output": {},
+  "metadata": {}
+}

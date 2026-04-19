@@ -1,0 +1,18 @@
+{
+  "point_id": "rb_caf28177",
+  "step_id": "main",
+  "timestamp": "2026-04-19T10:42:23.390109",
+  "state": {
+    "instance_id": "inst_fb4c73ca2a48",
+    "step_input": {
+      "context": {},
+      "dependencies": {},
+      "params": {}
+    },
+    "completed_steps": [],
+    "step_results": {}
+  },
+  "metadata": {
+    "phase": "before_step"
+  }
+}

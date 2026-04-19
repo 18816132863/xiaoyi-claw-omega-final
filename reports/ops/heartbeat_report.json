@@ -1,55 +1,55 @@
 {
   "version": "V7.2.0",
-  "start_time": "2026-04-19T10:08:57.257820",
-  "end_time": "2026-04-19T10:10:11.822785",
-  "total_duration_ms": 74564,
-  "success_count": 3,
+  "start_time": "2026-04-19T10:25:11.915089",
+  "end_time": "2026-04-19T10:27:17.959480",
+  "total_duration_ms": 126044,
+  "success_count": 2,
   "total_count": 6,
   "results": [
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-19T10:08:57.257883",
-      "success": true,
-      "output": "✅ 推送成功\n",
-      "error": null,
-      "duration_ms": 9803,
-      "end_time": "2026-04-19T10:09:07.061369"
+      "start_time": "2026-04-19T10:25:11.915151",
+      "success": false,
+      "output": "",
+      "error": "超时 (60s)",
+      "duration_ms": 60020,
+      "end_time": "2026-04-19T10:26:11.936122"
     },
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-19T10:09:07.061436",
+      "start_time": "2026-04-19T10:26:11.936189",
       "success": false,
-      "output": "=========================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: c83a885 心跳自动提交\n  变更文件: 20 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-19 10:09:07\n  ❌ git push 失败: error: RPC failed; curl 16 Error in the HTTP2 framing layer\nsend-pack: unexpected disconnect while reading sideband packet\nfatal: the remote end hung up unexpectedly\nEverything up-to-date\n\n\n============================================================\n  ⚠️  自动备份上传失败\n============================================================\n\n",
+      "output": "=========================================================\n  自动备份上传器 V1.0.0\n============================================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: 286f161 心跳自动提交\n  变更文件: 1 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-19 10:26:12\n  ❌ git push 失败: fatal: Authentication failed for 'https://github.com/18816132863/xiaoyi-claw-omega-final.git/'\n\n\n============================================================\n  ⚠️  自动备份上传失败\n============================================================\n\n",
       "error": null,
-      "duration_ms": 32601,
-      "end_time": "2026-04-19T10:09:39.663401"
+      "duration_ms": 33885,
+      "end_time": "2026-04-19T10:26:45.821380"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-19T10:09:39.663456",
+      "start_time": "2026-04-19T10:26:45.821437",
       "success": true,
       "output": "============================================================\n  自动触发器 V1.0.0\n============================================================\n\n⏰ 检查时间触发...\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
       "error": null,
-      "duration_ms": 141,
-      "end_time": "2026-04-19T10:09:39.804800"
+      "duration_ms": 128,
+      "end_time": "2026-04-19T10:26:45.949633"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-19T10:09:39.804851",
+      "start_time": "2026-04-19T10:26:45.949689",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 32017,
-      "end_time": "2026-04-19T10:10:11.822703"
+      "duration_ms": 32009,
+      "end_time": "2026-04-19T10:27:17.959414"
     },
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-19T10:10:11.822769",
+      "start_time": "2026-04-19T10:27:17.959465",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -58,7 +58,7 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-19T10:10:11.822782",
+      "start_time": "2026-04-19T10:27:17.959477",
       "success": false,
       "output": "任务已禁用",
       "error": null,

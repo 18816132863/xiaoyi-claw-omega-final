@@ -1,55 +1,55 @@
 {
   "version": "V7.2.0",
-  "start_time": "2026-04-19T11:45:35.594891",
-  "end_time": "2026-04-19T11:46:10.550173",
-  "total_duration_ms": 34955,
-  "success_count": 4,
+  "start_time": "2026-04-19T12:01:10.631621",
+  "end_time": "2026-04-19T12:02:25.625466",
+  "total_duration_ms": 74993,
+  "success_count": 3,
   "total_count": 6,
   "results": [
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-19T11:45:35.595001",
+      "start_time": "2026-04-19T12:01:10.631679",
       "success": true,
       "output": "✅ 推送成功\n",
       "error": null,
-      "duration_ms": 10138,
-      "end_time": "2026-04-19T11:45:45.733957"
+      "duration_ms": 9950,
+      "end_time": "2026-04-19T12:01:20.581818"
     },
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-19T11:45:45.734019",
-      "success": true,
-      "output": "============================================================\n  自动备份上传器 V1.0.0\n============================================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: 516e7f7 心跳自动提交\n  变更文件: 20 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-19 11:45:46\n  ✅ 推送成功\n\n============================================================\n  ✅ 自动备份上传完成\n============================================================\n\n",
+      "start_time": "2026-04-19T12:01:20.581879",
+      "success": false,
+      "output": "=========================================\n\n📊 检查 Git 状态...\n  分支: master\n  最新提交: 36f90b0 心跳自动提交\n  变更文件: 20 个\n\n📤 上传到 Git...\n  ✅ 提交: 自动备份: 2026-04-19 12:01:21\n  ❌ git push 失败: error: RPC failed; curl 16 Error in the HTTP2 framing layer\nsend-pack: unexpected disconnect while reading sideband packet\nfatal: the remote end hung up unexpectedly\nEverything up-to-date\n\n\n============================================================\n  ⚠️  自动备份上传失败\n============================================================\n\n",
       "error": null,
-      "duration_ms": 10151,
-      "end_time": "2026-04-19T11:45:55.886027"
+      "duration_ms": 32592,
+      "end_time": "2026-04-19T12:01:53.174827"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-19T11:45:55.886090",
+      "start_time": "2026-04-19T12:01:53.174898",
       "success": true,
-      "output": "============================================================\n  自动触发器 V1.0.0\n============================================================\n\n⏰ 检查时间触发...\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
+      "output": "============================================================\n  自动触发器 V1.0.0\n============================================================\n\n⏰ 检查时间触发...\n   - 中午检查: 中午检查时间 (12:00)\n\n📁 检查文件触发...\n   无文件触发\n\n============================================================\n  执行触发任务\n============================================================\n\n🔧 [midday_check] 中午检查...\n   ✅ 成功\n\n",
       "error": null,
-      "duration_ms": 171,
-      "end_time": "2026-04-19T11:45:56.057538"
+      "duration_ms": 236,
+      "end_time": "2026-04-19T12:01:53.411114"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-19T11:45:56.057596",
+      "start_time": "2026-04-19T12:01:53.411182",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 14492,
-      "end_time": "2026-04-19T11:46:10.550079"
+      "duration_ms": 32214,
+      "end_time": "2026-04-19T12:02:25.625387"
     },
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-19T11:46:10.550146",
+      "start_time": "2026-04-19T12:02:25.625451",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -58,7 +58,7 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-19T11:46:10.550169",
+      "start_time": "2026-04-19T12:02:25.625463",
       "success": false,
       "output": "任务已禁用",
       "error": null,

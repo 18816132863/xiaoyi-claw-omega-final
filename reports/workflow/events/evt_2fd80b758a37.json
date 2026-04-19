@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_2fd80b758a37",
+  "instance_id": "inst_82d21f25c37c",
+  "event_type": "checkpoint_saved",
+  "timestamp": "2026-04-19T09:37:01.438871",
+  "step_id": "step1",
+  "data": {
+    "checkpoint_id": "cp_dd7dde65",
+    "phase": "after_step"
+  },
+  "metadata": {}
+}

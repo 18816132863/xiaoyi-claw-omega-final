@@ -253,5 +253,6 @@ def create_backup(output_dir: Path = None, version: str = "v4.3.2") -> Path:
 
 
 if __name__ == "__main__":
+    base_dir = Path(__file__).resolve().parent.parent
     output_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else base_dir.parent
     create_backup(output_dir)

@@ -43,11 +43,19 @@ class HeartbeatExecutor:
         # 心跳任务配置
         self.tasks = [
             {
+                "id": "one_time_trigger",
+                "name": "一次性定时任务",
+                "command": [sys.executable, str(self.root / "scripts/one_time_trigger.py")],
+                "timeout": 60,
+                "priority": -2,  # 最高优先级
+                "enabled": True
+            },
+            {
                 "id": "message_sender",
                 "name": "消息队列处理",
                 "command": [sys.executable, str(self.root / "scripts/message_sender.py")],
                 "timeout": 60,
-                "priority": -1,  # 最高优先级
+                "priority": -1,  # 次高优先级
                 "enabled": True
             },
             {

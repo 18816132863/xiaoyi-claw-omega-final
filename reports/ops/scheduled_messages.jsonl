@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-04-20T09:42:00Z",
+  "scheduled_time": "2026-04-20T09:45:00Z",
+  "title": "🌅 每日健康提醒（补发）",
+  "content": "🌅 每日健康提醒\n📅 2026-04-20 09:45\n\n😴 睡眠提醒\n  如果睡眠质量不好，可以试试睡前冥想\n\n⏰ 作息提醒\n  避免熬夜，保护肝脏\n\n💪 保持健康，从每一天开始！",
+  "channel": "xiaoyi-channel",
+  "target": "default",
+  "status": "pending",
+  "reason": "用户要求在 9:45 补发健康提醒",
+  "one_time": true
+}

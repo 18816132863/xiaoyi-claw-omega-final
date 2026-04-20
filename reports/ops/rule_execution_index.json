@@ -108,11 +108,23 @@
       "waived": false,
       "waiver_reason": null,
       "waiver_debt_status": null
+    },
+    {
+      "rule_id": "R010",
+      "status": "active",
+      "owner": "architecture",
+      "passed": true,
+      "blocking": true,
+      "skipped": false,
+      "skip_reason": null,
+      "waived": false,
+      "waiver_reason": null,
+      "waiver_debt_status": null
     }
   ],
   "summary": {
-    "total": 8,
-    "passed": 7,
+    "total": 9,
+    "passed": 8,
     "failed": 0,
     "warnings": 0,
     "skipped": 1,
@@ -182,5 +194,5 @@
       "high_debt_count": 0
     }
   },
-  "timestamp": "2026-04-19T17:43:21.081100"
+  "timestamp": "2026-04-20T09:11:01.181236"
 }

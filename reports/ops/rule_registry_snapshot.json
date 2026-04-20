@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-19T17:43:19.384668",
+  "generated_at": "2026-04-20T09:13:24.688794",
   "registry_version": "1.2.0",
   "rules": [
     {
@@ -79,6 +79,15 @@
       "name": "删除确认规则",
       "version": "1.0.0",
       "owner": "governance",
+      "status": "active",
+      "rollout_stage": "all",
+      "blocking": true
+    },
+    {
+      "rule_id": "R010",
+      "name": "架构遵循规则",
+      "version": "3.0.1",
+      "owner": "architecture",
       "status": "active",
       "rollout_stage": "all",
       "blocking": true

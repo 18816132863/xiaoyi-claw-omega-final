@@ -1,65 +1,65 @@
 {
   "version": "V7.3.0",
-  "start_time": "2026-04-20T10:14:26.198756",
-  "end_time": "2026-04-20T10:14:58.899701",
-  "total_duration_ms": 32700,
+  "start_time": "2026-04-20T10:18:35.830541",
+  "end_time": "2026-04-20T10:19:16.602587",
+  "total_duration_ms": 40772,
   "success_count": 5,
   "total_count": 9,
   "results": [
     {
       "id": "one_time_trigger",
       "name": "一次性定时任务",
-      "start_time": "2026-04-20T10:14:26.198831",
+      "start_time": "2026-04-20T10:18:35.830658",
       "success": true,
       "output": "============================================================\n  一次性定时任务触发器 V1.0.0\n============================================================\n\n✅ 处理完成\n  发送: 0 条\n  剩余: 0 条\n\n",
       "error": null,
-      "duration_ms": 56,
-      "end_time": "2026-04-20T10:14:26.255208"
+      "duration_ms": 146,
+      "end_time": "2026-04-20T10:18:35.977068"
     },
     {
       "id": "message_sender",
       "name": "消息队列处理",
-      "start_time": "2026-04-20T10:14:26.255252",
+      "start_time": "2026-04-20T10:18:35.977153",
       "success": true,
-      "output": "  剩余: 0 条\n\n============================================================\n📤 待发送消息:\n============================================================\n{\"action\": \"send\", \"channel\": \"xiaoyi-channel\", \"target\": \"default\", \"message\": \"🌅 每日健康提醒\\n📅 2026-04-20 10:05\\n\\n😴 睡眠提醒\\n  如果睡眠质量不好，可以试试睡前冥想\\n\\n⏰ 作息提醒\\n  避免熬夜，保护肝脏\\n\\n💪 保持健康，从每一天开始！\", \"title\": \"🌅 每日健康提醒\", \"scheduled_time\": \"2026-04-20T02:05:00Z\", \"timestamp\": \"2026-04-20T10:14:17.365682\"}\n============================================================\n✅ 处理完成\n",
+      "output": "============================================================\n  消息队列处理器 V2.0.0\n============================================================\n\n📬 处理待发送队列...\n  处理: 0 条\n\n⏰ 处理定时消息...\n  处理: 0 条\n  剩余: 0 条\n\n✅ 处理完成\n",
       "error": null,
-      "duration_ms": 57,
-      "end_time": "2026-04-20T10:14:26.313119"
+      "duration_ms": 146,
+      "end_time": "2026-04-20T10:18:36.124100"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-20T10:14:26.313163",
+      "start_time": "2026-04-20T10:18:36.124187",
       "success": true,
       "output": "'skill_health_check', 'new_python_file']\n  本周已触发: ['daily_first_start', 'weekly_first_start', 'daily_weather_report', 'session_cleanup', 'new_python_file', 'daily_health_reminder', 'weekly_skill_report', 'new_python_file', 'new_python_file', 'governance_file_change', 'governance_file_change', 'governance_file_change', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'skill_health_check', 'new_python_file']\n\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
       "error": null,
-      "duration_ms": 155,
-      "end_time": "2026-04-20T10:14:26.468800"
+      "duration_ms": 304,
+      "end_time": "2026-04-20T10:18:36.428568"
     },
     {
       "id": "session_end_detector",
       "name": "会话结束检测",
-      "start_time": "2026-04-20T10:14:26.468845",
+      "start_time": "2026-04-20T10:18:36.428643",
       "success": true,
       "output": "============================================================\n  会话结束检测器 V1.0.0\n============================================================\n\n✅ 会话活跃中\n\n",
       "error": null,
-      "duration_ms": 58,
-      "end_time": "2026-04-20T10:14:26.527748"
+      "duration_ms": 157,
+      "end_time": "2026-04-20T10:18:36.586622"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-20T10:14:26.527788",
+      "start_time": "2026-04-20T10:18:36.586676",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 32371,
-      "end_time": "2026-04-20T10:14:58.899621"
+      "duration_ms": 40015,
+      "end_time": "2026-04-20T10:19:16.602518"
     },
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-20T10:14:58.899683",
+      "start_time": "2026-04-20T10:19:16.602564",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -68,7 +68,7 @@
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-20T10:14:58.899690",
+      "start_time": "2026-04-20T10:19:16.602573",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -77,7 +77,7 @@
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-20T10:14:58.899695",
+      "start_time": "2026-04-20T10:19:16.602580",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -86,7 +86,7 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-20T10:14:58.899698",
+      "start_time": "2026-04-20T10:19:16.602584",
       "success": false,
       "output": "任务已禁用",
       "error": null,

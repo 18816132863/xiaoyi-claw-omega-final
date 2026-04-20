@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-04-21T04:06:54.890165",
+  "version": "1.0.0",
+  "release_gates": [],
+  "nightly_audits": [
+    {
+      "timestamp": "20260421_020359",
+      "passed": true,
+      "p0_count": 0,
+      "p1_count": 2
+    }
+  ],
+  "blocking_alerts": [],
+  "incidents": [
+    {
+      "incident_id": "INC-20260412174545",
+      "alert_type": "P0_BLOCKED",
+      "severity": "high",
+      "opened_at": "2026-04-12T17:45:45.587820",
+      "status": "resolved",
+      "owner": "admin",
+      "source_report": {
+        "runtime": "2026-04-12T17:34:03.287214",
+        "quality": "2026-04-12T17:34:03.487790",
+        "release": "2026-04-12T17:34:03.679687",
+        "nightly": "2026-04-12T17:33:50.228675"
+      },
+      "blocked_reasons": [],
+      "resolution_note": "手动关闭",
+      "resolved_at": "2026-04-12T23:34:46.354867"
+    }
+  ],
+  "remediations": [],
+  "approvals": {
+    "pending": [],
+    "granted": [],
+    "denied": [],
+    "executed": [],
+    "execute_failed": [],
+    "pending_count": 0,
+    "granted_count": 0,
+    "denied_count": 0,
+    "executed_count": 0,
+    "execute_failed_count": 0,
+    "latest_execute_record_id": null
+  },
+  "timeline": []
+}

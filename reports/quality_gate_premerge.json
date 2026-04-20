@@ -1,11 +1,11 @@
 {
   "profile": "premerge",
-  "verified_at": "2026-04-16T08:00:03.344741",
-  "overall_passed": true,
+  "verified_at": "2026-04-20T13:18:28.718860",
+  "overall_passed": false,
   "p0_count": 0,
-  "local_status": "passed",
-  "integration_status": "passed",
-  "external_status": "passed",
+  "local_status": "failed",
+  "integration_status": "failed",
+  "external_status": "failed",
   "checks": {
     "protected_files": {
       "status": "pass",
@@ -16,9 +16,9 @@
       "message": "架构文件完整 (8 个)"
     },
     "skill_registry": {
-      "status": "pass",
-      "message": "技能总数: 275, 可执行: 273"
+      "status": "fail",
+      "message": "'list' object has no attribute 'values'"
     }
   },
-  "summary": "3/3 通过"
+  "summary": "2/3 通过"
 }

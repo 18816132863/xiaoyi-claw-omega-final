@@ -4,12 +4,81 @@
 
 ## 项目状态
 
-- **版本**: V7.2.1
-- **阶段**: 长期养成阶段 (POST RELEASE)
-- **状态**: 全面整合完成，门禁通过
-- **更新时间**: 2026-04-17
+- **版本**: V8.0.0
+- **阶段**: 任务系统重构完成
+- **状态**: MVP 测试通过
+- **更新时间**: 2026-04-20
 
 ## 最近变更
+
+### 2026-04-20 任务系统重构 V8.0.0
+
+**重大升级**：引入持久化任务系统，实现"可持久化、可恢复、可定时、可重试、可观测"
+
+**新增模块**：
+
+1. **领域层 (domain/)**
+   - `domain/tasks/specs.py` - 任务规格定义（TaskSpec, StepSpec, ScheduleSpec）
+   - `domain/tasks/enums.py` - 状态枚举（TaskStatus, StepStatus, EventType）
+
+2. **应用层 (application/)**
+   - `application/task_service/service.py` - 任务服务（创建、查询、管理）
+
+3. **基础设施层 (infrastructure/)**
+   - `infrastructure/storage/repositories/` - 仓储实现（SQLite）
+   - `infrastructure/scheduler/scheduler.py` - 任务调度器
+   - `infrastructure/workers/executor.py` - 任务执行器
+   - `infrastructure/tool_adapters/message_adapter.py` - 消息发送适配器
+   - `infrastructure/task_manager.py` - 统一任务管理入口
+
+4. **数据库**
+   - `infrastructure/storage/migrations/001_task_system.sql` - 数据库迁移脚本
+   - `data/tasks.db` - SQLite 任务数据库
+
+**核心特性**：
+
+| 特性 | 实现 |
+|------|------|
+| 任务持久化 | ✅ SQLite 数据库 |
+| 状态机 | ✅ 12 种状态，显式流转 |
+| 调度器 | ✅ 支持 once/delay/cron/recurring |
+| 执行器 | ✅ 步骤执行，结果记录 |
+| 幂等控制 | ✅ 任务级 + 步骤级 + 工具调用级 |
+| 检查点 | ✅ 支持中断恢复 |
+| 事件日志 | ✅ 完整执行轨迹 |
+
+**MVP 测试结果**：6/6 通过
+
+**使用方式**：
+```python
+from infrastructure.task_manager import get_task_manager
+
+tm = get_task_manager()
+
+# 创建定时消息
+result = await tm.create_scheduled_message(
+    user_id="user123",
+    message="提醒内容",
+    run_at="2026-04-20 15:00:00"
+)
+
+# 查询任务
+task = await tm.get_task(result['task_id'])
+
+# 查看事件
+events = await tm.get_task_events(result['task_id'])
+```
+
+**架构映射**：
+
+| 新增能力 | 归属层级 |
+|----------|----------|
+| TaskSpec / 状态枚举 | L4 Execution (领域任务) |
+| TaskService | L3 Orchestration (应用编排) |
+| Scheduler | L6 Infrastructure (基础设施) |
+| Executor | L4 Execution (能力执行) |
+| Repositories | L6 Infrastructure (存储) |
+| Tool Adapters | L4 Execution (工具适配) |
 
 ### 2026-04-20 架构遵循强制机制
 

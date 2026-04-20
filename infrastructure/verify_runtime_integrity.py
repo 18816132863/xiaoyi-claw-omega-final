@@ -100,25 +100,54 @@ def load_registry() -> Tuple[Optional[Dict], Optional[str]]:
 
 def get_skills_by_test_mode(registry: Dict, test_mode: str) -> List[str]:
     skills = []
-    for name, info in registry.get("skills", {}).items():
-        if isinstance(info, dict):
-            if (info.get("test_mode") == test_mode and 
-                info.get("registered") and info.get("routable") and info.get("callable")):
-                skills.append(name)
+    skills_data = registry.get("skills", [])
+    
+    # 支持数组和字典两种格式
+    if isinstance(skills_data, list):
+        for s in skills_data:
+            if isinstance(s, dict):
+                if (s.get("test_mode") == test_mode and 
+                    s.get("registered") and s.get("routable") and s.get("callable")):
+                    skills.append(s.get("skill_id"))
+    else:
+        for name, info in skills_data.items():
+            if isinstance(info, dict):
+                if (info.get("test_mode") == test_mode and 
+                    info.get("registered") and info.get("routable") and info.get("callable")):
+                    skills.append(name)
     return skills
 
 
 def get_smoke_test_skills(registry: Dict) -> List[str]:
-    return [n for n, i in registry.get("skills", {}).items() 
-            if isinstance(i, dict) and i.get("smoke_test") and i.get("test_mode") == "local"]
+    skills_data = registry.get("skills", [])
+    
+    # 支持数组和字典两种格式
+    if isinstance(skills_data, list):
+        return [s.get("skill_id") for s in skills_data 
+                if isinstance(s, dict) and s.get("smoke_test") and s.get("test_mode") == "local"]
+    else:
+        return [n for n, i in skills_data.items() 
+                if isinstance(i, dict) and i.get("smoke_test") and i.get("test_mode") == "local"]
 
 
 def get_external_env_requirements(registry: Dict, skill_name: str) -> Dict:
-    info = registry.get("skills", {}).get(skill_name, {})
-    return {
-        "requires_env": info.get("requires_env", False),
-        "env_keys": info.get("env_keys", []),
-    } if isinstance(info, dict) else {"requires_env": False, "env_keys": []}
+    skills_data = registry.get("skills", [])
+    
+    # 支持数组和字典两种格式
+    if isinstance(skills_data, list):
+        for s in skills_data:
+            if isinstance(s, dict) and s.get("skill_id") == skill_name:
+                return {
+                    "requires_env": s.get("requires_env", False),
+                    "env_keys": s.get("env_keys", []),
+                }
+        return {"requires_env": False, "env_keys": []}
+    else:
+        info = skills_data.get(skill_name, {})
+        return {
+            "requires_env": info.get("requires_env", False),
+            "env_keys": info.get("env_keys", []),
+        } if isinstance(info, dict) else {"requires_env": False, "env_keys": []}
 
 
 def check_external_env(skill_name: str, registry: Dict) -> Tuple[bool, List[str]]:

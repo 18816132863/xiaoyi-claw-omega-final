@@ -5,31 +5,19 @@
       "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/infrastructure/verify_runtime_integrity.py --profile premerge --report-json reports/runtime_integrity.json",
       "returncode": 0,
       "success": true,
-      "timestamp": "2026-04-16T08:00:03.132245"
+      "timestamp": "2026-04-20T13:18:28.521477"
     },
     {
       "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/governance/quality_gate.py --profile premerge --report-json reports/quality_gate.json",
-      "returncode": 0,
-      "success": true,
-      "timestamp": "2026-04-16T08:00:03.357213"
-    },
-    {
-      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/scripts/check_layer_dependencies.py",
-      "returncode": 0,
-      "success": true,
-      "timestamp": "2026-04-16T08:00:03.680510"
+      "returncode": 1,
+      "success": false,
+      "timestamp": "2026-04-20T13:18:28.729277"
     },
     {
       "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/scripts/check_json_contracts.py",
       "returncode": 0,
       "success": true,
-      "timestamp": "2026-04-16T08:00:05.481183"
-    },
-    {
-      "command": "/usr/local/bin/python /home/sandbox/.openclaw/workspace/scripts/check_repo_integrity.py --strict",
-      "returncode": 0,
-      "success": true,
-      "timestamp": "2026-04-16T08:00:10.153226"
+      "timestamp": "2026-04-20T13:18:30.338010"
     }
   ],
   "executed_rule_checks": {
@@ -38,9 +26,16 @@
   },
   "executed_gate_checks": {
     "runtime": true,
-    "quality": true
+    "quality": false
   },
-  "engine_failed": false,
-  "blocking_failures": [],
-  "timestamp": "2026-04-16T08:00:10.153664"
+  "engine_failed": true,
+  "blocking_failures": [
+    {
+      "rule_id": "R004",
+      "name": "变更影响规则",
+      "owner": "governance",
+      "status": "active"
+    }
+  ],
+  "timestamp": "2026-04-20T13:18:30.338357"
 }

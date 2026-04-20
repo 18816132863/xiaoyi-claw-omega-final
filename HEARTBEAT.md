@@ -10,6 +10,19 @@
 python scripts/heartbeat_executor.py
 ```
 
+## 任务系统集成
+
+心跳时会自动：
+1. 检查待执行的定时任务（从数据库）
+2. 投递到期任务到执行队列
+3. 执行队列中的任务
+4. 处理待发送消息
+
+任务系统文件：
+- 数据库: `data/tasks.db`
+- 任务队列: `data/task_queue.jsonl`
+- 待发送消息: `reports/ops/pending_sends.jsonl`
+
 ## 心跳任务列表
 
 | 任务 | 说明 | 超时 |

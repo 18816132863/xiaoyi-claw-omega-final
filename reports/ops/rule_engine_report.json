@@ -15,7 +15,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║          层间依赖检查 V1.0.0                    ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 03:51:52\n\n【检查 core/】\n  ✅ 无违规\n\n【检查 orchestration/】\n  ✅ 无违规\n\n【检查 execution/】\n  ✅ 无违规\n\n【检查 memory_context/】\n  ✅ 无违规\n\n【检查 governance/】\n  ✅ 无违规\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 5\n  ❌ 违规: 0\n\n"
+      "output": "╔══════════════════════════════════════════════════╗\n║          层间依赖检查 V1.0.0                    ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 04:07:25\n\n【检查 core/】\n  ✅ 无违规\n\n【检查 orchestration/】\n  ✅ 无违规\n\n【检查 execution/】\n  ✅ 无违规\n\n【检查 memory_context/】\n  ✅ 无违规\n\n【检查 governance/】\n  ✅ 无违规\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 5\n  ❌ 违规: 0\n\n"
     },
     {
       "rule_id": "R002",
@@ -31,7 +31,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║          JSON 契约校验 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 03:51:53\n\n⚠️ jsonschema 未安装，跳过 schema 验证\n安装命令: pip install jsonschema\n\n"
+      "output": "╔══════════════════════════════════════════════════╗\n║          JSON 契约校验 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 04:07:25\n\n⚠️ jsonschema 未安装，跳过 schema 验证\n安装命令: pip install jsonschema\n\n"
     },
     {
       "rule_id": "R003",
@@ -47,7 +47,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "调用规则守卫自测】\n  ✅ 规则守卫自测通过\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 58\n  ⚠️ 警告: 0\n  ❌ 错误: 12\n\n【错误详情】\n  ❌ 目录缺失: reports/alerts\n  ❌ 目录缺失: reports/bundles\n  ❌ 目录缺失: reports/dashboard\n  ❌ 目录缺失: reports/remediation\n  ❌ 目录缺失: reports/remediation/history\n  ❌ 目录缺失: skills\n  ❌ Contract 文件缺失: reports/release_gate.json (对应 core/contracts/gate_report.schema.json)\n  ❌ Contract 文件缺失: reports/al"
+      "output": "e\n\n【检查审批历史一致性】\n  ⚠️ approval_history.json 不存在，跳过\n\n【调用层间依赖检查】\n  ✅ 层间依赖检查通过\n\n【调用 JSON 契约检查】\n  ✅ JSON 契约检查通过\n\n【调用规则守卫自测】\n  ✅ 规则守卫自测通过\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 59\n  ⚠️ 警告: 0\n  ❌ 错误: 11\n\n【错误详情】\n  ❌ 目录缺失: reports/alerts\n  ❌ 目录缺失: reports/bundles\n  ❌ 目录缺失: reports/dashboard\n  ❌ 目录缺失: reports/remediation\n  ❌ 目录缺失: reports/remediation/history\n  ❌ 目录缺失: skills\n  ❌ Contra"
     },
     {
       "rule_id": "R004",
@@ -79,7 +79,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║          规则守卫自测 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 03:51:53\n\n【测试 1: 层间依赖守卫】\n  ✅ 违规样例有效: 包含 'from core ...'\n  ✅ 层间依赖守卫测试通过\n\n【测试 2: JSON 契约守卫】\n  ✅ 违规样例有效: 缺少 'profile' 必需字段\n  ✅ JSON 契约守卫测试通过\n\n【测试 3: 检查器执行能力】\n  ✅ check_layer_dependencies.py 正常执行\n  ✅ check_json_contracts.py 正常执行\n\n==================================================\n【Rule Guard Self-Test 结果】\n==============================="
+      "output": "╔══════════════════════════════════════════════════╗\n║          规则守卫自测 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 04:07:26\n\n【测试 1: 层间依赖守卫】\n  ✅ 违规样例有效: 包含 'from core ...'\n  ✅ 层间依赖守卫测试通过\n\n【测试 2: JSON 契约守卫】\n  ✅ 违规样例有效: 缺少 'profile' 必需字段\n  ✅ JSON 契约守卫测试通过\n\n【测试 3: 检查器执行能力】\n  ✅ check_layer_dependencies.py 正常执行\n  ✅ check_json_contracts.py 正常执行\n\n==================================================\n【Rule Guard Self-Test 结果】\n==============================="
     },
     {
       "rule_id": "R006",
@@ -280,5 +280,5 @@
   "warning_count": 0,
   "skipped_count": 1,
   "waived_count": 1,
-  "generated_at": "2026-04-21T03:51:54.524912"
+  "generated_at": "2026-04-21T04:07:27.202187"
 }

@@ -1,65 +1,65 @@
 {
   "version": "V7.3.0",
-  "start_time": "2026-04-20T17:30:59.682513",
-  "end_time": "2026-04-20T17:31:40.694594",
-  "total_duration_ms": 41012,
+  "start_time": "2026-04-20T17:38:03.728532",
+  "end_time": "2026-04-20T17:38:18.638153",
+  "total_duration_ms": 14909,
   "success_count": 5,
   "total_count": 9,
   "results": [
     {
       "id": "one_time_trigger",
       "name": "一次性定时任务",
-      "start_time": "2026-04-20T17:30:59.682610",
+      "start_time": "2026-04-20T17:38:03.728612",
       "success": true,
       "output": "============================================================\n  一次性定时任务触发器 V1.0.0\n============================================================\n\n✅ 处理完成\n  发送: 0 条\n  剩余: 0 条\n\n",
       "error": null,
-      "duration_ms": 145,
-      "end_time": "2026-04-20T17:30:59.828314"
+      "duration_ms": 64,
+      "end_time": "2026-04-20T17:38:03.792943"
     },
     {
       "id": "message_sender",
       "name": "消息队列处理",
-      "start_time": "2026-04-20T17:30:59.828361",
+      "start_time": "2026-04-20T17:38:03.793010",
       "success": true,
       "output": "============================================================\n  消息队列处理器 V2.0.0\n============================================================\n\n📬 处理待发送队列...\n  处理: 0 条\n\n⏰ 处理定时消息...\n  处理: 0 条\n  剩余: 0 条\n\n✅ 处理完成\n",
       "error": null,
-      "duration_ms": 146,
-      "end_time": "2026-04-20T17:30:59.974678"
+      "duration_ms": 65,
+      "end_time": "2026-04-20T17:38:03.858547"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-20T17:30:59.974734",
+      "start_time": "2026-04-20T17:38:03.858616",
       "success": true,
       "output": "'skill_health_check', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'midday_check', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file', 'new_python_file']\n\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
       "error": null,
-      "duration_ms": 272,
-      "end_time": "2026-04-20T17:31:00.246926"
+      "duration_ms": 196,
+      "end_time": "2026-04-20T17:38:04.054703"
     },
     {
       "id": "session_end_detector",
       "name": "会话结束检测",
-      "start_time": "2026-04-20T17:31:00.246972",
+      "start_time": "2026-04-20T17:38:04.054763",
       "success": true,
       "output": "============================================================\n  会话结束检测器 V1.0.0\n============================================================\n\n✅ 会话活跃中\n\n",
       "error": null,
-      "duration_ms": 146,
-      "end_time": "2026-04-20T17:31:00.393931"
+      "duration_ms": 67,
+      "end_time": "2026-04-20T17:38:04.121931"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-20T17:31:00.393975",
+      "start_time": "2026-04-20T17:38:04.122007",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 40300,
-      "end_time": "2026-04-20T17:31:40.694529"
+      "duration_ms": 14516,
+      "end_time": "2026-04-20T17:38:18.638088"
     },
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-20T17:31:40.694573",
+      "start_time": "2026-04-20T17:38:18.638136",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -68,7 +68,7 @@
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-20T17:31:40.694580",
+      "start_time": "2026-04-20T17:38:18.638142",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -77,7 +77,7 @@
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-20T17:31:40.694587",
+      "start_time": "2026-04-20T17:38:18.638146",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -86,7 +86,7 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-20T17:31:40.694592",
+      "start_time": "2026-04-20T17:38:18.638150",
       "success": false,
       "output": "任务已禁用",
       "error": null,

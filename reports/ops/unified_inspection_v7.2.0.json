@@ -1,28 +1,17 @@
 {
   "version": "V7.2.0",
-  "timestamp": "2026-04-20T09:13:32.478994",
+  "timestamp": "2026-04-20T09:16:30.579708",
   "total_items": 34,
   "passed": 34,
   "failed": 0,
   "warnings": 0,
-  "total_duration_ms": 6070,
+  "total_duration_ms": 6237,
   "items": [
-    {
-      "id": "core_state",
-      "name": "L1 状态契约检查",
-      "passed": true,
-      "duration_ms": 0,
-      "details": [
-        "✅ core/state/global_state_contract.py (3163 bytes)",
-        "✅ core/state/profile_state_contract.py (8597 bytes)",
-        "✅ core/state/task_state_contract.py (5702 bytes)"
-      ]
-    },
     {
       "id": "core_cognition",
       "name": "L1 认知系统检查",
       "passed": true,
-      "duration_ms": 6,
+      "duration_ms": 2,
       "details": [
         "✅ core/cognition/reasoning.py (13147 bytes)",
         "✅ core/cognition/decision.py (9523 bytes)",
@@ -32,10 +21,21 @@
       ]
     },
     {
+      "id": "core_state",
+      "name": "L1 状态契约检查",
+      "passed": true,
+      "duration_ms": 26,
+      "details": [
+        "✅ core/state/global_state_contract.py (3163 bytes)",
+        "✅ core/state/profile_state_contract.py (8597 bytes)",
+        "✅ core/state/task_state_contract.py (5702 bytes)"
+      ]
+    },
+    {
       "id": "memory_retrieval",
       "name": "L2 检索系统检查",
       "passed": true,
-      "duration_ms": 174,
+      "duration_ms": 280,
       "details": [
         "✅ memory_context.retrieval.retrieval_router.RetrievalRouter",
         "✅ memory_context.retrieval.hybrid_search.HybridSearch"
@@ -45,7 +45,7 @@
       "id": "memory_session",
       "name": "L2 会话管理检查",
       "passed": true,
-      "duration_ms": 13,
+      "duration_ms": 10,
       "details": [
         "✅ memory_context.session.session_history.SessionHistory",
         "✅ memory_context.long_term.project_memory_store.ProjectMemoryStore"
@@ -55,7 +55,7 @@
       "id": "memory_builder",
       "name": "L2 上下文构建检查",
       "passed": true,
-      "duration_ms": 246,
+      "duration_ms": 345,
       "details": [
         "✅ memory_context.builder.context_builder.ContextBuilder",
         "✅ memory_context.builder.priority_ranker.PriorityRanker",
@@ -67,7 +67,7 @@
       "id": "execution_control",
       "name": "L3 执行控制检查",
       "passed": true,
-      "duration_ms": 32,
+      "duration_ms": 28,
       "details": [
         "✅ orchestration.execution_control.retry_policy.RetryPolicy",
         "✅ orchestration.execution_control.fallback_policy.FallbackPolicy",
@@ -78,7 +78,7 @@
       "id": "checkpoint_store",
       "name": "L3 检查点存储检查",
       "passed": true,
-      "duration_ms": 37,
+      "duration_ms": 5,
       "details": [
         "✅ orchestration.state.checkpoint_store.CheckpointStore"
       ]
@@ -87,7 +87,7 @@
       "id": "skill_registry",
       "name": "L4 技能注册表检查",
       "passed": true,
-      "duration_ms": 44,
+      "duration_ms": 74,
       "details": [
         "✅ skills.registry.skill_registry.SkillRegistry",
         "✅ skills.registry.skill_registry.SkillManifest",
@@ -111,7 +111,7 @@
       "id": "skill_lifecycle",
       "name": "L4 生命周期检查",
       "passed": true,
-      "duration_ms": 3,
+      "duration_ms": 6,
       "details": [
         "✅ skills.lifecycle.install_manager.InstallManager",
         "✅ skills.lifecycle.enable_disable_manager.EnableDisableManager",
@@ -122,7 +122,7 @@
       "id": "skill_policies",
       "name": "L4 技能策略检查",
       "passed": true,
-      "duration_ms": 8,
+      "duration_ms": 9,
       "details": [
         "✅ skills.policies.skill_budget_policy.SkillBudgetPolicy",
         "✅ skills.policies.skill_risk_policy.SkillRiskPolicy",
@@ -133,7 +133,7 @@
       "id": "policy_engine",
       "name": "L5 策略引擎检查",
       "passed": true,
-      "duration_ms": 176,
+      "duration_ms": 165,
       "details": [
         "✅ governance.control_plane.policy_engine.PolicyEngine",
         "✅ governance.control_plane.policy_engine.Policy",
@@ -182,7 +182,7 @@
       "id": "skill_registry_json",
       "name": "L6 技能注册表 JSON 检查",
       "passed": true,
-      "duration_ms": 1,
+      "duration_ms": 0,
       "details": [
         "✅ skills/registry/skill_registry.json 有效"
       ]
@@ -202,7 +202,7 @@
       "id": "main_chain_recovery",
       "name": "主链-恢复链集成检查",
       "passed": true,
-      "duration_ms": 13,
+      "duration_ms": 51,
       "details": [
         "✅ FallbackPolicy.decide() 存在",
         "✅ FallbackPolicy 错误类型识别正确",
@@ -226,42 +226,30 @@
       ]
     },
     {
-      "id": "workflow_engine",
-      "name": "L3 工作流引擎检查",
-      "passed": true,
-      "duration_ms": 401,
-      "details": [
-        "✅ orchestration.workflow.workflow_engine.WorkflowEngine",
-        "✅ orchestration.workflow.dag_builder.DAGBuilder",
-        "✅ orchestration.workflow.dependency_resolver.DependencyResolver",
-        "✅ orchestration.workflow.state_machine.WorkflowStateMachine"
-      ]
-    },
-    {
       "id": "metrics_task",
       "name": "Metrics-任务指标检查",
       "passed": true,
-      "duration_ms": 4,
+      "duration_ms": 3,
       "details": [
         "✅ reports/metrics/task_metrics.json 有效"
-      ]
-    },
-    {
-      "id": "metrics_memory",
-      "name": "Metrics-记忆指标检查",
-      "passed": true,
-      "duration_ms": 1,
-      "details": [
-        "✅ reports/metrics/memory_metrics.json 有效"
       ]
     },
     {
       "id": "metrics_skill",
       "name": "Metrics-技能指标检查",
       "passed": true,
-      "duration_ms": 5,
+      "duration_ms": 0,
       "details": [
         "✅ reports/metrics/skill_metrics.json 有效"
+      ]
+    },
+    {
+      "id": "metrics_memory",
+      "name": "Metrics-记忆指标检查",
+      "passed": true,
+      "duration_ms": 0,
+      "details": [
+        "✅ reports/metrics/memory_metrics.json 有效"
       ]
     },
     {
@@ -274,20 +262,42 @@
       ]
     },
     {
+      "id": "workflow_engine",
+      "name": "L3 工作流引擎检查",
+      "passed": true,
+      "duration_ms": 420,
+      "details": [
+        "✅ orchestration.workflow.workflow_engine.WorkflowEngine",
+        "✅ orchestration.workflow.dag_builder.DAGBuilder",
+        "✅ orchestration.workflow.dependency_resolver.DependencyResolver",
+        "✅ orchestration.workflow.state_machine.WorkflowStateMachine"
+      ]
+    },
+    {
       "id": "core_events",
       "name": "L1 事件系统检查",
       "passed": true,
-      "duration_ms": 626,
+      "duration_ms": 782,
       "details": [
         "✅ core.events.event_bus.EventBus",
         "✅ core.events.event_types.EventType"
       ]
     },
     {
+      "id": "skills_count",
+      "name": "技能生态-数量检查",
+      "passed": true,
+      "duration_ms": 38,
+      "details": [
+        "✅ 技能目录数量: 279",
+        "✅ 技能数量达标 (>= 200)"
+      ]
+    },
+    {
       "id": "benchmarks",
       "name": "基准测试检查",
       "passed": true,
-      "duration_ms": 0,
+      "duration_ms": 7,
       "details": [
         "✅ tests/benchmarks/task_success_bench.py (2941 bytes)",
         "✅ tests/benchmarks/skill_latency_bench.py (2259 bytes)",
@@ -295,29 +305,19 @@
       ]
     },
     {
-      "id": "skills_count",
-      "name": "技能生态-数量检查",
+      "id": "change_impact",
+      "name": "变更影响检查",
       "passed": true,
-      "duration_ms": 36,
+      "duration_ms": 941,
       "details": [
-        "✅ 技能目录数量: 279",
-        "✅ 技能数量达标 (>= 200)"
+        "退出码: 0"
       ]
     },
     {
       "id": "layer_dependencies",
       "name": "层间依赖检查",
       "passed": true,
-      "duration_ms": 911,
-      "details": [
-        "退出码: 0"
-      ]
-    },
-    {
-      "id": "change_impact",
-      "name": "变更影响检查",
-      "passed": true,
-      "duration_ms": 925,
+      "duration_ms": 1013,
       "details": [
         "退出码: 0"
       ]
@@ -326,17 +326,17 @@
       "id": "test_integration",
       "name": "集成测试检查",
       "passed": true,
-      "duration_ms": 1685,
+      "duration_ms": 1849,
       "details": [
         "退出码: 0",
-        "错误: sessment)\n测试风险评估 ... ok\ntest_12_full_loop (__main__.TestMinimumLoop.test_12_full_loop)\n测试完整闭环 ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.143s\n\nOK\n"
+        "错误: sessment)\n测试风险评估 ... ok\ntest_12_full_loop (__main__.TestMinimumLoop.test_12_full_loop)\n测试完整闭环 ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.146s\n\nOK\n"
       ]
     },
     {
       "id": "json_contracts",
       "name": "JSON 契约检查",
       "passed": true,
-      "duration_ms": 3702,
+      "duration_ms": 3229,
       "details": [
         "退出码: 0"
       ]
@@ -345,7 +345,7 @@
       "id": "skill_security",
       "name": "技能安全检查",
       "passed": true,
-      "duration_ms": 4962,
+      "duration_ms": 5061,
       "details": [
         "退出码: 0"
       ]
@@ -354,7 +354,7 @@
       "id": "repo_integrity",
       "name": "仓库完整性检查",
       "passed": true,
-      "duration_ms": 6069,
+      "duration_ms": 6234,
       "details": [
         "退出码: 0"
       ]

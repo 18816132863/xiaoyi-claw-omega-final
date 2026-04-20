@@ -35,6 +35,7 @@ def check_scheduled_messages() -> Dict[str, Any]:
         return {
             "status": "success",
             "processed": 0,
+            "remaining": 0,
             "message": "无定时消息"
         }
     
@@ -51,6 +52,7 @@ def check_scheduled_messages() -> Dict[str, Any]:
         return {
             "status": "success",
             "processed": 0,
+            "remaining": 0,
             "message": "无定时消息"
         }
     

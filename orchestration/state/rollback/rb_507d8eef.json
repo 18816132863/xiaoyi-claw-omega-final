@@ -1,0 +1,18 @@
+{
+  "point_id": "rb_507d8eef",
+  "step_id": "main",
+  "timestamp": "2026-04-20T18:55:01.756151",
+  "state": {
+    "instance_id": "inst_4ea525ccdb35",
+    "step_input": {
+      "context": {},
+      "dependencies": {},
+      "params": {}
+    },
+    "completed_steps": [],
+    "step_results": {}
+  },
+  "metadata": {
+    "phase": "before_step"
+  }
+}

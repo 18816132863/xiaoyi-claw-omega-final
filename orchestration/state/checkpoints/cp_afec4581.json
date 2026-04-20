@@ -1,0 +1,20 @@
+{
+  "checkpoint_id": "cp_afec4581",
+  "workflow_id": "loop_task_03db3cf4",
+  "step_id": "main",
+  "timestamp": "2026-04-20T21:44:12.350965",
+  "state": {
+    "instance_id": "inst_673c484a3c88",
+    "output": {
+      "ok": true
+    },
+    "step_results": {}
+  },
+  "completed_steps": [
+    "main"
+  ],
+  "pending_steps": [],
+  "metadata": {
+    "phase": "after_step"
+  }
+}

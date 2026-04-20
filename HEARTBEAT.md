@@ -87,14 +87,17 @@ python scripts/generate_metrics.py
 - 所有任务成功: 回复 `HEARTBEAT_OK`
 - 部分任务失败: 回复失败详情
 - 无需处理: 回复 `HEARTBEAT_OK`
+- 有待发送消息: 发送消息后回复 `HEARTBEAT_OK + 📤 已发送 N 条消息`
 
 ## 待发送消息处理
 
-心跳执行完成后，检查 `reports/ops/pending_sends.jsonl`：
+**重要**：每次心跳时必须检查并发送待发送消息！
 
-1. 如果有待发送消息，逐条调用 `message` 工具发送
-2. 发送完成后清空 `pending_sends.jsonl`
-3. 在回复中说明发送了多少条消息
+检查流程：
+1. 读取 `reports/ops/pending_sends.jsonl`
+2. 如果有消息，逐条调用 `message` 工具发送
+3. 发送完成后清空 `pending_sends.jsonl`
+4. 在回复中说明发送了多少条消息
 
 示例回复：
 ```

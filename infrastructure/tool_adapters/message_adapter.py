@@ -62,7 +62,15 @@ class MessageSenderAdapter:
                 "message": "消息已发送过（幂等）"
             }
         
-        # 写入待发送队列
+        # 尝试调用消息服务
+        result = await self._call_message_service(channel, target, message, idempotency_key)
+        
+        if result.get("success"):
+            # 记录已发送
+            await self._record_sent(idempotency_key, channel, target, message)
+            return result
+        
+        # 备用方案：写入待发送队列
         result = await self._write_to_pending_sends({
             "action": "send",
             "channel": channel,
@@ -77,6 +85,35 @@ class MessageSenderAdapter:
         
         return result
     
+    async def _call_message_service(
+        self,
+        channel: str,
+        target: str,
+        message: str,
+        idempotency_key: str
+    ) -> Dict[str, Any]:
+        """调用消息服务"""
+        import aiohttp
+        
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.post(
+                    "http://localhost:18790/send",
+                    json={
+                        "channel": channel,
+                        "target": target,
+                        "message": message,
+                        "idempotency_key": idempotency_key
+                    },
+                    timeout=aiohttp.ClientTimeout(total=5)
+                ) as resp:
+                    if resp.status == 200:
+                        return await resp.json()
+                    else:
+                        return {"success": False, "error": f"HTTP {resp.status}"}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+    
     async def _write_to_pending_sends(self, entry: Dict[str, Any]) -> Dict[str, Any]:
         """写入待发送队列"""
         pending_file = self.root / "reports" / "ops" / "pending_sends.jsonl"
@@ -84,6 +121,11 @@ class MessageSenderAdapter:
         
         with open(pending_file, 'a', encoding='utf-8') as f:
             f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+        
+        # 写入通知文件，让 AI 知道有消息待发送
+        notify_file = self.root / "reports" / "ops" / "notify_send.txt"
+        with open(notify_file, 'w', encoding='utf-8') as f:
+            f.write(f"PENDING_SEND:{entry.get('message', '')[:50]}...\n")
         
         return {
             "success": True,

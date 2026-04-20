@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
-生产级 Celery 配置 V2.0.0
+生产级 Celery 配置 V3.0.0
 
-使用 Upstash Redis 作为 Broker，Neon PostgreSQL 作为 Backend。
+使用 Upstash Redis 作为 Broker 和 Backend。
 """
 
 import os
 from celery import Celery
 from celery.schedules import crontab
 
-# Upstash Redis 作为 Broker (使用 REST API 适配)
-# 由于 Upstash 不支持标准 Redis 协议，使用 db+postgresql 作为 backend
-broker_url = 'sqla+postgresql://neondb_owner:npg_4OLShte8JHas@ep-fancy-wind-ankicwux.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require'
-result_backend = 'db+postgresql://neondb_owner:npg_4OLShte8JHas@ep-fancy-wind-ankicwux.c-6.us-east-1.aws.neon.tech/neondb?sslmode=require'
+# Upstash Redis 作为 Broker 和 Backend
+# 注意：Upstash 使用 REST API，需要特殊配置
+broker_url = 'redis://default:gQAAAAAAAZLqAAIocDE2NjFjNmExZmMxNDc0ZWRlYjY0ODZlYTc3MTRlNzI1Y3AxMTAzMTQ2@beloved-crayfish-103146.upstash.io:6379/0'
+result_backend = 'redis://default:gQAAAAAAAZLqAAIocDE2NjFjNmExZmMxNDc0ZWRlYjY0ODZlYTc3MTRlNzI1Y3AxMTAzMTQ2@beloved-crayfish-103146.upstash.io:6379/1'
 
 # 创建 Celery 应用
 app = Celery('openclaw_tasks')
@@ -37,12 +37,7 @@ app.conf.update(
             'schedule': 60.0,
         },
     },
-    # 结果表名
     result_expires=3600,
-    database_table_names={
-        'task': 'celery_taskmeta',
-        'group': 'celery_tasksetmeta',
-    },
 )
 
 # 导入任务

@@ -72,3 +72,4 @@
 {"timestamp": "2026-04-21T00:14:09.565079", "trigger_id": "governance_file_change", "action": "rule_check", "result": "success"}
 {"timestamp": "2026-04-21T00:16:01.221009", "trigger_id": "governance_file_change", "action": "rule_check", "result": "success"}
 {"timestamp": "2026-04-21T00:31:16.267681", "trigger_id": "cache_cleanup", "action": "cache_cleanup", "result": "failed: "}
+{"timestamp": "2026-04-21T01:00:43.061470", "trigger_id": "backup_cleanup", "action": "backup_cleanup", "result": "success"}

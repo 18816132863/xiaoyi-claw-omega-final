@@ -1,40 +1,40 @@
 {
   "states": {
     "fusion_engine": {
-      "last_refreshed": "2026-04-21T05:08:23.949842",
-      "refresh_count": 13
+      "last_refreshed": "2026-04-21T05:23:35.152754",
+      "refresh_count": 14
     },
     "memory_engine": {
-      "last_refreshed": "2026-04-21T04:53:21.248568",
-      "refresh_count": 12
+      "last_refreshed": "2026-04-21T05:08:32.897237",
+      "refresh_count": 13
     },
     "rule_engine": {
-      "last_refreshed": "2026-04-21T04:53:21.249516",
-      "refresh_count": 12
+      "last_refreshed": "2026-04-21T05:08:32.898093",
+      "refresh_count": 13
     },
     "exception_manager": {
-      "last_refreshed": "2026-04-21T04:53:23.316318",
-      "refresh_count": 12
+      "last_refreshed": "2026-04-21T05:08:34.709069",
+      "refresh_count": 13
     },
     "dependency_manager": {
-      "last_refreshed": "2026-04-21T04:53:23.317313",
-      "refresh_count": 12
+      "last_refreshed": "2026-04-21T05:08:34.709878",
+      "refresh_count": 13
     },
     "delete_manager": {
-      "last_refreshed": "2026-04-21T04:53:23.318226",
-      "refresh_count": 12
+      "last_refreshed": "2026-04-21T05:08:34.710630",
+      "refresh_count": 13
     },
     "skill_registry": {
-      "last_refreshed": "2026-04-21T04:53:23.319130",
-      "refresh_count": 12
+      "last_refreshed": "2026-04-21T05:08:34.711396",
+      "refresh_count": 13
     },
     "core_identity": {
-      "last_refreshed": "2026-04-21T04:53:23.320087",
-      "refresh_count": 12
+      "last_refreshed": "2026-04-21T05:08:34.712187",
+      "refresh_count": 13
     },
     "architecture": {
-      "last_refreshed": "2026-04-21T04:53:23.320953",
-      "refresh_count": 12
+      "last_refreshed": "2026-04-21T05:08:34.712903",
+      "refresh_count": 13
     }
   },
   "last_check": null,

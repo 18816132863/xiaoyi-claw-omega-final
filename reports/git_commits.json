@@ -5766,6 +5766,29 @@
         ],
         "renamed": []
       }
+    },
+    {
+      "hash": "c31b0fd9",
+      "message": "架构巡检: 5/6 通过, 358 文件",
+      "timestamp": "2026-04-21T00:14:15.500389",
+      "changes": {
+        "modified": [
+          "overnance/budget/budgets.json",
+          "reports/audit/abuse_audit.jsonl",
+          "reports/observability/events.jsonl",
+          "reports/ops/auto_trigger_log.jsonl",
+          "reports/ops/keeper_state.json",
+          "reports/ops/rule_exception_debt.json",
+          "reports/ops/rule_registry_snapshot.json",
+          "reports/ops/session_end_detection.json",
+          "reports/ops/session_state.json",
+          "reports/ops/unified_inspection_v7.2.0.json",
+          "skills/registry/skill_health_index.json"
+        ],
+        "added": [],
+        "deleted": [],
+        "renamed": []
+      }
     }
   ]
 }

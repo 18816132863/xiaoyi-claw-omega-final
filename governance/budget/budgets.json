@@ -6,7 +6,7 @@
       "period": "daily",
       "limit": 10000,
       "current_usage": 1000,
-      "reset_at": "2026-04-21T00:00:00"
+      "reset_at": "2026-04-22T00:00:00"
     }
   ]
 }

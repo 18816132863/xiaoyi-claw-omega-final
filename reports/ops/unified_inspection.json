@@ -1,42 +1,42 @@
 {
   "profile": "premerge",
-  "generated_at": "2026-04-20T18:33:27.997917",
+  "generated_at": "2026-04-20T18:39:39.285786",
   "version": "5.0.0",
   "checks": [
     {
       "name": "变更影响",
       "passed": true,
-      "duration_ms": 642,
+      "duration_ms": 208,
       "cached": false
     },
     {
       "name": "仓库完整性",
       "passed": true,
-      "duration_ms": 716,
-      "cached": false
-    },
-    {
-      "name": "层间依赖",
-      "passed": true,
-      "duration_ms": 756,
+      "duration_ms": 237,
       "cached": false
     },
     {
       "name": "JSON契约",
       "passed": true,
-      "duration_ms": 2392,
+      "duration_ms": 287,
+      "cached": false
+    },
+    {
+      "name": "层间依赖",
+      "passed": true,
+      "duration_ms": 348,
       "cached": false
     },
     {
       "name": "技能安全",
       "passed": true,
-      "duration_ms": 4535,
+      "duration_ms": 4087,
       "cached": false
     },
     {
       "name": "架构完整性",
-      "passed": true,
-      "duration_ms": 12432,
+      "passed": false,
+      "duration_ms": 11923,
       "cached": false
     },
     {
@@ -71,9 +71,9 @@
   ],
   "summary": {
     "total": 8,
-    "passed": 8,
-    "failed": 0,
+    "passed": 7,
+    "failed": 1,
     "cached": 0,
-    "max_duration_ms": 12432
+    "max_duration_ms": 11923
   }
 }

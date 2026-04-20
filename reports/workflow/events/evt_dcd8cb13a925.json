@@ -1,0 +1,14 @@
+{
+  "event_id": "evt_dcd8cb13a925",
+  "instance_id": "inst_46c3f4169432",
+  "event_type": "step_completed",
+  "timestamp": "2026-04-20T14:34:05.203511",
+  "step_id": "main",
+  "data": {
+    "output": {
+      "ok": true
+    },
+    "duration_ms": 1
+  },
+  "metadata": {}
+}

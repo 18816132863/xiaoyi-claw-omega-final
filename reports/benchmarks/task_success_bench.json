@@ -1,9 +1,0 @@
-{
-  "benchmark": "task_success_rate",
-  "timestamp": "2026-04-17T20:54:54.507001",
-  "iterations": 10,
-  "successes": 0,
-  "failures": 10,
-  "success_rate": 0.0,
-  "avg_latency_ms": 34.674835205078125
-}

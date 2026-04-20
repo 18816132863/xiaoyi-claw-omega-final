@@ -1,3 +1,0 @@
-{"timestamp": "2026-04-17T23:37:19.067986", "date": "2026-04-17", "type": "sleep", "value": 7.0, "unit": "hours", "note": "", "source": "user_input"}
-{"timestamp": "2026-04-17T23:37:19.067986", "date": "2026-04-17", "type": "exercise", "value": 30.0, "unit": "minutes", "note": "", "source": "user_input"}
-{"timestamp": "2026-04-17T23:37:19.067986", "date": "2026-04-17", "type": "reading", "value": 20.0, "unit": "pages", "note": "", "source": "user_input"}

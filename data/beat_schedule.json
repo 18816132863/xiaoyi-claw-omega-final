@@ -1,8 +1,0 @@
-{
-  "scan_scheduled_tasks": {
-    "task": "scan_scheduled_tasks",
-    "schedule": 60.0,
-    "last_run": null,
-    "next_run": "2026-04-20T23:12:16.379086"
-  }
-}

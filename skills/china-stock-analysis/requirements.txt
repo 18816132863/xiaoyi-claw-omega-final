@@ -1,4 +1,0 @@
-pandas
-tushare
-requests
-beautifulsoup4

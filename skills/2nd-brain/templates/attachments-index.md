@@ -1,4 +1,0 @@
-# Attachments
-
-| File | Description | Added |
-|------|-------------|-------|

@@ -1,0 +1,12 @@
+{
+  "event_id": "evt_2c15c9a2d67e",
+  "instance_id": "inst_d5ad450adf67",
+  "event_type": "workflow_completed",
+  "timestamp": "2026-04-21T01:17:43.775898",
+  "step_id": null,
+  "data": {
+    "status": "completed",
+    "output": {}
+  },
+  "metadata": {}
+}

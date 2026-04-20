@@ -15,7 +15,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║          层间依赖检查 V1.0.0                    ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-20 14:09:54\n\n【检查 core/】\n  ✅ 无违规\n\n【检查 orchestration/】\n  ✅ 无违规\n\n【检查 execution/】\n  ✅ 无违规\n\n【检查 memory_context/】\n  ✅ 无违规\n\n【检查 governance/】\n  ✅ 无违规\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 5\n  ❌ 违规: 0\n\n"
+      "output": "╔══════════════════════════════════════════════════╗\n║          层间依赖检查 V1.0.0                    ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-20 14:18:55\n\n【检查 core/】\n  ✅ 无违规\n\n【检查 orchestration/】\n  ✅ 无违规\n\n【检查 execution/】\n  ✅ 无违规\n\n【检查 memory_context/】\n  ✅ 无违规\n\n【检查 governance/】\n  ✅ 无违规\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 5\n  ❌ 违规: 0\n\n"
     },
     {
       "rule_id": "R002",
@@ -31,7 +31,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║          JSON 契约校验 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-20 14:09:54\n\n【校验 JSON 契约】\n  ✅ reports/runtime_integrity.json 符合 schema\n  ✅ reports/quality_gate.json 符合 schema\n  ✅ reports/release_gate.json 符合 schema\n  ✅ reports/alerts/latest_alerts.json 符合 schema (空数组)\n  ✅ governance/ops/incident_tracker.json 符合 schema (1 条)\n  ✅ reports/remediation/latest_remediation.json 符合 schema\n  ✅ reports/re"
+      "output": "╔══════════════════════════════════════════════════╗\n║          JSON 契约校验 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-20 14:18:55\n\n⚠️ jsonschema 未安装，跳过 schema 验证\n安装命令: pip install jsonschema\n\n"
     },
     {
       "rule_id": "R003",
@@ -79,7 +79,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║          规则守卫自测 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-20 14:10:00\n\n【测试 1: 层间依赖守卫】\n  ✅ 违规样例有效: 包含 'from core ...'\n  ✅ 层间依赖守卫测试通过\n\n【测试 2: JSON 契约守卫】\n  ✅ 违规样例有效: 缺少 'profile' 必需字段\n  ✅ JSON 契约守卫测试通过\n\n【测试 3: 检查器执行能力】\n  ✅ check_layer_dependencies.py 正常执行\n  ✅ check_json_contracts.py 正常执行\n\n==================================================\n【Rule Guard Self-Test 结果】\n==============================="
+      "output": "╔══════════════════════════════════════════════════╗\n║          规则守卫自测 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-20 14:18:56\n\n【测试 1: 层间依赖守卫】\n  ✅ 违规样例有效: 包含 'from core ...'\n  ✅ 层间依赖守卫测试通过\n\n【测试 2: JSON 契约守卫】\n  ✅ 违规样例有效: 缺少 'profile' 必需字段\n  ✅ JSON 契约守卫测试通过\n\n【测试 3: 检查器执行能力】\n  ✅ check_layer_dependencies.py 正常执行\n  ✅ check_json_contracts.py 正常执行\n\n==================================================\n【Rule Guard Self-Test 结果】\n==============================="
     },
     {
       "rule_id": "R006",
@@ -141,7 +141,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "usage: delete_manager.py [-h] [--request REQUEST] [--reason REASON]\n                         [--confirm CONFIRM] [--reject REJECT] [--list]\n                         [--restore RESTORE] [--empty-trash EMPTY_TRASH]\n\n删除确认模块 V1.0.0\n\noptions:\n  -h, --help            show this help message and exit\n  --request REQUEST     请求删除目标\n  --reason REASON       删除原因\n  --confirm CONFIRM     确认删除请求ID\n  --reject REJECT       拒绝删除请求ID\n  --list                列出待确认请求\n  --restore RESTORE     从回收站恢复\n  --empty-trash E"
+      "output": "usage: delete_manager.py [-h] [--request REQUEST] [--reason REASON]\n                         [--confirm CONFIRM] [--reject REJECT] [--list]\n                         [--restore RESTORE] [--empty-trash EMPTY_TRASH]\n\n删除确认模块 V1.0.0\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --request REQUEST     请求删除目标\n  --reason REASON       删除原因\n  --confirm CONFIRM     确认删除请求ID\n  --reject REJECT       拒绝删除请求ID\n  --list                列出待确认请求\n  --restore RESTORE     从回收站恢复\n  --em"
     },
     {
       "rule_id": "R010",
@@ -157,7 +157,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "usage: architecture_compliance_checker.py [-h] [--check] [--report] [--test]\n\n架构遵循检查器 V2.0.0\n\noptions:\n  -h, --help  show this help message and exit\n  --check     检查最近 24 小时合规性\n  --report    生成合规报告\n  --test      测试强制执行机制\n"
+      "output": "usage: architecture_compliance_checker.py [-h] [--check] [--report] [--test]\n\n架构遵循检查器 V2.0.0\n\noptional arguments:\n  -h, --help  show this help message and exit\n  --check     检查最近 24 小时合规性\n  --report    生成合规报告\n  --test      测试强制执行机制\n"
     }
   ],
   "passed_rules": [
@@ -266,5 +266,5 @@
   "warning_count": 0,
   "skipped_count": 1,
   "waived_count": 1,
-  "generated_at": "2026-04-20T14:10:03.165685"
+  "generated_at": "2026-04-20T14:18:57.029556"
 }

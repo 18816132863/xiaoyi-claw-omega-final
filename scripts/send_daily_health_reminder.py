@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-每日健康提醒 - V1.0.0
+每日健康提醒 - V1.1.0
 
 职责：
 1. 每天早上9点发送健康提醒
 2. 包含睡眠、运动、饮水、作息建议
 3. 根据用户历史数据个性化提醒
+4. V1.1.0: 集成消息发送功能
 
 使用方式：
 - python scripts/send_daily_health_reminder.py
@@ -17,6 +18,10 @@ import json
 from pathlib import Path
 from datetime import datetime, date
 from typing import Dict, Any, Optional
+
+# 添加消息发送能力
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from send_message_helper import send_message
 
 
 def get_project_root() -> Path:
@@ -182,7 +187,7 @@ class DailyHealthReminder:
     def run(self) -> Dict:
         """运行健康提醒"""
         print("=" * 60)
-        print("  每日健康提醒")
+        print("  每日健康提醒 V1.1.0")
         print("=" * 60)
         print()
         
@@ -195,14 +200,22 @@ class DailyHealthReminder:
         # 保存记录
         self.save_reminder(reminder)
         
+        # V1.1.0: 发送消息给用户
+        send_result = send_message(
+            title="🌅 每日健康提醒",
+            content=message
+        )
+        
         print("✅ 健康提醒已生成")
         print(f"📁 记录: {self.reports_dir / 'daily_reminders.jsonl'}")
+        print(f"📤 消息: {send_result.get('status')}")
         print()
         
         return {
             "status": "success",
             "reminder": reminder,
-            "message": message
+            "message": message,
+            "send_result": send_result
         }
 
 
@@ -211,13 +224,10 @@ def main():
     reminder = DailyHealthReminder(root)
     result = reminder.run()
     
-    # 输出消息供外部调用
-    if result.get("message"):
-        print("\n--- MESSAGE ---")
-        print(result["message"])
-        print("--- END ---\n")
+    # V1.1.0: 消息已在 run() 中发送
+    # 这里只需返回状态
     
-    return 0
+    return 0 if result.get("status") == "success" else 1
 
 
 if __name__ == "__main__":

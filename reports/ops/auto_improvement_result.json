@@ -1,0 +1,62 @@
+{
+  "analysis": {
+    "total": 5,
+    "patterns": [
+      {
+        "layer": "L1_core",
+        "severity": "CRITICAL",
+        "count": 1,
+        "examples": [
+          "L1_core 未完成 (状态: pending)"
+        ]
+      },
+      {
+        "layer": "L3_orchestration",
+        "severity": "HIGH",
+        "count": 1,
+        "examples": [
+          "L3_orchestration 未完成 (状态: pending)"
+        ]
+      },
+      {
+        "layer": "L4_execution",
+        "severity": "MEDIUM",
+        "count": 1,
+        "examples": [
+          "L4_execution 未完成 (状态: pending)"
+        ]
+      },
+      {
+        "layer": "L5_governance",
+        "severity": "MEDIUM",
+        "count": 1,
+        "examples": [
+          "L5_governance 未完成 (状态: pending)"
+        ]
+      },
+      {
+        "layer": "L6_infrastructure",
+        "severity": "MEDIUM",
+        "count": 1,
+        "examples": [
+          "L6_infrastructure 未完成 (状态: pending)"
+        ]
+      }
+    ],
+    "suggestions": [
+      "在任务开始前强制读取 ARCHITECTURE_QUICK_REFERENCE.md",
+      "在 L2 Memory 后自动调用 TaskEngine.process()",
+      "在 L3 Orchestration 后自动路由技能",
+      "在 L4 Execution 后自动验证结果",
+      "在 L5 Governance 后自动调用工具"
+    ]
+  },
+  "upgrade": {
+    "status": "upgraded",
+    "old_version": "3.0.0",
+    "new_version": "3.0.1",
+    "violations_analyzed": 5,
+    "patterns_detected": 5,
+    "check_items_added": 0
+  }
+}

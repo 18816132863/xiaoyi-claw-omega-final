@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-心跳执行器 V7.2.0
+心跳执行器 V7.3.0
 
 统一执行所有心跳任务，支持：
 - 自动 Git 同步
@@ -8,6 +8,7 @@
 - Metrics 生成
 - 架构巡检
 - 规则引擎检查
+- V7.3.0: 消息队列处理
 
 使用方式：
 1. 被 HEARTBEAT.md 心跳触发
@@ -42,19 +43,11 @@ class HeartbeatExecutor:
         # 心跳任务配置
         self.tasks = [
             {
-                "id": "auto_git",
-                "name": "自动 Git 同步",
-                "command": [sys.executable, str(self.root / "infrastructure/auto_git.py"), "sync", "心跳自动提交"],
+                "id": "message_sender",
+                "name": "消息队列处理",
+                "command": [sys.executable, str(self.root / "scripts/message_sender.py")],
                 "timeout": 60,
-                "priority": 0,
-                "enabled": True
-            },
-            {
-                "id": "auto_backup",
-                "name": "自动备份上传",
-                "command": [sys.executable, str(self.root / "infrastructure/auto_backup_uploader.py")],
-                "timeout": 60,
-                "priority": 1,
+                "priority": -1,  # 最高优先级
                 "enabled": True
             },
             {
@@ -62,7 +55,15 @@ class HeartbeatExecutor:
                 "name": "自动触发器",
                 "command": [sys.executable, str(self.root / "scripts/auto_trigger.py")],
                 "timeout": 120,
-                "priority": 2,
+                "priority": 0,
+                "enabled": True
+            },
+            {
+                "id": "session_end_detector",
+                "name": "会话结束检测",
+                "command": [sys.executable, str(self.root / "scripts/session_end_detector.py")],
+                "timeout": 180,
+                "priority": 1,
                 "enabled": True
             },
             {
@@ -70,24 +71,40 @@ class HeartbeatExecutor:
                 "name": "永久守护器刷新",
                 "command": [sys.executable, str(self.root / "scripts/permanent_keeper.py"), "refresh"],
                 "timeout": 60,
-                "priority": 3,
+                "priority": 2,
                 "enabled": True
+            },
+            {
+                "id": "auto_git",
+                "name": "自动 Git 同步",
+                "command": [sys.executable, str(self.root / "infrastructure/auto_git.py"), "sync", "心跳自动提交"],
+                "timeout": 60,
+                "priority": 3,
+                "enabled": False  # 禁用：由会话结束检测器触发
+            },
+            {
+                "id": "auto_backup",
+                "name": "自动备份上传",
+                "command": [sys.executable, str(self.root / "infrastructure/auto_backup_uploader.py")],
+                "timeout": 60,
+                "priority": 4,
+                "enabled": False  # 禁用：由会话结束检测器触发
             },
             {
                 "id": "metrics_generator",
                 "name": "Metrics 生成",
                 "command": [sys.executable, str(self.root / "scripts/generate_metrics.py")],
                 "timeout": 60,
-                "priority": 4,
-                "enabled": False  # 禁用，示例脚本有导入错误
+                "priority": 5,
+                "enabled": False  # 禁用：示例脚本有导入错误
             },
             {
                 "id": "quick_inspection",
                 "name": "快速巡检",
                 "command": [sys.executable, str(self.root / "scripts/unified_inspector_v7.py"), "--quick"],
                 "timeout": 120,
-                "priority": 5,
-                "enabled": False  # 默认关闭，避免耗时过长
+                "priority": 6,
+                "enabled": False  # 禁用：避免耗时过长
             }
         ]
     

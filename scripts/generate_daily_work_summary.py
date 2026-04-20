@@ -254,11 +254,14 @@ def main():
     summary = DailyWorkSummary(root)
     result = summary.run()
     
-    # 输出消息供外部调用
+    # 发送消息给用户
     if result.get("message"):
-        print("\n--- MESSAGE ---")
-        print(result["message"])
-        print("--- END ---\n")
+        # 导入消息发送器
+        sys.path.insert(0, str(root))
+        from scripts.message_sender import MessageSender
+        
+        # 发送消息
+        MessageSender.send(result["message"], "每日工作总结")
     
     return 0
 

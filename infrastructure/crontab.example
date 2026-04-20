@@ -1,0 +1,30 @@
+# OpenClaw Cron 配置 V1.0.0
+# 
+# 安装方式：
+#   crontab -e
+# 然后添加以下内容：
+#   */15 * * * * cd /home/sandbox/.openclaw/workspace && /usr/bin/python3 scripts/heartbeat_executor.py >> logs/cron.log 2>&1
+#
+# 说明：
+#   - 每 15 分钟执行一次心跳
+#   - 心跳会自动触发定时任务
+#   - 日志记录到 logs/cron.log
+
+# 心跳执行器（每 15 分钟）
+*/15 * * * * cd /home/sandbox/.openclaw/workspace && /usr/bin/python3 scripts/heartbeat_executor.py >> logs/cron.log 2>&1
+
+# 可选：单独的定时任务（如果不想依赖心跳）
+# 每日健康提醒（每天 09:00）
+# 0 9 * * * cd /home/sandbox/.openclaw/workspace && /usr/bin/python3 scripts/send_daily_health_reminder.py >> logs/health_reminder.log 2>&1
+
+# 每日工作总结（每天 18:00）
+# 0 18 * * * cd /home/sandbox/.openclaw/workspace && /usr/bin/python3 scripts/send_daily_work_summary.py >> logs/work_summary.log 2>&1
+
+# 晚间复盘（每天 21:00）
+# 0 21 * * * cd /home/sandbox/.openclaw/workspace && /usr/bin/python3 scripts/send_evening_review.py >> logs/evening_review.log 2>&1
+
+# 系统健康报告（每天 22:00）
+# 0 22 * * * cd /home/sandbox/.openclaw/workspace && /usr/bin/python3 scripts/send_system_health_report.py >> logs/health_report.log 2>&1
+
+# 技能使用报告（每天 23:00）
+# 0 23 * * * cd /home/sandbox/.openclaw/workspace && /usr/bin/python3 scripts/send_skill_usage_report.py >> logs/skill_report.log 2>&1

@@ -10,6 +10,36 @@
 - **更新时间**: 2026-04-17
 
 ## 最近变更
+
+### 2026-04-20 架构遵循强制机制
+
+**新增**：
+1. ✅ `core/ARCHITECTURE_COMPLIANCE.md` - 架构遵循强制机制定义
+2. ✅ `core/ARCHITECTURE_QUICK_REFERENCE.md` - 架构快速参考卡片
+3. ✅ `scripts/architecture_compliance_checker.py` - 架构遵循检查器
+4. ✅ `core/RULE_REGISTRY.json` - 新增 R010 架构遵循规则
+
+**强制流程**：
+```
+L1 Core → L2 Memory → L3 Orchestration → L4 Execution → L5 Governance → L6 Infrastructure
+```
+
+**检查机制**：
+- 每次任务开始前：检查是否按顺序执行各层
+- 每次任务结束后：验证结果是否符合 IO 契约
+- 执行轨迹记录：`reports/ops/architecture_compliance.jsonl`
+- 违规记录：`reports/ops/architecture_violations.jsonl`
+
+**自检清单**（回复前必须确认）：
+- [ ] 已读取 L1 Core 规则
+- [ ] 已搜索 L2 Memory
+- [ ] 已调用 L3 Orchestration
+- [ ] 已执行 L4 Execution
+- [ ] 已验证 L5 Governance
+- [ ] 已调用 L6 Infrastructure
+- [ ] 结果符合 IO 契约
+- [ ] 已记录执行轨迹
+
 ### 2026-04-17 自动同步
 
 - **run_doc_sync**: 新增方法: run_doc_sync(root, execute)

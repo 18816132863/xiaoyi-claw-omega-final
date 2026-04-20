@@ -8,6 +8,7 @@
 2. `USER.md` — 用户
 3. `TOOLS.md` — 工具规则
 4. `memory/YYYY-MM-DD.md` — 今日日记
+5. **`core/ARCHITECTURE_QUICK_REFERENCE.md` — 架构快速参考（必须阅读）**
 
 ---
 
@@ -169,6 +170,38 @@ python scripts/run_release_gate.py release
 4. 是否影响历史兼容映射
 5. 是否触发变更影响强制门禁
 6. 是否需要执行 follow-up 门禁
+
+---
+
+## 架构遵循强制机制
+
+**所有任务处理必须严格按照六层架构流程**：
+
+```
+L1 Core → L2 Memory → L3 Orchestration → L4 Execution → L5 Governance → L6 Infrastructure
+```
+
+**详细规范**：`core/ARCHITECTURE_COMPLIANCE.md`
+
+**快速参考**：`core/ARCHITECTURE_QUICK_REFERENCE.md`
+
+**检查工具**：`scripts/architecture_compliance_checker.py`
+
+**禁止行为**：
+- ❌ 跳过任何层级
+- ❌ 直接调用工具（绕过编排层）
+- ❌ 直接读取脚本（违反依赖规则）
+- ❌ 返回非契约格式（违反 IO 契约）
+
+**自检清单**（回复前必须确认）：
+- [ ] 已读取 L1 Core 规则
+- [ ] 已搜索 L2 Memory
+- [ ] 已调用 L3 Orchestration
+- [ ] 已执行 L4 Execution
+- [ ] 已验证 L5 Governance
+- [ ] 已调用 L6 Infrastructure
+- [ ] 结果符合 IO 契约
+- [ ] 已记录执行轨迹
 
 ---
 

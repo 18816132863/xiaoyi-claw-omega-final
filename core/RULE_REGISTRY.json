@@ -220,6 +220,78 @@
       "severity": "error",
       "blocking": true,
       "outputs": []
+    },
+    "R010": {
+      "rule_id": "R010",
+      "name": "架构遵循规则",
+      "description": "所有任务处理必须严格按照六层架构流程，强制执行轨迹记录、违规检测和自动改进 (自动升级 2026-04-20)",
+      "version": "3.0.1",
+      "owner": "architecture",
+      "status": "active",
+      "introduced_in": "14A",
+      "deprecated_in": null,
+      "rollout_stage": "all",
+      "owner_layer": "L1",
+      "source_files": [
+        "core/ARCHITECTURE_COMPLIANCE.md",
+        "core/ARCHITECTURE_QUICK_REFERENCE.md",
+        "scripts/architecture_compliance_checker.py",
+        "scripts/architecture_auto_improver.py"
+      ],
+      "checker_script": "scripts/architecture_compliance_checker.py",
+      "enforcement_stage": [
+        "premerge",
+        "nightly",
+        "release"
+      ],
+      "severity": "error",
+      "blocking": true,
+      "outputs": [
+        "reports/ops/architecture_compliance.jsonl",
+        "reports/ops/architecture_violations.jsonl",
+        "reports/ops/violation_patterns.json",
+        "reports/ops/auto_improvements.jsonl"
+      ],
+      "enforcement_mechanism": {
+        "pre_task_check": true,
+        "post_task_check": true,
+        "execution_trace_required": true,
+        "violation_blocking": true,
+        "auto_correction": true,
+        "auto_improvement": true,
+        "auto_upgrade": true
+      },
+      "check_items": [
+        "L1_core_rules_read",
+        "L2_memory_searched",
+        "L3_orchestration_called",
+        "L4_execution_routed",
+        "L5_governance_validated",
+        "L6_infrastructure_called",
+        "io_contract_compliant",
+        "execution_trace_recorded",
+        "auto_improvement_triggered",
+        "auto_detect_L1_core",
+        "auto_detect_L3_orchestration",
+        "auto_detect_L4_execution",
+        "auto_detect_L5_governance",
+        "auto_detect_L6_infrastructure"
+      ],
+      "violation_levels": {
+        "CRITICAL": "跳过 L1 Core 规则读取",
+        "HIGH": "跳过 L2 Memory 或 L3 Orchestration",
+        "MEDIUM": "跳过 L4/L5/L6 或违反 IO 契约",
+        "LOW": "缺少执行轨迹"
+      },
+      "auto_improvement": {
+        "enabled": true,
+        "trigger_on_violation": true,
+        "analyze_patterns": true,
+        "generate_fixes": true,
+        "auto_apply_safe_fixes": true,
+        "auto_upgrade_rule": true,
+        "max_auto_fixes_per_day": 10
+      }
     }
   },
   "profiles": {
@@ -233,7 +305,8 @@
         "R006",
         "R007",
         "R008",
-        "R009"
+        "R009",
+        "R010"
       ],
       "description": "Premerge 门禁规则集"
     },
@@ -247,7 +320,8 @@
         "R007",
         "R008",
         "R004",
-        "R009"
+        "R009",
+        "R010"
       ],
       "description": "Nightly 门禁规则集"
     },
@@ -261,7 +335,8 @@
         "R007",
         "R008",
         "R004",
-        "R009"
+        "R009",
+        "R010"
       ],
       "description": "Release 门禁规则集"
     }

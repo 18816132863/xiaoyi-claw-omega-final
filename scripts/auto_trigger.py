@@ -388,6 +388,12 @@ class AutoTrigger:
         current_minute = current_time.minute
         current_weekday = date.today().weekday()  # 0=周一, 6=周日
         
+        # 调试日志
+        print(f"  当前时间: {current_hour:02d}:{current_minute:02d}")
+        print(f"  今日已触发: {today_triggered}")
+        print(f"  本周已触发: {week_triggered}")
+        print()
+        
         # 每日首次启动
         if "daily_first_start" not in today_triggered:
             triggers.append({
@@ -412,7 +418,7 @@ class AutoTrigger:
         
         # 夜间巡检 (02:00)
         if "nightly_audit" not in today_triggered:
-            if current_hour == 2 and current_minute < 30:
+            if current_hour == 2:  # 扩大到整个小时
                 triggers.append({
                     "id": "nightly_audit",
                     "name": "夜间巡检",
@@ -423,7 +429,7 @@ class AutoTrigger:
         
         # 报告清理 (03:00)
         if "report_cleanup" not in today_triggered:
-            if current_hour == 3 and current_minute < 30:
+            if current_hour == 3:  # 扩大到整个小时
                 triggers.append({
                     "id": "report_cleanup",
                     "name": "报告清理",
@@ -434,7 +440,7 @@ class AutoTrigger:
         
         # AI API 检查 (08:00)
         if "ai_api_check" not in today_triggered:
-            if current_hour == 8 and current_minute < 30:
+            if current_hour == 8:  # 扩大到整个小时
                 triggers.append({
                     "id": "ai_api_check",
                     "name": "AI API 状态检查",
@@ -445,7 +451,7 @@ class AutoTrigger:
         
         # 每日健康提醒 (09:00)
         if "daily_health_reminder" not in today_triggered:
-            if current_hour == 9 and current_minute < 30:
+            if current_hour == 9:  # 扩大到整个小时
                 triggers.append({
                     "id": "daily_health_reminder",
                     "name": "每日健康提醒",
@@ -456,7 +462,7 @@ class AutoTrigger:
         
         # 每日工作总结 (18:00)
         if "daily_work_summary" not in today_triggered:
-            if current_hour == 18 and current_minute < 30:
+            if current_hour == 18:  # 扩大到整个小时
                 triggers.append({
                     "id": "daily_work_summary",
                     "name": "每日工作总结",
@@ -610,7 +616,7 @@ class AutoTrigger:
         
         # 晚间复盘 (21:00)
         if "end_of_day_review" not in today_triggered:
-            if current_hour == 21 and current_minute < 30:
+            if current_hour == 21:  # 扩大到整个小时
                 triggers.append({
                     "id": "end_of_day_review",
                     "name": "晚间复盘",
@@ -623,7 +629,7 @@ class AutoTrigger:
         
         # 会话清理 (00:00)
         if "session_cleanup" not in today_triggered:
-            if current_hour == 0 and current_minute < 30:
+            if current_hour == 0:  # 扩大到整个小时
                 triggers.append({
                     "id": "session_cleanup",
                     "name": "会话清理",
@@ -632,7 +638,7 @@ class AutoTrigger:
                     "reason": "会话清理时间 (00:00)"
                 })
         
-        # 缓存清理 (00:30)
+        # 缓存清理 (00:30) - 特殊处理，保持在 00:30-00:59
         if "cache_cleanup" not in today_triggered:
             if current_hour == 0 and current_minute >= 30:
                 triggers.append({
@@ -645,7 +651,7 @@ class AutoTrigger:
         
         # 备份清理 (01:00)
         if "backup_cleanup" not in today_triggered:
-            if current_hour == 1 and current_minute < 30:
+            if current_hour == 1:  # 扩大到整个小时
                 triggers.append({
                     "id": "backup_cleanup",
                     "name": "备份清理",
@@ -656,7 +662,7 @@ class AutoTrigger:
         
         # 系统健康报告 (22:00)
         if "system_health_report" not in today_triggered:
-            if current_hour == 22 and current_minute < 30:
+            if current_hour == 22:  # 扩大到整个小时
                 triggers.append({
                     "id": "system_health_report",
                     "name": "系统健康报告",
@@ -667,7 +673,7 @@ class AutoTrigger:
         
         # 技能使用统计 (23:00)
         if "skill_usage_stats" not in today_triggered:
-            if current_hour == 23 and current_minute < 30:
+            if current_hour == 23:  # 扩大到整个小时
                 triggers.append({
                     "id": "skill_usage_stats",
                     "name": "技能使用统计",

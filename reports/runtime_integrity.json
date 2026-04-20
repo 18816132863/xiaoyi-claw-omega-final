@@ -1,0 +1,17 @@
+{
+  "profile": "nightly",
+  "scope": "all",
+  "verified_at": "2026-04-21T02:03:59.124442",
+  "overall_passed": true,
+  "failure_reasons": [],
+  "p0_count": 0,
+  "p1_count": 2,
+  "p2_count": 18,
+  "local_status": "passed",
+  "local_results": [],
+  "integration_status": "passed",
+  "integration_results": [],
+  "external_status": "passed",
+  "external_results": [],
+  "skipped_skills": []
+}

@@ -1,0 +1,41 @@
+{
+  "current_profile": "nightly",
+  "executed_commands": [
+    {
+      "command": "/usr/bin/python3 /home/sandbox/.openclaw/workspace/infrastructure/verify_runtime_integrity.py --profile nightly --report-json reports/runtime_integrity.json",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-21T02:03:59.131568"
+    },
+    {
+      "command": "/usr/bin/python3 /home/sandbox/.openclaw/workspace/governance/quality_gate.py --profile nightly --report-json reports/quality_gate.json",
+      "returncode": 0,
+      "success": true,
+      "timestamp": "2026-04-21T02:03:59.204449"
+    }
+  ],
+  "executed_rule_checks": {
+    "layer_dependency": true,
+    "json_contract": true
+  },
+  "executed_gate_checks": {
+    "runtime": true,
+    "quality": true
+  },
+  "engine_failed": true,
+  "blocking_failures": [
+    {
+      "rule_id": "R003",
+      "name": "唯一真源规则",
+      "owner": "architecture",
+      "status": "active"
+    },
+    {
+      "rule_id": "R006",
+      "name": "仓库完整性规则",
+      "owner": "infrastructure",
+      "status": "active"
+    }
+  ],
+  "timestamp": "2026-04-21T02:03:59.204705"
+}

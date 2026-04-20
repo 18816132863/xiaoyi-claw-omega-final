@@ -1,0 +1,62 @@
+{
+  "audit_at": "2026-04-21T02:03:59.214054",
+  "profile": "nightly",
+  "overall_passed": true,
+  "has_regression": false,
+  "strong_regressions": [],
+  "weak_regressions": [],
+  "changes": [],
+  "runtime_summary": {
+    "p0_count": 0,
+    "p1_count": 2,
+    "p2_count": 18,
+    "local_status": "passed",
+    "integration_status": "passed",
+    "external_status": "passed",
+    "skipped_count": 0
+  },
+  "quality_summary": {
+    "passed": true,
+    "checks": {
+      "protected_files": {
+        "status": "pass",
+        "message": "保护文件完整 (19 个)"
+      },
+      "architecture_files": {
+        "status": "pass",
+        "message": "架构文件完整 (8 个)"
+      },
+      "skill_registry": {
+        "status": "pass",
+        "message": "技能总数: 3, 可执行: 0"
+      }
+    }
+  },
+  "release_summary": {
+    "can_release": false,
+    "blocked_count": 0
+  },
+  "registry_check": {
+    "status": "error",
+    "message": "'list' object has no attribute 'values'"
+  },
+  "p2_trend": {
+    "status": "info",
+    "message": "首次运行，无历史数据"
+  },
+  "summary": {
+    "p0_count": 0,
+    "p1_count": 2,
+    "p2_count": 18,
+    "local_status": "passed",
+    "integration_status": "passed",
+    "external_status": "passed",
+    "skipped_count": 0,
+    "total_skills": 0,
+    "callable_skills": 0,
+    "quality_gate_passed": true,
+    "can_release": false,
+    "blocked_reason_count": 0
+  },
+  "recommendations": []
+}

@@ -1,3 +1,4 @@
+from collections import defaultdict
 #!/usr/bin/env python3
 """
 服务模板与复制引擎 - V2.8.0

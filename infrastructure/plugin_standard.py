@@ -1,3 +1,13 @@
+import re
+from pathlib import Path
+
+def get_project_root() -> Path:
+    """获取项目根目录"""
+    current = Path(__file__).resolve().parent
+    while current != "/" and not (current / "core" / "ARCHITECTURE.md").exists():
+        current = current.parent
+    return current if current != "/" else Path(__file__).resolve().parent
+
 #!/usr/bin/env python3
 """
 插件标准接口（安全加固版）

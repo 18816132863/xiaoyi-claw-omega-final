@@ -41,7 +41,7 @@
       "rule_id": "R004",
       "status": "active",
       "owner": "governance",
-      "passed": false,
+      "passed": true,
       "blocking": true,
       "skipped": false,
       "skip_reason": null,
@@ -124,8 +124,8 @@
   ],
   "summary": {
     "total": 9,
-    "passed": 7,
-    "failed": 1,
+    "passed": 8,
+    "failed": 0,
     "warnings": 0,
     "skipped": 1,
     "waived": 1
@@ -194,5 +194,5 @@
       "high_debt_count": 0
     }
   },
-  "timestamp": "2026-04-20T13:18:25.062033"
+  "timestamp": "2026-04-20T13:24:13.677426"
 }

@@ -102,9 +102,17 @@ def check_skill_registry() -> Dict:
     
     try:
         data = json.load(open(registry_path, encoding='utf-8'))
-        skill_count = len(data.get("skills", {}))
-        callable_count = sum(1 for s in data.get("skills", {}).values() 
-                            if isinstance(s, dict) and s.get("callable"))
+        skills_data = data.get("skills", [])
+        
+        # 支持数组和字典两种格式
+        if isinstance(skills_data, list):
+            skill_count = len(skills_data)
+            callable_count = sum(1 for s in skills_data 
+                                if isinstance(s, dict) and s.get("callable"))
+        else:
+            skill_count = len(skills_data)
+            callable_count = sum(1 for s in skills_data.values() 
+                                if isinstance(s, dict) and s.get("callable"))
         
         return {
             "status": "pass",

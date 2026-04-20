@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """
-消息队列处理器 - V1.0.0
+消息队列处理器 - V2.0.0
 
 职责：
 1. 处理待发送消息队列
-2. 由心跳或守护进程调用
-3. 批量发送消息，避免频繁调用
+2. 生成消息发送指令文件
+3. 由心跳执行器读取并返回给 AI
+
+V2.0.0 改进：
+- 不再只是打印到控制台
+- 生成 pending_sends.jsonl 供 AI 读取
+- AI 在心跳响应时调用 message 工具发送
 
 使用方式：
     python scripts/message_sender.py
@@ -14,7 +19,7 @@
 import sys
 import json
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any
 
 
@@ -33,6 +38,7 @@ class MessageSender:
         self.root = root or get_project_root()
         self.queue_file = self.root / "reports" / "ops" / "message_queue.jsonl"
         self.scheduled_file = self.root / "reports" / "ops" / "scheduled_messages.jsonl"
+        self.pending_sends_file = self.root / "reports" / "ops" / "pending_sends.jsonl"
         self.sent_file = self.root / "reports" / "ops" / "sent_messages.jsonl"
         
         # 确保目录存在
@@ -64,56 +70,34 @@ class MessageSender:
                 "message": "队列为空"
             }
         
-        # 处理消息
+        # 处理消息：写入 pending_sends.jsonl
         processed = 0
-        failed = 0
-        results = []
-        
         for msg in messages:
             try:
-                # 这里应该调用 OpenClaw 的 message 工具
-                # 但由于脚本无法直接调用工具，我们：
-                # 1. 记录到已发送文件
-                # 2. 输出到标准输出（会被守护进程捕获）
+                # 生成发送指令
+                send_instruction = {
+                    "action": "send",
+                    "channel": msg.get("channel", "xiaoyi-channel"),
+                    "target": msg.get("target", "default"),
+                    "message": msg.get("content"),
+                    "title": msg.get("title"),
+                    "timestamp": datetime.now().isoformat()
+                }
                 
-                # 记录已发送
-                msg["sent_at"] = datetime.now().isoformat()
-                msg["status"] = "sent"
-                
-                with open(self.sent_file, 'a', encoding='utf-8') as f:
-                    f.write(json.dumps(msg, ensure_ascii=False) + '\n')
-                
-                # 输出到标准输出
-                print("\n" + "=" * 60)
-                print(f"📤 发送消息")
-                print(f"标题: {msg.get('title')}")
-                print(f"渠道: {msg.get('channel')}")
-                print("=" * 60)
-                print(msg.get('content'))
-                print("=" * 60 + "\n")
+                with open(self.pending_sends_file, 'a', encoding='utf-8') as f:
+                    f.write(json.dumps(send_instruction, ensure_ascii=False) + '\n')
                 
                 processed += 1
-                results.append({
-                    "title": msg.get('title'),
-                    "status": "sent"
-                })
             
             except Exception as e:
-                failed += 1
-                results.append({
-                    "title": msg.get('title'),
-                    "status": "failed",
-                    "error": str(e)
-                })
+                print(f"❌ 处理失败: {e}")
         
         # 清空队列
         self.queue_file.unlink(missing_ok=True)
         
         return {
             "status": "success",
-            "processed": processed,
-            "failed": failed,
-            "results": results
+            "processed": processed
         }
     
     def process_scheduled(self) -> Dict[str, Any]:
@@ -140,6 +124,7 @@ class MessageSender:
             return {
                 "status": "success",
                 "processed": 0,
+                "remaining": 0,
                 "message": "无定时消息"
             }
         
@@ -149,31 +134,46 @@ class MessageSender:
         future_messages = []
         
         for msg in messages:
-            scheduled_time = datetime.fromisoformat(msg.get('scheduled_time'))
+            scheduled_time_str = msg.get('scheduled_time')
+            # 解析时间，处理有无时区的情况
+            if scheduled_time_str.endswith('Z'):
+                scheduled_time = datetime.fromisoformat(scheduled_time_str.replace('Z', '+00:00'))
+            elif '+' in scheduled_time_str or scheduled_time_str.count('-') > 2:
+                scheduled_time = datetime.fromisoformat(scheduled_time_str)
+            else:
+                scheduled_time = datetime.fromisoformat(scheduled_time_str).replace(tzinfo=timezone.utc)
+            
+            now = datetime.now(timezone.utc)
+            
             if scheduled_time <= now:
                 due_messages.append(msg)
             else:
                 future_messages.append(msg)
         
-        # 处理到期消息
+        # 处理到期消息：写入 pending_sends.jsonl
         processed = 0
         for msg in due_messages:
             try:
+                # 生成发送指令
+                send_instruction = {
+                    "action": "send",
+                    "channel": msg.get("channel", "xiaoyi-channel"),
+                    "target": msg.get("target", "default"),
+                    "message": msg.get("content"),
+                    "title": msg.get("title"),
+                    "scheduled_time": msg.get("scheduled_time"),
+                    "timestamp": datetime.now().isoformat()
+                }
+                
+                with open(self.pending_sends_file, 'a', encoding='utf-8') as f:
+                    f.write(json.dumps(send_instruction, ensure_ascii=False) + '\n')
+                
                 # 记录已发送
                 msg["sent_at"] = datetime.now().isoformat()
                 msg["status"] = "sent"
                 
                 with open(self.sent_file, 'a', encoding='utf-8') as f:
                     f.write(json.dumps(msg, ensure_ascii=False) + '\n')
-                
-                # 输出到标准输出
-                print("\n" + "=" * 60)
-                print(f"📤 发送定时消息")
-                print(f"标题: {msg.get('title')}")
-                print(f"计划时间: {msg.get('scheduled_time')}")
-                print("=" * 60)
-                print(msg.get('content'))
-                print("=" * 60 + "\n")
                 
                 processed += 1
             
@@ -190,6 +190,25 @@ class MessageSender:
             "processed": processed,
             "remaining": len(future_messages)
         }
+    
+    def get_pending_sends(self) -> List[Dict[str, Any]]:
+        """获取待发送消息"""
+        if not self.pending_sends_file.exists():
+            return []
+        
+        messages = []
+        with open(self.pending_sends_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    messages.append(json.loads(line.strip()))
+                except:
+                    pass
+        
+        return messages
+    
+    def clear_pending_sends(self):
+        """清空待发送消息"""
+        self.pending_sends_file.unlink(missing_ok=True)
 
 
 def main():
@@ -197,7 +216,7 @@ def main():
     sender = MessageSender()
     
     print("=" * 60)
-    print("  消息队列处理器 V1.0.0")
+    print("  消息队列处理器 V2.0.0")
     print("=" * 60)
     print()
     
@@ -205,8 +224,6 @@ def main():
     print("📬 处理待发送队列...")
     queue_result = sender.process_queue()
     print(f"  处理: {queue_result['processed']} 条")
-    if queue_result.get('failed'):
-        print(f"  失败: {queue_result['failed']} 条")
     print()
     
     # 处理定时消息
@@ -215,6 +232,16 @@ def main():
     print(f"  处理: {scheduled_result['processed']} 条")
     print(f"  剩余: {scheduled_result['remaining']} 条")
     print()
+    
+    # 输出待发送消息（供 AI 读取）
+    pending = sender.get_pending_sends()
+    if pending:
+        print("=" * 60)
+        print("📤 待发送消息:")
+        print("=" * 60)
+        for msg in pending:
+            print(json.dumps(msg, ensure_ascii=False))
+        print("=" * 60)
     
     print("✅ 处理完成")
 

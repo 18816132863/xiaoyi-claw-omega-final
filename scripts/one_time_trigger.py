@@ -72,8 +72,7 @@ def check_scheduled_messages() -> Dict[str, Any]:
     processed = 0
     for msg in due_messages:
         try:
-            # 这里应该调用消息发送工具
-            # 但由于脚本无法直接调用工具，我们输出到标准输出
+            # 输出到标准输出（供心跳执行器捕获）
             print("\n" + "=" * 60)
             print(f"📤 发送定时消息")
             print(f"标题: {msg.get('title')}")
@@ -81,6 +80,19 @@ def check_scheduled_messages() -> Dict[str, Any]:
             print("=" * 60)
             print(msg.get('content'))
             print("=" * 60 + "\n")
+            
+            # 生成消息发送指令文件（供心跳执行器读取并调用 message 工具）
+            send_instruction = {
+                "action": "send_message",
+                "channel": msg.get("channel", "xiaoyi-channel"),
+                "target": msg.get("target", "default"),
+                "message": msg.get("content"),
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            instruction_file = root / "reports" / "ops" / "pending_sends.jsonl"
+            with open(instruction_file, 'a', encoding='utf-8') as f:
+                f.write(json.dumps(send_instruction, ensure_ascii=False) + '\n')
             
             # 记录已发送
             msg["sent_at"] = datetime.now().isoformat()

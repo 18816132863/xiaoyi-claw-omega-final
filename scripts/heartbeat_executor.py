@@ -192,15 +192,19 @@ class HeartbeatExecutor:
         print(f"  总耗时: {total_duration}ms")
         print(f"  成功: {success_count}/{len(self.results)}")
         
+        # 检查待发送消息
+        pending_sends = self._get_pending_sends()
+        
         # 保存结果
         report = {
-            "version": "V7.2.0",
+            "version": "V7.3.0",
             "start_time": self.start_time.isoformat(),
             "end_time": end_time.isoformat(),
             "total_duration_ms": total_duration,
             "success_count": success_count,
             "total_count": len(self.results),
-            "results": self.results
+            "results": self.results,
+            "pending_sends": pending_sends
         }
         
         report_path = self.root / "reports/ops/heartbeat_report.json"
@@ -209,6 +213,16 @@ class HeartbeatExecutor:
             json.dump(report, f, indent=2, ensure_ascii=False)
         
         print(f"  报告: {report_path}")
+        
+        # 输出待发送消息
+        if pending_sends:
+            print("\n" + "=" * 60)
+            print("  📤 待发送消息:")
+            print("=" * 60)
+            for msg in pending_sends:
+                print(f"  - {msg.get('title', '无标题')}: {msg.get('message', '')[:50]}...")
+            print("=" * 60)
+        
         print("\n" + "=" * 60)
         
         if success_count == len(self.results):
@@ -218,6 +232,27 @@ class HeartbeatExecutor:
         print("=" * 60 + "\n")
         
         return report
+    
+    def _get_pending_sends(self) -> List[Dict[str, Any]]:
+        """获取并清空待发送消息"""
+        pending_file = self.root / "reports/ops/pending_sends.jsonl"
+        
+        if not pending_file.exists():
+            return []
+        
+        messages = []
+        with open(pending_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    messages.append(json.loads(line.strip()))
+                except:
+                    pass
+        
+        # 清空文件
+        if messages:
+            pending_file.unlink(missing_ok=True)
+        
+        return messages
 
 
 def main():

@@ -1,12 +1,6 @@
 # domain/tasks/__init__.py
 """
 任务领域模块
-
-职责：
-- 任务规格定义
-- 任务状态机
-- 任务仓储接口
-- 任务事件
 """
 
 from .specs import (
@@ -22,6 +16,11 @@ from .specs import (
     StepSpec,
     TaskSpec,
 )
+from .state_machine import (
+    can_transition,
+    get_next_status,
+    STATE_TRANSITIONS,
+)
 
 __all__ = [
     "TaskStatus",
@@ -35,4 +34,7 @@ __all__ = [
     "ScheduleSpec",
     "StepSpec",
     "TaskSpec",
+    "can_transition",
+    "get_next_status",
+    "STATE_TRANSITIONS",
 ]

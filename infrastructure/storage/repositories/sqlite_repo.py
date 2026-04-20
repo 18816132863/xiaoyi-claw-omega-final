@@ -524,8 +524,9 @@ class SQLiteCheckpointRepository(CheckpointRepository):
             
             cp_id = str(uuid.uuid4())
             
+            # 使用 INSERT OR REPLACE 处理唯一约束
             cursor.execute("""
-                INSERT INTO workflow_checkpoints (
+                INSERT OR REPLACE INTO workflow_checkpoints (
                     id, task_id, task_run_id, thread_id, checkpoint_id,
                     checkpoint_ns, snapshot_json, metadata_json, created_at
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)

@@ -9,5 +9,15 @@
 """
 
 from .message_adapter import MessageSenderAdapter, send_message_tool, TOOL_REGISTRY
+from .flaky_tool import flaky_sender, reset_flaky_counter
 
-__all__ = ["MessageSenderAdapter", "send_message_tool", "TOOL_REGISTRY"]
+# 添加 flaky_sender 到工具注册表
+TOOL_REGISTRY["flaky_sender"] = flaky_sender
+
+__all__ = [
+    "MessageSenderAdapter",
+    "send_message_tool",
+    "TOOL_REGISTRY",
+    "flaky_sender",
+    "reset_flaky_counter",
+]

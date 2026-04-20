@@ -212,6 +212,52 @@ class TaskManager:
         
         return await self.task_service.create_task(spec)
     
+    async def create_recurring_message(
+        self,
+        user_id: str,
+        message: str,
+        cron_expr: str,
+        channel: str = "xiaoyi-channel",
+        target: str = "default",
+        title: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """创建重复消息任务"""
+        spec = TaskSpec(
+            task_type=TaskType.SCHEDULED_MESSAGE.value,
+            goal=f"Cron {cron_expr} 发送消息: {message[:50]}...",
+            user_id=user_id,
+            trigger_mode=TriggerMode.SCHEDULED,
+            schedule=ScheduleSpec(
+                mode=ScheduleType.CRON,
+                cron_expr=cron_expr,
+                timezone="Asia/Shanghai"
+            ),
+            inputs={
+                "channel": channel,
+                "target": target,
+                "message": message,
+                "title": title or "定时消息"
+            },
+            steps=[
+                StepSpec(
+                    step_index=1,
+                    step_name="send_message",
+                    tool_name="message_sender",
+                    input_mapping={
+                        "channel": "$inputs.channel",
+                        "target": "$inputs.target",
+                        "message": "$inputs.message"
+                    },
+                    output_key="send_result"
+                )
+            ],
+            required_tools=["message_sender"],
+            retry_policy=RetryPolicy(max_attempts=3, backoff_seconds=60),
+            timeout_policy=TimeoutPolicy(task_timeout_seconds=300)
+        )
+        
+        return await self.task_service.create_task(spec)
+    
     # ==================== 任务查询 ====================
     
     async def get_task(self, task_id: str) -> Optional[TaskSpec]:
@@ -231,6 +277,35 @@ class TaskManager:
         """获取任务事件"""
         return await self.task_service.get_task_events(task_id)
     
+    async def get_task_runs(self, task_id: str) -> List[Dict[str, Any]]:
+        """获取任务运行记录"""
+        # 简化实现：从事件中提取
+        events = await self.event_repo.list_events(task_id)
+        runs = []
+        for event in events:
+            if event.get("event_type") in ("started", "succeeded", "failed"):
+                runs.append(event)
+        return runs
+    
+    async def get_tool_calls(self, task_id: str) -> List[Dict[str, Any]]:
+        """获取工具调用记录"""
+        tool_calls_file = self.root / "data" / "tool_calls.jsonl"
+        
+        if not tool_calls_file.exists():
+            return []
+        
+        calls = []
+        with open(tool_calls_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    entry = json.loads(line.strip())
+                    if entry.get("task_id") == task_id:
+                        calls.append(entry)
+                except:
+                    pass
+        
+        return calls
+    
     # ==================== 任务管理 ====================
     
     async def cancel_task(self, task_id: str) -> Dict[str, Any]:
@@ -244,6 +319,57 @@ class TaskManager:
     async def resume_task(self, task_id: str) -> Dict[str, Any]:
         """恢复任务"""
         return await self.task_service.resume_task(task_id)
+    
+    async def trigger_task_now(self, task_id: str) -> Dict[str, Any]:
+        """立即触发任务"""
+        task = await self.task_repo.get(task_id)
+        if not task:
+            return {"success": False, "error": "任务不存在"}
+        
+        # 更新状态为已入队
+        await self.task_repo.update(task_id, {"status": TaskStatus.QUEUED.value})
+        
+        # 执行任务
+        return await self.executor.execute_task(task_id)
+    
+    async def retry_task(self, task_id: str) -> Dict[str, Any]:
+        """重试任务"""
+        task = await self.task_repo.get(task_id)
+        if not task:
+            return {"success": False, "error": "任务不存在"}
+        
+        # 重置状态
+        await self.task_repo.update(task_id, {
+            "status": TaskStatus.QUEUED.value,
+            "attempt_count": 0
+        })
+        
+        # 执行任务
+        return await self.executor.execute_task(task_id)
+    
+    async def update_schedule(
+        self,
+        task_id: str,
+        run_at: Optional[str] = None,
+        cron_expr: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """更新调度时间"""
+        updates = {}
+        
+        if run_at:
+            updates["run_at"] = run_at
+            updates["schedule_type"] = "once"
+        
+        if cron_expr:
+            updates["cron_expr"] = cron_expr
+            updates["schedule_type"] = "cron"
+        
+        if not updates:
+            return {"success": False, "error": "必须提供 run_at 或 cron_expr"}
+        
+        success = await self.task_repo.update(task_id, updates)
+        
+        return {"success": success, "task_id": task_id}
     
     # ==================== 任务执行 ====================
     

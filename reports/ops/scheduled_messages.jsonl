@@ -1,1 +1,0 @@
-{"timestamp": "2026-04-20T01:55:00Z", "scheduled_time": "2026-04-20T01:56:00Z", "title": "🎉 完整流程测试", "content": "这是一条完整的定时消息测试。\n\n✅ 如果你在聊天界面看到这条消息，说明定时任务机制已经完全打通！", "channel": "xiaoyi-channel", "target": "default", "status": "pending", "one_time": true}

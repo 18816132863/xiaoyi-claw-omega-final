@@ -192,7 +192,7 @@ class MessageSender:
         }
     
     def get_pending_sends(self) -> List[Dict[str, Any]]:
-        """获取待发送消息"""
+        """获取待发送消息（不清空）"""
         if not self.pending_sends_file.exists():
             return []
         
@@ -209,6 +209,14 @@ class MessageSender:
     def clear_pending_sends(self):
         """清空待发送消息"""
         self.pending_sends_file.unlink(missing_ok=True)
+    
+    def mark_sent(self, messages: List[Dict[str, Any]]):
+        """标记消息为已发送"""
+        for msg in messages:
+            msg["sent_at"] = datetime.now().isoformat()
+            msg["status"] = "sent"
+            with open(self.sent_file, 'a', encoding='utf-8') as f:
+                f.write(json.dumps(msg, ensure_ascii=False) + '\n')
 
 
 def main():

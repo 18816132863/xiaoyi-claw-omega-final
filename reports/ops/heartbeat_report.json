@@ -1,65 +1,65 @@
 {
-  "version": "V7.2.0",
-  "start_time": "2026-04-20T09:47:29.349657",
-  "end_time": "2026-04-20T09:47:53.981779",
-  "total_duration_ms": 24632,
+  "version": "V7.3.0",
+  "start_time": "2026-04-20T09:55:22.233306",
+  "end_time": "2026-04-20T09:56:03.100012",
+  "total_duration_ms": 40866,
   "success_count": 4,
   "total_count": 9,
   "results": [
     {
       "id": "one_time_trigger",
       "name": "一次性定时任务",
-      "start_time": "2026-04-20T09:47:29.349759",
-      "success": true,
-      "output": "============================================================\n  一次性定时任务触发器 V1.0.0\n============================================================\n\n✅ 处理完成\n  发送: 0 条\n  剩余: 0 条\n\n",
-      "error": null,
-      "duration_ms": 149,
-      "end_time": "2026-04-20T09:47:29.499510"
+      "start_time": "2026-04-20T09:55:22.233405",
+      "success": false,
+      "output": "============================================================\n  一次性定时任务触发器 V1.0.0\n============================================================\n\n",
+      "error": "orkspace/scripts/one_time_trigger.py\", line 66, in check_scheduled_messages\n    if scheduled_time <= now:\n       ^^^^^^^^^^^^^^^^^^^^^\nTypeError: can't compare offset-naive and offset-aware datetimes\n",
+      "duration_ms": 148,
+      "end_time": "2026-04-20T09:55:22.381699"
     },
     {
       "id": "message_sender",
       "name": "消息队列处理",
-      "start_time": "2026-04-20T09:47:29.499573",
-      "success": false,
-      "output": "============================================================\n  消息队列处理器 V1.0.0\n============================================================\n\n📬 处理待发送队列...\n  处理: 0 条\n\n⏰ 处理定时消息...\n  处理: 0 条\n",
-      "error": "andbox/.openclaw/workspace/scripts/message_sender.py\", line 216, in main\n    print(f\"  剩余: {scheduled_result['remaining']} 条\")\n                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nKeyError: 'remaining'\n",
-      "duration_ms": 150,
-      "end_time": "2026-04-20T09:47:29.650427"
+      "start_time": "2026-04-20T09:55:22.381747",
+      "success": true,
+      "output": "============================================================\n  消息队列处理器 V2.0.0\n============================================================\n\n📬 处理待发送队列...\n  处理: 0 条\n\n⏰ 处理定时消息...\n  处理: 0 条\n  剩余: 1 条\n\n✅ 处理完成\n",
+      "error": null,
+      "duration_ms": 146,
+      "end_time": "2026-04-20T09:55:22.528334"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-20T09:47:29.650487",
+      "start_time": "2026-04-20T09:55:22.528384",
       "success": true,
-      "output": "le', 'daily_health_reminder', 'weekly_skill_report', 'new_python_file', 'new_python_file', 'governance_file_change', 'governance_file_change', 'governance_file_change', 'new_python_file', 'new_python_file']\n\n   无时间触发\n\n📁 检查文件触发...\n   - 新增 Python 文件: 文件变更: ['scripts/heartbeat_executor.py', 'scripts/one_time_trigger.py']\n\n============================================================\n  执行触发任务\n============================================================\n\n🔧 [new_python_file] 新增 Python 文件...\n   ❌ 失败: \n\n",
+      "output": "rt', 'new_python_file', 'new_python_file', 'governance_file_change', 'governance_file_change', 'governance_file_change', 'new_python_file', 'new_python_file', 'new_python_file']\n\n   无时间触发\n\n📁 检查文件触发...\n   - 新增 Python 文件: 文件变更: ['scripts/heartbeat_executor.py', 'scripts/message_sender.py', 'scripts/one_time_trigger.py']\n\n============================================================\n  执行触发任务\n============================================================\n\n🔧 [new_python_file] 新增 Python 文件...\n   ❌ 失败: \n\n",
       "error": null,
-      "duration_ms": 522,
-      "end_time": "2026-04-20T09:47:30.172927"
+      "duration_ms": 471,
+      "end_time": "2026-04-20T09:55:22.999749"
     },
     {
       "id": "session_end_detector",
       "name": "会话结束检测",
-      "start_time": "2026-04-20T09:47:30.172988",
+      "start_time": "2026-04-20T09:55:22.999795",
       "success": true,
       "output": "============================================================\n  会话结束检测器 V1.0.0\n============================================================\n\n✅ 会话活跃中\n\n",
       "error": null,
-      "duration_ms": 157,
-      "end_time": "2026-04-20T09:47:30.330330"
+      "duration_ms": 151,
+      "end_time": "2026-04-20T09:55:23.151806"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-20T09:47:30.330429",
+      "start_time": "2026-04-20T09:55:23.151857",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 23651,
-      "end_time": "2026-04-20T09:47:53.981707"
+      "duration_ms": 39948,
+      "end_time": "2026-04-20T09:56:03.099946"
     },
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-20T09:47:53.981757",
+      "start_time": "2026-04-20T09:56:03.099991",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -68,7 +68,7 @@
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-20T09:47:53.981766",
+      "start_time": "2026-04-20T09:56:03.099999",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -77,7 +77,7 @@
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-20T09:47:53.981772",
+      "start_time": "2026-04-20T09:56:03.100005",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -86,11 +86,12 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-20T09:47:53.981776",
+      "start_time": "2026-04-20T09:56:03.100009",
       "success": false,
       "output": "任务已禁用",
       "error": null,
       "duration_ms": 0
     }
-  ]
+  ],
+  "pending_sends": []
 }

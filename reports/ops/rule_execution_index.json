@@ -65,7 +65,7 @@
       "rule_id": "R006",
       "status": "active",
       "owner": "infrastructure",
-      "passed": false,
+      "passed": true,
       "blocking": true,
       "skipped": false,
       "skip_reason": null,
@@ -124,8 +124,8 @@
   ],
   "summary": {
     "total": 9,
-    "passed": 6,
-    "failed": 2,
+    "passed": 7,
+    "failed": 1,
     "warnings": 0,
     "skipped": 1,
     "waived": 1
@@ -194,5 +194,5 @@
       "high_debt_count": 0
     }
   },
-  "timestamp": "2026-04-21T23:00:24.522498"
+  "timestamp": "2026-04-21T23:15:36.818398"
 }

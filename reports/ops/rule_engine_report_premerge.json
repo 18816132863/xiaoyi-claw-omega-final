@@ -15,7 +15,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║          层间依赖检查 V1.0.0                    ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 23:00:22\n\n【检查 core/】\n  ✅ 无违规\n\n【检查 orchestration/】\n  ✅ 无违规\n\n【检查 execution/】\n  ✅ 无违规\n\n【检查 memory_context/】\n  ✅ 无违规\n\n【检查 governance/】\n  ✅ 无违规\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 5\n  ❌ 违规: 0\n\n"
+      "output": "╔══════════════════════════════════════════════════╗\n║          层间依赖检查 V1.0.0                    ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 23:15:35\n\n【检查 core/】\n  ✅ 无违规\n\n【检查 orchestration/】\n  ✅ 无违规\n\n【检查 execution/】\n  ✅ 无违规\n\n【检查 memory_context/】\n  ✅ 无违规\n\n【检查 governance/】\n  ✅ 无违规\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 5\n  ❌ 违规: 0\n\n"
     },
     {
       "rule_id": "R002",
@@ -31,7 +31,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║          JSON 契约校验 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 23:00:22\n\n⚠️ jsonschema 未安装，跳过 schema 验证\n安装命令: pip install jsonschema\n\n"
+      "output": "╔══════════════════════════════════════════════════╗\n║          JSON 契约校验 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 23:15:35\n\n⚠️ jsonschema 未安装，跳过 schema 验证\n安装命令: pip install jsonschema\n\n"
     },
     {
       "rule_id": "R003",
@@ -47,7 +47,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "e\n\n【检查审批历史一致性】\n  ⚠️ approval_history.json 不存在，跳过\n\n【调用层间依赖检查】\n  ✅ 层间依赖检查通过\n\n【调用 JSON 契约检查】\n  ✅ JSON 契约检查通过\n\n【调用规则守卫自测】\n  ✅ 规则守卫自测通过\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 59\n  ⚠️ 警告: 0\n  ❌ 错误: 11\n\n【错误详情】\n  ❌ 目录缺失: reports/alerts\n  ❌ 目录缺失: reports/bundles\n  ❌ 目录缺失: reports/dashboard\n  ❌ 目录缺失: reports/remediation\n  ❌ 目录缺失: reports/remediation/history\n  ❌ 目录缺失: skills\n  ❌ Contra"
+      "output": "  ✅ verify-release\n\n【检查审批历史一致性】\n  ⚠️ approval_history.json 不存在，跳过\n\n【调用层间依赖检查】\n  ✅ 层间依赖检查通过\n\n【调用 JSON 契约检查】\n  ✅ JSON 契约检查通过\n\n【调用规则守卫自测】\n  ✅ 规则守卫自测通过\n\n╔══════════════════════════════════════════════════╗\n║              检查结果汇总                       ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ 通过: 60\n  ⚠️ 警告: 0\n  ❌ 错误: 10\n\n【错误详情】\n  ❌ 目录缺失: reports/alerts\n  ❌ 目录缺失: reports/bundles\n  ❌ 目录缺失: reports/dashboard\n  ❌ 目录缺失: reports/remediation\n  ❌ 目录缺失: reports/remediation/history\n  ❌ Contra"
     },
     {
       "rule_id": "R004",
@@ -79,7 +79,7 @@
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║          规则守卫自测 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 23:00:23\n\n【测试 1: 层间依赖守卫】\n  ✅ 违规样例有效: 包含 'from core ...'\n  ✅ 层间依赖守卫测试通过\n\n【测试 2: JSON 契约守卫】\n  ✅ 违规样例有效: 缺少 'profile' 必需字段\n  ✅ JSON 契约守卫测试通过\n\n【测试 3: 检查器执行能力】\n  ✅ check_layer_dependencies.py 正常执行\n  ✅ check_json_contracts.py 正常执行\n\n==================================================\n【Rule Guard Self-Test 结果】\n==============================="
+      "output": "╔══════════════════════════════════════════════════╗\n║          规则守卫自测 V1.0.0                   ║\n╚══════════════════════════════════════════════════╝\n时间: 2026-04-21 23:15:36\n\n【测试 1: 层间依赖守卫】\n  ✅ 违规样例有效: 包含 'from core ...'\n  ✅ 层间依赖守卫测试通过\n\n【测试 2: JSON 契约守卫】\n  ✅ 违规样例有效: 缺少 'profile' 必需字段\n  ✅ JSON 契约守卫测试通过\n\n【测试 3: 检查器执行能力】\n  ✅ check_layer_dependencies.py 正常执行\n  ✅ check_json_contracts.py 正常执行\n\n==================================================\n【Rule Guard Self-Test 结果】\n==============================="
     },
     {
       "rule_id": "R006",
@@ -88,14 +88,14 @@
       "status": "active",
       "version": "2.0.0",
       "checker": "scripts/check_repo_integrity_fast.py",
-      "passed": false,
+      "passed": true,
       "blocking": true,
       "skipped": false,
       "skip_reason": null,
       "waived": false,
       "waiver_reason": null,
       "error": null,
-      "output": "╔══════════════════════════════════════════════════╗\n║      仓库完整性快速检查 V4.0.0                 ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ core/ARCHITECTURE.md\n  ✅ core/RULE_REGISTRY.json\n  ✅ core/LAYER_DEPENDENCY_RULES.json\n  ✅ infrastructure/inventory/skill_registry.json\n  ✅ governance/guard/protected_files.json\n  ✅ scripts/run_release_gate.py\n  ✅ core/\n  ✅ governance/\n  ✅ infrastructure/\n  ✅ scripts/\n  ❌ skills/ (不存在)\n  ✅ execution/\n  ✅ reports/\n\n================================"
+      "output": "╔══════════════════════════════════════════════════╗\n║      仓库完整性快速检查 V4.0.0                 ║\n╚══════════════════════════════════════════════════╝\n\n  ✅ core/ARCHITECTURE.md\n  ✅ core/RULE_REGISTRY.json\n  ✅ core/LAYER_DEPENDENCY_RULES.json\n  ✅ infrastructure/inventory/skill_registry.json\n  ✅ governance/guard/protected_files.json\n  ✅ scripts/run_release_gate.py\n  ✅ core/\n  ✅ governance/\n  ✅ infrastructure/\n  ✅ scripts/\n  ✅ skills/\n  ✅ execution/\n  ✅ reports/\n\n======================================"
     },
     {
       "rule_id": "R007",
@@ -165,12 +165,12 @@
     "R002",
     "R004",
     "R005",
+    "R006",
     "R009",
     "R010"
   ],
   "failed_rules": [
-    "R003",
-    "R006"
+    "R003"
   ],
   "warning_rules": [],
   "blocking_failures": [
@@ -178,12 +178,6 @@
       "rule_id": "R003",
       "name": "唯一真源规则",
       "owner": "architecture",
-      "status": "active"
-    },
-    {
-      "rule_id": "R006",
-      "name": "仓库完整性规则",
-      "owner": "infrastructure",
       "status": "active"
     }
   ],
@@ -275,10 +269,10 @@
     }
   },
   "total_rules": 9,
-  "passed_count": 6,
-  "failed_count": 2,
+  "passed_count": 7,
+  "failed_count": 1,
   "warning_count": 0,
   "skipped_count": 1,
   "waived_count": 1,
-  "generated_at": "2026-04-21T23:00:24.522498"
+  "generated_at": "2026-04-21T23:15:36.818398"
 }

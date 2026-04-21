@@ -1,10 +1,15 @@
 {
   "project_name": "xiaoyi-claw-omega-final",
-  "version": "8.0.0",
-  "git_commit": "61843122",
-  "build_date": "2026-04-21T00:31:31Z",
+  "version": "7.0.0",
+  "git_commit": "9a5da382",
+  "build_date": "2026-04-21T14:58:00Z",
   "entrypoint": "openclaw gateway start",
   "runtime_mode": "cloud_broker_mode",
+  "architecture_source_of_truth": "core/ARCHITECTURE.md",
+  "verification_commands": [
+    "python tests/test_no_fake_success.py",
+    "python tests/test_end_to_end.py"
+  ],
   "database": {
     "type": "postgresql",
     "provider": "neon",

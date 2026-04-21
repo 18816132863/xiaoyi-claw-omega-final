@@ -1,10 +1,19 @@
 # 小艺 Claw Omega Final
 
-> 六层架构 · 任务系统 · 持久化 · 可恢复
+> 七层闭环 · 真实验证 · 证据驱动 · 禁止假成功
 
 ## 版本
 
-**V8.0.0** - 2026-04-21
+**V7.0.0** - 2026-04-21 闭环收口版
+
+## 核心特性
+
+| 特性 | 说明 |
+|------|------|
+| 真实验证 | verify_executor 真实检查文件/数据库/消息证据 |
+| 证据驱动 | 没有证据不能标 success |
+| 禁止假成功 | result_guard 五重检查总闸 |
+| 完整回复 | 固定模板：执行结果/完成项/未完成项/证据/下一步 |
 
 ## 运行模式
 
@@ -12,6 +21,58 @@
 - **Database**: PostgreSQL (Neon)
 - **Broker**: Redis (Upstash)
 - **Result Backend**: Redis (Upstash)
+
+## 主链流程
+
+```
+parse
+  ↓
+distribute
+  ↓
+execute
+  ↓
+verify_executor.verify()      ← 真实验证
+  ↓
+summarize_executor.summarize() ← 真实总结
+  ↓
+result_guard.guard()          ← 最终总闸
+  ↓
+final_response
+```
+
+## 最终返回格式
+
+```json
+{
+  "status": "success | failed",
+  "reason": "",
+  "user_response": "【执行结果】...",
+  "completed_items": [],
+  "failed_items": [],
+  "evidence": {
+    "files": [],
+    "db_records": [],
+    "messages": [],
+    "tool_calls": [],
+    "extra": {}
+  },
+  "next_action": "",
+  "execution_trace": [],
+  "task_id": "",
+  "intent": "",
+  "total_latency_ms": 0
+}
+```
+
+## 禁止空成功
+
+只有下面全部满足，才允许 success：
+
+1. 至少一个真实 skill 执行成功
+2. verify 成功
+3. evidence 不为空
+4. user_response 不为空
+5. completed_items 不为空
 
 ## 六层架构
 
@@ -50,19 +111,22 @@ openclaw gateway start
 # 健康检查
 openclaw gateway status
 
-# 冒烟测试
-python tests/test_architecture.py
+# 测试
+python tests/test_no_fake_success.py
+python tests/test_end_to_end.py
 ```
 
 ## 核心文件
 
 | 文件 | 说明 |
 |------|------|
-| `package_info.json` | 包信息 |
-| `DEPLOY.md` | 部署指南 |
-| `core/ARCHITECTURE.md` | 架构定义 |
-| `AGENTS.md` | 工作空间规则 |
-| `MEMORY.md` | 长期记忆 |
+| `orchestration/task_engine.py` | 任务引擎 V7.0.0 |
+| `orchestration/verify_executor.py` | 真实验证器 |
+| `orchestration/summarize_executor.py` | 真实总结器 |
+| `orchestration/result_guard.py` | 结果守卫 |
+| `application/response_service/` | 响应服务 |
+| `memory_context/memory_write_policy.py` | 记忆写入策略 |
+| `memory_context/memory_retrieval_policy.py` | 记忆检索策略 |
 
 ## 技能生态
 

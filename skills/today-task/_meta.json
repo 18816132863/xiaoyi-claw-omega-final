@@ -1,0 +1,17 @@
+{
+  "owner": "ganhaiyang3",
+  "slug": "today-task",
+  "displayName": "Today Task",
+  "latest": {
+    "version": "1.0.17",
+    "publishedAt": 1775183319801,
+    "commit": "https://github.com/openclaw/skills/commit/5c08ef7f2e7119a533c241fe31789cdb8f533aeb"
+  },
+  "history": [
+    {
+      "version": "1.0.13",
+      "publishedAt": 1775015397557,
+      "commit": "https://github.com/openclaw/skills/commit/4106b446bbd3d9cdae617f16954128fe305df3a9"
+    }
+  ]
+}

@@ -1,12 +1,23 @@
 {
   "version": "V7.2.0",
-  "timestamp": "2026-04-21T12:02:26.185046",
+  "timestamp": "2026-04-21T12:17:37.145611",
   "total_items": 34,
   "passed": 20,
   "failed": 14,
   "warnings": 9,
-  "total_duration_ms": 5023,
+  "total_duration_ms": 4995,
   "items": [
+    {
+      "id": "core_state",
+      "name": "L1 状态契约检查",
+      "passed": true,
+      "duration_ms": 4,
+      "details": [
+        "✅ core/state/global_state_contract.py (3163 bytes)",
+        "✅ core/state/profile_state_contract.py (8597 bytes)",
+        "✅ core/state/task_state_contract.py (5702 bytes)"
+      ]
+    },
     {
       "id": "core_cognition",
       "name": "L1 认知系统检查",
@@ -21,21 +32,10 @@
       ]
     },
     {
-      "id": "core_state",
-      "name": "L1 状态契约检查",
-      "passed": true,
-      "duration_ms": 3,
-      "details": [
-        "✅ core/state/global_state_contract.py (3163 bytes)",
-        "✅ core/state/profile_state_contract.py (8597 bytes)",
-        "✅ core/state/task_state_contract.py (5702 bytes)"
-      ]
-    },
-    {
       "id": "memory_retrieval",
       "name": "L2 检索系统检查",
       "passed": true,
-      "duration_ms": 165,
+      "duration_ms": 166,
       "details": [
         "✅ memory_context.retrieval.retrieval_router.RetrievalRouter",
         "✅ memory_context.retrieval.hybrid_search.HybridSearch"
@@ -45,7 +45,7 @@
       "id": "memory_session",
       "name": "L2 会话管理检查",
       "passed": true,
-      "duration_ms": 44,
+      "duration_ms": 8,
       "details": [
         "✅ memory_context.session.session_history.SessionHistory",
         "✅ memory_context.long_term.project_memory_store.ProjectMemoryStore"
@@ -55,7 +55,7 @@
       "id": "memory_builder",
       "name": "L2 上下文构建检查",
       "passed": true,
-      "duration_ms": 259,
+      "duration_ms": 299,
       "details": [
         "✅ memory_context.builder.context_builder.ContextBuilder",
         "✅ memory_context.builder.priority_ranker.PriorityRanker",
@@ -67,7 +67,7 @@
       "id": "execution_control",
       "name": "L3 执行控制检查",
       "passed": true,
-      "duration_ms": 26,
+      "duration_ms": 27,
       "details": [
         "✅ orchestration.execution_control.retry_policy.RetryPolicy",
         "✅ orchestration.execution_control.fallback_policy.FallbackPolicy",
@@ -133,7 +133,7 @@
       "id": "policy_engine",
       "name": "L5 策略引擎检查",
       "passed": true,
-      "duration_ms": 205,
+      "duration_ms": 166,
       "details": [
         "✅ governance.control_plane.policy_engine.PolicyEngine",
         "✅ governance.control_plane.policy_engine.Policy",
@@ -202,7 +202,7 @@
       "id": "main_chain_recovery",
       "name": "主链-恢复链集成检查",
       "passed": false,
-      "duration_ms": 131,
+      "duration_ms": 121,
       "details": [
         "✅ FallbackPolicy.decide() 存在",
         "✅ FallbackPolicy 错误类型识别正确",
@@ -253,22 +253,10 @@
       ]
     },
     {
-      "id": "workflow_engine",
-      "name": "L3 工作流引擎检查",
-      "passed": false,
-      "duration_ms": 407,
-      "details": [
-        "❌ orchestration.workflow.workflow_engine.WorkflowEngine 不存在",
-        "✅ orchestration.workflow.dag_builder.DAGBuilder",
-        "✅ orchestration.workflow.dependency_resolver.DependencyResolver",
-        "✅ orchestration.workflow.state_machine.WorkflowStateMachine"
-      ]
-    },
-    {
       "id": "metrics_aggregated",
       "name": "Metrics-聚合指标检查",
       "passed": true,
-      "duration_ms": 1,
+      "duration_ms": 0,
       "details": [
         "⚠️ reports/metrics/aggregated_metrics.json 不存在"
       ]
@@ -280,6 +268,28 @@
       "duration_ms": 0,
       "details": [
         "❌ skills 目录不存在"
+      ]
+    },
+    {
+      "id": "workflow_engine",
+      "name": "L3 工作流引擎检查",
+      "passed": false,
+      "duration_ms": 358,
+      "details": [
+        "❌ orchestration.workflow.workflow_engine.WorkflowEngine 不存在",
+        "✅ orchestration.workflow.dag_builder.DAGBuilder",
+        "✅ orchestration.workflow.dependency_resolver.DependencyResolver",
+        "✅ orchestration.workflow.state_machine.WorkflowStateMachine"
+      ]
+    },
+    {
+      "id": "skill_security",
+      "name": "技能安全检查",
+      "passed": false,
+      "duration_ms": 657,
+      "details": [
+        "退出码: 1",
+        "错误: port)\n  File \"/home/sandbox/.openclaw/workspace/scripts/check_skill_security.py\", line 599, in print_report\n    print(f\"通过: {report['passed']}\")\n                   ~~~~~~^^^^^^^^^^\nKeyError: 'passed'\n"
       ]
     },
     {
@@ -297,27 +307,17 @@
       "id": "core_events",
       "name": "L1 事件系统检查",
       "passed": true,
-      "duration_ms": 714,
+      "duration_ms": 683,
       "details": [
         "✅ core.events.event_bus.EventBus",
         "✅ core.events.event_types.EventType"
       ]
     },
     {
-      "id": "skill_security",
-      "name": "技能安全检查",
-      "passed": false,
-      "duration_ms": 745,
-      "details": [
-        "退出码: 1",
-        "错误: port)\n  File \"/home/sandbox/.openclaw/workspace/scripts/check_skill_security.py\", line 599, in print_report\n    print(f\"通过: {report['passed']}\")\n                   ~~~~~~^^^^^^^^^^\nKeyError: 'passed'\n"
-      ]
-    },
-    {
       "id": "change_impact",
       "name": "变更影响检查",
       "passed": true,
-      "duration_ms": 789,
+      "duration_ms": 799,
       "details": [
         "退出码: 0"
       ]
@@ -326,7 +326,7 @@
       "id": "layer_dependencies",
       "name": "层间依赖检查",
       "passed": true,
-      "duration_ms": 825,
+      "duration_ms": 836,
       "details": [
         "退出码: 0"
       ]
@@ -335,7 +335,7 @@
       "id": "test_integration",
       "name": "集成测试检查",
       "passed": false,
-      "duration_ms": 1039,
+      "duration_ms": 913,
       "details": [
         "退出码: 1",
         "错误: law/workspace/orchestration/workflow/workflow_engine.py\", line 31, in <module>\n    from orchestration.state.workflow_instance_store import (\nModuleNotFoundError: No module named 'orchestration.state'\n"
@@ -345,7 +345,7 @@
       "id": "json_contracts",
       "name": "JSON 契约检查",
       "passed": false,
-      "duration_ms": 2417,
+      "duration_ms": 2324,
       "details": [
         "退出码: 1"
       ]
@@ -354,7 +354,7 @@
       "id": "repo_integrity",
       "name": "仓库完整性检查",
       "passed": false,
-      "duration_ms": 5018,
+      "duration_ms": 4992,
       "details": [
         "退出码: 1"
       ]

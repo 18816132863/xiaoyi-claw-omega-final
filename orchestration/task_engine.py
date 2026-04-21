@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-任务分配与执行引擎 - V4.3.2 主链改造版
+任务分配与执行引擎 - V6.0.0 真实验证总结版
 
-V4.3.2 主链改造：
-- TaskParser 只负责提取 intent、target、constraints
-- TaskDistributor 不再写死 note/calendar/alarm；改为基于 router + registry 动态分配 skill
-- 复杂任务最少支持 validate → route → execute → verify → summarize 五段
-- 新增技能后无需再改 _assign_skill()
+V6.0.0 主链改造：
+- 删除 verify / summarize 占位成功逻辑
+- 接入 VerifyExecutor 和 SummarizeExecutor
+- 接入 ResponseRenderer
+- 统一返回格式：user_response / completed_items / failed_items / evidence / next_action
+- 禁止空成功：没有证据不能标 success
 """
 
 import time
@@ -17,6 +18,9 @@ from enum import Enum
 from collections import defaultdict
 
 from infrastructure.shared.router import get_router, RouteResult
+from orchestration.verify_executor import verify_execution, VerifyExecutor
+from orchestration.summarize_executor import summarize_execution, SummarizeExecutor
+from application.response_service.renderer import ResponseRenderer
 
 class TaskStatus(Enum):
     PENDING = "pending"
@@ -503,8 +507,13 @@ class TaskExecutor:
                 result = gateway.execute(task.assigned_skill, task.inputs)
                 if result.success:
                     task.outputs = result.data if result.data else {"result": "success"}
+                    # V6.0.0: 传递证据
+                    if result.evidence:
+                        task.outputs["evidence"] = result.evidence
                 else:
-                    task.outputs = {"error": result.error, "error_code": result.error_code}
+                    # V6.0.0: 统一错误结构
+                    error = result.error if isinstance(result.error, dict) else {"code": "UNKNOWN", "message": str(result.error)}
+                    task.outputs = {"error": error}
                     task.status = TaskStatus.FAILED
             else:
                 # V4.3.2 返修：没有真实技能执行，必须失败
@@ -677,9 +686,12 @@ class TaskEngine:
         self.parser = TaskParser()
         self.distributor = TaskDistributor()
         self.executor = TaskExecutor()
+        self.verify_executor = VerifyExecutor()
+        self.summarize_executor = SummarizeExecutor()
+        self.renderer = ResponseRenderer()
     
     async def process(self, user_input: str) -> Dict[str, Any]:
-        """处理用户输入 - V5.0.0: 禁止空成功"""
+        """处理用户输入 - V6.0.0: 真实验证总结"""
         start = time.time()
         
         # 清空旧结果
@@ -698,8 +710,6 @@ class TaskEngine:
         # 4. 构建执行追踪
         execution_trace = []
         has_real_execution = False
-        has_evidence = False
-        evidences = []
         
         for t in subtasks:
             trace_entry = {
@@ -714,80 +724,71 @@ class TaskEngine:
             # 只有 execute 类任务才算真实执行
             if t.status == TaskStatus.SUCCESS and t.assigned_skill and t.type not in [TaskType.VALIDATE, TaskType.VERIFY, TaskType.SUMMARIZE]:
                 has_real_execution = True
-                
-                # 检查是否有证据
-                if t.outputs:
-                    if "file_path" in t.outputs or "output_file" in t.outputs:
-                        evidences.append({"type": "file", "value": t.outputs.get("file_path") or t.outputs.get("output_file")})
-                        has_evidence = True
-                    if "record_id" in t.outputs or "task_id" in t.outputs:
-                        evidences.append({"type": "db_record", "value": t.outputs.get("record_id") or t.outputs.get("task_id")})
-                        has_evidence = True
-                    if "message_id" in t.outputs:
-                        evidences.append({"type": "message", "value": t.outputs["message_id"]})
-                        has_evidence = True
-                    if "content" in t.outputs or "text" in t.outputs:
-                        content = t.outputs.get("content") or t.outputs.get("text", "")
-                        if content:
-                            evidences.append({"type": "content", "length": len(content)})
-                            has_evidence = True
         
-        # 5. V5.0.0: 禁止空成功总闸
-        if not has_real_execution:
-            result = {
-                "status": "failed",
-                "message": "没有真实执行的技能",
-                "reason": "所有子任务都未成功执行或没有分配到技能",
-                "evidences": []
-            }
-        elif not has_evidence:
-            # V5.0.0: 没有证据不能标成功
-            result = {
-                "status": "failed",
-                "message": "执行成功但无证据",
-                "reason": "成功必须带至少一种 evidence: file_path / db_record / message_id / content",
-                "evidences": [],
-                "execution_trace": execution_trace
-            }
-        else:
-            result = self._aggregate(results)
-            if result is None:
-                result = {
-                    "status": "failed",
-                    "message": "执行结果为空",
-                    "evidences": []
-                }
-            elif isinstance(result, dict):
-                result["status"] = "success"
-                result["evidences"] = evidences
-            else:
-                # SkillResult 或其他对象
-                result = {
-                    "status": "success" if hasattr(result, 'success') and result.success else "failed",
-                    "data": result.data if hasattr(result, 'data') else str(result),
-                    "evidences": evidences
-                }
+        # 5. V6.0.0: 真实验证
+        verify_result = self.verify_executor.verify(results, task.intent)
         
-        # 6. 返回
+        # 6. V6.0.0: 真实总结
+        summarize_result = self.summarize_executor.summarize(verify_result, task.intent, execution_trace)
+        
+        # 7. V6.0.0: 渲染用户响应
+        user_response = summarize_result.message
+        
+        # 8. V6.0.0: 任务成功判定总闸
+        final_status = self._determine_final_status(
+            has_real_execution=has_real_execution,
+            verify_status=verify_result.status,
+            has_evidence=self.verify_executor.has_evidence(verify_result.evidence),
+            user_response=user_response,
+            completed_items=summarize_result.completed_items
+        )
+        
+        # 9. 返回统一格式
         total_latency = time.time() - start
         
         return {
+            "status": final_status,
+            "user_response": user_response,
+            "completed_items": summarize_result.completed_items,
+            "failed_items": summarize_result.failed_items,
+            "evidence": summarize_result.evidence,
+            "next_action": summarize_result.next_action,
+            "execution_trace": execution_trace,
             "task_id": task.id,
             "intent": task.intent,
-            "result": result,
-            "execution_trace": execution_trace,
-            "subtasks": [
-                {
-                    "id": t.id,
-                    "status": t.status.value,
-                    "skill": t.assigned_skill,
-                    "latency": round(t.latency * 1000, 2)
-                }
-                for t in subtasks
-            ],
-            "total_latency_ms": round(total_latency * 1000, 2),
-            "has_evidence": has_evidence
+            "total_latency_ms": round(total_latency * 1000, 2)
         }
+    
+    def _determine_final_status(
+        self,
+        has_real_execution: bool,
+        verify_status: str,
+        has_evidence: bool,
+        user_response: str,
+        completed_items: List[str]
+    ) -> str:
+        """V6.0.0: 任务成功判定总闸"""
+        # 1. 至少有一个真实 skill 执行成功
+        if not has_real_execution:
+            return "failed"
+        
+        # 2. verify_executor 返回 success
+        if verify_status != "success":
+            return "failed"
+        
+        # 3. evidence_formatter.has_evidence(evidence) == True
+        if not has_evidence:
+            return "failed"
+        
+        # 4. user_response 非空
+        if not user_response or not user_response.strip():
+            return "failed"
+        
+        # 5. completed_items 非空
+        if not completed_items:
+            return "failed"
+        
+        return "success"
     
     def _aggregate(self, results: Dict[str, Any]) -> Any:
         """聚合结果"""

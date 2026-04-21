@@ -1,0 +1,559 @@
+{
+  "existing_tasks": {
+    "auto_trigger_tasks": [
+      "vector_optimization",
+      "layer_dependency_check",
+      "daily_health_reminder",
+      "exception_management",
+      "weekly_first_start",
+      "session_cleanup",
+      "governance_file_change",
+      "skill_health_check",
+      "end_of_day_review",
+      "report_cleanup",
+      "backup_cleanup",
+      "core_file_change",
+      "nightly_audit",
+      "auto_classify_skills",
+      "json_contract_check",
+      "full_backup",
+      "continuous_improvement",
+      "cache_cleanup",
+      "weekly_skill_report",
+      "skill_usage_stats",
+      "daily_work_summary",
+      "daily_first_start",
+      "control_plane_audit",
+      "midday_check",
+      "ai_api_check",
+      "dependency_check",
+      "system_health_report",
+      "deep_inspection",
+      "repo_integrity_check",
+      "new_python_file"
+    ],
+    "heartbeat_tasks": [
+      "| 自动 Git 同步 | 提交并推送变更 | 60s |",
+      "| 自动备份上传 | 自动提交推送变更 | 60s |",
+      "| 自动触发器 | 检测场景并自动触发任务 | 120s |",
+      "| 每周首次启动 | 周复盘 | 周一自动生成周报 |"
+    ]
+  },
+  "scripts_with_keywords": {
+    "daily": [
+      "send_daily_weather_report.py",
+      "auto_trigger.py",
+      "generate_charts.py",
+      "run_weekly_growth_review.py",
+      "run_end_of_day_review.py",
+      "run_daily_growth_check.py",
+      "run_daily_growth_loop.py",
+      "run_midday_check.py",
+      "generate_daily_work_summary.py"
+    ],
+    "audit": [
+      "control_plane_audit.py",
+      "check_repo_integrity.py",
+      "check_json_contracts.py",
+      "control_plane.py",
+      "build_ops_dashboard.py",
+      "render_nightly_summary.py"
+    ],
+    "schedule": [
+      "auto_classify_skills.py",
+      "scheduled_tasks_daemon.py",
+      "start_celery_fakeredis.py",
+      "start_production.py",
+      "quick_task.py",
+      "one_time_trigger.py",
+      "quick_schedule.py",
+      "scheduled_tasks_launcher.py",
+      "task_daemon_v2.py",
+      "create_scheduled_message.py",
+      "task_daemon.py",
+      "find_scheduled_tasks.py",
+      "precise_sender.py",
+      "migrate_to_postgres.py",
+      "final_acceptance.py",
+      "scheduled_message_daemon.py",
+      "send_daily_health_reminder.py",
+      "send_message_helper.py",
+      "production_acceptance.py",
+      "start_real_infra.py",
+      "message_sender.py"
+    ],
+    "check": [
+      "run_rule_engine.py",
+      "demo_minimum_loop.py",
+      "check_repo_integrity_fast.py",
+      "skill_health_check.py",
+      "check_layer_dependencies.py",
+      "delete_manager.py",
+      "check_change_impact.py",
+      "check_rule_guards.py",
+      "check_skill_security.py",
+      "generate_final_verification_bundle.py",
+      "render_premerge_summary.py",
+      "render_release_summary.py",
+      "generate_release_reports.py",
+      "run_release_gate.py",
+      "check_change_impact_enforcement.py",
+      "check_ai_apis.py"
+    ],
+    "cron": [
+      "test_recurring_real.py",
+      "heartbeat_executor.py",
+      "continuous_improvement.py"
+    ],
+    "定期": [
+      "architecture_auto_improver.py",
+      "permanent_keeper.py"
+    ],
+    "自动": [
+      "ops_center.py",
+      "component_classifier.py",
+      "session_end_detector.py",
+      "architecture_compliance_checker.py",
+      "upgrade_all_to_commercial.py",
+      "remediation_center.py",
+      "dependency_manager.py",
+      "cleanup_reports.py",
+      "auto_fusion_hook.py",
+      "smart_compressor.py",
+      "test_all_skills.py",
+      "auto_summarizer.py",
+      "unified_inspector_v7.py",
+      "exception_manager.py"
+    ],
+    "backup": [
+      "full_backup.py"
+    ],
+    "定时": [
+      "batch_skill_upgrade.py"
+    ],
+    "巡检": [
+      "unified_inspector.py",
+      "run_nightly_audit.py",
+      "deep_inspection.py"
+    ],
+    "weekly": [
+      "create_professional_docs.py",
+      "generate_weekly_skill_report.py"
+    ],
+    "monitor": [
+      "verify_phase3_final.py",
+      "generate_observability_reports.py"
+    ]
+  },
+  "skills_with_scheduled_tasks": {
+    "today-task": [
+      "SKILL.md contains 'schedule'"
+    ]
+  },
+  "docs_with_scheduled_tasks": {
+    "docs/API_REFERENCE.md": "contains '自动'",
+    "docs/FUSION_REPORT.md": "contains '监控'",
+    "docs/SCHEDULED_TASKS_EXECUTION.md": "contains '定时'",
+    "docs/FILE_INVENTORY.md": "contains '定时'",
+    "docs/MAINTENANCE_GUIDE.md": "contains '定期'",
+    "docs/COMPONENT_CLASSIFICATION_POLICY.md": "contains '巡检'",
+    "docs/V7.2.0_UNIFIED_ARCHITECTURE.md": "contains '自动'",
+    "docs/CHANGELOG.md": "contains '巡检'",
+    "docs/SCHEDULED_TASKS_ANALYSIS.md": "contains '定时'",
+    "docs/SCHEDULED_TASKS.md": "contains '定时'",
+    "docs/TOKEN_OPTIMIZATION_STRATEGY.md": "contains '自动'",
+    "docs/BACKUP_MECHANISM_EXPLAINED.md": "contains '定时'",
+    "docs/DEPLOY.md": "contains '巡检'",
+    "docs/REAL_INFRASTRUCTURE_SETUP.md": "contains '定时'",
+    "docs/LITE_VERSION_PLAN.md": "contains '自动'",
+    "docs/SYSTEM_MODULES.md": "contains '定时'",
+    "docs/HEARTBEAT_INTERVAL_ANALYSIS.md": "contains '定时'",
+    "docs/SCHEDULED_TASKS_DISCOVERY_V3.md": "contains '定时'",
+    "docs/V7.2.0_ARCHITECTURE.md": "contains '自动'",
+    "docs/HEARTBEAT_ANALYSIS.md": "contains '定时'",
+    "docs/PERMANENT_KEEPER_MODULE.md": "contains '定期'",
+    "docs/抖店智能客服系统功能说明书_V1.0.md": "contains '自动'",
+    "docs/HEARTBEAT_DAEMON_CONFIGURED.md": "contains '定时'",
+    "docs/V7.2.0_架构中文完整版.md": "contains '定时'",
+    "docs/DELETE_CONFIRMATION_POLICY.md": "contains '自动'",
+    "docs/SCHEDULED_TASKS_COMPLETE.md": "contains '定时'",
+    "docs/loop_guard_design.md": "contains '自动'",
+    "docs/AUTO_RUN_COMPONENTS.md": "contains '定时'",
+    "docs/history/V4.3.1_UPGRADE_SUMMARY.md": "contains '自动'",
+    "docs/history/V4.3.2_ARCHITECTURE_SUMMARY.md": "contains '自动'",
+    "docs/history/V4.3.0_UPGRADE_SUMMARY.md": "contains '自动'",
+    "docs/scripts/README.md": "contains '定期'"
+  },
+  "suggestions": [
+    {
+      "script": "send_daily_weather_report.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "auto_trigger.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "generate_charts.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_weekly_growth_review.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_end_of_day_review.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_daily_growth_check.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_daily_growth_loop.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "run_midday_check.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "generate_daily_work_summary.py",
+      "keyword": "daily",
+      "reason": "脚本包含关键词 'daily'，可能需要定时执行"
+    },
+    {
+      "script": "check_repo_integrity.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "check_json_contracts.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "control_plane.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "build_ops_dashboard.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "render_nightly_summary.py",
+      "keyword": "audit",
+      "reason": "脚本包含关键词 'audit'，可能需要定时执行"
+    },
+    {
+      "script": "scheduled_tasks_daemon.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "start_celery_fakeredis.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "start_production.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "quick_task.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "one_time_trigger.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "quick_schedule.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "scheduled_tasks_launcher.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "task_daemon_v2.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "create_scheduled_message.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "task_daemon.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "find_scheduled_tasks.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "precise_sender.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "migrate_to_postgres.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "final_acceptance.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "scheduled_message_daemon.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "send_daily_health_reminder.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "send_message_helper.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "production_acceptance.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "start_real_infra.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "message_sender.py",
+      "keyword": "schedule",
+      "reason": "脚本包含关键词 'schedule'，可能需要定时执行"
+    },
+    {
+      "script": "run_rule_engine.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "demo_minimum_loop.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_repo_integrity_fast.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_layer_dependencies.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "delete_manager.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_change_impact.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_rule_guards.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_skill_security.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "generate_final_verification_bundle.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "render_premerge_summary.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "render_release_summary.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "generate_release_reports.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "run_release_gate.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_change_impact_enforcement.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "check_ai_apis.py",
+      "keyword": "check",
+      "reason": "脚本包含关键词 'check'，可能需要定时执行"
+    },
+    {
+      "script": "test_recurring_real.py",
+      "keyword": "cron",
+      "reason": "脚本包含关键词 'cron'，可能需要定时执行"
+    },
+    {
+      "script": "heartbeat_executor.py",
+      "keyword": "cron",
+      "reason": "脚本包含关键词 'cron'，可能需要定时执行"
+    },
+    {
+      "script": "architecture_auto_improver.py",
+      "keyword": "定期",
+      "reason": "脚本包含关键词 '定期'，可能需要定时执行"
+    },
+    {
+      "script": "permanent_keeper.py",
+      "keyword": "定期",
+      "reason": "脚本包含关键词 '定期'，可能需要定时执行"
+    },
+    {
+      "script": "ops_center.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "component_classifier.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "session_end_detector.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "architecture_compliance_checker.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "upgrade_all_to_commercial.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "remediation_center.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "dependency_manager.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "cleanup_reports.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "auto_fusion_hook.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "smart_compressor.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "test_all_skills.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "auto_summarizer.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "unified_inspector_v7.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "exception_manager.py",
+      "keyword": "自动",
+      "reason": "脚本包含关键词 '自动'，可能需要定时执行"
+    },
+    {
+      "script": "batch_skill_upgrade.py",
+      "keyword": "定时",
+      "reason": "脚本包含关键词 '定时'，可能需要定时执行"
+    },
+    {
+      "script": "unified_inspector.py",
+      "keyword": "巡检",
+      "reason": "脚本包含关键词 '巡检'，可能需要定时执行"
+    },
+    {
+      "script": "run_nightly_audit.py",
+      "keyword": "巡检",
+      "reason": "脚本包含关键词 '巡检'，可能需要定时执行"
+    },
+    {
+      "script": "create_professional_docs.py",
+      "keyword": "weekly",
+      "reason": "脚本包含关键词 'weekly'，可能需要定时执行"
+    },
+    {
+      "script": "generate_weekly_skill_report.py",
+      "keyword": "weekly",
+      "reason": "脚本包含关键词 'weekly'，可能需要定时执行"
+    },
+    {
+      "script": "verify_phase3_final.py",
+      "keyword": "monitor",
+      "reason": "脚本包含关键词 'monitor'，可能需要定时执行"
+    },
+    {
+      "script": "generate_observability_reports.py",
+      "keyword": "monitor",
+      "reason": "脚本包含关键词 'monitor'，可能需要定时执行"
+    }
+  ]
+}

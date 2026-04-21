@@ -1,5 +1,13 @@
 # 部署指南 V8.0.0
 
+## 运行模式
+
+**当前交付模式**: `cloud_broker_mode`
+
+- **数据库**: PostgreSQL (Neon)
+- **Broker**: Redis (Upstash)
+- **Result Backend**: Redis (Upstash)
+
 ## 环境要求
 
 - Python 3.11+
@@ -44,7 +52,7 @@ python infrastructure/architecture_inspector.py
 ## 启动命令
 
 ```bash
-# 启动 OpenClaw Gateway
+# 启动 OpenClaw Gateway（生产入口）
 openclaw gateway start
 
 # 检查 Gateway 状态

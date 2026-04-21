@@ -76,6 +76,29 @@
 
 ---
 
+## L4 Execution 目录承载说明
+
+**L4 Execution 层由以下目录共同承载**：
+
+| 目录 | 说明 |
+|------|------|
+| `execution/` | **主目录**，包含技能网关、适配器、循环防护、任务质量等核心执行组件 |
+| `skills/` | 技能包存放目录，由 `execution/skill_gateway.py` 加载和路由 |
+| `domain/` | 领域模型定义，为执行层提供任务规格、状态枚举等 |
+| `application/` | 应用服务层，协调执行层的任务服务 |
+
+**核心执行组件**：
+
+| 组件 | 路径 | 职责 |
+|------|------|------|
+| SkillGateway | `execution/skill_gateway.py` | 技能网关入口 |
+| SkillRouter | `execution/skill_router.py` | 技能路由 |
+| LoopGuard | `execution/loop_guard.py` | 循环防护 |
+| TaskReviewer | `execution/task_reviewer.py` | 任务审查 |
+| ResultValidator | `execution/result_validator.py` | 结果验证 |
+
+---
+
 ## 技能生态
 
 ### 技能统计

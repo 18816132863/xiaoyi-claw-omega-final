@@ -1,16 +1,32 @@
 {
   "project_name": "xiaoyi-claw-omega-final",
   "version": "8.0.0",
-  "git_commit": "7e3f7eb953e20b84c7c471aad8e7860dfe28c446",
+  "git_commit": "61843122",
   "build_date": "2026-04-21T00:31:31Z",
-  "entrypoint": "openclaw",
-  "runtime_mode": "agent",
+  "entrypoint": "openclaw gateway start",
+  "runtime_mode": "cloud_broker_mode",
   "database": {
-    "type": "sqlite",
-    "path": "data/tasks.db",
-    "tables": ["tasks", "task_steps", "task_events", "tool_calls", "scheduled_messages"]
+    "type": "postgresql",
+    "provider": "neon",
+    "tables": [
+      "tasks",
+      "task_runs",
+      "task_steps",
+      "task_events",
+      "tool_calls",
+      "workflow_checkpoints"
+    ]
   },
-  "broker": "none",
-  "result_backend": "none",
+  "broker": {
+    "type": "redis",
+    "provider": "upstash"
+  },
+  "result_backend": {
+    "type": "redis",
+    "provider": "upstash"
+  },
+  "legacy_tables": {
+    "scheduled_jobs": "兼容遗留表，用于旧版定时任务，新版使用 task_runs"
+  },
   "sha256": "5ce684521dd337a1d8d5156505d00a92c2daa66a8b9f7728008b0db1bad67f7a"
 }

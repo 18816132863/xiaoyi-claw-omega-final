@@ -1,25 +1,12 @@
 {
   "version": "V7.2.0",
-  "timestamp": "2026-04-21T09:13:36.675161",
+  "timestamp": "2026-04-21T09:35:28.843265",
   "total_items": 34,
   "passed": 20,
   "failed": 14,
   "warnings": 9,
-  "total_duration_ms": 4914,
+  "total_duration_ms": 4972,
   "items": [
-    {
-      "id": "core_cognition",
-      "name": "L1 认知系统检查",
-      "passed": true,
-      "duration_ms": 1,
-      "details": [
-        "✅ core/cognition/reasoning.py (13147 bytes)",
-        "✅ core/cognition/decision.py (9523 bytes)",
-        "✅ core/cognition/planning.py (8663 bytes)",
-        "✅ core/cognition/reflection.py (9859 bytes)",
-        "✅ core/cognition/learning.py (10989 bytes)"
-      ]
-    },
     {
       "id": "core_state",
       "name": "L1 状态契约检查",
@@ -32,10 +19,23 @@
       ]
     },
     {
+      "id": "core_cognition",
+      "name": "L1 认知系统检查",
+      "passed": true,
+      "duration_ms": 6,
+      "details": [
+        "✅ core/cognition/reasoning.py (13147 bytes)",
+        "✅ core/cognition/decision.py (9523 bytes)",
+        "✅ core/cognition/planning.py (8663 bytes)",
+        "✅ core/cognition/reflection.py (9859 bytes)",
+        "✅ core/cognition/learning.py (10989 bytes)"
+      ]
+    },
+    {
       "id": "memory_retrieval",
       "name": "L2 检索系统检查",
       "passed": true,
-      "duration_ms": 57,
+      "duration_ms": 220,
       "details": [
         "✅ memory_context.retrieval.retrieval_router.RetrievalRouter",
         "✅ memory_context.retrieval.hybrid_search.HybridSearch"
@@ -45,7 +45,7 @@
       "id": "memory_session",
       "name": "L2 会话管理检查",
       "passed": true,
-      "duration_ms": 33,
+      "duration_ms": 10,
       "details": [
         "✅ memory_context.session.session_history.SessionHistory",
         "✅ memory_context.long_term.project_memory_store.ProjectMemoryStore"
@@ -55,7 +55,7 @@
       "id": "memory_builder",
       "name": "L2 上下文构建检查",
       "passed": true,
-      "duration_ms": 135,
+      "duration_ms": 273,
       "details": [
         "✅ memory_context.builder.context_builder.ContextBuilder",
         "✅ memory_context.builder.priority_ranker.PriorityRanker",
@@ -67,7 +67,7 @@
       "id": "execution_control",
       "name": "L3 执行控制检查",
       "passed": true,
-      "duration_ms": 6,
+      "duration_ms": 19,
       "details": [
         "✅ orchestration.execution_control.retry_policy.RetryPolicy",
         "✅ orchestration.execution_control.fallback_policy.FallbackPolicy",
@@ -111,7 +111,7 @@
       "id": "skill_lifecycle",
       "name": "L4 生命周期检查",
       "passed": false,
-      "duration_ms": 0,
+      "duration_ms": 4,
       "details": [
         "❌ skills.lifecycle.install_manager.InstallManager 不存在",
         "❌ skills.lifecycle.enable_disable_manager.EnableDisableManager 不存在",
@@ -133,7 +133,7 @@
       "id": "policy_engine",
       "name": "L5 策略引擎检查",
       "passed": true,
-      "duration_ms": 116,
+      "duration_ms": 193,
       "details": [
         "✅ governance.control_plane.policy_engine.PolicyEngine",
         "✅ governance.control_plane.policy_engine.Policy",
@@ -199,16 +199,13 @@
       ]
     },
     {
-      "id": "main_chain_recovery",
-      "name": "主链-恢复链集成检查",
+      "id": "skill_security",
+      "name": "技能安全检查",
       "passed": false,
-      "duration_ms": 87,
+      "duration_ms": 618,
       "details": [
-        "✅ FallbackPolicy.decide() 存在",
-        "✅ FallbackPolicy 错误类型识别正确",
-        "✅ RollbackManager 方法存在",
-        "❌ CheckpointStore 导入失败: No module named 'orchestration.state'",
-        "❌ WorkflowEngine 导入失败: cannot import name 'WorkflowEngine' from 'orchestration.workflow.workflow_engine' (/home/sandbox/.openclaw/workspace/orchestration/workflow/workflow_engine.py)"
+        "退出码: 1",
+        "错误: port)\n  File \"/home/sandbox/.openclaw/workspace/scripts/check_skill_security.py\", line 599, in print_report\n    print(f\"通过: {report['passed']}\")\n                   ~~~~~~^^^^^^^^^^\nKeyError: 'passed'\n"
       ]
     },
     {
@@ -253,22 +250,10 @@
       ]
     },
     {
-      "id": "workflow_engine",
-      "name": "L3 工作流引擎检查",
-      "passed": false,
-      "duration_ms": 256,
-      "details": [
-        "❌ orchestration.workflow.workflow_engine.WorkflowEngine 不存在",
-        "✅ orchestration.workflow.dag_builder.DAGBuilder",
-        "✅ orchestration.workflow.dependency_resolver.DependencyResolver",
-        "✅ orchestration.workflow.state_machine.WorkflowStateMachine"
-      ]
-    },
-    {
       "id": "metrics_aggregated",
       "name": "Metrics-聚合指标检查",
       "passed": true,
-      "duration_ms": 1,
+      "duration_ms": 0,
       "details": [
         "⚠️ reports/metrics/aggregated_metrics.json 不存在"
       ]
@@ -283,10 +268,23 @@
       ]
     },
     {
+      "id": "main_chain_recovery",
+      "name": "主链-恢复链集成检查",
+      "passed": false,
+      "duration_ms": 142,
+      "details": [
+        "✅ FallbackPolicy.decide() 存在",
+        "✅ FallbackPolicy 错误类型识别正确",
+        "✅ RollbackManager 方法存在",
+        "❌ CheckpointStore 导入失败: No module named 'orchestration.state'",
+        "❌ WorkflowEngine 导入失败: cannot import name 'WorkflowEngine' from 'orchestration.workflow.workflow_engine' (/home/sandbox/.openclaw/workspace/orchestration/workflow/workflow_engine.py)"
+      ]
+    },
+    {
       "id": "benchmarks",
       "name": "基准测试检查",
       "passed": true,
-      "duration_ms": 5,
+      "duration_ms": 0,
       "details": [
         "✅ tests/benchmarks/task_success_bench.py (2941 bytes)",
         "✅ tests/benchmarks/skill_latency_bench.py (2259 bytes)",
@@ -294,39 +292,41 @@
       ]
     },
     {
+      "id": "workflow_engine",
+      "name": "L3 工作流引擎检查",
+      "passed": false,
+      "duration_ms": 409,
+      "details": [
+        "❌ orchestration.workflow.workflow_engine.WorkflowEngine 不存在",
+        "✅ orchestration.workflow.dag_builder.DAGBuilder",
+        "✅ orchestration.workflow.dependency_resolver.DependencyResolver",
+        "✅ orchestration.workflow.state_machine.WorkflowStateMachine"
+      ]
+    },
+    {
       "id": "core_events",
       "name": "L1 事件系统检查",
       "passed": true,
-      "duration_ms": 431,
+      "duration_ms": 657,
       "details": [
         "✅ core.events.event_bus.EventBus",
         "✅ core.events.event_types.EventType"
       ]
     },
     {
-      "id": "layer_dependencies",
-      "name": "层间依赖检查",
+      "id": "change_impact",
+      "name": "变更影响检查",
       "passed": true,
-      "duration_ms": 767,
+      "duration_ms": 777,
       "details": [
         "退出码: 0"
       ]
     },
     {
-      "id": "skill_security",
-      "name": "技能安全检查",
-      "passed": false,
-      "duration_ms": 753,
-      "details": [
-        "退出码: 1",
-        "错误: port)\n  File \"/home/sandbox/.openclaw/workspace/scripts/check_skill_security.py\", line 599, in print_report\n    print(f\"通过: {report['passed']}\")\n                   ~~~~~~^^^^^^^^^^\nKeyError: 'passed'\n"
-      ]
-    },
-    {
-      "id": "change_impact",
-      "name": "变更影响检查",
+      "id": "layer_dependencies",
+      "name": "层间依赖检查",
       "passed": true,
-      "duration_ms": 836,
+      "duration_ms": 827,
       "details": [
         "退出码: 0"
       ]
@@ -335,7 +335,7 @@
       "id": "test_integration",
       "name": "集成测试检查",
       "passed": false,
-      "duration_ms": 1203,
+      "duration_ms": 915,
       "details": [
         "退出码: 1",
         "错误: law/workspace/orchestration/workflow/workflow_engine.py\", line 31, in <module>\n    from orchestration.state.workflow_instance_store import (\nModuleNotFoundError: No module named 'orchestration.state'\n"
@@ -345,7 +345,7 @@
       "id": "json_contracts",
       "name": "JSON 契约检查",
       "passed": false,
-      "duration_ms": 2268,
+      "duration_ms": 2336,
       "details": [
         "退出码: 1"
       ]
@@ -354,7 +354,7 @@
       "id": "repo_integrity",
       "name": "仓库完整性检查",
       "passed": false,
-      "duration_ms": 4910,
+      "duration_ms": 4970,
       "details": [
         "退出码: 1"
       ]

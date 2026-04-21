@@ -13,11 +13,12 @@ from execution.skill_adapter_gateway import execute_skill
 
 @dataclass
 class SkillResult:
-    """技能执行结果"""
+    """技能执行结果 - V5.0.0: 统一错误结构"""
     success: bool
     skill_id: str
     data: Any
-    error: Optional[Dict] = None
+    error: Optional[str] = None
+    error_code: Optional[str] = None  # V5.0.0: 新增错误码
     timestamp: str = ""
 
     def __post_init__(self):
@@ -49,7 +50,8 @@ class SkillGateway:
             success=result.get("success", False),
             skill_id=skill_id,
             data=result.get("data"),
-            error=result.get("error"),
+            error=result.get("error") if isinstance(result.get("error"), str) else str(result.get("error", "")),
+            error_code=result.get("error_code") or result.get("code") or "UNKNOWN_ERROR",
             timestamp=datetime.now().isoformat()
         )
 

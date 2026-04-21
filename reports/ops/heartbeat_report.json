@@ -1,65 +1,65 @@
 {
   "version": "V7.3.0",
-  "start_time": "2026-04-21T11:46:50.125260",
-  "end_time": "2026-04-21T11:47:22.538559",
-  "total_duration_ms": 32413,
+  "start_time": "2026-04-21T12:02:22.626005",
+  "end_time": "2026-04-21T12:02:33.726544",
+  "total_duration_ms": 11100,
   "success_count": 5,
   "total_count": 9,
   "results": [
     {
       "id": "one_time_trigger",
       "name": "一次性定时任务",
-      "start_time": "2026-04-21T11:46:50.125348",
+      "start_time": "2026-04-21T12:02:22.626086",
       "success": true,
       "output": "============================================================\n  一次性定时任务触发器 V1.0.0\n============================================================\n\n✅ 处理完成\n  发送: 0 条\n  剩余: 0 条\n\n",
       "error": null,
-      "duration_ms": 67,
-      "end_time": "2026-04-21T11:46:50.192627"
+      "duration_ms": 58,
+      "end_time": "2026-04-21T12:02:22.684304"
     },
     {
       "id": "message_sender",
       "name": "消息队列处理",
-      "start_time": "2026-04-21T11:46:50.192707",
+      "start_time": "2026-04-21T12:02:22.684356",
       "success": true,
       "output": "============================================================\n  消息队列处理器 V2.0.0\n============================================================\n\n📬 处理待发送队列...\n  处理: 0 条\n\n⏰ 处理定时消息...\n  处理: 0 条\n  剩余: 0 条\n\n✅ 处理完成\n",
       "error": null,
-      "duration_ms": 68,
-      "end_time": "2026-04-21T11:46:50.261716"
+      "duration_ms": 62,
+      "end_time": "2026-04-21T12:02:22.746889"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-21T11:46:50.261806",
+      "start_time": "2026-04-21T12:02:22.746936",
       "success": true,
-      "output": "======================\n\n⏰ 检查时间触发...\n  当前时间: 11:46\n  今日已触发: ['daily_first_start', 'nightly_audit', 'report_cleanup', 'control_plane_audit', 'json_contract_check', 'continuous_improvement', 'exception_management', 'ai_api_check', 'daily_health_reminder']\n  本周已触发: ['daily_first_start', 'nightly_audit', 'report_cleanup', 'control_plane_audit', 'json_contract_check', 'continuous_improvement', 'exception_management', 'ai_api_check', 'daily_health_reminder']\n\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
+      "output": "t_start', 'nightly_audit', 'report_cleanup', 'control_plane_audit', 'json_contract_check', 'continuous_improvement', 'exception_management', 'ai_api_check', 'daily_health_reminder']\n\n   - 中午检查: 中午检查时间 (12:00)\n\n📁 检查文件触发...\n   无文件触发\n\n============================================================\n  执行触发任务\n============================================================\n\n🔧 [midday_check] 中午检查...\n   ❌ 失败: ============================================================\n  Midday Check - 中午检查纠偏 V1.0.0\n========\n\n",
       "error": null,
-      "duration_ms": 128,
-      "end_time": "2026-04-21T11:46:50.390762"
+      "duration_ms": 181,
+      "end_time": "2026-04-21T12:02:22.928176"
     },
     {
       "id": "session_end_detector",
       "name": "会话结束检测",
-      "start_time": "2026-04-21T11:46:50.390841",
+      "start_time": "2026-04-21T12:02:22.928225",
       "success": true,
       "output": "============================================================\n  会话结束检测器 V1.0.0\n============================================================\n\n✅ 会话活跃中\n\n",
       "error": null,
-      "duration_ms": 68,
-      "end_time": "2026-04-21T11:46:50.459724"
+      "duration_ms": 58,
+      "end_time": "2026-04-21T12:02:22.987032"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-21T11:46:50.459810",
+      "start_time": "2026-04-21T12:02:22.987084",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 32078,
-      "end_time": "2026-04-21T11:47:22.538493"
+      "duration_ms": 10739,
+      "end_time": "2026-04-21T12:02:33.726472"
     },
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-21T11:47:22.538542",
+      "start_time": "2026-04-21T12:02:33.726525",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -68,7 +68,7 @@
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-21T11:47:22.538548",
+      "start_time": "2026-04-21T12:02:33.726532",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -77,7 +77,7 @@
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-21T11:47:22.538553",
+      "start_time": "2026-04-21T12:02:33.726537",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -86,7 +86,7 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-21T11:47:22.538556",
+      "start_time": "2026-04-21T12:02:33.726541",
       "success": false,
       "output": "任务已禁用",
       "error": null,

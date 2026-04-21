@@ -1,65 +1,65 @@
 {
   "version": "V7.3.0",
-  "start_time": "2026-04-21T09:28:44.199738",
-  "end_time": "2026-04-21T09:29:16.567501",
-  "total_duration_ms": 32367,
+  "start_time": "2026-04-21T09:44:16.672801",
+  "end_time": "2026-04-21T09:44:49.345168",
+  "total_duration_ms": 32672,
   "success_count": 5,
   "total_count": 9,
   "results": [
     {
       "id": "one_time_trigger",
       "name": "一次性定时任务",
-      "start_time": "2026-04-21T09:28:44.199825",
+      "start_time": "2026-04-21T09:44:16.672896",
       "success": true,
       "output": "============================================================\n  一次性定时任务触发器 V1.0.0\n============================================================\n\n✅ 处理完成\n  发送: 0 条\n  剩余: 0 条\n\n",
       "error": null,
-      "duration_ms": 61,
-      "end_time": "2026-04-21T09:28:44.260896"
+      "duration_ms": 60,
+      "end_time": "2026-04-21T09:44:16.733850"
     },
     {
       "id": "message_sender",
       "name": "消息队列处理",
-      "start_time": "2026-04-21T09:28:44.260945",
+      "start_time": "2026-04-21T09:44:16.733940",
       "success": true,
-      "output": "处理待发送队列...\n  处理: 1 条\n\n⏰ 处理定时消息...\n  处理: 0 条\n  剩余: 0 条\n\n============================================================\n📤 待发送消息:\n============================================================\n{\"action\": \"send\", \"channel\": \"xiaoyi-channel\", \"target\": \"default\", \"message\": \"🌅 每日健康提醒\\n📅 2026-04-21 09:13\\n\\n😴 睡眠提醒\\n  睡前1小时放下手机，让大脑放松\\n\\n⏰ 作息提醒\\n  避免熬夜，保护肝脏\\n\\n💪 保持健康，从每一天开始！\", \"title\": \"🌅 每日健康提醒\", \"timestamp\": \"2026-04-21T09:28:44.313913\"}\n============================================================\n✅ 处理完成\n",
+      "output": "============================================================\n  消息队列处理器 V2.0.0\n============================================================\n\n📬 处理待发送队列...\n  处理: 0 条\n\n⏰ 处理定时消息...\n  处理: 0 条\n  剩余: 0 条\n\n✅ 处理完成\n",
       "error": null,
-      "duration_ms": 58,
-      "end_time": "2026-04-21T09:28:44.319054"
+      "duration_ms": 65,
+      "end_time": "2026-04-21T09:44:16.799594"
     },
     {
       "id": "auto_trigger",
       "name": "自动触发器",
-      "start_time": "2026-04-21T09:28:44.319099",
+      "start_time": "2026-04-21T09:44:16.799664",
       "success": true,
-      "output": "======================\n\n⏰ 检查时间触发...\n  当前时间: 09:28\n  今日已触发: ['daily_first_start', 'nightly_audit', 'report_cleanup', 'control_plane_audit', 'json_contract_check', 'continuous_improvement', 'exception_management', 'ai_api_check', 'daily_health_reminder']\n  本周已触发: ['daily_first_start', 'nightly_audit', 'report_cleanup', 'control_plane_audit', 'json_contract_check', 'continuous_improvement', 'exception_management', 'ai_api_check', 'daily_health_reminder']\n\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
+      "output": "======================\n\n⏰ 检查时间触发...\n  当前时间: 09:44\n  今日已触发: ['daily_first_start', 'nightly_audit', 'report_cleanup', 'control_plane_audit', 'json_contract_check', 'continuous_improvement', 'exception_management', 'ai_api_check', 'daily_health_reminder']\n  本周已触发: ['daily_first_start', 'nightly_audit', 'report_cleanup', 'control_plane_audit', 'json_contract_check', 'continuous_improvement', 'exception_management', 'ai_api_check', 'daily_health_reminder']\n\n   无时间触发\n\n📁 检查文件触发...\n   无文件触发\n\n✅ 无需触发任何任务\n",
       "error": null,
-      "duration_ms": 97,
-      "end_time": "2026-04-21T09:28:44.416722"
+      "duration_ms": 118,
+      "end_time": "2026-04-21T09:44:16.917732"
     },
     {
       "id": "session_end_detector",
       "name": "会话结束检测",
-      "start_time": "2026-04-21T09:28:44.416767",
+      "start_time": "2026-04-21T09:44:16.917796",
       "success": true,
       "output": "============================================================\n  会话结束检测器 V1.0.0\n============================================================\n\n✅ 会话活跃中\n\n",
       "error": null,
-      "duration_ms": 58,
-      "end_time": "2026-04-21T09:28:44.475268"
+      "duration_ms": 67,
+      "end_time": "2026-04-21T09:44:16.984997"
     },
     {
       "id": "permanent_keeper",
       "name": "永久守护器刷新",
-      "start_time": "2026-04-21T09:28:44.475311",
+      "start_time": "2026-04-21T09:44:16.985072",
       "success": true,
       "output": "{\n  \"refreshed\": [\n    \"fusion_engine\",\n    \"memory_engine\",\n    \"rule_engine\",\n    \"exception_manager\",\n    \"dependency_manager\",\n    \"delete_manager\",\n    \"skill_registry\",\n    \"core_identity\",\n    \"architecture\"\n  ],\n  \"failed\": [],\n  \"skipped\": []\n}\n",
       "error": null,
-      "duration_ms": 32092,
-      "end_time": "2026-04-21T09:29:16.567436"
+      "duration_ms": 32359,
+      "end_time": "2026-04-21T09:44:49.345083"
     },
     {
       "id": "auto_git",
       "name": "自动 Git 同步",
-      "start_time": "2026-04-21T09:29:16.567483",
+      "start_time": "2026-04-21T09:44:49.345150",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -68,7 +68,7 @@
     {
       "id": "auto_backup",
       "name": "自动备份上传",
-      "start_time": "2026-04-21T09:29:16.567489",
+      "start_time": "2026-04-21T09:44:49.345157",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -77,7 +77,7 @@
     {
       "id": "metrics_generator",
       "name": "Metrics 生成",
-      "start_time": "2026-04-21T09:29:16.567494",
+      "start_time": "2026-04-21T09:44:49.345161",
       "success": false,
       "output": "任务已禁用",
       "error": null,
@@ -86,21 +86,12 @@
     {
       "id": "quick_inspection",
       "name": "快速巡检",
-      "start_time": "2026-04-21T09:29:16.567498",
+      "start_time": "2026-04-21T09:44:49.345165",
       "success": false,
       "output": "任务已禁用",
       "error": null,
       "duration_ms": 0
     }
   ],
-  "pending_sends": [
-    {
-      "action": "send",
-      "channel": "xiaoyi-channel",
-      "target": "default",
-      "message": "🌅 每日健康提醒\n📅 2026-04-21 09:13\n\n😴 睡眠提醒\n  睡前1小时放下手机，让大脑放松\n\n⏰ 作息提醒\n  避免熬夜，保护肝脏\n\n💪 保持健康，从每一天开始！",
-      "title": "🌅 每日健康提醒",
-      "timestamp": "2026-04-21T09:28:44.313913"
-    }
-  ]
+  "pending_sends": []
 }

@@ -163,7 +163,7 @@ class ArchitectureInspector:
     def inspect_all(self) -> Dict:
         """执行完整巡检"""
         print("=" * 70)
-        print("架构巡检器 - V5.0.0 规则平台化版")
+        print("架构巡检器 - V6.0.0 新模块融入版")
         print("=" * 70)
         print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print()
@@ -210,10 +210,16 @@ class ArchitectureInspector:
         # 14. 门禁报告检查 (V5.0.0 新增)
         self._inspect_gate_reports()
         
-        # 15. 生成摘要
+        # 15. 新模块融入检查 (V6.0.0 新增)
+        self._inspect_new_modules()
+        
+        # 16. 任务系统检查 (V6.0.0 新增)
+        self._inspect_task_system()
+        
+        # 17. 生成摘要
         self._generate_summary()
         
-        # 16. 自动 Git 同步
+        # 18. 自动 Git 同步
         self._auto_git_sync()
         
         return self.results
@@ -817,6 +823,120 @@ class ArchitectureInspector:
         
         self.results["gate_reports"] = status
     
+    def _inspect_new_modules(self):
+        """V6.0.0: 检查新模块融入"""
+        print()
+        print("【15. 新模块融入检查】")
+        print("-" * 70)
+        
+        new_modules = {
+            "application/task_service": {
+                "required_files": ["service.py", "scheduler.py"],
+                "layer": "L3 Orchestration"
+            },
+            "application/response_service": {
+                "required_files": ["renderer.py", "evidence_formatter.py"],
+                "layer": "L3 Orchestration"
+            },
+            "domain/tasks": {
+                "required_files": ["specs.py", "state_machine.py"],
+                "layer": "L4 Execution"
+            },
+            "infrastructure/storage/repositories": {
+                "required_files": ["interfaces.py", "sqlite_repo.py"],
+                "layer": "L6 Infrastructure"
+            },
+            "infrastructure/storage/migrations": {
+                "required_files": ["001_task_system.sql"],
+                "layer": "L6 Infrastructure"
+            }
+        }
+        
+        status = {"modules": {}}
+        all_ok = True
+        
+        for module_path, config in new_modules.items():
+            module_dir = PROJECT_ROOT / module_path
+            exists = module_dir.exists()
+            
+            module_status = {
+                "exists": exists,
+                "layer": config["layer"],
+                "files_found": [],
+                "files_missing": []
+            }
+            
+            if exists:
+                for req_file in config["required_files"]:
+                    file_path = module_dir / req_file
+                    if file_path.exists():
+                        module_status["files_found"].append(req_file)
+                    else:
+                        module_status["files_missing"].append(req_file)
+                
+                if module_status["files_missing"]:
+                    all_ok = False
+                    print(f"  ⚠️ {module_path}: 缺失 {module_status['files_missing']}")
+                else:
+                    print(f"  ✅ {module_path}: {len(module_status['files_found'])} 文件")
+            else:
+                all_ok = False
+                print(f"  ❌ {module_path}: 目录不存在")
+            
+            status["modules"][module_path] = module_status
+        
+        status["all_ok"] = all_ok
+        self.results["new_modules"] = status
+    
+    def _inspect_task_system(self):
+        """V6.0.0: 检查任务系统"""
+        print()
+        print("【16. 任务系统检查】")
+        print("-" * 70)
+        
+        status = {
+            "task_engine": False,
+            "skill_gateway": False,
+            "evidence_check": False
+        }
+        
+        # 检查 task_engine.py
+        task_engine_path = PROJECT_ROOT / "orchestration" / "task_engine.py"
+        if task_engine_path.exists():
+            content = task_engine_path.read_text()
+            # V5.0.0 检查：是否有真实总结器和验证器
+            has_summarize = "_execute_summarize" in content
+            has_verify = "_execute_verify" in content
+            has_evidence_check = "has_evidence" in content
+            
+            status["task_engine"] = True
+            status["summarize_method"] = has_summarize
+            status["verify_method"] = has_verify
+            status["evidence_check"] = has_evidence_check
+            
+            print(f"  ✅ task_engine.py 存在")
+            print(f"  {'✅' if has_summarize else '❌'} 真实总结器: {'已实现' if has_summarize else '未实现'}")
+            print(f"  {'✅' if has_verify else '❌'} 真实验证器: {'已实现' if has_verify else '未实现'}")
+            print(f"  {'✅' if has_evidence_check else '❌'} 证据检查: {'已实现' if has_evidence_check else '未实现'}")
+        else:
+            print(f"  ❌ task_engine.py 不存在")
+        
+        # 检查 skill_gateway.py
+        gateway_path = PROJECT_ROOT / "execution" / "skill_gateway.py"
+        if gateway_path.exists():
+            content = gateway_path.read_text()
+            has_error_code = "error_code" in content
+            
+            status["skill_gateway"] = True
+            status["error_code_field"] = has_error_code
+            
+            print(f"  ✅ skill_gateway.py 存在")
+            print(f"  {'✅' if has_error_code else '❌'} error_code 字段: {'已添加' if has_error_code else '未添加'}")
+        else:
+            print(f"  ❌ skill_gateway.py 不存在")
+        
+        self.results["task_system"] = status
+    
     def _generate_summary(self):
         """生成摘要"""
         print()
@@ -877,6 +997,21 @@ class ArchitectureInspector:
         print(f"  变更影响: {self.results['summary']['change_impact']}")
         print(f"  技能安全: {self.results['summary']['skill_security']}")
         print(f"  循环防护: {self.results['summary']['loop_guard']}")
+        
+        # V6.0.0 新增摘要
+        print()
+        print("【V6.0.0 新增检查】")
+        new_modules = self.results.get("new_modules", {})
+        task_system = self.results.get("task_system", {})
+        
+        modules_ok = new_modules.get("all_ok", False)
+        print(f"  {'✅' if modules_ok else '❌'} 新模块融入: {'全部就绪' if modules_ok else '有缺失'}")
+        
+        task_engine_ok = task_system.get("task_engine", False) and task_system.get("summarize_method", False)
+        print(f"  {'✅' if task_engine_ok else '❌'} 任务引擎: {'V5.0.0 已升级' if task_engine_ok else '需升级'}")
+        
+        evidence_ok = task_system.get("evidence_check", False)
+        print(f"  {'✅' if evidence_ok else '❌'} 证据检查: {'已实现' if evidence_ok else '未实现'}")
         
         # 总体状态
         all_ok = (layer_ok == layer_total and 

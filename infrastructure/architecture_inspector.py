@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""架构巡检器 - V5.0.0 规则平台化版
+"""架构巡检器 - V6.0.0 新模块融入版
 
 增强功能：
 1. 六层架构完整性检查
@@ -20,6 +20,12 @@ V5.0.0 新增:
 14. 技能安全检查 (skill_security_report.json)
 15. 循环防护检查 (loop_guard.py)
 16. 门禁报告检查 (gate_report.json)
+
+V6.0.0 新增:
+17. 新模块融入检查 (application/, domain/, infrastructure/storage/)
+18. 任务系统检查 (task_engine.py, task_service/)
+19. 响应服务检查 (response_service/)
+20. 数据库迁移检查 (migrations/)
 """
 
 import json

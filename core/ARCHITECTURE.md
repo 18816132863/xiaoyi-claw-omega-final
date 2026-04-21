@@ -1,4 +1,4 @@
-# 六层架构定义 V7.0.0
+# 六层架构定义 V8.0.0
 
 > **唯一主架构定义** - 本文档是项目唯一正式运行架构定义
 > 
@@ -6,16 +6,73 @@
 
 ---
 
-## 六层架构
+## 六层主架构
 
-| 层级 | 名称 | 职责 | 目录 |
-|------|------|------|------|
+| 层级 | 名称 | 职责 | 主目录 |
+|------|------|------|--------|
 | L1 | Core | 核心认知、身份、规则、标准 | `core/` |
 | L2 | Memory Context | 记忆上下文、知识库、统一搜索、向量存储 | `memory_context/` |
 | L3 | Orchestration | 任务编排、工作流、路由、策略 | `orchestration/` |
 | L4 | Execution | 能力执行、技能网关、交付 | `execution/` |
 | L5 | Governance | 稳定治理、安全审计、合规、计费 | `governance/` |
 | L6 | Infrastructure | 基础设施、工具链、注册表、运维 | `infrastructure/` |
+
+---
+
+## 顶层目录与六层映射
+
+### 主层目录（6个）
+
+| 目录 | 所属层级 | 说明 |
+|------|----------|------|
+| `core/` | L1 | 核心层，包含认知、状态、事件、规则 |
+| `memory_context/` | L2 | 记忆上下文层，包含检索、会话、构建 |
+| `orchestration/` | L3 | 编排层，包含工作流、执行控制、状态管理 |
+| `execution/` | L4 | 执行层，包含技能网关、适配器、循环防护 |
+| `governance/` | L5 | 治理层，包含安全、权限、审计、预算、风控 |
+| `infrastructure/` | L6 | 基础设施层，包含存储、调度、缓存、自动化 |
+
+### 工程模块目录（非主层）
+
+| 目录 | 归属主层 | 说明 |
+|------|----------|------|
+| `skills/` | L4 Execution | 技能包存放目录 |
+| `domain/` | L4 Execution | 领域模型定义 |
+| `application/` | L3 Orchestration | 应用服务层 |
+| `tests/` | L6 Infrastructure | 测试套件 |
+| `scripts/` | L6 Infrastructure | 运维脚本 |
+| `reports/` | L6 Infrastructure | 报告输出 |
+| `data/` | L6 Infrastructure | 数据存储 |
+| `docs/` | L6 Infrastructure | 文档 |
+
+### 根目录文件（L1 Core）
+
+| 文件 | 说明 |
+|------|------|
+| `AGENTS.md` | 工作空间规则 |
+| `SOUL.md` | 身份定义 |
+| `USER.md` | 用户信息 |
+| `TOOLS.md` | 工具规则 |
+| `IDENTITY.md` | 身份标识 |
+| `MEMORY.md` | 长期记忆 |
+| `HEARTBEAT.md` | 心跳任务 |
+
+---
+
+## memory 与 memory_context 的关系
+
+**重要说明**：本项目只有 **6 层架构**，不是 8 层。
+
+| 目录 | 职责 | 是否主层 |
+|------|------|----------|
+| `memory/` | 会话数据存储（日记、对话历史） | ❌ 非主层，属于 L2 的数据存储 |
+| `memory_context/` | 记忆上下文系统（检索、会话管理、上下文构建） | ✅ L2 主层 |
+
+**区别**：
+- `memory/` 是**数据目录**，存放运行时产生的记忆数据
+- `memory_context/` 是**架构层**，包含记忆系统的代码逻辑
+
+**不要混淆**：`memory/` 不是第 7 层，`memory_context/` 才是 L2 主层
 
 ---
 
@@ -236,6 +293,60 @@ python infrastructure/performance_optimizer.py --benchmark
 - `docs/OPTIMIZATION_PLAN.md` - 优化方案
 - `docs/OPTIMIZATION_CALCULATION.md` - 优化计算
 - `docs/COMPRESSION_OPTIMIZATION.md` - 压缩优化策略
+
+---
+
+## 数据库系统
+
+### 数据库文件
+
+| 文件 | 路径 | 说明 |
+|------|------|------|
+| 任务数据库 | `data/tasks.db` | SQLite 主数据库 |
+| 向量数据库 | `data/vectors.db` | sqlite-vec 向量存储 |
+| 审计数据库 | `data/audit.db` | 审计日志存储 |
+
+### 迁移脚本
+
+| 文件 | 路径 | 说明 |
+|------|------|------|
+| 任务系统迁移 | `infrastructure/storage/migrations/001_task_system.sql` | 创建任务相关表 |
+| 向量索引迁移 | `infrastructure/storage/migrations/002_vector_index.sql` | 创建向量索引 |
+
+### 初始化脚本
+
+| 文件 | 路径 | 说明 |
+|------|------|------|
+| 数据库初始化 | `infrastructure/storage/init_db.py` | 初始化所有数据库 |
+| 种子数据 | `infrastructure/storage/seed_data.py` | 插入初始数据 |
+
+### 表结构说明
+
+| 表名 | 路径 | 说明 |
+|------|------|------|
+| `tasks` | `infrastructure/storage/migrations/001_task_system.sql` | 任务主表 |
+| `task_steps` | `infrastructure/storage/migrations/001_task_system.sql` | 任务步骤表 |
+| `task_events` | `infrastructure/storage/migrations/001_task_system.sql` | 任务事件表 |
+| `tool_calls` | `infrastructure/storage/migrations/001_task_system.sql` | 工具调用表 |
+| `scheduled_messages` | `infrastructure/storage/migrations/001_task_system.sql` | 定时消息表 |
+
+### Checkpoint 相关路径
+
+| 文件 | 路径 | 说明 |
+|------|------|------|
+| Checkpoint 存储 | `orchestration/state/checkpoint_store.py` | 检查点存储模块 |
+| Checkpoint 数据 | `data/checkpoints/` | 检查点数据目录 |
+| 工作流实例存储 | `orchestration/state/workflow_instance_store.py` | 工作流实例持久化 |
+
+### 数据库表命名规范
+
+**所有表名统一使用 snake_case**：
+
+| 正确 | 错误 |
+|------|------|
+| `task_runs` | ~~taskruns~~ |
+| `task_events` | ~~taskevents~~ |
+| `tool_calls` | ~~toolcalls~~ |
 
 ---
 

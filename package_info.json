@@ -1,0 +1,16 @@
+{
+  "project_name": "xiaoyi-claw-omega-final",
+  "version": "8.0.0",
+  "git_commit": "7e3f7eb953e20b84c7c471aad8e7860dfe28c446",
+  "build_date": "2026-04-21T00:31:31Z",
+  "entrypoint": "openclaw",
+  "runtime_mode": "agent",
+  "database": {
+    "type": "sqlite",
+    "path": "data/tasks.db",
+    "tables": ["tasks", "task_steps", "task_events", "tool_calls", "scheduled_messages"]
+  },
+  "broker": "none",
+  "result_backend": "none",
+  "sha256": "5ce684521dd337a1d8d5156505d00a92c2daa66a8b9f7728008b0db1bad67f7a"
+}

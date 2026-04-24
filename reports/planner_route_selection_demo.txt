@@ -1,0 +1,145 @@
+================================================================================
+规划器路由选择演示
+================================================================================
+
+演示场景：用户发出不同意图，规划器如何选择正确的路由
+
+--------------------------------------------------------------------------------
+场景 1: 用户说 "给张三发消息说明天开会"
+--------------------------------------------------------------------------------
+
+输入意图识别: "发送消息"
+匹配路由: route.send_message
+
+路由详情:
+{
+  "route_id": "route.send_message",
+  "capability": "send_message",
+  "user_intents": ["发送消息", "发消息", "给某人发消息"],
+  "handler": "device_capability_bus.capabilities.message.send_message",
+  "risk_level": "HIGH",
+  "requires_confirmation": true,
+  "fallback_routes": ["list_recent_messages", "query_message_status"]
+}
+
+执行计划:
+1. 解析参数: recipient="张三", message="明天开会"
+2. 风险检查: HIGH → 需要用户确认
+3. 调用 handler: device_capability_bus.capabilities.message.send_message
+4. 如果失败 → fallback 到 query_message_status
+
+--------------------------------------------------------------------------------
+场景 2: 用户说 "明天早上8点叫我"
+--------------------------------------------------------------------------------
+
+输入意图识别: "创建闹钟"
+匹配路由: route.create_alarm
+
+路由详情:
+{
+  "route_id": "route.create_alarm",
+  "capability": "create_alarm",
+  "user_intents": ["创建闹钟", "设置闹钟"],
+  "handler": "device_capability_bus.capabilities.alarm.create_alarm",
+  "risk_level": "MEDIUM",
+  "requires_confirmation": false,
+  "fallback_routes": ["query_alarm"]
+}
+
+执行计划:
+1. 解析参数: time="明天早上8点", label=""
+2. 风险检查: MEDIUM → 可直接执行
+3. 调用 handler: device_capability_bus.capabilities.alarm.create_alarm
+4. 如果失败 → fallback 到 query_alarm
+
+--------------------------------------------------------------------------------
+场景 3: 用户说 "查一下我的备忘录里有没有购物清单"
+--------------------------------------------------------------------------------
+
+输入意图识别: "查询备忘录"
+匹配路由: route.query_note
+
+路由详情:
+{
+  "route_id": "route.query_note",
+  "capability": "query_note",
+  "user_intents": ["查询备忘录"],
+  "handler": "device_capability_bus.capabilities.note.query_note",
+  "risk_level": "LOW",
+  "requires_confirmation": false,
+  "fallback_routes": []
+}
+
+执行计划:
+1. 解析参数: keyword="购物清单"
+2. 风险检查: LOW → 可直接执行
+3. 调用 handler: device_capability_bus.capabilities.note.query_note
+4. 返回查询结果
+
+--------------------------------------------------------------------------------
+场景 4: 用户说 "删除所有闹钟"
+--------------------------------------------------------------------------------
+
+输入意图识别: "删除闹钟"
+匹配路由: route.delete_alarm
+
+路由详情:
+{
+  "route_id": "route.delete_alarm",
+  "capability": "delete_alarm",
+  "user_intents": ["删除闹钟"],
+  "handler": "device_capability_bus.capabilities.alarm.delete_alarm",
+  "risk_level": "HIGH",
+  "requires_confirmation": true,
+  "fallback_routes": ["query_alarm"]
+}
+
+执行计划:
+1. 解析参数: alarm_id="all" (需要先查询)
+2. 风险检查: HIGH → 需要用户确认
+3. 先调用 query_alarm 获取闹钟列表
+4. 展示给用户确认
+5. 确认后调用 delete_alarm
+6. 如果失败 → fallback 到 query_alarm (显示当前状态)
+
+--------------------------------------------------------------------------------
+场景 5: 用户说 "打个车去公司"
+--------------------------------------------------------------------------------
+
+输入意图识别: 未找到直接匹配
+模糊匹配: "拨打电话" (部分匹配)
+
+建议路由:
+- route.make_call (拨打电话)
+- route.get_location (获取位置)
+
+执行计划:
+1. 意图识别失败 → 询问用户澄清
+2. "您是想拨打电话，还是需要叫车服务？"
+
+--------------------------------------------------------------------------------
+场景 6: 多步骤任务 "提醒我明天下午3点开会，并给张三发消息"
+--------------------------------------------------------------------------------
+
+分解为多个子任务:
+1. 创建日程: route.create_calendar_event
+2. 发送消息: route.send_message
+
+执行计划:
+步骤1: 创建日程
+  - 意图: "创建日程"
+  - 路由: route.create_calendar_event
+  - 参数: title="开会", start_time="明天下午3点"
+  - 风险: MEDIUM → 可直接执行
+
+步骤2: 发送消息
+  - 意图: "发送消息"
+  - 路由: route.send_message
+  - 参数: recipient="张三", message="明天下午3点开会"
+  - 风险: HIGH → 需要确认
+
+执行顺序: 串行执行，先创建日程，再发送消息
+
+================================================================================
+演示结束
+================================================================================

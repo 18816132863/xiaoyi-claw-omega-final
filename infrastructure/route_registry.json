@@ -1,0 +1,2143 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-24T23:38:39.894839",
+  "routes": {
+    "route.delete_note": {
+      "route_id": "route.delete_note",
+      "capability": "delete_note",
+      "user_intents": [
+        "删除备忘录"
+      ],
+      "handler": "device_capability_bus.capabilities.note.delete_note",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "note_id": {
+            "type": "string",
+            "description": "备忘录ID"
+          }
+        },
+        "required": [
+          "note_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [
+        "query_note"
+      ],
+      "tested_by": "tests.test_route_delete_note",
+      "documented_in": "docs/routes/delete_note.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894420",
+      "metadata": {
+        "description": "删除备忘录能力",
+        "original_path": "capabilities/delete_note.py"
+      }
+    },
+    "route.self_repair": {
+      "route_id": "route.self_repair",
+      "capability": "self_repair",
+      "user_intents": [
+        "自修复"
+      ],
+      "handler": "core.recovery.self_repair",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "SYSTEM",
+      "requires_confirmation": true,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_self_repair",
+      "documented_in": "docs/routes/self_repair.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894441",
+      "metadata": {
+        "description": "Capability: self_repair",
+        "original_path": "capabilities/self_repair.py"
+      }
+    },
+    "route.query_contact": {
+      "route_id": "route.query_contact",
+      "capability": "query_contact",
+      "user_intents": [
+        "查询联系人"
+      ],
+      "handler": "device_capability_bus.capabilities.contact.query_contact",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_query_contact",
+      "documented_in": "docs/routes/query_contact.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894450",
+      "metadata": {
+        "description": "查询联系人能力",
+        "original_path": "capabilities/query_contact.py"
+      }
+    },
+    "route.explain_notification_auth_state": {
+      "route_id": "route.explain_notification_auth_state",
+      "capability": "explain_notification_auth_state",
+      "user_intents": [
+        "解释通知授权状态"
+      ],
+      "handler": "device_capability_bus.capabilities.notification.explain_auth_state",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_explain_notification_auth_state",
+      "documented_in": "docs/routes/explain_notification_auth_state.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894457",
+      "metadata": {
+        "description": "解释通知授权状态能力",
+        "original_path": "capabilities/explain_notification_auth_state.py"
+      }
+    },
+    "route.refresh_notification_auth": {
+      "route_id": "route.refresh_notification_auth",
+      "capability": "refresh_notification_auth",
+      "user_intents": [
+        "刷新通知授权"
+      ],
+      "handler": "device_capability_bus.capabilities.notification.refresh_auth",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "SYSTEM",
+      "requires_confirmation": true,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_refresh_notification_auth",
+      "documented_in": "docs/routes/refresh_notification_auth.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894464",
+      "metadata": {
+        "description": "刷新通知授权能力",
+        "original_path": "capabilities/refresh_notification_auth.py"
+      }
+    },
+    "route.delete_contact": {
+      "route_id": "route.delete_contact",
+      "capability": "delete_contact",
+      "user_intents": [
+        "删除联系人"
+      ],
+      "handler": "device_capability_bus.capabilities.contact.delete_contact",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [
+        "query_contact"
+      ],
+      "tested_by": "tests.test_route_delete_contact",
+      "documented_in": "docs/routes/delete_contact.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894471",
+      "metadata": {
+        "description": "删除联系人能力",
+        "original_path": "capabilities/delete_contact.py"
+      }
+    },
+    "route.pause_task": {
+      "route_id": "route.pause_task",
+      "capability": "pause_task",
+      "user_intents": [
+        "暂停任务"
+      ],
+      "handler": "autonomous_planner.task_decomposer.pause_task",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_pause_task",
+      "documented_in": "docs/routes/pause_task.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894478",
+      "metadata": {
+        "description": "Capability: pause_task",
+        "original_path": "capabilities/pause_task.py"
+      }
+    },
+    "route.make_call": {
+      "route_id": "route.make_call",
+      "capability": "make_call",
+      "user_intents": [
+        "拨打电话",
+        "打电话"
+      ],
+      "handler": "device_capability_bus.capabilities.call.make_call",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "contact": {
+            "type": "string",
+            "description": "联系人姓名或号码"
+          }
+        },
+        "required": [
+          "contact"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [
+        "query_contact"
+      ],
+      "tested_by": "tests.test_route_make_call",
+      "documented_in": "docs/routes/make_call.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894494",
+      "metadata": {
+        "description": "拨打电话能力",
+        "original_path": "capabilities/make_call.py"
+      }
+    },
+    "route.delete_photo": {
+      "route_id": "route.delete_photo",
+      "capability": "delete_photo",
+      "user_intents": [
+        "删除照片"
+      ],
+      "handler": "device_capability_bus.capabilities.photo.delete_photo",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [
+        "query_photo"
+      ],
+      "tested_by": "tests.test_route_delete_photo",
+      "documented_in": "docs/routes/delete_photo.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894501",
+      "metadata": {
+        "description": "删除照片能力",
+        "original_path": "capabilities/delete_photo.py"
+      }
+    },
+    "route.manage_file": {
+      "route_id": "route.manage_file",
+      "capability": "manage_file",
+      "user_intents": [
+        "管理文件"
+      ],
+      "handler": "device_capability_bus.capabilities.file.manage_file",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_manage_file",
+      "documented_in": "docs/routes/manage_file.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894507",
+      "metadata": {
+        "description": "移动/复制文件能力",
+        "original_path": "capabilities/manage_file.py"
+      }
+    },
+    "route.cancel_task": {
+      "route_id": "route.cancel_task",
+      "capability": "cancel_task",
+      "user_intents": [
+        "取消任务"
+      ],
+      "handler": "autonomous_planner.task_decomposer.cancel_task",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_cancel_task",
+      "documented_in": "docs/routes/cancel_task.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894513",
+      "metadata": {
+        "description": "Capability: cancel_task",
+        "original_path": "capabilities/cancel_task.py"
+      }
+    },
+    "route.get_location": {
+      "route_id": "route.get_location",
+      "capability": "get_location",
+      "user_intents": [
+        "获取位置",
+        "定位"
+      ],
+      "handler": "device_capability_bus.capabilities.location.get_location",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_get_location",
+      "documented_in": "docs/routes/get_location.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894519",
+      "metadata": {
+        "description": "获取位置能力",
+        "original_path": "capabilities/get_location.py"
+      }
+    },
+    "route.delete_xiaoyi_note": {
+      "route_id": "route.delete_xiaoyi_note",
+      "capability": "delete_xiaoyi_note",
+      "user_intents": [
+        "删除小艺帮记"
+      ],
+      "handler": "device_capability_bus.capabilities.xiaoyi_note.delete_note",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_delete_xiaoyi_note",
+      "documented_in": "docs/routes/delete_xiaoyi_note.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894526",
+      "metadata": {
+        "description": "小艺帮记删除能力",
+        "original_path": "capabilities/delete_xiaoyi_note.py"
+      }
+    },
+    "route.query_photo": {
+      "route_id": "route.query_photo",
+      "capability": "query_photo",
+      "user_intents": [
+        "查询照片"
+      ],
+      "handler": "device_capability_bus.capabilities.photo.query_photo",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_query_photo",
+      "documented_in": "docs/routes/query_photo.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894533",
+      "metadata": {
+        "description": "查询图库照片能力",
+        "original_path": "capabilities/query_photo.py"
+      }
+    },
+    "route.delete_calendar_event": {
+      "route_id": "route.delete_calendar_event",
+      "capability": "delete_calendar_event",
+      "user_intents": [
+        "删除日程"
+      ],
+      "handler": "device_capability_bus.capabilities.calendar.delete_event",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [
+        "query_calendar_event"
+      ],
+      "tested_by": "tests.test_route_delete_calendar_event",
+      "documented_in": "docs/routes/delete_calendar_event.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894543",
+      "metadata": {
+        "description": "删除日程事件能力",
+        "original_path": "capabilities/delete_calendar_event.py"
+      }
+    },
+    "route.preview_side_effect": {
+      "route_id": "route.preview_side_effect",
+      "capability": "preview_side_effect",
+      "user_intents": [
+        "预览副作用"
+      ],
+      "handler": "governance.review.change_review.preview_side_effect",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "SYSTEM",
+      "requires_confirmation": true,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_preview_side_effect",
+      "documented_in": "docs/routes/preview_side_effect.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894553",
+      "metadata": {
+        "description": "副作用预览能力",
+        "original_path": "capabilities/preview_side_effect.py"
+      }
+    },
+    "route.send_message": {
+      "route_id": "route.send_message",
+      "capability": "send_message",
+      "user_intents": [
+        "发送消息",
+        "发消息",
+        "给某人发消息"
+      ],
+      "handler": "device_capability_bus.capabilities.message.send_message",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "recipient": {
+            "type": "string",
+            "description": "接收者"
+          },
+          "message": {
+            "type": "string",
+            "description": "消息内容"
+          },
+          "channel": {
+            "type": "string",
+            "description": "发送渠道"
+          }
+        },
+        "required": [
+          "recipient",
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message_id": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [
+        "list_recent_messages",
+        "query_message_status"
+      ],
+      "tested_by": "tests.test_route_send_message",
+      "documented_in": "docs/routes/send_message.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894562",
+      "metadata": {
+        "description": "Capability: send_message",
+        "original_path": "capabilities/send_message.py"
+      }
+    },
+    "route.list_recent_messages": {
+      "route_id": "route.list_recent_messages",
+      "capability": "list_recent_messages",
+      "user_intents": [
+        "列出最近消息"
+      ],
+      "handler": "device_capability_bus.capabilities.message.list_recent",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_list_recent_messages",
+      "documented_in": "docs/routes/list_recent_messages.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894572",
+      "metadata": {
+        "description": "列出最近消息能力",
+        "original_path": "capabilities/list_recent_messages.py"
+      }
+    },
+    "route.resend_message": {
+      "route_id": "route.resend_message",
+      "capability": "resend_message",
+      "user_intents": [
+        "重发消息"
+      ],
+      "handler": "device_capability_bus.capabilities.message.resend_message",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_resend_message",
+      "documented_in": "docs/routes/resend_message.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894579",
+      "metadata": {
+        "description": "重发消息能力",
+        "original_path": "capabilities/resend_message.py"
+      }
+    },
+    "route.create_album": {
+      "route_id": "route.create_album",
+      "capability": "create_album",
+      "user_intents": [
+        "创建相册"
+      ],
+      "handler": "device_capability_bus.capabilities.photo.create_album",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_create_album",
+      "documented_in": "docs/routes/create_album.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894585",
+      "metadata": {
+        "description": "创建相册能力",
+        "original_path": "capabilities/create_album.py"
+      }
+    },
+    "route.query_note": {
+      "route_id": "route.query_note",
+      "capability": "query_note",
+      "user_intents": [
+        "查询备忘录"
+      ],
+      "handler": "device_capability_bus.capabilities.note.query_note",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "搜索关键词"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "返回数量限制"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "array"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_query_note",
+      "documented_in": "docs/routes/query_note.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894591",
+      "metadata": {
+        "description": "查询备忘录能力",
+        "original_path": "capabilities/query_note.py"
+      }
+    },
+    "route.explain_message_result": {
+      "route_id": "route.explain_message_result",
+      "capability": "explain_message_result",
+      "user_intents": [
+        "解释消息结果"
+      ],
+      "handler": "device_capability_bus.capabilities.message.explain_result",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_explain_message_result",
+      "documented_in": "docs/routes/explain_message_result.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894597",
+      "metadata": {
+        "description": "解释消息发送结果能力",
+        "original_path": "capabilities/explain_message_result.py"
+      }
+    },
+    "route.update_calendar_event": {
+      "route_id": "route.update_calendar_event",
+      "capability": "update_calendar_event",
+      "user_intents": [
+        "更新日程"
+      ],
+      "handler": "device_capability_bus.capabilities.calendar.update_event",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_update_calendar_event",
+      "documented_in": "docs/routes/update_calendar_event.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894604",
+      "metadata": {
+        "description": "更新日程事件能力",
+        "original_path": "capabilities/update_calendar_event.py"
+      }
+    },
+    "route.query_file": {
+      "route_id": "route.query_file",
+      "capability": "query_file",
+      "user_intents": [
+        "查询文件"
+      ],
+      "handler": "device_capability_bus.capabilities.file.query_file",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_query_file",
+      "documented_in": "docs/routes/query_file.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894610",
+      "metadata": {
+        "description": "查询文件能力",
+        "original_path": "capabilities/query_file.py"
+      }
+    },
+    "route.explain_invocation_status": {
+      "route_id": "route.explain_invocation_status",
+      "capability": "explain_invocation_status",
+      "user_intents": [
+        "解释调用状态"
+      ],
+      "handler": "core.invocation.explain_status",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_explain_invocation_status",
+      "documented_in": "docs/routes/explain_invocation_status.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894615",
+      "metadata": {
+        "description": "Capability: explain_invocation_status",
+        "original_path": "capabilities/explain_invocation_status.py"
+      }
+    },
+    "route.query_calendar_event": {
+      "route_id": "route.query_calendar_event",
+      "capability": "query_calendar_event",
+      "user_intents": [
+        "查询日程"
+      ],
+      "handler": "device_capability_bus.capabilities.calendar.query_event",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_query_calendar_event",
+      "documented_in": "docs/routes/query_calendar_event.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894621",
+      "metadata": {
+        "description": "查询日程事件能力",
+        "original_path": "capabilities/query_calendar_event.py"
+      }
+    },
+    "route.diagnostics": {
+      "route_id": "route.diagnostics",
+      "capability": "diagnostics",
+      "user_intents": [
+        "诊断"
+      ],
+      "handler": "core.diagnostics.run_diagnostics",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_diagnostics",
+      "documented_in": "docs/routes/diagnostics.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894627",
+      "metadata": {
+        "description": "Capability: diagnostics",
+        "original_path": "capabilities/diagnostics.py"
+      }
+    },
+    "route.query_message_status": {
+      "route_id": "route.query_message_status",
+      "capability": "query_message_status",
+      "user_intents": [
+        "查看消息状态"
+      ],
+      "handler": "device_capability_bus.capabilities.message.query_status",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_query_message_status",
+      "documented_in": "docs/routes/query_message_status.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894633",
+      "metadata": {
+        "description": "查询消息发送状态能力",
+        "original_path": "capabilities/query_message_status.py"
+      }
+    },
+    "route.list_calendar_events": {
+      "route_id": "route.list_calendar_events",
+      "capability": "list_calendar_events",
+      "user_intents": [
+        "列出日程"
+      ],
+      "handler": "device_capability_bus.capabilities.calendar.list_events",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_list_calendar_events",
+      "documented_in": "docs/routes/list_calendar_events.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894639",
+      "metadata": {
+        "description": "列出日程事件能力",
+        "original_path": "capabilities/list_calendar_events.py"
+      }
+    },
+    "route.create_contact": {
+      "route_id": "route.create_contact",
+      "capability": "create_contact",
+      "user_intents": [
+        "创建联系人",
+        "添加联系人"
+      ],
+      "handler": "device_capability_bus.capabilities.contact.create_contact",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_create_contact",
+      "documented_in": "docs/routes/create_contact.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894645",
+      "metadata": {
+        "description": "创建联系人能力",
+        "original_path": "capabilities/create_contact.py"
+      }
+    },
+    "route.query_notification_status": {
+      "route_id": "route.query_notification_status",
+      "capability": "query_notification_status",
+      "user_intents": [
+        "查询通知状态"
+      ],
+      "handler": "device_capability_bus.capabilities.notification.query_status",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_query_notification_status",
+      "documented_in": "docs/routes/query_notification_status.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894651",
+      "metadata": {
+        "description": "查询通知状态能力",
+        "original_path": "capabilities/query_notification_status.py"
+      }
+    },
+    "route.create_alarm": {
+      "route_id": "route.create_alarm",
+      "capability": "create_alarm",
+      "user_intents": [
+        "创建闹钟",
+        "设置闹钟"
+      ],
+      "handler": "device_capability_bus.capabilities.alarm.create_alarm",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "description": "闹钟时间"
+          },
+          "label": {
+            "type": "string",
+            "description": "标签"
+          },
+          "repeat": {
+            "type": "boolean",
+            "description": "是否重复"
+          }
+        },
+        "required": [
+          "time"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [
+        "query_alarm"
+      ],
+      "tested_by": "tests.test_route_create_alarm",
+      "documented_in": "docs/routes/create_alarm.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894657",
+      "metadata": {
+        "description": "创建闹钟能力",
+        "original_path": "capabilities/create_alarm.py"
+      }
+    },
+    "route.update_contact": {
+      "route_id": "route.update_contact",
+      "capability": "update_contact",
+      "user_intents": [
+        "更新联系人"
+      ],
+      "handler": "device_capability_bus.capabilities.contact.update_contact",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_update_contact",
+      "documented_in": "docs/routes/update_contact.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894663",
+      "metadata": {
+        "description": "更新联系人能力",
+        "original_path": "capabilities/update_contact.py"
+      }
+    },
+    "route.search_notes": {
+      "route_id": "route.search_notes",
+      "capability": "search_notes",
+      "user_intents": [
+        "搜索备忘录"
+      ],
+      "handler": "device_capability_bus.capabilities.note.search_notes",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_search_notes",
+      "documented_in": "docs/routes/search_notes.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894668",
+      "metadata": {
+        "description": "搜索备忘录能力",
+        "original_path": "capabilities/search_notes.py"
+      }
+    },
+    "route.bootstrap": {
+      "route_id": "route.bootstrap",
+      "capability": "bootstrap",
+      "user_intents": [
+        "引导"
+      ],
+      "handler": "core.bootstrap.run_bootstrap",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "SYSTEM",
+      "requires_confirmation": true,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_bootstrap",
+      "documented_in": "docs/routes/bootstrap.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894674",
+      "metadata": {
+        "description": "Capability: bootstrap",
+        "original_path": "capabilities/bootstrap.py"
+      }
+    },
+    "route.approve_action": {
+      "route_id": "route.approve_action",
+      "capability": "approve_action",
+      "user_intents": [
+        "审批动作"
+      ],
+      "handler": "governance.review.change_review.approve_action",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_approve_action",
+      "documented_in": "docs/routes/approve_action.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894680",
+      "metadata": {
+        "description": "审批动作能力",
+        "original_path": "capabilities/approve_action.py"
+      }
+    },
+    "route.cancel_notification": {
+      "route_id": "route.cancel_notification",
+      "capability": "cancel_notification",
+      "user_intents": [
+        "取消通知"
+      ],
+      "handler": "device_capability_bus.capabilities.notification.cancel_notification",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_cancel_notification",
+      "documented_in": "docs/routes/cancel_notification.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894686",
+      "metadata": {
+        "description": "取消通知能力",
+        "original_path": "capabilities/cancel_notification.py"
+      }
+    },
+    "route.delete_file": {
+      "route_id": "route.delete_file",
+      "capability": "delete_file",
+      "user_intents": [
+        "删除文件"
+      ],
+      "handler": "device_capability_bus.capabilities.file.delete_file",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [
+        "query_file"
+      ],
+      "tested_by": "tests.test_route_delete_file",
+      "documented_in": "docs/routes/delete_file.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894692",
+      "metadata": {
+        "description": "删除文件能力",
+        "original_path": "capabilities/delete_file.py"
+      }
+    },
+    "route.update_note": {
+      "route_id": "route.update_note",
+      "capability": "update_note",
+      "user_intents": [
+        "更新备忘录"
+      ],
+      "handler": "device_capability_bus.capabilities.note.update_note",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_update_note",
+      "documented_in": "docs/routes/update_note.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894698",
+      "metadata": {
+        "description": "更新备忘录能力",
+        "original_path": "capabilities/update_note.py"
+      }
+    },
+    "route.registry": {
+      "route_id": "route.registry",
+      "capability": "registry",
+      "user_intents": [
+        "注册表"
+      ],
+      "handler": "core.registry.manage_registry",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "SYSTEM",
+      "requires_confirmation": true,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_registry",
+      "documented_in": "docs/routes/registry.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894704",
+      "metadata": {
+        "description": "Capability: registry",
+        "original_path": "capabilities/registry.py"
+      }
+    },
+    "route.query_xiaoyi_note": {
+      "route_id": "route.query_xiaoyi_note",
+      "capability": "query_xiaoyi_note",
+      "user_intents": [
+        "查询小艺帮记"
+      ],
+      "handler": "device_capability_bus.capabilities.xiaoyi_note.query_note",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_query_xiaoyi_note",
+      "documented_in": "docs/routes/query_xiaoyi_note.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894763",
+      "metadata": {
+        "description": "小艺帮记查询能力",
+        "original_path": "capabilities/query_xiaoyi_note.py"
+      }
+    },
+    "route.retry_task": {
+      "route_id": "route.retry_task",
+      "capability": "retry_task",
+      "user_intents": [
+        "重试任务"
+      ],
+      "handler": "autonomous_planner.task_decomposer.retry_task",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_retry_task",
+      "documented_in": "docs/routes/retry_task.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894770",
+      "metadata": {
+        "description": "Capability: retry_task",
+        "original_path": "capabilities/retry_task.py"
+      }
+    },
+    "route.resume_task": {
+      "route_id": "route.resume_task",
+      "capability": "resume_task",
+      "user_intents": [
+        "恢复任务"
+      ],
+      "handler": "autonomous_planner.task_decomposer.resume_task",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_resume_task",
+      "documented_in": "docs/routes/resume_task.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894776",
+      "metadata": {
+        "description": "Capability: resume_task",
+        "original_path": "capabilities/resume_task.py"
+      }
+    },
+    "route.delete_alarm": {
+      "route_id": "route.delete_alarm",
+      "capability": "delete_alarm",
+      "user_intents": [
+        "删除闹钟"
+      ],
+      "handler": "device_capability_bus.capabilities.alarm.delete_alarm",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "HIGH",
+      "requires_confirmation": true,
+      "fallback_routes": [
+        "query_alarm"
+      ],
+      "tested_by": "tests.test_route_delete_alarm",
+      "documented_in": "docs/routes/delete_alarm.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894783",
+      "metadata": {
+        "description": "删除闹钟能力",
+        "original_path": "capabilities/delete_alarm.py"
+      }
+    },
+    "route.audit_queries": {
+      "route_id": "route.audit_queries",
+      "capability": "audit_queries",
+      "user_intents": [
+        "审计查询"
+      ],
+      "handler": "core.audit.audit_queries",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_audit_queries",
+      "documented_in": "docs/routes/audit_queries.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894789",
+      "metadata": {
+        "description": "Capability: audit_queries",
+        "original_path": "capabilities/audit_queries.py"
+      }
+    },
+    "route.schedule_task": {
+      "route_id": "route.schedule_task",
+      "capability": "schedule_task",
+      "user_intents": [
+        "调度任务"
+      ],
+      "handler": "autonomous_planner.task_decomposer.schedule_task",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [
+        "query_note"
+      ],
+      "tested_by": "tests.test_route_schedule_task",
+      "documented_in": "docs/routes/schedule_task.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894795",
+      "metadata": {
+        "description": "Capability: schedule_task",
+        "original_path": "capabilities/schedule_task.py"
+      }
+    },
+    "route.export_history": {
+      "route_id": "route.export_history",
+      "capability": "export_history",
+      "user_intents": [
+        "导出历史"
+      ],
+      "handler": "core.history.export_history",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_export_history",
+      "documented_in": "docs/routes/export_history.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894801",
+      "metadata": {
+        "description": "Capability: export_history",
+        "original_path": "capabilities/export_history.py"
+      }
+    },
+    "route.replay_run": {
+      "route_id": "route.replay_run",
+      "capability": "replay_run",
+      "user_intents": [
+        "重放运行"
+      ],
+      "handler": "core.replay.replay_run",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "SYSTEM",
+      "requires_confirmation": true,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_replay_run",
+      "documented_in": "docs/routes/replay_run.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894807",
+      "metadata": {
+        "description": "Capability: replay_run",
+        "original_path": "capabilities/replay_run.py"
+      }
+    },
+    "route.query_alarm": {
+      "route_id": "route.query_alarm",
+      "capability": "query_alarm",
+      "user_intents": [
+        "查询闹钟"
+      ],
+      "handler": "device_capability_bus.capabilities.alarm.query_alarm",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_query_alarm",
+      "documented_in": "docs/routes/query_alarm.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894813",
+      "metadata": {
+        "description": "查询闹钟能力",
+        "original_path": "capabilities/query_alarm.py"
+      }
+    },
+    "route.confirm_invocation": {
+      "route_id": "route.confirm_invocation",
+      "capability": "confirm_invocation",
+      "user_intents": [
+        "确认调用"
+      ],
+      "handler": "core.invocation.confirm_invocation",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "SYSTEM",
+      "requires_confirmation": true,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_confirm_invocation",
+      "documented_in": "docs/routes/confirm_invocation.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894819",
+      "metadata": {
+        "description": "Capability: confirm_invocation",
+        "original_path": "capabilities/confirm_invocation.py"
+      }
+    },
+    "route.update_alarm": {
+      "route_id": "route.update_alarm",
+      "capability": "update_alarm",
+      "user_intents": [
+        "更新闹钟"
+      ],
+      "handler": "device_capability_bus.capabilities.alarm.update_alarm",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "MEDIUM",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_update_alarm",
+      "documented_in": "docs/routes/update_alarm.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894824",
+      "metadata": {
+        "description": "更新闹钟能力",
+        "original_path": "capabilities/update_alarm.py"
+      }
+    },
+    "route.list_recent_notes": {
+      "route_id": "route.list_recent_notes",
+      "capability": "list_recent_notes",
+      "user_intents": [
+        "列出备忘录"
+      ],
+      "handler": "device_capability_bus.capabilities.note.list_recent",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_list_recent_notes",
+      "documented_in": "docs/routes/list_recent_notes.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894830",
+      "metadata": {
+        "description": "列出最近备忘录能力",
+        "original_path": "capabilities/list_recent_notes.py"
+      }
+    },
+    "route.check_calendar_conflicts": {
+      "route_id": "route.check_calendar_conflicts",
+      "capability": "check_calendar_conflicts",
+      "user_intents": [
+        "检查日程冲突"
+      ],
+      "handler": "device_capability_bus.capabilities.calendar.check_conflicts",
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "risk_level": "LOW",
+      "requires_confirmation": false,
+      "fallback_routes": [],
+      "tested_by": "tests.test_route_check_calendar_conflicts",
+      "documented_in": "docs/routes/check_calendar_conflicts.md",
+      "status": "generated",
+      "created_at": "2026-04-24T23:38:39.894836",
+      "metadata": {
+        "description": "检查日程冲突能力",
+        "original_path": "capabilities/check_calendar_conflicts.py"
+      }
+    }
+  },
+  "intent_index": {
+    "删除备忘录": [
+      "route.delete_note"
+    ],
+    "自修复": [
+      "route.self_repair"
+    ],
+    "查询联系人": [
+      "route.query_contact"
+    ],
+    "解释通知授权状态": [
+      "route.explain_notification_auth_state"
+    ],
+    "刷新通知授权": [
+      "route.refresh_notification_auth"
+    ],
+    "删除联系人": [
+      "route.delete_contact"
+    ],
+    "暂停任务": [
+      "route.pause_task"
+    ],
+    "拨打电话": [
+      "route.make_call"
+    ],
+    "打电话": [
+      "route.make_call"
+    ],
+    "删除照片": [
+      "route.delete_photo"
+    ],
+    "管理文件": [
+      "route.manage_file"
+    ],
+    "取消任务": [
+      "route.cancel_task"
+    ],
+    "获取位置": [
+      "route.get_location"
+    ],
+    "定位": [
+      "route.get_location"
+    ],
+    "删除小艺帮记": [
+      "route.delete_xiaoyi_note"
+    ],
+    "查询照片": [
+      "route.query_photo"
+    ],
+    "删除日程": [
+      "route.delete_calendar_event"
+    ],
+    "预览副作用": [
+      "route.preview_side_effect"
+    ],
+    "发送消息": [
+      "route.send_message"
+    ],
+    "发消息": [
+      "route.send_message"
+    ],
+    "给某人发消息": [
+      "route.send_message"
+    ],
+    "列出最近消息": [
+      "route.list_recent_messages"
+    ],
+    "重发消息": [
+      "route.resend_message"
+    ],
+    "创建相册": [
+      "route.create_album"
+    ],
+    "查询备忘录": [
+      "route.query_note"
+    ],
+    "解释消息结果": [
+      "route.explain_message_result"
+    ],
+    "更新日程": [
+      "route.update_calendar_event"
+    ],
+    "查询文件": [
+      "route.query_file"
+    ],
+    "解释调用状态": [
+      "route.explain_invocation_status"
+    ],
+    "查询日程": [
+      "route.query_calendar_event"
+    ],
+    "诊断": [
+      "route.diagnostics"
+    ],
+    "查看消息状态": [
+      "route.query_message_status"
+    ],
+    "列出日程": [
+      "route.list_calendar_events"
+    ],
+    "创建联系人": [
+      "route.create_contact"
+    ],
+    "添加联系人": [
+      "route.create_contact"
+    ],
+    "查询通知状态": [
+      "route.query_notification_status"
+    ],
+    "创建闹钟": [
+      "route.create_alarm"
+    ],
+    "设置闹钟": [
+      "route.create_alarm"
+    ],
+    "更新联系人": [
+      "route.update_contact"
+    ],
+    "搜索备忘录": [
+      "route.search_notes"
+    ],
+    "引导": [
+      "route.bootstrap"
+    ],
+    "审批动作": [
+      "route.approve_action"
+    ],
+    "取消通知": [
+      "route.cancel_notification"
+    ],
+    "删除文件": [
+      "route.delete_file"
+    ],
+    "更新备忘录": [
+      "route.update_note"
+    ],
+    "注册表": [
+      "route.registry"
+    ],
+    "查询小艺帮记": [
+      "route.query_xiaoyi_note"
+    ],
+    "重试任务": [
+      "route.retry_task"
+    ],
+    "恢复任务": [
+      "route.resume_task"
+    ],
+    "删除闹钟": [
+      "route.delete_alarm"
+    ],
+    "审计查询": [
+      "route.audit_queries"
+    ],
+    "调度任务": [
+      "route.schedule_task"
+    ],
+    "导出历史": [
+      "route.export_history"
+    ],
+    "重放运行": [
+      "route.replay_run"
+    ],
+    "查询闹钟": [
+      "route.query_alarm"
+    ],
+    "确认调用": [
+      "route.confirm_invocation"
+    ],
+    "更新闹钟": [
+      "route.update_alarm"
+    ],
+    "列出备忘录": [
+      "route.list_recent_notes"
+    ],
+    "检查日程冲突": [
+      "route.check_calendar_conflicts"
+    ]
+  },
+  "stats": {
+    "total": 53,
+    "by_risk_level": {
+      "LOW": 24,
+      "MEDIUM": 12,
+      "HIGH": 10,
+      "SYSTEM": 7
+    },
+    "by_status": {
+      "generated": 53,
+      "verified": 0,
+      "active": 0
+    },
+    "with_fallback": 10,
+    "requires_confirmation": 17
+  },
+  "description": "路由注册表 - 用户意图到能力的映射"
+}

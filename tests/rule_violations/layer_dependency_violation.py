@@ -1,14 +1,9 @@
-#!/usr/bin/env python3
-"""
-Layer Dependency Violation Test Case
+"""层间依赖违规样例 - 用于测试守卫"""
 
-This file intentionally violates layer dependency rules for testing.
-"""
+# 这是故意违规的样例，用于测试层间依赖检查器
+# execution 层不应该直接 import core 层
 
-# This import violates L4 -> L1 dependency rule
-# L4 (execution) should not directly import from L1 (core)
-from execution import SkillGateway  # VIOLATION - intentional for testing
+from core.some_module import something  # 违规：跨层依赖
 
-def test_violation():
-    """Test case that would trigger layer dependency violation"""
+def bad_function():
     pass

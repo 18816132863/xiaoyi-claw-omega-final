@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-04-25T00:05:00+08:00",
+  "version": "1.0.0",
+  "executions": [
+    {
+      "rule_id": "layer_dependency_rule",
+      "last_run": "2026-04-25T00:01:00+08:00",
+      "status": "passed",
+      "duration_ms": 1077
+    },
+    {
+      "rule_id": "json_contract_rule",
+      "last_run": "2026-04-25T00:01:00+08:00",
+      "status": "passed",
+      "duration_ms": 3951
+    },
+    {
+      "rule_id": "single_source_of_truth_rule",
+      "last_run": "2026-04-25T00:01:00+08:00",
+      "status": "passed",
+      "duration_ms": 500
+    },
+    {
+      "rule_id": "change_impact_rule",
+      "last_run": "2026-04-25T00:01:00+08:00",
+      "status": "passed",
+      "duration_ms": 874
+    },
+    {
+      "rule_id": "repo_integrity_rule",
+      "last_run": "2026-04-25T00:01:00+08:00",
+      "status": "passed",
+      "duration_ms": 1110
+    },
+    {
+      "rule_id": "skill_security_rule",
+      "last_run": "2026-04-25T00:01:00+08:00",
+      "status": "passed",
+      "duration_ms": 1914
+    }
+  ],
+  "summary": {
+    "total_executions": 6,
+    "passed": 6,
+    "failed": 0,
+    "avg_duration_ms": 1571
+  }
+}

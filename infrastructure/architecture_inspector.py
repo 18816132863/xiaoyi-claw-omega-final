@@ -907,7 +907,8 @@ class ArchitectureInspector:
             # V5.0.0 检查：是否有真实总结器和验证器
             has_summarize = "_execute_summarize" in content
             has_verify = "_execute_verify" in content
-            has_evidence_check = "has_evidence" in content
+            # 证据检查：检查 evidences 列表和 verified 字段
+            has_evidence_check = "evidences" in content and "verified" in content
             
             status["task_engine"] = True
             status["summarize_method"] = has_summarize
@@ -925,13 +926,14 @@ class ArchitectureInspector:
         gateway_path = PROJECT_ROOT / "execution" / "skill_gateway.py"
         if gateway_path.exists():
             content = gateway_path.read_text()
-            has_error_code = "error_code" in content
+            # V6.0.0: 检查统一的 error 结构（包含 code 字段）
+            has_error_code = '"code"' in content and '"message"' in content
             
             status["skill_gateway"] = True
             status["error_code_field"] = has_error_code
             
             print(f"  ✅ skill_gateway.py 存在")
-            print(f"  {'✅' if has_error_code else '❌'} error_code 字段: {'已添加' if has_error_code else '未添加'}")
+            print(f"  {'✅' if has_error_code else '❌'} error 结构: {'已添加' if has_error_code else '未添加'}")
         else:
             print(f"  ❌ skill_gateway.py 不存在")
         

@@ -47,6 +47,21 @@ class SkillRouter:
         self.registry = registry or get_skill_registry()
         self._metrics: Dict[str, Dict[str, Any]] = {}
         self._lock = threading.RLock()
+        
+        # 自动加载 metrics
+        self._auto_load_metrics()
+    
+    def _auto_load_metrics(self):
+        """自动加载 metrics 文件"""
+        try:
+            project_root = _get_project_root()
+            metrics_path = project_root / "reports" / "metrics" / "skill_metrics.json"
+            if metrics_path.exists():
+                import json
+                with open(metrics_path, 'r', encoding='utf-8') as f:
+                    self._metrics = json.load(f)
+        except Exception:
+            pass
     
     def select_skill(self, task_type: str, context: Optional[SkillExecutionContext] = None) -> Optional[str]:
         """选择技能"""

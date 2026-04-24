@@ -17,6 +17,8 @@ from core.events.event_replay import (
     ReplayStep,
     get_event_replay
 )
+from core.events.event_types import CoreEventType, EventType
+from core.events.event_bus import EventBus, get_event_bus
 
 __all__ = [
     "EventSchemaRegistry",
@@ -30,4 +32,8 @@ __all__ = [
     "ReplayResult",
     "ReplayStep",
     "get_event_replay",
+    "CoreEventType",
+    "EventType",
+    "EventBus",
+    "get_event_bus",
 ]

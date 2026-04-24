@@ -194,6 +194,24 @@ class CheckpointStore:
             
             if to_remove:
                 self._save()
+    
+    def persist(self) -> bool:
+        """持久化所有检查点到文件"""
+        try:
+            self._save()
+            return True
+        except Exception as e:
+            print(f"保存检查点失败: {e}")
+            return False
+    
+    def reload(self) -> bool:
+        """从文件重新加载检查点"""
+        try:
+            self._load()
+            return True
+        except Exception as e:
+            print(f"加载检查点失败: {e}")
+            return False
 
 
 # 单例实例

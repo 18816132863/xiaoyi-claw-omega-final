@@ -2603,6 +2603,34 @@
       "resolved": false,
       "resolved_at": null,
       "metadata": {}
+    },
+    {
+      "record_id": "test_instance_test_step_20260424223854849263",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "error_type": "transient",
+      "error_message": "Test error",
+      "recovery_action": "retry",
+      "timestamp": "2026-04-24T22:38:54.849286",
+      "retry_count": 0,
+      "max_retries": 3,
+      "resolved": false,
+      "resolved_at": null,
+      "metadata": {}
+    },
+    {
+      "record_id": "test_instance_test_step_20260424224036056861",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "error_type": "transient",
+      "error_message": "Test error",
+      "recovery_action": "retry",
+      "timestamp": "2026-04-24T22:40:36.056881",
+      "retry_count": 0,
+      "max_retries": 3,
+      "resolved": false,
+      "resolved_at": null,
+      "metadata": {}
     }
   ]
 }

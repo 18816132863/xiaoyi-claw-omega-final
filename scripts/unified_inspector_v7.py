@@ -644,7 +644,7 @@ def check_recovery_chain(root: Path) -> Dict:
     # 检查 CheckpointStore
     try:
         from orchestration.state.checkpoint_store import CheckpointStore
-        if hasattr(CheckpointStore, 'save') and hasattr(CheckpointStore, 'load'):
+        if hasattr(CheckpointStore, 'persist') and hasattr(CheckpointStore, 'reload'):
             result["details"].append("✅ CheckpointStore 方法存在")
         else:
             result["passed"] = False

@@ -4069,6 +4069,39 @@
       },
       "context": {},
       "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260424224029249614",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-24T22:40:29.249641",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260424224036050428",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-24T22:40:36.050449",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260424224036059704",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-24T22:40:36.059722",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
     }
   ]
 }

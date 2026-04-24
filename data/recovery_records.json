@@ -2645,6 +2645,20 @@
       "resolved": false,
       "resolved_at": null,
       "metadata": {}
+    },
+    {
+      "record_id": "test_instance_test_step_20260424225254522757",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "error_type": "transient",
+      "error_message": "Test error",
+      "recovery_action": "retry",
+      "timestamp": "2026-04-24T22:52:54.522774",
+      "retry_count": 0,
+      "max_retries": 3,
+      "resolved": false,
+      "resolved_at": null,
+      "metadata": {}
     }
   ]
 }

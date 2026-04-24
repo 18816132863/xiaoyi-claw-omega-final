@@ -1,11 +1,11 @@
 {
   "version": "V7.2.0",
-  "timestamp": "2026-04-24T22:48:11.427342",
+  "timestamp": "2026-04-24T22:49:51.244007",
   "total_items": 34,
   "passed": 30,
   "failed": 4,
   "warnings": 1,
-  "total_duration_ms": 6495,
+  "total_duration_ms": 6501,
   "items": [
     {
       "id": "core_state",
@@ -35,7 +35,7 @@
       "id": "memory_retrieval",
       "name": "L2 检索系统检查",
       "passed": true,
-      "duration_ms": 145,
+      "duration_ms": 139,
       "details": [
         "✅ memory_context.retrieval.retrieval_router.RetrievalRouter",
         "✅ memory_context.retrieval.hybrid_search.HybridSearch"
@@ -45,7 +45,7 @@
       "id": "memory_session",
       "name": "L2 会话管理检查",
       "passed": true,
-      "duration_ms": 60,
+      "duration_ms": 41,
       "details": [
         "✅ memory_context.session.session_history.SessionHistory",
         "✅ memory_context.long_term.project_memory_store.ProjectMemoryStore"
@@ -55,7 +55,7 @@
       "id": "memory_builder",
       "name": "L2 上下文构建检查",
       "passed": true,
-      "duration_ms": 430,
+      "duration_ms": 365,
       "details": [
         "✅ memory_context.builder.context_builder.ContextBuilder",
         "✅ memory_context.builder.priority_ranker.PriorityRanker",
@@ -64,20 +64,10 @@
       ]
     },
     {
-      "id": "core_events",
-      "name": "L1 事件系统检查",
-      "passed": true,
-      "duration_ms": 488,
-      "details": [
-        "✅ core.events.event_bus.EventBus",
-        "✅ core.events.event_types.EventType"
-      ]
-    },
-    {
       "id": "execution_control",
       "name": "L3 执行控制检查",
       "passed": true,
-      "duration_ms": 17,
+      "duration_ms": 4,
       "details": [
         "✅ orchestration.execution_control.retry_policy.RetryPolicy",
         "✅ orchestration.execution_control.fallback_policy.FallbackPolicy",
@@ -85,10 +75,29 @@
       ]
     },
     {
+      "id": "checkpoint_store",
+      "name": "L3 检查点存储检查",
+      "passed": true,
+      "duration_ms": 65,
+      "details": [
+        "✅ orchestration.state.checkpoint_store.CheckpointStore"
+      ]
+    },
+    {
+      "id": "core_events",
+      "name": "L1 事件系统检查",
+      "passed": true,
+      "duration_ms": 472,
+      "details": [
+        "✅ core.events.event_bus.EventBus",
+        "✅ core.events.event_types.EventType"
+      ]
+    },
+    {
       "id": "skill_registry",
       "name": "L4 技能注册表检查",
       "passed": true,
-      "duration_ms": 54,
+      "duration_ms": 11,
       "details": [
         "✅ skills.registry.skill_registry.SkillRegistry",
         "✅ skills.registry.skill_registry.SkillManifest",
@@ -97,19 +106,22 @@
       ]
     },
     {
-      "id": "checkpoint_store",
-      "name": "L3 检查点存储检查",
+      "id": "skill_router",
+      "name": "L4 技能路由检查",
       "passed": true,
-      "duration_ms": 64,
+      "duration_ms": 31,
       "details": [
-        "✅ orchestration.state.checkpoint_store.CheckpointStore"
+        "✅ skills.runtime.skill_router.SkillRouter",
+        "✅ skills.runtime.skill_loader.SkillLoader",
+        "✅ skills.runtime.skill_sandbox.SkillSandbox",
+        "✅ skills.runtime.skill_audit.SkillAudit"
       ]
     },
     {
       "id": "skill_lifecycle",
       "name": "L4 生命周期检查",
       "passed": true,
-      "duration_ms": 31,
+      "duration_ms": 33,
       "details": [
         "✅ skills.lifecycle.install_manager.InstallManager",
         "✅ skills.lifecycle.enable_disable_manager.EnableDisableManager",
@@ -120,7 +132,7 @@
       "id": "skill_policies",
       "name": "L4 技能策略检查",
       "passed": true,
-      "duration_ms": 5,
+      "duration_ms": 9,
       "details": [
         "✅ skills.policies.skill_budget_policy.SkillBudgetPolicy",
         "✅ skills.policies.skill_risk_policy.SkillRiskPolicy",
@@ -128,22 +140,10 @@
       ]
     },
     {
-      "id": "skill_router",
-      "name": "L4 技能路由检查",
-      "passed": true,
-      "duration_ms": 47,
-      "details": [
-        "✅ skills.runtime.skill_router.SkillRouter",
-        "✅ skills.runtime.skill_loader.SkillLoader",
-        "✅ skills.runtime.skill_sandbox.SkillSandbox",
-        "✅ skills.runtime.skill_audit.SkillAudit"
-      ]
-    },
-    {
       "id": "budget_managers",
       "name": "L5 预算管理检查",
       "passed": true,
-      "duration_ms": 12,
+      "duration_ms": 10,
       "details": [
         "✅ governance.budget.token_budget_manager.TokenBudgetManager",
         "✅ governance.budget.cost_budget_manager.CostBudgetManager"
@@ -153,7 +153,7 @@
       "id": "risk_management",
       "name": "L5 风险管理检查",
       "passed": true,
-      "duration_ms": 105,
+      "duration_ms": 122,
       "details": [
         "✅ governance.risk.risk_classifier.RiskClassifier",
         "✅ governance.risk.high_risk_guard.HighRiskGuard"
@@ -163,7 +163,7 @@
       "id": "permission_engine",
       "name": "L5 权限引擎检查",
       "passed": true,
-      "duration_ms": 0,
+      "duration_ms": 2,
       "details": [
         "✅ governance.permissions.permission_engine.PermissionEngine"
       ]
@@ -172,9 +172,20 @@
       "id": "evaluation_aggregator",
       "name": "L5 评估聚合检查",
       "passed": true,
-      "duration_ms": 0,
+      "duration_ms": 3,
       "details": [
         "✅ governance.evaluation.evaluation_aggregator.EvaluationAggregator"
+      ]
+    },
+    {
+      "id": "policy_engine",
+      "name": "L5 策略引擎检查",
+      "passed": true,
+      "duration_ms": 140,
+      "details": [
+        "✅ governance.control_plane.policy_engine.PolicyEngine",
+        "✅ governance.control_plane.policy_engine.Policy",
+        "✅ governance.control_plane.policy_engine.PolicyType"
       ]
     },
     {
@@ -198,21 +209,10 @@
       ]
     },
     {
-      "id": "policy_engine",
-      "name": "L5 策略引擎检查",
-      "passed": true,
-      "duration_ms": 126,
-      "details": [
-        "✅ governance.control_plane.policy_engine.PolicyEngine",
-        "✅ governance.control_plane.policy_engine.Policy",
-        "✅ governance.control_plane.policy_engine.PolicyType"
-      ]
-    },
-    {
       "id": "main_chain_metrics",
       "name": "主链-Metrics反哺检查",
       "passed": true,
-      "duration_ms": 0,
+      "duration_ms": 7,
       "details": [
         "✅ PolicyEngine metrics 方法存在",
         "✅ SkillRouter metrics 自动加载存在",
@@ -262,7 +262,7 @@
       "id": "skills_count",
       "name": "技能生态-数量检查",
       "passed": false,
-      "duration_ms": 6,
+      "duration_ms": 1,
       "details": [
         "✅ 技能目录数量: 174",
         "❌ 技能数量不足 (< 200)"
@@ -272,7 +272,7 @@
       "id": "main_chain_recovery",
       "name": "主链-恢复链集成检查",
       "passed": true,
-      "duration_ms": 299,
+      "duration_ms": 335,
       "details": [
         "✅ FallbackPolicy.decide() 存在",
         "✅ FallbackPolicy 错误类型识别正确",
@@ -296,7 +296,7 @@
       "id": "workflow_engine",
       "name": "L3 工作流引擎检查",
       "passed": true,
-      "duration_ms": 654,
+      "duration_ms": 710,
       "details": [
         "✅ orchestration.workflow.workflow_engine.WorkflowEngine",
         "✅ orchestration.workflow.dag_builder.DAGBuilder",
@@ -305,28 +305,28 @@
       ]
     },
     {
-      "id": "change_impact",
-      "name": "变更影响检查",
-      "passed": true,
-      "duration_ms": 1207,
-      "details": [
-        "退出码: 0"
-      ]
-    },
-    {
       "id": "layer_dependencies",
       "name": "层间依赖检查",
       "passed": false,
-      "duration_ms": 1261,
+      "duration_ms": 1080,
       "details": [
         "退出码: 1"
+      ]
+    },
+    {
+      "id": "change_impact",
+      "name": "变更影响检查",
+      "passed": true,
+      "duration_ms": 1224,
+      "details": [
+        "退出码: 0"
       ]
     },
     {
       "id": "skill_security",
       "name": "技能安全检查",
       "passed": true,
-      "duration_ms": 2339,
+      "duration_ms": 2347,
       "details": [
         "退出码: 0"
       ]
@@ -335,7 +335,7 @@
       "id": "test_integration",
       "name": "集成测试检查",
       "passed": true,
-      "duration_ms": 1781,
+      "duration_ms": 1765,
       "details": [
         "退出码: 0"
       ]
@@ -344,7 +344,7 @@
       "id": "json_contracts",
       "name": "JSON 契约检查",
       "passed": false,
-      "duration_ms": 4231,
+      "duration_ms": 4269,
       "details": [
         "退出码: 1"
       ]
@@ -353,7 +353,7 @@
       "id": "repo_integrity",
       "name": "仓库完整性检查",
       "passed": false,
-      "duration_ms": 6490,
+      "duration_ms": 6493,
       "details": [
         "退出码: 1"
       ]

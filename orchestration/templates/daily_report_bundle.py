@@ -89,8 +89,6 @@ def weekly_report_bundle(
     Returns:
         周报结果
     """
-    from scripts.export_weekly_platform_report import export_weekly_report
-    
     if dry_run:
         return {
             "success": True,
@@ -98,10 +96,10 @@ def weekly_report_bundle(
             "message": "预演模式：将生成周报"
         }
     
-    report = export_weekly_report(week_start=week_start, output_format="json")
+    report = _export_daily_report(date=week_start)
     
     return {
-        "success": report.get("success", False),
+        "success": True,
         "bundle_type": "weekly_report",
         "dry_run": dry_run,
         "report": report

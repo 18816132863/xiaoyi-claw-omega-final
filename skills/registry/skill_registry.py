@@ -247,6 +247,10 @@ class SkillRegistry:
             print(f"加载失败: {e}")
             return False
     
+    def reload(self) -> bool:
+        """重新加载注册表（别名）"""
+        return self.load()
+    
     def export_to_json(self, path: str) -> bool:
         """导出到 JSON 文件"""
         try:

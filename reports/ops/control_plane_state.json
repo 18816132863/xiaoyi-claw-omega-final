@@ -1,0 +1,8 @@
+{
+  "state": "running",
+  "components": {
+    "policy_engine": "active",
+    "audit": "active"
+  },
+  "last_updated": "2026-04-24T22:49:13.556434"
+}

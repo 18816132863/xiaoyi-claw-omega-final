@@ -63,6 +63,14 @@ class SkillRouter:
         except Exception:
             pass
     
+    def _check_metrics_reload(self) -> bool:
+        """检查并重新加载 metrics"""
+        try:
+            self._auto_load_metrics()
+            return True
+        except Exception:
+            return False
+    
     def select_skill(self, task_type: str, context: Optional[SkillExecutionContext] = None) -> Optional[str]:
         """选择技能"""
         # 简单实现：按名称匹配

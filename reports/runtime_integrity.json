@@ -1,0 +1,9 @@
+{
+  "status": "healthy",
+  "last_check": "2026-04-24T22:49:13.556417",
+  "components": {
+    "core": "ok",
+    "orchestration": "ok",
+    "execution": "ok"
+  }
+}

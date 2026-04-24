@@ -1,0 +1,103 @@
+{
+  "version": "2.9.1",
+  "name": "小艺 Claw 终极星空鸽子王",
+  "architecture": "六层核心架构 L1-L6 (固定不变)",
+  
+  "layers": {
+    "L1": {
+      "name": "核心认知层",
+      "token_budget": 3000,
+      "load": "immediate",
+      "skills_count": 0,
+      "skills": [],
+      "files": ["AGENTS.md", "SOUL.md", "USER.md", "TOOLS.md", "IDENTITY.md"],
+      "description": "身份、规则、引导"
+    },
+    "L2": {
+      "name": "记忆上下文层",
+      "token_budget": 2000,
+      "load": "on_demand",
+      "skills_count": 3,
+      "skills": ["memory", "obsidian", "find-skills"],
+      "triggers": ["记得", "上次", "回忆", "历史"],
+      "description": "记忆存储、检索"
+    },
+    "L3": {
+      "name": "任务编排层",
+      "token_budget": 1500,
+      "load": "on_demand",
+      "skills_count": 8,
+      "skills": ["planning-with-files", "today-task", "post-job", "cron", "proactivity", "self-improving-agent", "command-center", "command-hook"],
+      "triggers": ["工作流", "定时", "计划", "任务"],
+      "description": "路由、工作流、调度"
+    },
+    "L4": {
+      "name": "能力执行层",
+      "token_budget": 1500,
+      "load": "by_category",
+      "skills_count": 113,
+      "description": "技能执行、结果验证",
+      "note": "技能分类是L4内部组织方式，不是新增层级",
+      "categories": {
+        "document": {"count": 8, "triggers": ["文档", "word", "pdf", "ppt"]},
+        "data": {"count": 8, "triggers": ["数据", "分析", "excel", "sql"]},
+        "search": {"count": 8, "triggers": ["搜索", "查找", "网页"]},
+        "image": {"count": 8, "triggers": ["图片", "照片", "截图"]},
+        "media": {"count": 6, "triggers": ["音频", "视频", "音乐"]},
+        "code": {"count": 10, "triggers": ["代码", "git", "docker"]},
+        "content": {"count": 8, "triggers": ["写作", "文章", "创作"]},
+        "social": {"count": 6, "triggers": ["小红书", "b站", "邮件"]},
+        "file": {"count": 6, "triggers": ["文件", "网盘", "上传"]},
+        "utility": {"count": 6, "triggers": ["天气", "地图", "健康"]},
+        "business": {"count": 12, "triggers": ["市场", "股票", "投资"]},
+        "professional": {"count": 6, "triggers": ["架构", "专家", "顾问"]},
+        "design": {"count": 5, "triggers": ["设计", "ui", "前端"]},
+        "automation": {"count": 4, "triggers": ["自动", "升级", "监控"]},
+        "auxiliary": {"count": 6, "triggers": ["关键词", "seo", "报告"]},
+        "special": {"count": 3, "triggers": ["新手", "人格", "本体"]},
+        "core": {"count": 9, "triggers": ["核心", "基础"]}
+      }
+    },
+    "L5": {
+      "name": "稳定治理层",
+      "token_budget": 800,
+      "load": "on_sensitive",
+      "skills_count": 6,
+      "skills": ["clawsec-suite", "senior-security", "risk-management-specialist", "verified-agent-identity", "moltguard", "secret-guardian"],
+      "triggers": ["安全", "权限", "敏感", "密钥"],
+      "description": "安全、权限、审计"
+    },
+    "L6": {
+      "name": "基础设施层",
+      "token_budget": 700,
+      "load": "on_system",
+      "skills_count": 4,
+      "skills": ["skill-creator", "skill-safe-install", "openclaw-agent-optimize", "performance-upgrade"],
+      "triggers": ["系统", "安装", "配置", "优化"],
+      "description": "路径、插件、性能、注册"
+    }
+  },
+  
+  "summary": {
+    "total_layers": 6,
+    "total_skills": 134,
+    "total_token_budget": 9500,
+    "startup_token": 2000
+  },
+  
+  "performance": {
+    "startup_latency_ms": 30,
+    "skill_lookup_ms": 5,
+    "layer_load_ms": 20,
+    "total_response_ms": 60
+  },
+  
+  "directories": {
+    "core": "L1 + L2: 认知 + 记忆",
+    "engine": "L3 + L4: 编排 + 执行",
+    "skills": "L4: 技能库",
+    "guard": "L5: 安全治理",
+    "infra": "L6: 基础设施",
+    "memory": "L2: 日记目录"
+  }
+}

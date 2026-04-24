@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "description": "架构展示统计配置",
+  
+  "ignore_dirs": [
+    "node_modules",
+    ".git",
+    "__pycache__",
+    ".pytest_cache",
+    "full-architecture-backup",
+    "repo",
+    "venv",
+    ".venv",
+    "site-packages",
+    "include",
+    "bin",
+    "cache",
+    ".cache",
+    "dist",
+    "build"
+  ],
+  
+  "ignore_patterns": [
+    "*.egg-info",
+    "*.pyc",
+    "*.log",
+    "*.tmp"
+  ],
+  
+  "display_domains": [
+    "core",
+    "intelligence",
+    "execution",
+    "control",
+    "evolution_lab",
+    "platform",
+    "resilience",
+    "business",
+    "skills",
+    "memory"
+  ],
+  
+  "statistics_mode": {
+    "md_only": {
+      "description": "仅统计 Markdown 文档数，面向用户展示",
+      "extension": ".md"
+    },
+    "all_files": {
+      "description": "统计所有文件数，技术排查用",
+      "extension": null
+    }
+  },
+  
+  "skills_display": {
+    "show_dir_count": true,
+    "show_md_count": true,
+    "description": "技能层同时展示目录数和文档数"
+  }
+}

@@ -1,0 +1,478 @@
+{
+  "version": "2.9.1",
+  "name": "小艺 Claw 终极星空鸽子王",
+  "architecture": "六层核心架构 L1-L6 (固定不变)",
+  "upload_mode": "full_upload",
+  "last_updated": "2026-04-11T09:16:00+08:00",
+  
+  "design_principles": [
+    "六层固定 - L1-L6 核心架构不变",
+    "目录极简 - 从36个目录精简到6个",
+    "文件聚合 - 同类文件合并，减少碎片",
+    "按需加载 - 启动只加载L1，其他按需"
+  ],
+  
+  "layers": {
+    "L1": {
+      "name": "核心认知层",
+      "name_en": "Core Cognition Layer",
+      "token_budget": 3000,
+      "load_strategy": "immediate",
+      "skills_count": 0,
+      "skills": [],
+      "files": [
+        "AGENTS.md",
+        "SOUL.md",
+        "USER.md",
+        "TOOLS.md",
+        "IDENTITY.md"
+      ],
+      "directories": ["core/", "core/guide/"],
+      "description": "身份、规则、引导",
+      "description_en": "Identity, rules, guidance"
+    },
+    
+    "L2": {
+      "name": "记忆上下文层",
+      "name_en": "Memory Context Layer",
+      "token_budget": 2000,
+      "load_strategy": "on_demand",
+      "skills_count": 3,
+      "skills": [
+        {"name": "memory", "desc": "记忆管理", "category": "core"},
+        {"name": "obsidian", "desc": "笔记同步", "category": "core"},
+        {"name": "find-skills", "desc": "技能发现", "category": "core"}
+      ],
+      "triggers": ["记得", "上次", "回忆", "历史", "remember", "recall"],
+      "directories": ["core/MEMORY.md", "memory/"],
+      "description": "记忆存储、检索",
+      "description_en": "Memory storage and retrieval"
+    },
+    
+    "L3": {
+      "name": "任务编排层",
+      "name_en": "Task Orchestration Layer",
+      "token_budget": 1500,
+      "load_strategy": "on_demand",
+      "skills_count": 8,
+      "skills": [
+        {"name": "planning-with-files", "desc": "文件规划", "category": "orchestration"},
+        {"name": "today-task", "desc": "今日任务", "category": "orchestration"},
+        {"name": "post-job", "desc": "任务发布", "category": "orchestration"},
+        {"name": "cron", "desc": "定时任务", "category": "orchestration"},
+        {"name": "proactivity", "desc": "主动代理", "category": "orchestration"},
+        {"name": "self-improving-agent", "desc": "自改进代理", "category": "orchestration"},
+        {"name": "command-center", "desc": "命令中心", "category": "orchestration"},
+        {"name": "command-hook", "desc": "命令钩子", "category": "orchestration"}
+      ],
+      "triggers": ["工作流", "定时", "计划", "任务", "workflow", "schedule", "task"],
+      "directories": ["engine/", "engine/router.py", "engine/workflows/"],
+      "description": "路由、工作流、调度",
+      "description_en": "Routing, workflows, scheduling"
+    },
+    
+    "L4": {
+      "name": "能力执行层",
+      "name_en": "Capability Execution Layer",
+      "token_budget": 1500,
+      "load_strategy": "by_category",
+      "skills_count": 113,
+      "description": "技能执行、结果验证",
+      "description_en": "Skill execution and result validation",
+      "note": "技能分类是L4内部组织方式，不是新增层级",
+      "directories": ["engine/executor.py", "engine/validator.py", "skills/"],
+      
+      "categories": {
+        "document": {
+          "name": "文档处理",
+          "count": 8,
+          "triggers": ["文档", "word", "pdf", "ppt", "markdown", "转换", "document"],
+          "skills": [
+            {"name": "docx", "desc": "Word文档处理"},
+            {"name": "pdf", "desc": "PDF处理"},
+            {"name": "pptx", "desc": "PPT生成"},
+            {"name": "markitdown", "desc": "Markdown转换"},
+            {"name": "xiaoyi-doc-convert", "desc": "文档转换"},
+            {"name": "unified-document", "desc": "统一文档"},
+            {"name": "docs-cog", "desc": "文档认知"},
+            {"name": "nano-pdf", "desc": "轻量PDF"}
+          ]
+        },
+        
+        "data": {
+          "name": "数据分析",
+          "count": 8,
+          "triggers": ["数据", "分析", "excel", "sql", "数据库", "表格", "data", "analysis"],
+          "skills": [
+            {"name": "data-analysis", "desc": "数据分析"},
+            {"name": "excel-analysis", "desc": "Excel分析"},
+            {"name": "sqlite", "desc": "SQLite数据库"},
+            {"name": "mysql", "desc": "MySQL数据库"},
+            {"name": "mongodb", "desc": "MongoDB数据库"},
+            {"name": "elasticsearch", "desc": "ES搜索"},
+            {"name": "sheet-cog", "desc": "表格认知"},
+            {"name": "tushare-data", "desc": "金融数据"}
+          ]
+        },
+        
+        "search": {
+          "name": "搜索网络",
+          "count": 8,
+          "triggers": ["搜索", "查找", "网页", "互联网", "网上", "search", "web"],
+          "skills": [
+            {"name": "xiaoyi-web-search", "desc": "小艺搜索"},
+            {"name": "web-browsing", "desc": "网页浏览"},
+            {"name": "web-scraper", "desc": "网页抓取"},
+            {"name": "web-search-exa", "desc": "Exa搜索"},
+            {"name": "tavily-search-skill", "desc": "Tavily搜索"},
+            {"name": "cn-web-search", "desc": "中文搜索"},
+            {"name": "deep-search-and-insight-synthesize", "desc": "深度搜索"},
+            {"name": "unified-search", "desc": "统一搜索"}
+          ]
+        },
+        
+        "image": {
+          "name": "图片处理",
+          "count": 8,
+          "triggers": ["图片", "图像", "照片", "截图", "生成图", "image", "photo"],
+          "skills": [
+            {"name": "image", "desc": "图片处理"},
+            {"name": "xiaoyi-image-understanding", "desc": "图片理解"},
+            {"name": "xiaoyi-image-search", "desc": "图片搜索"},
+            {"name": "seedream-image_gen", "desc": "图片生成"},
+            {"name": "unified-image", "desc": "统一图片"},
+            {"name": "chart-image", "desc": "图表图片"},
+            {"name": "image-gen", "desc": "图片生成"},
+            {"name": "camsnap", "desc": "截图"}
+          ]
+        },
+        
+        "media": {
+          "name": "多媒体",
+          "count": 6,
+          "triggers": ["音频", "视频", "音乐", "字幕", "语音", "audio", "video", "media"],
+          "skills": [
+            {"name": "audio-cog", "desc": "音频处理"},
+            {"name": "video-cog", "desc": "视频处理"},
+            {"name": "video-subtitles", "desc": "视频字幕"},
+            {"name": "openai-whisper-api", "desc": "语音识别"},
+            {"name": "spotify-player", "desc": "音乐播放"},
+            {"name": "sonoscli", "desc": "音响控制"}
+          ]
+        },
+        
+        "code": {
+          "name": "开发工具",
+          "count": 10,
+          "triggers": ["代码", "git", "docker", "部署", "测试", "开发", "code", "dev"],
+          "skills": [
+            {"name": "git", "desc": "Git操作"},
+            {"name": "code-analysis-skills", "desc": "代码分析"},
+            {"name": "docker", "desc": "Docker管理"},
+            {"name": "ansible", "desc": "自动化部署"},
+            {"name": "terraform", "desc": "基础设施"},
+            {"name": "javascript-skills", "desc": "JS开发"},
+            {"name": "tdd-guide", "desc": "TDD指导"},
+            {"name": "webapp-testing", "desc": "Web测试"},
+            {"name": "playwright", "desc": "浏览器自动化"},
+            {"name": "agent-browser", "desc": "浏览器代理"}
+          ]
+        },
+        
+        "content": {
+          "name": "内容创作",
+          "count": 8,
+          "triggers": ["写作", "文章", "文案", "小说", "诗歌", "创作", "write", "content"],
+          "skills": [
+            {"name": "article-writer", "desc": "文章写作"},
+            {"name": "copywriter", "desc": "文案创作"},
+            {"name": "poetry", "desc": "诗歌生成"},
+            {"name": "novel-generator", "desc": "小说生成"},
+            {"name": "story-cog", "desc": "故事认知"},
+            {"name": "ai-ppt-generator", "desc": "PPT生成"},
+            {"name": "ai-picture-book", "desc": "绘本生成"},
+            {"name": "beauty-generation-api", "desc": "美妆生成"}
+          ]
+        },
+        
+        "social": {
+          "name": "社交平台",
+          "count": 6,
+          "triggers": ["小红书", "b站", "linkedin", "discord", "邮件", "发消息", "social"],
+          "skills": [
+            {"name": "xiaohongshu-all-in-one", "desc": "小红书"},
+            {"name": "bilibili-all-in-one", "desc": "B站"},
+            {"name": "linkedin-api", "desc": "LinkedIn"},
+            {"name": "discord", "desc": "Discord"},
+            {"name": "imsg", "desc": "iMessage"},
+            {"name": "imap-smtp-email", "desc": "邮件"}
+          ]
+        },
+        
+        "file": {
+          "name": "文件管理",
+          "count": 6,
+          "triggers": ["文件", "网盘", "上传", "下载", "云盘", "file", "upload"],
+          "skills": [
+            {"name": "file-manager", "desc": "文件管理"},
+            {"name": "baidu-netdisk-skills", "desc": "百度网盘"},
+            {"name": "huawei-drive", "desc": "华为云盘"},
+            {"name": "xiaoyi-file-upload", "desc": "文件上传"},
+            {"name": "tencent-cos-skill", "desc": "腾讯COS"},
+            {"name": "local_app_interconnect", "desc": "本地互联"}
+          ]
+        },
+        
+        "utility": {
+          "name": "实用工具",
+          "count": 6,
+          "triggers": ["天气", "地图", "健康", "截图", "手机", "weather", "map", "utility"],
+          "skills": [
+            {"name": "weather", "desc": "天气"},
+            {"name": "google-maps", "desc": "地图"},
+            {"name": "xiaoyi-health", "desc": "健康"},
+            {"name": "utils", "desc": "工具集"},
+            {"name": "screenshot", "desc": "截图"},
+            {"name": "xiao-gui-agent", "desc": "GUI代理"}
+          ]
+        },
+        
+        "business": {
+          "name": "商业分析",
+          "count": 12,
+          "triggers": ["市场", "股票", "投资", "交易", "商业", "选品", "business", "stock", "market"],
+          "skills": [
+            {"name": "market-research", "desc": "市场研究"},
+            {"name": "stock-price-query", "desc": "股价查询"},
+            {"name": "crypto", "desc": "加密货币"},
+            {"name": "china-stock-analysis", "desc": "A股分析"},
+            {"name": "bitsoul-stock-quantization", "desc": "量化交易"},
+            {"name": "mx-stocks-screener", "desc": "股票筛选"},
+            {"name": "industry-stock-tracker", "desc": "行业追踪"},
+            {"name": "t-trading", "desc": "交易工具"},
+            {"name": "polymarket-trade", "desc": "预测市场"},
+            {"name": "moltrade", "desc": "交易模块"},
+            {"name": "klaviyo", "desc": "营销自动化"},
+            {"name": "amazon-product-search-api-skill", "desc": "亚马逊选品"}
+          ]
+        },
+        
+        "professional": {
+          "name": "专业服务",
+          "count": 6,
+          "triggers": ["架构", "专家", "顾问", "留学", "专业", "professional", "expert"],
+          "skills": [
+            {"name": "senior-architect", "desc": "架构师"},
+            {"name": "senior-data-scientist", "desc": "数据科学家"},
+            {"name": "ceo-advisor", "desc": "CEO顾问"},
+            {"name": "best-minds", "desc": "专家智库"},
+            {"name": "pexoai-agent", "desc": "专业代理"},
+            {"name": "university-applications", "desc": "留学申请"}
+          ]
+        },
+        
+        "design": {
+          "name": "设计创意",
+          "count": 5,
+          "triggers": ["设计", "ui", "前端", "创意", "design", "ui", "frontend"],
+          "skills": [
+            {"name": "frontend-design-pro", "desc": "前端设计"},
+            {"name": "ui-design-system", "desc": "UI设计"},
+            {"name": "admapix", "desc": "广告图片"},
+            {"name": "wan-image-video-generation-editting", "desc": "图片视频生成"},
+            {"name": "calcom-cal.com-web-design-guidelines-1.0.2", "desc": "Web设计"}
+          ]
+        },
+        
+        "automation": {
+          "name": "自动化",
+          "count": 4,
+          "triggers": ["自动", "升级", "融合", "监控", "automation", "auto"],
+          "skills": [
+            {"name": "auto-skill-upgrade", "desc": "自动升级"},
+            {"name": "skill-fusion", "desc": "技能融合"},
+            {"name": "agent-chronicle", "desc": "代理编年史"},
+            {"name": "topic-monitor", "desc": "话题监控"}
+          ]
+        },
+        
+        "auxiliary": {
+          "name": "辅助工具",
+          "count": 6,
+          "triggers": ["关键词", "seo", "报告", "华为阅读", "keyword", "seo", "report"],
+          "skills": [
+            {"name": "keyword-research", "desc": "关键词研究"},
+            {"name": "technical-seo-checker", "desc": "SEO检查"},
+            {"name": "good-txt-to-hwreader", "desc": "华为阅读"},
+            {"name": "xiaoyi-report", "desc": "报告生成"},
+            {"name": "quality-documentation-manager", "desc": "文档管理"},
+            {"name": "taskr", "desc": "任务工具"}
+          ]
+        },
+        
+        "special": {
+          "name": "特殊技能",
+          "count": 3,
+          "triggers": ["新手", "人格", "本体", "beginner", "persona"],
+          "skills": [
+            {"name": "beginner-mode", "desc": "新手模式"},
+            {"name": "personas", "desc": "人格切换"},
+            {"name": "ontology", "desc": "本体论"}
+          ]
+        },
+        
+        "core": {
+          "name": "核心技能",
+          "count": 9,
+          "triggers": ["核心", "基础", "core", "basic"],
+          "skills": [
+            {"name": "core", "desc": "核心技能"},
+            {"name": "engines", "desc": "引擎"},
+            {"name": "api-gateway", "desc": "API网关"},
+            {"name": "clawdhub", "desc": "ClawdHub"},
+            {"name": "productivity", "desc": "生产力"},
+            {"name": "research-cog", "desc": "研究认知"},
+            {"name": "scrapling-official", "desc": "Scrapling"},
+            {"name": "ocr-local", "desc": "本地OCR"},
+            {"name": "video-agent", "desc": "视频代理"}
+          ]
+        },
+        
+        "platform": {
+          "name": "平台集成",
+          "count": 4,
+          "triggers": ["掘金", "笔记", "热点", "新闻", "platform", "news"],
+          "skills": [
+            {"name": "juejin-skills", "desc": "掘金"},
+            {"name": "getnote", "desc": "Get笔记"},
+            {"name": "hot-news-aggregator", "desc": "热点聚合"},
+            {"name": "tech-news-digest", "desc": "科技新闻"}
+          ]
+        },
+        
+        "other": {
+          "name": "其他技能",
+          "count": 6,
+          "triggers": [],
+          "skills": [
+            {"name": "dingtalk-ai-table", "desc": "钉钉AI表格"},
+            {"name": "marketing-strategy-pmm", "desc": "营销策略"},
+            {"name": "react-best-practices", "desc": "React最佳实践"},
+            {"name": "su-lan-paper-daily-skill", "desc": "论文日报"},
+            {"name": "skill-finder", "desc": "技能查找"},
+            {"name": "openclaw-skills-agent-builder-1.0.3", "desc": "代理构建器"}
+          ]
+        }
+      }
+    },
+    
+    "L5": {
+      "name": "稳定治理层",
+      "name_en": "Stability Governance Layer",
+      "token_budget": 800,
+      "load_strategy": "on_sensitive",
+      "skills_count": 6,
+      "skills": [
+        {"name": "clawsec-suite", "desc": "安全套件", "category": "security"},
+        {"name": "senior-security", "desc": "安全专家", "category": "security"},
+        {"name": "risk-management-specialist", "desc": "风险管理", "category": "security"},
+        {"name": "verified-agent-identity", "desc": "身份验证", "category": "security"},
+        {"name": "moltguard", "desc": "安全防护", "category": "security"},
+        {"name": "secret-guardian", "desc": "密钥守护", "category": "security"}
+      ],
+      "triggers": ["安全", "权限", "敏感", "密钥", "security", "permission"],
+      "directories": ["guard/", "guard/security.py", "guard/permissions.py", "guard/audit.py"],
+      "description": "安全、权限、审计",
+      "description_en": "Security, permissions, audit"
+    },
+    
+    "L6": {
+      "name": "基础设施层",
+      "name_en": "Infrastructure Layer",
+      "token_budget": 700,
+      "load_strategy": "on_system",
+      "skills_count": 4,
+      "skills": [
+        {"name": "skill-creator", "desc": "技能创建", "category": "infra"},
+        {"name": "skill-safe-install", "desc": "安全安装", "category": "infra"},
+        {"name": "openclaw-agent-optimize", "desc": "代理优化", "category": "infra"},
+        {"name": "performance-upgrade", "desc": "性能升级", "category": "infra"}
+      ],
+      "triggers": ["系统", "安装", "配置", "优化", "system", "install", "config"],
+      "directories": ["infra/", "infra/paths.py", "infra/plugins.py", "infra/performance.py", "infra/registry.py"],
+      "description": "路径、插件、性能、注册",
+      "description_en": "Path, plugins, performance, registry"
+    }
+  },
+  
+  "all_skills": [
+    "admapix", "agent-browser-clawdbot", "agent-chronicle", "ai-picture-book", "ai-ppt-generator",
+    "amazon-product-search-api-skill", "ansible", "api-gateway", "article-writer", "audio-cog",
+    "auto-skill-upgrade", "baidu-netdisk-skills", "beauty-generation-api", "beginner-mode", "best-minds",
+    "bilibili-all-in-one", "bitsoul-stock-quantization", "calcom-cal.com-web-design-guidelines-1.0.2",
+    "camsnap", "ceo-advisor", "chart-image", "china-stock-analysis", "clawdhub", "clawsec-suite",
+    "cn-web-search", "code-analysis-skills", "command-center", "command-hook", "copywriter", "core",
+    "cron", "crypto", "data-analysis", "deep-search-and-insight-synthesize", "dingtalk-ai-table",
+    "discord", "docker", "docs-cog", "docx", "elasticsearch", "engines", "eno", "excel-analysis",
+    "file-manager", "find-skills", "frontend-design-pro", "getnote", "git", "good-txt-to-hwreader",
+    "google-maps", "guide", "hot-news-aggregator", "huawei-drive", "image", "image-gen",
+    "imap-smtp-email", "imsg", "industry-stock-tracker", "javascript-skills", "juejin-skills",
+    "keyword-research", "klaviyo", "linkedin-api", "local_app_interconnect", "market-research",
+    "marketing-strategy-pmm", "markitdown", "memory", "moltguard", "moltrade", "mongodb",
+    "mx-stocks-screener", "mysql", "nano-pdf", "novel-generator", "obsidian", "ocr-local",
+    "ontology", "openai-whisper-api", "openclaw-agent-optimize", "openclaw-skills-agent-builder-1.0.3",
+    "pdf", "performance-upgrade", "personas", "pexoai-agent", "planning-with-files", "playwright",
+    "poetry", "polymarket-trade", "post-job", "pptx", "proactivity", "productivity",
+    "quality-documentation-manager", "react-best-practices", "research-cog", "risk-management-specialist",
+    "scrapling-official", "screenshot", "seedream-image_gen", "self-improving-agent", "senior-architect",
+    "senior-data-scientist", "senior-security", "sheet-cog", "skill-creator", "skill-finder",
+    "skill-fusion", "skill-install-manager-1-0-0", "sonoscli", "spotify-player", "sqlite",
+    "stock-price-query", "story-cog", "su-lan-paper-daily-skill", "t-trading", "taskr",
+    "tavily-search-skill", "tdd-guide", "tech-news-digest", "technical-seo-checker", "tencent-cos-skill",
+    "terraform", "today-task", "topic-monitor", "tushare-data", "ui-design-system", "unified-document",
+    "unified-image", "unified-search", "university-applications", "utils", "verified-agent-identity",
+    "video-agent", "video-cog", "video-subtitles", "wan-image-video-generation-editting", "weather",
+    "web-browsing", "web-scraper", "web-search-exa", "webapp-testing", "xiao-gui-agent",
+    "xiaohongshu-all-in-one", "xiaoyi-doc-convert", "xiaoyi-file-upload", "xiaoyi-health",
+    "xiaoyi-image-search", "xiaoyi-image-understanding", "xiaoyi-report", "xiaoyi-web-search"
+  ],
+  
+  "summary": {
+    "total_layers": 6,
+    "total_skills": 151,
+    "total_token_budget": 9500,
+    "startup_token": 2000,
+    "categories_count": 19
+  },
+  
+  "performance": {
+    "startup_latency_ms": 30,
+    "skill_lookup_ms": 5,
+    "layer_load_ms": 20,
+    "total_response_ms": 60
+  },
+  
+  "directories": {
+    "core": "L1 + L2: 认知 + 记忆",
+    "engine": "L3 + L4: 编排 + 执行",
+    "skills": "L4: 技能库 (151个)",
+    "guard": "L5: 安全治理",
+    "infra": "L6: 基础设施",
+    "memory": "L2: 日记目录"
+  },
+  
+  "safety": {
+    "execution_validator": true,
+    "secret_guardian": true,
+    "skill_scope_check": true,
+    "trash_over_rm": true
+  },
+  
+  "version_history": [
+    {"version": "2.8.0", "date": "2026-04-10", "desc": "十阶段升级"},
+    {"version": "2.8.1", "date": "2026-04-11", "desc": "安全加固"},
+    {"version": "2.8.2", "date": "2026-04-11", "desc": "层级优化"},
+    {"version": "2.9.0", "date": "2026-04-11", "desc": "终极精简 (错误: 多了L4子层)"},
+    {"version": "2.9.1", "date": "2026-04-11", "desc": "修正: 六层架构固定不变"}
+  ]
+}

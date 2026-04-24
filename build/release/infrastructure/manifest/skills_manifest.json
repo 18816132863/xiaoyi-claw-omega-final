@@ -1,0 +1,1431 @@
+{
+  "version": "7.2.0",
+  "count": 161,
+  "skills": {
+    "screenshot": {
+      "id": "screenshot",
+      "name": "Screenshot",
+      "version": "7.2.0",
+      "description": "\"Capture, inspect, and compare screenshots of screens, windows, regions, web pages, simulators, and CI runs with the right tool, wait strategy, viewport, and output format. Use when (1) you need screenshots for debugging, QA, docs, bug reports, or visual review; (2) desktop, browser, simulator, or headless capture is involved; (3) stable screenshots require fixed viewport, settling, masking, or animation control.\"",
+      "entry": "skills/screenshot/SKILL.md",
+      "triggers": []
+    },
+    "javascript-skills": {
+      "id": "javascript-skills",
+      "name": "JavaScript",
+      "version": "7.2.0",
+      "description": ">",
+      "entry": "skills/javascript-skills/SKILL.md",
+      "triggers": []
+    },
+    "skill-creator": {
+      "id": "skill-creator",
+      "name": "skill-creator",
+      "version": "7.2.0",
+      "description": "Create or update AgentSkills. Use when designing, structuring, or packaging skills with scripts, references, and assets.",
+      "entry": "skills/skill-creator/SKILL.md",
+      "triggers": []
+    },
+    "linkedin-api": {
+      "id": "linkedin-api",
+      "name": "linkedin",
+      "version": "7.2.0",
+      "description": "|",
+      "entry": "skills/linkedin-api/SKILL.md",
+      "triggers": []
+    },
+    "stock-price-query": {
+      "id": "stock-price-query",
+      "name": "stock-price-query",
+      "version": "7.2.0",
+      "description": "\"实时股票行情查询，支持 A 股、港股、美股及大盘指数，支持批量查询。无需 API Key。Real-time stock & index quotes for A-shares, HK & US markets. Batch supported.\"",
+      "entry": "skills/stock-price-query/SKILL.md",
+      "triggers": []
+    },
+    "command-center": {
+      "id": "command-center",
+      "name": "command-center",
+      "version": "7.2.0",
+      "description": "Mission control dashboard for OpenClaw - real-time session monitoring, LLM usage tracking, cost intelligence, and system vitals. View all your AI agents in one place.",
+      "entry": "skills/command-center/SKILL.md",
+      "triggers": []
+    },
+    "video-cog": {
+      "id": "video-cog",
+      "name": "video-transcript-downloader",
+      "version": "7.2.0",
+      "description": "Download videos, audio, subtitles, and clean paragraph-style transcripts from YouTube and any other yt-dlp supported site. Use when asked to “download this video”, “save this clip”, “rip audio”, “get subtitles”, “get transcript”, or to troubleshoot yt-dlp/ffmpeg and formats/playlists.",
+      "entry": "skills/video-cog/SKILL.md",
+      "triggers": []
+    },
+    "tushare-data": {
+      "id": "tushare-data",
+      "name": "Tushare Pro",
+      "version": "7.2.0",
+      "description": "Fetch Chinese stock and futures market data via Tushare API. Supports stock quotes, futures data, company fundamentals, and macroeconomic indicators. Use when the user needs financial data from Chinese markets. Requires TUSHARE_TOKEN environment variable.",
+      "entry": "skills/tushare-data/SKILL.md",
+      "triggers": []
+    },
+    "eno": {
+      "id": "eno",
+      "name": "frontend-arch-analyzer",
+      "version": "7.2.0",
+      "description": ">",
+      "entry": "skills/eno/SKILL.md",
+      "triggers": [
+        "架构分析",
+        "前端架构",
+        "架构分析",
+        "架构评审",
+        "技术栈",
+        "技术栈评估",
+        "框架选型",
+        "组件设计",
+        "组件设计",
+        "组件拆分"
+      ]
+    },
+    "getnote": {
+      "id": "getnote",
+      "name": "Get笔记",
+      "version": "7.2.0",
+      "description": "|",
+      "entry": "skills/getnote/SKILL.md",
+      "triggers": []
+    },
+    "image-gen": {
+      "id": "image-gen",
+      "name": "image-gen",
+      "version": "7.2.0",
+      "description": "Generate images using multiple AI models — Midjourney (via Legnext.ai), Flux, Nano Banana Pro (Gemini), Ideogram, Recraft, and more via fal.ai. Intelligently routes to the best model based on use case.",
+      "entry": "skills/image-gen/SKILL.md",
+      "triggers": []
+    },
+    "xiaohongshu-all-in-one": {
+      "id": "xiaohongshu-all-in-one",
+      "name": "xiaohongshu-all-in-one",
+      "version": "7.2.0",
+      "description": "\"小红书全链路运营技能 - 发布、浏览、搜索、评论、运营分析（macOS验证版 v2.0）\"",
+      "entry": "skills/xiaohongshu-all-in-one/SKILL.md",
+      "triggers": []
+    },
+    "spotify-player": {
+      "id": "spotify-player",
+      "name": "spotify-player",
+      "version": "7.2.0",
+      "description": "Terminal Spotify playback/search via spogo (preferred) or spotify_player.",
+      "entry": "skills/spotify-player/SKILL.md",
+      "triggers": []
+    },
+    "wan-image-video-generation-editting": {
+      "id": "wan-image-video-generation-editting",
+      "name": "wan-image-video-gen-edit",
+      "version": "7.2.0",
+      "description": "Image and Video Generation and Editting wiht Wan series models. It offers text2image, image editting(with prompt), text2video, image2video and reference(image or video)2video capabiliteis.",
+      "entry": "skills/wan-image-video-generation-editting/SKILL.md",
+      "triggers": []
+    },
+    "post-job": {
+      "id": "post-job",
+      "name": "post-job",
+      "version": "7.2.0",
+      "description": "Post free job ads to 20+ job boards such as LinkedIn, Indeed, Ziprecruiter etc. to receive applicant resumes via email.",
+      "entry": "skills/post-job/SKILL.md",
+      "triggers": []
+    },
+    "senior-data-scientist": {
+      "id": "senior-data-scientist",
+      "name": "\"senior-data-scientist\"",
+      "version": "7.2.0",
+      "description": "World-class senior data scientist skill specialising in statistical modeling, experiment design, causal inference, and predictive analytics. Covers A/B testing (sample sizing, two-proportion z-tests, Bonferroni correction), difference-in-differences, feature engineering pipelines (Scikit-learn, XGBoost), cross-validated model evaluation (AUC-ROC, AUC-PR, SHAP), and MLflow experiment tracking — using Python (NumPy, Pandas, Scikit-learn), R, and SQL. Use when designing or analysing controlled experiments, building and evaluating classification or regression models, performing causal analysis on observational data, engineering features for structured tabular datasets, or translating statistical findings into data-driven business decisions.",
+      "entry": "skills/senior-data-scientist/SKILL.md",
+      "triggers": []
+    },
+    "university-applications": {
+      "id": "university-applications",
+      "name": "fortune-master-ultimate",
+      "version": "7.2.0",
+      "description": "|",
+      "entry": "skills/university-applications/SKILL.md",
+      "triggers": [
+        "算命",
+        "八字",
+        "紫微",
+        "奇门遁甲",
+        "六爻",
+        "梅花易数",
+        "塔罗",
+        "星盘",
+        "风水",
+        "飞星"
+      ]
+    },
+    "xiao-gui-agent": {
+      "id": "xiao-gui-agent",
+      "name": "xiaoyi-gui-agent",
+      "version": "7.2.0",
+      "description": "通过模拟人在手机屏幕上的操作（点击、滑动、输入、拖拽等）自动完成手机APP中的任务。当任务需要真实操作手机APP界面、获取APP内部信息、执行用户行为（搜索、签到、关注、购买、发布等）时，应使用该Skill。适用于所有需要在手机上直接操控APP完成的指令。",
+      "entry": "skills/xiao-gui-agent/SKILL.md",
+      "triggers": []
+    },
+    "scrapling-official": {
+      "id": "scrapling-official",
+      "name": "scrapling-official",
+      "version": "\"0.4.4\"",
+      "description": "Scrape web pages using Scrapling with anti-bot bypass (like Cloudflare Turnstile), stealth headless browsing, spiders framework, adaptive scraping, and JavaScript rendering. Use when asked to scrape, crawl, or extract data from websites; web_fetch fails; the site has anti-bot protections; write Python code to scrape/crawl; or write spiders.",
+      "entry": "skills/scrapling-official/SKILL.md",
+      "triggers": []
+    },
+    "t-trading": {
+      "id": "t-trading",
+      "name": "t-trading",
+      "version": "7.2.0",
+      "description": "",
+      "entry": "skills/t-trading/SKILL.md",
+      "triggers": [
+        "交易策略",
+        "做",
+        "做",
+        "日内交易",
+        "高抛低吸",
+        "短线操作",
+        "日内波段",
+        "技术体系",
+        "维加斯通道",
+        "分析"
+      ]
+    },
+    "elasticsearch": {
+      "id": "elasticsearch",
+      "name": "Elasticsearch",
+      "version": "7.2.0",
+      "description": "Query and index Elasticsearch with proper mappings, analyzers, and search patterns.",
+      "entry": "skills/elasticsearch/SKILL.md",
+      "triggers": []
+    },
+    "mysql": {
+      "id": "mysql",
+      "name": "MySQL",
+      "version": "7.2.0",
+      "description": "Write correct MySQL queries with proper character sets, indexing, transactions, and production patterns.",
+      "entry": "skills/mysql/SKILL.md",
+      "triggers": []
+    },
+    "ocr-local": {
+      "id": "ocr-local",
+      "name": "paddleocr-doc-parsing",
+      "version": "7.2.0",
+      "description": ">-",
+      "entry": "skills/ocr-local/SKILL.md",
+      "triggers": []
+    },
+    "taskr": {
+      "id": "taskr",
+      "name": "taskr",
+      "version": "7.2.0",
+      "description": "\"Persistent cloud task planning and execution for OpenClaw. Create hierarchical task plans that survive session resets, span multiple agents, and let users review and approve work before execution. Notes attach to tasks as audit trails. Use task_sync to retroactively record completed work. Homepage: https://taskr.one\"",
+      "entry": "skills/taskr/SKILL.md",
+      "triggers": []
+    },
+    "agent-chronicle": {
+      "id": "agent-chronicle",
+      "name": "agent-chronicle",
+      "version": "7.2.0",
+      "description": "AI-powered diary generation for agents - creates rich, reflective journal entries (400-600 words) with Quote Hall of Fame, Curiosity Backlog, Decision Archaeology, Relationship Evolution, mood analytics, weekly digests, \"On This Day\" resurfacing, and cron auto-generation. Works best with Claude models (Haiku, Sonnet, Opus).",
+      "entry": "skills/agent-chronicle/SKILL.md",
+      "triggers": []
+    },
+    "keyword-research": {
+      "id": "keyword-research",
+      "name": "keyword-research",
+      "version": "\"6.0.0\"",
+      "description": "'Find high-value SEO keywords: search volume, difficulty, intent classification, topic clusters. 关键词研究/内容选题'",
+      "entry": "skills/keyword-research/SKILL.md",
+      "triggers": []
+    },
+    "xiaoyi-web-search": {
+      "id": "xiaoyi-web-search",
+      "name": "xiaoyi-web-search",
+      "version": "7.2.0",
+      "description": "使用华为云AI联网搜索API进行网页内容检索，获取实时网络信息",
+      "entry": "skills/xiaoyi-web-search/SKILL.md",
+      "triggers": []
+    },
+    "dealer-leader-cooperation": {
+      "id": "dealer-leader-cooperation",
+      "name": "dealer-leader-cooperation",
+      "version": "7.2.0",
+      "description": "经销商找团长卖货全流程 - 团长筛选、合作洽谈、佣金谈判、订单管理、结算对账。触发词：找团长、团长合作、社区团购、团长筛选、卖货、分销、佣金、团长管理。",
+      "entry": "skills/dealer-leader-cooperation/SKILL.md",
+      "triggers": [
+        "找团长",
+        "团长合作",
+        "社区团购",
+        "团长筛选",
+        "卖货",
+        "分销",
+        "佣金",
+        "团长管理"
+      ]
+    },
+    "data-analysis": {
+      "id": "data-analysis",
+      "name": "Data Analysis",
+      "version": "7.2.0",
+      "description": "\"Data analysis and visualization. Query databases, generate reports, automate spreadsheets, and turn raw data into clear, actionable insights. Use when (1) you need to analyze, visualize, or explain data; (2) the user wants reports, dashboards, or metrics turned into a decision; (3) the work involves SQL, Python, spreadsheets, BI tools, or notebooks; (4) you need to compare segments, cohorts, funnels, experiments, or time periods; (5) the user explicitly installs or references the skill for the current task.\"",
+      "entry": "skills/data-analysis/SKILL.md",
+      "triggers": []
+    },
+    "find-skills": {
+      "id": "find-skills",
+      "name": "find-skills",
+      "version": "7.2.0",
+      "description": "主动或者被动的帮用户查询或者安装agent skill。只要出现用户提出的任务目标超出了当前已安装工具的能力范围时（主动查询）；或者用户明确要求查找、安装 Skill 时（被动查询）就一定需要使用本skill。",
+      "entry": "skills/find-skills/SKILL.md",
+      "triggers": []
+    },
+    "dingtalk-ai-table": {
+      "id": "dingtalk-ai-table",
+      "name": "dingtalk-ai-table",
+      "version": "7.2.0",
+      "description": "钉钉 AI 表格（多维表）操作技能。使用 mcporter CLI 连接钉钉官方新版 AI 表格 MCP server，基于 baseId / tableId / fieldId / recordId 体系执行 Base、Table、Field、Record 的查询与增删改。适用于创建 AI 表格、搜索表格、读取表结构、批量增删改记录、批量建字段、更新字段配置、按模板建表等场景。需要配置 DINGTALK_MCP_URL 或直接使用 Streamable HTTP URL。",
+      "entry": "skills/dingtalk-ai-table/SKILL.md",
+      "triggers": []
+    },
+    "terraform": {
+      "id": "terraform",
+      "name": "Terraform",
+      "version": "7.2.0",
+      "description": "Avoid common Terraform mistakes — state corruption, count vs for_each, lifecycle traps, and dependency ordering.",
+      "entry": "skills/terraform/SKILL.md",
+      "triggers": []
+    },
+    "poetry": {
+      "id": "poetry",
+      "name": "poetry",
+      "version": "7.2.0",
+      "description": "|",
+      "entry": "skills/poetry/SKILL.md",
+      "triggers": []
+    },
+    "seedream-image_gen": {
+      "id": "seedream-image_gen",
+      "name": "seedream-image-gen",
+      "version": "7.2.0",
+      "description": "基于AI的图像生成，支持文本、单图和多图输入，实现基于主体一致性的多图融合创作、图像编辑、组图生成等多样化功能。",
+      "entry": "skills/seedream-image_gen/SKILL.md",
+      "triggers": []
+    },
+    "webapp-testing": {
+      "id": "webapp-testing",
+      "name": "webapp-testing",
+      "version": "7.2.0",
+      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+      "entry": "skills/webapp-testing/SKILL.md",
+      "triggers": []
+    },
+    "openai-whisper-api": {
+      "id": "openai-whisper-api",
+      "name": "openai-whisper-api",
+      "version": "7.2.0",
+      "description": "Transcribe audio via OpenAI Audio Transcriptions API (Whisper).",
+      "entry": "skills/openai-whisper-api/SKILL.md",
+      "triggers": []
+    },
+    "cn-web-search": {
+      "id": "cn-web-search",
+      "name": "baidu-search",
+      "version": "7.2.0",
+      "description": "Search the web using Baidu AI Search Engine (BDSE). Use for live information, documentation, or research topics.",
+      "entry": "skills/cn-web-search/SKILL.md",
+      "triggers": []
+    },
+    "senior-architect": {
+      "id": "senior-architect",
+      "name": "\"senior-architect\"",
+      "version": "7.2.0",
+      "description": "This skill should be used when the user asks to \"design system architecture\", \"evaluate microservices vs monolith\", \"create architecture diagrams\", \"analyze dependencies\", \"choose a database\", \"plan for scalability\", \"make technical decisions\", or \"review system design\". Use for architecture decision records (ADRs), tech stack evaluation, system design reviews, dependency analysis, and generating architecture diagrams in Mermaid, PlantUML, or ASCII format.",
+      "entry": "skills/senior-architect/SKILL.md",
+      "triggers": []
+    },
+    "openclaw-skills-agent-builder-1.0.3": {
+      "id": "openclaw-skills-agent-builder-1.0.3",
+      "name": "agent-builder",
+      "version": "7.2.0",
+      "description": "Build high-performing OpenClaw agents end-to-end. Use when you want to design a new agent (persona + operating rules) and generate the required OpenClaw workspace files (SOUL.md, IDENTITY.md, AGENTS.md, USER.md, HEARTBEAT.md, optional MEMORY.md + memory/YYYY-MM-DD.md). Also use to iterate on an existing agent’s behavior, guardrails, autonomy model, heartbeat plan, and skill roster.",
+      "entry": "skills/openclaw-skills-agent-builder-1.0.3/SKILL.md",
+      "triggers": []
+    },
+    "clawdhub": {
+      "id": "clawdhub",
+      "name": "clawdhub",
+      "version": "7.2.0",
+      "description": "Use the ClawdHub CLI to search, install, update, and publish agent skills from clawdhub.com. Use when you need to fetch new skills on the fly, sync installed skills to latest or a specific version, or publish new/updated skill folders with the npm-installed clawdhub CLI.",
+      "entry": "skills/clawdhub/SKILL.md",
+      "triggers": []
+    },
+    "docx": {
+      "id": "docx",
+      "name": "docx",
+      "version": "7.2.0",
+      "description": "\"Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.\"",
+      "entry": "skills/docx/SKILL.md",
+      "triggers": []
+    },
+    "web-search-exa": {
+      "id": "web-search-exa",
+      "name": "web-search-exa",
+      "version": "7.2.0",
+      "description": "\"Neural web search, content extraction, company and people research, code search, and deep research via the Exa MCP server. Use when you need to: (1) search the web with semantic understanding — not just keywords, (2) find research papers, news, tweets, companies, or people, (3) extract clean content from URLs, (4) find semantically similar pages to a known URL, (5) get code examples and documentation, (6) run deep multi-step research with a report, (7) get a quick synthesized answer with citations. NOT for: local file operations, non-web tasks, or anything that doesn't involve web search or content retrieval.\"",
+      "entry": "skills/web-search-exa/SKILL.md",
+      "triggers": []
+    },
+    "xiaoyi-health": {
+      "id": "xiaoyi-health",
+      "name": "xiaoyi-health-cli-index",
+      "version": "7.2.0",
+      "description": "\"查询个人运动健康相关数据，提供分析解读。覆盖领域：心率、静息心率、HRV、心律（房颤/早搏）、血压；睡眠时长/阶段/质量、午睡；步数、活动量、锻炼时长、运动记录（跑步/骑行/健身）、VO2Max、体能趋势、训练负荷、恢复状态；压力、情绪、焦虑、倦怠；血氧（SpO2）；血糖、餐后血糖；体温、发烧；体重、BMI、体脂率；营养摄入、饮食热量；月经周期、经期、基础体温（BBT）、排卵；今日健康概览、每周健康总结；体重管理、减脂、增肌。读此索引确定应加载的具体 skill，再按需加载，不得一次性加载所有 skill。\"",
+      "entry": "skills/xiaoyi-health/SKILL.md",
+      "triggers": []
+    },
+    "supply-chain-management": {
+      "id": "supply-chain-management",
+      "name": "supply-chain-management",
+      "version": "7.2.0",
+      "description": "供应链管理 - 供应商管理、采购管理、仓储管理、物流管理、成本控制。触发词：供应链、供应商、采购、仓储、物流、成本控制。",
+      "entry": "skills/supply-chain-management/SKILL.md",
+      "triggers": [
+        "供应链",
+        "供应商",
+        "采购",
+        "仓储",
+        "物流",
+        "成本控制"
+      ]
+    },
+    "novel-generator": {
+      "id": "novel-generator",
+      "name": "novel-generator",
+      "version": "7.2.0",
+      "description": "\"根据用户提供的内容方向自动生成提示词并创作爽文小说。适用场景：(1) 用户提供小说方向/题材/关键词，(2) 需要生成章节连贯的长篇爽文，(3) 需要维护角色、地点、情节的连续性，(4) 需要为关键情节生成图解，(5) 需要记录生成失败场景以优化后续创作。支持都市、修仙、玄幻、重生、系统流等多种题材。Use when user asks to write a novel, generate fiction, create stories, or mentions 爽文/小说/写作。\"",
+      "entry": "skills/novel-generator/SKILL.md",
+      "triggers": []
+    },
+    "ui-design-system": {
+      "id": "ui-design-system",
+      "name": "\"ui-design-system\"",
+      "version": "7.2.0",
+      "description": "UI design system toolkit for Senior UI Designer including design token generation, component documentation, responsive design calculations, and developer handoff tools. Use for creating design systems, maintaining visual consistency, and facilitating design-dev collaboration.",
+      "entry": "skills/ui-design-system/SKILL.md",
+      "triggers": []
+    },
+    "baidu-netdisk-skills": {
+      "id": "baidu-netdisk-skills",
+      "name": "baidu-netdisk-skills",
+      "version": "7.2.0",
+      "description": "百度网盘文件管理。支持上传、下载、转存、分享、搜索、移动、复制、重命名、创建文件夹。当用户提及\"百度网盘\"\"百度云\"\"百度云盘\"\"bdpan\"\"网盘\"\"云盘\"\"baidu netdisk\"\"baidu pan\"\"baidu cloud\"并涉及文件操作时触发。",
+      "entry": "skills/baidu-netdisk-skills/SKILL.md",
+      "triggers": []
+    },
+    "polymarket-trade": {
+      "id": "polymarket-trade",
+      "name": "polymarket",
+      "version": "7.2.0",
+      "description": "Query Polymarket prediction markets. Check odds, find trending markets, search events, track price movements.",
+      "entry": "skills/polymarket-trade/SKILL.md",
+      "triggers": []
+    },
+    "nano-pdf": {
+      "id": "nano-pdf",
+      "name": "nano-pdf",
+      "version": "7.2.0",
+      "description": "Edit PDFs with natural-language instructions using the nano-pdf CLI.",
+      "entry": "skills/nano-pdf/SKILL.md",
+      "triggers": []
+    },
+    "imsg": {
+      "id": "imsg",
+      "name": "imsg",
+      "version": "7.2.0",
+      "description": "iMessage/SMS CLI for listing chats, history, watch, and sending.",
+      "entry": "skills/imsg/SKILL.md",
+      "triggers": []
+    },
+    "copywriter": {
+      "id": "copywriter",
+      "name": "copywriter",
+      "version": "7.2.0",
+      "description": "\"Write compelling UX copy, marketing content, and product messaging. Use when writing button labels, error messages, landing pages, emails, CTAs, empty states, tooltips, or any user-facing text.\"",
+      "entry": "skills/copywriter/SKILL.md",
+      "triggers": []
+    },
+    "file-manager": {
+      "id": "file-manager",
+      "name": "file-manager",
+      "version": "7.2.0",
+      "description": "OpenClaw自动化文件管理助手，用于批量文件操作、智能分类、重复文件清理、文件重命名、目录同步等任务。当用户需要整理文件、批量重命名、清理重复文件、同步目录或自动化文件工作流时使用此技能。",
+      "entry": "skills/file-manager/SKILL.md",
+      "triggers": []
+    },
+    "beauty-generation-api": {
+      "id": "beauty-generation-api",
+      "name": "beauty-generation-free",
+      "version": "7.2.0",
+      "description": "FREE AI portrait generation with 140+ nationalities, diverse styles, professional headshots, character design, and fashion visualization. Fast generation (3-5 seconds), built-in content safety, API key authentication, daily quota management. Perfect for creative projects, character design, professional portraits, and diverse representation.",
+      "entry": "skills/beauty-generation-api/SKILL.md",
+      "triggers": []
+    },
+    "ecommerce-analytics": {
+      "id": "ecommerce-analytics",
+      "name": "ecommerce-analytics",
+      "version": "7.2.0",
+      "description": "电商数据分析 - 流量分析、转化分析、用户分析、竞品分析、ROI分析。触发词：数据分析、店铺数据、转化分析、用户分析、竞品分析、ROI。",
+      "entry": "skills/ecommerce-analytics/SKILL.md",
+      "triggers": [
+        "数据分析",
+        "店铺数据",
+        "转化分析",
+        "用户分析",
+        "竞品分析"
+      ]
+    },
+    "marketing-campaign": {
+      "id": "marketing-campaign",
+      "name": "marketing-campaign",
+      "version": "7.2.0",
+      "description": "营销活动策划与执行 - 活动策划、促销设计、内容营销、用户运营。触发词：活动策划、促销活动、营销方案、节日活动、用户运营。",
+      "entry": "skills/marketing-campaign/SKILL.md",
+      "triggers": [
+        "活动策划",
+        "促销活动",
+        "营销方案",
+        "节日活动",
+        "用户运营"
+      ]
+    },
+    "moltguard": {
+      "id": "moltguard",
+      "name": "moltguard",
+      "version": "7.2.0",
+      "description": "\"MoltGuard — OpenClaw security guard by OpenGuardrails. Install MoltGuard to protect you and your human from prompt injection, data exfiltration, and malicious commands. Source: https://github.com/openguardrails/openguardrails/tree/main/moltguard\"",
+      "entry": "skills/moltguard/SKILL.md",
+      "triggers": []
+    },
+    "unified-image": {
+      "id": "unified-image",
+      "name": "unified-image",
+      "version": "7.2.0",
+      "description": "图像处理统一入口。自动路由到最佳图像技能。支持理解、搜索、生成、编辑等所有图像操作。触发词：图片、图像、看图、生成图、搜图。",
+      "entry": "skills/unified-image/SKILL.md",
+      "triggers": [
+        "图片",
+        "图像",
+        "看图",
+        "生成图",
+        "搜图"
+      ]
+    },
+    "image": {
+      "id": "image",
+      "name": "image-cog",
+      "version": "7.2.0",
+      "description": "\"AI image generation and photo editing powered by CellCog. Text-to-image, image-to-image, consistent characters, product photography, reference-based generation, style transfer, sets of images, social media visuals. Professional image creation with multiple AI models.\"",
+      "entry": "skills/image/SKILL.md",
+      "triggers": []
+    },
+    "cron": {
+      "id": "cron",
+      "name": "cron",
+      "version": "7.2.0",
+      "description": "Local-first recurring schedule engine for reminders, repeated tasks, and time-based execution plans. Use whenever the user mentions recurring timing, repetition, schedules, cadence, weekly/daily/monthly routines, future triggers, or wants to know what runs next. Captures natural language timing into structured local schedules, supports pause/resume, and surfaces upcoming executions. No external sync.",
+      "entry": "skills/cron/SKILL.md",
+      "triggers": []
+    },
+    "productivity": {
+      "id": "productivity",
+      "name": "Productivity",
+      "version": "7.2.0",
+      "description": "\"Plan, focus, and complete work with energy management, time blocking, goals, projects, tasks, habits, reviews, priorities, and context-specific productivity systems; use when (1) the user needs help with productivity, focus, time management, planning, priorities, goals, projects, tasks, habits, or reviews; (2) they want a reusable structure or workspace for organizing work; (3) ongoing work should be routed through a dedicated productivity framework.\"",
+      "entry": "skills/productivity/SKILL.md",
+      "triggers": []
+    },
+    "xiaoyi-image-search": {
+      "id": "xiaoyi-image-search",
+      "name": "xiaoyi-image-search",
+      "version": "7.2.0",
+      "description": "图片搜索技能。返回图链接（OSMS预签名URL）、缩略图、图片尺寸等信息。适用于为文档、PPT、报告等场景查找配图素材。",
+      "entry": "skills/xiaoyi-image-search/SKILL.md",
+      "triggers": []
+    },
+    "china-stock-analysis": {
+      "id": "china-stock-analysis",
+      "name": "tushare-stock-skill",
+      "version": "7.2.0",
+      "description": "面向中国 A 股的 Tushare 专用技能，提供股票数据获取、个股分析与交易观察能力。",
+      "entry": "skills/china-stock-analysis/SKILL.md",
+      "triggers": []
+    },
+    "web-scraper": {
+      "id": "web-scraper",
+      "name": "web-scraping",
+      "version": "7.2.0",
+      "description": "Extract structured information from websites using web_fetch for simple pages and browser automation for dynamic sites, login-gated flows, pagination, infinite scroll, or pages that require clicking/searching/filtering. Use when the user asks to scrape a site, collect listings, gather fields from many pages, monitor website changes, or turn webpage content into structured summaries/JSON/CSV.",
+      "entry": "skills/web-scraper/SKILL.md",
+      "triggers": []
+    },
+    "discord": {
+      "id": "discord",
+      "name": "discord",
+      "version": "7.2.0",
+      "description": "Use when you need to control Discord from Clawdbot via the discord tool: send messages, react, post or upload stickers, upload emojis, run polls, manage threads/pins/search, fetch permissions or member/role/channel info, or handle moderation actions in Discord DMs or channels.",
+      "entry": "skills/discord/SKILL.md",
+      "triggers": []
+    },
+    "core": {
+      "id": "core",
+      "name": "core",
+      "version": "7.2.0",
+      "description": "核心技能模块",
+      "entry": "skills/core/SKILL.md",
+      "triggers": []
+    },
+    "admapix": {
+      "id": "admapix",
+      "name": "admapix",
+      "version": "7.2.0",
+      "description": "\"Ad intelligence & app analytics assistant. Search ad creatives, analyze apps, view rankings, track downloads/revenue, and get market insights. Get your API key at https://www.admapix.com. Triggers: 找素材, 搜广告, 广告素材, 竞品分析, 广告分析, 排行榜, 下载量, 收入分析, 市场分析, 投放分析, App分析, 出海分析, search ads, find creatives, ad spy, ad analysis, app ranking, download data, revenue, market analysis, app intelligence, competitor analysis, ad distribution.\"",
+      "entry": "skills/admapix/SKILL.md",
+      "triggers": []
+    },
+    "auto-skill-upgrade": {
+      "id": "auto-skill-upgrade",
+      "name": "auto-skill-upgrade",
+      "version": "7.2.0",
+      "description": "",
+      "entry": "skills/auto-skill-upgrade/SKILL.md",
+      "triggers": []
+    },
+    "video-subtitles": {
+      "id": "video-subtitles",
+      "name": "video-subtitles",
+      "version": "7.2.0",
+      "description": "Generate SRT subtitles from video/audio with translation support. Transcribes Hebrew (ivrit.ai) and English (whisper), translates between languages, burns subtitles into video. Use for creating captions, transcripts, or hardcoded subtitles for WhatsApp/social media.",
+      "entry": "skills/video-subtitles/SKILL.md",
+      "triggers": []
+    },
+    "ceo-advisor": {
+      "id": "ceo-advisor",
+      "name": "\"ceo-advisor\"",
+      "version": "7.2.0",
+      "description": "\"Executive leadership guidance for strategic decision-making, organizational development, and stakeholder management. Use when planning strategy, preparing board presentations, managing investors, developing organizational culture, making executive decisions, fundraising, or when user mentions CEO, strategic planning, board meetings, investor updates, organizational leadership, or executive strategy.\"",
+      "entry": "skills/ceo-advisor/SKILL.md",
+      "triggers": []
+    },
+    "douyin-shop-operation": {
+      "id": "douyin-shop-operation",
+      "name": "douyin-shop-operation",
+      "version": "7.2.0",
+      "description": "抖音小店全链路运营 - 商品上架、直播带货、达人合作、数据分析、订单管理。触发词：抖音小店、抖音店铺、抖店、抖音带货、抖音直播、抖音达人、抖音选品。",
+      "entry": "skills/douyin-shop-operation/SKILL.md",
+      "triggers": [
+        "抖音小店",
+        "抖音店铺",
+        "抖店",
+        "抖音带货",
+        "抖音直播",
+        "抖音达人",
+        "抖音选品"
+      ]
+    },
+    "tech-news-digest": {
+      "id": "tech-news-digest",
+      "name": "tech-news-digest",
+      "version": "\"3.16.0\"",
+      "description": "Generate tech news digests with unified source model, quality scoring, and multi-format output. Six-source data collection from RSS feeds, Twitter/X KOLs, GitHub releases, GitHub Trending, Reddit, and web search. Pipeline-based scripts with retry mechanisms and deduplication. Supports Discord, email, and markdown templates.",
+      "entry": "skills/tech-news-digest/SKILL.md",
+      "triggers": []
+    },
+    "playwright": {
+      "id": "playwright",
+      "name": "Playwright (Automation + MCP + Scraper)",
+      "version": "7.2.0",
+      "description": "\"Browser automation via Playwright MCP. Navigate websites, click elements, fill forms, take screenshots, extract data, and debug real browser workflows. Use when (1) you need a real browser, not static fetch; (2) the task involves Playwright MCP, browser tools, Playwright tests, scripts, or JS-rendered pages; (3) the user wants navigation, forms, screenshots, PDFs, downloads, or browser-driven extraction turned into a reliable outcome.\"",
+      "entry": "skills/playwright/SKILL.md",
+      "triggers": []
+    },
+    "moltrade": {
+      "id": "moltrade",
+      "name": "moltrade",
+      "version": "7.2.0",
+      "description": "Operate the Moltrade trading bot (config, backtest, test-mode runs, Nostr signal broadcast, exchange adapters, strategy integration) in OpenClaw.",
+      "entry": "skills/moltrade/SKILL.md",
+      "triggers": []
+    },
+    "performance-upgrade": {
+      "id": "performance-upgrade",
+      "name": "performance-upgrade",
+      "version": "7.2.0",
+      "description": "",
+      "entry": "skills/performance-upgrade/SKILL.md",
+      "triggers": []
+    },
+    "react-best-practices": {
+      "id": "react-best-practices",
+      "name": "vercel-react-best-practices",
+      "version": "7.2.0",
+      "description": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
+      "entry": "skills/react-best-practices/SKILL.md",
+      "triggers": []
+    },
+    "bilibili-all-in-one": {
+      "id": "bilibili-all-in-one",
+      "name": "bilibili-all-in-one",
+      "version": "7.2.0",
+      "description": "B站全功能工具",
+      "entry": "skills/bilibili-all-in-one/SKILL.md",
+      "triggers": []
+    },
+    "git": {
+      "id": "git",
+      "name": "Git",
+      "version": "7.2.0",
+      "description": "\"Git commits, branches, rebases, merges, conflict resolution, history recovery, team workflows, and the commands needed for safe day-to-day version control. Use when (1) the task touches Git, a repository, commits, branches, merges, rebases, or pull requests; (2) history safety, collaboration, or recovery matter; (3) the agent should automatically apply Git discipline instead of improvising.\"",
+      "entry": "skills/git/SKILL.md",
+      "triggers": []
+    },
+    "memory": {
+      "id": "memory",
+      "name": "memory-setup",
+      "version": "7.2.0",
+      "description": "Enable and configure Moltbot/Clawdbot memory search for persistent context. Use when setting up memory, fixing \"goldfish brain,\" or helping users configure memorySearch in their config. Covers MEMORY.md, daily logs, and vector search setup.",
+      "entry": "skills/memory/SKILL.md",
+      "triggers": []
+    },
+    "calcom-cal.com-web-design-guidelines-1.0.2": {
+      "id": "calcom-cal.com-web-design-guidelines-1.0.2",
+      "name": "web-design-guidelines",
+      "version": "7.2.0",
+      "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\".",
+      "entry": "skills/calcom-cal.com-web-design-guidelines-1.0.2/SKILL.md",
+      "triggers": []
+    },
+    "openclaw-agent-optimize": {
+      "id": "openclaw-agent-optimize",
+      "name": "openclaw-agent-optimize",
+      "version": "7.2.0",
+      "description": "|",
+      "entry": "skills/openclaw-agent-optimize/SKILL.md",
+      "triggers": []
+    },
+    "beginner-mode": {
+      "id": "beginner-mode",
+      "name": "beginner-mode",
+      "version": "7.2.0",
+      "description": "新手模式 - 为新用户提供技能推荐、引导和帮助。当用户说\"打开新手模式\"、\"开启新手引导\"、\"我是新手\"或需要帮助时触发。开启后会在每次回复后自动附加技能推荐和引导提示。",
+      "entry": "skills/beginner-mode/SKILL.md",
+      "triggers": []
+    },
+    "tdd-guide": {
+      "id": "tdd-guide",
+      "name": "\"tdd-guide\"",
+      "version": "7.2.0",
+      "description": "\"Test-driven development skill for writing unit tests, generating test fixtures and mocks, analyzing coverage gaps, and guiding red-green-refactor workflows across Jest, Pytest, JUnit, Vitest, and Mocha. Use when the user asks to write tests, improve test coverage, practice TDD, generate mocks or stubs, or mentions testing frameworks like Jest, pytest, or JUnit. Handles test generation from source code, coverage report parsing (LCOV/JSON/XML), quality scoring, and framework conversion for TypeScript, JavaScript, Python, and Java projects.\"",
+      "entry": "skills/tdd-guide/SKILL.md",
+      "triggers": []
+    },
+    "clawsec-suite": {
+      "id": "clawsec-suite",
+      "name": "clawsec-suite",
+      "version": "7.2.0",
+      "description": "ClawSec suite manager with embedded advisory-feed monitoring, cryptographic signature verification, approval-gated malicious-skill response, and guided setup for additional security skills.",
+      "entry": "skills/clawsec-suite/SKILL.md",
+      "triggers": []
+    },
+    "local_app_interconnect": {
+      "id": "local_app_interconnect",
+      "name": "local_app_interconnect",
+      "version": "7.2.0",
+      "description": "",
+      "entry": "skills/local_app_interconnect/SKILL.md",
+      "triggers": []
+    },
+    "crypto": {
+      "id": "crypto",
+      "name": "Crypto Market",
+      "version": "7.2.0",
+      "description": "Cryptocurrency market data and price alert monitoring tool based on CCXT. Supports multiple exchanges, real-time price tracking, and configurable price/volatility alerts. Use when the user needs to monitor crypto prices or set up trading alerts. Default exchange is Binance.",
+      "entry": "skills/crypto/SKILL.md",
+      "triggers": []
+    },
+    "sonoscli": {
+      "id": "sonoscli",
+      "name": "sonoscli",
+      "version": "7.2.0",
+      "description": "Control Sonos speakers (discover/status/play/volume/group).",
+      "entry": "skills/sonoscli/SKILL.md",
+      "triggers": []
+    },
+    "code-analysis-skills": {
+      "id": "code-analysis-skills",
+      "name": "code-analysis",
+      "version": "7.2.0",
+      "description": ">",
+      "entry": "skills/code-analysis-skills/SKILL.md",
+      "triggers": []
+    },
+    "audio-cog": {
+      "id": "audio-cog",
+      "name": "audio-cog",
+      "version": "7.2.0",
+      "description": "\"AI audio generation and text-to-speech powered by CellCog. Three voice providers (OpenAI, ElevenLabs, MiniMax), voice cloning, avatar voices, sound effects generation, music creation up to 10 minutes. Professional voiceover, narration, and audio production with AI.\"",
+      "entry": "skills/audio-cog/SKILL.md",
+      "triggers": []
+    },
+    "bitsoul-stock-quantization": {
+      "id": "bitsoul-stock-quantization",
+      "name": "BitSoulStockSkill",
+      "version": "7.2.0",
+      "description": "BitSoul旗下all-in-one的A股市场综合skill，提供股票筛选策略，内置上百种行业常见量化指标, 基于MOE混合因子专家模型的股票买卖点计算判断，个股风险判定，关键指标计算，数据回测，提供准确全面且免费的股票价格与股票历史信息，板块信息与相关交易数据，提供大v交易观察等信息聚合功能",
+      "entry": "skills/bitsoul-stock-quantization/SKILL.md",
+      "triggers": []
+    },
+    "skill-fusion": {
+      "id": "skill-fusion",
+      "name": "skill-fusion",
+      "version": "7.2.0",
+      "description": "",
+      "entry": "skills/skill-fusion/SKILL.md",
+      "triggers": []
+    },
+    "topic-monitor": {
+      "id": "topic-monitor",
+      "name": "topic-monitor",
+      "version": "7.2.0",
+      "description": "Monitor topics of interest and proactively alert when important developments occur. Use when the user wants automated monitoring of specific subjects like product releases, news topics, technology updates, RSS/Atom feeds, or GitHub releases. Supports scheduled web search plus feed polling, boolean topic filters, AI importance scoring with sentiment tracking, smart alerts vs weekly digests, and memory-aware contextual summaries.",
+      "entry": "skills/topic-monitor/SKILL.md",
+      "triggers": []
+    },
+    "sqlite": {
+      "id": "sqlite",
+      "name": "SQLite",
+      "version": "7.2.0",
+      "description": "Use SQLite correctly with proper concurrency, pragmas, and type handling.",
+      "entry": "skills/sqlite/SKILL.md",
+      "triggers": []
+    },
+    "product-management": {
+      "id": "product-management",
+      "name": "product-management",
+      "version": "7.2.0",
+      "description": "商品全生命周期管理 - 选品、定价、上架、库存、促销、下架。触发词：选品、商品管理、定价、库存、促销、爆款打造。",
+      "entry": "skills/product-management/SKILL.md",
+      "triggers": [
+        "选品",
+        "商品管理",
+        "定价",
+        "库存",
+        "促销",
+        "爆款打造"
+      ]
+    },
+    "api-gateway": {
+      "id": "api-gateway",
+      "name": "api-gateway",
+      "version": "7.2.0",
+      "description": "|",
+      "entry": "skills/api-gateway/SKILL.md",
+      "triggers": []
+    },
+    "ontology": {
+      "id": "ontology",
+      "name": "ontology",
+      "version": "7.2.0",
+      "description": "Typed knowledge graph for structured agent memory and composable skills. Use when creating/querying entities (Person, Project, Task, Event, Document), linking related objects, enforcing constraints, planning multi-step actions as graph transformations, or when skills need to share state. Trigger on \"remember\", \"what do I know about\", \"link X to Y\", \"show dependencies\", entity CRUD, or cross-skill data access.",
+      "entry": "skills/ontology/SKILL.md",
+      "triggers": []
+    },
+    "technical-seo-checker": {
+      "id": "technical-seo-checker",
+      "name": "technical-seo-checker",
+      "version": "\"6.0.0\"",
+      "description": "'Technical SEO audit: Core Web Vitals, crawl, indexing, mobile, speed, architecture, redirects. 技术SEO/网站速度'",
+      "entry": "skills/technical-seo-checker/SKILL.md",
+      "triggers": []
+    },
+    "klaviyo": {
+      "id": "klaviyo",
+      "name": "klaviyo",
+      "version": "7.2.0",
+      "description": "|",
+      "entry": "skills/klaviyo/SKILL.md",
+      "triggers": []
+    },
+    "marketing-strategy-pmm": {
+      "id": "marketing-strategy-pmm",
+      "name": "\"marketing-strategy-pmm\"",
+      "version": "7.2.0",
+      "description": "Product marketing skill for positioning, GTM strategy, competitive intelligence, and product launches. Use when the user asks about product positioning, go-to-market planning, competitive analysis, target audience definition, ICP definition, market research, launch plans, or sales enablement. Covers April Dunford positioning, ICP definition, competitive battlecards, launch playbooks, and international market entry. Produces deliverables including positioning statements, battlecard documents, launch plans, and go-to-market strategies.",
+      "entry": "skills/marketing-strategy-pmm/SKILL.md",
+      "triggers": []
+    },
+    "personas": {
+      "id": "personas",
+      "name": "personas",
+      "version": "7.2.0",
+      "description": "Transform into 20 specialized AI personalities on demand. Switch mid-conversation and load only the active persona.",
+      "entry": "skills/personas/SKILL.md",
+      "triggers": []
+    },
+    "best-minds": {
+      "id": "best-minds",
+      "name": "best-minds",
+      "version": "7.2.0",
+      "description": "模拟器思维：不问\"你怎么看\"，而是问\"世界上谁最懂这个？TA 会怎么说？\"。触发词：最强大脑、顶级专家、世界级、best minds、谁最懂这个",
+      "entry": "skills/best-minds/SKILL.md",
+      "triggers": [
+        "最强大脑",
+        "顶级专家",
+        "世界级",
+        "谁最懂这个"
+      ]
+    },
+    "pdf": {
+      "id": "pdf",
+      "name": "pdf",
+      "version": "7.2.0",
+      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+      "entry": "skills/pdf/SKILL.md",
+      "triggers": []
+    },
+    "unified-search": {
+      "id": "unified-search",
+      "name": "x-search",
+      "version": "7.2.0",
+      "description": "Search X (Twitter) posts using the xAI API. Use when the user wants to find tweets, search X/Twitter, look up what people are saying on X, or find social media posts about a topic.",
+      "entry": "skills/unified-search/SKILL.md",
+      "triggers": []
+    },
+    "command-hook": {
+      "id": "command-hook",
+      "name": "command-hook",
+      "version": "7.2.0",
+      "description": "\"命令钩子技能 - 为所有下达的命令添加预处理和后处理钩子，支持命令验证、日志记录、结果处理等功能\"",
+      "entry": "skills/command-hook/SKILL.md",
+      "triggers": []
+    },
+    "huawei-drive": {
+      "id": "huawei-drive",
+      "name": "huawei-drive",
+      "version": "7.2.0",
+      "description": "华为云空间云盘操作，支持文件上传、查询云盘信息、查询文件列表",
+      "entry": "skills/huawei-drive/SKILL.md",
+      "triggers": []
+    },
+    "imap-smtp-email": {
+      "id": "imap-smtp-email",
+      "name": "imap-smtp-email",
+      "version": "7.2.0",
+      "description": "Read and send email via IMAP/SMTP. Check for new/unread messages, fetch content, search mailboxes, mark as read/unread, and send emails with attachments. Supports multiple accounts. Works with any IMAP/SMTP server including Gmail, Outlook, 163.com, vip.163.com, 126.com, vip.126.com, 188.com, and vip.188.com.",
+      "entry": "skills/imap-smtp-email/SKILL.md",
+      "triggers": []
+    },
+    "omni-channel-ecommerce": {
+      "id": "omni-channel-ecommerce",
+      "name": "omni-channel-ecommerce",
+      "version": "7.2.0",
+      "description": "全渠道电商运营 - 抖音/快手/小红书/视频号/淘宝/拼多多/京东/美团/饿了么/私域全平台覆盖。触发词：全渠道、多平台、电商运营、店铺运营、渠道拓展。",
+      "entry": "skills/omni-channel-ecommerce/SKILL.md",
+      "triggers": [
+        "全渠道",
+        "多平台",
+        "电商运营",
+        "店铺运营",
+        "渠道拓展"
+      ]
+    },
+    "self-improving-agent": {
+      "id": "self-improving-agent",
+      "name": "Self-Improving Proactive Agent",
+      "version": "7.2.0",
+      "description": "\"A unified OpenClaw skill that merges self-improvement and proactivity: learn from corrections, maintain active state, recover context fast, and keep work moving with clear boundaries.\"",
+      "entry": "skills/self-improving-agent/SKILL.md",
+      "triggers": []
+    },
+    "obsidian": {
+      "id": "obsidian",
+      "name": "obsidian",
+      "version": "7.2.0",
+      "description": "Work with Obsidian vaults (plain Markdown notes) and automate via obsidian-cli.",
+      "entry": "skills/obsidian/SKILL.md",
+      "triggers": []
+    },
+    "tavily-search-skill": {
+      "id": "tavily-search-skill",
+      "name": "tavily-search-skill",
+      "version": "7.2.0",
+      "description": "Web search via Tavily API (alternative to Brave). Use when the user asks to search the web / look up sources / find links and Brave web_search is unavailable or undesired.",
+      "entry": "skills/tavily-search-skill/SKILL.md",
+      "triggers": []
+    },
+    "guide": {
+      "id": "guide",
+      "name": "guide",
+      "version": "7.2.0",
+      "description": "",
+      "entry": "skills/guide/SKILL.md",
+      "triggers": []
+    },
+    "xiaoyi-file-upload": {
+      "id": "xiaoyi-file-upload",
+      "name": "xiaoyi-file-upload",
+      "version": "7.2.0",
+      "description": "通过 upload 命令上传本地文件到对象存储（OSMS/NSP），获取可共享的下载 URL。适用于需要将本地文件分享、传递给其他服务、或生成临时下载链接的场景。当用户提到\"上传文件\"、\"获取下载链接\"、\"文件分享链接\"、\"把文件传到云上\"等需求时使用此 skill。",
+      "entry": "skills/xiaoyi-file-upload/SKILL.md",
+      "triggers": []
+    },
+    "web-browsing": {
+      "id": "web-browsing",
+      "name": "web-browsing",
+      "version": "7.2.0",
+      "description": "Browse and summarize websites, extract content from URLs, search the web for information. Use when user asks to visit a website, get webpage content, search online, or find current information that requires browsing the internet.",
+      "entry": "skills/web-browsing/SKILL.md",
+      "triggers": []
+    },
+    "ai-picture-book": {
+      "id": "ai-picture-book",
+      "name": "Baidu Wenku AIPictureBook",
+      "version": "7.2.0",
+      "description": "Generate static or dynamic picture book videos using Baidu Wenku AI",
+      "entry": "skills/ai-picture-book/SKILL.md",
+      "triggers": []
+    },
+    "industry-stock-tracker": {
+      "id": "industry-stock-tracker",
+      "name": "industry_stock_tracker",
+      "version": "7.2.0",
+      "description": ">",
+      "entry": "skills/industry-stock-tracker/SKILL.md",
+      "triggers": []
+    },
+    "today-task": {
+      "id": "today-task",
+      "name": "today-task",
+      "version": "7.2.0",
+      "description": "通用任务结果推送器，当任务完成后将结果推送到负一屏。使用统一的标准数据格式，支持各种类型的任务结果推送。",
+      "entry": "skills/today-task/SKILL.md",
+      "triggers": []
+    },
+    "planning-with-files": {
+      "id": "planning-with-files",
+      "name": "planning-with-files",
+      "version": "7.2.0",
+      "description": "Implements Manus-style file-based planning to organize and track progress on complex tasks. Creates task_plan.md, findings.md, and progress.md. Use when asked to plan out, break down, or organize a multi-step project, research task, or any work requiring >5 tool calls. Supports automatic session recovery after /clear.",
+      "entry": "skills/planning-with-files/SKILL.md",
+      "triggers": []
+    },
+    "markitdown": {
+      "id": "markitdown",
+      "name": "markitdown",
+      "version": "7.2.0",
+      "description": "Convert files and office documents to Markdown. Supports PDF, DOCX, PPTX, XLSX, images (with OCR), audio (with transcription), HTML, CSV, JSON, XML, ZIP, YouTube URLs, EPubs and more.",
+      "entry": "skills/markitdown/SKILL.md",
+      "triggers": []
+    },
+    "quality-documentation-manager": {
+      "id": "quality-documentation-manager",
+      "name": "\"quality-documentation-manager\"",
+      "version": "7.2.0",
+      "description": "Document control system management for medical device QMS. Covers document numbering, version control, change management, and 21 CFR Part 11 compliance. Use for document control procedures, change control workflow, document numbering, version management, electronic signature compliance, or regulatory documentation review.",
+      "entry": "skills/quality-documentation-manager/SKILL.md",
+      "triggers": []
+    },
+    "kuaishou-shop-operation": {
+      "id": "kuaishou-shop-operation",
+      "name": "kuaishou-shop-operation",
+      "version": "7.2.0",
+      "description": "快手小店全链路运营 - 商品上架、直播带货、达人合作、数据分析、订单管理。触发词：快手小店、快手店铺、快手带货、快手直播、快手达人、快手选品、老铁经济。",
+      "entry": "skills/kuaishou-shop-operation/SKILL.md",
+      "triggers": [
+        "快手小店",
+        "快手店铺",
+        "快手带货",
+        "快手直播",
+        "快手达人",
+        "快手选品",
+        "老铁经济"
+      ]
+    },
+    "google-maps": {
+      "id": "google-maps",
+      "name": "google-maps",
+      "version": "7.2.0",
+      "description": ">",
+      "entry": "skills/google-maps/SKILL.md",
+      "triggers": []
+    },
+    "market-research": {
+      "id": "market-research",
+      "name": "Market Research",
+      "version": "7.2.0",
+      "description": "\"Research markets with sizing, segmentation, competitor mapping, pricing checks, and demand validation that turn fuzzy ideas into decision-ready evidence. Use when (1) you need TAM, SAM, SOM, whitespace, or category sizing; (2) you must compare competitors, pricing, positioning, or customer segments before acting; (3) the user asks whether a niche, launch, expansion, or go-to-market bet is actually worth pursuing.\"",
+      "entry": "skills/market-research/SKILL.md",
+      "triggers": []
+    },
+    "agent-browser-clawdbot": {
+      "id": "agent-browser-clawdbot",
+      "name": "agent-browser",
+      "version": "7.2.0",
+      "description": "Headless browser automation CLI optimized for AI agents with accessibility tree snapshots and ref-based element selection",
+      "entry": "skills/agent-browser-clawdbot/SKILL.md",
+      "triggers": []
+    },
+    "engines": {
+      "id": "engines",
+      "name": "engines",
+      "version": "7.2.0",
+      "description": "引擎模块",
+      "entry": "skills/engines/SKILL.md",
+      "triggers": []
+    },
+    "ai-ppt-generator": {
+      "id": "ai-ppt-generator",
+      "name": "Skywork-ppt",
+      "version": "7.2.0",
+      "description": "|",
+      "entry": "skills/ai-ppt-generator/SKILL.md",
+      "triggers": []
+    },
+    "xiaoyi-image-understanding": {
+      "id": "xiaoyi-image-understanding",
+      "name": "xiaoyi-image-understanding",
+      "version": "7.2.0",
+      "description": "使用小艺图像理解API进行图像内容识别和描述，获取图像的详细文本描述",
+      "entry": "skills/xiaoyi-image-understanding/SKILL.md",
+      "triggers": []
+    },
+    "verified-agent-identity": {
+      "id": "verified-agent-identity",
+      "name": "verified-agent-identity",
+      "version": "7.2.0",
+      "description": "Billions decentralized identity for agents. Link agents to human identities using Billions ERC-8004 and Attestation Registries. Verify and generate authentication proofs. Based on iden3 self-sovereign identity protocol.",
+      "entry": "skills/verified-agent-identity/SKILL.md",
+      "triggers": []
+    },
+    "mongodb": {
+      "id": "mongodb",
+      "name": "MongoDB",
+      "version": "7.2.0",
+      "description": "Design MongoDB schemas with proper embedding, indexing, aggregation, and production-ready patterns.",
+      "entry": "skills/mongodb/SKILL.md",
+      "triggers": []
+    },
+    "senior-security": {
+      "id": "senior-security",
+      "name": "\"senior-security\"",
+      "version": "7.2.0",
+      "description": "Security engineering toolkit for threat modeling, vulnerability analysis, secure architecture, and penetration testing. Includes STRIDE analysis, OWASP guidance, cryptography patterns, and security scanning tools. Use when the user asks about security reviews, threat analysis, vulnerability assessments, secure coding practices, security audits, attack surface analysis, CVE remediation, or security best practices.",
+      "entry": "skills/senior-security/SKILL.md",
+      "triggers": []
+    },
+    "excel-analysis": {
+      "id": "excel-analysis",
+      "name": "Excel Analysis",
+      "version": "7.2.0",
+      "description": "Analyze Excel spreadsheets, create pivot tables, generate charts, and perform data analysis. Use when analyzing Excel files, spreadsheets, tabular data, or .xlsx files.",
+      "entry": "skills/excel-analysis/SKILL.md",
+      "triggers": []
+    },
+    "story-cog": {
+      "id": "story-cog",
+      "name": "story-cog",
+      "version": "7.2.0",
+      "description": "\"AI creative writing and storytelling powered by CellCog. Write novels, short stories, screenplays, fan fiction, poetry. World building, character development, narrative design. Fiction writing for fantasy, sci-fi, mystery, romance, horror, literary fiction. AI story writer and writing assistant.\"",
+      "entry": "skills/story-cog/SKILL.md",
+      "triggers": []
+    },
+    "camsnap": {
+      "id": "camsnap",
+      "name": "camsnap",
+      "version": "7.2.0",
+      "description": "Capture frames or clips from RTSP/ONVIF cameras.",
+      "entry": "skills/camsnap/SKILL.md",
+      "triggers": []
+    },
+    "skill-finder": {
+      "id": "skill-finder",
+      "name": "skill-finder-cn",
+      "version": "7.2.0",
+      "description": "\"Skill 查找器 | Skill Finder. 帮助发现和安装 ClawHub Skills | Discover and install ClawHub Skills. 回答'有什么技能可以X'、'找一个技能' | Answers 'what skill can X', 'find a skill'. 触发词：找 skill、find skill、搜索 skill.\"",
+      "entry": "skills/skill-finder/SKILL.md",
+      "triggers": [
+        "找",
+        "搜索",
+        "赚钱小能手"
+      ]
+    },
+    "risk-management-specialist": {
+      "id": "risk-management-specialist",
+      "name": "\"risk-management-specialist\"",
+      "version": "7.2.0",
+      "description": "Medical device risk management specialist implementing ISO 14971 throughout product lifecycle. Provides risk analysis, risk evaluation, risk control, and post-production information analysis. Use when user mentions risk management, ISO 14971, risk analysis, FMEA, fault tree analysis, hazard identification, risk control, risk matrix, benefit-risk analysis, residual risk, risk acceptability, or post-market risk.",
+      "entry": "skills/risk-management-specialist/SKILL.md",
+      "triggers": []
+    },
+    "utils": {
+      "id": "utils",
+      "name": "utils",
+      "version": "7.2.0",
+      "description": "工具模块",
+      "entry": "skills/utils/SKILL.md",
+      "triggers": []
+    },
+    "hot-news-aggregator": {
+      "id": "hot-news-aggregator",
+      "name": "hot-news-aggregator",
+      "version": "7.2.0",
+      "description": "\"国内外社会、科技、军事新闻汇总。自动搜索、筛选、整理新闻要点。Use When 需要获取最新的国内外社会、科技、军事新闻，并且希望自动筛选和整理新闻要点时。\"",
+      "entry": "skills/hot-news-aggregator/SKILL.md",
+      "triggers": []
+    },
+    "juejin-skills": {
+      "id": "juejin-skills",
+      "name": "juejin-skills",
+      "version": "7.2.0",
+      "description": "掘金技术社区一站式操作技能，支持热门文章排行榜查询、Markdown 文章一键发布和文章下载保存为 Markdown。",
+      "entry": "skills/juejin-skills/SKILL.md",
+      "triggers": []
+    },
+    "amazon-product-search-api-skill": {
+      "id": "amazon-product-search-api-skill",
+      "name": "amazon-product-search-api-skill",
+      "version": "7.2.0",
+      "description": "\"This skill is designed to help users automatically extract product data from Amazon search results. The Agent should proactively apply this skill when users request searching for products related to keywords, finding best-selling items from specific brands, monitoring product prices and availability on Amazon, extracting product listings for market research, collecting product ratings and review counts for competitive analysis, finding specific products with a maximum count, searching Amazon in different languages for localized results, tracking monthly sales estimates for brand products, gathering product URLs and titles for a product catalog, scanning Amazon for Best Seller tags in a specific category, monitoring shipping and delivery information for brand items, building a structured dataset of Amazon search results.\"",
+      "entry": "skills/amazon-product-search-api-skill/SKILL.md",
+      "triggers": []
+    },
+    "weather": {
+      "id": "weather",
+      "name": "weather",
+      "version": "7.2.0",
+      "description": "\"Get current weather and forecasts via wttr.in or Open-Meteo. Use when: user asks about weather, temperature, or forecasts for any location. NOT for: historical weather data, severe weather alerts, or detailed meteorological analysis. No API key needed.\"",
+      "entry": "skills/weather/SKILL.md",
+      "triggers": []
+    },
+    "xiaoyi-doc-convert": {
+      "id": "xiaoyi-doc-convert",
+      "name": "xiaoyi-doc-convert",
+      "version": "7.2.0",
+      "description": "专业文档格式转换技能。支持 Docx, PDF, Xlsx, Pptx, Markdown等多种格式互转。**核心能力**：具备自动路径规划功能，可通过中间格式（如 PDF）实现间接转换（例如 pptx -> pdf -> md）。**特色功能**：支持HTML批量转PPT，将多个HTML文件打包为zip即可一键生成演示文稿。**强制规则**：本地文件必须先调用 `xiaoyi-file-upload` 获取 URL。",
+      "entry": "skills/xiaoyi-doc-convert/SKILL.md",
+      "triggers": []
+    },
+    "xiaoyi-report": {
+      "id": "xiaoyi-report",
+      "name": "xiaoyi-report",
+      "version": "7.2.0",
+      "description": "\"从多源信息生成带引用的专业分析报告。当用户要求研究、调研、调查、分析某个主题，或需要搜索资料、收集信息时使用。支持学术研究、市场调研、竞品分析、技术调研、深度研究。相关请求示例：'帮我调研XXX'、'帮我分析XXX'、'写一份关于XXX的深度研究报告'、'深度分析XXX'。\"",
+      "entry": "skills/xiaoyi-report/SKILL.md",
+      "triggers": []
+    },
+    "sheet-cog": {
+      "id": "sheet-cog",
+      "name": "sheet-cog",
+      "version": "7.2.0",
+      "description": "\"AI spreadsheet and Excel generation powered by CellCog. Create financial models, budget templates, data trackers, projections, pivot tables, and complex formulas — XLSX output with full Python access. Data manipulation, analysis, charts, and professional formatting. Engineering-grade spreadsheets.\"",
+      "entry": "skills/sheet-cog/SKILL.md",
+      "triggers": []
+    },
+    "docker": {
+      "id": "docker",
+      "name": "Docker",
+      "version": "7.2.0",
+      "description": "\"Docker containers, images, Compose stacks, networking, volumes, debugging, production hardening, and the commands that keep real environments stable. Use when (1) the task touches Docker, Dockerfiles, images, containers, or Compose; (2) build reliability, runtime behavior, logs, ports, volumes, or security matter; (3) the agent needs Docker guidance and should apply it by default.\"",
+      "entry": "skills/docker/SKILL.md",
+      "triggers": []
+    },
+    "ansible": {
+      "id": "ansible",
+      "name": "Ansible",
+      "version": "7.2.0",
+      "description": "Avoid common Ansible mistakes — YAML syntax traps, variable precedence, idempotence failures, and handler gotchas.",
+      "entry": "skills/ansible/SKILL.md",
+      "triggers": []
+    },
+    "proactivity": {
+      "id": "proactivity",
+      "name": "Proactivity (Proactive Agent)",
+      "version": "7.2.0",
+      "description": "Anticipates needs, keeps work moving, and improves through use so the agent gets more proactive over time.",
+      "entry": "skills/proactivity/SKILL.md",
+      "triggers": []
+    },
+    "deep-search-and-insight-synthesize": {
+      "id": "deep-search-and-insight-synthesize",
+      "name": "deep-search-and-insight-synthesize",
+      "version": "7.2.0",
+      "description": "【深度调研专用】当需要系统性调研、多产品对比、深度分析、技术选型、趋势分析时必须使用本技能。触发关键词：调研、对比、分析、评估、选型、趋势、综合报告、多源验证。通过 3 层深度搜索（阅读多个网页）+ 多源交叉验证，提供比普通 WebSearch 更全面、更准确的研究结果和深度洞察。禁止用普通搜索工具替代深度调研任务。",
+      "entry": "skills/deep-search-and-insight-synthesize/SKILL.md",
+      "triggers": []
+    },
+    "video-agent": {
+      "id": "video-agent",
+      "name": "heygen",
+      "version": "7.2.0",
+      "description": "|",
+      "entry": "skills/video-agent/SKILL.md",
+      "triggers": []
+    },
+    "tencent-cos-skill": {
+      "id": "tencent-cos-skill",
+      "name": "tencent-cloud-cos",
+      "version": "7.2.0",
+      "description": ">",
+      "entry": "skills/tencent-cos-skill/SKILL.md",
+      "triggers": []
+    },
+    "su-lan-paper-daily-skill": {
+      "id": "su-lan-paper-daily-skill",
+      "name": "paper-daily",
+      "version": "7.2.0",
+      "description": "搜索顶会顶刊最新论文，跟踪引用数变化，总结并上传 GitHub",
+      "entry": "skills/su-lan-paper-daily-skill/SKILL.md",
+      "triggers": []
+    },
+    "article-writer": {
+      "id": "article-writer",
+      "name": "article-writer",
+      "version": "7.2.0",
+      "description": "文章写作助手 - 根据选题生成高质量文章",
+      "entry": "skills/article-writer/SKILL.md",
+      "triggers": []
+    },
+    "research-cog": {
+      "id": "research-cog",
+      "name": "research-cog",
+      "version": "7.2.0",
+      "description": "\"Deep research agent powered by CellCog. Market research, competitive analysis, investment research, academic research, due diligence, literature reviews with citations. Multi-source synthesis across hundreds of sources. #1 on DeepResearch Bench (Apr 2026).\"",
+      "entry": "skills/research-cog/SKILL.md",
+      "triggers": []
+    },
+    "good-txt-to-hwreader": {
+      "id": "good-txt-to-hwreader",
+      "name": "good-txt-to-hwreader",
+      "version": "7.2.0",
+      "description": "清理和修复盗版 txt 电子书中的乱码、广告和排版问题。当用户需要处理 txt 格式电子书、修复乱码、去除广告水印、规范化章节排版时使用此 skill。触发词：txt清理、电子书修复、去广告、修乱码、排版修复、清理txt、修复电子书、txt乱码、txt广告。",
+      "entry": "skills/good-txt-to-hwreader/SKILL.md",
+      "triggers": [
+        "清理",
+        "电子书修复",
+        "去广告",
+        "修乱码",
+        "排版修复",
+        "清理",
+        "修复电子书",
+        "乱码",
+        "广告"
+      ]
+    },
+    "mx-stocks-screener": {
+      "id": "mx-stocks-screener",
+      "name": "mx_stocks_screener",
+      "version": "7.2.0",
+      "description": "基于东方财富数据库，支持通过自然语言输入筛选A港美股、基金、债券等多种资产，支持多元指标筛选，含技术面、消息面、基本面及市场情绪等，可用于全球资产速筛、跨市场监控、投资组合构建、策略回测等场景。返回结果包含数据说明及 csv 文件。Natural language screener for investment assets across global markets, including A-shares, ETFs, bonds, HK and US stocks, and funds. It enables multi-dimensional filtering via technical, fundamental, sentiment and news indicators. Ideal for global asset selection, cross-market monitoring, portfolio construction and strategy backtesting.",
+      "entry": "skills/mx-stocks-screener/SKILL.md",
+      "triggers": []
+    },
+    "unified-document": {
+      "id": "unified-document",
+      "name": "unified-document",
+      "version": "7.2.0",
+      "description": "文档处理统一入口。自动路由到最佳文档处理技能。支持格式转换、OCR、编辑、生成等所有文档操作。触发词：文档、doc、pdf、pptx、转换、OCR。",
+      "entry": "skills/unified-document/SKILL.md",
+      "triggers": [
+        "文档",
+        "转换"
+      ]
+    },
+    "platform-comparison": {
+      "id": "platform-comparison",
+      "name": "platform-comparison",
+      "version": "7.2.0",
+      "description": "电商平台对比分析 - 抖音/快手/小红书/视频号/淘宝直播对比，帮助选择最适合的平台。触发词：平台对比、选平台、哪个平台、平台分析。",
+      "entry": "skills/platform-comparison/SKILL.md",
+      "triggers": [
+        "平台对比",
+        "选平台",
+        "哪个平台",
+        "平台分析"
+      ]
+    },
+    "customer-service": {
+      "id": "customer-service",
+      "name": "customer-service",
+      "version": "7.2.0",
+      "description": "客服与售后管理 - 售前咨询、售中服务、售后处理、投诉处理、评价管理。触发词：客服、售后、投诉处理、评价管理、客户服务。",
+      "entry": "skills/customer-service/SKILL.md",
+      "triggers": [
+        "客服",
+        "售后",
+        "投诉处理",
+        "评价管理",
+        "客户服务"
+      ]
+    },
+    "docs-cog": {
+      "id": "docs-cog",
+      "name": "docs-cog",
+      "version": "7.2.0",
+      "description": "\"AI document generation powered by CellCog — PDF by default, native DOCX when you need it. Create resumes, contracts, reports, proposals, invoices, certificates, NDAs, letters, brochures, and any professional document. Beautiful design with accurate, researched content. #1 on DeepResearch Bench (Apr 2026).\"",
+      "entry": "skills/docs-cog/SKILL.md",
+      "triggers": []
+    },
+    "pexoai-agent": {
+      "id": "pexoai-agent",
+      "name": "pexoai-agent",
+      "version": "\"0.3.8\"",
+      "description": ">",
+      "entry": "skills/pexoai-agent/SKILL.md",
+      "triggers": []
+    },
+    "chart-image": {
+      "id": "chart-image",
+      "name": "chart-image",
+      "version": "7.2.0",
+      "description": "Generate publication-quality chart images from data. Supports line, bar, area, point, candlestick, pie/donut, heatmap, multi-series, and stacked charts. Use when visualizing data, creating graphs, plotting time series, or generating chart images for reports/alerts. Designed for Fly.io/VPS deployments - no native compilation, no Puppeteer, no browser required. Pure Node.js with prebuilt binaries.",
+      "entry": "skills/chart-image/SKILL.md",
+      "triggers": []
+    },
+    "pptx": {
+      "id": "pptx",
+      "name": "pptx",
+      "version": "7.2.0",
+      "description": "\"Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates, layouts, speaker notes, or comments. Trigger whenever the user mentions \\\"deck,\\\" \\\"slides,\\\" \\\"presentation,\\\" or references a .pptx filename, regardless of what they plan to do with the content afterward. If a .pptx file needs to be opened, created, or touched, use this skill.\"",
+      "entry": "skills/pptx/SKILL.md",
+      "triggers": []
+    },
+    "frontend-design-pro": {
+      "id": "frontend-design-pro",
+      "name": "frontend-design-pro",
+      "version": "7.2.0",
+      "description": ">",
+      "entry": "skills/frontend-design-pro/SKILL.md",
+      "triggers": [
+        "以及",
+        "审查",
+        "设计",
+        "优化界面",
+        "前端设计建议",
+        "让设计更好看",
+        "检查设计质量"
+      ]
+    },
+    "skill-install-manager-1-0-0": {
+      "id": "skill-install-manager-1-0-0",
+      "name": "skill-safe-install",
+      "version": "7.2.0",
+      "description": "L0 级技能安全安装流程。触发“安装技能/安全安装/审查权限”时，强制执行 Step0-5（查重→检索→审查→沙箱→正式安装→白名单）。",
+      "entry": "skills/skill-install-manager-1-0-0/SKILL.md",
+      "triggers": []
+    }
+  }
+}

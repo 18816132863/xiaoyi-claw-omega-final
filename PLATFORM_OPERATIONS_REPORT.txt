@@ -1,0 +1,171 @@
+# 平台运营报告
+
+## 版本
+- V8.4.0 可运营化版
+- 日期: 2026-04-24
+
+## 一、完成内容
+
+### 1.1 审计操作入口
+
+**新增文件**:
+- `scripts/invocation_audit_cli.py` - 审计 CLI
+- `capabilities/audit_queries.py` - 审计查询能力
+- `capabilities/confirm_invocation.py` - 手动确认能力
+- `capabilities/explain_invocation_status.py` - 状态解释能力
+
+**CLI 命令**:
+- `query-recent` - 查询最近 N 条记录
+- `query-uncertain` - 查询 uncertain 记录
+- `query-failed` - 查询 failed 记录
+- `query-timeout` - 查询 timeout 记录
+- `confirm` - 手动确认
+- `stats` - 显示统计
+- `export` - 导出报告
+- `cleanup` - 清理旧记录
+
+### 1.2 导出与备份
+
+**支持格式**:
+- JSON 导出
+- CSV 导出
+- 脱敏导出
+
+**脱敏规则**:
+- 手机号: `138****8000`
+- 长内容: 前 10 字符 + `...`
+
+### 1.3 用户解释能力
+
+**状态解释**:
+- completed: "操作已完成"
+- timeout: "请求超时，当前无法确认操作是否已执行"
+- result_uncertain: "操作结果不确定，为避免重复操作，系统未自动重试"
+- auth_required: "该能力需要授权才能使用"
+- failed: "操作执行失败"
+
+**后续建议**:
+- MESSAGE_SENDING: "请检查手机是否收到短信"
+- TASK_SCHEDULING: "请检查日历是否有该日程"
+- STORAGE: "请检查备忘录列表"
+- NOTIFICATION: "请检查负一屏是否有该通知"
+
+### 1.4 健康巡检脚本
+
+**新增文件**: `scripts/platform_health_check.py`
+
+**输出指标**:
+- total_invocations: 总调用数
+- uncertain_count: Uncertain 记录数
+- unconfirmed_uncertain_count: 未确认 Uncertain 数
+- failed_rate_24h: 24 小时失败率
+- timeout_rate_24h: 24 小时超时率
+- notification_auth_status: NOTIFICATION 授权状态
+
+**健康评估**:
+- ✅ 所有指标正常
+- ⚠️ 警告（失败率 > 5%，超时率 > 5%，待确认 > 10）
+- ❌ 严重（失败率 > 10%，超时率 > 10%）
+
+## 二、测试结果
+
+### 2.1 全量测试
+
+```
+368 passed, 1 skipped
+```
+
+### 2.2 新增测试
+
+- `tests/test_audit_cli.py` - 审计 CLI 测试
+- `tests/test_confirm_invocation_capability.py` - 确认能力测试
+- `tests/test_redact_export.py` - 脱敏导出测试
+- `tests/test_health_check.py` - 健康巡检测试
+
+## 三、CLI 原始输出
+
+### 3.1 统计命令
+
+```
+==================================================
+平台调用审计统计
+==================================================
+总调用数: 0
+Uncertain 记录: 0
+已确认记录: 0
+
+按状态分布:
+```
+
+### 3.2 健康巡检
+
+```
+============================================================
+平台健康巡检报告
+============================================================
+时间: 2026-04-24T14:12:09
+
+📊 总体统计
+----------------------------------------
+总调用数: 0
+Uncertain 记录: 0
+未确认 Uncertain: 0
+
+📈 24 小时统计
+----------------------------------------
+失败率: 0.00%
+超时率: 0.00%
+
+🔐 NOTIFICATION 授权状态
+----------------------------------------
+状态: not_configured
+说明: authCode 未配置或无效
+
+🏥 健康评估
+----------------------------------------
+⚠️ NOTIFICATION 未正确授权
+
+============================================================
+```
+
+## 四、导出样例
+
+### 4.1 JSON 导出
+
+```json
+[]
+```
+
+### 4.2 CSV 导出
+
+```
+(空文件 - 无记录)
+```
+
+## 五、文档
+
+| 文档 | 说明 |
+|------|------|
+| PLATFORM_AUDIT_OPERATIONS.md | 审计操作手册 |
+| MANUAL_CONFIRMATION_PLAYBOOK.md | 手动确认手册 |
+| PLATFORM_EXPORT_AND_BACKUP.md | 导出备份手册 |
+| PLATFORM_HEALTH_CHECK.md | 健康巡检手册 |
+
+## 六、验收标准
+
+| 标准 | 状态 |
+|------|------|
+| 全量 pytest 通过 | ✅ 368 passed |
+| 审计 CLI 可用 | ✅ |
+| 手动确认可用 | ✅ |
+| 脱敏导出可用 | ✅ |
+| 健康巡检可用 | ✅ |
+| 文档完整 | ✅ |
+
+## 七、总结
+
+- ✅ 审计操作入口完成
+- ✅ 导出与备份完成
+- ✅ 用户解释能力完成
+- ✅ 健康巡检完成
+- ✅ 368 测试通过

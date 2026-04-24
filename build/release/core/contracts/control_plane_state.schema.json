@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "control_plane_state.schema.json",
+  "title": "Control Plane State",
+  "description": "控制平面状态契约",
+  "type": "object",
+  "required": ["overview", "gates", "alerts", "incidents", "remediation", "approvals", "dashboard", "audit"],
+  "properties": {
+    "overview": {
+      "type": "object",
+      "description": "概览"
+    },
+    "gates": {
+      "type": "object",
+      "description": "门禁状态"
+    },
+    "alerts": {
+      "type": "object",
+      "description": "告警状态"
+    },
+    "incidents": {
+      "type": "object",
+      "description": "事件状态"
+    },
+    "remediation": {
+      "type": "object",
+      "description": "处置状态"
+    },
+    "approvals": {
+      "type": "object",
+      "description": "审批摘要"
+    },
+    "dashboard": {
+      "type": "object",
+      "description": "Dashboard 状态"
+    },
+    "audit": {
+      "type": "object",
+      "description": "审计状态"
+    },
+    "notifications": {
+      "type": "object",
+      "description": "通知状态"
+    },
+    "trends": {
+      "type": "object",
+      "description": "趋势状态"
+    },
+    "control_plane_id": {
+      "type": "string",
+      "description": "控制平面唯一标识"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "时间戳"
+    }
+  },
+  "additionalProperties": true
+}

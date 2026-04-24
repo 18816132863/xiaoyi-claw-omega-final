@@ -1,0 +1,38 @@
+{
+  "version": "7.2.0",
+  "total": 275,
+  "categories": {
+    "other": 129,
+    "video": 10,
+    "ai": 31,
+    "image": 17,
+    "search": 24,
+    "document": 13,
+    "audio": 5,
+    "automation": 5,
+    "finance": 8,
+    "code": 8,
+    "data": 7,
+    "memory": 7,
+    "ecommerce": 8,
+    "communication": 2,
+    "utility": 1
+  },
+  "performance": {
+    "total_skills": 275,
+    "routable": 273,
+    "testable": 80,
+    "callable": 273,
+    "cache_enabled": true,
+    "lazy_load": true,
+    "parallel_check": true
+  },
+  "top_skills": [
+    "llm-memory-integration",
+    "find-skills",
+    "memory-setup",
+    "agent-chronicle",
+    "unified-inspector"
+  ],
+  "updated": "2026-04-14"
+}

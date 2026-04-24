@@ -1,0 +1,356 @@
+{
+  "version": "2.9.3",
+  "name": "小艺 Claw 终极星空鸽子王 - 完整技能索引",
+  "upload_mode": "full_upload",
+  "last_updated": "2026-04-11T09:40:00+08:00",
+  
+  "skills_summary": {
+    "total_skills": 151,
+    "total_skill_md_files": 175,
+    "categories": 21
+  },
+  
+  "skills_by_category": {
+    "document": {
+      "name": "文档处理",
+      "count": 8,
+      "skills": [
+        {"name": "docx", "desc": "Word文档处理", "layer": "L4"},
+        {"name": "pdf", "desc": "PDF处理", "layer": "L4"},
+        {"name": "pptx", "desc": "PPT生成", "layer": "L4"},
+        {"name": "markitdown", "desc": "Markdown转换", "layer": "L4"},
+        {"name": "xiaoyi-doc-convert", "desc": "文档转换", "layer": "L4"},
+        {"name": "unified-document", "desc": "统一文档", "layer": "L4"},
+        {"name": "docs-cog", "desc": "文档认知", "layer": "L4"},
+        {"name": "nano-pdf", "desc": "轻量PDF", "layer": "L4"}
+      ]
+    },
+    
+    "data": {
+      "name": "数据分析",
+      "count": 8,
+      "skills": [
+        {"name": "data-analysis", "desc": "数据分析", "layer": "L4"},
+        {"name": "excel-analysis", "desc": "Excel分析", "layer": "L4"},
+        {"name": "sqlite", "desc": "SQLite数据库", "layer": "L4"},
+        {"name": "mysql", "desc": "MySQL数据库", "layer": "L4"},
+        {"name": "mongodb", "desc": "MongoDB数据库", "layer": "L4"},
+        {"name": "elasticsearch", "desc": "ES搜索", "layer": "L4"},
+        {"name": "sheet-cog", "desc": "表格认知", "layer": "L4"},
+        {"name": "tushare-data", "desc": "金融数据", "layer": "L4"}
+      ]
+    },
+    
+    "search": {
+      "name": "搜索网络",
+      "count": 8,
+      "skills": [
+        {"name": "xiaoyi-web-search", "desc": "小艺搜索", "layer": "L4"},
+        {"name": "web-browsing", "desc": "网页浏览", "layer": "L4"},
+        {"name": "web-scraper", "desc": "网页抓取", "layer": "L4"},
+        {"name": "web-search-exa", "desc": "Exa搜索", "layer": "L4"},
+        {"name": "tavily-search-skill", "desc": "Tavily搜索", "layer": "L4"},
+        {"name": "cn-web-search", "desc": "中文搜索", "layer": "L4"},
+        {"name": "deep-search-and-insight-synthesize", "desc": "深度搜索", "layer": "L4"},
+        {"name": "unified-search", "desc": "统一搜索", "layer": "L4"}
+      ]
+    },
+    
+    "image": {
+      "name": "图片处理",
+      "count": 8,
+      "skills": [
+        {"name": "image", "desc": "图片处理", "layer": "L4"},
+        {"name": "xiaoyi-image-understanding", "desc": "图片理解", "layer": "L4"},
+        {"name": "xiaoyi-image-search", "desc": "图片搜索", "layer": "L4"},
+        {"name": "seedream-image_gen", "desc": "图片生成", "layer": "L4"},
+        {"name": "unified-image", "desc": "统一图片", "layer": "L4"},
+        {"name": "chart-image", "desc": "图表图片", "layer": "L4"},
+        {"name": "image-gen", "desc": "图片生成", "layer": "L4"},
+        {"name": "camsnap", "desc": "截图", "layer": "L4"}
+      ]
+    },
+    
+    "media": {
+      "name": "多媒体",
+      "count": 6,
+      "skills": [
+        {"name": "audio-cog", "desc": "音频处理", "layer": "L4"},
+        {"name": "video-cog", "desc": "视频处理", "layer": "L4"},
+        {"name": "video-subtitles", "desc": "视频字幕", "layer": "L4"},
+        {"name": "openai-whisper-api", "desc": "语音识别", "layer": "L4"},
+        {"name": "spotify-player", "desc": "音乐播放", "layer": "L4"},
+        {"name": "sonoscli", "desc": "音响控制", "layer": "L4"}
+      ]
+    },
+    
+    "code": {
+      "name": "开发工具",
+      "count": 10,
+      "skills": [
+        {"name": "git", "desc": "Git操作", "layer": "L4"},
+        {"name": "code-analysis-skills", "desc": "代码分析", "layer": "L4"},
+        {"name": "docker", "desc": "Docker管理", "layer": "L4"},
+        {"name": "ansible", "desc": "自动化部署", "layer": "L4"},
+        {"name": "terraform", "desc": "基础设施", "layer": "L4"},
+        {"name": "javascript-skills", "desc": "JS开发", "layer": "L4"},
+        {"name": "tdd-guide", "desc": "TDD指导", "layer": "L4"},
+        {"name": "webapp-testing", "desc": "Web测试", "layer": "L4"},
+        {"name": "playwright", "desc": "浏览器自动化", "layer": "L4"},
+        {"name": "agent-browser-clawdbot", "desc": "浏览器代理", "layer": "L4"}
+      ]
+    },
+    
+    "content": {
+      "name": "内容创作",
+      "count": 8,
+      "skills": [
+        {"name": "article-writer", "desc": "文章写作", "layer": "L4"},
+        {"name": "copywriter", "desc": "文案创作", "layer": "L4"},
+        {"name": "poetry", "desc": "诗歌生成", "layer": "L4"},
+        {"name": "novel-generator", "desc": "小说生成", "layer": "L4"},
+        {"name": "story-cog", "desc": "故事认知", "layer": "L4"},
+        {"name": "ai-ppt-generator", "desc": "PPT生成", "layer": "L4"},
+        {"name": "ai-picture-book", "desc": "绘本生成", "layer": "L4"},
+        {"name": "beauty-generation-api", "desc": "美妆生成", "layer": "L4"}
+      ]
+    },
+    
+    "social": {
+      "name": "社交平台",
+      "count": 6,
+      "skills": [
+        {"name": "xiaohongshu-all-in-one", "desc": "小红书", "layer": "L4"},
+        {"name": "bilibili-all-in-one", "desc": "B站", "layer": "L4"},
+        {"name": "linkedin-api", "desc": "LinkedIn", "layer": "L4"},
+        {"name": "discord", "desc": "Discord", "layer": "L4"},
+        {"name": "imsg", "desc": "iMessage", "layer": "L4"},
+        {"name": "imap-smtp-email", "desc": "邮件", "layer": "L4"}
+      ]
+    },
+    
+    "file": {
+      "name": "文件管理",
+      "count": 6,
+      "skills": [
+        {"name": "file-manager", "desc": "文件管理", "layer": "L4"},
+        {"name": "baidu-netdisk-skills", "desc": "百度网盘", "layer": "L4"},
+        {"name": "huawei-drive", "desc": "华为云盘", "layer": "L4"},
+        {"name": "xiaoyi-file-upload", "desc": "文件上传", "layer": "L4"},
+        {"name": "tencent-cos-skill", "desc": "腾讯COS", "layer": "L4"},
+        {"name": "local_app_interconnect", "desc": "本地互联", "layer": "L4"}
+      ]
+    },
+    
+    "utility": {
+      "name": "实用工具",
+      "count": 6,
+      "skills": [
+        {"name": "weather", "desc": "天气", "layer": "L4"},
+        {"name": "google-maps", "desc": "地图", "layer": "L4"},
+        {"name": "xiaoyi-health", "desc": "健康", "layer": "L4"},
+        {"name": "utils", "desc": "工具集", "layer": "L4"},
+        {"name": "screenshot", "desc": "截图", "layer": "L4"},
+        {"name": "xiao-gui-agent", "desc": "GUI代理", "layer": "L4"}
+      ]
+    },
+    
+    "business": {
+      "name": "商业分析",
+      "count": 12,
+      "skills": [
+        {"name": "market-research", "desc": "市场研究", "layer": "L4"},
+        {"name": "stock-price-query", "desc": "股价查询", "layer": "L4"},
+        {"name": "crypto", "desc": "加密货币", "layer": "L4"},
+        {"name": "china-stock-analysis", "desc": "A股分析", "layer": "L4"},
+        {"name": "bitsoul-stock-quantization", "desc": "量化交易", "layer": "L4"},
+        {"name": "mx-stocks-screener", "desc": "股票筛选", "layer": "L4"},
+        {"name": "industry-stock-tracker", "desc": "行业追踪", "layer": "L4"},
+        {"name": "t-trading", "desc": "交易工具", "layer": "L4"},
+        {"name": "polymarket-trade", "desc": "预测市场", "layer": "L4"},
+        {"name": "moltrade", "desc": "交易模块", "layer": "L4"},
+        {"name": "klaviyo", "desc": "营销自动化", "layer": "L4"},
+        {"name": "amazon-product-search-api-skill", "desc": "亚马逊选品", "layer": "L4"}
+      ]
+    },
+    
+    "professional": {
+      "name": "专业服务",
+      "count": 6,
+      "skills": [
+        {"name": "senior-architect", "desc": "架构师", "layer": "L4"},
+        {"name": "senior-data-scientist", "desc": "数据科学家", "layer": "L4"},
+        {"name": "ceo-advisor", "desc": "CEO顾问", "layer": "L4"},
+        {"name": "best-minds", "desc": "专家智库", "layer": "L4"},
+        {"name": "pexoai-agent", "desc": "专业代理", "layer": "L4"},
+        {"name": "university-applications", "desc": "留学申请", "layer": "L4"}
+      ]
+    },
+    
+    "design": {
+      "name": "设计创意",
+      "count": 5,
+      "skills": [
+        {"name": "frontend-design-pro", "desc": "前端设计", "layer": "L4"},
+        {"name": "ui-design-system", "desc": "UI设计", "layer": "L4"},
+        {"name": "admapix", "desc": "广告图片", "layer": "L4"},
+        {"name": "wan-image-video-generation-editting", "desc": "图片视频生成", "layer": "L4"},
+        {"name": "calcom-cal.com-web-design-guidelines-1.0.2", "desc": "Web设计", "layer": "L4"}
+      ]
+    },
+    
+    "automation": {
+      "name": "自动化",
+      "count": 4,
+      "skills": [
+        {"name": "auto-skill-upgrade", "desc": "自动升级", "layer": "L4"},
+        {"name": "skill-fusion", "desc": "技能融合", "layer": "L4"},
+        {"name": "agent-chronicle", "desc": "代理编年史", "layer": "L4"},
+        {"name": "topic-monitor", "desc": "话题监控", "layer": "L4"}
+      ]
+    },
+    
+    "auxiliary": {
+      "name": "辅助工具",
+      "count": 6,
+      "skills": [
+        {"name": "keyword-research", "desc": "关键词研究", "layer": "L4"},
+        {"name": "technical-seo-checker", "desc": "SEO检查", "layer": "L4"},
+        {"name": "good-txt-to-hwreader", "desc": "华为阅读", "layer": "L4"},
+        {"name": "xiaoyi-report", "desc": "报告生成", "layer": "L4"},
+        {"name": "quality-documentation-manager", "desc": "文档管理", "layer": "L4"},
+        {"name": "taskr", "desc": "任务工具", "layer": "L4"}
+      ]
+    },
+    
+    "special": {
+      "name": "特殊技能",
+      "count": 3,
+      "skills": [
+        {"name": "beginner-mode", "desc": "新手模式", "layer": "L4"},
+        {"name": "personas", "desc": "人格切换", "layer": "L4"},
+        {"name": "ontology", "desc": "本体论", "layer": "L4"}
+      ]
+    },
+    
+    "strategy": {
+      "name": "战略目标",
+      "count": 2,
+      "skills": [
+        {"name": "marketing-strategy-pmm", "desc": "营销策略", "layer": "L4"},
+        {"name": "su-lan-paper-daily-skill", "desc": "论文日报", "layer": "L4"}
+      ]
+    },
+    
+    "collaboration": {
+      "name": "组织协同",
+      "count": 1,
+      "skills": [
+        {"name": "dingtalk-ai-table", "desc": "钉钉AI表格", "layer": "L4"}
+      ]
+    },
+    
+    "core": {
+      "name": "核心技能",
+      "count": 9,
+      "skills": [
+        {"name": "core", "desc": "核心技能", "layer": "L4"},
+        {"name": "engines", "desc": "引擎", "layer": "L4"},
+        {"name": "api-gateway", "desc": "API网关", "layer": "L4"},
+        {"name": "clawdhub", "desc": "ClawdHub", "layer": "L4"},
+        {"name": "productivity", "desc": "生产力", "layer": "L4"},
+        {"name": "research-cog", "desc": "研究认知", "layer": "L4"},
+        {"name": "scrapling-official", "desc": "Scrapling", "layer": "L4"},
+        {"name": "ocr-local", "desc": "本地OCR", "layer": "L4"},
+        {"name": "video-agent", "desc": "视频代理", "layer": "L4"}
+      ]
+    },
+    
+    "platform": {
+      "name": "平台集成",
+      "count": 4,
+      "skills": [
+        {"name": "juejin-skills", "desc": "掘金", "layer": "L4"},
+        {"name": "getnote", "desc": "Get笔记", "layer": "L4"},
+        {"name": "hot-news-aggregator", "desc": "热点聚合", "layer": "L4"},
+        {"name": "tech-news-digest", "desc": "科技新闻", "layer": "L4"}
+      ]
+    },
+    
+    "other": {
+      "name": "其他技能",
+      "count": 4,
+      "skills": [
+        {"name": "react-best-practices", "desc": "React最佳实践", "layer": "L4"},
+        {"name": "skill-finder", "desc": "技能查找", "layer": "L4"},
+        {"name": "openclaw-skills-agent-builder-1.0.3", "desc": "代理构建器", "layer": "L4"},
+        {"name": "eno", "desc": "前端架构分析", "layer": "L4"}
+      ]
+    }
+  },
+  
+  "skills_by_layer": {
+    "L1": {"count": 0, "skills": []},
+    "L2": {"count": 3, "skills": ["memory", "obsidian", "find-skills"]},
+    "L3": {"count": 8, "skills": ["planning-with-files", "today-task", "post-job", "cron", "proactivity", "self-improving-agent", "command-center", "command-hook"]},
+    "L4": {"count": 134, "skills": "见上方分类"},
+    "L5": {"count": 6, "skills": ["clawsec-suite", "senior-security", "risk-management-specialist", "verified-agent-identity", "moltguard", "secret-guardian"]},
+    "L6": {"count": 4, "skills": ["skill-creator", "skill-safe-install", "openclaw-agent-optimize", "performance-upgrade"]}
+  },
+  
+  "all_skills_list": [
+    "admapix", "agent-browser-clawdbot", "agent-chronicle", "ai-picture-book", "ai-ppt-generator",
+    "amazon-product-search-api-skill", "ansible", "api-gateway", "article-writer", "audio-cog",
+    "auto-skill-upgrade", "baidu-netdisk-skills", "beauty-generation-api", "beginner-mode", "best-minds",
+    "bilibili-all-in-one", "bitsoul-stock-quantization", "calcom-cal.com-web-design-guidelines-1.0.2",
+    "camsnap", "ceo-advisor", "chart-image", "china-stock-analysis", "clawdhub", "clawsec-suite",
+    "cn-web-search", "code-analysis-skills", "command-center", "command-hook", "copywriter", "core",
+    "cron", "crypto", "data-analysis", "deep-search-and-insight-synthesize", "dingtalk-ai-table",
+    "discord", "docker", "docs-cog", "docx", "elasticsearch", "engines", "eno", "excel-analysis",
+    "file-manager", "find-skills", "frontend-design-pro", "getnote", "git", "good-txt-to-hwreader",
+    "google-maps", "guide", "hot-news-aggregator", "huawei-drive", "image", "image-gen",
+    "imap-smtp-email", "imsg", "industry-stock-tracker", "javascript-skills", "juejin-skills",
+    "keyword-research", "klaviyo", "linkedin-api", "local_app_interconnect", "market-research",
+    "marketing-strategy-pmm", "markitdown", "memory", "moltguard", "moltrade", "mongodb",
+    "mx-stocks-screener", "mysql", "nano-pdf", "novel-generator", "obsidian", "ocr-local",
+    "ontology", "openai-whisper-api", "openclaw-agent-optimize", "openclaw-skills-agent-builder-1.0.3",
+    "pdf", "performance-upgrade", "personas", "pexoai-agent", "planning-with-files", "playwright",
+    "poetry", "polymarket-trade", "post-job", "pptx", "proactivity", "productivity",
+    "quality-documentation-manager", "react-best-practices", "research-cog", "risk-management-specialist",
+    "scrapling-official", "screenshot", "seedream-image_gen", "self-improving-agent", "senior-architect",
+    "senior-data-scientist", "senior-security", "sheet-cog", "skill-creator", "skill-finder",
+    "skill-fusion", "skill-install-manager-1-0-0", "sonoscli", "spotify-player", "sqlite",
+    "stock-price-query", "story-cog", "su-lan-paper-daily-skill", "t-trading", "taskr",
+    "tavily-search-skill", "tdd-guide", "tech-news-digest", "technical-seo-checker", "tencent-cos-skill",
+    "terraform", "today-task", "topic-monitor", "tushare-data", "ui-design-system", "unified-document",
+    "unified-image", "unified-search", "university-applications", "utils", "verified-agent-identity",
+    "video-agent", "video-cog", "video-subtitles", "wan-image-video-generation-editting", "weather",
+    "web-browsing", "web-scraper", "web-search-exa", "webapp-testing", "xiao-gui-agent",
+    "xiaohongshu-all-in-one", "xiaoyi-doc-convert", "xiaoyi-file-upload", "xiaoyi-health",
+    "xiaoyi-image-search", "xiaoyi-image-understanding", "xiaoyi-report", "xiaoyi-web-search"
+  ],
+  
+  "xiaoyi_exclusive_skills": {
+    "description": "小艺专属技能",
+    "skills": [
+      {"name": "xiaoyi-web-search", "desc": "网络搜索"},
+      {"name": "xiaoyi-image-understanding", "desc": "图片理解"},
+      {"name": "xiaoyi-image-search", "desc": "图片搜索"},
+      {"name": "xiaoyi-doc-convert", "desc": "文档转换"},
+      {"name": "xiaoyi-file-upload", "desc": "文件上传"},
+      {"name": "xiaoyi-health", "desc": "健康查询"},
+      {"name": "xiaoyi-report", "desc": "报告生成"},
+      {"name": "xiao-gui-agent", "desc": "手机操控"}
+    ]
+  },
+  
+  "health_subskills": {
+    "description": "健康子技能",
+    "skills": [
+      "blood-oxygen", "blood-sugar-coach", "body-temperature", "cardiovascular",
+      "fitness", "health-overview", "healthy-shared", "mental-health",
+      "naps", "nutrition", "reproductive-health", "running",
+      "sleep-coach", "weekly-review", "weight-management"
+    ]
+  }
+}

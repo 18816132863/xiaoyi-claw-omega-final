@@ -1,0 +1,115 @@
+{
+  "version": "7.2.0",
+  "updated": "2026-04-11",
+  "category": "电商运营",
+  "skills": {
+    "dealer-leader-cooperation": {
+      "name": "经销商-团长合作",
+      "layer": "L4",
+      "priority": "P0",
+      "triggers": ["找团长", "团长合作", "社区团购", "团长筛选", "分销", "佣金"],
+      "workflows": ["leader_selection", "commission_design", "cooperation_negotiation"]
+    },
+    "douyin-shop-operation": {
+      "name": "抖音小店运营",
+      "layer": "L4",
+      "priority": "P0",
+      "triggers": ["抖音小店", "抖店", "抖音带货", "抖音直播", "抖音达人"],
+      "workflows": ["live_stream_operation", "influencer_cooperation"]
+    },
+    "kuaishou-shop-operation": {
+      "name": "快手小店运营",
+      "layer": "L4",
+      "priority": "P0",
+      "triggers": ["快手小店", "快手带货", "快手直播", "老铁"],
+      "workflows": ["live_stream_operation", "influencer_cooperation"]
+    },
+    "platform-comparison": {
+      "name": "平台对比分析",
+      "layer": "L3",
+      "priority": "P1",
+      "triggers": ["平台对比", "选平台", "哪个平台", "平台分析"],
+      "workflows": ["ecommerce_operation"]
+    },
+    "omni-channel-ecommerce": {
+      "name": "全渠道电商运营",
+      "layer": "L3",
+      "priority": "P0",
+      "triggers": ["全渠道", "多平台", "电商运营", "渠道拓展"],
+      "workflows": ["ecommerce_operation"]
+    },
+    "product-management": {
+      "name": "商品管理",
+      "layer": "L4",
+      "priority": "P0",
+      "triggers": ["选品", "商品管理", "定价", "库存", "促销", "爆款"],
+      "workflows": ["ecommerce_operation"]
+    },
+    "marketing-campaign": {
+      "name": "营销活动",
+      "layer": "L4",
+      "priority": "P0",
+      "triggers": ["活动策划", "促销活动", "营销方案", "节日活动", "用户运营"],
+      "workflows": ["ecommerce_operation"]
+    },
+    "ecommerce-analytics": {
+      "name": "电商数据分析",
+      "layer": "L2",
+      "priority": "P0",
+      "triggers": ["数据分析", "店铺数据", "转化分析", "用户分析", "ROI"],
+      "workflows": ["ecommerce_operation"]
+    },
+    "supply-chain-management": {
+      "name": "供应链管理",
+      "layer": "L6",
+      "priority": "P1",
+      "triggers": ["供应链", "供应商", "采购", "仓储", "物流"],
+      "workflows": ["ecommerce_operation"]
+    },
+    "customer-service": {
+      "name": "客服与售后",
+      "layer": "L4",
+      "priority": "P1",
+      "triggers": ["客服", "售后", "投诉处理", "评价管理"],
+      "workflows": ["ecommerce_operation"]
+    }
+  },
+  "workflows": {
+    "leader_selection": {
+      "name": "团长筛选",
+      "steps": ["search_leaders", "filter_by_criteria", "evaluate_quality", "rank_leaders", "generate_recommendations"],
+      "input": ["category", "region", "followers_min", "monthly_sales_min"],
+      "output": ["leaders", "rankings", "recommendations"]
+    },
+    "commission_design": {
+      "name": "佣金设计",
+      "steps": ["analyze_margin", "design_base_commission", "design_tiered_commission", "design_promotion_commission", "generate_scheme"],
+      "input": ["category", "gross_margin", "avg_order_value"],
+      "output": ["base_commission", "tiered_commission", "promotion_commission", "scheme"]
+    },
+    "cooperation_negotiation": {
+      "name": "合作洽谈",
+      "steps": ["generate_proposal", "generate_script", "generate_agreement", "generate_support_plan"],
+      "input": ["leader_name", "category", "commission_rate"],
+      "output": ["proposal", "script", "agreement", "support_plan"]
+    },
+    "live_stream_operation": {
+      "name": "直播带货",
+      "steps": ["select_products", "design_script", "create_preheat_content", "setup_live_room", "monitor_live", "analyze_results"],
+      "input": ["platform", "category", "duration", "products"],
+      "output": ["products", "script", "preheat", "live_config", "monitor_data", "analysis"]
+    },
+    "influencer_cooperation": {
+      "name": "达人合作",
+      "steps": ["search_influencers", "filter_influencers", "evaluate_influencers", "design_proposal", "generate_contract"],
+      "input": ["platform", "category", "followers_min", "cooperation_type"],
+      "output": ["influencers", "rankings", "proposal", "contract"]
+    },
+    "ecommerce_operation": {
+      "name": "电商运营主流程",
+      "steps": ["market_analysis", "channel_planning", "product_strategy", "store_setup", "traffic_acquisition", "conversion_optimization", "operation_management", "data_analysis"],
+      "input": ["business_type", "category", "platforms", "budget", "target"],
+      "output": ["market_analysis", "channel_plan", "product_strategy", "store_config", "traffic_plan", "conversion_plan", "operation_guide", "data_dashboard"]
+    }
+  }
+}

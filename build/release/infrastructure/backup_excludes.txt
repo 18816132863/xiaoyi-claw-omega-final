@@ -1,0 +1,36 @@
+# 备份排除规则
+
+# 备份目录
+.openclaw/backup/
+
+# 浏览器缓存
+.openclaw/browser/
+
+# NPM 缓存
+.openclaw/npm-cache/
+
+# 历史会话
+*.jsonl.reset.*
+*.jsonl.deleted.*
+
+# 大型工具
+skills/*/magika/
+skills/*/git-lfs/
+
+# 旧备份
+*.tar.gz
+*.zip
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Node modules
+node_modules/
+
+# 临时文件
+*.tmp
+*.temp
+*.log

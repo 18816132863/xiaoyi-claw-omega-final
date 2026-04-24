@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-04-24T22:11:04.611603",
+  "checks": {
+    "modules": {
+      "stats": {
+        "total": 8,
+        "active": 8,
+        "created_only": 0,
+        "registered_only": 0
+      },
+      "issues": []
+    },
+    "capabilities": {
+      "stats": {
+        "total": 53,
+        "active": 0,
+        "created_only": 0,
+        "unrouted": 0,
+        "untested": 0
+      },
+      "issues": []
+    },
+    "configs": {
+      "stats": {
+        "total": 15,
+        "active": 0,
+        "unused": 0
+      },
+      "issues": []
+    },
+    "scripts": {
+      "stats": {
+        "total": 123,
+        "active": 0,
+        "created_only": 0
+      },
+      "issues": []
+    },
+    "tests": {
+      "stats": {
+        "total": 70,
+        "collected": 70,
+        "uncollected": 0
+      },
+      "issues": []
+    },
+    "documents": {
+      "stats": {
+        "total": 67,
+        "indexed": 67,
+        "orphan": 0
+      },
+      "issues": []
+    }
+  },
+  "summary": {
+    "total_checks": 6,
+    "total_issues": 0,
+    "passed": true
+  },
+  "issues": []
+}

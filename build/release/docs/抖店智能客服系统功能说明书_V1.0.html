@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body { font-family: SimSun, Arial, sans-serif; padding: 40px; line-height: 1.8; }
+h1 { font-size: 24px; border-bottom: 2px solid #333; padding-bottom: 10px; }
+h2 { font-size: 18px; margin-top: 20px; color: #333; }
+h3 { font-size: 14px; margin-top: 15px; }
+p { margin: 8px 0; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background: #f5f5f5; }
+</style>
+</head>
+<body>
+
+<h1>抖店智能客服系统 - 功能说明书</h1>
+<p><strong>版本:</strong> V1.0 &nbsp;|&nbsp; <strong>日期:</strong> 2026-04-12 &nbsp;|&nbsp; <strong>状态:</strong> 待确认</p>
+
+<h2>一、系统概述</h2>
+<h3>1.1 系统定位</h3>
+<p>基于腾讯云部署的抖店智能客服系统，实现自动回复、订单处理、售后管理等功能。</p>
+
+<h3>1.2 技术架构</h3>
+<p>抖店 API → 腾讯云 API 网关 → 业务逻辑层 → 数据库 → 智能回复引擎</p>
+
+<h3>1.3 部署环境</h3>
+<p>• 云服务商: 腾讯云</p>
+<p>• 服务器: CVM 4核8G</p>
+<p>• 数据库: MySQL 2核4G</p>
+<p>• 缓存: Redis 2G</p>
+<p>• 存储: COS 对象存储</p>
+
+<h2>二、核心功能模块</h2>
+
+<h3>2.1 自动回复模块</h3>
+<p>• 关键词匹配: 根据关键词自动回复 (P0)</p>
+<p>• 意图识别: 识别用户意图（咨询/投诉/售后）(P1)</p>
+<p>• 智能回复: AI 生成个性化回复 (P1)</p>
+<p>• 多轮对话: 支持上下文对话 (P2)</p>
+
+<h3>2.2 订单处理模块</h3>
+<p>• 订单查询: 查询订单状态、物流信息 (P0)</p>
+<p>• 发货通知: 自动发送发货提醒 (P0)</p>
+<p>• 催付提醒: 未付款订单自动催付 (P1)</p>
+<p>• 确认收货: 引导用户确认收货 (P1)</p>
+
+<h3>2.3 售后管理模块</h3>
+<p>• 退款处理: 自动审核退款申请 (P0)</p>
+<p>• 退货引导: 引导用户填写退货信息 (P0)</p>
+<p>• 纠纷预警: 识别高风险纠纷 (P1)</p>
+<p>• 工单流转: 复杂问题转人工 (P0)</p>
+
+<h3>2.4 数据分析模块</h3>
+<p>• 响应时间: 平均响应时间统计 (P1)</p>
+<p>• 满意度: 客户满意度分析 (P1)</p>
+<p>• 热门问题: 高频问题 TOP 榜 (P2)</p>
+<p>• 转化率: 客服转订单率 (P2)</p>
+
+<h2>三、API 对接清单</h2>
+
+<h3>3.1 抖店开放平台 API</h3>
+<table>
+<tr><th>API</th><th>功能</th><th>调用频率</th></tr>
+<tr><td>order.list</td><td>订单列表查询</td><td>100次/分钟</td></tr>
+<tr><td>order.detail</td><td>订单详情</td><td>100次/分钟</td></tr>
+<tr><td>logistics.update</td><td>物流更新</td><td>100次/分钟</td></tr>
+<tr><td>afterSale.list</td><td>售后列表</td><td>100次/分钟</td></tr>
+<tr><td>afterSale.agree</td><td>同意售后</td><td>100次/分钟</td></tr>
+<tr><td>message.send</td><td>发送客服消息</td><td>1000次/分钟</td></tr>
+</table>
+
+<h3>3.2 腾讯云服务</h3>
+<table>
+<tr><th>服务</th><th>用途</th><th>规格</th></tr>
+<tr><td>API 网关</td><td>API 统一入口</td><td>共享版</td></tr>
+<tr><td>Redis</td><td>会话缓存</td><td>2G</td></tr>
+<tr><td>MySQL</td><td>数据存储</td><td>2核4G</td></tr>
+<tr><td>COS</td><td>图片存储</td><td>100GB</td></tr>
+<tr><td>腾讯云 TI</td><td>AI 意图识别</td><td>按需调用</td></tr>
+</table>
+
+<h2>四、系统流程</h2>
+
+<h3>4.1 客服消息处理流程</h3>
+<p>用户消息 → 飞鸽推送 → 腾讯云 API 网关 → 意图识别 → 自动回复/转人工</p>
+
+<h3>4.2 订单自动处理流程</h3>
+<p>新订单 → 系统监听 → 订单状态判断 → 催付/发货/物流跟踪/评价邀请</p>
+
+<h3>4.3 售后处理流程</h3>
+<p>售后申请 → 风险评估 → 自动审核/人工审核 → 处理结果通知</p>
+
+<h2>五、配置项</h2>
+
+<h3>5.1 自动回复规则</h3>
+<p>• 关键词 "发货" → "亲，订单付款后48小时内发货哦~"</p>
+<p>• 关键词 "退款" → "亲，如需退款请在订单详情页申请~"</p>
+<p>• 正则 "订单号:\d+" → 自动查询订单状态</p>
+<p>• 意图 "投诉" → 转人工客服</p>
+
+<h3>5.2 工作时间配置</h3>
+<p>• 9:00-22:00: 自动回复 + 人工 (< 30秒响应)</p>
+<p>• 22:00-9:00: 仅自动回复 (< 5秒响应)</p>
+
+<h3>5.3 告警规则</h3>
+<p>• API 调用失败率 > 5%: 短信 + 邮件</p>
+<p>• 响应超时 > 10秒: 企业微信通知</p>
+<p>• 纠纷预警: 电话通知</p>
+<p>• 系统异常: 电话 + 短信</p>
+
+<h2>六、数据安全</h2>
+<p>• 数据传输: HTTPS 加密 (TLS 1.2+)</p>
+<p>• 敏感信息: AES-256 加密存储</p>
+<p>• 访问控制: CAM 权限管理 (最小权限)</p>
+<p>• 日志审计: 操作日志留存 90 天</p>
+<p>• 数据备份: 每日自动备份，保留 30 天</p>
+
+<h2>七、性能指标</h2>
+<p>• 消息响应时间: < 3秒 (95% 请求)</p>
+<p>• 系统可用性: > 99.9% (月度统计)</p>
+<p>• 并发处理: 1000 QPS (峰值流量)</p>
+<p>• 数据一致性: 100% (订单/售后数据)</p>
+
+<h2>八、费用预估</h2>
+
+<h3>腾讯云资源费用 (月度)</h3>
+<table>
+<tr><th>项目</th><th>规格</th><th>月费用</th></tr>
+<tr><td>CVM 云服务器</td><td>4核8G</td><td>¥200-300</td></tr>
+<tr><td>MySQL 云数据库</td><td>2核4G</td><td>¥200-300</td></tr>
+<tr><td>Redis 缓存</td><td>2G</td><td>¥80</td></tr>
+<tr><td>API 网关</td><td>共享版</td><td>¥30</td></tr>
+<tr><td>COS 对象存储</td><td>100GB</td><td>¥10</td></tr>
+<tr><td>CDN 流量</td><td>100GB</td><td>¥17</td></tr>
+<tr><td><strong>合计</strong></td><td></td><td><strong>¥537-637/月</strong></td></tr>
+</table>
+
+<h2>九、交付物清单</h2>
+<p>1. 系统源代码 (Python + Flask)</p>
+<p>2. 部署文档 (腾讯云部署指南)</p>
+<p>3. API 对接文档 (抖店 API 集成说明)</p>
+<p>4. 运维手册 (日常运维操作指南)</p>
+<p>5. 培训资料 (客服使用培训)</p>
+<p>6. 测试报告 (功能测试 + 压力测试)</p>
+
+<h2>十、项目里程碑</h2>
+<table>
+<tr><th>阶段</th><th>内容</th><th>周期</th></tr>
+<tr><td>第一阶段</td><td>需求确认 + 架构设计</td><td>1 周</td></tr>
+<tr><td>第二阶段</td><td>核心功能开发</td><td>2 周</td></tr>
+<tr><td>第三阶段</td><td>API 对接 + 联调</td><td>1 周</td></tr>
+<tr><td>第四阶段</td><td>测试 + 上线</td><td>1 周</td></tr>
+<tr><td><strong>总计</strong></td><td></td><td><strong>5 周</strong></td></tr>
+</table>
+
+</body>
+</html>

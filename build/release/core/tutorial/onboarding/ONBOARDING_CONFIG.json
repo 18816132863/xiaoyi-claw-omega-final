@@ -1,0 +1,50 @@
+{
+  "module": "onboarding",
+  "version": "1.0.0",
+  "description": "新手引导系统",
+  "stages": {
+    "welcome": {
+      "step": 1,
+      "content": "欢迎体验终极鸽子王",
+      "duration_seconds": 10
+    },
+    "capability_intro": {
+      "step": 2,
+      "content": "核心能力介绍",
+      "interactive": true
+    },
+    "first_interaction": {
+      "step": 3,
+      "content": "首次交互引导",
+      "sample_tasks": [
+        "问问题",
+        "生成代码",
+        "分析数据"
+      ]
+    },
+    "mode_selection": {
+      "step": 4,
+      "content": "模式选择引导",
+      "modes": [
+        "personal",
+        "enterprise",
+        "hybrid"
+      ]
+    },
+    "complete": {
+      "step": 5,
+      "content": "引导完成",
+      "next_steps": [
+        "探索更多",
+        "查看教程",
+        "开始使用"
+      ]
+    }
+  },
+  "features": {
+    "skip_allowed": true,
+    "resume_support": true,
+    "personalized": true,
+    "progress_tracking": true
+  }
+}

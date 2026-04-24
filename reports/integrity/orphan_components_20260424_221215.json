@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-04-24T22:12:15.067857",
+  "orphans": {
+    "modules": [],
+    "capabilities": [],
+    "configs": [],
+    "scripts": [],
+    "documents": [
+      {
+        "name": "sqlite_datetime_policy",
+        "path": "/home/sandbox/.openclaw/workspace/docs/sqlite_datetime_policy.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "data_retention_policy",
+        "path": "/home/sandbox/.openclaw/workspace/docs/data_retention_policy.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DEPLOY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DEPLOY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SYSTEM_MODULES",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SYSTEM_MODULES.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "CONTRIBUTING",
+        "path": "/home/sandbox/.openclaw/workspace/docs/CONTRIBUTING.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "XIAOYI_API_WIRING_POINTS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/XIAOYI_API_WIRING_POINTS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "FILE_INVENTORY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/FILE_INVENTORY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "REFACTOR_PLAN",
+        "path": "/home/sandbox/.openclaw/workspace/docs/REFACTOR_PLAN.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "HUAWEI_CLOUD_SETUP",
+        "path": "/home/sandbox/.openclaw/workspace/docs/HUAWEI_CLOUD_SETUP.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "API_REFERENCE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/API_REFERENCE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "CAPABILITY_MATRIX",
+        "path": "/home/sandbox/.openclaw/workspace/docs/CAPABILITY_MATRIX.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "CHANGELOG",
+        "path": "/home/sandbox/.openclaw/workspace/docs/CHANGELOG.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "MAINTENANCE_GUIDE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/MAINTENANCE_GUIDE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "抖店智能客服系统功能说明书_V1.0",
+        "path": "/home/sandbox/.openclaw/workspace/docs/抖店智能客服系统功能说明书_V1.0.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "RUNTIME_ASSUMPTIONS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/RUNTIME_ASSUMPTIONS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "ARCHITECTURE_RELATIONSHIP",
+        "path": "/home/sandbox/.openclaw/workspace/docs/ARCHITECTURE_RELATIONSHIP.md",
+        "reason": "未在文档索引中"
+      }
+    ],
+    "tests": [],
+    "tables": []
+  },
+  "summary": {
+    "total": 16,
+    "by_category": {
+      "modules": 0,
+      "capabilities": 0,
+      "configs": 0,
+      "scripts": 0,
+      "documents": 16,
+      "tests": 0,
+      "tables": 0
+    }
+  }
+}

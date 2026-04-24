@@ -1,0 +1,392 @@
+{
+  "layers": {
+    "L1": {
+      "name": "Core",
+      "description": "核心认知、身份、规则",
+      "mutable": false,
+      "allowed_types": [
+        "core",
+        "identity",
+        "rule"
+      ],
+      "directories": [
+        "core/"
+      ],
+      "priority": 1
+    },
+    "L2": {
+      "name": "Memory",
+      "description": "记忆上下文、知识库",
+      "mutable": true,
+      "allowed_types": [
+        "memory",
+        "knowledge",
+        "embedding"
+      ],
+      "directories": [
+        "memory/",
+        "memory_context/"
+      ],
+      "priority": 2
+    },
+    "L3": {
+      "name": "Orchestration",
+      "description": "任务编排、工作流",
+      "mutable": true,
+      "allowed_types": [
+        "orchestration",
+        "workflow",
+        "router"
+      ],
+      "directories": [
+        "orchestration/"
+      ],
+      "priority": 3
+    },
+    "L4": {
+      "name": "Execution",
+      "description": "能力执行、技能网关",
+      "mutable": true,
+      "allowed_types": [
+        "execution",
+        "skill",
+        "gateway",
+        "module"
+      ],
+      "directories": [
+        "execution/",
+        "skills/"
+      ],
+      "priority": 4
+    },
+    "L5": {
+      "name": "Governance",
+      "description": "稳定治理、安全审计",
+      "mutable": true,
+      "allowed_types": [
+        "governance",
+        "audit",
+        "security",
+        "policy"
+      ],
+      "directories": [
+        "governance/"
+      ],
+      "priority": 5
+    },
+    "L6": {
+      "name": "Infrastructure",
+      "description": "基础设施、工具链",
+      "mutable": true,
+      "allowed_types": [
+        "infrastructure",
+        "tool",
+        "config",
+        "script"
+      ],
+      "directories": [
+        "infrastructure/",
+        "scripts/"
+      ],
+      "priority": 6
+    }
+  },
+  "types": {
+    "core": {
+      "name": "核心文件",
+      "description": "架构、规则、身份等核心定义",
+      "required_layer": "L1",
+      "can_call": [
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "can_be_called_by": [],
+      "examples": [
+        "ARCHITECTURE.md",
+        "RULE_REGISTRY.json",
+        "SOUL.md"
+      ]
+    },
+    "engine": {
+      "name": "引擎",
+      "description": "核心引擎，如融合引擎、规则引擎",
+      "required_layer": "L1",
+      "can_call": [
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "can_be_called_by": [
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "examples": [
+        "fusion_index.json",
+        "run_rule_engine.py"
+      ]
+    },
+    "module": {
+      "name": "模块",
+      "description": "功能模块，如例外管理器、依赖管理器",
+      "required_layer": "L6",
+      "can_call": [
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "can_be_called_by": [
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "examples": [
+        "exception_manager.py",
+        "dependency_manager.py"
+      ]
+    },
+    "skill": {
+      "name": "技能",
+      "description": "技能包，如 llm-memory-integration",
+      "required_layer": "L4",
+      "can_call": [
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "can_be_called_by": [
+        "L3",
+        "L4"
+      ],
+      "examples": [
+        "llm-memory-integration",
+        "find-skills"
+      ]
+    },
+    "tool": {
+      "name": "工具",
+      "description": "辅助工具脚本",
+      "required_layer": "L6",
+      "can_call": [
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "can_be_called_by": [
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "examples": [
+        "full_backup.py",
+        "unified_inspector.py"
+      ]
+    },
+    "config": {
+      "name": "配置",
+      "description": "配置文件",
+      "required_layer": "L6",
+      "can_call": [],
+      "can_be_called_by": [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "examples": [
+        "unified.json",
+        "dependency_manifest.json"
+      ]
+    },
+    "registry": {
+      "name": "注册表",
+      "description": "索引、注册表",
+      "required_layer": "L6",
+      "can_call": [],
+      "can_be_called_by": [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "examples": [
+        "skill_registry.json",
+        "fusion_index.json"
+      ]
+    },
+    "doc": {
+      "name": "文档",
+      "description": "说明文档",
+      "required_layer": "L6",
+      "can_call": [],
+      "can_be_called_by": [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "examples": [
+        "ARCHITECTURE.md",
+        "PERMANENT_KEEPER_MODULE.md"
+      ]
+    },
+    "report": {
+      "name": "报告",
+      "description": "运行报告",
+      "required_layer": "L6",
+      "can_call": [],
+      "can_be_called_by": [
+        "L3",
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "examples": [
+        "rule_engine_report.json",
+        "delete_log.json"
+      ]
+    }
+  },
+  "components": {
+    "ARCHITECTURE.md": {
+      "layer": "L1",
+      "type": "core",
+      "name": "架构文档"
+    },
+    "RULE_REGISTRY.json": {
+      "layer": "L1",
+      "type": "core",
+      "name": "规则注册表"
+    },
+    "RULE_EXCEPTIONS.json": {
+      "layer": "L1",
+      "type": "core",
+      "name": "例外注册表"
+    },
+    "SOUL.md": {
+      "layer": "L1",
+      "type": "core",
+      "name": "身份定义"
+    },
+    "USER.md": {
+      "layer": "L1",
+      "type": "core",
+      "name": "用户信息"
+    },
+    "IDENTITY.md": {
+      "layer": "L1",
+      "type": "core",
+      "name": "身份标识"
+    },
+    "AGENTS.md": {
+      "layer": "L1",
+      "type": "core",
+      "name": "工作空间规则"
+    },
+    "TOOLS.md": {
+      "layer": "L1",
+      "type": "core",
+      "name": "工具规则"
+    },
+    "MEMORY.md": {
+      "layer": "L1",
+      "type": "core",
+      "name": "长期记忆"
+    },
+    "fusion_index.json": {
+      "layer": "L6",
+      "type": "engine",
+      "name": "融合引擎"
+    },
+    "unified.json": {
+      "layer": "L6",
+      "type": "config",
+      "name": "统一配置"
+    },
+    "run_rule_engine.py": {
+      "layer": "L6",
+      "type": "engine",
+      "name": "规则引擎"
+    },
+    "unified_inspector.py": {
+      "layer": "L6",
+      "type": "tool",
+      "name": "统一巡检器"
+    },
+    "exception_manager.py": {
+      "layer": "L6",
+      "type": "module",
+      "name": "例外管理器"
+    },
+    "dependency_manager.py": {
+      "layer": "L6",
+      "type": "module",
+      "name": "依赖管理器"
+    },
+    "delete_manager.py": {
+      "layer": "L6",
+      "type": "module",
+      "name": "删除管理器"
+    },
+    "permanent_keeper.py": {
+      "layer": "L6",
+      "type": "module",
+      "name": "永久守护模块"
+    },
+    "full_backup.py": {
+      "layer": "L6",
+      "type": "tool",
+      "name": "备份工具"
+    },
+    "skill_registry.json": {
+      "layer": "L6",
+      "type": "registry",
+      "name": "技能注册表"
+    },
+    "dependency_manifest.json": {
+      "layer": "L6",
+      "type": "config",
+      "name": "依赖清单"
+    },
+    "permanent_keepers.json": {
+      "layer": "L6",
+      "type": "config",
+      "name": "守护配置"
+    },
+    "llm-memory-integration": {
+      "layer": "L4",
+      "type": "skill",
+      "name": "LLM记忆集成"
+    },
+    "find-skills": {
+      "layer": "L4",
+      "type": "skill",
+      "name": "技能发现"
+    },
+    "check_skill_security.py": {
+      "layer": "L5",
+      "type": "governance",
+      "name": "技能安全检查"
+    },
+    "check_change_impact.py": {
+      "layer": "L5",
+      "type": "governance",
+      "name": "变更影响检查"
+    }
+  },
+  "version": "1.0.0"
+}

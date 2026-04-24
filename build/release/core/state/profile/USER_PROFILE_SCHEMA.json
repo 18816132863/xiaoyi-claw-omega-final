@@ -1,0 +1,187 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-06T13:20:00+08:00",
+  "description": "用户画像数据结构定义",
+  "schema": {
+    "profileId": {
+      "type": "string",
+      "required": true,
+      "description": "画像唯一标识"
+    },
+    "stable_preferences": {
+      "type": "array",
+      "required": true,
+      "description": "长期稳定偏好",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "category": { 
+            "type": "string",
+            "enum": ["communication", "output_format", "topic", "style", "language", "other"]
+          },
+          "preference": { "type": "string" },
+          "strength": { "type": "number", "min": 0, "max": 1 },
+          "source": { "type": "string" },
+          "created_at": { "type": "datetime" },
+          "last_confirmed": { "type": "datetime" }
+        }
+      }
+    },
+    "working_style": {
+      "type": "object",
+      "required": true,
+      "description": "工作风格",
+      "properties": {
+        "decision_making": {
+          "type": "string",
+          "enum": ["quick", "deliberate", "collaborative"],
+          "description": "决策风格"
+        },
+        "detail_level": {
+          "type": "string",
+          "enum": ["high_level", "detailed", "comprehensive"],
+          "description": "细节偏好"
+        },
+        "iteration_preference": {
+          "type": "string",
+          "enum": ["single_shot", "iterative", "interactive"],
+          "description": "迭代偏好"
+        },
+        "risk_tolerance": {
+          "type": "string",
+          "enum": ["conservative", "moderate", "aggressive"],
+          "description": "风险容忍度"
+        }
+      }
+    },
+    "communication_style": {
+      "type": "object",
+      "required": true,
+      "description": "沟通风格",
+      "properties": {
+        "formality": {
+          "type": "string",
+          "enum": ["casual", "neutral", "formal"],
+          "description": "正式程度"
+        },
+        "verbosity": {
+          "type": "string",
+          "enum": ["concise", "moderate", "detailed"],
+          "description": "详细程度"
+        },
+        "tone": {
+          "type": "string",
+          "enum": ["friendly", "professional", "neutral"],
+          "description": "语气风格"
+        },
+        "language": {
+          "type": "string",
+          "description": "首选语言"
+        }
+      }
+    },
+    "long_term_goals": {
+      "type": "array",
+      "required": true,
+      "description": "长期目标",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "goal": { "type": "string" },
+          "category": { "type": "string" },
+          "priority": { "type": "string", "enum": ["high", "medium", "low"] },
+          "status": { "type": "string", "enum": ["active", "paused", "completed"] },
+          "created_at": { "type": "datetime" }
+        }
+      }
+    },
+    "recurring_tasks": {
+      "type": "array",
+      "required": true,
+      "description": "重复任务",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "task": { "type": "string" },
+          "frequency": { "type": "string" },
+          "preferences": { "type": "object" },
+          "last_executed": { "type": "datetime" }
+        }
+      }
+    },
+    "risk_tolerance": {
+      "type": "object",
+      "required": true,
+      "description": "风险容忍度",
+      "properties": {
+        "overall": {
+          "type": "string",
+          "enum": ["conservative", "moderate", "aggressive"]
+        },
+        "data_risk": { "type": "string", "enum": ["low", "medium", "high"] },
+        "privacy_risk": { "type": "string", "enum": ["low", "medium", "high"] },
+        "security_risk": { "type": "string", "enum": ["low", "medium", "high"] }
+      }
+    },
+    "saved_constraints": {
+      "type": "array",
+      "required": true,
+      "description": "已保存的约束",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "constraint": { "type": "string" },
+          "type": { "type": "string", "enum": ["hard", "soft"] },
+          "scope": { "type": "string", "enum": ["global", "task_specific"] },
+          "created_at": { "type": "datetime" }
+        }
+      }
+    },
+    "expertise_areas": {
+      "type": "array",
+      "required": false,
+      "description": "专业领域",
+      "items": {
+        "type": "object",
+        "properties": {
+          "area": { "type": "string" },
+          "level": { "type": "string", "enum": ["beginner", "intermediate", "expert"] }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": true,
+      "description": "元数据",
+      "properties": {
+        "created_at": { "type": "datetime" },
+        "updated_at": { "type": "datetime" },
+        "version": { "type": "string" },
+        "source": { "type": "string" }
+      }
+    }
+  },
+  "storage": {
+    "path": "profile/user_profile.json",
+    "backup_path": "profile/backups/",
+    "retention": "permanent"
+  },
+  "validation": {
+    "strictMode": true,
+    "requiredFields": [
+      "profileId",
+      "stable_preferences",
+      "working_style",
+      "communication_style",
+      "long_term_goals",
+      "recurring_tasks",
+      "risk_tolerance",
+      "saved_constraints",
+      "metadata"
+    ]
+  }
+}

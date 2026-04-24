@@ -1,0 +1,264 @@
+# 平台运营自动化报告
+
+## 版本
+- V8.4.0 运营自动化版
+- 日期: 2026-04-24
+
+## 一、完成内容
+
+### 1.1 审计台账预热
+
+**新增文件**: `scripts/seed_platform_invocations.py`
+
+**功能**:
+- 插入 completed / failed / timeout / result_uncertain / auth_required / queued_for_delivery 样例
+- 插入历史数据（可配置天数和每天记录数）
+- 自动确认部分 uncertain 记录
+
+**使用**:
+```bash
+python scripts/seed_platform_invocations.py --days 7 --per-day 5
+```
+
+### 1.2 自动化作业
+
+**新增文件**:
+- `scripts/run_daily_backup.sh` - 每日备份脚本
+- `scripts/run_weekly_cleanup.sh` - 每周清理脚本
+- `scripts/run_hourly_health_check.sh` - 每小时健康巡检脚本
+
+**配置示例**:
+- `config/crontab.example` - Crontab 配置示例
+- `config/systemd.example` - Systemd 服务配置示例
+
+### 1.3 NOTIFICATION 授权闭环
+
+**新增文件**:
+- `scripts/check_notification_auth.py` - 授权检查脚本
+- `NOTIFICATION_AUTH_GUIDE.md` - 授权配置指南
+
+**输出状态**:
+- `configured` - authCode 已配置且有效
+- `not_configured` - authCode 未配置
+- `invalid` - authCode 已配置但无效
+
+### 1.4 运营报表
+
+**新增文件**:
+- `scripts/export_daily_platform_report.py` - 日报导出
+- `scripts/export_weekly_platform_report.py` - 周报导出
+
+**输出指标**:
+- 总调用数
+- 成功数/失败数/超时数
+- Uncertain 数/已确认数
+- 失败率/超时率/确认率
+- 按能力统计
+- 按天统计（周报）
+
+**支持格式**: JSON / CSV
+
+### 1.5 脱敏增强
+
+**脱敏规则**:
+
+| 字段类型 | 字段名 | 脱敏规则 |
+|----------|--------|----------|
+| 手机号 | phone_number, phoneNumber, phone, mobile, tel | 保留前3后4 |
+| 用户内容 | content, message, title, body, text, description, note | 截断到20字 |
+| request_json | 内部敏感字段 | 同上 |
+| raw_result_json | 内部敏感字段 | 同上 |
+| confirm_note | - | 截断到50字 |
+
+## 二、测试结果
+
+### 2.1 全量测试
+
+```
+416 passed, 1 skipped
+```
+
+### 2.2 新增测试
+
+- `tests/test_seed_invocations.py` - 预热脚本测试
+- `tests/test_check_notification_auth.py` - 授权检查测试
+- `tests/test_platform_reports.py` - 日报/周报测试
+- `tests/test_automation_scripts.py` - 自动化脚本测试
+- `tests/test_extended_redaction.py` - 扩展脱敏测试
+
+## 三、原始输出
+
+### 3.1 预热脚本输出
+
+```
+🌱 开始预热平台调用审计台账...
+   目标记录数: 47
+   插入样例数据...
+   ✓ 记录 #99: MESSAGE_SENDING - completed
+   ✓ 记录 #100: TASK_SCHEDULING - completed
+   ...
+✅ 预热完成!
+   样例数据: 12 条
+   历史数据: 35 条
+   已确认: 13 条
+   总记录数: 47
+```
+
+### 3.2 CLI 统计输出
+
+```
+==================================================
+平台调用审计统计
+==================================================
+总调用数: 145
+Uncertain 记录: 38
+已确认记录: 31
+
+按状态分布:
+  auth_required: 8 (5.5%)
+  completed: 71 (49.0%)
+  failed: 20 (13.8%)
+  queued_for_delivery: 8 (5.5%)
+  result_uncertain: 18 (12.4%)
+  timeout: 20 (13.8%)
+```
+
+### 3.3 健康巡检输出
+
+```
+============================================================
+平台健康巡检报告
+============================================================
+时间: 2026-04-24T16:41:21
+
+📊 总体统计
+----------------------------------------
+总调用数: 145
+Uncertain 记录: 38
+未确认 Uncertain: 7
+
+📈 24 小时统计
+----------------------------------------
+失败率: 13.79%
+超时率: 13.79%
+
+🔐 NOTIFICATION 授权状态
+----------------------------------------
+状态: not_configured
+说明: authCode 未配置或无效
+
+🏥 健康评估
+----------------------------------------
+⚠️ 24小时失败率过高: 13.79%
+⚠️ 24小时超时率过高: 13.79%
+⚠️ NOTIFICATION 未正确授权
+
+============================================================
+```
+
+### 3.4 授权检查输出
+
+```
+============================================================
+NOTIFICATION 授权状态检查
+============================================================
+
+状态: not_configured
+说明: authCode 未配置
+
+详细信息:
+----------------------------------------
+  authCode: 未找到
+
+💡 请配置 XIAOYI_AUTH_CODE 环境变量或在 config/xiaoyi_config.json 中设置 auth_code
+
+============================================================
+```
+
+### 3.5 日报 JSON 输出
+
+```json
+{
+  "date": "2026-04-24",
+  "generated_at": "2026-04-24T16:41:30",
+  "total_invocations": 145,
+  "completed_count": 71,
+  "failed_count": 20,
+  "timeout_count": 20,
+  "uncertain_count": 38,
+  "confirmed_count": 31,
+  "failed_rate": 13.79,
+  "timeout_rate": 13.79,
+  "confirmation_rate": 81.58,
+  "by_capability": {
+    "MESSAGE_SENDING": {"total": 56, "completed": 19, "failed": 10, "timeout": 11},
+    "TASK_SCHEDULING": {"total": 34, "completed": 17, "failed": 9, "timeout": 0},
+    "STORAGE": {"total": 20, "completed": 17, "failed": 0, "timeout": 1},
+    "NOTIFICATION": {"total": 35, "completed": 18, "failed": 1, "timeout": 8}
+  }
+}
+```
+
+### 3.6 日报 CSV 输出
+
+```csv
+指标,值
+日期,2026-04-24
+总调用数,145
+成功数,71
+失败数,20
+超时数,20
+Uncertain 数,38
+已确认数,31
+失败率,13.79%
+超时率,13.79%
+确认率,81.58%
+
+能力,总数,成功,失败,超时
+MESSAGE_SENDING,56,19,10,11
+TASK_SCHEDULING,34,17,9,0
+STORAGE,20,17,0,1
+NOTIFICATION,35,18,1,8
+```
+
+## 四、新增文件汇总
+
+| 类别 | 文件 |
+|------|------|
+| 预热 | `scripts/seed_platform_invocations.py` |
+| 自动化 | `scripts/run_daily_backup.sh` |
+| 自动化 | `scripts/run_weekly_cleanup.sh` |
+| 自动化 | `scripts/run_hourly_health_check.sh` |
+| 配置 | `config/crontab.example` |
+| 配置 | `config/systemd.example` |
+| 授权 | `scripts/check_notification_auth.py` |
+| 授权 | `NOTIFICATION_AUTH_GUIDE.md` |
+| 报表 | `scripts/export_daily_platform_report.py` |
+| 报表 | `scripts/export_weekly_platform_report.py` |
+| 测试 | `tests/test_seed_invocations.py` |
+| 测试 | `tests/test_check_notification_auth.py` |
+| 测试 | `tests/test_platform_reports.py` |
+| 测试 | `tests/test_automation_scripts.py` |
+| 测试 | `tests/test_extended_redaction.py` |
+
+## 五、验收标准
+
+| 标准 | 状态 |
+|------|------|
+| 全量 pytest 通过 | ✅ 416 passed |
+| 预热脚本可用 | ✅ |
+| 自动化脚本可用 | ✅ |
+| 授权检查可用 | ✅ |
+| 日报/周报可用 | ✅ |
+| 脱敏规则增强 | ✅ |
+| CLI 有非空输出 | ✅ |
+| 健康巡检有非空输出 | ✅ |
+
+## 六、总结
+
+- ✅ 审计台账预热完成
+- ✅ 自动化作业脚本完成
+- ✅ NOTIFICATION 授权闭环完成
+- ✅ 运营报表完成
+- ✅ 脱敏规则增强完成
+- ✅ 416 测试通过

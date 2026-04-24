@@ -1,0 +1,360 @@
+{
+  "timestamp": "2026-04-24T22:11:12.825826",
+  "orphans": {
+    "modules": [],
+    "capabilities": [],
+    "configs": [],
+    "scripts": [],
+    "documents": [
+      {
+        "name": "sqlite_datetime_policy",
+        "path": "/home/sandbox/.openclaw/workspace/docs/sqlite_datetime_policy.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "RELEASE_NOTES_SKILL_REFACTOR",
+        "path": "/home/sandbox/.openclaw/workspace/docs/RELEASE_NOTES_SKILL_REFACTOR.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "data_retention_policy",
+        "path": "/home/sandbox/.openclaw/workspace/docs/data_retention_policy.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "EXECUTION_SEMANTICS_STATE_TABLE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/EXECUTION_SEMANTICS_STATE_TABLE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "V7.2.0_ARCHITECTURE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_ARCHITECTURE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "COMPONENT_CLASSIFICATION_POLICY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/COMPONENT_CLASSIFICATION_POLICY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DELIVERY_CONFIRMATION_STRATEGY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DELIVERY_CONFIRMATION_STRATEGY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "loop_guard_design",
+        "path": "/home/sandbox/.openclaw/workspace/docs/loop_guard_design.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "00_exact_refactor_fix_v2",
+        "path": "/home/sandbox/.openclaw/workspace/docs/00_exact_refactor_fix_v2.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "architecture",
+        "path": "/home/sandbox/.openclaw/workspace/docs/architecture.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DEGRADATION_STRATEGY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DEGRADATION_STRATEGY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "OPTIMIZATION_CALCULATION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/OPTIMIZATION_CALCULATION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "state_machine",
+        "path": "/home/sandbox/.openclaw/workspace/docs/state_machine.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS_DISCOVERY_V3",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_DISCOVERY_V3.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "configuration",
+        "path": "/home/sandbox/.openclaw/workspace/docs/configuration.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_ENHANCED_SKILL_ARCHITECTURE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_ENHANCED_SKILL_ARCHITECTURE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DEPLOY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DEPLOY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "MEMORY_OPTIMIZATION_STRATEGY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/MEMORY_OPTIMIZATION_STRATEGY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_CONNECTED_EXECUTION_FLOW",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CONNECTED_EXECUTION_FLOW.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SKILL_PRODUCT_ARCHITECTURE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_PRODUCT_ARCHITECTURE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PERMANENT_KEEPER_MODULE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PERMANENT_KEEPER_MODULE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SYSTEM_MODULES",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SYSTEM_MODULES.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_CONNECTION_MATRIX",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CONNECTION_MATRIX.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "CONTRIBUTING",
+        "path": "/home/sandbox/.openclaw/workspace/docs/CONTRIBUTING.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "XIAOYI_API_WIRING_POINTS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/XIAOYI_API_WIRING_POINTS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "XIAOYI_REAL_INTEGRATION_PLAN",
+        "path": "/home/sandbox/.openclaw/workspace/docs/XIAOYI_REAL_INTEGRATION_PLAN.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_CAPABILITY_MAPPING",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CAPABILITY_MAPPING.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "FILE_INVENTORY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/FILE_INVENTORY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "runbook",
+        "path": "/home/sandbox/.openclaw/workspace/docs/runbook.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "OPTIMIZATION_PLAN",
+        "path": "/home/sandbox/.openclaw/workspace/docs/OPTIMIZATION_PLAN.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS_ANALYSIS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_ANALYSIS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "HEARTBEAT_ANALYSIS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_ANALYSIS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "task_lifecycle",
+        "path": "/home/sandbox/.openclaw/workspace/docs/task_lifecycle.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "observability",
+        "path": "/home/sandbox/.openclaw/workspace/docs/observability.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "AUTO_RUN_COMPONENTS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/AUTO_RUN_COMPONENTS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "REFACTOR_PLAN",
+        "path": "/home/sandbox/.openclaw/workspace/docs/REFACTOR_PLAN.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "HUAWEI_CLOUD_SETUP",
+        "path": "/home/sandbox/.openclaw/workspace/docs/HUAWEI_CLOUD_SETUP.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SKILL_LIMITATIONS_AND_DEGRADATION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_LIMITATIONS_AND_DEGRADATION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SKILL_USER_RESULT_EXPLANATION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_USER_RESULT_EXPLANATION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS_EXECUTION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_EXECUTION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "API_REFERENCE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/API_REFERENCE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "HEARTBEAT_DAEMON_CONFIGURED",
+        "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_DAEMON_CONFIGURED.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "00_exact_skill_refactor_fix_list",
+        "path": "/home/sandbox/.openclaw/workspace/docs/00_exact_skill_refactor_fix_list.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "CAPABILITY_MATRIX",
+        "path": "/home/sandbox/.openclaw/workspace/docs/CAPABILITY_MATRIX.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "CHANGELOG",
+        "path": "/home/sandbox/.openclaw/workspace/docs/CHANGELOG.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DELETE_CONFIRMATION_POLICY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DELETE_CONFIRMATION_POLICY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "skill_integration_rules",
+        "path": "/home/sandbox/.openclaw/workspace/docs/skill_integration_rules.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "TOKEN_OPTIMIZATION_STRATEGY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/TOKEN_OPTIMIZATION_STRATEGY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DEFAULT_SKILL_CONFIG",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DEFAULT_SKILL_CONFIG.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "MAINTENANCE_GUIDE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/MAINTENANCE_GUIDE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SKILL_RUNTIME_MODES",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_RUNTIME_MODES.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS_COMPLETE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_COMPLETE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "抖店智能客服系统功能说明书_V1.0",
+        "path": "/home/sandbox/.openclaw/workspace/docs/抖店智能客服系统功能说明书_V1.0.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "FUSION_REPORT",
+        "path": "/home/sandbox/.openclaw/workspace/docs/FUSION_REPORT.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "COMPRESSION_OPTIMIZATION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/COMPRESSION_OPTIMIZATION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "EXECUTION_SEMANTICS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/EXECUTION_SEMANTICS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_CAPABILITY_MATRIX",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CAPABILITY_MATRIX.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "RUNTIME_ASSUMPTIONS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/RUNTIME_ASSUMPTIONS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "REAL_INFRASTRUCTURE_SETUP",
+        "path": "/home/sandbox/.openclaw/workspace/docs/REAL_INFRASTRUCTURE_SETUP.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "HEARTBEAT_INTERVAL_ANALYSIS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_INTERVAL_ANALYSIS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "V7.2.0_架构中文完整版",
+        "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_架构中文完整版.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "ARCHITECTURE_RELATIONSHIP",
+        "path": "/home/sandbox/.openclaw/workspace/docs/ARCHITECTURE_RELATIONSHIP.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "LITE_VERSION_PLAN",
+        "path": "/home/sandbox/.openclaw/workspace/docs/LITE_VERSION_PLAN.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "BACKUP_MECHANISM_EXPLAINED",
+        "path": "/home/sandbox/.openclaw/workspace/docs/BACKUP_MECHANISM_EXPLAINED.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "V7.2.0_UNIFIED_ARCHITECTURE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_UNIFIED_ARCHITECTURE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "production_deployment",
+        "path": "/home/sandbox/.openclaw/workspace/docs/production_deployment.md",
+        "reason": "未在文档索引中"
+      }
+    ],
+    "tests": [],
+    "tables": []
+  },
+  "summary": {
+    "total": 67,
+    "by_category": {
+      "modules": 0,
+      "capabilities": 0,
+      "configs": 0,
+      "scripts": 0,
+      "documents": 67,
+      "tests": 0,
+      "tables": 0
+    }
+  }
+}

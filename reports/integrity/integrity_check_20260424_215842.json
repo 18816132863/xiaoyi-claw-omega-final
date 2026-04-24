@@ -1,0 +1,2215 @@
+{
+  "timestamp": "2026-04-24T21:58:42.245834",
+  "checks": {
+    "modules": {
+      "stats": {
+        "total": 8,
+        "active": 8,
+        "created_only": 0,
+        "registered_only": 0
+      },
+      "issues": []
+    },
+    "capabilities": {
+      "stats": {
+        "total": 53,
+        "active": 0,
+        "created_only": 53,
+        "unrouted": 0,
+        "untested": 0
+      },
+      "issues": [
+        {
+          "type": "capability_not_registered",
+          "name": "delete_note",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_note.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "self_repair",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/self_repair.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "query_contact",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/query_contact.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "explain_notification_auth_state",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_notification_auth_state.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "refresh_notification_auth",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/refresh_notification_auth.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "delete_contact",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_contact.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "pause_task",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/pause_task.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "make_call",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/make_call.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "delete_photo",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_photo.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "manage_file",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/manage_file.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "cancel_task",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_task.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "get_location",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/get_location.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "delete_xiaoyi_note",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_xiaoyi_note.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "query_photo",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/query_photo.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "delete_calendar_event",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_calendar_event.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "preview_side_effect",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/preview_side_effect.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "send_message",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/send_message.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "list_recent_messages",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_messages.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "resend_message",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/resend_message.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "create_album",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/create_album.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "query_note",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/query_note.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "explain_message_result",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_message_result.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "update_calendar_event",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/update_calendar_event.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "query_file",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/query_file.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "explain_invocation_status",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_invocation_status.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "query_calendar_event",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/query_calendar_event.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "diagnostics",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/diagnostics.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "query_message_status",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/query_message_status.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "list_calendar_events",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/list_calendar_events.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "create_contact",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/create_contact.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "query_notification_status",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/query_notification_status.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "create_alarm",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/create_alarm.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "update_contact",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/update_contact.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "search_notes",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/search_notes.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "bootstrap",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/bootstrap.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "approve_action",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/approve_action.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "cancel_notification",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_notification.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "delete_file",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_file.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "update_note",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/update_note.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "registry",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/registry.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "query_xiaoyi_note",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/query_xiaoyi_note.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "retry_task",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/retry_task.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "resume_task",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/resume_task.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "delete_alarm",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_alarm.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "audit_queries",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/audit_queries.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "schedule_task",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/schedule_task.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "export_history",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/export_history.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "replay_run",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/replay_run.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "query_alarm",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/query_alarm.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "confirm_invocation",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/confirm_invocation.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "update_alarm",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/update_alarm.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "list_recent_notes",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_notes.py",
+          "status": "created_only"
+        },
+        {
+          "type": "capability_not_registered",
+          "name": "check_calendar_conflicts",
+          "path": "/home/sandbox/.openclaw/workspace/capabilities/check_calendar_conflicts.py",
+          "status": "created_only"
+        }
+      ]
+    },
+    "configs": {
+      "stats": {
+        "total": 15,
+        "active": 0,
+        "unused": 4
+      },
+      "issues": [
+        {
+          "type": "config_not_referenced",
+          "name": "dual_push_config",
+          "path": "/home/sandbox/.openclaw/workspace/config/dual_push_config.json",
+          "status": "unused"
+        },
+        {
+          "type": "config_not_referenced",
+          "name": "capability_timeouts",
+          "path": "/home/sandbox/.openclaw/workspace/config/capability_timeouts.json",
+          "status": "unused"
+        },
+        {
+          "type": "config_not_referenced",
+          "name": "default_skill_config",
+          "path": "/home/sandbox/.openclaw/workspace/config/default_skill_config.py",
+          "status": "unused"
+        },
+        {
+          "type": "config_not_referenced",
+          "name": "feature_flags",
+          "path": "/home/sandbox/.openclaw/workspace/config/feature_flags.py",
+          "status": "unused"
+        }
+      ]
+    },
+    "scripts": {
+      "stats": {
+        "total": 121,
+        "active": 0,
+        "created_only": 121
+      },
+      "issues": [
+        {
+          "type": "script_not_registered",
+          "name": "control_plane_audit",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/control_plane_audit.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "smoke_test",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/smoke_test.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "find_orphan_components",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/find_orphan_components.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "send_daily_health_reminder",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/send_daily_health_reminder.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "platform_health_check",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/platform_health_check.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "run_nightly_audit",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/run_nightly_audit.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_json_contracts",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_json_contracts.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "start_production_celery",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/start_production_celery.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "heartbeat_executor",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/heartbeat_executor.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "control_plane",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/control_plane.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "generate_alerts",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/generate_alerts.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "start_local_celery",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/start_local_celery.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "demo_manual_confirmation",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/demo_manual_confirmation.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "unified_inspector",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/unified_inspector.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "test_all_skills",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/test_all_skills.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "system_integrity_check",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/system_integrity_check.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_test_collection",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_test_collection.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_skill_security",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_skill_security.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "deep_inspection",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/deep_inspection.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "delete_manager",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/delete_manager.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "release_check",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/release_check.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "performance_benchmark",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/performance_benchmark.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "real_infra_test",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/real_infra_test.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "auto_classify_skills",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/auto_classify_skills.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "export_weekly_platform_report",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/export_weekly_platform_report.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "upgrade_all_to_commercial",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/upgrade_all_to_commercial.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "continuous_improvement",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/continuous_improvement.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "component_classifier",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/component_classifier.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "stress_capabilities",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/stress_capabilities.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "architecture_auto_improver",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/architecture_auto_improver.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "skill_preflight_check",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/skill_preflight_check.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "render_release_summary",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/render_release_summary.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_route_wiring",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_route_wiring.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "render_nightly_summary",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/render_nightly_summary.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "permanent_keeper",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/permanent_keeper.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "upgrade_skills_structure",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/upgrade_skills_structure.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "demo_daily_reminder",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/demo_daily_reminder.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "session_end_detector",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/session_end_detector.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "architecture_compliance_checker",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/architecture_compliance_checker.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "security_sanity_check",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/security_sanity_check.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_layer_dependencies",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_layer_dependencies.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "create_scheduled_message",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/create_scheduled_message.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "export_daily_platform_report",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/export_daily_platform_report.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "send_message_helper",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/send_message_helper.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "get_pending_sends",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/get_pending_sends.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "run_release_gate",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/run_release_gate.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "batch_upgrade_skills",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/batch_upgrade_skills.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_capability_registry",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_capability_registry.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_rule_guards",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_rule_guards.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "run_rule_engine",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/run_rule_engine.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "cleanup_reports",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/cleanup_reports.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "auto_summarizer",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/auto_summarizer.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "quick_start",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/quick_start.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "generate_metrics",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/generate_metrics.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "find_scheduled_tasks",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/find_scheduled_tasks.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_repo_integrity",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_repo_integrity.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "run_midday_check",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/run_midday_check.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "one_time_trigger",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/one_time_trigger.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "start_celery_real",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/start_celery_real.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_change_impact",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_change_impact.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "smart_compressor",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/smart_compressor.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "demo_minimum_loop",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/demo_minimum_loop.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "deploy_verification",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/deploy_verification.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "export_capability_performance_report",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/export_capability_performance_report.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "run_end_of_day_review",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/run_end_of_day_review.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "run_weekly_growth_review",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/run_weekly_growth_review.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "render_premerge_summary",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/render_premerge_summary.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "demo_l4_strong_confirm",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/demo_l4_strong_confirm.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "start_celery_fakeredis",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/start_celery_fakeredis.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "batch_skill_upgrade",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/batch_skill_upgrade.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "production_acceptance",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/production_acceptance.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "exception_manager",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/exception_manager.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "demo_bootstrap",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/demo_bootstrap.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_change_impact_enforcement",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_change_impact_enforcement.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "package_release",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/package_release.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "incident_cli",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/incident_cli.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "skill_health_check",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/skill_health_check.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_repo_integrity_fast",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_repo_integrity_fast.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "incremental_updater",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/incremental_updater.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "final_acceptance",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/final_acceptance.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_config_usage",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_config_usage.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "build_ops_dashboard",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/build_ops_dashboard.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "create_complete_docs",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/create_complete_docs.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "benchmark_capabilities",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/benchmark_capabilities.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "start_real_infra",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/start_real_infra.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "send_daily_weather_report",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/send_daily_weather_report.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "start_production",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/start_production.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "task_daemon",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/task_daemon.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "migrate_to_postgres",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/migrate_to_postgres.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "unified_inspector_v7",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/unified_inspector_v7.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "run_daily_growth_check",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/run_daily_growth_check.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "full_automation_agent_smoke",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/full_automation_agent_smoke.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "verify_phase3_final",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/verify_phase3_final.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "approval_manager",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/approval_manager.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "demo_learning_second_run",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/demo_learning_second_run.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "generate_observability_reports",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/generate_observability_reports.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_ai_apis",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_ai_apis.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "quick_task",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/quick_task.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "full_backup",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/full_backup.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "ops_center",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/ops_center.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "message_server",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/message_server.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "start_celery_production",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/start_celery_production.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "demo_learning_first_run",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/demo_learning_first_run.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "generate_final_verification_bundle",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/generate_final_verification_bundle.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "auto_fusion_hook",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/auto_fusion_hook.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "create_professional_docs",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/create_professional_docs.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "quick_schedule",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/quick_schedule.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "auto_trigger",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/auto_trigger.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "dependency_manager",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/dependency_manager.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_docs_index",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_docs_index.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "invocation_audit_cli",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/invocation_audit_cli.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "test_redis_connection",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/test_redis_connection.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "generate_release_reports",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/generate_release_reports.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "remediation_center",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/remediation_center.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "seed_platform_invocations",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/seed_platform_invocations.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "generate_charts",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/generate_charts.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_notification_auth",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_notification_auth.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "run_daily_growth_loop",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/run_daily_growth_loop.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "precise_sender",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/precise_sender.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "feishu_longpoll",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/feishu_longpoll.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "dual_channel_pusher",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/dual_channel_pusher.py",
+          "status": "created_only"
+        }
+      ]
+    },
+    "tests": {
+      "stats": {
+        "total": 70,
+        "collected": 69,
+        "uncollected": 1
+      },
+      "issues": [
+        {
+          "type": "test_not_collected",
+          "name": "test_scenarios_v3",
+          "path": "/home/sandbox/.openclaw/workspace/tests/test_scenarios_v3.py",
+          "status": "uncollected"
+        }
+      ]
+    },
+    "documents": {
+      "stats": {
+        "total": 67,
+        "indexed": 67,
+        "orphan": 0
+      },
+      "issues": []
+    }
+  },
+  "summary": {
+    "total_checks": 6,
+    "total_issues": 179,
+    "passed": false
+  },
+  "issues": [
+    {
+      "type": "capability_not_registered",
+      "name": "delete_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_note.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "self_repair",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/self_repair.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_contact.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "explain_notification_auth_state",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_notification_auth_state.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "refresh_notification_auth",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/refresh_notification_auth.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_contact.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "pause_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/pause_task.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "make_call",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/make_call.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_photo.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "manage_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/manage_file.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "cancel_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_task.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "get_location",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/get_location.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_xiaoyi_note.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_photo.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_calendar_event.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "preview_side_effect",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/preview_side_effect.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "send_message",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/send_message.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "list_recent_messages",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_messages.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "resend_message",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/resend_message.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "create_album",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_album.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_note.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "explain_message_result",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_message_result.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "update_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_calendar_event.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_file.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "explain_invocation_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_invocation_status.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_calendar_event.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "diagnostics",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/diagnostics.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_message_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_message_status.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "list_calendar_events",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_calendar_events.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "create_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_contact.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_notification_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_notification_status.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "create_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_alarm.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "update_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_contact.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "search_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/search_notes.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "bootstrap",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/bootstrap.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "approve_action",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/approve_action.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "cancel_notification",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_notification.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_file.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "update_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_note.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "registry",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/registry.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_xiaoyi_note.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "retry_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/retry_task.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "resume_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/resume_task.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_alarm.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "audit_queries",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/audit_queries.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "schedule_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/schedule_task.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "export_history",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/export_history.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "replay_run",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/replay_run.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_alarm.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "confirm_invocation",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/confirm_invocation.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "update_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_alarm.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "list_recent_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_notes.py",
+      "status": "created_only"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "check_calendar_conflicts",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/check_calendar_conflicts.py",
+      "status": "created_only"
+    },
+    {
+      "type": "config_not_referenced",
+      "name": "dual_push_config",
+      "path": "/home/sandbox/.openclaw/workspace/config/dual_push_config.json",
+      "status": "unused"
+    },
+    {
+      "type": "config_not_referenced",
+      "name": "capability_timeouts",
+      "path": "/home/sandbox/.openclaw/workspace/config/capability_timeouts.json",
+      "status": "unused"
+    },
+    {
+      "type": "config_not_referenced",
+      "name": "default_skill_config",
+      "path": "/home/sandbox/.openclaw/workspace/config/default_skill_config.py",
+      "status": "unused"
+    },
+    {
+      "type": "config_not_referenced",
+      "name": "feature_flags",
+      "path": "/home/sandbox/.openclaw/workspace/config/feature_flags.py",
+      "status": "unused"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "control_plane_audit",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/control_plane_audit.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "smoke_test",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/smoke_test.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "find_orphan_components",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/find_orphan_components.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "send_daily_health_reminder",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/send_daily_health_reminder.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "platform_health_check",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/platform_health_check.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "run_nightly_audit",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/run_nightly_audit.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_json_contracts",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_json_contracts.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "start_production_celery",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/start_production_celery.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "heartbeat_executor",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/heartbeat_executor.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "control_plane",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/control_plane.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "generate_alerts",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/generate_alerts.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "start_local_celery",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/start_local_celery.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "demo_manual_confirmation",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/demo_manual_confirmation.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "unified_inspector",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/unified_inspector.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "test_all_skills",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/test_all_skills.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "system_integrity_check",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/system_integrity_check.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_test_collection",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_test_collection.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_skill_security",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_skill_security.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "deep_inspection",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/deep_inspection.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "delete_manager",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/delete_manager.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "release_check",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/release_check.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "performance_benchmark",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/performance_benchmark.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "real_infra_test",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/real_infra_test.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "auto_classify_skills",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/auto_classify_skills.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "export_weekly_platform_report",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/export_weekly_platform_report.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "upgrade_all_to_commercial",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/upgrade_all_to_commercial.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "continuous_improvement",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/continuous_improvement.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "component_classifier",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/component_classifier.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "stress_capabilities",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/stress_capabilities.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "architecture_auto_improver",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/architecture_auto_improver.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "skill_preflight_check",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/skill_preflight_check.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "render_release_summary",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/render_release_summary.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_route_wiring",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_route_wiring.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "render_nightly_summary",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/render_nightly_summary.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "permanent_keeper",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/permanent_keeper.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "upgrade_skills_structure",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/upgrade_skills_structure.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "demo_daily_reminder",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/demo_daily_reminder.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "session_end_detector",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/session_end_detector.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "architecture_compliance_checker",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/architecture_compliance_checker.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "security_sanity_check",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/security_sanity_check.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_layer_dependencies",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_layer_dependencies.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "create_scheduled_message",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/create_scheduled_message.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "export_daily_platform_report",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/export_daily_platform_report.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "send_message_helper",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/send_message_helper.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "get_pending_sends",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/get_pending_sends.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "run_release_gate",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/run_release_gate.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "batch_upgrade_skills",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/batch_upgrade_skills.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_capability_registry",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_capability_registry.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_rule_guards",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_rule_guards.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "run_rule_engine",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/run_rule_engine.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "cleanup_reports",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/cleanup_reports.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "auto_summarizer",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/auto_summarizer.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "quick_start",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/quick_start.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "generate_metrics",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/generate_metrics.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "find_scheduled_tasks",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/find_scheduled_tasks.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_repo_integrity",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_repo_integrity.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "run_midday_check",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/run_midday_check.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "one_time_trigger",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/one_time_trigger.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "start_celery_real",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/start_celery_real.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_change_impact",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_change_impact.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "smart_compressor",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/smart_compressor.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "demo_minimum_loop",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/demo_minimum_loop.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "deploy_verification",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/deploy_verification.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "export_capability_performance_report",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/export_capability_performance_report.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "run_end_of_day_review",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/run_end_of_day_review.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "run_weekly_growth_review",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/run_weekly_growth_review.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "render_premerge_summary",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/render_premerge_summary.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "demo_l4_strong_confirm",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/demo_l4_strong_confirm.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "start_celery_fakeredis",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/start_celery_fakeredis.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "batch_skill_upgrade",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/batch_skill_upgrade.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "production_acceptance",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/production_acceptance.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "exception_manager",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/exception_manager.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "demo_bootstrap",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/demo_bootstrap.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_change_impact_enforcement",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_change_impact_enforcement.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "package_release",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/package_release.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "incident_cli",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/incident_cli.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "skill_health_check",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/skill_health_check.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_repo_integrity_fast",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_repo_integrity_fast.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "incremental_updater",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/incremental_updater.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "final_acceptance",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/final_acceptance.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_config_usage",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_config_usage.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "build_ops_dashboard",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/build_ops_dashboard.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "create_complete_docs",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/create_complete_docs.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "benchmark_capabilities",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/benchmark_capabilities.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "start_real_infra",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/start_real_infra.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "send_daily_weather_report",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/send_daily_weather_report.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "start_production",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/start_production.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "task_daemon",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/task_daemon.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "migrate_to_postgres",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/migrate_to_postgres.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "unified_inspector_v7",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/unified_inspector_v7.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "run_daily_growth_check",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/run_daily_growth_check.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "full_automation_agent_smoke",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/full_automation_agent_smoke.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "verify_phase3_final",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/verify_phase3_final.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "approval_manager",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/approval_manager.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "demo_learning_second_run",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/demo_learning_second_run.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "generate_observability_reports",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/generate_observability_reports.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_ai_apis",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_ai_apis.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "quick_task",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/quick_task.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "full_backup",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/full_backup.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "ops_center",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/ops_center.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "message_server",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/message_server.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "start_celery_production",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/start_celery_production.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "demo_learning_first_run",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/demo_learning_first_run.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "generate_final_verification_bundle",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/generate_final_verification_bundle.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "auto_fusion_hook",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/auto_fusion_hook.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "create_professional_docs",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/create_professional_docs.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "quick_schedule",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/quick_schedule.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "auto_trigger",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/auto_trigger.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "dependency_manager",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/dependency_manager.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_docs_index",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_docs_index.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "invocation_audit_cli",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/invocation_audit_cli.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "test_redis_connection",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/test_redis_connection.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "generate_release_reports",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/generate_release_reports.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "remediation_center",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/remediation_center.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "seed_platform_invocations",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/seed_platform_invocations.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "generate_charts",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/generate_charts.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_notification_auth",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_notification_auth.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "run_daily_growth_loop",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/run_daily_growth_loop.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "precise_sender",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/precise_sender.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "feishu_longpoll",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/feishu_longpoll.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "dual_channel_pusher",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/dual_channel_pusher.py",
+      "status": "created_only"
+    },
+    {
+      "type": "test_not_collected",
+      "name": "test_scenarios_v3",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_scenarios_v3.py",
+      "status": "uncollected"
+    }
+  ]
+}

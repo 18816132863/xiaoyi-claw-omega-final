@@ -1,0 +1,40 @@
+{
+  "module": "ddd_engine",
+  "version": "1.0.0",
+  "description": "领域驱动设计引擎",
+  "features": {
+    "bounded_context": {
+      "auto_identify": true,
+      "context_mapping": true,
+      "anti_corruption_layer": true
+    },
+    "aggregate_design": {
+      "aggregate_root": true,
+      "entity": true,
+      "value_object": true,
+      "domain_event": true
+    },
+    "strategic_design": {
+      "context_map": true,
+      "partnership": true,
+      "shared_kernel": true,
+      "customer_supplier": true
+    },
+    "tactical_design": {
+      "repository": true,
+      "factory": true,
+      "service": true,
+      "specification": true
+    }
+  },
+  "patterns": [
+    "Aggregate",
+    "Entity",
+    "Value Object",
+    "Domain Event",
+    "Repository",
+    "Factory",
+    "Service",
+    "Specification"
+  ]
+}

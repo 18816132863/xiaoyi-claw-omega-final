@@ -1,0 +1,22 @@
+{
+  "name": "xiaoyi-image-translation",
+  "version": "1.0.0",
+  "description": "小艺图片翻译API",
+  "main": "scripts/image_translation.py",
+  "bin": {
+    "xiaoyi-image-translation": "./scripts/image_translation.py"
+  },
+  "scripts": {
+    "understand": "python scripts/image_translation.py"
+  },
+  "keywords": [
+    "image",
+    "vision",
+    "translation",
+    "xiaoyi"
+  ],
+  "dependencies": {
+    "requests": "^2.31.0"
+  },
+  "python": ">=3.7"
+}

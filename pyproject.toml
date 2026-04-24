@@ -50,3 +50,8 @@ include = [
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
 asyncio_mode = "auto"
+markers = [
+    "device_runtime: requires real device runtime",
+    "connected_runtime: requires OpenClaw/Xiaoyi connected runtime",
+    "requires_call_device_tool: requires injected call_device_tool",
+]

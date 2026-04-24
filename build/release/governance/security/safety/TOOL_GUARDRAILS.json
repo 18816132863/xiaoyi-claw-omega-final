@@ -1,0 +1,246 @@
+{
+  "version": "2.0.0",
+  "lastUpdated": "2026-04-08T18:25:00+08:00",
+  "description": "工具护栏配置 - 已优化超时和重试机制",
+  "tools": {
+    "read": {
+      "risk_level": "low",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 10,
+      "post_check_required": false,
+      "rate_limit": {
+        "max_per_minute": 30,
+        "max_per_hour": 500
+      }
+    },
+    "write": {
+      "risk_level": "medium",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 5,
+      "post_check_required": true,
+      "post_checks": ["file_exists", "content_match"],
+      "rate_limit": {
+        "max_per_minute": 10,
+        "max_per_hour": 100
+      }
+    },
+    "edit": {
+      "risk_level": "medium",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 5,
+      "post_check_required": true,
+      "post_checks": ["file_exists", "edit_applied"],
+      "rate_limit": {
+        "max_per_minute": 10,
+        "max_per_hour": 100
+      }
+    },
+    "exec": {
+      "risk_level": "medium",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 3,
+      "post_check_required": true,
+      "post_checks": ["exit_code"],
+      "forbidden_commands": ["rm -rf /", "dd if=/dev/zero", ":(){ :|:& };:", "chmod 777", "chown root"],
+      "require_approval_commands": ["apt-get", "yum", "pip install", "npm install -g"],
+      "rate_limit": {
+        "max_per_minute": 5,
+        "max_per_hour": 50
+      }
+    },
+    "web_fetch": {
+      "risk_level": "low",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 10,
+      "post_check_required": false,
+      "forbidden_domains": ["localhost", "127.0.0.1", "192.168.*", "10.*"],
+      "rate_limit": {
+        "max_per_minute": 20,
+        "max_per_hour": 200
+      }
+    },
+    "create_alarm": {
+      "risk_level": "medium",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 5,
+      "post_check_required": true,
+      "post_checks": ["alarm_created"],
+      "rate_limit": {
+        "max_per_minute": 5,
+        "max_per_hour": 20
+      }
+    },
+    "modify_alarm": {
+      "risk_level": "medium",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 5,
+      "post_check_required": true,
+      "post_checks": ["alarm_modified"],
+      "rate_limit": {
+        "max_per_minute": 5,
+        "max_per_hour": 20
+      }
+    },
+    "delete_alarm": {
+      "risk_level": "high",
+      "auto_allowed": false,
+      "confirmation_required": true,
+      "max_consecutive_calls": 1,
+      "post_check_required": true,
+      "post_checks": ["alarm_deleted"],
+      "rate_limit": {
+        "max_per_minute": 2,
+        "max_per_hour": 10
+      }
+    },
+    "create_note": {
+      "risk_level": "medium",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 5,
+      "post_check_required": true,
+      "post_checks": ["note_created"],
+      "rate_limit": {
+        "max_per_minute": 10,
+        "max_per_hour": 100
+      }
+    },
+    "create_calendar_event": {
+      "risk_level": "medium",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 5,
+      "post_check_required": true,
+      "post_checks": ["event_created"],
+      "rate_limit": {
+        "max_per_minute": 5,
+        "max_per_hour": 50
+      }
+    },
+    "send_message": {
+      "risk_level": "high",
+      "auto_allowed": false,
+      "confirmation_required": true,
+      "max_consecutive_calls": 1,
+      "post_check_required": true,
+      "post_checks": ["message_sent"],
+      "rate_limit": {
+        "max_per_minute": 2,
+        "max_per_hour": 10
+      }
+    },
+    "call_phone": {
+      "risk_level": "high",
+      "auto_allowed": false,
+      "confirmation_required": true,
+      "max_consecutive_calls": 1,
+      "post_check_required": true,
+      "post_checks": ["call_initiated"],
+      "rate_limit": {
+        "max_per_minute": 1,
+        "max_per_hour": 5
+      }
+    },
+    "xiaoyi_gui_agent": {
+      "risk_level": "high",
+      "auto_allowed": false,
+      "confirmation_required": true,
+      "max_consecutive_calls": 1,
+      "post_check_required": true,
+      "post_checks": ["action_completed"],
+      "timeout_ms": 300000,
+      "step_timeout_ms": 30000,
+      "retry_count": 2,
+      "retry_delay_ms": 5000,
+      "rate_limit": {
+        "max_per_minute": 1,
+        "max_per_hour": 10
+      }
+    },
+    "get_user_location": {
+      "risk_level": "medium",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 3,
+      "post_check_required": true,
+      "post_checks": ["location_retrieved"],
+      "timeout_ms": 120000,
+      "retry_count": 2,
+      "retry_delay_ms": 5000,
+      "fallback_strategy": "ip_based_location",
+      "rate_limit": {
+        "max_per_minute": 2,
+        "max_per_hour": 10
+      }
+    },
+    "web_fetch": {
+      "risk_level": "low",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 10,
+      "post_check_required": false,
+      "forbidden_domains": ["localhost", "127.0.0.1", "192.168.*", "10.*"],
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "retry_count": 3,
+      "retry_delay_ms": 2000,
+      "rate_limit": {
+        "max_per_minute": 20,
+        "max_per_hour": 200
+      }
+    },
+    "sessions_spawn": {
+      "risk_level": "critical",
+      "auto_allowed": false,
+      "confirmation_required": true,
+      "double_confirmation_required": true,
+      "max_consecutive_calls": 1,
+      "post_check_required": true,
+      "post_checks": ["session_spawned"],
+      "rate_limit": {
+        "max_per_minute": 1,
+        "max_per_hour": 5
+      }
+    },
+    "memory_search": {
+      "risk_level": "low",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 20,
+      "post_check_required": false,
+      "rate_limit": {
+        "max_per_minute": 30,
+        "max_per_hour": 500
+      }
+    },
+    "memory_get": {
+      "risk_level": "low",
+      "auto_allowed": true,
+      "confirmation_required": false,
+      "max_consecutive_calls": 20,
+      "post_check_required": false,
+      "rate_limit": {
+        "max_per_minute": 30,
+        "max_per_hour": 500
+      }
+    }
+  },
+  "global_limits": {
+    "max_total_calls_per_minute": 100,
+    "max_total_calls_per_hour": 1000,
+    "max_consecutive_failures": 5,
+    "failure_cooldown_ms": 60000
+  },
+  "violation_actions": {
+    "rate_limit_exceeded": "queue_request",
+    "consecutive_failures_exceeded": "temporarily_disable_tool",
+    "forbidden_command": "block_and_alert",
+    "confirmation_timeout": "cancel_operation"
+  }
+}

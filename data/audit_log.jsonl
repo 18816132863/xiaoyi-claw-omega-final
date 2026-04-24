@@ -1,0 +1,3 @@
+{"event": "manual_confirmation", "invocation_id": "inv_12345", "result": "confirmed_success", "approver": "user", "timestamp": "2026-04-24T20:37:43.772024"}
+{"event": "smoke_test", "test": "closed_loop", "timestamp": "2026-04-24T20:53:03.476743"}
+{"event": "smoke_test", "test": "closed_loop", "timestamp": "2026-04-24T21:28:17.503446"}

@@ -1,0 +1,49 @@
+{
+  "module": "tutorial",
+  "version": "1.0.0",
+  "description": "教程系统",
+  "tutorials": {
+    "basic": {
+      "name": "基础教程",
+      "lessons": [
+        "启动系统",
+        "基本交互",
+        "任务管理"
+      ],
+      "duration_minutes": 15
+    },
+    "personal": {
+      "name": "个人模式教程",
+      "lessons": [
+        "智能对话",
+        "知识管理",
+        "任务规划"
+      ],
+      "duration_minutes": 20
+    },
+    "enterprise": {
+      "name": "企业模式教程",
+      "lessons": [
+        "团队协作",
+        "项目管理",
+        "架构设计"
+      ],
+      "duration_minutes": 30
+    },
+    "advanced": {
+      "name": "高级教程",
+      "lessons": [
+        "多智能体",
+        "代码生成",
+        "自动化工作流"
+      ],
+      "duration_minutes": 45
+    }
+  },
+  "features": {
+    "interactive": true,
+    "hands_on": true,
+    "quiz": true,
+    "certificate": true
+  }
+}

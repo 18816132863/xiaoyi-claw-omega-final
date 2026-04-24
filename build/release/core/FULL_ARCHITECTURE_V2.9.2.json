@@ -1,0 +1,180 @@
+{
+  "version": "2.9.2",
+  "name": "小艺 Claw 终极星空鸽子王",
+  "architecture": "六层核心架构 L1-L6 (固定不变) + 文件保护模块",
+  "upload_mode": "full_upload",
+  "last_updated": "2026-04-11T09:28:00+08:00",
+  
+  "new_features": {
+    "file_guardian": {
+      "name": "文件保护模块",
+      "location": "guard/file_guardian.py",
+      "layer": "L5",
+      "description": "防止在升级优化过程中误删有用文件",
+      "rules": [
+        "所有删除操作必须经过人工二次确认",
+        "确认时必须说明文件的必要性和作用",
+        "受保护文件列表不可绕过",
+        "使用 trash 替代 rm"
+      ]
+    }
+  },
+  
+  "layers": {
+    "L1": {
+      "name": "核心认知层",
+      "token_budget": 3000,
+      "load_strategy": "immediate",
+      "skills_count": 0,
+      "skills": [],
+      "files": ["AGENTS.md", "SOUL.md", "USER.md", "TOOLS.md", "IDENTITY.md", "CONFIG.json"],
+      "directories": ["core/", "core/guide/"],
+      "description": "身份、规则、引导"
+    },
+    
+    "L2": {
+      "name": "记忆上下文层",
+      "token_budget": 2000,
+      "load_strategy": "on_demand",
+      "skills_count": 3,
+      "skills": ["memory", "obsidian", "find-skills"],
+      "triggers": ["记得", "上次", "回忆", "历史"],
+      "files": ["MEMORY.md", "memory/*.md"],
+      "description": "记忆存储、检索"
+    },
+    
+    "L3": {
+      "name": "任务编排层",
+      "token_budget": 1500,
+      "load_strategy": "on_demand",
+      "skills_count": 8,
+      "skills": ["planning-with-files", "today-task", "post-job", "cron", "proactivity", "self-improving-agent", "command-center", "command-hook"],
+      "triggers": ["工作流", "定时", "计划", "任务"],
+      "directories": ["engine/", "engine/router.py", "engine/workflows/"],
+      "description": "路由、工作流、调度"
+    },
+    
+    "L4": {
+      "name": "能力执行层",
+      "token_budget": 1500,
+      "load_strategy": "by_category",
+      "skills_count": 134,
+      "description": "技能执行、结果验证",
+      "directories": ["engine/executor.py", "engine/validator.py", "skills/"],
+      "categories_count": 22,
+      "note": "扩展层(E/X/Y)技能已整合到L4分类中"
+    },
+    
+    "L5": {
+      "name": "稳定治理层",
+      "token_budget": 800,
+      "load_strategy": "on_sensitive",
+      "skills_count": 6,
+      "skills": ["clawsec-suite", "senior-security", "risk-management-specialist", "verified-agent-identity", "moltguard", "secret-guardian"],
+      "triggers": ["安全", "权限", "敏感"],
+      "directories": ["guard/"],
+      "modules": {
+        "security.py": "安全检查模块",
+        "permissions.py": "权限管理模块",
+        "audit.py": "审计日志模块",
+        "file_guardian.py": "文件保护模块 (新增)",
+        "protected_files.json": "受保护文件列表 (新增)"
+      },
+      "description": "安全、权限、审计、文件保护"
+    },
+    
+    "L6": {
+      "name": "基础设施层",
+      "token_budget": 700,
+      "load_strategy": "on_system",
+      "skills_count": 4,
+      "skills": ["skill-creator", "skill-safe-install", "openclaw-agent-optimize", "performance-upgrade"],
+      "triggers": ["系统", "安装", "配置"],
+      "directories": ["infra/"],
+      "description": "路径、插件、性能、注册"
+    }
+  },
+  
+  "protected_files": {
+    "description": "受保护文件列表 - 删除前必须人工确认",
+    "core_protected": [
+      {"path": "AGENTS.md", "reason": "工作空间规则", "layer": "L1"},
+      {"path": "SOUL.md", "reason": "身份定义", "layer": "L1"},
+      {"path": "USER.md", "reason": "用户信息", "layer": "L1"},
+      {"path": "TOOLS.md", "reason": "工具规则", "layer": "L1"},
+      {"path": "IDENTITY.md", "reason": "身份标识", "layer": "L1"},
+      {"path": "MEMORY.md", "reason": "长期记忆", "layer": "L2"},
+      {"path": "CONFIG.json", "reason": "核心配置", "layer": "L1"},
+      {"path": "guard/file_guardian.py", "reason": "文件保护模块", "layer": "L5"},
+      {"path": "guard/protected_files.json", "reason": "受保护列表", "layer": "L5"}
+    ],
+    "delete_rules": [
+      "所有删除操作必须经过人工二次确认",
+      "确认时必须说明文件的必要性和作用",
+      "受保护文件列表不可绕过",
+      "使用 trash 替代 rm"
+    ]
+  },
+  
+  "all_skills": [
+    "admapix", "agent-browser-clawdbot", "agent-chronicle", "ai-picture-book", "ai-ppt-generator",
+    "amazon-product-search-api-skill", "ansible", "api-gateway", "article-writer", "audio-cog",
+    "auto-skill-upgrade", "baidu-netdisk-skills", "beauty-generation-api", "beginner-mode", "best-minds",
+    "bilibili-all-in-one", "bitsoul-stock-quantization", "calcom-cal.com-web-design-guidelines-1.0.2",
+    "camsnap", "ceo-advisor", "chart-image", "china-stock-analysis", "clawdhub", "clawsec-suite",
+    "cn-web-search", "code-analysis-skills", "command-center", "command-hook", "copywriter", "core",
+    "cron", "crypto", "data-analysis", "deep-search-and-insight-synthesize", "dingtalk-ai-table",
+    "discord", "docker", "docs-cog", "docx", "elasticsearch", "engines", "eno", "excel-analysis",
+    "file-manager", "find-skills", "frontend-design-pro", "getnote", "git", "good-txt-to-hwreader",
+    "google-maps", "guide", "hot-news-aggregator", "huawei-drive", "image", "image-gen",
+    "imap-smtp-email", "imsg", "industry-stock-tracker", "javascript-skills", "juejin-skills",
+    "keyword-research", "klaviyo", "linkedin-api", "local_app_interconnect", "market-research",
+    "marketing-strategy-pmm", "markitdown", "memory", "moltguard", "moltrade", "mongodb",
+    "mx-stocks-screener", "mysql", "nano-pdf", "novel-generator", "obsidian", "ocr-local",
+    "ontology", "openai-whisper-api", "openclaw-agent-optimize", "openclaw-skills-agent-builder-1.0.3",
+    "pdf", "performance-upgrade", "personas", "pexoai-agent", "planning-with-files", "playwright",
+    "poetry", "polymarket-trade", "post-job", "pptx", "proactivity", "productivity",
+    "quality-documentation-manager", "react-best-practices", "research-cog", "risk-management-specialist",
+    "scrapling-official", "screenshot", "seedream-image_gen", "self-improving-agent", "senior-architect",
+    "senior-data-scientist", "senior-security", "sheet-cog", "skill-creator", "skill-finder",
+    "skill-fusion", "skill-install-manager-1-0-0", "sonoscli", "spotify-player", "sqlite",
+    "stock-price-query", "story-cog", "su-lan-paper-daily-skill", "t-trading", "taskr",
+    "tavily-search-skill", "tdd-guide", "tech-news-digest", "technical-seo-checker", "tencent-cos-skill",
+    "terraform", "today-task", "topic-monitor", "tushare-data", "ui-design-system", "unified-document",
+    "unified-image", "unified-search", "university-applications", "utils", "verified-agent-identity",
+    "video-agent", "video-cog", "video-subtitles", "wan-image-video-generation-editting", "weather",
+    "web-browsing", "web-scraper", "web-search-exa", "webapp-testing", "xiao-gui-agent",
+    "xiaohongshu-all-in-one", "xiaoyi-doc-convert", "xiaoyi-file-upload", "xiaoyi-health",
+    "xiaoyi-image-search", "xiaoyi-image-understanding", "xiaoyi-report", "xiaoyi-web-search"
+  ],
+  
+  "summary": {
+    "total_layers": 6,
+    "total_skills": 151,
+    "total_token_budget": 9500,
+    "startup_token": 2000,
+    "protected_files_count": 9,
+    "new_modules": ["guard/file_guardian.py", "guard/protected_files.json"]
+  },
+  
+  "performance": {
+    "startup_latency_ms": 30,
+    "skill_lookup_ms": 5,
+    "layer_load_ms": 20,
+    "total_response_ms": 60
+  },
+  
+  "directories": {
+    "core": "L1 + L2: 认知 + 记忆",
+    "engine": "L3 + L4: 编排 + 执行",
+    "skills": "L4: 技能库 (151个)",
+    "guard": "L5: 安全治理 + 文件保护",
+    "infra": "L6: 基础设施",
+    "memory": "L2: 日记目录"
+  },
+  
+  "version_history": [
+    {"version": "2.9.1", "date": "2026-04-11", "desc": "六层架构固定"},
+    {"version": "2.9.2", "date": "2026-04-11", "desc": "新增文件保护模块"}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "exec",
+  "bin": "scripts/tts.py",
+  "env": [],
+  "name": "xiaoyi-tts",
+  "description": "小艺语音合成API进行文字信息转成语音流",
+  "tags": ["text", "speech"],
+  "autoLoad": true
+}

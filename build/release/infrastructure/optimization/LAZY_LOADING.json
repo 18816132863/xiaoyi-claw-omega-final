@@ -1,0 +1,30 @@
+{
+  "version": "7.2.0",
+  "updated": "2026-04-13",
+  "strategy": "lazy_load_inactive_skills",
+  "active_skills": [
+    "docx",
+    "pdf", 
+    "cron",
+    "file-manager",
+    "xiaoyi-web-search",
+    "xiaoyi-image-understanding",
+    "xiaoyi-file-upload",
+    "find-skills"
+  ],
+  "preload_on_startup": [
+    "core/ARCHITECTURE.md",
+    "MEMORY.md",
+    "AGENTS.md",
+    "TOOLS.md"
+  ],
+  "lazy_load_patterns": [
+    "skills/*/SKILL.md",
+    "infrastructure/inventory/skill_registry.json"
+  ],
+  "cache_config": {
+    "skill_metadata_ttl": 3600,
+    "search_result_ttl": 300,
+    "vector_cache_ttl": 86400
+  }
+}

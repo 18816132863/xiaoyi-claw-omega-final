@@ -15,6 +15,11 @@ V7.2.2 新增：
 - 架构文档自动更新
 - 新模块自动注册
 - 能力矩阵自动更新
+
+V8.8.3 新增：
+- 模块融合引擎集成
+- 手动创建模块自动融合
+- 扫描未注册模块并自动注册
 """
 
 import sys
@@ -154,18 +159,84 @@ def run_architecture_check(root: Path) -> bool:
     return True
 
 
+def run_module_fusion(root: Path) -> bool:
+    """运行模块融合引擎"""
+    print("\n📦 运行模块融合引擎 (V8.8.3)...")
+    
+    module_fusion_path = root / 'infrastructure' / 'fusion' / 'module_fusion_engine.py'
+    
+    if not module_fusion_path.exists():
+        print("  ⚠️  模块融合引擎不存在，跳过")
+        return True
+    
+    result = subprocess.run(
+        [sys.executable, str(module_fusion_path), 'scan'],
+        cwd=str(root),
+        capture_output=True,
+        text=True
+    )
+    
+    print(result.stdout)
+    
+    if result.returncode == 0:
+        # 检查是否融合了新模块
+        if "融合 0 个" in result.stdout:
+            print("  ✅ 所有模块已注册")
+            return True
+        else:
+            print("  ✅ 新模块已自动融合")
+            return True
+    else:
+        print(f"  ❌ 模块融合失败: {result.stderr}")
+        return False
+
+
+def run_skill_fusion(root: Path) -> bool:
+    """运行技能融合引擎"""
+    print("\n🎯 运行技能融合引擎...")
+    
+    skill_fusion_path = root / 'infrastructure' / 'fusion' / 'skill_fusion_engine.py'
+    
+    if not skill_fusion_path.exists():
+        print("  ⚠️  技能融合引擎不存在，跳过")
+        return True
+    
+    # 使用 auto_fuse_all 方法
+    result = subprocess.run(
+        [sys.executable, '-c', 
+         f"import sys; sys.path.insert(0, '{root}'); "
+         f"from infrastructure.fusion.skill_fusion_engine import SkillFusionEngine; "
+         f"engine = SkillFusionEngine(); result = engine.auto_fuse_all(); "
+         f"print(f'扫描: {{result.get(\"scanned\", 0)}} 融合: {{result.get(\"fused\", 0)}}')"],
+        cwd=str(root),
+        capture_output=True,
+        text=True
+    )
+    
+    print(result.stdout)
+    
+    if result.returncode == 0:
+        print("  ✅ 技能融合完成")
+        return True
+    else:
+        print(f"  ⚠️  技能融合警告: {result.stderr}")
+        return True  # 不阻断流程
+
+
 def main():
     """主函数"""
     import argparse
-    parser = argparse.ArgumentParser(description="自动融合钩子 V7.2.2")
+    parser = argparse.ArgumentParser(description="自动融合钩子 V8.8.3")
     parser.add_argument("--execute", action="store_true", help="执行文档同步")
     parser.add_argument("--check-arch", action="store_true", help="检查架构完整性")
+    parser.add_argument("--skip-modules", action="store_true", help="跳过模块融合")
+    parser.add_argument("--skip-skills", action="store_true", help="跳过技能融合")
     args = parser.parse_args()
     
     root = get_project_root()
     
     print("=" * 60)
-    print("  自动融合钩子 V7.2.2")
+    print("  自动融合钩子 V8.8.3")
     print("=" * 60)
     
     all_passed = True
@@ -181,12 +252,24 @@ def main():
         if not fuse_passed:
             all_passed = False
     
-    # 3. 运行文档同步检查
+    # 3. 运行模块融合（V8.8.3 新增）
+    if not args.skip_modules:
+        module_passed = run_module_fusion(root)
+        if not module_passed:
+            all_passed = False
+    
+    # 4. 运行技能融合
+    if not args.skip_skills:
+        skill_passed = run_skill_fusion(root)
+        if not skill_passed:
+            all_passed = False
+    
+    # 5. 运行文档同步检查
     doc_passed = run_doc_sync(root, execute=args.execute)
     if not doc_passed:
         all_passed = False
     
-    # 4. 检查架构完整性
+    # 6. 检查架构完整性
     if args.check_arch:
         arch_passed = run_architecture_check(root)
         if not arch_passed:

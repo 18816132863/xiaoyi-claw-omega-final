@@ -1,0 +1,163 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-06T13:40:00+08:00",
+  "description": "模型/能力路由配置",
+  "routingTable": {
+    "qa": {
+      "task_type": "qa",
+      "model_tier": "fast",
+      "description": "简单问答使用快速模型",
+      "escalation_conditions": [
+        {
+          "condition": "complexity > 0.7",
+          "action": "escalate_to_standard"
+        },
+        {
+          "condition": "requires_external_info",
+          "action": "escalate_to_standard"
+        }
+      ],
+      "fallback_model": "standard",
+      "max_context": 4000,
+      "preferred_validators": ["ANSWER_VALIDATOR"]
+    },
+    "search": {
+      "task_type": "search",
+      "model_tier": "standard",
+      "description": "搜索任务使用标准模型",
+      "escalation_conditions": [
+        {
+          "condition": "results_conflict",
+          "action": "escalate_to_deep"
+        },
+        {
+          "condition": "requires_analysis",
+          "action": "escalate_to_deep"
+        }
+      ],
+      "fallback_model": "deep",
+      "max_context": 8000,
+      "preferred_validators": ["ANSWER_VALIDATOR", "FACT_CHECK"]
+    },
+    "document_edit": {
+      "task_type": "document_edit",
+      "model_tier": "standard",
+      "description": "文档编辑使用标准模型",
+      "escalation_conditions": [
+        {
+          "condition": "document_size > 10000",
+          "action": "escalate_to_deep"
+        },
+        {
+          "condition": "format_complex",
+          "action": "escalate_to_deep"
+        }
+      ],
+      "fallback_model": "deep",
+      "max_context": 16000,
+      "preferred_validators": ["FORMAT_ENFORCEMENT"]
+    },
+    "planning": {
+      "task_type": "planning",
+      "model_tier": "deep",
+      "description": "规划任务使用深度模型",
+      "escalation_conditions": [],
+      "fallback_model": null,
+      "max_context": 32000,
+      "preferred_validators": ["ANSWER_VALIDATOR"]
+    },
+    "creative_generation": {
+      "task_type": "creative_generation",
+      "model_tier": "deep",
+      "description": "创作任务使用深度模型",
+      "escalation_conditions": [],
+      "fallback_model": null,
+      "max_context": 32000,
+      "preferred_validators": ["FORMAT_ENFORCEMENT"]
+    },
+    "tool_use": {
+      "task_type": "tool_use",
+      "model_tier": "fast",
+      "description": "工具调用使用快速模型",
+      "escalation_conditions": [
+        {
+          "condition": "tool_failure",
+          "action": "escalate_to_standard"
+        }
+      ],
+      "fallback_model": "standard",
+      "max_context": 4000,
+      "preferred_validators": ["ANSWER_VALIDATOR"]
+    },
+    "multi_step_agent": {
+      "task_type": "multi_step_agent",
+      "model_tier": "deep",
+      "description": "多步任务使用深度模型",
+      "escalation_conditions": [],
+      "fallback_model": null,
+      "max_context": 64000,
+      "preferred_validators": ["ANSWER_VALIDATOR", "FACT_CHECK"]
+    },
+    "high_risk_request": {
+      "task_type": "high_risk_request",
+      "model_tier": "validation",
+      "description": "高风险任务使用校验模型",
+      "escalation_conditions": [],
+      "fallback_model": null,
+      "max_context": 8000,
+      "preferred_validators": ["REFUSAL_POLICY", "FACT_CHECK"]
+    }
+  },
+  "modelTiers": {
+    "fast": {
+      "description": "快速模型",
+      "characteristics": [
+        "低延迟",
+        "低成本",
+        "适合简单任务"
+      ],
+      "max_tokens": 4000,
+      "typical_latency_ms": 1000,
+      "cost_per_1k_tokens": 0.001
+    },
+    "standard": {
+      "description": "标准模型",
+      "characteristics": [
+        "平衡性能",
+        "中等成本",
+        "适合常规任务"
+      ],
+      "max_tokens": 8000,
+      "typical_latency_ms": 3000,
+      "cost_per_1k_tokens": 0.01
+    },
+    "deep": {
+      "description": "深度模型",
+      "characteristics": [
+        "高能力",
+        "高成本",
+        "适合复杂任务"
+      ],
+      "max_tokens": 32000,
+      "typical_latency_ms": 10000,
+      "cost_per_1k_tokens": 0.1
+    },
+    "validation": {
+      "description": "校验模型",
+      "characteristics": [
+        "高准确性",
+        "严格校验",
+        "适合高风险任务"
+      ],
+      "max_tokens": 8000,
+      "typical_latency_ms": 5000,
+      "cost_per_1k_tokens": 0.05
+    }
+  },
+  "escalationRules": {
+    "max_escalations": 2,
+    "escalation_cooldown_ms": 5000,
+    "auto_escalation_enabled": true,
+    "log_escalations": true
+  }
+}

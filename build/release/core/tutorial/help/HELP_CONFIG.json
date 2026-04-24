@@ -1,0 +1,33 @@
+{
+  "module": "help_system",
+  "version": "1.0.0",
+  "description": "智能帮助系统",
+  "help_types": {
+    "quick_help": {
+      "description": "快速帮助",
+      "trigger": "关键词",
+      "response_time_ms": 100
+    },
+    "context_help": {
+      "description": "上下文帮助",
+      "trigger": "当前操作",
+      "response_time_ms": 200
+    },
+    "search_help": {
+      "description": "搜索帮助",
+      "trigger": "用户搜索",
+      "response_time_ms": 500
+    },
+    "ai_help": {
+      "description": "AI帮助",
+      "trigger": "自然语言问题",
+      "response_time_ms": 1000
+    }
+  },
+  "features": {
+    "predictive": true,
+    "interactive": true,
+    "multilingual": true,
+    "accessibility": true
+  }
+}

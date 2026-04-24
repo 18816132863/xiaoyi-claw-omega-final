@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "execution_result.schema.json",
+  "title": "Execution Result",
+  "description": "技能执行结果契约",
+  "type": "object",
+  "required": ["success", "data", "error"],
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "是否成功"
+    },
+    "data": {
+      "type": "object",
+      "description": "返回数据"
+    },
+    "error": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "错误码"
+        },
+        "message": {
+          "type": "string",
+          "description": "错误信息"
+        }
+      },
+      "description": "错误信息"
+    },
+    "execution_time": {
+      "type": "number",
+      "minimum": 0,
+      "description": "执行时间(ms)"
+    },
+    "skill_id": {
+      "type": "string",
+      "description": "技能 ID"
+    },
+    "execution_id": {
+      "type": "string",
+      "description": "执行唯一标识"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "时间戳"
+    }
+  },
+  "additionalProperties": true
+}

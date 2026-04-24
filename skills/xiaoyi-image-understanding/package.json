@@ -1,0 +1,23 @@
+{
+  "name": "xiaoyi-image-understanding",
+  "version": "1.0.0",
+  "description": "小艺图像理解API进行图像内容识别和描述",
+  "main": "scripts/image_understanding.py",
+  "bin": {
+    "xiaoyi-image-understanding": "./scripts/image_understanding.py"
+  },
+  "scripts": {
+    "understand": "python scripts/image_understanding.py"
+  },
+  "keywords": [
+    "image",
+    "vision",
+    "understanding",
+    "caption",
+    "xiaoyi"
+  ],
+  "dependencies": {
+    "requests": "^2.31.0"
+  },
+  "python": ">=3.7"
+}

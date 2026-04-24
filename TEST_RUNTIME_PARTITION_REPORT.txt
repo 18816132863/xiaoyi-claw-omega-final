@@ -1,0 +1,66 @@
+"""测试运行时分区报告"""
+
+# 测试分层策略
+
+## 一、测试标记
+
+| 标记 | 说明 | 默认运行 |
+|------|------|---------|
+| 无标记 | 普通单元测试 | ✅ 是 |
+| device_runtime | 需要真实设备 | ❌ 否 |
+| connected_runtime | 需要 OpenClaw 连接 | ❌ 否 |
+| requires_call_device_tool | 需要 call_device_tool | ❌ 否 |
+
+## 二、pytest 配置
+
+```ini
+[pytest]
+markers =
+    device_runtime: requires real device runtime
+    connected_runtime: requires OpenClaw/Xiaoyi connected runtime
+    requires_call_device_tool: requires injected call_device_tool
+```
+
+## 三、测试文件分类
+
+### 默认运行（无标记）
+- tests/test_*_closed_loop.py - 能力闭环测试
+- tests/test_workflow*.py - 工作流测试
+- tests/test_*_bundle.py - 场景模板测试
+- tests/test_*_controls.py - 安全控制测试
+
+### 需要 device_runtime 标记
+- tests/test_xiaoyi_adapter_guarded.py - 端侧适配器测试
+
+## 四、运行命令
+
+```bash
+# 默认测试（不包含设备测试）
+python -m pytest -q
+
+# 仅设备测试
+python -m pytest -q -m device_runtime
+
+# 全部测试
+python -m pytest -q -m ""
+```
+
+## 五、跳过规则
+
+设备测试在以下情况自动跳过：
+1. call_device_tool 不可用
+2. OpenClaw runtime 未连接
+3. 设备未授权
+
+跳过代码示例：
+```python
+import pytest
+
+pytestmark = pytest.mark.device_runtime
+
+def test_real_device():
+    try:
+        from tools import call_device_tool
+    except ImportError:
+        pytest.skip("requires call_device_tool")
+```

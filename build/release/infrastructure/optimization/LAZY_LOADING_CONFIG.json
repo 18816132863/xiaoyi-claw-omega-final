@@ -1,0 +1,44 @@
+{
+  "version": "2.7.0",
+  "description": "延迟加载配置 - 减少启动时 Token 消耗",
+  "loadingStrategy": {
+    "immediate": [
+      "AGENTS.md",
+      "SOUL.md",
+      "TOOLS.md",
+      "USER.md",
+      "IDENTITY.md",
+      "HEARTBEAT.md",
+      "core/ARCHITECTURE.md"
+    ],
+    "onDemand": {
+      "skills": {
+        "trigger": "user_request",
+        "maxPreload": 5,
+        "cacheTimeout": 300
+      },
+      "memory": {
+        "trigger": "recall_needed",
+        "maxDays": 7
+      },
+      "governance": {
+        "trigger": "error_or_audit",
+        "cacheSize": 10
+      },
+      "infrastructure": {
+        "trigger": "ops_task",
+        "cacheSize": 5
+      }
+    }
+  },
+  "compression": {
+    "enabled": true,
+    "algorithm": "gzip",
+    "minSize": 1024
+  },
+  "caching": {
+    "enabled": true,
+    "ttl": 3600,
+    "maxSize": "100MB"
+  }
+}

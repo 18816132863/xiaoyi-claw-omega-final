@@ -1,0 +1,147 @@
+{
+  "version": "7.2.0",
+  "updated": "2026-04-10",
+  "components": {
+    "fast_bridge": {
+      "name": "FastBridge",
+      "version": "7.2.0",
+      "layer": 1,
+      "type": "core",
+      "entry": "core/layer_bridge/fast_bridge.py",
+      "config": "core/layer_bridge/LAYER_BRIDGE_CONFIG.json",
+      "performance": {
+        "avg_latency_ms": 0.005,
+        "qps": 217523,
+        "memory_mb": 5
+      },
+      "dependencies": [],
+      "status": "active",
+      "description": "层间高速连接器"
+    },
+    "zero_copy": {
+      "name": "ZeroCopyManager",
+      "version": "7.2.0",
+      "layer": 2,
+      "type": "memory",
+      "entry": "core/layer_bridge/zero_copy.py",
+      "config": null,
+      "performance": {
+        "avg_latency_ms": 0.004,
+        "qps": 269667,
+        "memory_mb": 10
+      },
+      "dependencies": [],
+      "status": "active",
+      "description": "零拷贝数据传输"
+    },
+    "layer_cache": {
+      "name": "LayerCache",
+      "version": "7.2.0",
+      "layer": 2,
+      "type": "memory",
+      "entry": "core/layer_bridge/layer_cache.py",
+      "config": null,
+      "performance": {
+        "read_latency_ms": 0.001,
+        "write_latency_ms": 0.219,
+        "read_qps": 699566,
+        "write_qps": 4561,
+        "memory_mb": 100
+      },
+      "dependencies": [],
+      "status": "active",
+      "description": "三级缓存系统"
+    },
+    "async_queue": {
+      "name": "AsyncCallQueue",
+      "version": "7.2.0",
+      "layer": 3,
+      "type": "orchestration",
+      "entry": "core/layer_bridge/async_queue.py",
+      "config": null,
+      "performance": {
+        "avg_latency_ms": 0.1,
+        "qps": 50000,
+        "memory_mb": 20
+      },
+      "dependencies": [],
+      "status": "active",
+      "description": "异步调用队列"
+    },
+    "smart_router": {
+      "name": "SmartRouter",
+      "version": "7.2.0",
+      "layer": 3,
+      "type": "orchestration",
+      "entry": "infrastructure/performance/smart_router.py",
+      "config": null,
+      "performance": {
+        "avg_latency_ms": 0.005,
+        "qps": 186059,
+        "memory_mb": 15
+      },
+      "dependencies": [],
+      "status": "active",
+      "description": "智能路由器"
+    },
+    "unified_optimizer": {
+      "name": "UnifiedOptimizer",
+      "version": "7.2.0",
+      "layer": 4,
+      "type": "execution",
+      "entry": "infrastructure/performance/unified_optimizer.py",
+      "config": null,
+      "performance": {
+        "avg_latency_ms": 0.462,
+        "qps": 2164,
+        "memory_mb": 30
+      },
+      "dependencies": [
+        "fast_bridge",
+        "layer_cache",
+        "zero_copy"
+      ],
+      "status": "active",
+      "description": "统一优化器"
+    },
+    "performance_monitor": {
+      "name": "PerformanceMonitor",
+      "version": "7.2.0",
+      "layer": 5,
+      "type": "governance",
+      "entry": "infrastructure/performance/performance_monitor.py",
+      "config": null,
+      "performance": {
+        "avg_latency_ms": 1.0,
+        "qps": 10000,
+        "memory_mb": 50
+      },
+      "dependencies": [],
+      "status": "active",
+      "description": "性能监控器"
+    }
+  },
+  "layers": {
+    "L1_core": [
+      "fast_bridge"
+    ],
+    "L2_memory": [
+      "zero_copy",
+      "layer_cache"
+    ],
+    "L3_orchestration": [
+      "async_queue",
+      "smart_router"
+    ],
+    "L4_execution": [
+      "unified_optimizer"
+    ],
+    "L5_governance": [
+      "performance_monitor"
+    ],
+    "L6_infrastructure": [
+      "performance_monitor",
+      "smart_router"
+    ]
+  }
+}

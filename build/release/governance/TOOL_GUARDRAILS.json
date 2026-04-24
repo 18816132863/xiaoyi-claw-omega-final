@@ -1,0 +1,77 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-15",
+  "guardrails": {
+    "read": {
+      "risk_level": "low",
+      "requires_confirmation": false,
+      "rate_limit": 100,
+      "timeout_seconds": 10
+    },
+    "write": {
+      "risk_level": "medium",
+      "requires_confirmation": false,
+      "rate_limit": 50,
+      "timeout_seconds": 30,
+      "checks": ["path_allowed", "size_reasonable"]
+    },
+    "edit": {
+      "risk_level": "medium",
+      "requires_confirmation": false,
+      "rate_limit": 50,
+      "timeout_seconds": 30,
+      "checks": ["file_exists", "backup_created"]
+    },
+    "exec": {
+      "risk_level": "high",
+      "requires_confirmation": true,
+      "rate_limit": 20,
+      "timeout_seconds": 60,
+      "checks": ["command_allowed", "not_elevated"]
+    },
+    "delete_alarm": {
+      "risk_level": "high",
+      "requires_confirmation": true,
+      "rate_limit": 10,
+      "timeout_seconds": 60
+    },
+    "send_message": {
+      "risk_level": "high",
+      "requires_confirmation": true,
+      "rate_limit": 10,
+      "timeout_seconds": 60,
+      "checks": ["phone_format_valid"]
+    },
+    "call_phone": {
+      "risk_level": "critical",
+      "requires_confirmation": true,
+      "double_confirmation": true,
+      "rate_limit": 5,
+      "timeout_seconds": 60,
+      "checks": ["phone_format_valid", "not_emergency_number"]
+    },
+    "xiaoyi_gui_agent": {
+      "risk_level": "high",
+      "requires_confirmation": true,
+      "rate_limit": 10,
+      "timeout_seconds": 180
+    },
+    "sessions_spawn": {
+      "risk_level": "critical",
+      "requires_confirmation": true,
+      "double_confirmation": true,
+      "rate_limit": 5,
+      "timeout_seconds": 120
+    }
+  },
+  "global_limits": {
+    "max_concurrent_calls": 5,
+    "max_calls_per_minute": 100,
+    "max_calls_per_hour": 1000
+  },
+  "blocked_operations": [
+    "rm -rf /",
+    "format disk",
+    "delete all"
+  ]
+}

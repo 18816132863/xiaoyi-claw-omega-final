@@ -1,0 +1,94 @@
+{
+  "version": "7.2.0",
+  "updated_at": "2026-04-12",
+
+  "action_categories": {
+    "safe_auto": [
+      "rebuild_dashboard",
+      "rebuild_ops_state",
+      "rebuild_bundle",
+      "retry_notifications",
+      "regenerate_reports",
+      "cleanup_temp_cache"
+    ],
+    "semi_auto": [
+      "rerun_nightly",
+      "rerun_release_gate",
+      "toggle_incident",
+      "rerun_integration",
+      "fix_config_drift"
+    ],
+    "forbidden_auto": [
+      "modify_core_arch",
+      "modify_skill_registry",
+      "modify_quality_rules",
+      "delete_snapshots",
+      "modify_release_decision",
+      "clear_p2_backlog"
+    ]
+  },
+
+  "safe_auto_triggers": [
+    "dashboard_missing_or_stale",
+    "ops_state_missing_or_stale",
+    "bundle_missing",
+    "notification_failed",
+    "reports_missing",
+    "temp_cache_overflow"
+  ],
+
+  "suggest_only_triggers": [
+    "runtime_gate_fail",
+    "quality_gate_fail",
+    "release_blocked",
+    "strong_regression",
+    "p0_count_gt_zero",
+    "blocking_alerts"
+  ],
+
+  "config": {
+    "enable_safe_remediation": false,
+    "enable_semi_auto": false,
+    "require_approval_for_semi_auto": true,
+    "max_retry_count": 3,
+    "cooldown_minutes": 5,
+    "max_concurrent_actions": 1
+  },
+
+  "actions": {
+    "rebuild_dashboard": {
+      "command": "python scripts/build_ops_dashboard.py",
+      "outputs": [
+        "reports/dashboard/ops_dashboard.json",
+        "reports/dashboard/ops_dashboard.md",
+        "reports/dashboard/ops_dashboard.html"
+      ],
+      "timeout_seconds": 60,
+      "idempotent": true
+    },
+    "rebuild_ops_state": {
+      "command": "python scripts/ops_center.py status",
+      "outputs": [
+        "reports/ops/ops_state.json"
+      ],
+      "timeout_seconds": 30,
+      "idempotent": true
+    },
+    "rebuild_bundle": {
+      "command": "python scripts/ops_center.py bundle",
+      "outputs": [
+        "reports/bundles/ops_bundle_*.zip"
+      ],
+      "timeout_seconds": 60,
+      "idempotent": true
+    },
+    "retry_notifications": {
+      "command": "python scripts/remediation_center.py _retry_notifications",
+      "outputs": [
+        "reports/alerts/notification_result.json"
+      ],
+      "timeout_seconds": 30,
+      "idempotent": true
+    }
+  }
+}

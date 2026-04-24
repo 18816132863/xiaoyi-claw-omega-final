@@ -1,0 +1,43 @@
+{
+  "module": "service_mesh",
+  "version": "1.0.0",
+  "description": "服务网格系统",
+  "platforms": {
+    "istio": {
+      "enabled": true,
+      "version": "1.20"
+    },
+    "linkerd": {
+      "enabled": true,
+      "version": "2.14"
+    },
+    "consul_connect": {
+      "enabled": true,
+      "version": "1.16"
+    }
+  },
+  "features": {
+    "traffic_management": {
+      "routing": true,
+      "traffic_splitting": true,
+      "canary_release": true,
+      "a_b_testing": true
+    },
+    "security": {
+      "mtls": true,
+      "access_control": true,
+      "certificate_management": true
+    },
+    "observability": {
+      "distributed_tracing": true,
+      "metrics": true,
+      "logs": true,
+      "dashboards": true
+    }
+  },
+  "performance": {
+    "proxy_latency_ms": 0.5,
+    "throughput_rps": 100000,
+    "sidecar_memory_mb": 50
+  }
+}

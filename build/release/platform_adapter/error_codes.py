@@ -1,0 +1,56 @@
+"""
+平台错误码定义
+统一错误码，不允许各文件自己发明
+"""
+
+
+class ErrorCode:
+    """错误码基类"""
+    pass
+
+
+# 平台超时
+PLATFORM_TIMEOUT = "PLATFORM_TIMEOUT"
+
+# 平台结果不确定
+PLATFORM_RESULT_UNCERTAIN = "PLATFORM_RESULT_UNCERTAIN"
+
+# 平台授权缺失
+PLATFORM_AUTH_REQUIRED = "PLATFORM_AUTH_REQUIRED"
+
+# 平台权限拒绝
+PLATFORM_PERMISSION_DENIED = "PLATFORM_PERMISSION_DENIED"
+
+# 平台未连接
+PLATFORM_NOT_CONNECTED = "PLATFORM_NOT_CONNECTED"
+
+# 平台能力不可用
+PLATFORM_NOT_AVAILABLE = "PLATFORM_NOT_AVAILABLE"
+
+# 平台参数错误
+PLATFORM_BAD_PARAMS = "PLATFORM_BAD_PARAMS"
+
+# 平台执行失败
+PLATFORM_EXECUTION_FAILED = "PLATFORM_EXECUTION_FAILED"
+
+# 平台 fallback 已使用
+PLATFORM_FALLBACK_USED = "PLATFORM_FALLBACK_USED"
+
+
+# 错误码描述映射
+ERROR_CODE_DESCRIPTIONS = {
+    PLATFORM_TIMEOUT: "平台调用超时",
+    PLATFORM_RESULT_UNCERTAIN: "平台调用结果不确定",
+    PLATFORM_AUTH_REQUIRED: "平台能力需要授权",
+    PLATFORM_PERMISSION_DENIED: "平台权限被拒绝",
+    PLATFORM_NOT_CONNECTED: "平台未连接",
+    PLATFORM_NOT_AVAILABLE: "平台能力不可用",
+    PLATFORM_BAD_PARAMS: "平台参数错误",
+    PLATFORM_EXECUTION_FAILED: "平台执行失败",
+    PLATFORM_FALLBACK_USED: "已使用备用通道",
+}
+
+
+def get_error_description(error_code: str) -> str:
+    """获取错误码描述"""
+    return ERROR_CODE_DESCRIPTIONS.get(error_code, "未知错误")

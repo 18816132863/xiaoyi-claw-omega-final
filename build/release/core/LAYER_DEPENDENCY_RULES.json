@@ -1,0 +1,79 @@
+{
+  "version": "2.1.0",
+  "updated": "2026-04-14",
+  "description": "层间依赖规则配置文件 - 规则硬化版",
+  
+  "layers": {
+    "core": {
+      "description": "核心认知、身份、规则、标准",
+      "allow_read_from": [],
+      "allow_write_to": [],
+      "forbid_import_from": [
+        "orchestration",
+        "execution",
+        "memory_context",
+        "governance",
+        "infrastructure",
+        "scripts"
+      ]
+    },
+    "orchestration": {
+      "description": "任务编排、工作流、路由",
+      "allow_read_from": ["core", "infrastructure"],
+      "allow_write_to": [],
+      "forbid_import_from": ["scripts"]
+    },
+    "execution": {
+      "description": "能力执行、技能网关",
+      "allow_read_from": ["core", "infrastructure"],
+      "allow_write_to": [],
+      "forbid_import_from": ["governance", "scripts"]
+    },
+    "memory_context": {
+      "description": "记忆上下文、知识库、统一搜索",
+      "allow_read_from": ["core", "infrastructure"],
+      "allow_write_to": [],
+      "forbid_import_from": ["scripts"]
+    },
+    "governance": {
+      "description": "稳定治理、安全审计、合规",
+      "allow_read_from": ["core", "infrastructure"],
+      "allow_write_to": [],
+      "forbid_import_from": ["execution", "scripts"]
+    },
+    "infrastructure": {
+      "description": "基础设施、工具链、注册表",
+      "allow_read_from": ["core"],
+      "allow_write_to": [],
+      "forbid_import_from": []
+    },
+    "control_plane": {
+      "description": "控制平面：scripts/reports/ops 聚合层",
+      "allow_read_from": [
+        "core",
+        "orchestration",
+        "execution",
+        "memory_context",
+        "governance",
+        "infrastructure"
+      ],
+      "allow_write_to": ["reports"],
+      "forbid_import_from": []
+    }
+  },
+  
+  "hard_rules": [
+    "core 只能被读，不承担业务执行",
+    "execution 不直接依赖 governance 规则实现",
+    "governance 不直接依赖具体 skills 实现",
+    "control_plane 只能聚合，不是业务真源",
+    "registry 是真源，index 是派生物",
+    "reports 是产物，不是主逻辑输入真源"
+  ],
+  
+  "violation_handling": {
+    "error_level": "error",
+    "report_file": "reports/integrity/dependency_violations.json",
+    "block_on_violation": true
+  }
+}

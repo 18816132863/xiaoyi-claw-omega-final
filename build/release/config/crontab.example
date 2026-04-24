@@ -1,0 +1,17 @@
+# Crontab 配置示例
+# 添加到 /etc/crontab 或用户的 crontab
+
+# 每小时健康巡检
+0 * * * * cd /home/sandbox/.openclaw/workspace && bash scripts/run_hourly_health_check.sh
+
+# 每日凌晨 3 点备份
+0 3 * * * cd /home/sandbox/.openclaw/workspace && bash scripts/run_daily_backup.sh
+
+# 每周日凌晨 4 点清理
+0 4 * * 0 cd /home/sandbox/.openclaw/workspace && bash scripts/run_weekly_cleanup.sh
+
+# 每日 8:00 生成日报
+0 8 * * * cd /home/sandbox/.openclaw/workspace && python scripts/export_daily_platform_report.py
+
+# 每周一 8:00 生成周报
+0 8 * * 1 cd /home/sandbox/.openclaw/workspace && python scripts/export_weekly_platform_report.py

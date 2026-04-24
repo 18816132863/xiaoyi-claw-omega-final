@@ -1,0 +1,12 @@
+[
+  {"type":"h1","text":"Full Test Document"},
+  {"type":"body","text":"This is a test document for the xiaoyi-pdf reformat route."},
+  {"type":"bullet","text":"Feature one"},
+  {"type":"bullet","text":"Feature two"},
+  {"type":"numbered","text":"Step one"},
+  {"type":"numbered","text":"Step two"},
+  {"type":"callout","text":"This is a callout block with accent bar."},
+  {"type":"table","headers":["Item","Status"],"rows":[["Create","Pass"],["Reformat","Pass"]],"caption":"Test results"},
+  {"type":"code","language":"python","text":"print('hello world')"},
+  {"type":"divider"}
+]

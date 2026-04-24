@@ -1,0 +1,53 @@
+[
+  {"type":"h1",      "text":"全量测试 - 所有 Block 类型"},
+  {"type":"h2",      "text":"二级标题示例"},
+  {"type":"h3",      "text":"三级标题示例"},
+  {"type":"body",    "text":"这是一个正文段落，支持<b>粗体</b>和<i>斜体</i>标记。xiaoyi-pdf 提供了基于设计令牌的 PDF 生成能力。"},
+  {"type":"bullet",  "text":"无序列表项一"},
+  {"type":"bullet",  "text":"无序列表项二"},
+  {"type":"numbered","text":"有序列表项一"},
+  {"type":"numbered","text":"有序列表项二"},
+  {"type":"callout", "text":"这是一个高亮提示框，带有左侧强调色边条。"},
+  {"type":"table",
+    "headers": ["功能", "状态", "备注"],
+    "rows": [
+      ["CREATE", "通过", "所有类型均已测试"],
+      ["FILL", "通过", "表单填充正常"],
+      ["REFORMAT", "通过", "Markdown 转 PDF 正常"]
+    ],
+    "caption": "测试汇总表"
+  },
+  {"type":"code",    "language":"python",
+    "text":"def hello():\n    print('Hello, xiaoyi-pdf!')"},
+  {"type":"math",    "text":"E = mc^2", "label":"(1)"},
+  {"type":"chart",
+    "chart_type": "bar",
+    "title":      "季度数据",
+    "labels":     ["Q1", "Q2", "Q3", "Q4"],
+    "datasets": [
+      {"label": "收入", "values": [120, 145, 132, 178]}
+    ],
+    "caption": "季度收入趋势"
+  },
+  {"type":"flowchart",
+    "nodes": [
+      {"id":"start", "label":"开始", "shape":"oval"},
+      {"id":"proc",  "label":"处理", "shape":"rect"},
+      {"id":"end",   "label":"结束", "shape":"oval"}
+    ],
+    "edges": [
+      {"from":"start", "to":"proc"},
+      {"from":"proc",  "to":"end"}
+    ],
+    "caption": "简单流程图"
+  },
+  {"type":"bibliography",
+    "title": "参考文献",
+    "items": [
+      {"id":"1","text":"Bringhurst, R. (2004). The Elements of Typographic Style."},
+      {"id":"2","text":"Tufte, E. (2001). The Visual Display of Quantitative Information."}
+    ]
+  },
+  {"type":"divider"},
+  {"type":"caption","text":"文档结束 - 由 xiaoyi-pdf 生成"}
+]

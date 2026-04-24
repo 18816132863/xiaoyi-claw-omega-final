@@ -1,0 +1,9 @@
+{
+  "schema": "exec",
+  "bin": "scripts/image_understanding.py",
+  "env": [],
+  "name": "xiaoyi-image-understanding",
+  "description": "小艺图像理解API进行图像内容识别和描述",
+  "tags": ["image", "vision", "understanding", "caption"],
+  "autoLoad": true
+}

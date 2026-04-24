@@ -1,0 +1,72 @@
+{
+  "version": "7.2.0",
+  "description": "分层懒加载配置",
+  "layers": {
+    "P0_CORE": {
+      "priority": 0,
+      "load_mode": "immediate",
+      "token_budget": 3000,
+      "max_size_kb": 50,
+      "files": [
+        "AGENTS.md",
+        "SOUL.md",
+        "TOOLS.md",
+        "USER.md",
+        "IDENTITY.md",
+        "HEARTBEAT.md",
+        "core/ARCHITECTURE.md",
+        "core/CONFIG.json",
+        "infrastructure/path_resolver.py"
+      ]
+    },
+    "P1_COMMON": {
+      "priority": 1,
+      "load_mode": "on_demand",
+      "token_budget": 2000,
+      "max_size_kb": 500,
+      "directories": [
+        "orchestration/router/",
+        "execution/skill_gateway.py",
+        "memory_context/search/",
+        "infrastructure/inventory/"
+      ]
+    },
+    "P2_EXTENDED": {
+      "priority": 2,
+      "load_mode": "lazy",
+      "token_budget": 1500,
+      "max_size_kb": 2000,
+      "directories": [
+        "skills/",
+        "governance/",
+        "infrastructure/monitoring/"
+      ],
+      "skill_mode": "single"
+    },
+    "P3_ARCHIVE": {
+      "priority": 3,
+      "load_mode": "never",
+      "token_budget": 0,
+      "directories": [
+        "repo/",
+        "reports/",
+        "*.pdf",
+        "*.log"
+      ]
+    }
+  },
+  "cache_config": {
+    "l1_memory": {
+      "max_items": 100,
+      "ttl_seconds": 300
+    },
+    "l2_file": {
+      "max_size_mb": 10,
+      "ttl_seconds": 3600
+    },
+    "l3_compressed": {
+      "max_size_mb": 50,
+      "ttl_seconds": 86400
+    }
+  }
+}

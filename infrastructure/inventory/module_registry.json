@@ -1,0 +1,172 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-24",
+  "modules": {
+    "device_capability_bus": {
+      "name": "Device Capability Bus",
+      "layer": "L4",
+      "layer_name": "Execution",
+      "description": "设备能力总线，统一管理设备能力的注册、发现和执行",
+      "path": "device_capability_bus/",
+      "entry_points": [
+        "__init__.py",
+        "capability_registry.py",
+        "capability_executor.py"
+      ],
+      "dependencies": [],
+      "status": "active",
+      "created_at": "2026-04-24",
+      "fused_at": "2026-04-24"
+    },
+    "safety_governor": {
+      "name": "Safety Governor",
+      "layer": "L5",
+      "layer_name": "Governance",
+      "description": "安全治理器，策略引擎、审批门、风险等级管理",
+      "path": "safety_governor/",
+      "entry_points": [
+        "__init__.py",
+        "policy_engine.py",
+        "approval_gate.py"
+      ],
+      "dependencies": [
+        "device_capability_bus"
+      ],
+      "status": "active",
+      "created_at": "2026-04-24",
+      "fused_at": "2026-04-24"
+    },
+    "learning_loop": {
+      "name": "Learning Loop",
+      "layer": "L4",
+      "layer_name": "Execution",
+      "description": "学习闭环，执行记忆、计划优化、模式提取",
+      "path": "learning_loop/",
+      "entry_points": [
+        "__init__.py",
+        "execution_memory.py",
+        "plan_optimizer.py"
+      ],
+      "dependencies": [],
+      "status": "active",
+      "created_at": "2026-04-24",
+      "fused_at": "2026-04-24"
+    },
+    "skill_asset_registry": {
+      "name": "Skill Asset Registry",
+      "layer": "L6",
+      "layer_name": "Infrastructure",
+      "description": "技能资产库，扫描器、注册表、资产定义",
+      "path": "skill_asset_registry/",
+      "entry_points": [
+        "__init__.py",
+        "skill_scanner.py",
+        "skill_registry.py"
+      ],
+      "dependencies": [],
+      "status": "active",
+      "created_at": "2026-04-24",
+      "fused_at": "2026-04-24"
+    },
+    "autonomous_planner": {
+      "name": "Autonomous Planner",
+      "layer": "L3",
+      "layer_name": "Orchestration",
+      "description": "自主规划器，目标解析、任务分解、规划引擎",
+      "path": "autonomous_planner/",
+      "entry_points": [
+        "__init__.py",
+        "goal_parser.py",
+        "task_decomposer.py"
+      ],
+      "dependencies": [
+        "device_capability_bus",
+        "skill_asset_registry"
+      ],
+      "status": "active",
+      "created_at": "2026-04-24",
+      "fused_at": "2026-04-24"
+    },
+    "visual_operation_agent": {
+      "name": "Visual Operation Agent",
+      "layer": "L4",
+      "layer_name": "Execution",
+      "description": "视觉操作代理，屏幕观察、UI接地、动作执行",
+      "path": "visual_operation_agent/",
+      "entry_points": [
+        "__init__.py",
+        "screen_observer.py",
+        "ui_grounding.py"
+      ],
+      "dependencies": [
+        "device_capability_bus"
+      ],
+      "status": "active",
+      "created_at": "2026-04-24",
+      "fused_at": "2026-04-24"
+    },
+    "closed_loop_verifier": {
+      "name": "Closed Loop Verifier",
+      "layer": "L5",
+      "layer_name": "Governance",
+      "description": "闭环验证器，结果检查、审计写入、恢复管理",
+      "path": "closed_loop_verifier/",
+      "entry_points": [
+        "__init__.py",
+        "result_checker.py",
+        "audit_writer.py"
+      ],
+      "dependencies": [
+        "device_capability_bus",
+        "learning_loop"
+      ],
+      "status": "active",
+      "created_at": "2026-04-24",
+      "fused_at": "2026-04-24"
+    },
+    "domain": {
+      "name": "domain",
+      "layer": "L4",
+      "layer_name": "Execution",
+      "description": "Auto-detected module: domain",
+      "path": "domain/",
+      "entry_points": [
+        "__init__.py"
+      ],
+      "dependencies": [],
+      "status": "active",
+      "created_at": "2026-04-24",
+      "fused_at": "2026-04-24"
+    },
+    "skill_entry": {
+      "name": "skill_entry",
+      "layer": "L4",
+      "layer_name": "Execution",
+      "description": "Auto-detected module: skill_entry",
+      "path": "skill_entry/",
+      "entry_points": [
+        "__init__.py",
+        "input_router.py",
+        "response_formatter.py",
+        "validators.py",
+        "error_codes.py"
+      ],
+      "dependencies": [],
+      "status": "active",
+      "created_at": "2026-04-24",
+      "fused_at": "2026-04-24"
+    }
+  },
+  "stats": {
+    "total": 9,
+    "by_layer": {
+      "L4": 5,
+      "L5": 2,
+      "L6": 1,
+      "L3": 1
+    },
+    "by_status": {
+      "active": 9
+    }
+  }
+}

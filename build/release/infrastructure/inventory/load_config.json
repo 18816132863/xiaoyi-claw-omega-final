@@ -1,0 +1,85 @@
+{
+  "version": "7.2.0",
+  "description": "启动加载和上下文预算配置",
+  "startup_whitelist": {
+    "description": "启动时必须加载的文件",
+    "files": [
+      "core/ARCHITECTURE.md",
+      "core/AGENTS.md",
+      "core/SOUL.md",
+      "core/USER.md",
+      "core/TOOLS.md",
+      "infrastructure/inventory/skill_registry.json",
+      "infrastructure/inventory/skill_inverted_index.json"
+    ],
+    "max_total_size_kb": 500
+  },
+  "context_budget": {
+    "description": "上下文 Token 预算控制",
+    "max_total_tokens": 9500,
+    "layers": {
+      "L1": {
+        "max_tokens": 3000,
+        "load_mode": "immediate"
+      },
+      "L2": {
+        "max_tokens": 2000,
+        "load_mode": "on_demand"
+      },
+      "L3": {
+        "max_tokens": 1500,
+        "load_mode": "on_demand"
+      },
+      "L4": {
+        "max_tokens": 1500,
+        "load_mode": "lazy"
+      },
+      "L5": {
+        "max_tokens": 800,
+        "load_mode": "sensitive"
+      },
+      "L6": {
+        "max_tokens": 700,
+        "load_mode": "system"
+      }
+    }
+  },
+  "registry_minimal": {
+    "description": "注册表运行时必要字段",
+    "fields": [
+      "name",
+      "registered",
+      "routable",
+      "callable",
+      "executor_type",
+      "entry_point",
+      "path",
+      "status"
+    ]
+  },
+  "load_exclude": {
+    "description": "不进入主上下文的目录和文件",
+    "directories": [
+      "archive",
+      "reports",
+      "backups",
+      "logs",
+      "tmp",
+      "temp"
+    ],
+    "patterns": [
+      "*.bak",
+      "*.backup",
+      "*.old",
+      "*_backup*",
+      "*_old*",
+      "*.tar.gz",
+      "*.zip"
+    ],
+    "third_party": [
+      "node_modules",
+      "vendor",
+      "third_party"
+    ]
+  }
+}

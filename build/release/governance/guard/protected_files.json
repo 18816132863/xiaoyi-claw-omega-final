@@ -1,0 +1,45 @@
+{
+  "version": "7.2.0",
+  "updated": "2026-04-12",
+  "description": "受保护文件清单 - 只包含真实存在的文件",
+  "core": [
+    "core/ARCHITECTURE.md",
+    "core/ARCHITECTURE_INTEGRITY.md",
+    "core/AGENTS.md",
+    "core/SOUL.md",
+    "core/USER.md",
+    "core/TOOLS.md",
+    "core/IDENTITY.md",
+    "core/MEMORY.md",
+    "core/HEARTBEAT.md",
+    "governance/guard/file_guardian.py",
+    "governance/guard/protected_files.json",
+    "governance/quality_gate.py",
+    "infrastructure/path_resolver.py",
+    "infrastructure/verify_runtime_integrity.py",
+    "infrastructure/inventory/skill_registry.json",
+    "infrastructure/inventory/skill_inverted_index.json",
+    "infrastructure/release/release_manager.py",
+    "execution/skill_gateway.py",
+    "execution/skill_adapter_gateway.py"
+  ],
+  "directories": [
+    "governance/security/"
+  ],
+  "user_added": [],
+  "deprecated": [
+    "governance/security.py",
+    "AGENTS.md",
+    "SOUL.md",
+    "USER.md",
+    "TOOLS.md",
+    "IDENTITY.md",
+    "MEMORY.md",
+    "HEARTBEAT.md"
+  ],
+  "notes": [
+    "V4.0: 移除不存在的 governance/security.py",
+    "改为保护 governance/security/ 目录",
+    "只包含真实存在的文件"
+  ]
+}

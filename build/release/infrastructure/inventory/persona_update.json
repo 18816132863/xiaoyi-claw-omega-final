@@ -1,0 +1,16 @@
+{
+  "update_interval": 86400,
+  "min_memories_for_update": 5,
+  "max_persona_length": 2000,
+  "preserve_sections": [
+    "核心原型",
+    "基本信息",
+    "长期偏好"
+  ],
+  "auto_update": false,
+  "require_confirmation": true,
+  "backup_before_update": true,
+  "max_backups": 5,
+  "llm_assisted": true,
+  "_comment": "⚠️ auto_update 默认禁用，需用户手动启用。启用后更新前会请求确认并自动备份。"
+}

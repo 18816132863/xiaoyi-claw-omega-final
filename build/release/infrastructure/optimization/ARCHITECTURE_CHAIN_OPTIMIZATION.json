@@ -1,0 +1,106 @@
+{
+  "version": "7.2.0",
+  "updated": "2026-04-10",
+  "description": "架构链优化方案 - Token 消耗优化",
+  
+  "current_state": {
+    "total_md_lines": 286042,
+    "total_md_files": 0,
+    "large_files_over_500_lines": 30,
+    "redundant_files": 50,
+    "duplicate_architecture_files": 5
+  },
+  
+  "optimization_targets": {
+    "token_reduction": "40%",
+    "load_time_reduction": "50%",
+    "context_window_efficiency": "80%"
+  },
+  
+  "optimization_actions": {
+    "1_delete_redundant": {
+      "description": "删除冗余版本文件",
+      "files": [
+        "core/ARCHITECTURE_V23.md",
+        "memory_context/vector/ARCHITECTURE_V25.md",
+        "governance/GOVERNANCE_V7.md",
+        "governance/OBSERVABILITY_V7.md",
+        "governance/safety/SAFETY_V7.md",
+        "governance/safety/ZERO_TRUST_V2.md",
+        "execution/automation/AUTOMATION_V7.md",
+        "execution/orchestration/ORCHESTRATION_V7.md",
+        "execution/runtime/RUNTIME_V7.md",
+        "execution/multiagent/MULTIAGENT_COLLABORATION_V2.md",
+        "core/CORE_V7.md",
+        "infrastructure/optimization/TOKEN_OPTIMIZATION_V2.md",
+        "infrastructure/optimization/CONTEXT_WINDOW_MANAGE_V2.md",
+        "infrastructure/optimization/NETWORK_OPTIMIZATION_V2.md",
+        "infrastructure/optimization/PREDICTIVE_CACHE_V2.md",
+        "infrastructure/optimization/ASSISTANT_OPTIMIZATION_V2.md",
+        "infrastructure/optimization/PERFORMANCE_BENCHMARK_V2.md",
+        "infrastructure/optimization/FAST_PATH_V2.md"
+      ],
+      "estimated_savings": "15,000 lines"
+    },
+    
+    "2_delete_reports": {
+      "description": "删除旧报告文件",
+      "files": [
+        "REPORT_V7.2.0.md",
+        "reports/V28_CORE_SKILLS.md",
+        "reports/V28_ROLLBACK_PLAN.md",
+        "reports/EVOLUTION_UPGRADE_V28.md",
+        "reports/V28_ARCHITECTURE.md",
+        "reports/V28_FINAL_ACCEPTANCE.md"
+      ],
+      "estimated_savings": "5,000 lines"
+    },
+    
+    "3_compress_skills": {
+      "description": "压缩技能文档",
+      "actions": [
+        "将 SKILL.md 限制在 200 行以内",
+        "将 API reference 移到 references/ 目录",
+        "删除重复的 README.md"
+      ],
+      "estimated_savings": "50,000 lines"
+    },
+    
+    "4_lazy_loading": {
+      "description": "实现延迟加载",
+      "actions": [
+        "只加载当前需要的技能",
+        "按需加载 references/",
+        "缓存常用技能"
+      ],
+      "estimated_savings": "60% context"
+    },
+    
+    "5_consolidate_architecture": {
+      "description": "合并架构文档",
+      "actions": [
+        "保留 core/ARCHITECTURE.md 作为唯一真源",
+        "删除其他 ARCHITECTURE_*.md 文件",
+        "将架构相关内容整合到主文件"
+      ],
+      "estimated_savings": "3,000 lines"
+    }
+  },
+  
+  "execution_order": [
+    "1_delete_redundant",
+    "2_delete_reports", 
+    "3_compress_skills",
+    "5_consolidate_architecture",
+    "4_lazy_loading"
+  ],
+  
+  "expected_results": {
+    "lines_before": 286042,
+    "lines_after": 180000,
+    "reduction": "37%",
+    "token_before": "~150,000",
+    "token_after": "~90,000",
+    "token_reduction": "40%"
+  }
+}

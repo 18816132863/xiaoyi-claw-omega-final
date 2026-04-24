@@ -1,0 +1,56 @@
+{
+  "trace_id": "trace_e2d4845b",
+  "task_id": "task_001",
+  "original_query": "检查项目架构完整性",
+  "rewritten_query": "架构 完整性 检查 architecture",
+  "query_rewrite_reason": "同义词扩展",
+  "profile": "developer",
+  "risk_level": "low",
+  "allowed_sources": [
+    "session_history",
+    "long_term_memory",
+    "workflow_history"
+  ],
+  "denied_sources": [
+    "external_knowledge"
+  ],
+  "source_results": [
+    {
+      "source_id": "src_session_001",
+      "source_type": "session_history",
+      "query_used": "架构 完整性",
+      "hits_count": 5,
+      "filtered_count": 2,
+      "returned_count": 3,
+      "tokens_used": 150,
+      "latency_ms": 10,
+      "error": null
+    },
+    {
+      "source_id": "src_memory_001",
+      "source_type": "long_term_memory",
+      "query_used": "architecture integrity",
+      "hits_count": 10,
+      "filtered_count": 4,
+      "returned_count": 6,
+      "tokens_used": 300,
+      "latency_ms": 25,
+      "error": null
+    }
+  ],
+  "ranking_result": {},
+  "injection_plan": {},
+  "conflict_resolution": {},
+  "budget_result": {},
+  "final_result": {
+    "injected_sources": [
+      "session_history",
+      "long_term_memory"
+    ],
+    "total_items": 9,
+    "total_tokens": 450,
+    "compression_ratio": 0.85
+  },
+  "timestamp": "2026-04-24T21:03:36.391179",
+  "duration_ms": 50
+}

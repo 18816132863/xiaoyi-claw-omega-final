@@ -1,0 +1,48 @@
+{
+  "module": "clean_architecture",
+  "version": "1.0.0",
+  "description": "整洁架构系统",
+  "layers": {
+    "entities": {
+      "description": "企业业务规则",
+      "dependencies": "none",
+      "contains": [
+        "entity",
+        "value_object",
+        "domain_event"
+      ]
+    },
+    "use_cases": {
+      "description": "应用业务规则",
+      "dependencies": "entities",
+      "contains": [
+        "interactor",
+        "input_port",
+        "output_port"
+      ]
+    },
+    "interface_adapters": {
+      "description": "接口适配",
+      "dependencies": "use_cases",
+      "contains": [
+        "controller",
+        "presenter",
+        "gateway"
+      ]
+    },
+    "frameworks": {
+      "description": "框架和驱动",
+      "dependencies": "interface_adapters",
+      "contains": [
+        "web",
+        "database",
+        "external"
+      ]
+    }
+  },
+  "principles": {
+    "dependency_rule": "外层依赖内层",
+    "testability": "核心层可独立测试",
+    "independence": "框架无关"
+  }
+}

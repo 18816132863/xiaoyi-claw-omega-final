@@ -1,0 +1,43 @@
+{
+  "module": "architecture_health",
+  "version": "1.0.0",
+  "description": "架构健康度评估系统",
+  "metrics": {
+    "coupling": {
+      "description": "耦合度",
+      "target": "< 0.3",
+      "weight": 0.2
+    },
+    "cohesion": {
+      "description": "内聚度",
+      "target": "> 0.7",
+      "weight": 0.2
+    },
+    "complexity": {
+      "description": "复杂度",
+      "target": "< 20",
+      "weight": 0.15
+    },
+    "test_coverage": {
+      "description": "测试覆盖率",
+      "target": "> 80%",
+      "weight": 0.15
+    },
+    "technical_debt": {
+      "description": "技术债务",
+      "target": "< 100h",
+      "weight": 0.15
+    },
+    "maintainability": {
+      "description": "可维护性",
+      "target": "> 80",
+      "weight": 0.15
+    }
+  },
+  "reports": {
+    "health_score": true,
+    "debt_analysis": true,
+    "improvement_suggestions": true,
+    "trend_analysis": true
+  }
+}

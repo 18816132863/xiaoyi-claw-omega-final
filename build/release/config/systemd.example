@@ -1,0 +1,116 @@
+# Systemd Service 示例
+
+## 1. 每小时健康巡检
+
+### /etc/systemd/system/platform-health-check.service
+```ini
+[Unit]
+Description=Platform Health Check
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/sandbox/.openclaw/workspace/scripts/run_hourly_health_check.sh
+WorkingDirectory=/home/sandbox/.openclaw/workspace
+User=sandbox
+Group=sandbox
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### /etc/systemd/system/platform-health-check.timer
+```ini
+[Unit]
+Description=Run platform health check hourly
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+## 2. 每日备份
+
+### /etc/systemd/system/platform-daily-backup.service
+```ini
+[Unit]
+Description=Platform Daily Backup
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/sandbox/.openclaw/workspace/scripts/run_daily_backup.sh
+WorkingDirectory=/home/sandbox/.openclaw/workspace
+User=sandbox
+Group=sandbox
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### /etc/systemd/system/platform-daily-backup.timer
+```ini
+[Unit]
+Description=Run platform daily backup at 3 AM
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+## 3. 每周清理
+
+### /etc/systemd/system/platform-weekly-cleanup.service
+```ini
+[Unit]
+Description=Platform Weekly Cleanup
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/sandbox/.openclaw/workspace/scripts/run_weekly_cleanup.sh
+WorkingDirectory=/home/sandbox/.openclaw/workspace
+User=sandbox
+Group=sandbox
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### /etc/systemd/system/platform-weekly-cleanup.timer
+```ini
+[Unit]
+Description=Run platform weekly cleanup on Sunday at 4 AM
+
+[Timer]
+OnCalendar=Sun *-*-* 04:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+## 启用方法
+
+```bash
+# 启用健康巡检
+sudo systemctl enable platform-health-check.timer
+sudo systemctl start platform-health-check.timer
+
+# 启用每日备份
+sudo systemctl enable platform-daily-backup.timer
+sudo systemctl start platform-daily-backup.timer
+
+# 启用每周清理
+sudo systemctl enable platform-weekly-cleanup.timer
+sudo systemctl start platform-weekly-cleanup.timer
+
+# 查看状态
+systemctl list-timers
+```

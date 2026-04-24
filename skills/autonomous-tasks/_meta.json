@@ -1,0 +1,22 @@
+{
+  "owner": "changye01",
+  "slug": "autonomous-tasks",
+  "displayName": "autonomous-tasks",
+  "latest": {
+    "version": "10.3.1",
+    "publishedAt": 1772707576591,
+    "commit": "https://github.com/openclaw/skills/commit/74409672bb54379193960163061ec8d3612140b5"
+  },
+  "history": [
+    {
+      "version": "10.2.2",
+      "publishedAt": 1772705533057,
+      "commit": "https://github.com/openclaw/skills/commit/ad10e5e8077511aae5e44f8b586b0d74360ef8ec"
+    },
+    {
+      "version": "5.0.0",
+      "publishedAt": 1772673819225,
+      "commit": "https://github.com/openclaw/skills/commit/3c5f0c24532347b58a8c399de0538588dbfe30df"
+    }
+  ]
+}

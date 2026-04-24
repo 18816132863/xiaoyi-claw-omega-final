@@ -2965,6 +2965,153 @@
         "strategy": "auto",
         "conflicts": []
       }
+    },
+    {
+      "timestamp": "2026-04-24T21:36:31.730752",
+      "action": "fuse_content",
+      "skill": "device_capability_bus",
+      "details": {
+        "success": true,
+        "name": "device_capability_bus",
+        "architecture_fusion": {
+          "content_type": "file",
+          "layer": "L4",
+          "layer_name": "Execution",
+          "target_directory": "execution",
+          "boundary_check": {
+            "valid": true,
+            "warnings": [],
+            "errors": []
+          }
+        },
+        "silent": true
+      }
+    },
+    {
+      "timestamp": "2026-04-24T21:36:31.733731",
+      "action": "fuse_content",
+      "skill": "safety_governor",
+      "details": {
+        "success": true,
+        "name": "safety_governor",
+        "architecture_fusion": {
+          "content_type": "file",
+          "layer": "L4",
+          "layer_name": "Execution",
+          "target_directory": "execution",
+          "boundary_check": {
+            "valid": true,
+            "warnings": [],
+            "errors": []
+          }
+        },
+        "silent": true
+      }
+    },
+    {
+      "timestamp": "2026-04-24T21:36:31.737469",
+      "action": "fuse_content",
+      "skill": "learning_loop",
+      "details": {
+        "success": true,
+        "name": "learning_loop",
+        "architecture_fusion": {
+          "content_type": "file",
+          "layer": "L4",
+          "layer_name": "Execution",
+          "target_directory": "execution",
+          "boundary_check": {
+            "valid": true,
+            "warnings": [],
+            "errors": []
+          }
+        },
+        "silent": true
+      }
+    },
+    {
+      "timestamp": "2026-04-24T21:36:31.741604",
+      "action": "fuse_content",
+      "skill": "skill_asset_registry",
+      "details": {
+        "success": true,
+        "name": "skill_asset_registry",
+        "architecture_fusion": {
+          "content_type": "file",
+          "layer": "L4",
+          "layer_name": "Execution",
+          "target_directory": "execution",
+          "boundary_check": {
+            "valid": true,
+            "warnings": [],
+            "errors": []
+          }
+        },
+        "silent": true
+      }
+    },
+    {
+      "timestamp": "2026-04-24T21:36:31.745238",
+      "action": "fuse_content",
+      "skill": "autonomous_planner",
+      "details": {
+        "success": true,
+        "name": "autonomous_planner",
+        "architecture_fusion": {
+          "content_type": "file",
+          "layer": "L4",
+          "layer_name": "Execution",
+          "target_directory": "execution",
+          "boundary_check": {
+            "valid": true,
+            "warnings": [],
+            "errors": []
+          }
+        },
+        "silent": true
+      }
+    },
+    {
+      "timestamp": "2026-04-24T21:36:31.748839",
+      "action": "fuse_content",
+      "skill": "visual_operation_agent",
+      "details": {
+        "success": true,
+        "name": "visual_operation_agent",
+        "architecture_fusion": {
+          "content_type": "file",
+          "layer": "L4",
+          "layer_name": "Execution",
+          "target_directory": "execution",
+          "boundary_check": {
+            "valid": true,
+            "warnings": [],
+            "errors": []
+          }
+        },
+        "silent": true
+      }
+    },
+    {
+      "timestamp": "2026-04-24T21:36:31.752792",
+      "action": "fuse_content",
+      "skill": "closed_loop_verifier",
+      "details": {
+        "success": true,
+        "name": "closed_loop_verifier",
+        "architecture_fusion": {
+          "content_type": "file",
+          "layer": "L4",
+          "layer_name": "Execution",
+          "target_directory": "execution",
+          "boundary_check": {
+            "valid": true,
+            "warnings": [],
+            "errors": []
+          }
+        },
+        "silent": true
+      }
     }
   ]
 }

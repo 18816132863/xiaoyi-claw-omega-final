@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-24",
+  "items": {},
+  "stats": {
+    "total": 0,
+    "by_status": {
+      "created": 0,
+      "indexed": 0,
+      "active": 0
+    },
+    "by_category": {
+      "guide": 0,
+      "reference": 0,
+      "report": 0,
+      "specification": 0
+    }
+  },
+  "description": "文档注册表 - 记录所有文档的状态"
+}

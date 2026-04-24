@@ -1,0 +1,33 @@
+{
+  "module": "feedback_system",
+  "version": "1.0.0",
+  "description": "反馈系统",
+  "feedback_types": {
+    "rating": {
+      "description": "评分反馈",
+      "scale": "1-5",
+      "auto_prompt": true
+    },
+    "comment": {
+      "description": "评论反馈",
+      "free_text": true,
+      "sentiment_analysis": true
+    },
+    "bug_report": {
+      "description": "问题报告",
+      "auto_collect": true,
+      "priority": "auto"
+    },
+    "feature_request": {
+      "description": "功能建议",
+      "voting": true,
+      "status_tracking": true
+    }
+  },
+  "features": {
+    "auto_analysis": true,
+    "response_notification": true,
+    "improvement_tracking": true,
+    "reward_system": true
+  }
+}

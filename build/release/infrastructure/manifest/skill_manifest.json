@@ -1,0 +1,213 @@
+{
+  "version": "7.2.0",
+  "generated": "2026-04-11T18:19:12.796323",
+  "source": "skill_registry.json",
+  "total_skills": 156,
+  "active_skills": 15,
+  "skills": {
+    "xiao-gui-agent": {
+      "name": "xiao-gui-agent",
+      "display_name": "xiaoyi-gui-agent",
+      "description": "该 Skill 提供模拟真实用户在手机上操作的能力，通过点击、滑动、输入、拖拽、页面导航等交互行为，自动完成手机 APP 中的各类任务。",
+      "category": "search",
+      "risk_level": "low",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/xiao-gui-agent",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "xiaoyi-web-search": {
+      "name": "xiaoyi-web-search",
+      "display_name": "xiaoyi-web-search",
+      "description": "## 简介",
+      "category": "search",
+      "risk_level": "low",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/xiaoyi-web-search",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "find-skills": {
+      "name": "find-skills",
+      "display_name": "find-skills",
+      "description": "此Skill用于发现并为 Agent 安装新能力，并在下载完成后统一强制执行安全扫描。它整合了内部小艺Skill市场和外部开源Skill生态。",
+      "category": "search",
+      "risk_level": "low",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/find-skills",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "docx": {
+      "name": "docx",
+      "display_name": "docx",
+      "description": "## Overview",
+      "category": "document",
+      "risk_level": "high",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/docx",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "file-manager": {
+      "name": "file-manager",
+      "display_name": "file-manager",
+      "description": "## 核心功能",
+      "category": "other",
+      "risk_level": "high",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/file-manager",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "cron": {
+      "name": "cron",
+      "display_name": "cron",
+      "description": "Turn recurring intentions into structured local schedules.",
+      "category": "automation",
+      "risk_level": "high",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/cron",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "xiaoyi-image-search": {
+      "name": "xiaoyi-image-search",
+      "display_name": "xiaoyi-image-search",
+      "description": "## 简介",
+      "category": "search",
+      "risk_level": "low",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/xiaoyi-image-search",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "git": {
+      "name": "git",
+      "display_name": "Git",
+      "description": "",
+      "category": "system",
+      "risk_level": "high",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/git",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "pdf": {
+      "name": "pdf",
+      "display_name": "pdf",
+      "description": "## Overview",
+      "category": "document",
+      "risk_level": "high",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/pdf",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "huawei-drive": {
+      "name": "huawei-drive",
+      "display_name": "huawei-drive",
+      "description": "目前只支持小艺Claw，所有操作限制在`小艺claw`目录",
+      "category": "other",
+      "risk_level": "low",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/huawei-drive",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "xiaoyi-image-understanding": {
+      "name": "xiaoyi-image-understanding",
+      "display_name": "xiaoyi-image-understanding",
+      "description": "## 简介",
+      "category": "image",
+      "risk_level": "high",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/xiaoyi-image-understanding",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "xiaoyi-doc-convert": {
+      "name": "xiaoyi-doc-convert",
+      "display_name": "xiaoyi-doc-convert",
+      "description": "## 简介",
+      "category": "document",
+      "risk_level": "high",
+      "priority": "P0",
+      "timeout": 60,
+      "path": "/home/sandbox/.openclaw/workspace/skills/xiaoyi-doc-convert",
+      "status": "active",
+      "entry": "SKILL.md"
+    },
+    "dealer-leader-cooperation": {
+      "name": "经销商-团长合作",
+      "display_name": null,
+      "description": "帮助经销商找团长、谈合作、设计佣金",
+      "category": "ecommerce",
+      "risk_level": null,
+      "priority": "P0",
+      "timeout": 60,
+      "path": null,
+      "status": "active",
+      "entry": "skills/dealer-leader-cooperation/SKILL.md"
+    },
+    "douyin-shop-operation": {
+      "name": "抖音小店运营",
+      "display_name": null,
+      "description": "抖音小店、抖音直播带货运营支持",
+      "category": "ecommerce",
+      "risk_level": null,
+      "priority": "P0",
+      "timeout": 60,
+      "path": null,
+      "status": "active",
+      "entry": "skills/douyin-shop-operation/SKILL.md"
+    },
+    "product-management": {
+      "name": "商品管理",
+      "display_name": null,
+      "description": "选品、定价、库存管理",
+      "category": "ecommerce",
+      "risk_level": null,
+      "priority": "P0",
+      "timeout": 60,
+      "path": null,
+      "status": "active",
+      "entry": "skills/product-management/SKILL.md"
+    }
+  },
+  "categories": {
+    "search": "搜索类",
+    "document": "文档处理",
+    "image": "图像处理",
+    "system": "系统工具",
+    "communication": "通信工具",
+    "data": "数据处理",
+    "automation": "自动化",
+    "other": "其他"
+  },
+  "routing_rules": {
+    "P0": {
+      "max_concurrent": 3,
+      "timeout_multiplier": 1.0
+    },
+    "P1": {
+      "max_concurrent": 5,
+      "timeout_multiplier": 1.5
+    },
+    "P2": {
+      "max_concurrent": 10,
+      "timeout_multiplier": 2.0
+    }
+  }
+}

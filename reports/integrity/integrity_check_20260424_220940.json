@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-04-24T22:09:39.662591",
+  "checks": {
+    "modules": {
+      "stats": {
+        "total": 8,
+        "active": 8,
+        "created_only": 0,
+        "registered_only": 0
+      },
+      "issues": []
+    },
+    "capabilities": {
+      "stats": {
+        "total": 53,
+        "active": 0,
+        "created_only": 0,
+        "unrouted": 0,
+        "untested": 0
+      },
+      "issues": []
+    },
+    "configs": {
+      "stats": {
+        "total": 15,
+        "active": 0,
+        "unused": 2
+      },
+      "issues": [
+        {
+          "type": "config_not_referenced",
+          "name": "default_skill_config",
+          "path": "/home/sandbox/.openclaw/workspace/config/default_skill_config.py",
+          "status": "unused"
+        },
+        {
+          "type": "config_not_referenced",
+          "name": "feature_flags",
+          "path": "/home/sandbox/.openclaw/workspace/config/feature_flags.py",
+          "status": "unused"
+        }
+      ]
+    },
+    "scripts": {
+      "stats": {
+        "total": 123,
+        "active": 0,
+        "created_only": 0
+      },
+      "issues": []
+    },
+    "tests": {
+      "stats": {
+        "total": 70,
+        "collected": 70,
+        "uncollected": 0
+      },
+      "issues": []
+    },
+    "documents": {
+      "stats": {
+        "total": 67,
+        "indexed": 67,
+        "orphan": 0
+      },
+      "issues": []
+    }
+  },
+  "summary": {
+    "total_checks": 6,
+    "total_issues": 2,
+    "passed": false
+  },
+  "issues": [
+    {
+      "type": "config_not_referenced",
+      "name": "default_skill_config",
+      "path": "/home/sandbox/.openclaw/workspace/config/default_skill_config.py",
+      "status": "unused"
+    },
+    {
+      "type": "config_not_referenced",
+      "name": "feature_flags",
+      "path": "/home/sandbox/.openclaw/workspace/config/feature_flags.py",
+      "status": "unused"
+    }
+  ]
+}

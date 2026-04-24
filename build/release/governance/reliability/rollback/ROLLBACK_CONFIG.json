@@ -1,0 +1,81 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-06T10:32:00+08:00",
+  "description": "回滚点配置",
+  "retention": {
+    "preUpgrade": 5,
+    "preConfig": 10,
+    "scheduled": 7,
+    "manual": 3
+  },
+  "storage": {
+    "path": "~/.openclaw/workspace/rollback/",
+    "maxSize": 1073741824,
+    "compression": "gzip",
+    "encryption": false
+  },
+  "contents": {
+    "config": {
+      "include": [
+        "core/*.md",
+        "runtime/*.json",
+        "runtime/*.md",
+        "safety/*.json",
+        "safety/*.md",
+        "governance/*.md",
+        "evaluation/*.md",
+        "*.md",
+        "*.json"
+      ],
+      "exclude": [
+        "ARCHITECTURE*.md",
+        "OMEGA_FINAL.md"
+      ]
+    },
+    "memory": {
+      "include": [
+        "memory/*.md",
+        "memory/ontology/*.jsonl",
+        "memory/ontology/*.yaml"
+      ],
+      "exclude": [
+        "memory/archive/*",
+        "memory/session-summaries/*"
+      ]
+    },
+    "skills": {
+      "include": [
+        "skills/auto-skill-upgrade/*.json",
+        "skills-lock.json"
+      ],
+      "exclude": []
+    },
+    "vectorDb": {
+      "include": [
+        "~/.openclaw/memory/main.sqlite"
+      ],
+      "exclude": []
+    }
+  },
+  "validation": {
+    "checksumAlgorithm": "sha256",
+    "requiredChecks": [
+      "file_integrity",
+      "config_validity",
+      "system_health"
+    ],
+    "healthThreshold": 70
+  },
+  "autoRollback": {
+    "enabled": true,
+    "triggers": {
+      "upgradeFailure": true,
+      "configFailure": true,
+      "healthDrop": {
+        "enabled": true,
+        "threshold": 70
+      }
+    },
+    "notification": true
+  }
+}

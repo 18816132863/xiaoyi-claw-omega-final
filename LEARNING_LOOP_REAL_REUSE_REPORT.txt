@@ -1,0 +1,105 @@
+# 学习闭环真实复用报告
+
+## 一、问题描述
+
+上一版报告中，第一次执行写入了经验，但第二次执行显示"找到 0 条相似历史记录"，说明没有真正复用成功路径。
+
+## 二、修复内容
+
+### 2.1 相似度算法改进
+
+**原算法**: 简单关键词匹配
+
+```python
+keywords = set(goal.lower().split())
+overlap = len(keywords & record_keywords)
+```
+
+**新算法**: 模式匹配 + 关键词重叠
+
+```python
+goal_pattern = PatternExtractor.extract_goal_pattern(goal)
+record_pattern = PatternExtractor.extract_goal_pattern(record.goal)
+
+# 模式匹配加分
+pattern_score = 10 if goal_pattern == record_pattern else 0
+
+# 关键词重叠
+overlap = len(keywords & record_keywords)
+
+# 总分
+total_score = pattern_score + overlap
+```
+
+### 2.2 存储路径统一
+
+**问题**: 两次执行使用不同的存储路径
+
+**修复**: 使用固定路径 `data/learning_demo_memory.jsonl`
+
+### 2.3 优化说明改进
+
+**原输出**: "这是首次执行..."
+
+**新输出**: "基于历史记录 XXX（YYY）：..."
+
+---
+
+## 三、验证结果
+
+### 3.1 第一次执行
+
+```
+用户目标: 明天提醒我开会
+
+经验记录:
+  记录ID: 2653827855509309561
+  目标: 明天提醒我开会
+  计划: 2 步
+  使用能力: ['schedule.create_calendar_event', 'notification.push']
+  成功步骤: [1, 2]
+  失败步骤: []
+  最终结果: success
+```
+
+### 3.2 第二次执行
+
+```
+用户目标: 后天提醒我交报告
+
+找到 1 条相似历史记录
+  1. 明天提醒我开会 (结果: success)
+
+优化措施:
+  - apply_preferred_capabilities: ['schedule.create_calendar_event', 'notification.push']
+  - reduce_confirmations: 基于历史经验，减少不必要的确认
+
+优化说明:
+  基于历史记录 2653827855509309561（明天提醒我开会）：
+  1. 上次使用了 2 个能力
+  2. 成功步骤: [1, 2]
+  3. 上次执行成功，将复用相同路径
+  4. 优化建议: 下次可以直接创建日程，不需要额外确认
+
+匹配记录: 2653827855509309561
+复用成功路径: True
+```
+
+---
+
+## 四、关键指标
+
+| 指标 | 修复前 | 修复后 |
+|------|--------|--------|
+| 找到相似记录 | 0 条 | 1 条 |
+| matched_previous_record_id | None | 2653827855509309561 |
+| reused_success_path | False | True |
+| 优化说明 | "首次执行" | "基于历史记录..." |
+
+---
+
+## 五、测试覆盖
+
+- `tests/test_learning_similarity_match.py` - 相似度匹配测试
+- `tests/test_learning_second_run_reuses_success_path.py` - 复用成功路径测试
+- `tests/test_learning_no_false_claim_when_no_match.py` - 无匹配时不虚假声明测试

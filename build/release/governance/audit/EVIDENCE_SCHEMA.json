@@ -1,0 +1,273 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Evidence Schema",
+  "description": "证据对象结构定义 - 终极鸽子王 V27.0",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["evidence_id", "source_type", "source_ref", "timestamp", "freshness_class"],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "description": "证据唯一标识符",
+      "pattern": "^ev_[a-zA-Z0-9]{16}$"
+    },
+    "conclusion_id": {
+      "type": "string",
+      "description": "关联的结论ID",
+      "pattern": "^conc_[a-zA-Z0-9]{16}$"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "official_document",
+        "system_log",
+        "audit_record",
+        "expert_testimony",
+        "multi_source_consensus",
+        "single_source",
+        "user_feedback",
+        "logical_inference",
+        "external_api",
+        "internal_data",
+        "benchmark_result",
+        "survey_result",
+        "research_paper",
+        "news_article",
+        "social_media"
+      ],
+      "description": "证据来源类型"
+    },
+    "source_ref": {
+      "type": "string",
+      "description": "来源引用（URL、文件路径、记录ID等）"
+    },
+    "source_name": {
+      "type": "string",
+      "description": "来源名称"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "来源URL（如有）"
+    },
+    "source_strength": {
+      "type": "string",
+      "enum": ["L1", "L2", "L3", "L4", "L5"],
+      "default": "L3",
+      "description": "来源强度等级"
+    },
+    "source_credibility": {
+      "type": "object",
+      "properties": {
+        "authority_level": {
+          "type": "string",
+          "enum": ["official", "expert", "reputable", "general", "unverified"],
+          "description": "权威级别"
+        },
+        "verification_status": {
+          "type": "string",
+          "enum": ["verified", "partially_verified", "unverified", "disputed"],
+          "description": "验证状态"
+        },
+        "bias_assessment": {
+          "type": "string",
+          "enum": ["neutral", "potential_bias", "biased", "unknown"],
+          "description": "偏见评估"
+        }
+      },
+      "description": "来源可信度评估"
+    },
+    "extracted_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": { "type": "string" },
+          "claim_text": { "type": "string" },
+          "claim_type": {
+            "type": "string",
+            "enum": ["fact", "statistic", "opinion", "inference", "prediction"]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "extraction_method": { "type": "string" }
+        }
+      },
+      "description": "从来源提取的声明列表"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "证据时间戳（证据本身的时间）"
+    },
+    "collection_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "证据收集时间"
+    },
+    "freshness_class": {
+      "type": "string",
+      "enum": ["current", "recent", "dated", "historical", "timeless"],
+      "description": "时效性分类"
+    },
+    "freshness_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "时效性分数"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "证据置信度"
+    },
+    "relevance_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "与结论的相关性分数"
+    },
+    "tenant_scope": {
+      "type": "string",
+      "description": "租户范围（如适用）",
+      "pattern": "^tenant_[a-zA-Z0-9]{16}$"
+    },
+    "access_scope": {
+      "type": "string",
+      "enum": ["public", "internal", "confidential", "restricted"],
+      "description": "访问范围"
+    },
+    "raw_data": {
+      "type": "object",
+      "description": "原始数据（如需要存储）"
+    },
+    "raw_data_ref": {
+      "type": "string",
+      "description": "原始数据引用（如存储在外部）"
+    },
+    "processing": {
+      "type": "object",
+      "properties": {
+        "extraction_method": { "type": "string" },
+        "processing_time": { "type": "string", "format": "date-time" },
+        "processor_version": { "type": "string" },
+        "validation_status": {
+          "type": "string",
+          "enum": ["passed", "failed", "warning", "pending"]
+        },
+        "validation_details": { "type": "object" }
+      },
+      "description": "处理信息"
+    },
+    "chain_position": {
+      "type": "object",
+      "properties": {
+        "chain_id": { "type": "string" },
+        "position": { "type": "integer", "minimum": 1 },
+        "parent_evidence_id": { "type": "string" },
+        "child_evidence_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "description": "证据链位置信息"
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "verified": { "type": "boolean" },
+        "verified_by": { "type": "string" },
+        "verified_at": { "type": "string", "format": "date-time" },
+        "verification_method": { "type": "string" },
+        "verification_notes": { "type": "string" }
+      },
+      "description": "验证信息"
+    },
+    "audit": {
+      "type": "object",
+      "properties": {
+        "created_by": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "modified_by": { "type": "string" },
+        "modified_at": { "type": "string", "format": "date-time" },
+        "access_count": { "type": "integer" },
+        "last_accessed": { "type": "string", "format": "date-time" }
+      },
+      "description": "审计信息"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "扩展元数据"
+    }
+  },
+  "source_strength_definitions": {
+    "L1": {
+      "name": "确证",
+      "description": "直接证据，无可辩驳",
+      "can_support": "可独立支撑确定性结论",
+      "examples": ["官方文档", "系统日志", "审计记录"]
+    },
+    "L2": {
+      "name": "强证",
+      "description": "多源一致，高度可信",
+      "can_support": "可独立支撑高置信结论",
+      "examples": ["专家证言", "多源一致数据"]
+    },
+    "L3": {
+      "name": "中证",
+      "description": "单源或多源部分一致",
+      "can_support": "需配合其他证据",
+      "examples": ["单一可靠来源", "部分一致数据"]
+    },
+    "L4": {
+      "name": "弱证",
+      "description": "单一来源，可信度一般",
+      "can_support": "仅作参考，需验证",
+      "examples": ["用户反馈", "未验证来源"]
+    },
+    "L5": {
+      "name": "推断",
+      "description": "基于逻辑推断",
+      "can_support": "必须标注为推断",
+      "examples": ["逻辑推断", "趋势预测"]
+    }
+  },
+  "freshness_class_definitions": {
+    "current": {
+      "description": "当前有效",
+      "age_limit": "< 24小时",
+      "score_range": "0.9-1.0"
+    },
+    "recent": {
+      "description": "近期有效",
+      "age_limit": "< 7天",
+      "score_range": "0.7-0.9"
+    },
+    "dated": {
+      "description": "有些过时",
+      "age_limit": "< 30天",
+      "score_range": "0.5-0.7"
+    },
+    "historical": {
+      "description": "历史数据",
+      "age_limit": "< 1年",
+      "score_range": "0.3-0.5"
+    },
+    "timeless": {
+      "description": "长期有效",
+      "age_limit": "无限制",
+      "score_range": "1.0"
+    }
+  },
+  "validation_rules": {
+    "source_ref_required": true,
+    "timestamp_required": true,
+    "confidence_range": "0-1",
+    "relevance_range": "0-1"
+  }
+}

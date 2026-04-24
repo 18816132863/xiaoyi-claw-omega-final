@@ -1,0 +1,98 @@
+{
+  "version": "7.2.0",
+  "updated": "2026-04-10",
+  "layers": {
+    "L1": {
+      "name": "core",
+      "description": "核心认知层 - 身份、性格、用户、规则",
+      "modules": {
+        "query": {
+          "description": "查询处理模块",
+          "source": "llm-memory-integration",
+          "files": ["understand.py", "rewriter.py", "langdetect.py"]
+        },
+        "llm": {
+          "description": "LLM 客户端",
+          "source": "llm-memory-integration",
+          "files": ["llm.py"]
+        }
+      }
+    },
+    "L2": {
+      "name": "memory_context",
+      "description": "记忆与上下文层 - 长期记忆、数据管理",
+      "modules": {
+        "vector": {
+          "description": "向量处理模块",
+          "source": "llm-memory-integration",
+          "files": ["embedding.py", "cache.py", "history.py"]
+        }
+      }
+    },
+    "L3": {
+      "name": "orchestration",
+      "description": "任务编排层 - 调度、路由、策略",
+      "modules": {
+        "router": {
+          "description": "路由模块",
+          "source": "llm-memory-integration",
+          "files": ["router.py", "weights.py", "rrf.py"]
+        }
+      }
+    },
+    "L4": {
+      "name": "execution",
+      "description": "能力执行层 - 技能执行、智能体协作",
+      "modules": {
+        "search": {
+          "description": "搜索模块",
+          "source": "llm-memory-integration",
+          "files": ["search.py", "search_optimized.py", "dedup.py"]
+        }
+      }
+    },
+    "L5": {
+      "name": "governance",
+      "description": "稳定性与治理层 - 安全、审计、灾备",
+      "modules": {
+        "audit": {
+          "description": "审计模块",
+          "source": "llm-memory-integration",
+          "files": ["feedback.py", "explainer.py", "summarizer.py"]
+        },
+        "security": {
+          "description": "安全模块",
+          "modules": {
+            "vmp-protect": {
+              "description": "VMP 代码保护",
+              "files": ["SKILL.md", "vmp_protect.py"]
+            }
+          }
+        }
+      }
+    },
+    "L6": {
+      "name": "infrastructure",
+      "description": "基础设施与运维层 - 资产、运维、监控",
+      "modules": {
+        "optimization": {
+          "description": "优化模块",
+          "modules": {
+            "avx512": {
+              "description": "AVX-512 指令集优化",
+              "files": ["SKILL.md", "avx512.hpp"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "integrations": {
+    "llm-memory-integration": {
+      "version": "7.2.0",
+      "author": "@xkzs2007",
+      "url": "https://clawhub.ai/xkzs2007/llm-memory-integration",
+      "integrated_at": "2026-04-10"
+    }
+  }
+}

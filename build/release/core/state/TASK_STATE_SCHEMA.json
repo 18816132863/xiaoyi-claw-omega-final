@@ -1,0 +1,221 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Task State Schema",
+  "description": "单个任务状态结构定义",
+  "type": "object",
+  "required": ["task_id", "state", "created_at"],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "description": "任务唯一标识符",
+      "pattern": "^TASK-.*$"
+    },
+    "parent_task_id": {
+      "type": "string",
+      "description": "父任务ID（用于子任务）"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "关联项目ID"
+    },
+    "state": {
+      "type": "string",
+      "description": "当前状态",
+      "enum": ["idle", "triaged", "planned", "executing", "waiting_input", "waiting_external", "validating", "completed", "failed", "aborted"]
+    },
+    "substate": {
+      "type": "string",
+      "description": "子状态（状态内的细分状态）"
+    },
+    "assigned_agent": {
+      "type": "string",
+      "description": "分配的代理ID"
+    },
+    "task_type": {
+      "type": "string",
+      "description": "任务类型",
+      "enum": ["query", "action", "planning", "analysis", "generation", "integration", "maintenance"]
+    },
+    "priority": {
+      "type": "string",
+      "description": "优先级",
+      "enum": ["critical", "high", "medium", "low"],
+      "default": "medium"
+    },
+    "required_inputs": {
+      "type": "array",
+      "description": "必需输入列表",
+      "items": {
+        "type": "object",
+        "properties": {
+          "input_id": { "type": "string" },
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "required": { "type": "boolean", "default": true },
+          "provided": { "type": "boolean", "default": false },
+          "value": { "type": ["string", "number", "object", "array", "null"] },
+          "source": { "type": "string" }
+        }
+      }
+    },
+    "missing_inputs": {
+      "type": "array",
+      "description": "缺失输入列表",
+      "items": {
+        "type": "object",
+        "properties": {
+          "input_id": { "type": "string" },
+          "name": { "type": "string" },
+          "reason": { "type": "string" },
+          "requested_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "description": "阻塞列表",
+      "items": {
+        "type": "object",
+        "required": ["blocker_id", "type", "description"],
+        "properties": {
+          "blocker_id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["user_input_missing", "external_tool_failed", "dependency_incomplete", "source_conflict", "permission_denied", "budget_exhausted", "resource_unavailable"]
+          },
+          "description": { "type": "string" },
+          "detected_at": { "type": "string", "format": "date-time" },
+          "resolution": { "type": "string" },
+          "resolved_at": { "type": "string", "format": "date-time" },
+          "escalation_level": { "type": "integer", "default": 0 }
+        }
+      }
+    },
+    "next_action": {
+      "type": "object",
+      "description": "下一步动作",
+      "properties": {
+        "action": { "type": "string" },
+        "params": { "type": "object" },
+        "expected_outcome": { "type": "string" },
+        "timeout": { "type": "integer" }
+      }
+    },
+    "retry_count": {
+      "type": "integer",
+      "description": "重试次数",
+      "default": 0,
+      "minimum": 0
+    },
+    "max_retries": {
+      "type": "integer",
+      "description": "最大重试次数",
+      "default": 3
+    },
+    "last_transition_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "最后状态转换时间"
+    },
+    "state_history": {
+      "type": "array",
+      "description": "状态历史",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from_state": { "type": "string" },
+          "to_state": { "type": "string" },
+          "transition_at": { "type": "string", "format": "date-time" },
+          "trigger": { "type": "string" },
+          "duration_ms": { "type": "integer" }
+        }
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "description": "检查点列表",
+      "items": {
+        "type": "object",
+        "properties": {
+          "checkpoint_id": { "type": "string" },
+          "state": { "type": "string" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "data": { "type": "object" },
+          "can_rollback": { "type": "boolean", "default": true }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "任务依赖",
+      "items": {
+        "type": "object",
+        "properties": {
+          "task_id": { "type": "string" },
+          "type": { "type": "string", "enum": ["requires", "blocks", "relates"] },
+          "status": { "type": "string" }
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "description": "任务输出",
+      "properties": {
+        "result": { "type": ["string", "object", "array", "null"] },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string" },
+              "path": { "type": "string" },
+              "size": { "type": "integer" }
+            }
+          }
+        },
+        "metrics": { "type": "object" }
+      }
+    },
+    "error": {
+      "type": "object",
+      "description": "错误信息",
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "details": { "type": "object" },
+        "occurred_at": { "type": "string", "format": "date-time" },
+        "stack_trace": { "type": "string" }
+      }
+    },
+    "timeout_config": {
+      "type": "object",
+      "description": "超时配置",
+      "properties": {
+        "execution_timeout": { "type": "integer", "description": "执行超时(秒)" },
+        "input_timeout": { "type": "integer", "description": "等待输入超时(秒)" },
+        "external_timeout": { "type": "integer", "description": "等待外部超时(秒)" }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "创建时间"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "更新时间"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "完成时间"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "元数据",
+      "additionalProperties": true
+    }
+  }
+}

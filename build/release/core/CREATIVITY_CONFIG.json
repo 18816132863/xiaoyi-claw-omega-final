@@ -1,0 +1,49 @@
+{
+  "module": "creativity_engine",
+  "version": "1.0.0",
+  "description": "创意生成引擎",
+  "features": {
+    "original_ideas": {
+      "enabled": true,
+      "domains": [
+        "product",
+        "marketing",
+        "design",
+        "content",
+        "business"
+      ],
+      "novelty_score_threshold": 0.8
+    },
+    "idea_combination": {
+      "enabled": true,
+      "methods": [
+        "fusion",
+        "analogy",
+        "mutation",
+        "recombination"
+      ],
+      "max_combinations": 100
+    },
+    "idea_evaluation": {
+      "enabled": true,
+      "criteria": [
+        "novelty",
+        "feasibility",
+        "value",
+        "impact"
+      ],
+      "auto_ranking": true
+    },
+    "idea_optimization": {
+      "enabled": true,
+      "iterations": 10,
+      "feedback_learning": true
+    }
+  },
+  "performance": {
+    "generation_speed": 100,
+    "unit": "ideas_per_minute",
+    "novelty_rate": 0.85,
+    "feasibility_rate": 0.9
+  }
+}

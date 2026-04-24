@@ -1,0 +1,136 @@
+{
+  "version": "7.2.0",
+  "lastUpdated": "2026-04-14T21:45:00+08:00",
+  "description": "审计配置 - 高级功能已启用",
+  "events": {
+    "mandatory": [
+      {
+        "type": "high_risk_operation",
+        "level": "CRITICAL",
+        "retention": "permanent"
+      },
+      {
+        "type": "user_confirm",
+        "level": "HIGH",
+        "retention": "365d"
+      },
+      {
+        "type": "user_reject",
+        "level": "HIGH",
+        "retention": "365d"
+      },
+      {
+        "type": "security_violation",
+        "level": "CRITICAL",
+        "retention": "permanent"
+      },
+      {
+        "type": "config_change",
+        "level": "HIGH",
+        "retention": "365d"
+      },
+      {
+        "type": "skill_change",
+        "level": "HIGH",
+        "retention": "365d"
+      },
+      {
+        "type": "memory_delete",
+        "level": "HIGH",
+        "retention": "365d"
+      },
+      {
+        "type": "system_error",
+        "level": "MEDIUM",
+        "retention": "90d"
+      }
+    ],
+    "optional": [
+      {
+        "type": "tool_call",
+        "level": "INFO",
+        "retention": "30d",
+        "enabled": true
+      },
+      {
+        "type": "skill_call",
+        "level": "INFO",
+        "retention": "30d",
+        "enabled": true
+      },
+      {
+        "type": "memory_read",
+        "level": "INFO",
+        "retention": "30d",
+        "enabled": true
+      },
+      {
+        "type": "memory_write",
+        "level": "INFO",
+        "retention": "30d",
+        "enabled": true
+      },
+      {
+        "type": "retrieval",
+        "level": "INFO",
+        "retention": "30d",
+        "enabled": true
+      }
+    ]
+  },
+  "storage": {
+    "path": "audit/logs/",
+    "format": "jsonl",
+    "sharding": "daily",
+    "compression": "gzip",
+    "encryption": {
+      "enabled": true,
+      "algorithm": "AES-256-GCM"
+    }
+  },
+  "retention": {
+    "CRITICAL": "permanent",
+    "HIGH": "365d",
+    "MEDIUM": "90d",
+    "INFO": "30d"
+  },
+  "protection": {
+    "appendOnly": true,
+    "checksumVerification": true,
+    "backupEnabled": true,
+    "backupInterval": "daily"
+  },
+  "access": {
+    "readOnly": true,
+    "requirePermission": "audit:read",
+    "logAccess": true
+  },
+  "alerts": {
+    "rules": [
+      {
+        "name": "critical_events",
+        "condition": "count(CRITICAL) > 3 in 1h",
+        "level": "CRITICAL",
+        "action": "immediate_notify"
+      },
+      {
+        "name": "high_events",
+        "condition": "count(HIGH) > 10 in 1h",
+        "level": "WARNING",
+        "action": "log_and_aggregate"
+      },
+      {
+        "name": "rejection_rate",
+        "condition": "rejection_rate > 30%",
+        "level": "WARNING",
+        "action": "log_and_aggregate"
+      },
+      {
+        "name": "security_violation",
+        "condition": "count(security_violation) > 0",
+        "level": "CRITICAL",
+        "action": "immediate_notify"
+      }
+    ]
+  }
+}

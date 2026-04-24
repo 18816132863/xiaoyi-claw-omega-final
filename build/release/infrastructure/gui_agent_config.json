@@ -1,0 +1,22 @@
+{
+  "timeouts": {
+    "default": 30,
+    "app_launch": 10,
+    "page_load": 5,
+    "element_find": 3,
+    "animation": 2
+  },
+  "retry": {
+    "max_attempts": 2,
+    "delay": 1
+  },
+  "cache": {
+    "enabled": true,
+    "element_positions": true,
+    "app_states": true
+  },
+  "parallel": {
+    "enabled": true,
+    "max_workers": 3
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-06T10:32:00+08:00",
+  "description": "安全边界配置",
+  "boundaries": {
+    "fileSystem": {
+      "allowedPaths": [
+        "~/.openclaw/workspace",
+        "/tmp/openclaw"
+      ],
+      "forbiddenPaths": [
+        "/etc",
+        "/root",
+        "~/.ssh",
+        "~/.gnupg"
+      ],
+      "forbiddenPatterns": [
+        "*.key",
+        "*.pem",
+        "*.secret",
+        ".env",
+        "credentials*"
+      ],
+      "maxFileSize": 104857600,
+      "allowDelete": false,
+      "trashInsteadOfDelete": true
+    },
+    "network": {
+      "allowedDomains": [
+        "*.openclaw.ai",
+        "*.clawhub.ai",
+        "api.openai.com",
+        "api.anthropic.com"
+      ],
+      "forbiddenDomains": [
+        "localhost",
+        "127.0.0.1",
+        "192.168.*",
+        "10.*"
+      ],
+      "maxRequestSize": 10485760,
+      "timeout": 30000,
+      "maxRedirects": 3
+    },
+    "execution": {
+      "forbiddenCommands": [
+        "rm -rf /",
+        "dd if=/dev/zero",
+        ":(){ :|:& };:",
+        "chmod 777",
+        "chown root"
+      ],
+      "requireApproval": [
+        "apt-get",
+        "yum",
+        "pip install",
+        "npm install -g"
+      ],
+      "maxExecutionTime": 60000,
+      "maxOutputSize": 1048576
+    },
+    "memory": {
+      "maxMemoryWrite": 1048576,
+      "forbiddenKeys": [
+        "password",
+        "secret",
+        "token",
+        "api_key",
+        "private_key"
+      ],
+      "encryptFields": [
+        "credentials",
+        "auth"
+      ]
+    }
+  },
+  "violations": {
+    "pathViolation": {
+      "action": "block",
+      "log": true,
+      "notify": true
+    },
+    "commandViolation": {
+      "action": "block",
+      "log": true,
+      "notify": true,
+      "audit": true
+    },
+    "networkViolation": {
+      "action": "block",
+      "log": true,
+      "notify": true
+    },
+    "memoryViolation": {
+      "action": "sanitize",
+      "log": true
+    }
+  },
+  "sanitization": {
+    "patterns": [
+      {
+        "name": "api_key",
+        "pattern": "(?i)(api[_-]?key|apikey)\\s*[=:]\\s*['\"]?([a-zA-Z0-9_-]{20,})",
+        "replacement": "[REDACTED_API_KEY]"
+      },
+      {
+        "name": "password",
+        "pattern": "(?i)(password|passwd|pwd)\\s*[=:]\\s*['\"]?([^'\"\\s]{8,})",
+        "replacement": "[REDACTED_PASSWORD]"
+      },
+      {
+        "name": "token",
+        "pattern": "(?i)(token|auth[_-]?token)\\s*[=:]\\s*['\"]?([a-zA-Z0-9._-]{20,})",
+        "replacement": "[REDACTED_TOKEN]"
+      }
+    ]
+  }
+}

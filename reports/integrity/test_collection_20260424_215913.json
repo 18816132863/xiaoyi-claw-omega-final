@@ -1,0 +1,578 @@
+{
+  "timestamp": "2026-04-24T21:59:11.822124",
+  "tests": {
+    "test_delivery_confirmation_semantics": {
+      "name": "test_delivery_confirmation_semantics",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_delivery_confirmation_semantics.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_photo_closed_loop": {
+      "name": "test_photo_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_photo_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_manual_confirmation": {
+      "name": "test_manual_confirmation",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_manual_confirmation.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_message_sending_real_platform_path": {
+      "name": "test_message_sending_real_platform_path",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_message_sending_real_platform_path.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_learning_no_false_claim_when_no_match": {
+      "name": "test_learning_no_false_claim_when_no_match",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_learning_no_false_claim_when_no_match.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_phone_closed_loop": {
+      "name": "test_phone_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_phone_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_single_source_of_truth": {
+      "name": "test_single_source_of_truth",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_single_source_of_truth.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_invoke_guard": {
+      "name": "test_invoke_guard",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_invoke_guard.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_platform_reports": {
+      "name": "test_platform_reports",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_platform_reports.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_platform_probe": {
+      "name": "test_platform_probe",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_platform_probe.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_cleanup_policy": {
+      "name": "test_cleanup_policy",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_cleanup_policy.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_degradation_strategy": {
+      "name": "test_degradation_strategy",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_degradation_strategy.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_calendar_closed_loop": {
+      "name": "test_calendar_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_calendar_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_learning_similarity_match": {
+      "name": "test_learning_similarity_match",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_learning_similarity_match.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_confirm_invocation_capability": {
+      "name": "test_confirm_invocation_capability",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_confirm_invocation_capability.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_manual_confirmation_bundle": {
+      "name": "test_manual_confirmation_bundle",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_manual_confirmation_bundle.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_xiaoyi_adapter_real_connection": {
+      "name": "test_xiaoyi_adapter_real_connection",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_xiaoyi_adapter_real_connection.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_workflow_parallel": {
+      "name": "test_workflow_parallel",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_workflow_parallel.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_audit_queries": {
+      "name": "test_audit_queries",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_audit_queries.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_automation_scripts": {
+      "name": "test_automation_scripts",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_automation_scripts.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_idle_skill_activation_suggestions": {
+      "name": "test_idle_skill_activation_suggestions",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_idle_skill_activation_suggestions.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_message_closed_loop": {
+      "name": "test_message_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_message_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_workflow_resume": {
+      "name": "test_workflow_resume",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_workflow_resume.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_file_closed_loop": {
+      "name": "test_file_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_file_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_user_messages": {
+      "name": "test_user_messages",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_user_messages.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_rule_violations": {
+      "name": "test_rule_violations",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_rule_violations.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_note_closed_loop": {
+      "name": "test_note_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_note_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_extended_redaction": {
+      "name": "test_extended_redaction",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_extended_redaction.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_alarm_closed_loop": {
+      "name": "test_alarm_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_alarm_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_user_result_matrix": {
+      "name": "test_user_result_matrix",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_user_result_matrix.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_scenarios_v4": {
+      "name": "test_scenarios_v4",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_scenarios_v4.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_skill_registry": {
+      "name": "test_skill_registry",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_skill_registry.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_check_notification_auth": {
+      "name": "test_check_notification_auth",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_check_notification_auth.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_skill_scan_coverage": {
+      "name": "test_skill_scan_coverage",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_skill_scan_coverage.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_skill_registry_external_import": {
+      "name": "test_skill_registry_external_import",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_skill_registry_external_import.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_end_to_end": {
+      "name": "test_end_to_end",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_end_to_end.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_batch_tasks": {
+      "name": "test_batch_tasks",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_batch_tasks.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_capability_registry": {
+      "name": "test_capability_registry",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_capability_registry.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_audit_cli": {
+      "name": "test_audit_cli",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_audit_cli.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_diagnostics_export": {
+      "name": "test_diagnostics_export",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_diagnostics_export.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_no_fake_implementation": {
+      "name": "test_no_fake_implementation",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_no_fake_implementation.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_learning_second_run_reuses_success_path": {
+      "name": "test_learning_second_run_reuses_success_path",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_learning_second_run_reuses_success_path.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_redact_export": {
+      "name": "test_redact_export",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_redact_export.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_location_closed_loop": {
+      "name": "test_location_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_location_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_architecture": {
+      "name": "test_architecture",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_architecture.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_runtime_probe_adapter_consistency": {
+      "name": "test_runtime_probe_adapter_consistency",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_runtime_probe_adapter_consistency.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_task_system_v2": {
+      "name": "test_task_system_v2",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_task_system_v2.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_scenarios_v3": {
+      "name": "test_scenarios_v3",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_scenarios_v3.py",
+      "has_test_func": false,
+      "has_test_class": false,
+      "collectible": false,
+      "collected_count": 0
+    },
+    "test_xiaoyi_note_closed_loop": {
+      "name": "test_xiaoyi_note_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_xiaoyi_note_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_xiaoyi_adapter_guarded": {
+      "name": "test_xiaoyi_adapter_guarded",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_xiaoyi_adapter_guarded.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_notification_closed_loop": {
+      "name": "test_notification_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_notification_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_pause_resume_semantics": {
+      "name": "test_pause_resume_semantics",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_pause_resume_semantics.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_sqlite_datetime": {
+      "name": "test_sqlite_datetime",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_sqlite_datetime.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_platform_execution_semantics": {
+      "name": "test_platform_execution_semantics",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_platform_execution_semantics.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_task_system_mvp": {
+      "name": "test_task_system_mvp",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_task_system_mvp.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_no_fake_success": {
+      "name": "test_no_fake_success",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_no_fake_success.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_dry_run_controls": {
+      "name": "test_dry_run_controls",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_dry_run_controls.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_xiaoyi_adapter_connected_path": {
+      "name": "test_xiaoyi_adapter_connected_path",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_xiaoyi_adapter_connected_path.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_seed_invocations": {
+      "name": "test_seed_invocations",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_seed_invocations.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_router_bootstrap": {
+      "name": "test_router_bootstrap",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_router_bootstrap.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_compat_shims": {
+      "name": "test_compat_shims",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_compat_shims.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_health_check": {
+      "name": "test_health_check",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_health_check.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_path_unification": {
+      "name": "test_path_unification",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_path_unification.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_contact_closed_loop": {
+      "name": "test_contact_closed_loop",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_contact_closed_loop.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_invocation_ledger": {
+      "name": "test_invocation_ledger",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_invocation_ledger.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_runtime_modes": {
+      "name": "test_runtime_modes",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_runtime_modes.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_approval_controls": {
+      "name": "test_approval_controls",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_approval_controls.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_real_capability_integration": {
+      "name": "test_real_capability_integration",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_real_capability_integration.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_notification_auth": {
+      "name": "test_notification_auth",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_notification_auth.py",
+      "has_test_func": true,
+      "has_test_class": true,
+      "collectible": true,
+      "collected_count": 0
+    },
+    "test_workflow_branching": {
+      "name": "test_workflow_branching",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_workflow_branching.py",
+      "has_test_func": true,
+      "has_test_class": false,
+      "collectible": true,
+      "collected_count": 0
+    }
+  },
+  "issues": [
+    {
+      "type": "test_not_collectible",
+      "name": "test_scenarios_v3",
+      "path": "/home/sandbox/.openclaw/workspace/tests/test_scenarios_v3.py",
+      "reason": "无可收集的测试函数或类"
+    }
+  ],
+  "stats": {
+    "total": 70,
+    "collectible": 69,
+    "uncollectible": 1
+  }
+}

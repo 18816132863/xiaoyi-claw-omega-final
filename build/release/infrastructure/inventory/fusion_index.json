@@ -1,0 +1,143 @@
+{
+  "version": "7.2.0",
+  "updated": "2026-04-14",
+  "description": "架构融合索引 - 统一入口",
+  "indexes": {
+    "skills": {
+      "registry": "infrastructure/inventory/skill_registry.json",
+      "inverted": "infrastructure/inventory/skill_inverted_index.json",
+      "total": 275
+    },
+    "rules": {
+      "registry": "core/RULE_REGISTRY.json",
+      "exceptions": "core/RULE_EXCEPTIONS.json",
+      "total": 8
+    },
+    "config": {
+      "unified": "infrastructure/config/unified.json",
+      "llm": "skills/llm-memory-integration/config/llm_config.json"
+    },
+    "reports": {
+      "ops": "reports/ops/",
+      "audit": "governance/audit/"
+    }
+  },
+  "performance": {
+    "parallel_execution": true,
+    "cache_enabled": true,
+    "lazy_load": true,
+    "batch_operations": true,
+    "inspector_version": "4.0.0",
+    "numba_enabled": true,
+    "numpy_enabled": true,
+    "max_workers": 6,
+    "target_time_ms": 10000
+  },
+  "injection": {
+    "mode": "minimal",
+    "config": "infrastructure/config/injection_config.json",
+    "estimated_tokens": 3500,
+    "minimal_tokens": 2762,
+    "modes": {
+      "full": {
+        "tokens": 13000000,
+        "description": "全量注入"
+      },
+      "minimal": {
+        "tokens": 5000,
+        "description": "精简注入"
+      },
+      "ultra_minimal": {
+        "tokens": 2762,
+        "description": "极简注入"
+      },
+      "smart": {
+        "tokens": 2000,
+        "description": "智能注入 - 自动压缩"
+      }
+    },
+    "tools": {
+      "compressor": "scripts/smart_compressor.py",
+      "updater": "scripts/incremental_updater.py",
+      "summarizer": "scripts/auto_summarizer.py"
+    }
+  },
+  "inspector": {
+    "version": "5.0.0",
+    "checks": 8,
+    "workers": 8,
+    "target_time_ms": 6000
+  },
+  "token_optimization": {
+    "modes": [
+      "full",
+      "minimal",
+      "ultra_minimal",
+      "smart"
+    ],
+    "tools": [
+      "smart_compressor.py",
+      "incremental_updater.py",
+      "auto_summarizer.py"
+    ],
+    "estimated_tokens": {
+      "full": 13000000,
+      "minimal": 5000,
+      "ultra_minimal": 2800,
+      "smart": 2000
+    }
+  },
+  "llm_memory_integration": {
+    "version": "5.1.5",
+    "path": "skills/llm-memory-integration",
+    "category": "memory",
+    "features": {
+      "embedding_dimensions": 4096,
+      "embedding_model": "Qwen3-Embedding-8B",
+      "llm_model": "Qwen3-235B-A22B",
+      "provider": "Gitee AI",
+      "three_engines": [
+        "sqlite-vec",
+        "qdrant",
+        "tfidf"
+      ],
+      "auto_update": true,
+      "sync_enabled": true
+    },
+    "config_files": [
+      "config/llm_config.json",
+      "config/three_engine_config.json",
+      "config/persona_update.json",
+      "config/progressive_config.json"
+    ]
+  },
+  "modules": {
+    "dependency_manager": {
+      "script": "scripts/dependency_manager.py",
+      "config": "infrastructure/config/dependency_manifest.json",
+      "report": "reports/ops/dependency_status.json",
+      "categories": [
+        "core",
+        "llm",
+        "embedding",
+        "vector",
+        "ml",
+        "performance",
+        "document"
+      ]
+    },
+    "delete_manager": {
+      "script": "scripts/delete_manager.py",
+      "trash_dir": "archive/trash/",
+      "log": "reports/ops/delete_log.json",
+      "pending": "reports/ops/pending_deletes.json",
+      "protected_files": [
+        "core/ARCHITECTURE.md",
+        "core/RULE_REGISTRY.json",
+        "core/SOUL.md",
+        "core/USER.md",
+        "MEMORY.md"
+      ]
+    }
+  }
+}

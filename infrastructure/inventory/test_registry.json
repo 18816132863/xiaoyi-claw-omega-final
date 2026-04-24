@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-24",
+  "items": {},
+  "stats": {
+    "total": 0,
+    "by_status": {
+      "created": 0,
+      "collectible": 0,
+      "passing": 0,
+      "active": 0
+    },
+    "by_category": {
+      "unit": 0,
+      "integration": 0,
+      "smoke": 0,
+      "e2e": 0
+    }
+  },
+  "description": "测试注册表 - 记录所有测试的状态"
+}

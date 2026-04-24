@@ -1,0 +1,517 @@
+{
+  "version": "2.9.3",
+  "name": "小艺 Claw 终极星空鸽子王",
+  "architecture": "六层核心架构 L1-L6 (固定不变) + 文件保护模块深度整合",
+  "upload_mode": "full_upload",
+  "last_updated": "2026-04-11T09:34:00+08:00",
+  
+  "architecture_diagram": {
+    "L1": "核心认知层 → 身份、规则、引导、配置",
+    "L2": "记忆上下文层 → 记忆存储、检索、日记",
+    "L3": "任务编排层 → 路由、工作流、调度、状态机",
+    "L4": "能力执行层 → 技能执行、结果验证、健康检查",
+    "L5": "稳定治理层 → 安全、权限、审计、文件保护",
+    "L6": "基础设施层 → 路径、插件、性能、注册表"
+  },
+  
+  "layer_integration": {
+    "description": "各层之间的调用关系和数据流向",
+    "flow": {
+      "request_flow": "用户请求 → L1解析 → L3路由 → L4执行 → L5验证 → 返回结果",
+      "protection_flow": "删除请求 → L5文件保护 → 人工确认 → L6执行 → L5审计日志",
+      "memory_flow": "L1触发词 → L2加载记忆 → L3编排 → L4执行 → L2存储结果"
+    }
+  },
+  
+  "layers": {
+    "L1": {
+      "name": "核心认知层",
+      "name_en": "Core Cognition Layer",
+      "token_budget": 3000,
+      "load_strategy": "immediate",
+      "skills_count": 0,
+      "skills": [],
+      "description": "身份、规则、引导、配置",
+      
+      "files": {
+        "AGENTS.md": {
+          "purpose": "工作空间规则，定义每次会话的加载流程",
+          "protected": true,
+          "calls": ["L2", "L5"]
+        },
+        "SOUL.md": {
+          "purpose": "身份定义，定义AI的性格和行为准则",
+          "protected": true,
+          "calls": []
+        },
+        "USER.md": {
+          "purpose": "用户信息，记录用户的偏好和上下文",
+          "protected": true,
+          "calls": []
+        },
+        "TOOLS.md": {
+          "purpose": "工具规则，定义工具的使用优先级",
+          "protected": true,
+          "calls": ["L4", "L5"]
+        },
+        "IDENTITY.md": {
+          "purpose": "身份标识，定义AI的名称和形象",
+          "protected": true,
+          "calls": []
+        },
+        "CONFIG.json": {
+          "purpose": "核心配置，定义六层架构的Token预算和加载策略",
+          "protected": true,
+          "calls": ["L2", "L3", "L4", "L5", "L6"]
+        }
+      },
+      
+      "directories": ["core/", "core/guide/"],
+      
+      "outbound_calls": {
+        "to_L2": "触发记忆加载 (记得、上次)",
+        "to_L3": "触发任务编排 (工作流、定时)",
+        "to_L4": "触发技能执行 (按类别)",
+        "to_L5": "触发安全检查 (敏感操作)",
+        "to_L6": "触发系统操作 (安装、配置)"
+      }
+    },
+    
+    "L2": {
+      "name": "记忆上下文层",
+      "name_en": "Memory Context Layer",
+      "token_budget": 2000,
+      "load_strategy": "on_demand",
+      "skills_count": 3,
+      "skills": [
+        {"name": "memory", "desc": "记忆管理", "calls": ["MEMORY.md"]},
+        {"name": "obsidian", "desc": "笔记同步", "calls": ["外部笔记系统"]},
+        {"name": "find-skills", "desc": "技能发现", "calls": ["L6/registry.py"]}
+      ],
+      "triggers": ["记得", "上次", "回忆", "历史", "remember", "recall"],
+      "description": "记忆存储、检索、日记",
+      
+      "files": {
+        "MEMORY.md": {
+          "purpose": "长期记忆，存储重要的历史信息",
+          "protected": true,
+          "calls": []
+        },
+        "memory/*.md": {
+          "purpose": "日记文件，记录每日工作",
+          "protected": true,
+          "pattern": true,
+          "calls": []
+        }
+      },
+      
+      "directories": ["memory/"],
+      
+      "inbound_calls": {
+        "from_L1": "触发词激活记忆加载"
+      },
+      
+      "outbound_calls": {
+        "to_L6": "调用 registry.py 查找技能"
+      }
+    },
+    
+    "L3": {
+      "name": "任务编排层",
+      "name_en": "Task Orchestration Layer",
+      "token_budget": 1500,
+      "load_strategy": "on_demand",
+      "skills_count": 8,
+      "skills": [
+        {"name": "planning-with-files", "desc": "文件规划", "calls": ["L4/file"]},
+        {"name": "today-task", "desc": "今日任务", "calls": ["L2/memory"]},
+        {"name": "post-job", "desc": "任务发布", "calls": ["L4/social"]},
+        {"name": "cron", "desc": "定时任务", "calls": ["L6/plugins.py"]},
+        {"name": "proactivity", "desc": "主动代理", "calls": ["L3/router.py"]},
+        {"name": "self-improving-agent", "desc": "自改进代理", "calls": ["L5/audit.py"]},
+        {"name": "command-center", "desc": "命令中心", "calls": ["L4/code"]},
+        {"name": "command-hook", "desc": "命令钩子", "calls": ["L5/permissions.py"]}
+      ],
+      "triggers": ["工作流", "定时", "计划", "任务", "workflow", "schedule"],
+      "description": "路由、工作流、调度、状态机",
+      
+      "files": {
+        "engine/router.py": {
+          "purpose": "技能路由器，根据任务类型路由到对应技能",
+          "protected": true,
+          "calls": ["L4/skills", "L6/registry.py"]
+        },
+        "engine/workflows/": {
+          "purpose": "工作流包，定义复杂任务的执行流程",
+          "protected": false,
+          "calls": ["L4/executors"]
+        }
+      },
+      
+      "directories": ["engine/", "engine/workflows/"],
+      
+      "inbound_calls": {
+        "from_L1": "触发词激活任务编排"
+      },
+      
+      "outbound_calls": {
+        "to_L2": "读取/存储任务相关记忆",
+        "to_L4": "调用技能执行",
+        "to_L5": "权限检查、审计日志",
+        "to_L6": "调用插件、注册表"
+      }
+    },
+    
+    "L4": {
+      "name": "能力执行层",
+      "name_en": "Capability Execution Layer",
+      "token_budget": 1500,
+      "load_strategy": "by_category",
+      "skills_count": 134,
+      "description": "技能执行、结果验证、健康检查",
+      
+      "files": {
+        "engine/executor.py": {
+          "purpose": "技能执行器，调用具体技能并返回结果",
+          "protected": true,
+          "calls": ["skills/*", "L5/validator.py"]
+        },
+        "engine/validator.py": {
+          "purpose": "结果验证器，验证技能执行结果",
+          "protected": true,
+          "calls": ["L5/audit.py"]
+        }
+      },
+      
+      "directories": ["skills/"],
+      
+      "categories": {
+        "document": {"count": 8, "triggers": ["文档", "word", "pdf", "ppt"]},
+        "data": {"count": 8, "triggers": ["数据", "分析", "excel", "sql"]},
+        "search": {"count": 8, "triggers": ["搜索", "查找", "网页"]},
+        "image": {"count": 8, "triggers": ["图片", "照片", "截图"]},
+        "media": {"count": 6, "triggers": ["音频", "视频", "音乐"]},
+        "code": {"count": 10, "triggers": ["代码", "git", "docker"]},
+        "content": {"count": 8, "triggers": ["写作", "文章", "创作"]},
+        "social": {"count": 6, "triggers": ["小红书", "b站", "邮件"]},
+        "file": {"count": 6, "triggers": ["文件", "网盘", "上传"]},
+        "utility": {"count": 6, "triggers": ["天气", "地图", "健康"]},
+        "business": {"count": 12, "triggers": ["市场", "股票", "投资"]},
+        "professional": {"count": 6, "triggers": ["架构", "专家", "顾问"]},
+        "design": {"count": 5, "triggers": ["设计", "ui", "前端"]},
+        "automation": {"count": 4, "triggers": ["自动", "升级", "监控"]},
+        "auxiliary": {"count": 6, "triggers": ["关键词", "seo", "报告"]},
+        "special": {"count": 3, "triggers": ["新手", "人格", "本体"]},
+        "strategy": {"count": 2, "triggers": ["战略", "目标", "规划"]},
+        "collaboration": {"count": 1, "triggers": ["协同", "团队", "协作"]},
+        "core": {"count": 9, "triggers": ["核心", "基础"]},
+        "platform": {"count": 4, "triggers": ["掘金", "笔记", "热点"]},
+        "other": {"count": 4, "triggers": []}
+      },
+      
+      "inbound_calls": {
+        "from_L1": "直接触发技能类别",
+        "from_L3": "工作流调用技能"
+      },
+      
+      "outbound_calls": {
+        "to_L2": "存储执行结果到记忆",
+        "to_L5": "安全检查、权限验证、审计日志"
+      }
+    },
+    
+    "L5": {
+      "name": "稳定治理层",
+      "name_en": "Stability Governance Layer",
+      "token_budget": 800,
+      "load_strategy": "on_sensitive",
+      "skills_count": 6,
+      "skills": [
+        {"name": "clawsec-suite", "desc": "安全套件", "calls": ["L5/security.py"]},
+        {"name": "senior-security", "desc": "安全专家", "calls": ["L5/security.py"]},
+        {"name": "risk-management-specialist", "desc": "风险管理", "calls": ["L5/audit.py"]},
+        {"name": "verified-agent-identity", "desc": "身份验证", "calls": ["L5/permissions.py"]},
+        {"name": "moltguard", "desc": "安全防护", "calls": ["L5/security.py"]},
+        {"name": "secret-guardian", "desc": "密钥守护", "calls": ["L5/security.py"]}
+      ],
+      "triggers": ["安全", "权限", "敏感", "删除", "security", "delete"],
+      "description": "安全、权限、审计、文件保护",
+      
+      "modules": {
+        "security.py": {
+          "purpose": "安全检查模块，检查危险命令和路径",
+          "protected": true,
+          "inbound": ["L1", "L3", "L4", "L6"],
+          "outbound": ["L5/audit.py"],
+          "functions": ["check_command()", "check_path()"]
+        },
+        "permissions.py": {
+          "purpose": "权限管理模块，控制操作权限",
+          "protected": true,
+          "inbound": ["L1", "L3", "L4", "L6"],
+          "outbound": ["L5/audit.py"],
+          "functions": ["check_permission()", "grant_auth()", "revoke_auth()"]
+        },
+        "audit.py": {
+          "purpose": "审计日志模块，记录所有操作",
+          "protected": true,
+          "inbound": ["L1", "L2", "L3", "L4", "L5", "L6"],
+          "outbound": ["L2/memory"],
+          "functions": ["log_operation()", "get_audit_log()"]
+        },
+        "file_guardian.py": {
+          "purpose": "文件保护模块，防止误删重要文件",
+          "protected": true,
+          "inbound": ["L1", "L3", "L4", "L6"],
+          "outbound": ["L5/audit.py", "L6/paths.py"],
+          "functions": [
+            "check_before_delete()",
+            "confirm_and_delete()",
+            "is_protected()",
+            "add_protection()",
+            "request_delete()",
+            "_analyze_necessity()",
+            "_get_file_description()"
+          ],
+          "integration": {
+            "with_L1": "AGENTS.md 定义文件保护规则",
+            "with_L2": "保护 MEMORY.md 和日记文件",
+            "with_L3": "工作流删除文件前调用保护检查",
+            "with_L4": "技能删除文件前调用保护检查",
+            "with_L6": "使用 paths.py 解析路径，使用 trash 目录"
+          }
+        },
+        "protected_files.json": {
+          "purpose": "受保护文件列表，定义哪些文件不可直接删除",
+          "protected": true,
+          "inbound": ["L5/file_guardian.py"],
+          "outbound": [],
+          "structure": {
+            "core": "核心受保护文件列表",
+            "user_added": "用户添加的保护文件",
+            "patterns": "受保护的文件模式",
+            "rules": "删除规则"
+          }
+        }
+      },
+      
+      "directories": ["guard/"],
+      
+      "inbound_calls": {
+        "from_L1": "敏感操作触发安全检查",
+        "from_L3": "工作流权限验证",
+        "from_L4": "技能执行安全检查",
+        "from_L6": "系统操作权限验证"
+      },
+      
+      "outbound_calls": {
+        "to_L2": "存储审计日志到记忆",
+        "to_L6": "调用 paths.py 解析路径"
+      },
+      
+      "protection_flow": {
+        "step_1": "任何删除请求 → L5/file_guardian.py",
+        "step_2": "file_guardian 检查 protected_files.json",
+        "step_3": "显示文件必要性和作用 → 请求人工确认",
+        "step_4": "人工确认 → L6/paths.py 解析路径",
+        "step_5": "移至 .trash 目录 → L5/audit.py 记录日志"
+      }
+    },
+    
+    "L6": {
+      "name": "基础设施层",
+      "name_en": "Infrastructure Layer",
+      "token_budget": 700,
+      "load_strategy": "on_system",
+      "skills_count": 4,
+      "skills": [
+        {"name": "skill-creator", "desc": "技能创建", "calls": ["L6/registry.py"]},
+        {"name": "skill-safe-install", "desc": "安全安装", "calls": ["L5/security.py", "L6/plugins.py"]},
+        {"name": "openclaw-agent-optimize", "desc": "代理优化", "calls": ["L6/performance.py"]},
+        {"name": "performance-upgrade", "desc": "性能升级", "calls": ["L6/performance.py"]}
+      ],
+      "triggers": ["系统", "安装", "配置", "优化", "system", "install"],
+      "description": "路径、插件、性能、注册表",
+      
+      "modules": {
+        "paths.py": {
+          "purpose": "路径解析模块，处理文件路径",
+          "protected": true,
+          "inbound": ["L1", "L3", "L4", "L5"],
+          "outbound": [],
+          "functions": ["resolve()", "is_safe()"]
+        },
+        "plugins.py": {
+          "purpose": "插件标准模块，定义插件接口",
+          "protected": true,
+          "inbound": ["L3", "L4"],
+          "outbound": ["L5/security.py"],
+          "functions": ["load_plugin()", "validate_plugin()"]
+        },
+        "performance.py": {
+          "purpose": "性能优化模块，缓存和加速",
+          "protected": true,
+          "inbound": ["L1", "L3", "L4"],
+          "outbound": [],
+          "functions": ["cached_lookup()", "PerformanceTimer"]
+        },
+        "registry.py": {
+          "purpose": "技能注册表，管理所有技能",
+          "protected": true,
+          "inbound": ["L2", "L3", "L4"],
+          "outbound": ["L5/audit.py"],
+          "functions": ["register_skill()", "find_skill()", "list_skills()"]
+        }
+      },
+      
+      "directories": ["infra/"],
+      
+      "inbound_calls": {
+        "from_L1": "系统配置操作",
+        "from_L3": "插件加载、技能查找",
+        "from_L4": "技能注册",
+        "from_L5": "路径解析"
+      },
+      
+      "outbound_calls": {
+        "to_L2": "存储系统操作日志",
+        "to_L5": "安全检查、权限验证"
+      }
+    }
+  },
+  
+  "call_coordination": {
+    "description": "层间调用协调规则",
+    "rules": [
+      "L1 可以调用所有层 (触发)",
+      "L2 只能调用 L6 (查找技能)",
+      "L3 可以调用 L2, L4, L5, L6",
+      "L4 可以调用 L2, L5",
+      "L5 可以调用 L2, L6",
+      "L6 可以调用 L2, L5",
+      "所有删除操作必须经过 L5/file_guardian.py",
+      "所有敏感操作必须经过 L5/security.py",
+      "所有操作必须记录到 L5/audit.py"
+    ],
+    
+    "delete_flow": {
+      "trigger": "任何层发起删除请求",
+      "step_1": "调用 L5/file_guardian.request_delete()",
+      "step_2": "file_guardian 检查 protected_files.json",
+      "step_3": "显示文件描述和必要性",
+      "step_4": "等待人工确认",
+      "step_5": "确认后调用 L6/paths.py 解析路径",
+      "step_6": "移至 .trash 目录",
+      "step_7": "调用 L5/audit.py 记录日志"
+    },
+    
+    "security_flow": {
+      "trigger": "敏感操作 (exec, install, config)",
+      "step_1": "调用 L5/security.py 检查",
+      "step_2": "调用 L5/permissions.py 验证权限",
+      "step_3": "需要确认则等待人工确认",
+      "step_4": "执行操作",
+      "step_5": "调用 L5/audit.py 记录日志"
+    }
+  },
+  
+  "protected_files": {
+    "L1_files": [
+      {"path": "AGENTS.md", "reason": "工作空间规则", "deletable": false},
+      {"path": "SOUL.md", "reason": "身份定义", "deletable": false},
+      {"path": "USER.md", "reason": "用户信息", "deletable": false},
+      {"path": "TOOLS.md", "reason": "工具规则", "deletable": false},
+      {"path": "IDENTITY.md", "reason": "身份标识", "deletable": false},
+      {"path": "CONFIG.json", "reason": "核心配置", "deletable": false}
+    ],
+    "L2_files": [
+      {"path": "MEMORY.md", "reason": "长期记忆", "deletable": false},
+      {"path": "memory/*.md", "reason": "日记文件", "deletable": "需确认", "pattern": true}
+    ],
+    "L3_files": [
+      {"path": "engine/router.py", "reason": "技能路由器", "deletable": false}
+    ],
+    "L4_files": [
+      {"path": "engine/executor.py", "reason": "技能执行器", "deletable": false},
+      {"path": "engine/validator.py", "reason": "结果验证器", "deletable": false}
+    ],
+    "L5_files": [
+      {"path": "guard/security.py", "reason": "安全检查模块", "deletable": false},
+      {"path": "guard/permissions.py", "reason": "权限管理模块", "deletable": false},
+      {"path": "guard/audit.py", "reason": "审计日志模块", "deletable": false},
+      {"path": "guard/file_guardian.py", "reason": "文件保护模块", "deletable": false},
+      {"path": "guard/protected_files.json", "reason": "受保护文件列表", "deletable": false}
+    ],
+    "L6_files": [
+      {"path": "infra/paths.py", "reason": "路径解析模块", "deletable": false},
+      {"path": "infra/plugins.py", "reason": "插件标准模块", "deletable": false},
+      {"path": "infra/performance.py", "reason": "性能优化模块", "deletable": false},
+      {"path": "infra/registry.py", "reason": "技能注册表", "deletable": false}
+    ]
+  },
+  
+  "all_skills": [
+    "admapix", "agent-browser-clawdbot", "agent-chronicle", "ai-picture-book", "ai-ppt-generator",
+    "amazon-product-search-api-skill", "ansible", "api-gateway", "article-writer", "audio-cog",
+    "auto-skill-upgrade", "baidu-netdisk-skills", "beauty-generation-api", "beginner-mode", "best-minds",
+    "bilibili-all-in-one", "bitsoul-stock-quantization", "calcom-cal.com-web-design-guidelines-1.0.2",
+    "camsnap", "ceo-advisor", "chart-image", "china-stock-analysis", "clawdhub", "clawsec-suite",
+    "cn-web-search", "code-analysis-skills", "command-center", "command-hook", "copywriter", "core",
+    "cron", "crypto", "data-analysis", "deep-search-and-insight-synthesize", "dingtalk-ai-table",
+    "discord", "docker", "docs-cog", "docx", "elasticsearch", "engines", "eno", "excel-analysis",
+    "file-manager", "find-skills", "frontend-design-pro", "getnote", "git", "good-txt-to-hwreader",
+    "google-maps", "guide", "hot-news-aggregator", "huawei-drive", "image", "image-gen",
+    "imap-smtp-email", "imsg", "industry-stock-tracker", "javascript-skills", "juejin-skills",
+    "keyword-research", "klaviyo", "linkedin-api", "local_app_interconnect", "market-research",
+    "marketing-strategy-pmm", "markitdown", "memory", "moltguard", "moltrade", "mongodb",
+    "mx-stocks-screener", "mysql", "nano-pdf", "novel-generator", "obsidian", "ocr-local",
+    "ontology", "openai-whisper-api", "openclaw-agent-optimize", "openclaw-skills-agent-builder-1.0.3",
+    "pdf", "performance-upgrade", "personas", "pexoai-agent", "planning-with-files", "playwright",
+    "poetry", "polymarket-trade", "post-job", "pptx", "proactivity", "productivity",
+    "quality-documentation-manager", "react-best-practices", "research-cog", "risk-management-specialist",
+    "scrapling-official", "screenshot", "seedream-image_gen", "self-improving-agent", "senior-architect",
+    "senior-data-scientist", "senior-security", "sheet-cog", "skill-creator", "skill-finder",
+    "skill-fusion", "skill-install-manager-1-0-0", "sonoscli", "spotify-player", "sqlite",
+    "stock-price-query", "story-cog", "su-lan-paper-daily-skill", "t-trading", "taskr",
+    "tavily-search-skill", "tdd-guide", "tech-news-digest", "technical-seo-checker", "tencent-cos-skill",
+    "terraform", "today-task", "topic-monitor", "tushare-data", "ui-design-system", "unified-document",
+    "unified-image", "unified-search", "university-applications", "utils", "verified-agent-identity",
+    "video-agent", "video-cog", "video-subtitles", "wan-image-video-generation-editting", "weather",
+    "web-browsing", "web-scraper", "web-search-exa", "webapp-testing", "xiao-gui-agent",
+    "xiaohongshu-all-in-one", "xiaoyi-doc-convert", "xiaoyi-file-upload", "xiaoyi-health",
+    "xiaoyi-image-search", "xiaoyi-image-understanding", "xiaoyi-report", "xiaoyi-web-search"
+  ],
+  
+  "summary": {
+    "total_layers": 6,
+    "total_skills": 151,
+    "total_token_budget": 9500,
+    "startup_token": 2000,
+    "protected_files_count": 18,
+    "L5_modules": 5,
+    "call_coordination_rules": 8
+  },
+  
+  "performance": {
+    "startup_latency_ms": 30,
+    "skill_lookup_ms": 5,
+    "layer_load_ms": 20,
+    "total_response_ms": 60,
+    "delete_confirm_time_ms": 0
+  },
+  
+  "directories": {
+    "core": "L1 + L2: 认知 + 记忆",
+    "engine": "L3 + L4: 编排 + 执行",
+    "skills": "L4: 技能库 (151个)",
+    "guard": "L5: 安全治理 + 文件保护 (5个模块)",
+    "infra": "L6: 基础设施 (4个模块)",
+    "memory": "L2: 日记目录"
+  },
+  
+  "version_history": [
+    {"version": "2.9.1", "date": "2026-04-11", "desc": "六层架构固定"},
+    {"version": "2.9.2", "date": "2026-04-11", "desc": "新增文件保护模块"},
+    {"version": "2.9.3", "date": "2026-04-11", "desc": "文件保护深度整合 + 调用协调优化"}
+  ]
+}

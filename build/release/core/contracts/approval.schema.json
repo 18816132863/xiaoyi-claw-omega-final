@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "approval.schema.json",
+  "title": "Approval",
+  "description": "审批契约",
+  "type": "object",
+  "required": ["approval_id", "action_type", "status", "final_status", "created_at", "approved_by", "approved_at", "executed_at", "execute_record_id"],
+  "properties": {
+    "approval_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "审批 ID"
+    },
+    "action_type": {
+      "type": "string",
+      "description": "动作类型"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "approved", "executed", "execute_failed", "denied"],
+      "description": "状态"
+    },
+    "final_status": {
+      "type": "string",
+      "description": "最终状态"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "创建时间"
+    },
+    "approved_by": {
+      "type": "string",
+      "description": "审批人"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "审批时间"
+    },
+    "executed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "执行时间"
+    },
+    "execute_record_id": {
+      "type": "string",
+      "description": "执行记录 ID（必须对应真实 remediation 记录）"
+    },
+    "action_params": {
+      "type": "object",
+      "description": "动作参数"
+    },
+    "denial_reason": {
+      "type": "string",
+      "description": "拒绝原因"
+    },
+    "notes": {
+      "type": "string",
+      "description": "备注"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,51 @@
+{
+  "module": "hexagonal_architecture",
+  "version": "1.0.0",
+  "description": "六边形架构系统",
+  "components": {
+    "core": {
+      "description": "核心业务逻辑",
+      "contains": [
+        "domain",
+        "service",
+        "port"
+      ]
+    },
+    "ports": {
+      "driving": {
+        "description": "驱动端口(入站)",
+        "examples": [
+          "api",
+          "cli",
+          "web"
+        ]
+      },
+      "driven": {
+        "description": "被驱动端口(出站)",
+        "examples": [
+          "database",
+          "messaging",
+          "external"
+        ]
+      }
+    },
+    "adapters": {
+      "driving": {
+        "description": "驱动适配器",
+        "examples": [
+          "rest_controller",
+          "cli_handler",
+          "graphql"
+        ]
+      },
+      "driven": {
+        "description": "被驱动适配器",
+        "examples": [
+          "jpa_repository",
+          "kafka_producer",
+          "http_client"
+        ]
+      }
+    }
+  }
+}

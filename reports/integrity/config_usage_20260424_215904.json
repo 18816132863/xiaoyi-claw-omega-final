@@ -1,0 +1,162 @@
+{
+  "timestamp": "2026-04-24T21:59:03.657364",
+  "configs": {
+    "dual_push_config": {
+      "name": "dual_push_config",
+      "path": "/home/sandbox/.openclaw/workspace/config/dual_push_config.json",
+      "ext": ".json",
+      "referenced": false,
+      "loaded": false
+    },
+    "injection_config_minimal": {
+      "name": "injection_config_minimal",
+      "path": "/home/sandbox/.openclaw/workspace/config/injection_config_minimal.json",
+      "ext": ".json",
+      "referenced": true,
+      "loaded": true
+    },
+    "capability_timeouts": {
+      "name": "capability_timeouts",
+      "path": "/home/sandbox/.openclaw/workspace/config/capability_timeouts.json",
+      "ext": ".json",
+      "referenced": false,
+      "loaded": false
+    },
+    "settings": {
+      "name": "settings",
+      "path": "/home/sandbox/.openclaw/workspace/config/settings.py",
+      "ext": ".py",
+      "referenced": true,
+      "loaded": true
+    },
+    "unified": {
+      "name": "unified",
+      "path": "/home/sandbox/.openclaw/workspace/config/unified.json",
+      "ext": ".json",
+      "referenced": true,
+      "loaded": true
+    },
+    "injection_config": {
+      "name": "injection_config",
+      "path": "/home/sandbox/.openclaw/workspace/config/injection_config.json",
+      "ext": ".json",
+      "referenced": true,
+      "loaded": true
+    },
+    "default_skill_config": {
+      "name": "default_skill_config",
+      "path": "/home/sandbox/.openclaw/workspace/config/default_skill_config.py",
+      "ext": ".py",
+      "referenced": false,
+      "loaded": true
+    },
+    "feature_flags": {
+      "name": "feature_flags",
+      "path": "/home/sandbox/.openclaw/workspace/config/feature_flags.py",
+      "ext": ".py",
+      "referenced": false,
+      "loaded": true
+    },
+    "crontab": {
+      "name": "crontab",
+      "path": "/home/sandbox/.openclaw/workspace/config/crontab.example",
+      "ext": ".example",
+      "referenced": true,
+      "loaded": true
+    },
+    "resource_paths": {
+      "name": "resource_paths",
+      "path": "/home/sandbox/.openclaw/workspace/config/resource_paths.py",
+      "ext": ".py",
+      "referenced": true,
+      "loaded": true
+    },
+    "dependency_manifest": {
+      "name": "dependency_manifest",
+      "path": "/home/sandbox/.openclaw/workspace/config/dependency_manifest.json",
+      "ext": ".json",
+      "referenced": true,
+      "loaded": true
+    },
+    "systemd": {
+      "name": "systemd",
+      "path": "/home/sandbox/.openclaw/workspace/config/systemd.example",
+      "ext": ".example",
+      "referenced": true,
+      "loaded": true
+    },
+    "safety_controls": {
+      "name": "safety_controls",
+      "path": "/home/sandbox/.openclaw/workspace/config/safety_controls.py",
+      "ext": ".py",
+      "referenced": true,
+      "loaded": true
+    },
+    "injection_config_smart": {
+      "name": "injection_config_smart",
+      "path": "/home/sandbox/.openclaw/workspace/config/injection_config_smart.json",
+      "ext": ".json",
+      "referenced": true,
+      "loaded": true
+    },
+    "runtime_modes": {
+      "name": "runtime_modes",
+      "path": "/home/sandbox/.openclaw/workspace/config/runtime_modes.py",
+      "ext": ".py",
+      "referenced": true,
+      "loaded": true
+    },
+    "permanent_keepers": {
+      "name": "permanent_keepers",
+      "path": "/home/sandbox/.openclaw/workspace/config/permanent_keepers.json",
+      "ext": ".json",
+      "referenced": true,
+      "loaded": true
+    },
+    "component_classification": {
+      "name": "component_classification",
+      "path": "/home/sandbox/.openclaw/workspace/config/component_classification.json",
+      "ext": ".json",
+      "referenced": true,
+      "loaded": true
+    }
+  },
+  "issues": [
+    {
+      "type": "config_not_referenced",
+      "name": "dual_push_config",
+      "path": "/home/sandbox/.openclaw/workspace/config/dual_push_config.json"
+    },
+    {
+      "type": "config_not_referenced",
+      "name": "capability_timeouts",
+      "path": "/home/sandbox/.openclaw/workspace/config/capability_timeouts.json"
+    },
+    {
+      "type": "config_not_referenced",
+      "name": "default_skill_config",
+      "path": "/home/sandbox/.openclaw/workspace/config/default_skill_config.py"
+    },
+    {
+      "type": "config_not_referenced",
+      "name": "feature_flags",
+      "path": "/home/sandbox/.openclaw/workspace/config/feature_flags.py"
+    },
+    {
+      "type": "config_not_loaded",
+      "name": "dual_push_config",
+      "path": "/home/sandbox/.openclaw/workspace/config/dual_push_config.json"
+    },
+    {
+      "type": "config_not_loaded",
+      "name": "capability_timeouts",
+      "path": "/home/sandbox/.openclaw/workspace/config/capability_timeouts.json"
+    }
+  ],
+  "stats": {
+    "total": 17,
+    "referenced": 13,
+    "loaded": 15,
+    "issues": 6
+  }
+}

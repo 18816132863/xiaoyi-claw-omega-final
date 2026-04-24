@@ -4146,6 +4146,50 @@
       },
       "context": {},
       "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260424225843895220",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-24T22:58:43.895240",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260424225843904633",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-24T22:58:43.904648",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260424225935480264",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-24T22:59:35.480284",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260424225935489755",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-24T22:59:35.489770",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
     }
   ]
 }

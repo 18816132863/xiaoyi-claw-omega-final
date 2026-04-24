@@ -4873,10 +4873,58 @@
         "previous_version_id": "ver_d68caea0",
         "timestamp": "2026-04-24T22:52:54.440607",
         "metadata": {}
+      },
+      {
+        "version_id": "ver_e75d5a0d",
+        "memory_id": "mem_test_001",
+        "version_number": 407,
+        "content": "初始决策内容",
+        "change_type": "create",
+        "change_reason": "测试创建",
+        "source_task_id": "task_001",
+        "previous_version_id": "ver_c4060c7e",
+        "timestamp": "2026-04-24T22:58:43.814137",
+        "metadata": {}
+      },
+      {
+        "version_id": "ver_59c126eb",
+        "memory_id": "mem_test_001",
+        "version_number": 408,
+        "content": "更新后的决策内容",
+        "change_type": "update",
+        "change_reason": "测试更新",
+        "source_task_id": "task_002",
+        "previous_version_id": "ver_e75d5a0d",
+        "timestamp": "2026-04-24T22:58:43.818558",
+        "metadata": {}
+      },
+      {
+        "version_id": "ver_a0d1a9df",
+        "memory_id": "mem_test_001",
+        "version_number": 409,
+        "content": "初始决策内容",
+        "change_type": "create",
+        "change_reason": "测试创建",
+        "source_task_id": "task_001",
+        "previous_version_id": "ver_59c126eb",
+        "timestamp": "2026-04-24T22:59:35.399297",
+        "metadata": {}
+      },
+      {
+        "version_id": "ver_2b3a8b43",
+        "memory_id": "mem_test_001",
+        "version_number": 410,
+        "content": "更新后的决策内容",
+        "change_type": "update",
+        "change_reason": "测试更新",
+        "source_task_id": "task_002",
+        "previous_version_id": "ver_a0d1a9df",
+        "timestamp": "2026-04-24T22:59:35.403688",
+        "metadata": {}
       }
     ],
-    "current_version": 406,
+    "current_version": 410,
     "created_at": "2026-04-17T13:02:04.198682",
-    "last_modified": "2026-04-24T22:52:54.440613"
+    "last_modified": "2026-04-24T22:59:35.403693"
   }
 }

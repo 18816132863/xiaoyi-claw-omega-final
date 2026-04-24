@@ -42,10 +42,10 @@ def test_layer_dependency_violation():
     if "from execution" in content:
         print("\n✅ 样例包含违规 import: from execution ...")
         print("✅ 依赖违规样例验证通过")
-        return True
+        assert True
     else:
         print("\n❌ 样例不包含违规 import")
-        return False
+        assert False, "样例不包含违规 import"
 
 
 def test_contract_violation():
@@ -77,10 +77,10 @@ def test_contract_violation():
     if '"profile"' not in content:
         print("\n✅ 样例缺少必需字段 'profile'")
         print("✅ 契约违规样例验证通过")
-        return True
+        assert True
     else:
         print("\n❌ 样例包含 profile 字段，不是有效违规样例")
-        return False
+        assert False, "样例包含 profile 字段，不是有效违规样例"
 
 
 def test_checkers_can_detect():
@@ -106,7 +106,7 @@ def test_checkers_can_detect():
     else:
         print("⚠️ JSON 契约检查器返回非零")
     
-    return True
+    assert True
 
 
 def main():

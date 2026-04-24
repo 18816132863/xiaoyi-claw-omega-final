@@ -15,7 +15,7 @@
 
 set -e
 
-VEC0_SO="/home/sandbox/.openclaw/workspace/repo/lib/python3.12/site-packages/sqlite_vec/vec0.so"
+VEC0_SO="$WORKSPACE/repo/lib/python3.12/site-packages/sqlite_vec/vec0.so"
 DIMENSION=1024
 TABLE_NAME="embeddings"
 

@@ -1,0 +1,102 @@
+============================================================
+  真源统一报告 V1.0.0
+============================================================
+
+验收时间: 2026-04-24 01:10
+版本: 8.3.0 (真源统一版)
+
+------------------------------------------------------------
+  一、真源位置确认
+------------------------------------------------------------
+
+### TaskStatus
+- ✅ 唯一真源: `domain/tasks/specs.py`
+- 重命名的同类:
+  - `orchestration/collaboration/org_orchestrator.py` → `OrgTaskStatus`
+  - `orchestration/task_engine.py` → `EngineTaskStatus`
+  - `infrastructure/automation/task_automator.py` → `AutomatorTaskStatus`
+  - `core/state/task_state_contract.py` → `ContractTaskStatus`
+  - `core/cognition/planning.py` → `PlanningTaskStatus`
+
+### StepStatus
+- ✅ 唯一真源: `domain/tasks/specs.py`
+- 重命名的同类:
+  - `orchestration/workflows/workflow_base.py` → `WorkflowStepStatus`
+  - `orchestration/workflow_engine.py` → `EngineStepStatus`
+
+### EventType
+- ✅ 唯一真源: `domain/tasks/specs.py`
+- 重命名的同类:
+  - `orchestration/state/workflow_event_store.py` → `WorkflowEventType`
+  - `infrastructure/automation/event_trigger.py` → `TriggerEventType`
+  - `core/events/event_types.py` → `CoreEventType`
+  - `core/events/event_bus.py` → `BusEventType`
+- 独立用途（保留原名）:
+  - `governance/compliance/trust_center.py` → `AuditEventType`
+
+### CapabilityRegistry
+- ✅ 唯一真源: `capabilities/registry.py`
+- 重命名的同类:
+  - `governance/control_plane/capability_registry.py` → `GovernanceCapabilityRegistry`
+
+### CapabilityStatus
+- ✅ 唯一真源: `capabilities/registry.py` (Enum)
+- 重命名的同类:
+  - `platform_adapter/base.py` → `PlatformCapabilityState` (dataclass)
+
+------------------------------------------------------------
+  二、新旧路径映射表
+------------------------------------------------------------
+
+| 旧路径 | 新路径 | 状态 |
+|--------|--------|------|
+| infrastructure/config/ | config/ | 两边都存在 |
+| execution/workflows/ | orchestration/workflows/ | 两边都存在 |
+| execution/collaboration/ | orchestration/collaboration/ | 两边都存在 |
+
+------------------------------------------------------------
+  三、Shim 文件清单
+------------------------------------------------------------
+
+暂无需要创建的 shim 文件。当前状态：
+- `infrastructure/config/` 和 `config/` 各自独立存在
+- `execution/workflows/` 和 `orchestration/workflows/` 各自独立存在
+- `execution/collaboration/` 和 `orchestration/collaboration/` 各自独立存在
+
+建议后续：
+1. 将 `infrastructure/config/` 的内容迁移到 `config/`
+2. 将 `execution/workflows/` 的内容迁移到 `orchestration/workflows/`
+3. 将 `execution/collaboration/` 的内容迁移到 `orchestration/collaboration/`
+4. 旧路径改为 re-export shim
+
+------------------------------------------------------------
+  四、全量 pytest -q 结果
+------------------------------------------------------------
+
+```
+178 passed in 4.57s
+```
+
+------------------------------------------------------------
+  五、新增测试
+------------------------------------------------------------
+
+1. `tests/test_single_source_of_truth.py` - 真源唯一性测试
+2. `tests/test_compat_shims.py` - 兼容性 shim 测试
+
+------------------------------------------------------------
+  六、验收结论
+------------------------------------------------------------
+
+✅ TaskStatus 唯一真源
+✅ StepStatus 唯一真源
+✅ EventType 唯一真源
+✅ CapabilityRegistry 唯一真源
+✅ CapabilityStatus 唯一真源
+✅ platform_adapter 不再有同名 CapabilityStatus 冲突
+✅ 全量 pytest 178/178 通过
+✅ 新增测试 11/11 通过
+
+真源统一完成，版本 8.3.0 (真源统一版) 可以发布。
+
+============================================================

@@ -21,9 +21,13 @@
 """
 
 import asyncio
+import json
+import logging
 from typing import Optional, Dict, Any, List
 from datetime import datetime
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 from domain.tasks import (
     TaskSpec,
@@ -133,22 +137,16 @@ class TaskManager:
             steps=[
                 StepSpec(
                     step_index=1,
-                    step_name="validate",
-                    tool_name="system_validator"
-                ),
-                StepSpec(
-                    step_index=2,
                     step_name="send_message",
-                    tool_name="message_sender",
+                    tool_name="send_message",
                     input_mapping={
-                        "channel": "$inputs.channel",
-                        "target": "$inputs.target",
+                        "user_id": "$inputs.target",
                         "message": "$inputs.message"
                     },
                     output_key="send_result"
                 )
             ],
-            required_tools=["system_validator", "message_sender"],
+            required_tools=["send_message"],
             retry_policy=RetryPolicy(max_attempts=3, backoff_seconds=60),
             timeout_policy=TimeoutPolicy(task_timeout_seconds=300)
         )
@@ -199,15 +197,14 @@ class TaskManager:
                 StepSpec(
                     step_index=1,
                     step_name="send_reminder",
-                    tool_name="message_sender",
+                    tool_name="send_message",
                     input_mapping={
-                        "channel": "$inputs.channel",
-                        "target": "$inputs.target",
+                        "user_id": "$inputs.target",
                         "message": "$inputs.message"
                     }
                 )
             ],
-            required_tools=["message_sender"]
+            required_tools=["send_message"]
         )
         
         return await self.task_service.create_task(spec)
@@ -242,16 +239,15 @@ class TaskManager:
                 StepSpec(
                     step_index=1,
                     step_name="send_message",
-                    tool_name="message_sender",
+                    tool_name="send_message",
                     input_mapping={
-                        "channel": "$inputs.channel",
-                        "target": "$inputs.target",
+                        "user_id": "$inputs.target",
                         "message": "$inputs.message"
                     },
                     output_key="send_result"
                 )
             ],
-            required_tools=["message_sender"],
+            required_tools=["send_message"],
             retry_policy=RetryPolicy(max_attempts=3, backoff_seconds=60),
             timeout_policy=TimeoutPolicy(task_timeout_seconds=300)
         )
@@ -301,8 +297,10 @@ class TaskManager:
                     entry = json.loads(line.strip())
                     if entry.get("task_id") == task_id:
                         calls.append(entry)
-                except:
-                    pass
+                except json.JSONDecodeError as e:
+                    logger.warning(f"Failed to parse tool call line: {e}")
+                except Exception as e:
+                    logger.warning(f"Unexpected error parsing tool call: {e}")
         
         return calls
     

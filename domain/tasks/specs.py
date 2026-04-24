@@ -28,6 +28,7 @@ class TaskStatus(str, Enum):
     PERSISTED = "persisted"             # 已持久化
     QUEUED = "queued"                   # 已入队
     RUNNING = "running"                 # 运行中
+    DELIVERY_PENDING = "delivery_pending"  # 已执行，等待真实送达确认
     WAITING_RETRY = "waiting_retry"     # 等待重试
     WAITING_HUMAN = "waiting_human"     # 等待人工
     PAUSED = "paused"                   # 已暂停
@@ -78,6 +79,8 @@ class EventType(str, Enum):
     CANCELLED = "cancelled"
     SUCCEEDED = "succeeded"
     FAILED = "failed"
+    DELIVERY_PENDING = "delivery_pending"
+    DELIVERY_CONFIRMED = "delivery_confirmed"
 
 
 # ==================== 规格定义 ====================
@@ -109,7 +112,6 @@ class ScheduleSpec(BaseModel):
     def get_next_run_at(self, from_time: Optional[datetime] = None) -> Optional[datetime]:
         """计算下一次运行时间"""
         from datetime import timedelta
-        import croniter
         
         base = from_time or datetime.now()
         
@@ -122,14 +124,83 @@ class ScheduleSpec(BaseModel):
         
         elif self.mode == ScheduleType.CRON:
             if self.cron_expr:
-                cron = croniter.croniter(self.cron_expr, base)
-                return cron.get_next(datetime)
+                return self._get_next_cron_run_at(base)
         
         elif self.mode == ScheduleType.RECURRING:
             if self.interval_seconds:
                 return base + timedelta(seconds=self.interval_seconds)
         
         return None
+
+    def _get_next_cron_run_at(self, base: datetime) -> Optional[datetime]:
+        """计算 Cron 下次运行时间。优先使用 croniter，缺失时使用最小兜底解析。"""
+        try:
+            from croniter import croniter as croniter_factory
+            cron = croniter_factory(self.cron_expr, base)
+            return cron.get_next(datetime)
+        except ImportError:
+            return self._get_next_cron_run_at_fallback(base)
+
+    def _get_next_cron_run_at_fallback(self, base: datetime) -> Optional[datetime]:
+        """无 croniter 依赖时的轻量兜底。当前支持测试与常见分钟级表达式。"""
+        from datetime import timedelta
+
+        if not self.cron_expr:
+            return None
+
+        fields = self.cron_expr.strip().split()
+        if len(fields) != 5:
+            raise ValueError(f"Unsupported cron expression without croniter: {self.cron_expr}")
+
+        minute_field, hour_field, day_field, month_field, weekday_field = fields
+        supported = {day_field, month_field, weekday_field}
+        if supported != {'*'}:
+            raise ValueError(
+                "Fallback cron parser only supports wildcard day/month/weekday fields. "
+                f"Got: {self.cron_expr}"
+            )
+
+        def _parse_numeric_field(value: str, minimum: int, maximum: int) -> set[int]:
+            allowed: set[int] = set()
+            for part in value.split(','):
+                part = part.strip()
+                if not part:
+                    continue
+                if part == '*':
+                    allowed.update(range(minimum, maximum + 1))
+                    continue
+                if part.startswith('*/'):
+                    step = int(part[2:])
+                    if step <= 0:
+                        raise ValueError(f"Invalid step in cron field: {value}")
+                    allowed.update(range(minimum, maximum + 1, step))
+                    continue
+                if '-' in part:
+                    start_s, end_s = part.split('-', 1)
+                    start_i = int(start_s)
+                    end_i = int(end_s)
+                    if start_i > end_i:
+                        raise ValueError(f"Invalid range in cron field: {value}")
+                    allowed.update(range(start_i, end_i + 1))
+                    continue
+                allowed.add(int(part))
+
+            invalid = {item for item in allowed if item < minimum or item > maximum}
+            if invalid:
+                raise ValueError(f"Cron field out of range: {value}")
+            return allowed
+
+        allowed_minutes = _parse_numeric_field(minute_field, 0, 59)
+        allowed_hours = _parse_numeric_field(hour_field, 0, 23)
+
+        candidate = base.replace(second=0, microsecond=0) + timedelta(minutes=1)
+        max_checks = 60 * 24 * 366  # 最多向前找一年，避免死循环
+        for _ in range(max_checks):
+            if candidate.minute in allowed_minutes and candidate.hour in allowed_hours:
+                return candidate
+            candidate += timedelta(minutes=1)
+
+        raise ValueError(f"Unable to resolve next run for cron expression: {self.cron_expr}")
 
 
 class StepSpec(BaseModel):

@@ -1,0 +1,205 @@
+# 平台执行报告
+
+## 版本
+- V8.3.0 路径统一版 + 平台能力真接线
+- 更新日期: 2026-04-24
+
+## 一、平台适配器真接线状态
+
+### 1.1 适配器状态总览
+
+| 适配器 | 环境探测 | 能力接通 | 真实可用 | 状态 |
+|--------|----------|----------|----------|------|
+| xiaoyi | ✅ 可探测 | ❌ 未接通 | ❌ 不可用 | probe_only |
+| null | N/A | N/A | ❌ 不可用 | fallback |
+
+### 1.2 小艺平台能力详情
+
+#### TASK_SCHEDULING
+| 项目 | 状态 | 说明 |
+|------|------|------|
+| 环境探测 | ✅ | 可检测 XIAOYI_ENV / HARMONYOS_VERSION |
+| API 对接 | ❌ | 未实现 |
+| 真实调用 | ❌ | 不可用 |
+| 执行路径 | 无 | 需要对接小艺任务调度 API |
+
+#### MESSAGE_SENDING
+| 项目 | 状态 | 说明 |
+|------|------|------|
+| 环境探测 | ✅ | 可检测 |
+| API 对接 | ❌ | 未实现 |
+| 真实调用 | ❌ | 不可用 |
+| 执行路径 | 无 | 需要对接小艺消息 API |
+| Fallback | ✅ | 写入 pending_sends.jsonl |
+
+#### NOTIFICATION
+| 项目 | 状态 | 说明 |
+|------|------|------|
+| 环境探测 | ✅ | 可检测 |
+| API 对接 | ❌ | 未实现 |
+| 真实调用 | ❌ | 不可用 |
+| 执行路径 | 无 | 需要对接小艺通知 API |
+
+### 1.3 连接状态判定逻辑
+
+```python
+# 真正的 available = 环境存在 + 至少一个能力已接通
+truly_available = (
+    environment_exists and 
+    any(status.available for status in capabilities.values())
+)
+```
+
+### 1.4 语义澄清
+
+| ❌ 错误说法 | ✅ 正确说法 |
+|-------------|-------------|
+| "推荐适配器是 xiaoyi" | "探测到小艺环境，但能力未接通" |
+| "平台可用" | "平台状态: environment_detected, capabilities_not_connected" |
+
+## 二、统一执行结果语义
+
+### 2.1 三层执行状态
+
+| 状态 | 含义 | TaskStatus | EventType |
+|------|------|------------|-----------|
+| accepted | 已接受 | validated, persisted, queued | validated, persisted, queued |
+| queued_for_delivery | 已入队 | delivery_pending | delivery_pending |
+| completed | 已完成 | succeeded | delivery_confirmed, succeeded |
+
+### 2.2 消息发送状态
+
+| MessageSendResult | 语义层级 | 说明 |
+|-------------------|----------|------|
+| success | completed | 真实送达用户 |
+| queued_for_delivery | queued | 已生成发送请求，等待处理 |
+| failed | - | 发送失败 |
+
+### 2.3 关键区分
+
+| ❌ 错误理解 | ✅ 正确理解 |
+|-------------|-------------|
+| "任务状态是 succeeded" 但实际只是 "已入队" | `delivery_pending` = "已执行，等待真实送达确认" |
+| "消息已发送" 但实际只是 "已写入队列" | `queued_for_delivery` = "已生成请求，等待网关处理" |
+
+## 三、平台确认闭环
+
+### 3.1 确认能力分级
+
+| 级别 | 名称 | 说明 | 当前平台 |
+|------|------|------|----------|
+| Level 1 | 完整确认 | 平台支持回调/Webhook | 待定 |
+| Level 2 | 投递确认 | 平台确认已投递到网关 | 待定 |
+| Level 3 | 无确认 | 平台不支持任何确认 | ✅ 当前 |
+
+### 3.2 降级策略
+
+当平台不支持确认时：
+
+```python
+{
+    "status": "delivery_pending",
+    "confirmation_available": false,
+    "confirmation_level": "none",
+    "user_message": "已提交，等待处理"
+}
+```
+
+### 3.3 不允许的行为
+
+- ❌ 把 `queued_for_delivery` 说成 `succeeded`
+- ❌ 假设消息已送达
+- ❌ 隐瞒确认不可用的事实
+
+### 3.4 必须的行为
+
+- ✅ 明确告知用户当前状态
+- ✅ 区分"已提交"和"已完成"
+- ✅ 记录确认不可用的原因
+
+## 四、测试覆盖
+
+### 4.1 新增测试
+
+| 测试文件 | 测试数 | 状态 |
+|----------|--------|------|
+| test_platform_execution_semantics.py | 13 | ✅ 全部通过 |
+| test_delivery_confirmation_semantics.py | 11 | ✅ 全部通过 |
+| test_xiaoyi_adapter_real_connection.py | 14 | ✅ 全部通过 |
+
+### 4.2 测试详情
+
+#### test_platform_execution_semantics.py
+- ✅ accepted 层级状态测试
+- ✅ queued_for_delivery 层级状态测试
+- ✅ completed 层级状态测试
+- ✅ 送达事件语义测试
+- ✅ 消息发送结果语义测试
+- ✅ delivery_pending ≠ succeeded 测试
+- ✅ queued_for_delivery ≠ success 测试
+- ✅ 小艺适配器 probe_only 状态测试
+- ✅ 能力未接通错误码测试
+- ✅ 平台可用性双重条件测试
+
+#### test_delivery_confirmation_semantics.py
+- ✅ delivery_pending 不是 succeeded
+- ✅ delivery_confirmed 事件存在
+- ✅ delivery_pending 事件存在
+- ✅ 消息适配器返回 queued
+- ✅ queued 结果有明确消息
+- ✅ 无确认平台降级测试
+- ✅ 降级不声称成功测试
+- ✅ 确认级别定义测试
+- ✅ 超时阈值测试
+
+#### test_xiaoyi_adapter_real_connection.py
+- ✅ 适配器初始化测试
+- ✅ 探测状态检测测试
+- ✅ 环境检测变量测试
+- ✅ 能力状态明确性测试
+- ✅ mock/probe/connected 三态定义
+- ✅ 三态互斥测试
+- ✅ 当前环境状态检测
+- ✅ 适配器推荐测试
+- ✅ 不可用能力调用测试
+- ✅ null 适配器降级测试
+
+### 4.3 全量测试
+
+```
+223 passed in 2.95s
+```
+
+## 五、新增文档
+
+| 文档 | 说明 |
+|------|------|
+| PLATFORM_CONNECTION_MATRIX.md | 平台连接矩阵 |
+| EXECUTION_SEMANTICS.md | 执行语义说明 |
+| DELIVERY_CONFIRMATION_STRATEGY.md | 送达确认策略 |
+| SKILL_USER_RESULT_EXPLANATION.md | 技能用户结果说明 |
+
+## 六、验收标准达成情况
+
+| 标准 | 状态 |
+|------|------|
+| 全量 pytest -q 继续通过 | ✅ 223 passed |
+| 平台能力接线状态清晰 | ✅ probe_only / fallback |
+| accepted / queued / confirmed 语义完全分开 | ✅ 三层语义明确 |
+| 不再把"已进入投递链路"混同为"最终完成" | ✅ delivery_pending ≠ succeeded |
+| 技能用户能看到明确的结果解释 | ✅ 用户结果说明文档 |
+
+## 七、后续对接点
+
+当小艺 API 可用时，需要在以下位置实现：
+
+1. `platform_adapter/xiaoyi_adapter.py`
+   - `_capabilities[PlatformCapability.XXX].available = True`
+   - `invoke()` 方法实现实际 API 调用
+
+2. 添加确认回调
+   - `delivery_confirmed` 事件
+   - `external_completed` 状态
+
+3. 更新确认级别
+   - 从 Level 3 升级到 Level 1 或 Level 2

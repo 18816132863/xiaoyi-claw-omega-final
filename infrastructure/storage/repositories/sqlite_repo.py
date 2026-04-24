@@ -22,6 +22,201 @@ from domain.tasks import TaskSpec, TaskStatus, ScheduleType, EventType
 from .interfaces import TaskRepository, TaskRunRepository, TaskEventRepository, CheckpointRepository
 
 
+class SQLiteTaskRunRepository(TaskRunRepository):
+    """SQLite 任务运行仓储"""
+    
+    def __init__(self, db_path: Optional[str] = None):
+        if db_path is None:
+            root = get_project_root()
+            db_path = str(root / "data" / "tasks.db")
+        
+        self.db_path = db_path
+    
+    @contextmanager
+    def _get_connection(self):
+        conn = sqlite3.connect(self.db_path, detect_types=sqlite3.PARSE_DECLTYPES)
+        conn.row_factory = sqlite3.Row
+        try:
+            yield conn
+        finally:
+            conn.close()
+    
+    async def create_run(self, task_id: str, run_no: int) -> str:
+        """创建运行记录"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            run_id = str(uuid.uuid4())
+            
+            cursor.execute("""
+                INSERT INTO task_runs (id, task_id, run_no, status, started_at, created_at)
+                VALUES (?, ?, ?, 'running', ?, ?)
+            """, (
+                run_id,
+                task_id,
+                run_no,
+                serialize_datetime(datetime.now()),
+                serialize_datetime(datetime.now())
+            ))
+            
+            conn.commit()
+            
+            return run_id
+    
+    async def get_run(self, run_id: str) -> Optional[Dict[str, Any]]:
+        """获取运行记录"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            cursor.execute("SELECT * FROM task_runs WHERE id = ?", (run_id,))
+            row = cursor.fetchone()
+            
+            if not row:
+                return None
+            
+            return dict(row)
+    
+    async def update_run(self, run_id: str, updates: Dict[str, Any]) -> bool:
+        """更新运行记录"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # 序列化时间字段
+            for field in ["started_at", "ended_at", "retry_after"]:
+                if field in updates and updates[field] is not None:
+                    updates[field] = serialize_datetime(updates[field])
+            
+            set_clause = ", ".join([f"{k} = ?" for k in updates.keys()])
+            values = list(updates.values()) + [run_id]
+            
+            cursor.execute(f"UPDATE task_runs SET {set_clause} WHERE id = ?", values)
+            
+            conn.commit()
+            
+            return cursor.rowcount > 0
+    
+    async def list_runs(self, task_id: str, limit: int = 10) -> List[Dict[str, Any]]:
+        """列出任务的运行记录"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            cursor.execute("""
+                SELECT * FROM task_runs
+                WHERE task_id = ?
+                ORDER BY created_at DESC
+                LIMIT ?
+            """, (task_id, limit))
+            
+            rows = cursor.fetchall()
+            
+            return [dict(row) for row in rows]
+
+
+class SQLiteTaskStepRepository:
+    """SQLite 任务步骤仓储"""
+    
+    def __init__(self, db_path: Optional[str] = None):
+        if db_path is None:
+            root = get_project_root()
+            db_path = str(root / "data" / "tasks.db")
+        
+        self.db_path = db_path
+    
+    @contextmanager
+    def _get_connection(self):
+        conn = sqlite3.connect(self.db_path, detect_types=sqlite3.PARSE_DECLTYPES)
+        conn.row_factory = sqlite3.Row
+        try:
+            yield conn
+        finally:
+            conn.close()
+    
+    async def create_step(
+        self,
+        task_run_id: str,
+        step_index: int,
+        step_name: str,
+        tool_name: Optional[str] = None,
+        input_json: Optional[Dict[str, Any]] = None
+    ) -> str:
+        """创建步骤记录"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            step_id = str(uuid.uuid4())
+            
+            cursor.execute("""
+                INSERT INTO task_steps (
+                    id, task_run_id, step_index, step_name, tool_name,
+                    input_json, output_json, status, started_at, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?, '{}', 'running', ?, ?)
+            """, (
+                step_id,
+                task_run_id,
+                step_index,
+                step_name,
+                tool_name,
+                json.dumps(input_json or {}, ensure_ascii=False),
+                serialize_datetime(datetime.now()),
+                serialize_datetime(datetime.now())
+            ))
+            
+            conn.commit()
+            
+            return step_id
+    
+    async def update_step(self, step_id: str, updates: Dict[str, Any]) -> bool:
+        """更新步骤记录"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # 序列化时间字段
+            for field in ["started_at", "ended_at"]:
+                if field in updates and updates[field] is not None:
+                    updates[field] = serialize_datetime(updates[field])
+            
+            # 序列化 JSON 字段
+            for field in ["input_json", "output_json"]:
+                if field in updates and isinstance(updates[field], dict):
+                    updates[field] = json.dumps(updates[field], ensure_ascii=False)
+            
+            set_clause = ", ".join([f"{k} = ?" for k in updates.keys()])
+            values = list(updates.values()) + [step_id]
+            
+            cursor.execute(f"UPDATE task_steps SET {set_clause} WHERE id = ?", values)
+            
+            conn.commit()
+            
+            return cursor.rowcount > 0
+    
+    async def list_steps(self, task_run_id: str) -> List[Dict[str, Any]]:
+        """列出运行的所有步骤"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            cursor.execute("""
+                SELECT * FROM task_steps
+                WHERE task_run_id = ?
+                ORDER BY step_index ASC
+            """, (task_run_id,))
+            
+            rows = cursor.fetchall()
+            
+            return [dict(row) for row in rows]
+from ..sqlite_utils import serialize_datetime, deserialize_datetime
+
+
+# 统一时间字段集合 - 所有 SQLite 时间字段必须经过 serialize_datetime()
+TIME_FIELDS = {
+    "run_at",
+    "next_run_at",
+    "last_run_at",
+    "created_at",
+    "updated_at",
+    "delivered_at",
+}
+
+
 def get_project_root() -> Path:
     current = Path(__file__).resolve().parent.parent.parent.parent
     if (current / 'core' / 'ARCHITECTURE.md').exists():
@@ -44,7 +239,7 @@ class SQLiteTaskRepository(TaskRepository):
     @contextmanager
     def _get_connection(self):
         """获取数据库连接"""
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path, detect_types=sqlite3.PARSE_DECLTYPES)
         conn.row_factory = sqlite3.Row
         try:
             yield conn
@@ -200,6 +395,10 @@ class SQLiteTaskRepository(TaskRepository):
             
             schedule_dict = task.schedule.model_dump() if task.schedule else {}
             
+            # 确保 datetime 字段为字符串（使用统一序列化方法）
+            schedule_dict["run_at"] = serialize_datetime(schedule_dict.get("run_at"))
+            schedule_dict["next_run_at"] = serialize_datetime(schedule_dict.get("next_run_at"))
+            
             # 序列化 steps
             steps_json = json.dumps(
                 [s.model_dump() for s in task.steps],
@@ -231,8 +430,8 @@ class SQLiteTaskRepository(TaskRepository):
                 task.retry_policy.backoff_seconds,
                 task.timeout_policy.task_timeout_seconds,
                 task.idempotency_key,
-                datetime.now().isoformat(),
-                datetime.now().isoformat()
+                serialize_datetime(datetime.now()),
+                serialize_datetime(datetime.now())
             ))
             
             conn.commit()
@@ -263,12 +462,16 @@ class SQLiteTaskRepository(TaskRepository):
                 if key in ("payload_json", "inputs"):
                     set_clauses.append(f"{key} = ?")
                     values.append(json.dumps(value, ensure_ascii=False))
+                elif key in TIME_FIELDS:
+                    # 所有时间字段统一强制序列化
+                    set_clauses.append(f"{key} = ?")
+                    values.append(serialize_datetime(value))
                 else:
                     set_clauses.append(f"{key} = ?")
                     values.append(value)
             
             set_clauses.append("updated_at = ?")
-            values.append(datetime.now().isoformat())
+            values.append(serialize_datetime(datetime.now()))
             values.append(task_id)
             
             sql = f"UPDATE tasks SET {', '.join(set_clauses)} WHERE id = ?"
@@ -326,13 +529,13 @@ class SQLiteTaskRepository(TaskRepository):
             
             cursor.execute("""
                 SELECT * FROM tasks
-                WHERE status IN ('persisted', 'queued')
+                WHERE status IN ('persisted', 'waiting_retry')
                   AND trigger_mode = 'scheduled'
                   AND next_run_at IS NOT NULL
                   AND next_run_at <= ?
                 ORDER BY next_run_at ASC
                 LIMIT ?
-            """, (before.isoformat(), limit))
+            """, (serialize_datetime(before), limit))
             
             rows = cursor.fetchall()
             return [self._row_to_task(row) for row in rows]
@@ -365,7 +568,7 @@ class SQLiteTaskRepository(TaskRepository):
         if row["schedule_type"]:
             schedule = ScheduleSpec(
                 mode=ScheduleType(row["schedule_type"]),
-                run_at=datetime.fromisoformat(row["run_at"]) if row["run_at"] else None,
+                run_at=deserialize_datetime(row["run_at"]),
                 cron_expr=row["cron_expr"],
                 timezone=row["timezone"] or "Asia/Shanghai"
             )
@@ -407,7 +610,7 @@ class SQLiteTaskRepository(TaskRepository):
                 task_timeout_seconds=row["timeout_seconds"]
             ),
             idempotency_key=row["idempotency_key"],
-            created_at=datetime.fromisoformat(row["created_at"])
+            created_at=deserialize_datetime(row["created_at"])
         )
 
 
@@ -423,7 +626,7 @@ class SQLiteTaskEventRepository(TaskEventRepository):
     
     @contextmanager
     def _get_connection(self):
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path, detect_types=sqlite3.PARSE_DECLTYPES)
         conn.row_factory = sqlite3.Row
         try:
             yield conn
@@ -452,7 +655,7 @@ class SQLiteTaskEventRepository(TaskEventRepository):
                 run_id,
                 event_type,
                 json.dumps(event_payload, ensure_ascii=False),
-                datetime.now().isoformat()
+                serialize_datetime(datetime.now())
             ))
             
             conn.commit()
@@ -502,7 +705,7 @@ class SQLiteCheckpointRepository(CheckpointRepository):
     
     @contextmanager
     def _get_connection(self):
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path, detect_types=sqlite3.PARSE_DECLTYPES)
         conn.row_factory = sqlite3.Row
         try:
             yield conn
@@ -539,7 +742,7 @@ class SQLiteCheckpointRepository(CheckpointRepository):
                 "",
                 json.dumps(snapshot, ensure_ascii=False),
                 json.dumps(metadata or {}, ensure_ascii=False),
-                datetime.now().isoformat()
+                serialize_datetime(datetime.now())
             ))
             
             conn.commit()

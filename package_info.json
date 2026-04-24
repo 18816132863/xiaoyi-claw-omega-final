@@ -1,37 +1,7 @@
 {
-  "project_name": "xiaoyi-claw-omega-final",
-  "version": "7.0.0",
-  "git_commit": "9a5da382",
-  "build_date": "2026-04-21T14:58:00Z",
-  "entrypoint": "openclaw gateway start",
-  "runtime_mode": "cloud_broker_mode",
-  "architecture_source_of_truth": "core/ARCHITECTURE.md",
-  "verification_commands": [
-    "python tests/test_no_fake_success.py",
-    "python tests/test_end_to_end.py"
-  ],
-  "database": {
-    "type": "postgresql",
-    "provider": "neon",
-    "tables": [
-      "tasks",
-      "task_runs",
-      "task_steps",
-      "task_events",
-      "tool_calls",
-      "workflow_checkpoints"
-    ]
-  },
-  "broker": {
-    "type": "redis",
-    "provider": "upstash"
-  },
-  "result_backend": {
-    "type": "redis",
-    "provider": "upstash"
-  },
-  "legacy_tables": {
-    "scheduled_jobs": "兼容遗留表，用于旧版定时任务，新版使用 task_runs"
-  },
-  "sha256": "5ce684521dd337a1d8d5156505d00a92c2daa66a8b9f7728008b0db1bad67f7a"
+  "name": "openclaw-workspace",
+  "version": "8.2.4",
+  "status": "verified",
+  "release_date": "2026-04-23",
+  "description": "OpenClaw 任务系统 V8 - 所有 asyncio.run 统一显式清理版"
 }

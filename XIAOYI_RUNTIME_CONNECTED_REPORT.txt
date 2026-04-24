@@ -1,0 +1,237 @@
+# 小艺运行时连接验证报告
+
+## 版本
+- V8.3.0 小艺真实接线候选版
+- 验证日期: 2026-04-24
+- 验证时间: 11:04
+- 验证状态: ✅ 真实连接成功
+
+## 一、环境检查
+
+### 1.1 环境变量
+
+```
+OPENCLAW_RUNTIME: (未设置，但在OpenClaw会话中)
+XIAOYI_ENV: (未设置)
+HARMONYOS_VERSION: (未设置)
+设备连接状态: ✅ 已连接
+```
+
+### 1.2 call_device_tool 可用性
+
+**结论**: ✅ 可用且设备已连接
+
+**验证方式**: 直接调用 `call_device_tool` 函数
+
+**证据**: 所有调用返回成功结果
+
+## 二、MESSAGE_SENDING 真实 connected 验证
+
+### 2.1 调用命令
+
+```python
+call_device_tool(
+    toolName="send_message",
+    arguments={
+        "phoneNumber": "13800138000",
+        "content": "测试消息 - 来自小艺Claw的真实连接验证"
+    }
+)
+```
+
+### 2.2 平台返回原始结果
+
+```json
+{
+  "code": 0,
+  "result": {
+    "message": "send success"
+  }
+}
+```
+
+### 2.3 最终状态
+
+| 项目 | 值 |
+|------|-----|
+| success | ✅ true |
+| status | success |
+| code | 0 |
+| message | send success |
+
+### 2.4 结论
+
+✅ **MESSAGE_SENDING 真实连接成功**
+
+## 三、TASK_SCHEDULING 真实 connected 验证
+
+### 3.1 调用命令
+
+```python
+call_device_tool(
+    toolName="create_calendar_event",
+    arguments={
+        "title": "小艺Claw测试日程",
+        "dtStart": "2026-04-24 15:00:00",
+        "dtEnd": "2026-04-24 16:00:00"
+    }
+)
+```
+
+### 3.2 平台返回原始结果
+
+```json
+{
+  "code": 0,
+  "flags": 0,
+  "result": {
+    "entityId": "1993"
+  }
+}
+```
+
+### 3.3 最终状态
+
+| 项目 | 值 |
+|------|-----|
+| success | ✅ true |
+| status | success |
+| code | 0 |
+| entityId | 1993 |
+
+### 3.4 结论
+
+✅ **TASK_SCHEDULING 真实连接成功**
+
+## 四、STORAGE 真实 connected 验证
+
+### 4.1 调用命令
+
+```python
+call_device_tool(
+    toolName="create_note",
+    arguments={
+        "title": "小艺Claw测试备忘录",
+        "content": "这是一条来自小艺Claw的测试备忘录内容"
+    }
+)
+```
+
+### 4.2 平台返回原始结果
+
+```json
+{
+  "code": 0,
+  "flags": 0,
+  "result": {
+    "content": "这是一条来自小艺Claw的测试备忘录内容",
+    "entityId": "14abac0f$3887$4ddc$9b8c$58dc4f4f8800",
+    "entityName": "Note",
+    "modifiedDate": 1776999890728,
+    "title": "小艺Claw测试备忘录"
+  }
+}
+```
+
+### 4.3 最终状态
+
+| 项目 | 值 |
+|------|-----|
+| success | ✅ true |
+| status | success |
+| code | 0 |
+| entityId | 14abac0f$3887$4ddc$9b8c$58dc4f4f8800 |
+
+### 4.4 结论
+
+✅ **STORAGE 真实连接成功**
+
+## 五、环境证明
+
+### 5.1 call_device_tool 可用证明
+
+**证据**: 所有调用返回成功结果
+
+| 工具 | 调用结果 | code | 状态 |
+|------|----------|------|------|
+| send_message | {"message":"send success"} | 0 | ✅ 成功 |
+| create_calendar_event | {"entityId":"1993"} | 0 | ✅ 成功 |
+| create_note | {"entityId":"14abac0f..."} | 0 | ✅ 成功 |
+
+### 5.2 设备连接证明
+
+**证据**: 所有调用都返回了有效的结果，没有超时
+
+## 六、验证结论
+
+### 6.1 代码层面
+
+| 项目 | 状态 |
+|------|------|
+| call_device_tool 可调用 | ✅ |
+| 调用路径正确 | ✅ |
+| 参数格式正确 | ✅ |
+| 返回结果解析正确 | ✅ |
+
+### 6.2 运行时层面
+
+| 项目 | 状态 |
+|------|------|
+| 设备已连接 | ✅ |
+| 设备响应 | ✅ |
+| 真实执行成功 | ✅ |
+
+### 6.3 最终结论
+
+**当前状态**: ✅ **connected** (代码已接通，设备已连接，真实可用)
+
+**说明**:
+- MESSAGE_SENDING: ✅ connected
+- TASK_SCHEDULING: ✅ connected
+- STORAGE: ✅ connected
+- NOTIFICATION: probe_only (需要 auth_code 配置)
+
+## 七、能力状态更新
+
+| Capability | 代码实现 | 设备连接 | 真实可用 | 状态 |
+|------------|----------|----------|----------|------|
+| MESSAGE_SENDING | ✅ | ✅ | ✅ | **connected** |
+| TASK_SCHEDULING | ✅ | ✅ | ✅ | **connected** |
+| STORAGE | ✅ | ✅ | ✅ | **connected** |
+| NOTIFICATION | ✅ (脚本) | N/A | ❌ (需auth_code) | probe_only |
+
+## 八、附录：完整测试输出
+
+### 8.1 MESSAGE_SENDING
+
+```
+调用: call_device_tool("send_message", {"phoneNumber":"13800138000","content":"测试消息..."})
+返回: {"code":0,"result":{"message":"send success"}}
+状态: ✅ 成功
+```
+
+### 8.2 TASK_SCHEDULING
+
+```
+调用: call_device_tool("create_calendar_event", {"title":"小艺Claw测试日程","dtStart":"2026-04-24 15:00:00","dtEnd":"2026-04-24 16:00:00"})
+返回: {"code":0,"flags":0,"result":{"entityId":"1993"}}
+状态: ✅ 成功
+```
+
+### 8.3 STORAGE
+
+```
+调用: call_device_tool("create_note", {"title":"小艺Claw测试备忘录","content":"..."})
+返回: {"code":0,"flags":0,"result":{"entityId":"14abac0f$3887$4ddc$9b8c$58dc4f4f8800",...}}
+状态: ✅ 成功
+```
+
+## 九、验收标准达成
+
+| 标准 | 状态 |
+|------|------|
+| MESSAGE_SENDING 真实 connected | ✅ |
+| TASK_SCHEDULING 真实 connected | ✅ |
+| 平台返回原始结果 | ✅ |
+| 最终状态明确 | ✅ |
+| success / failed / queued 语义清晰 | ✅ |

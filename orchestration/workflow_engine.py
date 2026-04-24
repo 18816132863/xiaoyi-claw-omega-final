@@ -21,8 +21,8 @@ class WorkflowStatus(Enum):
     FAILED = "failed"
 
 
-class StepStatus(Enum):
-    """步骤状态"""
+class EngineStepStatus(Enum):
+    """工作流引擎步骤状态（与 domain.tasks.specs.StepStatus 不同）"""
     PENDING = "pending"
     RUNNING = "running"
     COMPLETED = "completed"
@@ -38,7 +38,7 @@ class WorkflowStep:
     action: str
     params: Dict[str, Any] = field(default_factory=dict)
     dependencies: List[str] = field(default_factory=list)
-    status: StepStatus = StepStatus.PENDING
+    status: EngineStepStatus = EngineStepStatus.PENDING
     result: Optional[Any] = None
     error: Optional[str] = None
 
@@ -130,10 +130,10 @@ class WorkflowEngine:
     def _get_ready_steps(self, workflow: Workflow) -> List[WorkflowStep]:
         """获取可执行的步骤"""
         ready = []
-        completed_ids = {s.id for s in workflow.steps if s.status == StepStatus.COMPLETED}
+        completed_ids = {s.id for s in workflow.steps if s.status == EngineStepStatus.COMPLETED}
         
         for step in workflow.steps:
-            if step.status != StepStatus.PENDING:
+            if step.status != EngineStepStatus.PENDING:
                 continue
             
             # 检查依赖是否完成
@@ -166,19 +166,19 @@ class WorkflowEngine:
                 
                 for step in ready_steps:
                     workflow.current_step = step.id
-                    step.status = StepStatus.RUNNING
+                    step.status = EngineStepStatus.RUNNING
                     
                     try:
                         result = self._execute_step(step, workflow.context)
                         step.result = result
-                        step.status = StepStatus.COMPLETED
+                        step.status = EngineStepStatus.COMPLETED
                         
                         # 更新上下文
                         workflow.context[step.id] = result
                         
                     except Exception as e:
                         step.error = str(e)
-                        step.status = StepStatus.FAILED
+                        step.status = EngineStepStatus.FAILED
                         workflow.status = WorkflowStatus.FAILED
                         return {"success": False, "error": str(e), "step": step.id}
             

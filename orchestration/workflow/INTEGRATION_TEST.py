@@ -1,10 +1,14 @@
+from pathlib import Path
+import os
 """
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 Phase3 第二组 Integration 示例
 证明 workflow 内核主链完整可用
 """
 
 import sys
-sys.path.insert(0, '/home/sandbox/.openclaw/workspace')
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from orchestration.workflow.workflow_registry import (
     WorkflowTemplate,

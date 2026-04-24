@@ -1,4 +1,7 @@
+from pathlib import Path
 """
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 Promotion Gate - 晋升门禁
 Phase3 Group6 核心模块
 """
@@ -160,7 +163,7 @@ class PromotionGate:
                 capture_output=True,
                 text=True,
                 timeout=120,
-                cwd="/home/sandbox/.openclaw/workspace"
+                cwd=str(PROJECT_ROOT)
             )
             
             passed = result.returncode == 0

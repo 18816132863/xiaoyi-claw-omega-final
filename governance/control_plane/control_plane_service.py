@@ -9,7 +9,7 @@ from typing import List, Dict, Optional, Any
 from enum import Enum
 import uuid
 
-from .capability_registry import CapabilityRegistry
+from .capability_registry import GovernanceCapabilityRegistry
 from .profile_switcher import ProfileSwitcher
 from .policy_snapshot_store import PolicySnapshotStore
 from .decision_audit_log import DecisionAuditLog
@@ -96,7 +96,7 @@ class ControlPlaneService:
     
     def __init__(self):
         # 核心组件
-        self.capability_registry = CapabilityRegistry()
+        self.capability_registry = GovernanceCapabilityRegistry()
         self.profile_switcher = ProfileSwitcher()
         self.snapshot_store = PolicySnapshotStore()
         self.audit_log = DecisionAuditLog()

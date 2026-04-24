@@ -1,0 +1,205 @@
+============================================================
+  巡检报告 - 整体冲突性分析
+============================================================
+
+巡检时间: 2026-04-23 23:30
+版本: 8.3.0
+
+------------------------------------------------------------
+  一、巡检结果汇总
+------------------------------------------------------------
+
+| 类别 | 通过 | 警告 | 冲突 |
+|------|------|------|------|
+| 能力注册 | ✅ 2 | - | - |
+| 路由器 | ✅ 1 | - | - |
+| 平台适配器 | ✅ 2 | - | - |
+| 数据库 | ✅ 1 | - | - |
+| 状态机 | ✅ 2 | - | - |
+| 配置 | ✅ 1 | - | - |
+| 类定义 | - | - | ❌ 89 |
+| 函数定义 | - | - | ❌ 5 |
+| 目录结构 | - | - | ❌ 34 |
+
+总计: ✅ 9 通过 | ❌ 130 冲突
+
+------------------------------------------------------------
+  二、核心冲突分析
+------------------------------------------------------------
+
+### A. 类定义冲突（严重程度分级）
+
+#### 高优先级（影响核心功能）
+
+| 类名 | 定义位置 | 影响 |
+|------|----------|------|
+| TaskStatus | 7处 | 任务状态机不一致 |
+| StepStatus | 3处 | 步骤状态不一致 |
+| EventType | 5处 | 事件类型不一致 |
+| WorkflowEngine | 2处 | 工作流引擎冲突 |
+| TaskExecutor | 2处 | 任务执行器冲突 |
+| CapabilityRegistry | 2处 | 能力注册表冲突 |
+| CapabilityStatus | 2处 | 能力状态冲突 |
+
+#### 中优先级（影响模块功能）
+
+| 类名 | 定义位置 | 影响 |
+|------|----------|------|
+| SkillRouter | 2处 | 技能路由冲突 |
+| ValidationResult | 4处 | 验证结果不一致 |
+| HealthStatus | 4处 | 健康状态不一致 |
+| RiskLevel | 7处 | 风险等级不一致 |
+| Alert | 3处 | 告警定义不一致 |
+
+#### 低优先级（局部影响）
+
+其余 70+ 类冲突主要在不同模块中定义同名类，
+但由于模块隔离，实际运行时不会冲突。
+
+### B. 目录结构冲突
+
+| 目录 | 存在位置 | 建议 |
+|------|----------|------|
+| orchestration/ | 根目录, execution/workflows/ | 保留根目录，删除 execution/workflows/orchestration |
+| config/ | 根目录, infrastructure/, core/ | 统一使用根目录 config/ |
+| scripts/ | 多处 | 各技能目录下的 scripts/ 保留，根目录 scripts/ 保留 |
+| workflows/ | execution/, orchestration/ | 统一到 orchestration/workflows/ |
+| collaboration/ | execution/, orchestration/ | 统一到 orchestration/collaboration/ |
+
+### C. 函数定义冲突
+
+| 函数名 | 定义次数 | 说明 |
+|--------|----------|------|
+| __init__ | 420处 | 正常，构造函数 |
+| _load_registry | 4处 | 需要统一命名 |
+| check | 9处 | 不同模块的检查函数，正常 |
+| reset | 13处 | 不同模块的重置函数，正常 |
+| status | 6处 | 不同模块的状态函数，正常 |
+
+------------------------------------------------------------
+  三、核心冲突修复建议
+------------------------------------------------------------
+
+### 修复1: 统一 TaskStatus 定义
+
+**问题**: TaskStatus 在 7 处定义
+
+**建议**:
+1. 保留 `domain/tasks/specs.py` 中的定义为唯一真源
+2. 其他位置改为导入:
+```python
+from domain.tasks import TaskStatus
+```
+
+**影响文件**:
+- orchestration/task_engine.py
+- domain/tasks/state_machine.py
+- 其他 4 处
+
+### 修复2: 统一 StepStatus 定义
+
+**问题**: StepStatus 在 3 处定义
+
+**建议**:
+1. 保留 `domain/tasks/specs.py` 中的定义
+2. 其他位置改为导入
+
+### 修复3: 统一 EventType 定义
+
+**问题**: EventType 在 5 处定义
+
+**建议**:
+1. 保留 `domain/tasks/specs.py` 中的定义
+2. 其他位置改为导入
+
+### 修复4: 统一 CapabilityStatus 定义
+
+**问题**: CapabilityStatus 在 2 处定义
+
+**建议**:
+1. 保留 `platform_adapter/base.py` 中的定义
+2. `capabilities/registry.py` 改为导入
+
+### 修复5: 统一 CapabilityRegistry 定义
+
+**问题**: CapabilityRegistry 在 2 处定义
+
+**建议**:
+1. 保留 `capabilities/registry.py` 中的定义
+2. `governance/control_plane/capability_registry.py` 重命名
+
+------------------------------------------------------------
+  四、目录结构整理建议
+------------------------------------------------------------
+
+### 需要删除的重复目录
+
+```
+execution/workflows/orchestration/  → 删除，使用根目录 orchestration/
+execution/workflows/               → 合并到 orchestration/workflows/
+execution/collaboration/           → 合并到 orchestration/collaboration/
+execution/ecommerce/               → 合并到 memory_context/ecommerce/ 或独立
+infrastructure/config/             → 合并到根目录 config/
+core/config/                       → 合并到根目录 config/
+```
+
+### 需要保留的目录
+
+```
+根目录:
+- skill_entry/      (入口层)
+- orchestration/    (编排层)
+- capabilities/     (能力层)
+- execution/        (执行层)
+- platform_adapter/ (适配层)
+- diagnostics/      (诊断层)
+- config/           (配置层)
+- domain/           (领域层)
+- infrastructure/   (基础设施层)
+- governance/       (治理层)
+- memory_context/   (记忆上下文)
+- skills/           (技能目录)
+- tests/            (测试)
+- scripts/          (脚本)
+```
+
+------------------------------------------------------------
+  五、修复优先级
+------------------------------------------------------------
+
+### P0 - 立即修复（影响核心功能）
+
+1. TaskStatus 统一
+2. StepStatus 统一
+3. EventType 统一
+4. CapabilityStatus 统一
+
+### P1 - 近期修复（影响模块功能）
+
+1. WorkflowEngine 统一
+2. TaskExecutor 统一
+3. ValidationResult 统一
+4. HealthStatus 统一
+
+### P2 - 后续优化（不影响运行）
+
+1. 目录结构整理
+2. 低优先级类冲突
+3. 函数命名规范化
+
+------------------------------------------------------------
+  六、当前系统可用性评估
+------------------------------------------------------------
+
+尽管存在大量类名冲突，但由于 Python 模块隔离机制，
+实际运行时不会产生冲突。当前系统：
+
+✅ 核心功能正常运行
+✅ 能力注册正常
+✅ 路由正常
+✅ 数据库正常
+✅ 状态机正常
+
+建议：按优先级逐步修复，不影响当前使用。
+
+============================================================

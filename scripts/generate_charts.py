@@ -1,4 +1,8 @@
+from pathlib import Path
+import os
 #!/usr/bin/env python3
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 """
 生成专业图表
 """
@@ -56,7 +60,7 @@ def create_sleep_trend_chart():
                    xytext=(0, 10), ha='center', fontsize=10, fontweight='bold')
     
     plt.tight_layout()
-    plt.savefig('/home/sandbox/.openclaw/workspace/skills/data-tracker/output/sleep_trend.png', 
+    plt.savefig('str(PROJECT_ROOT)/skills/data-tracker/output/sleep_trend.png', 
                 dpi=150, bbox_inches='tight', facecolor='white')
     plt.close()
     print("✅ 睡眠趋势图已生成")
@@ -91,7 +95,7 @@ def create_steps_bar_chart():
                 f'{val:,}', ha='center', va='bottom', fontsize=10, fontweight='bold')
     
     plt.tight_layout()
-    plt.savefig('/home/sandbox/.openclaw/workspace/skills/data-tracker/output/steps_bar.png', 
+    plt.savefig('str(PROJECT_ROOT)/skills/data-tracker/output/steps_bar.png', 
                 dpi=150, bbox_inches='tight', facecolor='white')
     plt.close()
     print("✅ 步数柱状图已生成")
@@ -116,7 +120,7 @@ def create_exercise_pie_chart():
     ax.axis('equal')
     
     plt.tight_layout()
-    plt.savefig('/home/sandbox/.openclaw/workspace/skills/data-tracker/output/exercise_pie.png', 
+    plt.savefig('str(PROJECT_ROOT)/skills/data-tracker/output/exercise_pie.png', 
                 dpi=150, bbox_inches='tight', facecolor='white')
     plt.close()
     print("✅ 运动饼图已生成")
@@ -153,7 +157,7 @@ def create_health_radar_chart():
     
     plt.title('Health Dimension Comparison', fontsize=16, fontweight='bold', pad=20)
     plt.tight_layout()
-    plt.savefig('/home/sandbox/.openclaw/workspace/skills/data-tracker/output/health_radar.png', 
+    plt.savefig('str(PROJECT_ROOT)/skills/data-tracker/output/health_radar.png', 
                 dpi=150, bbox_inches='tight', facecolor='white')
     plt.close()
     print("✅ 健康雷达图已生成")

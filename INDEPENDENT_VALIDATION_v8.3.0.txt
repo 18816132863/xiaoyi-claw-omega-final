@@ -1,0 +1,24 @@
+独立复核结论（基于 workspace_v8.3.0_exact_refactor.tar.gz）
+
+已复核命令：
+1.
+pytest -q tests/test_router_bootstrap.py tests/test_real_capability_integration.py tests/test_no_fake_implementation.py
+
+结果：存在 2 个失败
+- tests/test_real_capability_integration.py::test_schedule_task_creates_real_task
+- tests/test_real_capability_integration.py::test_pause_resume_cancel_chain
+
+2.
+pytest -q tests/test_runtime_modes.py tests/test_platform_probe.py
+
+结果：存在 1 个失败
+- tests/test_platform_probe.py::test_detect_environment
+
+3.
+在模拟 HarmonyOS 环境下人工复核：
+- RuntimeProbe.detect_environment()['runtime_mode'] == 'platform_enhanced'
+- RuntimeProbe.get_recommended_adapter() == 'xiaoyi'
+- XiaoyiAdapter.probe()['available'] == True
+- XiaoyiAdapter.is_available() == False
+
+说明：runtime_probe 与 xiaoyi_adapter 仍存在语义不一致。

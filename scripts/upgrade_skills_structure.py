@@ -1,4 +1,7 @@
+from pathlib import Path
 #!/usr/bin/env python3
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 """
 批量升级技能到专业文档水平
 """
@@ -18,7 +21,7 @@ SKILLS_TO_UPGRADE = [
 
 def upgrade_skill(skill_name):
     """升级单个技能"""
-    skill_dir = f'/home/sandbox/.openclaw/workspace/skills/{skill_name}'
+    skill_dir = f'str(PROJECT_ROOT)/skills/{skill_name}'
     
     if not os.path.exists(skill_dir):
         print(f"⚠️  技能目录不存在: {skill_name}")

@@ -1,0 +1,12 @@
+# OpenClaw 测试依赖
+# 使用: pip install -r requirements-test.txt
+
+# 核心依赖
+croniter>=2.0.0
+aiohttp>=3.9.0
+pydantic>=2.0.0
+
+# 测试框架
+pytest>=8.0.0
+pytest-asyncio==0.23.6
+pytest-cov>=4.1.0

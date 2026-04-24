@@ -1,5 +1,0 @@
-display_name: "网页读取"
-description: "读取网页内容。调用方式: {\"url\": \"https://example.com\", \"selector\": \"article\"}"
-version: "1.0.0"
-author: "小艺Claw"
-requires_auth: false

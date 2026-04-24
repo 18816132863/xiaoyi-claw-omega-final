@@ -202,17 +202,17 @@ class WorkflowReplay:
             duration_ms = None
             
             for event in step_events_list:
-                if event.event_type == EventType.STEP_STARTED:
+                if event.event_type == WorkflowEventType.STEP_STARTED:
                     started_at = event.timestamp
                     step_name = event.data.get("step_name", "")
                     action = event.data.get("action", "")
                     status = "running"
-                elif event.event_type == EventType.STEP_COMPLETED:
+                elif event.event_type == WorkflowEventType.STEP_COMPLETED:
                     completed_at = event.timestamp
                     output = event.data.get("output", {})
                     duration_ms = event.data.get("duration_ms")
                     status = "completed"
-                elif event.event_type == EventType.STEP_FAILED:
+                elif event.event_type == WorkflowEventType.STEP_FAILED:
                     completed_at = event.timestamp
                     error = event.data.get("error_message", "")
                     status = "failed"

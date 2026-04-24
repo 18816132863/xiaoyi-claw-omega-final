@@ -25,7 +25,8 @@ from orchestration.result_guard import guard_result, ResultGuard
 from application.response_service.renderer import ResponseRenderer
 from application.response_service.response_schema import FinalResponse, EvidenceSchema
 
-class TaskStatus(Enum):
+class EngineTaskStatus(Enum):
+    """任务引擎内部状态（与 domain.tasks.specs.TaskStatus 不同）"""
     PENDING = "pending"
     RUNNING = "running"
     SUCCESS = "success"
@@ -55,7 +56,7 @@ class SubTask:
     assigned_layer: int = 4
     assigned_skill: Optional[str] = None
     priority: int = 0
-    status: TaskStatus = TaskStatus.PENDING
+    status: EngineTaskStatus = EngineTaskStatus.PENDING
     dependencies: List[str] = field(default_factory=list)
     latency: float = 0.0
     error: Optional[str] = None
@@ -70,7 +71,7 @@ class Task:
     entities: Dict[str, Any]
     constraints: Dict[str, Any]
     subtasks: List[SubTask] = field(default_factory=list)
-    status: TaskStatus = TaskStatus.PENDING
+    status: EngineTaskStatus = EngineTaskStatus.PENDING
     result: Any = None
 
 class TaskParser:
@@ -270,7 +271,8 @@ class TaskDistributor:
         
         # 如果需要 output_directory
         if "output_directory" in allowed:
-            filtered["output_directory"] = "/tmp/output"
+            import tempfile
+            filtered["output_directory"] = os.environ.get("OUTPUT_DIR", tempfile.gettempdir())
         
         return filtered
     
@@ -464,18 +466,18 @@ class TaskExecutor:
                 executed.add(task.id)
                 # V4.3.2 返修：根据执行结果设置状态
                 if isinstance(result, Exception):
-                    task.status = TaskStatus.FAILED
+                    task.status = EngineTaskStatus.FAILED
                     task.error = str(result)
                 elif isinstance(result, dict):
                     # 检查返回的 dict 是否表示失败
                     if result.get("status") == "failed" or result.get("error"):
-                        task.status = TaskStatus.FAILED
+                        task.status = EngineTaskStatus.FAILED
                         task.error = result.get("error", "执行失败")
                     else:
-                        task.status = TaskStatus.SUCCESS
+                        task.status = EngineTaskStatus.SUCCESS
                         self.results[task.id] = result
                 else:
-                    task.status = TaskStatus.SUCCESS
+                    task.status = EngineTaskStatus.SUCCESS
                     self.results[task.id] = result
         
         return self.results
@@ -488,7 +490,7 @@ class TaskExecutor:
     async def _execute_single(self, task: SubTask) -> Any:
         """执行单个任务 - V5.0.0: 真实验证和总结"""
         start = time.time()
-        task.status = TaskStatus.RUNNING
+        task.status = EngineTaskStatus.RUNNING
         
         try:
             # V5.0.0: VALIDATE - 真实验证
@@ -517,10 +519,10 @@ class TaskExecutor:
                     # V6.0.0: 统一错误结构
                     error = result.error if isinstance(result.error, dict) else {"code": "UNKNOWN", "message": str(result.error)}
                     task.outputs = {"error": error}
-                    task.status = TaskStatus.FAILED
+                    task.status = EngineTaskStatus.FAILED
             else:
                 # V4.3.2 返修：没有真实技能执行，必须失败
-                task.status = TaskStatus.FAILED
+                task.status = EngineTaskStatus.FAILED
                 task.error = "没有分配到可执行的技能"
                 result = {"status": "failed", "error": "no_executable_skill", "inputs": task.inputs}
                 task.outputs = result
@@ -531,7 +533,7 @@ class TaskExecutor:
         except Exception as e:
             task.latency = time.time() - start
             task.error = str(e)
-            task.status = TaskStatus.FAILED
+            task.status = EngineTaskStatus.FAILED
             raise
     
     async def _execute_validate(self, task: SubTask) -> Dict[str, Any]:
@@ -551,10 +553,10 @@ class TaskExecutor:
         }
         
         if missing:
-            task.status = TaskStatus.FAILED
+            task.status = EngineTaskStatus.FAILED
             task.error = f"缺少参数: {missing}"
         else:
-            task.status = TaskStatus.SUCCESS
+            task.status = EngineTaskStatus.SUCCESS
             task.outputs = result
         
         return result
@@ -623,10 +625,10 @@ class TaskExecutor:
         }
         
         if not verified:
-            task.status = TaskStatus.FAILED
+            task.status = EngineTaskStatus.FAILED
             task.error = "验证失败: 无有效证据"
         else:
-            task.status = TaskStatus.SUCCESS
+            task.status = EngineTaskStatus.SUCCESS
             task.outputs = result
         
         return result
@@ -677,7 +679,7 @@ class TaskExecutor:
             "next_steps": response.next_steps
         }
         
-        task.status = TaskStatus.SUCCESS
+        task.status = EngineTaskStatus.SUCCESS
         task.outputs = result
         
         return result
@@ -719,14 +721,14 @@ class TaskEngine:
             trace_entry = {
                 "subtask_id": t.id,
                 "route_target": t.assigned_skill,
-                "executed": t.status == TaskStatus.SUCCESS,
+                "executed": t.status == EngineTaskStatus.SUCCESS,
                 "status": t.status.value,
                 "error": t.error,
             }
             execution_trace.append(trace_entry)
             
             # 只有 execute 类任务才算真实执行
-            if t.status == TaskStatus.SUCCESS and t.assigned_skill and t.type not in [TaskType.VALIDATE, TaskType.VERIFY, TaskType.SUMMARIZE]:
+            if t.status == EngineTaskStatus.SUCCESS and t.assigned_skill and t.type not in [TaskType.VALIDATE, TaskType.VERIFY, TaskType.SUMMARIZE]:
                 has_real_execution = True
         
         # 5. 真实验证

@@ -369,4 +369,21 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    previous_loop = None
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", DeprecationWarning)
+        try:
+            previous_loop = asyncio.get_event_loop_policy().get_event_loop()
+        except RuntimeError:
+            previous_loop = None
+
+    loop = asyncio.new_event_loop()
+    try:
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(main())
+    finally:
+        loop.close()
+        if previous_loop is not None and not previous_loop.is_closed():
+            asyncio.set_event_loop(previous_loop)
+        else:
+            asyncio.set_event_loop(None)

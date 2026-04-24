@@ -2,7 +2,7 @@
 # OpenClaw 心跳守护脚本
 # 每 15 分钟自动执行心跳任务
 
-WORKSPACE="/home/sandbox/.openclaw/workspace"
+WORKSPACE="$WORKSPACE"
 LOG_FILE="/tmp/openclaw_heartbeat.log"
 PID_FILE="/tmp/openclaw_heartbeat.pid"
 INTERVAL=900  # 15 分钟 = 900 秒

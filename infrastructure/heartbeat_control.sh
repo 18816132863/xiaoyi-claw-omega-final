@@ -1,7 +1,7 @@
 #!/bin/bash
 # OpenClaw 心跳守护进程管理脚本
 
-WORKSPACE="/home/sandbox/.openclaw/workspace"
+WORKSPACE="$WORKSPACE"
 PID_FILE="/tmp/openclaw_heartbeat.pid"
 LOG_FILE="/tmp/openclaw_heartbeat.log"
 

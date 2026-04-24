@@ -7,8 +7,8 @@ from enum import Enum
 import uuid
 
 
-class TaskStatus(Enum):
-    """Task lifecycle states."""
+class ContractTaskStatus(Enum):
+    """任务状态契约状态（与 domain.tasks.specs.TaskStatus 不同）"""
     CREATED = "created"
     PLANNING = "planning"
     READY = "ready"
@@ -27,7 +27,7 @@ class TaskState:
     Represents the complete state of a task.
     """
     task_id: str
-    status: TaskStatus = TaskStatus.CREATED
+    status: ContractTaskStatus = ContractTaskStatus.CREATED
     profile: str = "default"
     intent: str = ""
     created_at: datetime = field(default_factory=datetime.now)
@@ -122,7 +122,7 @@ class TaskStateContract:
         """Mark task as started."""
         return self.update_task(
             task_id,
-            status=TaskStatus.RUNNING,
+            status=ContractTaskStatus.RUNNING,
             started_at=datetime.now()
         )
     
@@ -130,7 +130,7 @@ class TaskStateContract:
         """Mark task as completed."""
         return self.update_task(
             task_id,
-            status=TaskStatus.COMPLETED,
+            status=ContractTaskStatus.COMPLETED,
             completed_at=datetime.now(),
             result=result or {}
         )
@@ -139,7 +139,7 @@ class TaskStateContract:
         """Mark task as failed."""
         return self.update_task(
             task_id,
-            status=TaskStatus.FAILED,
+            status=ContractTaskStatus.FAILED,
             completed_at=datetime.now(),
             error=error
         )
@@ -148,7 +148,7 @@ class TaskStateContract:
         """Get all active tasks."""
         return [
             t for t in self._tasks.values()
-            if t.status in [TaskStatus.CREATED, TaskStatus.PLANNING, TaskStatus.RUNNING]
+            if t.status in [ContractTaskStatus.CREATED, ContractTaskStatus.PLANNING, ContractTaskStatus.RUNNING]
         ]
     
     def get_recent_tasks(self, limit: int = 10) -> List[TaskState]:

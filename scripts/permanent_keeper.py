@@ -36,7 +36,7 @@ class PermanentKeeper:
     
     def __init__(self, root: Path = None):
         self.root = root or get_project_root()
-        self.config_file = self.root / "infrastructure/config/permanent_keepers.json"
+        self.config_file = self.root / "config/permanent_keepers.json"
         self.state_file = self.root / "reports/ops/keeper_state.json"
         self.config_file.parent.mkdir(parents=True, exist_ok=True)
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
@@ -49,7 +49,7 @@ class PermanentKeeper:
                 "priority": "critical",
                 "files": [
                     "infrastructure/inventory/fusion_index.json",
-                    "infrastructure/config/unified.json"
+                    "config/unified.json"
                 ],
                 "refresh_interval_hours": 1,
                 "auto_restore": True,
@@ -101,7 +101,7 @@ class PermanentKeeper:
                 "priority": "high",
                 "files": [
                     "scripts/dependency_manager.py",
-                    "infrastructure/config/dependency_manifest.json",
+                    "config/dependency_manifest.json",
                     "reports/ops/dependency_status.json"
                 ],
                 "refresh_interval_hours": 24,

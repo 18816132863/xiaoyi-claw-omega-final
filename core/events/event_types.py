@@ -3,8 +3,8 @@
 from enum import Enum
 
 
-class EventType(Enum):
-    """All system event types."""
+class CoreEventType(Enum):
+    """核心系统事件类型（与 domain.tasks.specs.EventType 不同）"""
     
     # Task events
     TASK_CREATED = "task_created"
@@ -82,61 +82,61 @@ class EventType(Enum):
 
 # Event type categories
 TASK_EVENTS = [
-    EventType.TASK_CREATED,
-    EventType.TASK_STARTED,
-    EventType.TASK_COMPLETED,
-    EventType.TASK_FAILED,
-    EventType.TASK_CANCELLED
+    CoreEventType.TASK_CREATED,
+    CoreEventType.TASK_STARTED,
+    CoreEventType.TASK_COMPLETED,
+    CoreEventType.TASK_FAILED,
+    CoreEventType.TASK_CANCELLED
 ]
 
 WORKFLOW_EVENTS = [
-    EventType.WORKFLOW_STARTED,
-    EventType.WORKFLOW_COMPLETED,
-    EventType.WORKFLOW_FAILED,
-    EventType.WORKFLOW_PAUSED,
-    EventType.WORKFLOW_RESUMED
+    CoreEventType.WORKFLOW_STARTED,
+    CoreEventType.WORKFLOW_COMPLETED,
+    CoreEventType.WORKFLOW_FAILED,
+    CoreEventType.WORKFLOW_PAUSED,
+    CoreEventType.WORKFLOW_RESUMED
 ]
 
 STEP_EVENTS = [
-    EventType.STEP_STARTED,
-    EventType.STEP_COMPLETED,
-    EventType.STEP_FAILED,
-    EventType.STEP_SKIPPED,
-    EventType.RETRY_TRIGGERED,
-    EventType.FALLBACK_TRIGGERED
+    CoreEventType.STEP_STARTED,
+    CoreEventType.STEP_COMPLETED,
+    CoreEventType.STEP_FAILED,
+    CoreEventType.STEP_SKIPPED,
+    CoreEventType.RETRY_TRIGGERED,
+    CoreEventType.FALLBACK_TRIGGERED
 ]
 
 SKILL_EVENTS = [
-    EventType.SKILL_SELECTED,
-    EventType.SKILL_EXECUTED,
-    EventType.SKILL_FAILED,
-    EventType.SKILL_REGISTERED,
-    EventType.SKILL_UNREGISTERED,
-    EventType.SKILL_DEPRECATED
+    CoreEventType.SKILL_SELECTED,
+    CoreEventType.SKILL_EXECUTED,
+    CoreEventType.SKILL_FAILED,
+    CoreEventType.SKILL_REGISTERED,
+    CoreEventType.SKILL_UNREGISTERED,
+    CoreEventType.SKILL_DEPRECATED
 ]
 
 POLICY_EVENTS = [
-    EventType.POLICY_APPLIED,
-    EventType.POLICY_DENIED,
-    EventType.POLICY_EVALUATED
+    CoreEventType.POLICY_APPLIED,
+    CoreEventType.POLICY_DENIED,
+    CoreEventType.POLICY_EVALUATED
 ]
 
 DEGRADATION_EVENTS = [
-    EventType.DEGRADATION_TRIGGERED,
-    EventType.DEGRADATION_RECOVERED,
-    EventType.KILL_SWITCH_ACTIVATED,
-    EventType.KILL_SWITCH_DEACTIVATED
+    CoreEventType.DEGRADATION_TRIGGERED,
+    CoreEventType.DEGRADATION_RECOVERED,
+    CoreEventType.KILL_SWITCH_ACTIVATED,
+    CoreEventType.KILL_SWITCH_DEACTIVATED
 ]
 
 MEMORY_EVENTS = [
-    EventType.MEMORY_STORED,
-    EventType.MEMORY_RETRIEVED,
-    EventType.MEMORY_UPDATED,
-    EventType.MEMORY_DELETED
+    CoreEventType.MEMORY_STORED,
+    CoreEventType.MEMORY_RETRIEVED,
+    CoreEventType.MEMORY_UPDATED,
+    CoreEventType.MEMORY_DELETED
 ]
 
 BUDGET_EVENTS = [
-    EventType.BUDGET_EXCEEDED,
-    EventType.BUDGET_WARNING,
-    EventType.BUDGET_RESET
+    CoreEventType.BUDGET_EXCEEDED,
+    CoreEventType.BUDGET_WARNING,
+    CoreEventType.BUDGET_RESET
 ]

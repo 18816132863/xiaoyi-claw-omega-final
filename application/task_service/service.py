@@ -157,18 +157,20 @@ class TaskService:
         if not task:
             return {"success": False, "error": "任务不存在"}
         
-        if task.status not in (TaskStatus.QUEUED, TaskStatus.RUNNING):
+        # 扩展可暂停状态：PERSISTED, QUEUED, RUNNING, WAITING_RETRY
+        if task.status not in (TaskStatus.PERSISTED, TaskStatus.QUEUED, TaskStatus.RUNNING, TaskStatus.WAITING_RETRY):
             return {"success": False, "error": f"任务状态 {task.status.value} 不可暂停"}
         
+        previous_status = task.status.value
         await self.task_repo.update(task_id, {"status": TaskStatus.PAUSED.value})
         
         await self.event_repo.record_event(
             task_id=task_id,
             event_type=EventType.PAUSED.value,
-            event_payload={"previous_status": task.status.value}
+            event_payload={"previous_status": previous_status}
         )
         
-        return {"success": True, "task_id": task_id, "status": TaskStatus.PAUSED.value}
+        return {"success": True, "task_id": task_id, "status": TaskStatus.PAUSED.value, "previous_status": previous_status}
     
     async def resume_task(self, task_id: str) -> Dict[str, Any]:
         """恢复任务"""
@@ -179,18 +181,37 @@ class TaskService:
         if task.status != TaskStatus.PAUSED:
             return {"success": False, "error": f"任务状态 {task.status.value} 不可恢复"}
         
+        # 从最近一次 PAUSED 事件获取 previous_status
+        events = await self.event_repo.list_events(task_id, limit=100)
+        previous_status = TaskStatus.QUEUED.value  # 默认恢复到 QUEUED
+        
+        for event in reversed(events):
+            if event.get("event_type") == EventType.PAUSED.value:
+                payload = event.get("event_payload", {})
+                if isinstance(payload, str):
+                    import json
+                    payload = json.loads(payload)
+                previous_status = payload.get("previous_status", TaskStatus.QUEUED.value)
+                break
+        
+        # 根据之前状态决定恢复目标
+        if previous_status == TaskStatus.PERSISTED.value:
+            target_status = TaskStatus.PERSISTED.value
+        else:
+            target_status = TaskStatus.QUEUED.value
+        
         await self.task_repo.update(task_id, {"status": TaskStatus.RESUMED.value})
         
         await self.event_repo.record_event(
             task_id=task_id,
             event_type=EventType.RESUMED.value,
-            event_payload={"previous_status": task.status.value}
+            event_payload={"previous_status": previous_status, "target_status": target_status}
         )
         
-        # 触发重新入队
-        await self.task_repo.update(task_id, {"status": TaskStatus.QUEUED.value})
+        # 恢复到目标状态
+        await self.task_repo.update(task_id, {"status": target_status})
         
-        return {"success": True, "task_id": task_id, "status": TaskStatus.QUEUED.value}
+        return {"success": True, "task_id": task_id, "status": target_status, "previous_status": previous_status}
     
     async def get_task_events(self, task_id: str, limit: int = 100) -> List[Dict[str, Any]]:
         """获取任务事件"""

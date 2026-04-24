@@ -12,7 +12,7 @@ from orchestration.workflow.workflow_registry import (
     WorkflowTemplate, WorkflowStep, RecoveryPolicy, RecoveryPolicyType,
     get_workflow_registry
 )
-from orchestration.state.workflow_event_store import get_workflow_event_store, EventType
+from orchestration.state.workflow_event_store import get_workflow_event_store, WorkflowEventType
 from orchestration.state.recovery_store import get_recovery_store, RecoveryAction
 from orchestration.state.checkpoint_store import CheckpointStore
 from orchestration.execution_control.fallback_policy import FallbackPolicy
@@ -105,7 +105,7 @@ def verify_fallback_policy_integration():
     events = event_store.get_by_instance(result.instance_id)
     event_types = [e.event_type.value for e in events]
 
-    has_retry = EventType.RETRY_TRIGGERED.value in event_types
+    has_retry = WorkflowEventType.RETRY_TRIGGERED.value in event_types
 
     if has_retry or result.total_retry_count > 0:
         print(f"  ✅ fallback_policy.decide() 被调用")
@@ -157,7 +157,7 @@ def verify_rollback_manager_integration():
         events = event_store.get_by_instance(result.instance_id)
         event_types = [e.event_type.value for e in events]
 
-        if EventType.ROLLBACK_TRIGGERED.value in event_types:
+        if WorkflowEventType.ROLLBACK_TRIGGERED.value in event_types:
             print(f"  ✅ rollback_manager.rollback() 被调用 (事件存在)")
             return True
         else:
@@ -223,8 +223,8 @@ def verify_event_store_records():
     events = event_store.get_by_instance(result.instance_id)
     event_types = [e.event_type.value for e in events]
 
-    has_checkpoint = EventType.CHECKPOINT_SAVED.value in event_types
-    has_retry = EventType.RETRY_TRIGGERED.value in event_types
+    has_checkpoint = WorkflowEventType.CHECKPOINT_SAVED.value in event_types
+    has_retry = WorkflowEventType.RETRY_TRIGGERED.value in event_types
 
     print(f"  - 事件总数: {len(events)}")
     print(f"  - checkpoint_saved: {'✅' if has_checkpoint else '❌'}")

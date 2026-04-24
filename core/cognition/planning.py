@@ -21,8 +21,8 @@ class PlanStatus(Enum):
     FAILED = "failed"
 
 
-class TaskStatus(Enum):
-    """任务状态"""
+class PlanningTaskStatus(Enum):
+    """规划引擎任务状态（与 domain.tasks.specs.TaskStatus 不同）"""
     PENDING = "pending"
     READY = "ready"
     RUNNING = "running"
@@ -40,7 +40,7 @@ class Task:
     dependencies: Set[str] = field(default_factory=set)
     estimated_duration: timedelta = field(default_factory=lambda: timedelta(minutes=30))
     priority: int = 0
-    status: TaskStatus = TaskStatus.PENDING
+    status: PlanningTaskStatus = PlanningTaskStatus.PENDING
     assignee: Optional[str] = None
     result: Optional[Any] = None
     error: Optional[str] = None
@@ -183,15 +183,15 @@ class PlanningEngine:
             return []
         
         ready = []
-        completed_ids = {t.id for t in plan.tasks if t.status == TaskStatus.COMPLETED}
+        completed_ids = {t.id for t in plan.tasks if t.status == PlanningTaskStatus.COMPLETED}
         
         for task in plan.tasks:
-            if task.status != TaskStatus.PENDING:
+            if task.status != PlanningTaskStatus.PENDING:
                 continue
             
             # 检查依赖是否完成
             if task.dependencies.issubset(completed_ids):
-                task.status = TaskStatus.READY
+                task.status = PlanningTaskStatus.READY
                 ready.append(task)
         
         return ready
@@ -206,7 +206,7 @@ class PlanningEngine:
         if not task:
             return None
         
-        task.status = TaskStatus.RUNNING
+        task.status = PlanningTaskStatus.RUNNING
         
         try:
             if executor:
@@ -215,12 +215,12 @@ class PlanningEngine:
                 result = self._default_executor(task)
             
             task.result = result
-            task.status = TaskStatus.COMPLETED
+            task.status = PlanningTaskStatus.COMPLETED
             return result
             
         except Exception as e:
             task.error = str(e)
-            task.status = TaskStatus.FAILED
+            task.status = PlanningTaskStatus.FAILED
             return None
     
     def _default_executor(self, task: Task) -> Any:
@@ -234,9 +234,9 @@ class PlanningEngine:
             return {}
         
         total = len(plan.tasks)
-        completed = sum(1 for t in plan.tasks if t.status == TaskStatus.COMPLETED)
-        failed = sum(1 for t in plan.tasks if t.status == TaskStatus.FAILED)
-        running = sum(1 for t in plan.tasks if t.status == TaskStatus.RUNNING)
+        completed = sum(1 for t in plan.tasks if t.status == PlanningTaskStatus.COMPLETED)
+        failed = sum(1 for t in plan.tasks if t.status == PlanningTaskStatus.FAILED)
+        running = sum(1 for t in plan.tasks if t.status == PlanningTaskStatus.RUNNING)
         
         return {
             "plan_id": plan_id,
@@ -255,7 +255,7 @@ class PlanningEngine:
             return None
         
         # 保留已完成的任务
-        completed_tasks = [t for t in old_plan.tasks if t.status == TaskStatus.COMPLETED]
+        completed_tasks = [t for t in old_plan.tasks if t.status == PlanningTaskStatus.COMPLETED]
         
         # 重新分解剩余目标
         remaining_goal = f"继续完成: {old_plan.goal} (原因: {reason})"
@@ -274,7 +274,7 @@ class PlanningEngine:
         
         remaining_duration = timedelta()
         for task in plan.tasks:
-            if task.status not in [TaskStatus.COMPLETED]:
+            if task.status not in [PlanningTaskStatus.COMPLETED]:
                 remaining_duration += task.estimated_duration
         
         return datetime.now() + remaining_duration

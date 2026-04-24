@@ -15,6 +15,8 @@ from .interfaces import (
 )
 from .sqlite_repo import (
     SQLiteTaskRepository,
+    SQLiteTaskRunRepository,
+    SQLiteTaskStepRepository,
     SQLiteTaskEventRepository,
     SQLiteCheckpointRepository,
 )
@@ -25,6 +27,8 @@ __all__ = [
     "TaskEventRepository",
     "CheckpointRepository",
     "SQLiteTaskRepository",
+    "SQLiteTaskRunRepository",
+    "SQLiteTaskStepRepository",
     "SQLiteTaskEventRepository",
     "SQLiteCheckpointRepository",
 ]

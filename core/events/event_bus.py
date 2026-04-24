@@ -9,7 +9,8 @@ import asyncio
 from collections import defaultdict
 
 
-class EventType(Enum):
+class BusEventType(Enum):
+    """事件总线事件类型（与 domain.tasks.specs.EventType 不同）"""
     # Task events
     TASK_CREATED = "task_created"
     TASK_STARTED = "task_started"
@@ -58,7 +59,7 @@ class EventType(Enum):
 @dataclass
 class Event:
     """A system event."""
-    event_type: EventType
+    event_type: BusEventType
     source: str
     data: Dict
     timestamp: datetime = field(default_factory=datetime.now)
@@ -101,11 +102,11 @@ class EventBus:
         self._history: List[Event] = []
         self._correlation_map: Dict[str, List[str]] = defaultdict(list)
     
-    def subscribe(self, event_type: EventType, handler: Callable):
+    def subscribe(self, event_type: BusEventType, handler: Callable):
         """Subscribe to an event type."""
         self._handlers[event_type].append(handler)
     
-    def subscribe_async(self, event_type: EventType, handler: Callable):
+    def subscribe_async(self, event_type: BusEventType, handler: Callable):
         """Subscribe an async handler to an event type."""
         self._async_handlers[event_type].append(handler)
     
@@ -113,7 +114,7 @@ class EventBus:
         """Subscribe to all events."""
         self._global_handlers.append(handler)
     
-    def unsubscribe(self, event_type: EventType, handler: Callable):
+    def unsubscribe(self, event_type: BusEventType, handler: Callable):
         """Unsubscribe from an event type."""
         if handler in self._handlers[event_type]:
             self._handlers[event_type].remove(handler)
@@ -158,7 +159,7 @@ class EventBus:
     
     def emit(
         self,
-        event_type: EventType,
+        event_type: BusEventType,
         source: str,
         data: Dict,
         correlation_id: str = None
@@ -175,7 +176,7 @@ class EventBus:
     
     def get_history(
         self,
-        event_type: EventType = None,
+        event_type: BusEventType = None,
         source: str = None,
         limit: int = 100
     ) -> List[Event]:
@@ -214,7 +215,7 @@ def get_event_bus() -> EventBus:
 
 
 def emit_event(
-    event_type: EventType,
+    event_type: BusEventType,
     source: str,
     data: Dict,
     correlation_id: str = None

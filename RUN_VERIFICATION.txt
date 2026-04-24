@@ -1,0 +1,130 @@
+============================================================
+  运行验证报告 V2.0.0
+============================================================
+
+验证时间: 2026-04-23 20:50
+版本: 8.2.4
+
+------------------------------------------------------------
+  1. 单元测试
+------------------------------------------------------------
+
+$ python3 -m pytest tests/ -q -W default
+
+120 passed in 2.64s
+
+结果: ✅ 通过
+
+------------------------------------------------------------
+  2. Smoke Test V2.0.0
+------------------------------------------------------------
+
+$ python3 scripts/smoke_test.py
+
+[1/8] 创建任务
+  ✅ PASS - 创建一次性任务返回 task_id
+  ✅ PASS - 创建一次性任务返回 success: expected=True, actual=True
+  ✅ PASS - 创建循环任务返回 task_id
+  ✅ PASS - 创建循环任务返回 success: expected=True, actual=True
+
+[2/8] 查询任务
+  ✅ PASS - 查询任务返回非空
+  ✅ PASS - 任务 ID 匹配
+  ✅ PASS - 任务状态有效: actual=TaskStatus.PERSISTED
+
+[3/8] 执行一次性任务
+  ✅ PASS - 执行结果非空
+  ✅ PASS - 执行结果有 success 字段
+  ✅ PASS - 执行后状态有效: actual=TaskStatus.DELIVERY_PENDING
+
+执行结果详情:
+{
+  "success": true,
+  "outputs": {
+    "send_result": {
+      "success": true,
+      "status": "queued_for_delivery",
+      "task_id": "...",
+      "run_id": "...",
+      "message": "已生成发送请求，等待真实网关处理"
+    }
+  },
+  "delivery_status": "queued_for_delivery"
+}
+
+[4/8] 执行循环任务两次
+  ✅ PASS - 第一次执行结果非空
+  ✅ PASS - 第二次执行结果非空
+  ℹ️  next_run_at 未变化（delivery_status=queued_for_delivery）
+  ✅ PASS - 第一次执行后 next_run_at（queued_for_delivery 模式）
+  ✅ PASS - 第二次执行后 next_run_at（queued_for_delivery 模式）
+
+说明：系统设计为只有 delivery_status='delivered' 时才更新 next_run_at，
+当前测试返回 'queued_for_delivery'，符合预期。
+
+[5/8] 失败重试
+  ✅ PASS - 重试结果非空
+  ✅ PASS - 重试后状态有效: actual=TaskStatus.DELIVERY_PENDING
+
+说明：retry_task 会立即执行任务，所以状态变为 DELIVERY_PENDING。
+
+[6/8] Pause/Resume
+  ✅ PASS - 暂停结果非空
+  ✅ PASS - 暂停后状态为 PAUSED: expected=TaskStatus.PAUSED, actual=TaskStatus.PAUSED
+  ✅ PASS - 恢复结果非空
+  ✅ PASS - 恢复后状态有效: actual=TaskStatus.QUEUED
+
+[7/8] Cancel
+  ✅ PASS - 取消结果非空
+  ✅ PASS - 取消后状态为 CANCELLED: expected=TaskStatus.CANCELLED, actual=TaskStatus.CANCELLED
+  ✅ PASS - CANCELLED 后恢复失败，状态保持 CANCELLED
+
+说明：CANCELLED 状态不可恢复，这是预期行为。
+
+[8/8] 落库验证
+  ✅ PASS - 数据库文件存在
+  ✅ PASS - tasks 表有记录: count=84
+  ✅ PASS - task_events 表有记录: count=770
+  ✅ PASS - task_runs 表存在
+  ℹ️  task_runs 表记录数: 0
+  ✅ PASS - task_steps 表存在
+  ℹ️  task_steps 表记录数: 0
+  ℹ️  tool_calls 说明: 系统使用 task_steps 表记录工具调用
+
+------------------------------------------------------------
+  3. 数据库表结构
+------------------------------------------------------------
+
+tasks 表字段:
+- id, user_id, task_type, goal, payload_json
+- trigger_mode, status, schedule_type, run_at, cron_expr
+- timezone, next_run_at, last_run_at, attempt_count
+- max_attempts, retry_backoff_seconds, timeout_seconds
+- idempotency_key, last_error, created_at, updated_at
+
+task_runs 表字段:
+- id, task_id, run_no, workflow_thread_id, checkpoint_id
+- current_step, total_steps, status, started_at, ended_at
+- error_text, retry_after, created_at
+
+task_events 表字段:
+- id, task_id, task_run_id, event_type, event_payload, created_at
+
+task_steps 表字段:
+- id, task_run_id, step_index, step_name, tool_name
+- input_json, output_json, status, started_at, ended_at
+- error_text, idempotency_key, created_at
+
+tool_calls 说明:
+系统使用 task_steps 表记录工具调用，而非独立的 tool_calls 表。
+
+------------------------------------------------------------
+  4. 验收结论
+------------------------------------------------------------
+
+Smoke Test: 28/28 通过
+单元测试: 120/120 通过
+
+全部验证通过，版本 8.2.4 可以发布。
+
+============================================================

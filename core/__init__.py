@@ -1,7 +1,7 @@
 # L1 Core Layer
 
 from .events.event_bus import EventBus, Event
-from .events.event_types import EventType
+from .events.event_types import CoreEventType
 from .state.global_state_contract import GlobalStateContract
 from .state.profile_state_contract import ProfileStateContract
 from .state.task_state_contract import TaskStateContract
@@ -14,7 +14,7 @@ from .cognition.learning import LearningSystem
 __all__ = [
     "EventBus",
     "Event",
-    "EventType",
+    "CoreEventType",
     "GlobalStateContract",
     "ProfileStateContract",
     "TaskStateContract",

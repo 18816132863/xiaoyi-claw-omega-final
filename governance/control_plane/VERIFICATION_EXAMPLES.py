@@ -1,10 +1,14 @@
+from pathlib import Path
+import os
 """
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 Phase3 第一组验收示例
 展示 control plane 正式化后的 4 个验收点
 """
 
 import sys
-sys.path.insert(0, '/home/sandbox/.openclaw/workspace')
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from governance.control_plane.control_plane_service import (
     ControlPlaneService, 

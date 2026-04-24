@@ -61,6 +61,8 @@ class AsyncCallQueue:
         self._running = False
         if self._loop:
             self._loop.stop()
+            self._loop.close()
+            self._loop = None
     
     async def _process_queues(self):
         """处理队列"""

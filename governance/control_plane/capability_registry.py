@@ -31,9 +31,9 @@ class CapabilityDefinition:
     dependencies: List[str] = field(default_factory=list)
 
 
-class CapabilityRegistry:
+class GovernanceCapabilityRegistry:
     """
-    能力注册表
+    治理能力注册表（与 capabilities.registry.CapabilityRegistry 不同）
     
     统一管理所有 capability，确保：
     1. capability 名称固定
@@ -400,9 +400,9 @@ class CapabilityRegistry:
 # 全局单例
 _capability_registry = None
 
-def get_capability_registry() -> CapabilityRegistry:
+def get_capability_registry() -> GovernanceCapabilityRegistry:
     """获取能力注册表单例"""
     global _capability_registry
     if _capability_registry is None:
-        _capability_registry = CapabilityRegistry()
+        _capability_registry = GovernanceCapabilityRegistry()
     return _capability_registry

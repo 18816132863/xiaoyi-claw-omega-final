@@ -101,11 +101,11 @@ class WorkflowEventProjection:
         completed_at = None
         
         for event in events:
-            if event.event_type == EventType.WORKFLOW_STARTED:
+            if event.event_type == WorkflowEventType.WORKFLOW_STARTED:
                 workflow_id = event.data.get("workflow_id", "")
                 started_at = event.timestamp
                 status = "running"
-            elif event.event_type == EventType.WORKFLOW_COMPLETED:
+            elif event.event_type == WorkflowEventType.WORKFLOW_COMPLETED:
                 completed_at = event.timestamp
                 status = event.data.get("status", "completed")
         
@@ -158,16 +158,16 @@ class WorkflowEventProjection:
                     "error": None
                 }
             
-            if event.event_type == EventType.STEP_STARTED:
+            if event.event_type == WorkflowEventType.STEP_STARTED:
                 step_data[event.step_id]["step_name"] = event.data.get("step_name", "")
                 step_data[event.step_id]["action"] = event.data.get("action", "")
                 step_data[event.step_id]["started_at"] = event.timestamp
                 step_data[event.step_id]["status"] = "running"
-            elif event.event_type == EventType.STEP_COMPLETED:
+            elif event.event_type == WorkflowEventType.STEP_COMPLETED:
                 step_data[event.step_id]["completed_at"] = event.timestamp
                 step_data[event.step_id]["duration_ms"] = event.data.get("duration_ms")
                 step_data[event.step_id]["status"] = "completed"
-            elif event.event_type == EventType.STEP_FAILED:
+            elif event.event_type == WorkflowEventType.STEP_FAILED:
                 step_data[event.step_id]["completed_at"] = event.timestamp
                 step_data[event.step_id]["error"] = event.data.get("error_message", "")
                 step_data[event.step_id]["status"] = "failed"

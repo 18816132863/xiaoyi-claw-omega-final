@@ -9,6 +9,9 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 from pathlib import Path
 
+# 项目根目录
+PROJECT_ROOT = Path(__file__).resolve().parents[1]  # orchestration/ 的父目录
+
 
 @dataclass
 class VerifyResult:
@@ -24,7 +27,7 @@ class VerifyExecutor:
     """真实验证器"""
     
     def __init__(self):
-        self.project_root = Path("/home/sandbox/.openclaw/workspace")
+        self.project_root = Path(str(PROJECT_ROOT))
     
     def verify(self, execution_results: Dict[str, Any], task_type: str) -> VerifyResult:
         """

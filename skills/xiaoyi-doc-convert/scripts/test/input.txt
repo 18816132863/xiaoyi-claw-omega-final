@@ -1,0 +1,5 @@
+# Test input files configuration
+# Format: relative_path/to/file.md [output_formats]
+# Example: examples/test.md docx,xlsx
+
+examples/md2doc_all_content.md pdf

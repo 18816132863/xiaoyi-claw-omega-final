@@ -34,7 +34,7 @@ from orchestration.state.workflow_instance_store import (
 )
 from orchestration.state.workflow_event_store import (
     get_workflow_event_store,
-    EventType
+    WorkflowEventType
 )
 from orchestration.state.recovery_store import (
     get_recovery_store,
@@ -427,7 +427,7 @@ class WorkflowEngine:
             if any(cap in blocked_capabilities for cap in step.required_capabilities):
                 self._event_store.record(
                     instance_id=result.instance_id,
-                    event_type=EventType.CAPABILITY_BLOCKED,
+                    event_type=WorkflowEventType.CAPABILITY_BLOCKED,
                     step_id=step_id,
                     data={"blocked_capabilities": step.required_capabilities}
                 )
@@ -525,7 +525,7 @@ class WorkflowEngine:
         # 写 checkpoint_saved 事件
         self._event_store.record(
             instance_id=result.instance_id,
-            event_type=EventType.CHECKPOINT_SAVED,
+            event_type=WorkflowEventType.CHECKPOINT_SAVED,
             step_id=step.step_id,
             data={
                 "checkpoint_id": checkpoint.checkpoint_id,
@@ -578,7 +578,7 @@ class WorkflowEngine:
 
                 self._event_store.record(
                     instance_id=result.instance_id,
-                    event_type=EventType.CHECKPOINT_SAVED,
+                    event_type=WorkflowEventType.CHECKPOINT_SAVED,
                     step_id=step.step_id,
                     data={
                         "checkpoint_id": checkpoint.checkpoint_id,
@@ -669,7 +669,7 @@ class WorkflowEngine:
 
                             self._event_store.record(
                                 instance_id=result.instance_id,
-                                event_type=EventType.CHECKPOINT_SAVED,
+                                event_type=WorkflowEventType.CHECKPOINT_SAVED,
                                 step_id=step.step_id,
                                 data={
                                     "checkpoint_id": checkpoint.checkpoint_id,
@@ -703,7 +703,7 @@ class WorkflowEngine:
 
                                     self._event_store.record(
                                         instance_id=result.instance_id,
-                                        event_type=EventType.ROLLBACK_TRIGGERED,
+                                        event_type=WorkflowEventType.ROLLBACK_TRIGGERED,
                                         step_id=step.step_id,
                                         data={
                                             "rollback_point_id": step_result.rollback_point_id,
@@ -742,7 +742,7 @@ class WorkflowEngine:
 
                             self._event_store.record(
                                 instance_id=result.instance_id,
-                                event_type=EventType.ROLLBACK_TRIGGERED,
+                                event_type=WorkflowEventType.ROLLBACK_TRIGGERED,
                                 step_id=step.step_id,
                                 data={
                                     "rollback_point_id": step_result.rollback_point_id,
@@ -779,7 +779,7 @@ class WorkflowEngine:
 
             self._event_store.record(
                 instance_id=result.instance_id,
-                event_type=EventType.CHECKPOINT_SAVED,
+                event_type=WorkflowEventType.CHECKPOINT_SAVED,
                 step_id=step.step_id,
                 data={
                     "checkpoint_id": checkpoint.checkpoint_id,

@@ -1,0 +1,89 @@
+============================================================
+  可观测性建设报告 - v8.1.2
+============================================================
+
+完成时间: 2026-04-23
+版本: 8.1.2
+
+------------------------------------------------------------
+  一、统一结构化日志
+------------------------------------------------------------
+
+已创建模块:
+- infrastructure/observability/logger.py
+- infrastructure/observability/metrics.py
+- infrastructure/observability/health.py
+
+日志字段 (15个):
+- timestamp: ISO 格式时间戳
+- level: 日志级别 (DEBUG/INFO/WARNING/ERROR/CRITICAL)
+- service: 服务名称
+- component: 组件名称
+- message: 日志消息
+- task_id: 任务 ID
+- run_id: 运行 ID
+- event_type: 事件类型
+- status: 状态
+- tool_name: 工具名称
+- schedule_mode: 调度模式 (once/cron/recurring)
+- delivery_status: 送达状态
+- error_type: 错误类型
+- error_message: 错误消息
+
+已集成组件:
+- scripts/task_daemon.py (V7.0.0)
+- scripts/message_server.py (V4.0.0)
+
+日志位置:
+- logs/task_daemon_daemon.jsonl
+- logs/message_server_*.jsonl
+
+------------------------------------------------------------
+  二、业务指标
+------------------------------------------------------------
+
+指标类型:
+- counters: 计数器
+- gauges: 仪表
+- histograms: 直方图
+
+核心指标 (8个):
+- tasks_dispatched: 任务投递总数
+- tasks_executed: 任务执行总数
+- tasks_succeeded: 任务成功总数
+- tasks_failed: 任务失败总数
+- messages_delivered: 消息送达总数
+- deliveries_confirmed: 送达确认总数
+- message_send_failures: 消息发送失败总数
+- cycle_duration_seconds: 周期耗时
+
+指标位置:
+- reports/metrics/metrics.json
+
+------------------------------------------------------------
+  三、健康检查
+------------------------------------------------------------
+
+接口:
+- GET /health: 健康检查
+- GET /ready: 就绪检查
+- GET /metrics: 指标接口
+
+检查项:
+- daemon_running: 守护进程运行状态
+- db_connection: 数据库连接
+- queue_writable: 队列可写
+- storage_writable: 存储可写
+
+健康状态:
+- healthy: 健康
+- degraded: 降级
+- unhealthy: 不健康
+
+------------------------------------------------------------
+  四、测试结果
+------------------------------------------------------------
+
+pytest: 103 passed, 19 warnings
+
+============================================================

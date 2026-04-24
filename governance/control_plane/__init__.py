@@ -10,7 +10,7 @@ from .control_plane_service import (
     get_control_plane_service
 )
 from .capability_registry import (
-    CapabilityRegistry,
+    GovernanceCapabilityRegistry,
     CapabilityCategory,
     CapabilityDefinition,
     get_capability_registry
@@ -47,7 +47,7 @@ __all__ = [
     "get_control_plane_service",
     
     # Capability Registry
-    "CapabilityRegistry",
+    "GovernanceCapabilityRegistry",
     "CapabilityCategory",
     "CapabilityDefinition",
     "get_capability_registry",

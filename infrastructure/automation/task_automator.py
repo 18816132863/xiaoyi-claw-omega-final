@@ -13,8 +13,8 @@ import threading
 import queue
 
 
-class TaskStatus(Enum):
-    """任务状态"""
+class AutomatorTaskStatus(Enum):
+    """自动化器任务状态（与 domain.tasks.specs.TaskStatus 不同）"""
     PENDING = "pending"
     QUEUED = "queued"
     RUNNING = "running"
@@ -40,7 +40,7 @@ class AutomatedTask:
     action: Callable
     params: Dict[str, Any] = field(default_factory=dict)
     priority: TaskPriority = TaskPriority.MEDIUM
-    status: TaskStatus = TaskStatus.PENDING
+    status: AutomatorTaskStatus = AutomatorTaskStatus.PENDING
     created_at: datetime = field(default_factory=datetime.now)
     started_at: Optional[datetime] = None
     completed_at: Optional[datetime] = None
@@ -99,7 +99,7 @@ class TaskAutomator:
                 priority, task_id = self.task_queue.get(timeout=1)
                 task = self.tasks.get(task_id)
                 
-                if not task or task.status == TaskStatus.CANCELLED:
+                if not task or task.status == AutomatorTaskStatus.CANCELLED:
                     continue
                 
                 # 执行任务
@@ -112,7 +112,7 @@ class TaskAutomator:
     
     def _execute_task(self, task: AutomatedTask):
         """执行任务"""
-        task.status = TaskStatus.RUNNING
+        task.status = AutomatorTaskStatus.RUNNING
         task.started_at = datetime.now()
         
         start_time = datetime.now()
@@ -122,7 +122,7 @@ class TaskAutomator:
             result = task.action(**task.params)
             
             task.result = result
-            task.status = TaskStatus.COMPLETED
+            task.status = AutomatorTaskStatus.COMPLETED
             task.completed_at = datetime.now()
             
             # 记录结果
@@ -140,11 +140,11 @@ class TaskAutomator:
             
             if task.retry_count < task.max_retries:
                 # 重试
-                task.status = TaskStatus.PENDING
+                task.status = AutomatorTaskStatus.PENDING
                 self.task_queue.put((task.priority.value, task.id))
             else:
                 # 失败
-                task.status = TaskStatus.FAILED
+                task.status = AutomatorTaskStatus.FAILED
                 task.completed_at = datetime.now()
                 
                 self.results[task.id] = TaskResult(
@@ -190,7 +190,7 @@ class TaskAutomator:
         
         # 检查依赖
         if self._check_dependencies(task):
-            task.status = TaskStatus.QUEUED
+            task.status = AutomatorTaskStatus.QUEUED
             self.task_queue.put((priority.value, task_id))
         
         return task_id
@@ -199,7 +199,7 @@ class TaskAutomator:
         """检查依赖是否完成"""
         for dep_id in task.dependencies:
             dep_task = self.tasks.get(dep_id)
-            if not dep_task or dep_task.status != TaskStatus.COMPLETED:
+            if not dep_task or dep_task.status != AutomatorTaskStatus.COMPLETED:
                 return False
         return True
     
@@ -209,13 +209,13 @@ class TaskAutomator:
         if not task:
             return False
         
-        if task.status in [TaskStatus.PENDING, TaskStatus.QUEUED]:
-            task.status = TaskStatus.CANCELLED
+        if task.status in [AutomatorTaskStatus.PENDING, AutomatorTaskStatus.QUEUED]:
+            task.status = AutomatorTaskStatus.CANCELLED
             return True
         
         return False
     
-    def get_status(self, task_id: str) -> Optional[TaskStatus]:
+    def get_status(self, task_id: str) -> Optional[AutomatorTaskStatus]:
         """获取任务状态"""
         task = self.tasks.get(task_id)
         return task.status if task else None
@@ -253,7 +253,7 @@ class TaskAutomator:
                     results[task_id] = self.results[task_id]
                 else:
                     task = self.tasks.get(task_id)
-                    if task and task.status not in [TaskStatus.COMPLETED, TaskStatus.FAILED, TaskStatus.CANCELLED]:
+                    if task and task.status not in [AutomatorTaskStatus.COMPLETED, AutomatorTaskStatus.FAILED, AutomatorTaskStatus.CANCELLED]:
                         all_done = False
             
             if all_done:

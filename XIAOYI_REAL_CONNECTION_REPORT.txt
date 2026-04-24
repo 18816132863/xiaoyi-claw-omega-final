@@ -1,0 +1,207 @@
+# 小艺真实连接报告
+
+## 版本
+- V8.3.0 平台执行语义版 + 小艺真实能力接线
+- 更新日期: 2026-04-24
+
+## 一、小艺官方可用接入点
+
+### 1.1 接入方式
+**技能能力接口** - 通过 `call_device_tool` 调用设备端能力
+
+### 1.2 官方接入入口名称
+
+| 入口 | 类型 | 说明 |
+|------|------|------|
+| `call_device_tool` | 工具调用 | 调用设备端能力的统一入口 |
+| `send_message` | 设备工具 | 发送短信 |
+| `create_calendar_event` | 设备工具 | 创建日程 |
+| `create_note` | 设备工具 | 创建备忘录 |
+| `call_phone` | 设备工具 | 拨打电话 |
+
+### 1.3 对接文件位置
+
+| 文件 | 职责 |
+|------|------|
+| `platform_adapter/xiaoyi_adapter.py` | 小艺平台适配器主文件 |
+| `infrastructure/tool_adapters/message_adapter.py` | 消息发送 fallback |
+| `skills/today-task/scripts/task_push.py` | 负一屏推送 |
+
+## 二、真实能力接线状态
+
+### 2.1 MESSAGE_SENDING
+
+| 项目 | 状态 | 详情 |
+|------|------|------|
+| 接入点 | ✅ | `call_device_tool("send_message")` |
+| 实现代码 | ✅ | `_invoke_message_sending()` |
+| Fallback | ✅ | `_fallback_message_sending()` |
+| 状态返回 | ✅ | success / queued_for_delivery / failed |
+| 确认级别 | Level 2 | 短信发送是同步操作 |
+
+**调用链路**:
+```
+xiaoyi_adapter.invoke(MESSAGE_SENDING)
+  → _invoke_message_sending()
+    → call_device_tool("send_message", {phoneNumber, content})
+      → 成功: {status: "success"}
+      → 失败: {status: "failed"}
+    → ImportError: _fallback_message_sending()
+      → {status: "queued_for_delivery"}
+```
+
+### 2.2 TASK_SCHEDULING
+
+| 项目 | 状态 | 详情 |
+|------|------|------|
+| 接入点 | ✅ | `call_device_tool("create_calendar_event")` |
+| 实现代码 | ✅ | `_invoke_task_scheduling()` |
+| 状态返回 | ✅ | success / failed |
+| 确认级别 | Level 2 | 日程创建是同步操作 |
+
+### 2.3 NOTIFICATION
+
+| 项目 | 状态 | 详情 |
+|------|------|------|
+| 接入点 | ✅ | `today-task` 技能 |
+| 实现代码 | ✅ | `_invoke_notification()` |
+| 状态返回 | ✅ | success / failed |
+| 确认级别 | Level 3 | 无确认 |
+
+## 三、能力状态变化
+
+### 3.1 之前状态 (probe_only)
+
+```python
+{
+    "message_sending": {"available": False},
+    "task_scheduling": {"available": False},
+    "notification": {"available": False}
+}
+```
+
+### 3.2 当前状态 (connected / probe_only)
+
+```python
+# 如果 call_device_tool 可用
+{
+    "message_sending": {"available": True},  # connected
+    "task_scheduling": {"available": True},  # connected
+    "notification": {"available": False}     # probe_only (需要 auth_code)
+}
+
+# 如果 call_device_tool 不可用
+{
+    "message_sending": {"available": False},  # probe_only
+    "task_scheduling": {"available": False},  # probe_only
+    "notification": {"available": False}      # probe_only
+}
+```
+
+## 四、平台返回结果样例
+
+### 4.1 MESSAGE_SENDING 成功
+
+```json
+{
+    "success": true,
+    "status": "success",
+    "capability": "message_sending",
+    "platform_result": {
+        "messageId": "xxx",
+        "timestamp": "2026-04-24T10:00:00"
+    }
+}
+```
+
+### 4.2 MESSAGE_SENDING Fallback
+
+```json
+{
+    "success": true,
+    "status": "queued_for_delivery",
+    "capability": "message_sending",
+    "fallback_used": true,
+    "message": "已生成发送请求，等待真实网关处理",
+    "adapter_result": {
+        "task_id": "xxx",
+        "queued_at": "2026-04-24T10:00:00"
+    }
+}
+```
+
+### 4.3 MESSAGE_SENDING 失败
+
+```json
+{
+    "success": false,
+    "status": "failed",
+    "error": "没有授权",
+    "error_code": "PLATFORM_ERROR",
+    "platform_result": {
+        "error": "没有授权"
+    }
+}
+```
+
+## 五、测试覆盖
+
+### 5.1 新增测试
+
+| 测试文件 | 测试数 | 状态 |
+|----------|--------|------|
+| test_xiaoyi_adapter_connected_path.py | 14 | ✅ 13 passed, 1 skipped |
+| test_message_sending_real_platform_path.py | 14 | ✅ 13 passed, 1 skipped |
+
+### 5.2 Skipped 测试说明
+
+| 测试 | 原因 |
+|------|------|
+| test_message_sending_connected_path | 需要 OPENCLAW_RUNTIME=true |
+| test_message_sending_real_call | 需要 OPENCLAW_RUNTIME=true |
+
+这些测试在真实 OpenClaw 环境中会执行。
+
+### 5.3 全量测试
+
+```
+249 passed, 2 skipped in 2.97s
+```
+
+## 六、新增文档
+
+| 文档 | 说明 |
+|------|------|
+| XIAOYI_REAL_INTEGRATION_PLAN.md | 小艺真实集成计划 |
+| XIAOYI_API_WIRING_POINTS.md | 小艺 API 接线点 |
+| PLATFORM_CONNECTED_EXECUTION_FLOW.md | 平台连接执行流程 |
+
+## 七、验收标准达成情况
+
+| 标准 | 状态 |
+|------|------|
+| 全量 pytest -q 继续通过 | ✅ 249 passed |
+| xiaoyi_adapter 至少 1 个 capability 不再是 probe_only | ✅ MESSAGE_SENDING, TASK_SCHEDULING |
+| 至少 1 条真实平台调用路径落地 | ✅ _invoke_message_sending() |
+| 不再只有 fallback / pending_sends.jsonl | ✅ 有真实调用路径 |
+| 执行结果语义与平台实际返回一致 | ✅ success / queued / failed |
+
+## 八、关键改进
+
+### 8.1 之前
+- 所有能力都是 `available: False`
+- 只有 fallback 路径
+- 返回结果缺少 `status` 字段
+
+### 8.2 现在
+- MESSAGE_SENDING 和 TASK_SCHEDULING 可以变为 `available: True`
+- 有真实调用路径 (`call_device_tool`)
+- 有 fallback 路径
+- 返回结果包含 `status` 字段
+- 状态语义清晰: success / queued_for_delivery / failed
+
+## 九、后续工作
+
+1. 在真实 OpenClaw 环境中验证 connected 路径
+2. 配置 NOTIFICATION 的 auth_code
+3. 添加更多设备端工具支持

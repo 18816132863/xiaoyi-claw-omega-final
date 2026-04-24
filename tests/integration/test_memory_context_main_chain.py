@@ -50,10 +50,10 @@ def test_build_context_uses_query_rewriter():
             # 验证重写确实发生
             if trace.rewritten_query and trace.rewritten_query != trace.original_query:
                 print(f"\n  ✅ QueryRewriter 真正生效")
-                return True
+                return  # 成功即返回
 
     print(f"\n  ❌ QueryRewriter 未生效")
-    return False
+    assert False, "QueryRewriter 未生效"
 
 
 def test_build_context_uses_source_policy_router():
@@ -101,10 +101,10 @@ def test_build_context_uses_source_policy_router():
         allowed_sets = [set(data['allowed']) for data in results.values()]
         if allowed_sets[0] != allowed_sets[1] if len(allowed_sets) > 1 else True:
             print(f"\n  ✅ SourcePolicyRouter 真正生效")
-            return True
+            return  # 成功即返回
 
     print(f"\n  ❌ SourcePolicyRouter 未生效")
-    return False
+    assert False, "SourcePolicyRouter 未生效"
 
 
 def test_retrieval_trace_is_saved():
@@ -147,13 +147,13 @@ def test_retrieval_trace_is_saved():
             trace_file = f"memory_context/traces/{trace.trace_id}.json"
             if os.path.exists(trace_file):
                 print(f"\n  ✅ Trace 文件已落盘: {trace_file}")
-                return True
+                return  # 成功即返回
             else:
                 print(f"\n  ✅ Trace 已保存到内存")
-                return True
+                return  # 成功即返回
 
     print(f"\n  ❌ Trace 未保存")
-    return False
+    assert False, "Trace 未保存"
 
 
 def test_injection_planner_affects_bundle():
@@ -201,10 +201,10 @@ def test_injection_planner_affects_bundle():
             
             if not suppressed_ids.intersection(bundle_ids):
                 print(f"\n  ✅ InjectionPlanner 真正影响 Bundle（suppressed 已排除）")
-                return True
+                return  # 成功即返回
 
     print(f"\n  ❌ InjectionPlanner 未生效")
-    return False
+    assert False, "InjectionPlanner 未生效"
 
 
 def test_memory_version_is_written():
@@ -263,10 +263,10 @@ def test_memory_version_is_written():
 
         if history.current_version >= 2:
             print(f"\n  ✅ Memory Version 真实写入")
-            return True
+            return  # 成功即返回
 
     print(f"\n  ❌ Memory Version 未写入")
-    return False
+    assert False, "Memory Version 未写入"
 
 
 def test_gc_can_run_on_real_store():
@@ -331,10 +331,10 @@ def test_gc_can_run_on_real_store():
 
     if report.total_processed > 0:
         print(f"\n  ✅ GC 正式入口可用")
-        return True
+        return  # 成功即返回
 
     print(f"\n  ❌ GC 正式入口不可用")
-    return False
+    assert False, "GC 正式入口不可用"
 
 
 def main():
@@ -346,12 +346,41 @@ def main():
 
     results = []
 
-    results.append(("build_context 走 QueryRewriter", test_build_context_uses_query_rewriter()))
-    results.append(("build_context 走 SourcePolicyRouter", test_build_context_uses_source_policy_router()))
-    results.append(("Retrieval Trace 被保存", test_retrieval_trace_is_saved()))
-    results.append(("InjectionPlanner 影响 Bundle", test_injection_planner_affects_bundle()))
-    results.append(("Memory Version 真实写入", test_memory_version_is_written()))
-    results.append(("GC 正式入口可用", test_gc_can_run_on_real_store()))
+    try:
+        test_build_context_uses_query_rewriter()
+        results.append(("build_context 走 QueryRewriter", True))
+    except AssertionError as e:
+        results.append(("build_context 走 QueryRewriter", False))
+
+    try:
+        test_build_context_uses_source_policy_router()
+        results.append(("build_context 走 SourcePolicyRouter", True))
+    except AssertionError as e:
+        results.append(("build_context 走 SourcePolicyRouter", False))
+
+    try:
+        test_retrieval_trace_is_saved()
+        results.append(("Retrieval Trace 被保存", True))
+    except AssertionError as e:
+        results.append(("Retrieval Trace 被保存", False))
+
+    try:
+        test_injection_planner_affects_bundle()
+        results.append(("InjectionPlanner 影响 Bundle", True))
+    except AssertionError as e:
+        results.append(("InjectionPlanner 影响 Bundle", False))
+
+    try:
+        test_memory_version_is_written()
+        results.append(("Memory Version 真实写入", True))
+    except AssertionError as e:
+        results.append(("Memory Version 真实写入", False))
+
+    try:
+        test_gc_can_run_on_real_store()
+        results.append(("GC 正式入口可用", True))
+    except AssertionError as e:
+        results.append(("GC 正式入口可用", False))
 
     print("\n" + "=" * 60)
     print("测试汇总")

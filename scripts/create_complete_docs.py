@@ -1,4 +1,8 @@
+from pathlib import Path
+import os
 #!/usr/bin/env python3
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 """
 生成专业格式的完整文档 - 带图表、详细内容
 """
@@ -100,7 +104,7 @@ def create_health_report_with_charts():
     ax.legend()
     
     plt.tight_layout()
-    sleep_chart = '/home/sandbox/.openclaw/workspace/skills/data-tracker/output/sleep_chart.png'
+    sleep_chart = 'str(PROJECT_ROOT)/skills/data-tracker/output/sleep_chart.png'
     plt.savefig(sleep_chart, dpi=150, bbox_inches='tight')
     plt.close()
     
@@ -120,7 +124,7 @@ def create_health_report_with_charts():
                 f'{val:,}', ha='center', va='bottom', fontsize=10)
     
     plt.tight_layout()
-    steps_chart = '/home/sandbox/.openclaw/workspace/skills/data-tracker/output/steps_chart.png'
+    steps_chart = 'str(PROJECT_ROOT)/skills/data-tracker/output/steps_chart.png'
     plt.savefig(steps_chart, dpi=150, bbox_inches='tight')
     plt.close()
     
@@ -248,7 +252,7 @@ def create_health_report_with_charts():
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     
     # 保存
-    doc.save('/home/sandbox/.openclaw/workspace/skills/data-tracker/output/健康数据周报_完整版.docx')
+    doc.save('str(PROJECT_ROOT)/skills/data-tracker/output/健康数据周报_完整版.docx')
     print("✅ 健康数据周报（完整版）已生成")
 
 def create_diet_plan_with_nutrition():
@@ -393,7 +397,7 @@ def create_diet_plan_with_nutrition():
     ax.set_title('每日营养素占比', fontsize=16, fontweight='bold', pad=20)
     
     plt.tight_layout()
-    nutrition_chart = '/home/sandbox/.openclaw/workspace/skills/fitness-coach/output/nutrition_chart.png'
+    nutrition_chart = 'str(PROJECT_ROOT)/skills/fitness-coach/output/nutrition_chart.png'
     plt.savefig(nutrition_chart, dpi=150, bbox_inches='tight')
     plt.close()
     
@@ -487,7 +491,7 @@ def create_diet_plan_with_nutrition():
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     
     # 保存
-    doc.save('/home/sandbox/.openclaw/workspace/skills/fitness-coach/output/减脂食谱_完整版.docx')
+    doc.save('str(PROJECT_ROOT)/skills/fitness-coach/output/减脂食谱_完整版.docx')
     print("✅ 减脂食谱（完整版）已生成")
 
 if __name__ == '__main__':

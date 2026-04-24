@@ -10,9 +10,9 @@ from celery import Celery
 from celery.schedules import crontab
 
 # Upstash Redis 作为 Broker 和 Backend
-# 注意：Upstash 使用 REST API，需要特殊配置
-broker_url = 'redis://default:gQAAAAAAAZLqAAIocDE2NjFjNmExZmMxNDc0ZWRlYjY0ODZlYTc3MTRlNzI1Y3AxMTAzMTQ2@beloved-crayfish-103146.upstash.io:6379/0'
-result_backend = 'redis://default:gQAAAAAAAZLqAAIocDE2NjFjNmExZmMxNDc0ZWRlYjY0ODZlYTc3MTRlNzI1Y3AxMTAzMTQ2@beloved-crayfish-103146.upstash.io:6379/1'
+# 从环境变量读取配置
+broker_url = os.environ.get('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+result_backend = os.environ.get('CELERY_RESULT_BACKEND', 'redis://localhost:6379/1')
 
 # 创建 Celery 应用
 app = Celery('openclaw_tasks')

@@ -1,0 +1,214 @@
+============================================================
+  精确整改验收报告
+============================================================
+
+验收时间: 2026-04-23 23:20
+版本: 8.3.0 (精确整改版)
+
+------------------------------------------------------------
+  一、整改完成情况
+------------------------------------------------------------
+
+### A. capabilities/ 不再是硬编码假返回
+
+| 能力 | 状态 | 接入内核 |
+|------|------|----------|
+| send_message | ✅ 真实 | MessageAdapter |
+| schedule_task | ✅ 真实 | TaskManager |
+| retry_task | ✅ 真实 | TaskManager |
+| pause_task | ✅ 真实 | TaskManager |
+| resume_task | ✅ 真实 | TaskManager |
+| cancel_task | ✅ 真实 | TaskManager |
+| diagnostics | ✅ 真实 | RuntimeSelfCheck |
+| export_history | ✅ 真实 | SQLite 直接查询 |
+| replay_run | ✅ 真实 | SQLite 直接查询 |
+| self_repair | ✅ 真实 | SQLite 检查修复 |
+
+### B. skill_entry 已默认接通能力注册表
+
+✅ input_router.py 支持 auto_wire=True
+✅ route_request() 自动调用 bootstrap
+✅ 无需手工注册即可使用
+
+### C. 平台探测和平台适配器不再自相矛盾
+
+✅ runtime_probe.py 只返回实际存在的适配器
+✅ xiaoyi_adapter.py 明确标注能力未连接
+✅ 推荐适配器与实际可用一致
+
+### D. 默认技能路径统一走已验收的真实任务内核
+
+✅ schedule_task → TaskManager.create_scheduled_message()
+✅ retry_task → TaskManager.retry_task()
+✅ pause_task → TaskManager.pause_task()
+✅ resume_task → TaskManager.resume_task()
+✅ cancel_task → TaskManager.cancel_task()
+
+### E. export_history / replay_run 返回真实库数据
+
+✅ export_history 返回 tasks + task_runs + task_steps + task_events
+✅ replay_run 返回 run + steps + timeline
+
+### F. 新测试能卡住"空实现"和"假实现"
+
+✅ test_no_fake_implementation.py 检查源码
+✅ test_real_capability_integration.py 验证真实数据
+✅ test_router_bootstrap.py 验证自动路由
+
+------------------------------------------------------------
+  二、测试结果
+------------------------------------------------------------
+
+```
+1. 测试路由 Bootstrap
+✅ diagnostics 路由通过
+✅ schedule_task 路由通过
+
+2. 测试 schedule_task 创建真实任务
+✅ 任务创建并验证通过
+
+3. 测试 export_history 返回真实数据
+✅ 导出成功，记录数: 4
+
+4. 测试 replay_run
+✅ 回放成功，步骤数: 1
+
+5. 测试 retry_task
+✅ 重试成功
+
+6. 测试 cancel_task
+✅ 取消成功
+```
+
+------------------------------------------------------------
+  三、真实输出样例
+------------------------------------------------------------
+
+### schedule_task 创建真实任务
+
+```python
+result = await schedule_task.execute({
+    "task_type": "once",
+    "message": "Test task",
+    "user_id": "test"
+})
+
+# 返回:
+{
+    "success": True,
+    "task_id": "8206c8f3-580c-42f2-aef3-0695c2535aba",
+    "task_type": "once",
+    "status": "persisted",
+    "created_at": "2026-04-23T23:20:00"
+}
+```
+
+### export_history 返回样例
+
+```python
+result = await export_history.execute({"task_id": "xxx"})
+
+# 返回:
+{
+    "success": True,
+    "task_id": "xxx",
+    "task": {...},  # 真实任务记录
+    "runs": [...],  # 真实运行记录
+    "steps": [...], # 真实步骤记录
+    "events": [...], # 真实事件记录
+    "record_count": 4
+}
+```
+
+### replay_run 返回样例
+
+```python
+result = await replay_run.execute({"run_id": "yyy"})
+
+# 返回:
+{
+    "success": True,
+    "run_id": "yyy",
+    "run": {...},    # 真实运行记录
+    "steps": [...],  # 真实步骤记录
+    "timeline": [    # 时间线
+        {"type": "run_start", ...},
+        {"type": "step", "step_name": "send_message", ...},
+        {"type": "run_end", ...}
+    ]
+}
+```
+
+### route_request() 直调能力样例
+
+```python
+from skill_entry.input_router import route_request
+
+result = await route_request({
+    "type": "schedule_task",
+    "data": {"message": "Test", "user_id": "test"}
+})
+
+# 返回:
+{
+    "success": True,
+    "task_id": "34d15798-bdd2-4fe3-80e0-4b1ed7795319",
+    "task_type": "once",
+    "status": "persisted"
+}
+```
+
+### RuntimeSelfCheck 真实输出
+
+```
+整体状态: healthy
+检查项: 6
+  ✅ database_tables: 所有必需表存在，共 1478 条记录
+  ✅ state_machine: 状态机定义完整: 13 任务状态, 5 步骤状态
+  ✅ capabilities: 已注册 10 个能力，包含所有核心能力
+  ✅ platform_adapter: 运行模式: skill_default, 适配器: null
+  ✅ python_env: Python 3.12.10
+  ✅ default_chain: 默认链路正常
+```
+
+------------------------------------------------------------
+  四、文件变更统计
+------------------------------------------------------------
+
+修改文件:
+- capabilities/send_message.py (接入 MessageAdapter)
+- capabilities/schedule_task.py (接入 TaskManager)
+- capabilities/retry_task.py (接入 TaskManager)
+- capabilities/pause_task.py (接入 TaskManager)
+- capabilities/resume_task.py (接入 TaskManager)
+- capabilities/cancel_task.py (接入 TaskManager)
+- capabilities/diagnostics.py (接入 RuntimeSelfCheck)
+- capabilities/export_history.py (真实数据库查询)
+- capabilities/replay_run.py (真实数据库查询)
+- capabilities/self_repair.py (真实数据库检查)
+- capabilities/bootstrap.py (新增)
+- capabilities/__init__.py (更新)
+- skill_entry/input_router.py (auto_wire)
+- platform_adapter/runtime_probe.py (修复矛盾)
+- platform_adapter/xiaoyi_adapter.py (明确状态)
+- diagnostics/runtime_self_check.py (强化检查)
+
+新增测试:
+- tests/test_router_bootstrap.py
+- tests/test_real_capability_integration.py
+- tests/test_no_fake_implementation.py
+
+------------------------------------------------------------
+  五、验收结论
+------------------------------------------------------------
+
+✅ capabilities/ 不再是硬编码假返回
+✅ skill_entry 已默认接通能力注册表
+✅ 平台探测和平台适配器不再自相矛盾
+✅ 默认技能路径统一走已验收的真实任务内核
+✅ export_history / replay_run 返回真实库数据
+✅ 新测试能卡住"空实现"和"假实现"
+
+整改完成，版本 8.3.0 (精确整改版) 可以发布。
+
+============================================================

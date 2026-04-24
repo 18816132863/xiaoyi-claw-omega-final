@@ -2,11 +2,10 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:15
-    container_name: openclaw-postgres
+    image: postgres:15-alpine
     environment:
       POSTGRES_USER: openclaw
-      POSTGRES_PASSWORD: openclaw123
+      POSTGRES_PASSWORD: openclaw_dev
       POSTGRES_DB: openclaw
     ports:
       - "5432:5432"
@@ -19,8 +18,7 @@ services:
       retries: 5
 
   redis:
-    image: redis:7
-    container_name: openclaw-redis
+    image: redis:7-alpine
     ports:
       - "6379:6379"
     volumes:
@@ -30,6 +28,32 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  message-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.message-server
+    ports:
+      - "18790:18790"
+    environment:
+      - OPENCLAW_ENV=prod
+    depends_on:
+      - postgres
+      - redis
+
+  task-daemon:
+    build:
+      context: .
+      dockerfile: Dockerfile.task-daemon
+    environment:
+      - OPENCLAW_ENV=prod
+      - DATABASE_URL=postgresql://openclaw:openclaw_dev@postgres:5432/openclaw
+      - REDIS_HOST=redis
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
 volumes:
   postgres_data:

@@ -1,4 +1,7 @@
+from pathlib import Path
 #!/usr/bin/env python3
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 """
 批量升级所有技能到专业文档水平
 """
@@ -42,7 +45,7 @@ SKILLS = [
 
 def create_skill_structure(skill):
     """创建技能目录结构"""
-    skill_dir = f'/home/sandbox/.openclaw/workspace/skills/{skill["name"]}'
+    skill_dir = f'str(PROJECT_ROOT)/skills/{skill["name"]}'
     
     # 创建必要的目录
     dirs = [

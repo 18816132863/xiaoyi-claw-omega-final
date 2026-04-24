@@ -14,8 +14,8 @@ import threading
 from collections import defaultdict
 
 
-class EventType(Enum):
-    """事件类型"""
+class TriggerEventType(Enum):
+    """触发器事件类型（与 domain.tasks.specs.EventType 不同）"""
     FILE_CHANGE = "file_change"
     SCHEDULE = "schedule"
     THRESHOLD = "threshold"
@@ -36,7 +36,7 @@ class TriggerStatus(Enum):
 class Event:
     """事件"""
     id: str
-    type: EventType
+    type: TriggerEventType
     source: str
     data: Dict[str, Any]
     timestamp: datetime = field(default_factory=datetime.now)
@@ -48,7 +48,7 @@ class Trigger:
     """触发器"""
     id: str
     name: str
-    event_type: EventType
+    event_type: TriggerEventType
     condition: str  # 条件表达式
     action: Callable
     status: TriggerStatus = TriggerStatus.ACTIVE
@@ -83,7 +83,7 @@ class EventTrigger:
     
     def register_trigger(self,
                          name: str,
-                         event_type: EventType,
+                         event_type: TriggerEventType,
                          condition: str,
                          action: Callable,
                          priority: int = 0,
@@ -127,7 +127,7 @@ class EventTrigger:
         return False
     
     def emit(self,
-             event_type: EventType,
+             event_type: TriggerEventType,
              source: str,
              data: Dict[str, Any]) -> str:
         """
@@ -253,7 +253,7 @@ class EventTrigger:
             return True
         return False
     
-    def get_triggers_by_event_type(self, event_type: EventType) -> List[Trigger]:
+    def get_triggers_by_event_type(self, event_type: TriggerEventType) -> List[Trigger]:
         """按事件类型获取触发器"""
         return [t for t in self.triggers.values() if t.event_type == event_type]
     

@@ -200,16 +200,22 @@ class UnifiedOptimizer:
         async def async_wrapper():
             return func(*args, **kwargs)
         
+        created_loop = False
         try:
             loop = asyncio.get_event_loop()
         except RuntimeError:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
+            created_loop = True
         
-        result = loop.run_until_complete(async_wrapper())
-        self._stats["async_calls"] += 1
-        
-        return result
+        try:
+            result = loop.run_until_complete(async_wrapper())
+            self._stats["async_calls"] += 1
+            return result
+        finally:
+            # 自己创建的 loop 必须关闭
+            if created_loop:
+                loop.close()
     
     def _execute_lazy(self, func: Callable, args, kwargs) -> Any:
         """延迟加载执行"""

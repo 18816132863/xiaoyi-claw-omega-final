@@ -31,7 +31,8 @@ class WorkflowStatus(Enum):
     FAILED = "failed"
     CANCELLED = "cancelled"
 
-class StepStatus(Enum):
+class WorkflowStepStatus(Enum):
+    """工作流步骤状态（与 domain.tasks.specs.StepStatus 不同）"""
     PENDING = "pending"
     RUNNING = "running"
     SUCCESS = "success"
@@ -143,7 +144,7 @@ class WorkflowBase(ABC):
             name=name,
             description=description,
             skill=skill,
-            status=StepStatus.PENDING.value,
+            status=WorkflowStepStatus.PENDING.value,
             start_time=None,
             end_time=None,
             input_data={},
@@ -157,7 +158,7 @@ class WorkflowBase(ABC):
         """开始步骤"""
         for step in self.steps:
             if step.name == step_name:
-                step.status = StepStatus.RUNNING.value
+                step.status = WorkflowStepStatus.RUNNING.value
                 step.start_time = datetime.now().isoformat()
                 self.log(f"开始步骤: {step_name}")
                 break
@@ -166,7 +167,7 @@ class WorkflowBase(ABC):
         """完成步骤"""
         for step in self.steps:
             if step.name == step_name:
-                step.status = StepStatus.SUCCESS.value
+                step.status = WorkflowStepStatus.SUCCESS.value
                 step.end_time = datetime.now().isoformat()
                 if output:
                     step.output_data = output
@@ -177,7 +178,7 @@ class WorkflowBase(ABC):
         """失败步骤"""
         for step in self.steps:
             if step.name == step_name:
-                step.status = StepStatus.FAILED.value
+                step.status = WorkflowStepStatus.FAILED.value
                 step.end_time = datetime.now().isoformat()
                 step.error = error
                 step.fallback_used = use_fallback
@@ -259,7 +260,7 @@ class WorkflowBase(ABC):
         if not self.steps:
             return 0.0
         
-        success_count = sum(1 for s in self.steps if s.status == StepStatus.SUCCESS.value)
+        success_count = sum(1 for s in self.steps if s.status == WorkflowStepStatus.SUCCESS.value)
         fallback_count = sum(1 for s in self.steps if s.fallback_used)
         
         base_score = success_count / len(self.steps)
@@ -283,11 +284,11 @@ class WorkflowBase(ABC):
         
         for step in self.steps:
             status_emoji = {
-                StepStatus.SUCCESS.value: "✅",
-                StepStatus.FAILED.value: "❌",
-                StepStatus.RUNNING.value: "🔄",
-                StepStatus.PENDING.value: "⏳",
-                StepStatus.SKIPPED.value: "⏭️"
+                WorkflowStepStatus.SUCCESS.value: "✅",
+                WorkflowStepStatus.FAILED.value: "❌",
+                WorkflowStepStatus.RUNNING.value: "🔄",
+                WorkflowStepStatus.PENDING.value: "⏳",
+                WorkflowStepStatus.SKIPPED.value: "⏭️"
             }.get(step.status, "❓")
             
             lines.append(f"### {status_emoji} {step.name}")

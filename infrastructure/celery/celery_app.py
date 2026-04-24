@@ -100,6 +100,7 @@ def cleanup_old_tasks(days: int = 30):
     """清理旧任务"""
     from datetime import datetime, timedelta
     import sqlite3
+    from infrastructure.storage.sqlite_utils import serialize_datetime
     
     root = project_root
     db_path = str(root / "data" / "tasks.db")
@@ -114,7 +115,7 @@ def cleanup_old_tasks(days: int = 30):
         DELETE FROM tasks
         WHERE status IN ('succeeded', 'failed', 'cancelled')
           AND created_at < ?
-    ''', (cutoff.isoformat(),))
+    ''', (serialize_datetime(cutoff),))
     
     deleted = cursor.rowcount
     conn.commit()

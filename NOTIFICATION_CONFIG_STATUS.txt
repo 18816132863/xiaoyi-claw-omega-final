@@ -1,0 +1,55 @@
+# NOTIFICATION 能力配置说明
+
+## 版本
+- V8.3.0 小艺真实接线完成版
+- 更新日期: 2026-04-24
+
+## 当前状态
+
+| 能力 | 状态 | 说明 |
+|------|------|------|
+| MESSAGE_SENDING | ✅ connected | 已授权，调用成功 |
+| TASK_SCHEDULING | ✅ connected | 已授权，调用成功 |
+| STORAGE | ✅ connected | 已授权，调用成功 |
+| NOTIFICATION | ⏳ probe_only | auth_code 无效，需要重新配置 |
+
+## NOTIFICATION 配置状态
+
+### 当前配置
+
+```
+authCode: KzLEP2FjYPg1 (已配置但无效)
+pushServiceUrl: https://hiboard-claw-drcn.ai.dbankcloud.cn/distribution/message/cloud/claw/msg/upload
+```
+
+### 测试结果
+
+```
+[ERROR] 负一屏业务错误: 错误代码: 0000900034
+错误描述: The authCode is invalid
+```
+
+### 解决方案
+
+需要用户重新获取授权码：
+
+1. 从手机桌面右滑进入负一屏
+2. 点击左上角头像
+3. 进入"我的"页面，点击右上角设置图标
+4. 选择"动态管理"
+5. 点击"关联账号"
+6. 找到"Claw 智能体"并点击获取授权码
+
+### 配置命令
+
+获取新授权码后，使用以下命令配置：
+
+```bash
+openclaw config set skills.entries.today-task.config.authCode YOUR_NEW_AUTH_CODE
+```
+
+## 总结
+
+- ✅ 3 个能力已 connected
+- ⏳ NOTIFICATION 需要 valid auth_code 才能变为 connected
+- 当前 auth_code 无效，需要用户重新获取

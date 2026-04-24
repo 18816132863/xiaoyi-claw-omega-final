@@ -1,8 +1,51 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "created_at": "2026-04-12T15:04:43.406926",
-    "last_updated": "2026-04-12T15:04:43.406926"
+    "created_at": "2026-04-22T14:37:23.593072",
+    "last_updated": "2026-04-22T14:37:23.593082"
   },
-  "jobs": {}
+  "jobs": {
+    "weather_reminder": {
+      "id": "weather_reminder",
+      "name": "每日天气提醒",
+      "schedule": "0 8 * * *",
+      "enabled": true,
+      "script": "skills/today-task/scripts/task_push.py",
+      "params": {
+        "task_name": "天气提醒",
+        "task_type": "weather"
+      },
+      "created_at": "2026-04-22T14:37:23.593084",
+      "last_run": null,
+      "next_run": null
+    },
+    "daily_summary": {
+      "id": "daily_summary",
+      "name": "每日工作总结",
+      "schedule": "0 22 * * *",
+      "enabled": true,
+      "script": "skills/today-task/scripts/task_push.py",
+      "params": {
+        "task_name": "每日总结",
+        "task_type": "summary"
+      },
+      "created_at": "2026-04-22T14:37:23.593087",
+      "last_run": null,
+      "next_run": null
+    },
+    "weekly_report": {
+      "id": "weekly_report",
+      "name": "每周报告",
+      "schedule": "0 20 * * 0",
+      "enabled": true,
+      "script": "skills/today-task/scripts/task_push.py",
+      "params": {
+        "task_name": "每周报告",
+        "task_type": "weekly"
+      },
+      "created_at": "2026-04-22T14:37:23.593089",
+      "last_run": null,
+      "next_run": null
+    }
+  }
 }

@@ -18,7 +18,8 @@ from .specs import (
 )
 from .state_machine import (
     can_transition,
-    get_next_status,
+    get_valid_transitions,
+    is_terminal_status,
     STATE_TRANSITIONS,
 )
 
@@ -35,6 +36,7 @@ __all__ = [
     "StepSpec",
     "TaskSpec",
     "can_transition",
-    "get_next_status",
+    "get_valid_transitions",
+    "is_terminal_status",
     "STATE_TRANSITIONS",
 ]

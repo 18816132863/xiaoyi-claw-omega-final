@@ -1,4 +1,14 @@
-.PHONY: verify-phase1-baseline verify-phase3-final fusion-check fusion-auto inspect verify-premerge verify-nightly verify-release daily-growth-personal daily-growth-enterprise midday-check daily-review weekly-review
+.PHONY: test verify-phase1-baseline verify-phase3-final fusion-check fusion-auto inspect verify-premerge verify-nightly verify-release daily-growth-personal daily-growth-enterprise midday-check daily-review weekly-review
+
+# ═══════════════════════════════════════════════════════════════
+# 测试（自动安装依赖）
+# ═══════════════════════════════════════════════════════════════
+test:
+	@echo "=== 安装测试依赖 ==="
+	@pip install -r requirements-test.txt -q
+	@echo ""
+	@echo "=== 运行测试 ==="
+	@python -m pytest tests/ -q
 
 # ═══════════════════════════════════════════════════════════════
 # Phase 1 基线验证

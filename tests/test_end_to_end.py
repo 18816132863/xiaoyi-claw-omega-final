@@ -1,10 +1,14 @@
+from pathlib import Path
+import os
 #!/usr/bin/env python3
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]  # tests/ 的父目录
 """端到端测试"""
 
 import unittest
 import sys
 import asyncio
-sys.path.insert(0, '/home/sandbox/.openclaw/workspace')
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from orchestration.task_engine import TaskEngine
 

@@ -1,5 +1,0 @@
-display_name: "北京时间"
-description: "获取当前北京时间。调用方式: {\"format\": \"%Y-%m-%d %H:%M:%S\"}"
-version: "1.0.0"
-author: "小艺Claw"
-requires_auth: false

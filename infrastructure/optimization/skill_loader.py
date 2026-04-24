@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 """
 技能延迟加载器
 V2.7.0 - 2026-04-10
@@ -99,7 +101,7 @@ class SkillLoader:
         self.cache_timestamps.clear()
 
 if __name__ == "__main__":
-    loader = SkillLoader("/home/sandbox/.openclaw/workspace/skills")
+    loader = SkillLoader("str(PROJECT_ROOT)/skills")
     print(f"技能总数: {len(loader.get_skill_list())}")
     
     # 预加载核心技能

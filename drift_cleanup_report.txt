@@ -1,0 +1,58 @@
+============================================================
+  边缘漂移清理报告 - workspace_final_v8_verified
+============================================================
+
+清理时间: 2026-04-23
+版本: 8.0.1
+
+------------------------------------------------------------
+  一、删除的旧引用
+------------------------------------------------------------
+
+message_sender 残留已清理：
+- scripts/heartbeat_executor.py: 改为 task_daemon 检查
+- scripts/generate_daily_work_summary.py: 迁移到 legacy
+- scripts/generate_weekly_skill_report.py: 迁移到 legacy
+- scripts/test_recurring_real.py: 迁移到 legacy
+
+------------------------------------------------------------
+  二、迁移到 legacy 的脚本
+------------------------------------------------------------
+
+scripts/legacy/:
+- scheduled_tasks_daemon.py
+- scheduled_tasks_launcher.py
+- scheduled_tasks_launcher.sh
+- start_daemon.sh
+- stop_daemon.sh
+- start_scheduled_tasks.sh
+- stop_scheduled_tasks.sh
+- install_scheduled_tasks.sh
+- message_sender.py
+- scheduled_message_daemon.py
+- generate_daily_work_summary.py
+- generate_weekly_skill_report.py
+- test_recurring_real.py
+
+------------------------------------------------------------
+  三、当前主入口
+------------------------------------------------------------
+
+scripts/:
+- start_services.sh (主启动入口)
+- stop_services.sh (主停止入口)
+- status_services.sh (主状态入口)
+- start_all.sh (转发到 start_services.sh)
+- task_daemon.py (任务守护进程)
+- message_server.py (消息服务)
+
+------------------------------------------------------------
+  四、清理结果
+------------------------------------------------------------
+
+✅ message_sender 引用已清理
+✅ 旧脚本已迁移到 legacy
+✅ 主入口已统一
+✅ start_all.sh 改为转发入口
+
+============================================================

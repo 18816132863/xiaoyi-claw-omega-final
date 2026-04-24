@@ -28,7 +28,8 @@ class RoleType(Enum):
     EXTERNAL = "external"             # 外部伙伴
     SYSTEM = "system"                 # 系统角色
 
-class TaskStatus(Enum):
+class OrgTaskStatus(Enum):
+    """组织协同任务状态（与 domain.tasks.specs.TaskStatus 不同）"""
     PENDING = "pending"               # 待处理
     ASSIGNED = "assigned"             # 已分配
     IN_PROGRESS = "in_progress"       # 进行中
@@ -254,7 +255,7 @@ class OrgCollaborationOrchestrator:
             task_id=task_id,
             name=name,
             description=description,
-            status=TaskStatus.PENDING.value,
+            status=OrgTaskStatus.PENDING.value,
             priority=priority,
             assignee="",
             assignee_role=assignee_role,
@@ -281,7 +282,7 @@ class OrgCollaborationOrchestrator:
         
         task = self.tasks[task_id]
         task.assignee = assignee
-        task.status = TaskStatus.ASSIGNED.value
+        task.status = OrgTaskStatus.ASSIGNED.value
         task.audit_trail.append({
             "event": "assigned",
             "assignee": assignee,
@@ -301,13 +302,13 @@ class OrgCollaborationOrchestrator:
         # 检查依赖
         for dep_id in task.dependencies:
             if dep_id in self.tasks:
-                if self.tasks[dep_id].status != TaskStatus.COMPLETED.value:
-                    task.status = TaskStatus.BLOCKED.value
+                if self.tasks[dep_id].status != OrgTaskStatus.COMPLETED.value:
+                    task.status = OrgTaskStatus.BLOCKED.value
                     task.blocked_reason = f"依赖任务未完成: {dep_id}"
                     self._save()
                     return {"status": "blocked", "reason": task.blocked_reason}
         
-        task.status = TaskStatus.IN_PROGRESS.value
+        task.status = OrgTaskStatus.IN_PROGRESS.value
         task.audit_trail.append({
             "event": "started",
             "timestamp": datetime.now().isoformat()
@@ -322,7 +323,7 @@ class OrgCollaborationOrchestrator:
             return {"error": "任务不存在"}
         
         task = self.tasks[task_id]
-        task.status = TaskStatus.COMPLETED.value
+        task.status = OrgTaskStatus.COMPLETED.value
         task.audit_trail.append({
             "event": "completed",
             "result": result,
@@ -367,7 +368,7 @@ class OrgCollaborationOrchestrator:
         task = self.tasks[task_id]
         task.approval_chain = approvers
         task.current_approval_step = 0
-        task.status = TaskStatus.PENDING_REVIEW.value
+        task.status = OrgTaskStatus.PENDING_REVIEW.value
         self._save()
         
         return {"status": "approval_chain_created", "task_id": task_id}
@@ -421,7 +422,7 @@ class OrgCollaborationOrchestrator:
                     if action == ApprovalAction.APPROVE.value:
                         task.current_approval_step += 1
                         if task.current_approval_step >= len(task.approval_chain):
-                            task.status = TaskStatus.APPROVED.value
+                            task.status = OrgTaskStatus.APPROVED.value
                         task.audit_trail.append({
                             "event": "approved",
                             "step": request.step,
@@ -430,7 +431,7 @@ class OrgCollaborationOrchestrator:
                             "timestamp": datetime.now().isoformat()
                         })
                     elif action == ApprovalAction.REJECT.value:
-                        task.status = TaskStatus.REJECTED.value
+                        task.status = OrgTaskStatus.REJECTED.value
                         task.audit_trail.append({
                             "event": "rejected",
                             "step": request.step,
@@ -492,7 +493,7 @@ class OrgCollaborationOrchestrator:
         blockers = []
         
         for task in self.tasks.values():
-            if task.status == TaskStatus.BLOCKED.value:
+            if task.status == OrgTaskStatus.BLOCKED.value:
                 blockers.append({
                     "task_id": task.task_id,
                     "name": task.name,
@@ -502,7 +503,7 @@ class OrgCollaborationOrchestrator:
             # 检查超时
             if task.due_date:
                 due = datetime.fromisoformat(task.due_date)
-                if datetime.now() > due and task.status not in [TaskStatus.COMPLETED.value, TaskStatus.APPROVED.value]:
+                if datetime.now() > due and task.status not in [OrgTaskStatus.COMPLETED.value, OrgTaskStatus.APPROVED.value]:
                     blockers.append({
                         "task_id": task.task_id,
                         "name": task.name,

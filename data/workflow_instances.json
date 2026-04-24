@@ -1,0 +1,158 @@
+{
+  "instances": [
+    {
+      "instance_id": "test_workflow",
+      "template_id": "test_workflow",
+      "status": "failed",
+      "created_at": "2026-04-22T16:54:18.876246",
+      "updated_at": "2026-04-22T16:54:18.877092",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {
+        "version": "1.0.0",
+        "profile": "developer"
+      },
+      "started_at": null,
+      "completed_at": null
+    },
+    {
+      "instance_id": "loop_task_52d2ae05",
+      "template_id": "loop_task_52d2ae05",
+      "status": "pending",
+      "created_at": "2026-04-22T16:51:01.227577",
+      "updated_at": "2026-04-22T16:51:01.227577",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "started_at": null,
+      "completed_at": null
+    },
+    {
+      "instance_id": "recovery_chain_test",
+      "template_id": "recovery_chain_test",
+      "status": "failed",
+      "created_at": "2026-04-22T16:53:07.446427",
+      "updated_at": "2026-04-22T16:53:07.447376",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "started_at": null,
+      "completed_at": null
+    },
+    {
+      "instance_id": "rollback_test",
+      "template_id": "rollback_test",
+      "status": "failed",
+      "created_at": "2026-04-22T16:52:59.862134",
+      "updated_at": "2026-04-22T16:52:59.863177",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "started_at": null,
+      "completed_at": null
+    },
+    {
+      "instance_id": "loop_task_ccc440e9",
+      "template_id": "loop_task_ccc440e9",
+      "status": "running",
+      "created_at": "2026-04-22T16:52:11.455978",
+      "updated_at": "2026-04-22T16:52:11.456270",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "started_at": null,
+      "completed_at": null
+    },
+    {
+      "instance_id": "loop_task_a67adb54",
+      "template_id": "loop_task_a67adb54",
+      "status": "failed",
+      "created_at": "2026-04-22T16:52:59.856393",
+      "updated_at": "2026-04-22T16:52:59.857305",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "started_at": null,
+      "completed_at": null
+    },
+    {
+      "instance_id": "loop_task_65d36e7f",
+      "template_id": "loop_task_65d36e7f",
+      "status": "failed",
+      "created_at": "2026-04-22T16:53:36.802034",
+      "updated_at": "2026-04-22T16:53:36.802858",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "started_at": null,
+      "completed_at": null
+    },
+    {
+      "instance_id": "loop_task_d39eea76",
+      "template_id": "loop_task_d39eea76",
+      "status": "failed",
+      "created_at": "2026-04-22T16:54:18.886274",
+      "updated_at": "2026-04-22T16:54:18.887211",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {
+        "version": "1.0.0",
+        "profile": "default"
+      },
+      "started_at": null,
+      "completed_at": null
+    },
+    {
+      "instance_id": "test_instance",
+      "template_id": "test_template",
+      "status": "pending",
+      "created_at": "2026-04-24T12:10:23.566031",
+      "updated_at": "2026-04-24T12:10:23.566031",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {},
+      "started_at": null,
+      "completed_at": null
+    },
+    {
+      "instance_id": "full_loop_test",
+      "template_id": "test_template",
+      "status": "pending",
+      "created_at": "2026-04-24T12:10:23.582042",
+      "updated_at": "2026-04-24T12:10:23.582042",
+      "context": {},
+      "current_step": null,
+      "error": null,
+      "metadata": {},
+      "started_at": null,
+      "completed_at": null
+    }
+  ]
+}

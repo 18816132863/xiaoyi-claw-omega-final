@@ -1,4 +1,6 @@
 """
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 Redis 客户端 V1.0.0
 
 职责：
@@ -66,7 +68,7 @@ class RedisClient:
                 pass
         
         # Fallback: 写入文件
-        root = Path("/home/sandbox/.openclaw/workspace")
+        root = Path(str(PROJECT_ROOT))
         queue_file = root / "data" / f"{queue_name}.jsonl"
         queue_file.parent.mkdir(parents=True, exist_ok=True)
         
@@ -86,7 +88,7 @@ class RedisClient:
                 pass
         
         # Fallback: 从文件读取
-        root = Path("/home/sandbox/.openclaw/workspace")
+        root = Path(str(PROJECT_ROOT))
         queue_file = root / "data" / f"{queue_name}.jsonl"
         
         if not queue_file.exists():
@@ -116,7 +118,7 @@ class RedisClient:
                 pass
         
         # Fallback: 统计文件行数
-        root = Path("/home/sandbox/.openclaw/workspace")
+        root = Path(str(PROJECT_ROOT))
         queue_file = root / "data" / f"{queue_name}.jsonl"
         
         if not queue_file.exists():

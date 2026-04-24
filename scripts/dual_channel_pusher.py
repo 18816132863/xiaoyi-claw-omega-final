@@ -1,4 +1,7 @@
+import os
 #!/usr/bin/env python3
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 """
 双渠道推送器 - 负一屏 + 小艺界面
 
@@ -15,7 +18,7 @@ from pathlib import Path
 from datetime import datetime
 
 # 路径配置
-WORKSPACE = Path("/home/sandbox/.openclaw/workspace")
+WORKSPACE = Path(str(PROJECT_ROOT))
 TODAY_TASK_SKILL = WORKSPACE / "skills/today-task/scripts/task_push.py"
 
 

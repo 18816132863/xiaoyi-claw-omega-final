@@ -206,7 +206,7 @@ class ComponentClassifier:
     
     def __init__(self, root: Path = None):
         self.root = root or get_project_root()
-        self.config_file = self.root / "infrastructure/config/component_classification.json"
+        self.config_file = self.root / "config/component_classification.json"
         self.config_file.parent.mkdir(parents=True, exist_ok=True)
     
     def _load_config(self) -> Dict:
@@ -506,7 +506,7 @@ class ComponentClassifier:
             "module": "scripts/",
             "skill": "skills/",
             "tool": "scripts/",
-            "config": "infrastructure/config/",
+            "config": "config/",
             "registry": "infrastructure/inventory/",
             "doc": "docs/",
             "report": "reports/ops/"

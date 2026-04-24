@@ -87,7 +87,7 @@ def test_retrieval_trace():
     print(f"  - 最终注入: {result.final_result.get('injected_sources', [])}")
     print(f"  - 总 tokens: {result.final_result.get('total_tokens', 0)}")
 
-    return result.trace_id is not None
+    assert result.trace_id is not None
 
 
 def test_source_policy_routing():
@@ -131,7 +131,7 @@ def test_source_policy_routing():
     print(f"  LOW risk 允许来源数: {len(low_risk.allowed_sources)}")
     print(f"  HIGH risk 允许来源数: {len(high_risk.allowed_sources)}")
 
-    return len(low_risk.allowed_sources) >= len(high_risk.allowed_sources)
+    assert len(low_risk.allowed_sources) >= len(high_risk.allowed_sources)
 
 
 def test_context_injection_planning():
@@ -190,7 +190,7 @@ def test_context_injection_planning():
 
     print(f"\n  最终注入顺序: {plan.final_injection_order}")
 
-    return len(plan.required_sources) > 0 and len(plan.final_injection_order) > 0
+    assert len(plan.required_sources) > 0 and len(plan.final_injection_order) > 0
 
 
 def test_memory_version():
@@ -266,7 +266,7 @@ def test_memory_version():
     print(f"  - 总记忆数: {stats['total_memories']}")
     print(f"  - 总版本数: {stats['total_versions']}")
 
-    return history.current_version == 2
+    assert history.current_version == 2
 
 
 def test_memory_gc():
@@ -341,7 +341,7 @@ def test_memory_gc():
         if result.action.value == "decay":
             print(f"    分数变化: {result.original_score:.2f} -> {result.new_score:.2f}")
 
-    return report.total_processed == 4
+    assert report.total_processed == 4
 
 
 def main():

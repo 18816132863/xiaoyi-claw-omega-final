@@ -1,0 +1,17 @@
+[
+  {"type": "h1", "text": "Professional Experience"},
+  {"type": "h2", "text": "Senior Product Manager"},
+  {"type": "caption", "text": "TechCorp Inc. | 2021 – Present"},
+  {"type": "bullet", "text": "Led cross-functional team of 12 engineers and designers to launch 3 major product releases"},
+  {"type": "bullet", "text": "Increased user engagement by 45% through data-driven feature prioritization"},
+  {"type": "bullet", "text": "Managed $2M annual budget and established OKR framework adopted company-wide"},
+  {"type": "h2", "text": "Product Manager"},
+  {"type": "caption", "text": "StartupXYZ | 2018 – 2021"},
+  {"type": "bullet", "text": "Owned product roadmap for B2B SaaS platform serving 500+ enterprise clients"},
+  {"type": "bullet", "text": "Reduced churn by 22% by implementing customer success touchpoints"},
+  {"type": "h1", "text": "Education"},
+  {"type": "body", "text": "MBA, Stanford Graduate School of Business (2018)"},
+  {"type": "body", "text": "BS Computer Science, UC Berkeley (2016)"},
+  {"type": "h1", "text": "Skills"},
+  {"type": "body", "text": "Product Strategy, Agile/Scrum, SQL, Python, Data Analytics, Stakeholder Management, Go-to-Market Planning"}
+]

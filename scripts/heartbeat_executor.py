@@ -51,11 +51,11 @@ class HeartbeatExecutor:
                 "enabled": True
             },
             {
-                "id": "message_sender",
-                "name": "消息队列处理",
-                "command": [sys.executable, str(self.root / "scripts/message_sender.py")],
-                "timeout": 60,
-                "priority": -1,  # 次高优先级
+                "id": "task_daemon",
+                "name": "任务守护进程检查",
+                "command": [sys.executable, "-c", "import subprocess; subprocess.run(['pgrep', '-f', 'task_daemon.py'], check=False)"],
+                "timeout": 10,
+                "priority": -1,
                 "enabled": True
             },
             {

@@ -1,4 +1,7 @@
+import os
 """
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 模拟临时失败的工具 V1.0.0
 
 用于测试重试机制。
@@ -34,7 +37,7 @@ async def flaky_sender(inputs: Dict[str, Any], context: Dict[str, Any]) -> Dict[
     import json
     from datetime import datetime
     
-    root = Path("/home/sandbox/.openclaw/workspace")
+    root = Path(str(PROJECT_ROOT))
     pending_file = root / "reports" / "ops" / "pending_sends.jsonl"
     pending_file.parent.mkdir(parents=True, exist_ok=True)
     

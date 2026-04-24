@@ -1,0 +1,148 @@
+# 路径统一报告
+
+## 执行日期
+2026-04-24
+
+## 目标
+将 3 组路径收成：
+- 唯一真实实现目录
+- 旧路径只保留 compatibility shim
+- 不允许旧路径继续保留真实业务逻辑或真实资源文件
+
+## 迁移详情
+
+### 1. infrastructure/config/ → config/
+
+**唯一真源**: `config/`
+
+**迁移文件**:
+- `settings.py` → `config/settings.py`
+- `component_classification.json` → `config/component_classification.json`
+- `dependency_manifest.json` → `config/dependency_manifest.json`
+- `dual_push_config.json` → `config/dual_push_config.json`
+- `injection_config.json` → `config/injection_config.json`
+- `injection_config_minimal.json` → `config/injection_config_minimal.json`
+- `injection_config_smart.json` → `config/injection_config_smart.json`
+- `permanent_keepers.json` → `config/permanent_keepers.json`
+- `unified.json` → `config/unified.json`
+
+**代码引用更新**:
+- `scripts/task_daemon.py`: `from infrastructure.config` → `from config`
+- `scripts/message_server.py`: `from infrastructure.config` → `from config`
+- `scripts/unified_inspector.py`: 路径更新
+- `scripts/component_classifier.py`: 路径更新
+- `scripts/permanent_keeper.py`: 路径更新
+
+**Shim 状态**:
+- `infrastructure/config/__init__.py`: 仅做 re-export
+- `infrastructure/config/README_DEPRECATED.md`: 废弃说明
+
+### 2. execution/workflows/ → orchestration/workflows/
+
+**唯一真源**: `orchestration/workflows/`
+
+**迁移文件**:
+- `WORKFLOW_CONFIG.json` → `orchestration/workflows/WORKFLOW_CONFIG.json`
+- `WORKFLOW_REGISTRY.json` → `orchestration/workflows/WORKFLOW_REGISTRY.json`
+- `orchestration/INTEGRATION_REGISTRY.json` → `orchestration/workflows/INTEGRATION_REGISTRY.json`
+
+**Shim 状态**:
+- `execution/workflows/README_DEPRECATED.md`: 废弃说明
+- 无 `__init__.py` (纯资源目录)
+
+### 3. execution/collaboration/ → orchestration/collaboration/
+
+**唯一真源**: `orchestration/collaboration/`
+
+**迁移文件**:
+- `COLLABORATION_SCHEMA.json` → `orchestration/collaboration/COLLABORATION_SCHEMA.json`
+- `domain_agents/DOMAIN_REGISTRY.json` → `orchestration/collaboration/domain_agents/DOMAIN_REGISTRY.json`
+- `multiagent/AGENT_REGISTRY.json` → `orchestration/collaboration/multiagent/AGENT_REGISTRY.json`
+- `multiagent/MULTIAGENT_CONFIG.json` → `orchestration/collaboration/multiagent/MULTIAGENT_CONFIG.json`
+
+**Shim 状态**:
+- `execution/collaboration/README_DEPRECATED.md`: 废弃说明
+- 无 `__init__.py` (纯资源目录)
+
+## 新增资源路径访问层
+
+### config/resource_paths.py
+```python
+- get_config_path(filename)
+- get_settings_path()
+- get_injection_config_path(mode)
+- get_component_classification_path()
+- get_dependency_manifest_path()
+- get_permanent_keepers_path()
+- get_unified_config_path()
+```
+
+### orchestration/workflows/resource_paths.py
+```python
+- get_workflow_config_path()
+- get_workflow_registry_path()
+- get_integration_registry_path()
+```
+
+### orchestration/collaboration/resource_paths.py
+```python
+- get_collaboration_schema_path()
+- get_domain_registry_path()
+- get_agent_registry_path()
+- get_multiagent_config_path()
+```
+
+## 测试结果
+
+### test_path_unification.py
+```
+tests/test_path_unification.py::TestPathUnification::test_infrastructure_config_no_real_files PASSED
+tests/test_path_unification.py::TestPathUnification::test_execution_workflows_no_real_files PASSED
+tests/test_path_unification.py::TestPathUnification::test_execution_collaboration_no_real_files PASSED
+tests/test_path_unification.py::TestPathUnification::test_config_is_true_source PASSED
+tests/test_path_unification.py::TestPathUnification::test_orchestration_workflows_is_true_source PASSED
+tests/test_path_unification.py::TestPathUnification::test_orchestration_collaboration_is_true_source PASSED
+tests/test_path_unification.py::TestPathUnification::test_resource_paths_exist PASSED
+
+7 passed
+```
+
+### test_compat_shims.py
+```
+tests/test_compat_shims.py::test_infrastructure_config_is_shim PASSED
+tests/test_compat_shims.py::test_execution_workflows_is_shim PASSED
+tests/test_compat_shims.py::test_execution_collaboration_is_shim PASSED
+tests/test_compat_shims.py::test_domain_tasks_exports_from_specs PASSED
+tests/test_compat_shims.py::test_capabilities_exports_from_registry PASSED
+tests/test_compat_shims.py::test_platform_adapter_no_capability_status_conflict PASSED
+
+6 passed
+```
+
+### 全量测试
+```
+185 passed in 2.98s
+```
+
+## 路径引用扫描结果
+
+旧路径引用仅存在于：
+- `infrastructure/internal_consolidation.py`: 历史融合记录
+- `infrastructure/architecture_consolidation.py`: 历史融合记录
+
+这些是文档性质的历史记录，不是实际业务引用。
+
+## 验收标准
+
+| 标准 | 状态 |
+|------|------|
+| 全量 pytest -q 继续通过 | ✅ 185 passed |
+| config/ 为唯一配置真目录 | ✅ |
+| orchestration/workflows/ 为唯一 workflow 真目录 | ✅ |
+| orchestration/collaboration/ 为唯一 collaboration 真目录 | ✅ |
+| 旧路径只剩 shim 或已删除 | ✅ |
+| 不允许"旧新路径各自独立存在" | ✅ |
+
+## 结论
+
+路径收口完成，所有旧路径已迁移到唯一真源目录，旧路径仅保留 shim 或 README_DEPRECATED。

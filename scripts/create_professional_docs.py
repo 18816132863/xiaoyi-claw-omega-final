@@ -1,4 +1,7 @@
+from pathlib import Path
 #!/usr/bin/env python3
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 """
 生成专业格式的文档
 """
@@ -72,7 +75,7 @@ def create_weekly_report():
     doc.add_paragraph('• 优化用户引导', style='List Bullet')
     
     # 保存
-    doc.save('/home/sandbox/.openclaw/workspace/skills/doc-autofill/output/周报_20260419.docx')
+    doc.save('str(PROJECT_ROOT)/skills/doc-autofill/output/周报_20260419.docx')
     print("✅ 周报Word文档已生成")
 
 def create_novel_chapter():
@@ -122,7 +125,7 @@ def create_novel_chapter():
     p.add_run('林峰如何快速赚到第一桶金？')
     
     # 保存
-    doc.save('/home/sandbox/.openclaw/workspace/skills/novel-generator/output/第001章_重生归来.docx')
+    doc.save('str(PROJECT_ROOT)/skills/novel-generator/output/第001章_重生归来.docx')
     print("✅ 小说章节Word文档已生成")
 
 def create_diet_plan():
@@ -218,7 +221,7 @@ def create_diet_plan():
     doc.add_paragraph('4. 作息: 规律作息，避免熬夜', style='List Number')
     
     # 保存
-    doc.save('/home/sandbox/.openclaw/workspace/skills/fitness-coach/output/减脂食谱_20260418.docx')
+    doc.save('str(PROJECT_ROOT)/skills/fitness-coach/output/减脂食谱_20260418.docx')
     print("✅ 减脂食谱Word文档已生成")
 
 if __name__ == '__main__':

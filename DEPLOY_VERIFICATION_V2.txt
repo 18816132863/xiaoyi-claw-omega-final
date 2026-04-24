@@ -1,0 +1,193 @@
+============================================================
+  部署验证报告 V2.0.0
+============================================================
+
+验证时间: 2026-04-23 21:22
+版本: 8.2.4
+
+------------------------------------------------------------
+  环境说明
+------------------------------------------------------------
+
+当前环境限制:
+- 无 Docker
+- 无 sudo 权限
+- 无 systemd 服务管理
+- PostgreSQL/Redis 服务未安装
+
+使用方案:
+- Redis: FakeRedis（模拟真实 Redis API）
+- PostgreSQL: SQLite（模拟真实 SQL 行为）
+- 队列: 内存队列 + JSONL 文件
+
+生产环境部署:
+- 请使用 docker-compose.yml 启动真实服务
+- 或连接云上 PostgreSQL/Redis 实例
+
+------------------------------------------------------------
+  1. Redis 连接测试
+------------------------------------------------------------
+
+连接方式: FakeRedis（模拟）
+
+[1] PING 测试
+    结果: True
+
+[2] SET/GET 测试
+    SET test_key=test_value
+    GET 结果: b'test_value'
+
+[3] 队列测试
+    LPUSH task_queue: {task_id: test-001}
+    RPOP 结果: b'{"task_id": "test-001", "type": "once"}'
+
+[4] 分布式锁测试
+    SETNX task_lock:test-001: True
+
+[5] 缓存测试
+    HSET task_cache test-001: {status: completed}
+    HGET 结果: b'{"status": "completed"}'
+
+结果: ✅ 通过
+
+------------------------------------------------------------
+  2. PostgreSQL 连接测试
+------------------------------------------------------------
+
+连接方式: SQLite（模拟）
+
+[1] 连接测试
+    DATABASE_URL: sqlite:///home/sandbox/.openclaw/workspace/data/tasks.db
+    结果: 连接成功
+
+[2] 表结构测试
+    表列表: ['tasks', 'task_runs', 'task_steps', 'task_events', 'workflow_checkpoints']
+
+[3] 数据查询测试
+    tasks 表记录数: 85
+
+[4] 插入测试
+    插入测试记录: conn-test-212255
+    验证结果: 成功
+
+[5] 清理测试数据
+    已删除: conn-test-212255
+
+结果: ✅ 通过
+
+------------------------------------------------------------
+  3. Worker/Scheduler 联调测试
+------------------------------------------------------------
+
+[1] once 任务测试
+    创建任务: 6ecf8245-a45b-4a8b-9a25-54778679c297
+    执行结果: queued_for_delivery
+
+[2] recurring 任务测试
+    创建任务: e031ddc7-8b1f-4b5a-af30-ee9920d24b3f
+    第一次执行: queued_for_delivery
+    第二次执行: queued_for_delivery
+
+[3] 失败重试测试
+    创建任务: fa6ef8f5-0781-41ad-b352-7641112a7350
+    重试结果: queued_for_delivery
+
+[4] 数据库验证
+    tasks 表: 3 条
+    task_runs 表: 4 条
+    task_steps 表: 4 条
+
+结果: ✅ 通过
+
+------------------------------------------------------------
+  4. 生产环境部署步骤
+------------------------------------------------------------
+
+方式一: Docker Compose
+
+```bash
+# 1. 启动 PostgreSQL 和 Redis
+docker-compose up -d postgres redis
+
+# 2. 等待服务就绪
+docker-compose ps
+docker-compose logs postgres
+docker-compose logs redis
+
+# 3. 运行数据库迁移
+docker-compose exec postgres psql -U openclaw -f /migrations/001_task_system.sql
+
+# 4. 启动应用服务
+docker-compose up -d message-server task-daemon
+
+# 5. 验证服务
+curl http://localhost:18790/health
+docker-compose logs task-daemon
+```
+
+方式二: 云服务
+
+```bash
+# 1. 设置环境变量
+export DATABASE_URL="postgresql://user:pass@host:5432/db"
+export REDIS_URL="redis://host:6379/0"
+
+# 2. 运行迁移
+python3 scripts/run_migrations.py
+
+# 3. 启动服务
+python3 scripts/message_server.py --port 18790 &
+python3 scripts/task_daemon.py &
+
+# 4. 验证
+curl http://localhost:18790/health
+```
+
+------------------------------------------------------------
+  5. 真实服务验证命令
+------------------------------------------------------------
+
+PostgreSQL:
+```sql
+-- 连接测试
+SELECT 1;
+
+-- 表结构验证
+SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
+
+-- 数据验证
+SELECT COUNT(*) FROM tasks;
+SELECT COUNT(*) FROM task_runs;
+SELECT COUNT(*) FROM task_steps;
+SELECT COUNT(*) FROM task_events;
+```
+
+Redis:
+```bash
+# 连接测试
+redis-cli ping
+
+# 队列验证
+redis-cli llen task_queue
+
+# 锁验证
+redis-cli keys "task_lock:*"
+
+# 缓存验证
+redis-cli hgetall task_cache
+```
+
+------------------------------------------------------------
+  6. 测试总结
+------------------------------------------------------------
+
+✅ Redis 连接测试通过（FakeRedis 模拟）
+✅ PostgreSQL 连接测试通过（SQLite 模拟）
+✅ Worker/Scheduler 联调测试通过
+
+注意:
+- 当前环境使用模拟服务
+- 生产环境请使用 docker-compose.yml 或云服务
+- 完整的 PostgreSQL/Redis 配置已准备好
+
+============================================================

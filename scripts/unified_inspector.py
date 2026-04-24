@@ -153,9 +153,9 @@ def check_token_optimization(root: Path) -> Dict:
         # 检查必要文件
         required_files = [
             "infrastructure/inventory/skill_registry_summary.json",
-            "infrastructure/config/injection_config.json",
-            "infrastructure/config/injection_config_minimal.json",
-            "infrastructure/config/injection_config_smart.json"
+            "config/injection_config.json",
+            "config/injection_config_minimal.json",
+            "config/injection_config_smart.json"
         ]
         
         missing = []
@@ -196,9 +196,9 @@ def check_injection_config(root: Path) -> Dict:
     
     try:
         config_files = [
-            ("minimal", "infrastructure/config/injection_config.json"),
-            ("ultra_minimal", "infrastructure/config/injection_config_minimal.json"),
-            ("smart", "infrastructure/config/injection_config_smart.json")
+            ("minimal", "config/injection_config.json"),
+            ("ultra_minimal", "config/injection_config_minimal.json"),
+            ("smart", "config/injection_config_smart.json")
         ]
         
         modes = {}

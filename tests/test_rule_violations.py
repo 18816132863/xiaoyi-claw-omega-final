@@ -39,8 +39,8 @@ def test_layer_dependency_violation():
     print("-" * 40)
     
     # 检查是否包含违规 import
-    if "from execution" in content:
-        print("\n✅ 样例包含违规 import: from execution ...")
+    if "from core" in content:
+        print("\n✅ 样例包含违规 import: from core ...")
         print("✅ 依赖违规样例验证通过")
         assert True
     else:

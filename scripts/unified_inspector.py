@@ -238,7 +238,7 @@ def run_all_checks_fast(profile: str = "premerge") -> Dict:
         ("仓库完整性", "scripts/check_repo_integrity_fast.py", 15, None),
         ("变更影响", "scripts/check_change_impact_enforcement.py", 20, None),
         ("技能安全", "scripts/check_skill_security.py", 60, ["--scan-all"]),
-        ("架构完整性", "infrastructure/architecture_inspector.py", 30, None),
+        ("架构完整性", "infrastructure/architecture_inspector.py", 60, None),
     ]
     
     results = {

@@ -47,6 +47,10 @@ class CoreEventType(Enum):
     POLICY_APPLIED = "policy_applied"
     POLICY_DENIED = "policy_denied"
     POLICY_EVALUATED = "policy_evaluated"
+
+
+# 别名，兼容旧代码
+EventType = CoreEventType
     
     # Degradation events
     DEGRADATION_TRIGGERED = "degradation_triggered"

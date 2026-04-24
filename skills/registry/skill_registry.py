@@ -228,6 +228,74 @@ class SkillRegistry:
     def exists(self, skill_id: str) -> bool:
         """检查技能是否存在"""
         return skill_id in self._skills
+    
+    def persist(self) -> bool:
+        """持久化注册表"""
+        try:
+            self._save()
+            return True
+        except Exception as e:
+            print(f"持久化失败: {e}")
+            return False
+    
+    def load(self) -> bool:
+        """从文件加载注册表"""
+        try:
+            self._load()
+            return True
+        except Exception as e:
+            print(f"加载失败: {e}")
+            return False
+    
+    def export_to_json(self, path: str) -> bool:
+        """导出到 JSON 文件"""
+        try:
+            with self._lock:
+                data = {
+                    "skills": {skill_id: skill.to_dict() 
+                               for skill_id, skill in self._skills.items()},
+                    "exported_at": datetime.now().isoformat(),
+                }
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            return True
+        except Exception as e:
+            print(f"导出失败: {e}")
+            return False
+    
+    def import_from_json(self, path: str, merge: bool = True) -> bool:
+        """从 JSON 文件导入"""
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            skills_data = data.get("skills", {})
+            
+            with self._lock:
+                if not merge:
+                    self._skills.clear()
+                
+                for skill_id, skill_dict in skills_data.items():
+                    manifest = SkillManifest(
+                        skill_id=skill_id,
+                        name=skill_dict.get("name", skill_id),
+                        description=skill_dict.get("description", ""),
+                        version=skill_dict.get("version", "1.0.0"),
+                        category=SkillCategory(skill_dict.get("category", "other")),
+                        status=SkillStatus(skill_dict.get("status", "active")),
+                        tags=skill_dict.get("tags", []),
+                        dependencies=skill_dict.get("dependencies", []),
+                        entry_point=skill_dict.get("entry_point", ""),
+                        config=skill_dict.get("config", {}),
+                    )
+                    self._skills[skill_id] = manifest
+                
+                self._save()
+            
+            return True
+        except Exception as e:
+            print(f"导入失败: {e}")
+            return False
 
 
 # 单例实例

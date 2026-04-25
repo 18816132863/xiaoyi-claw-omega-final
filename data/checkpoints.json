@@ -219,6 +219,28 @@
       },
       "context": {},
       "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260426002244894607",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-26T00:22:44.894633",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260426002244898705",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-26T00:22:44.898721",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
     }
   ]
 }

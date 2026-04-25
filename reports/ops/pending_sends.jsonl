@@ -35,3 +35,7 @@
 {"task_id": null, "run_id": null, "user_id": "test_user", "message": "test message", "created_at": "2026-04-26T00:21:08.869124", "status": "pending", "source": "message_adapter"}
 {"task_id": "21c579dd-19bb-48f3-92da-b0d4166531b3", "run_id": "cc59f903-1077-4d21-a8d3-337a6b985266", "user_id": "default", "message": "Retry test task", "created_at": "2026-04-26T00:21:15.914535", "status": "pending", "source": "task_executor"}
 {"task_id": "e80c2dae-a626-4c4e-9f82-f47821de1e6a", "run_id": "cab5349d-7352-43fe-8755-d5265744398d", "user_id": "default", "message": "Replay test task", "created_at": "2026-04-26T00:21:16.001983", "status": "pending", "source": "task_executor"}
+{"task_id": "test_task", "run_id": null, "user_id": "test_user", "message": "test message", "created_at": "2026-04-26T00:22:50.069015", "status": "pending", "source": "message_adapter"}
+{"task_id": null, "run_id": null, "user_id": "test_user", "message": "test message", "created_at": "2026-04-26T00:22:50.069960", "status": "pending", "source": "message_adapter"}
+{"task_id": "91565942-d4bf-4674-9123-f8f33d8374b6", "run_id": "08d3cb86-4006-40f7-a18e-74066c0f185f", "user_id": "default", "message": "Retry test task", "created_at": "2026-04-26T00:22:57.064507", "status": "pending", "source": "task_executor"}
+{"task_id": "4f3d1b2c-ebd4-4de3-8cde-0ed1524fd5ad", "run_id": "a928b39f-0735-4d62-90d2-7999af27ef57", "user_id": "default", "message": "Replay test task", "created_at": "2026-04-26T00:22:57.134799", "status": "pending", "source": "task_executor"}

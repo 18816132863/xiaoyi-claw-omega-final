@@ -10,7 +10,7 @@ try:
     from scripts.utils.database_manager import DatabaseManager
 except ImportError as e:
     print(f"Import Error: {e}")
-    pass
+    sys.exit(1)
 
 class TestTracker(unittest.TestCase):
     def test_init(self):

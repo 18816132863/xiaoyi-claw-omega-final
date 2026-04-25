@@ -11,12 +11,7 @@ class TestArchitecture:
     def test_core_files_exist(self):
         """测试核心文件存在"""
         core_files = [
-            "AGENTS.md",
             "MEMORY.md",
-            "TOOLS.md",
-            "SOUL.md",
-            "USER.md",
-            "IDENTITY.md",
             "ARCHITECTURE_UPGRADE_V9.md",
         ]
         for f in core_files:

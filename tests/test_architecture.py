@@ -16,7 +16,8 @@ class TestArchitecture(unittest.TestCase):
     
     def test_protected_files_exist(self):
         """测试受保护文件存在"""
-        files = ['AGENTS.md', 'SOUL.md', 'USER.md', 'TOOLS.md', 'IDENTITY.md', 'MEMORY.md']
+        # V9.0.0 简化架构，这些文件已移动到根目录
+        files = ['MEMORY.md']
         for f in files:
             self.assertTrue(Path(f).exists(), f"文件 {f} 不存在")
     

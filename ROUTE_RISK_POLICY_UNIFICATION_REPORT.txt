@@ -1,0 +1,54 @@
+# Route Registry 风险体系统一报告
+
+**时间**: 2026-04-25 00:44:52
+
+## 统计
+
+- 总路由数: 53
+- 已是新口径: 53
+- 需要转换: 0
+
+## 风险等级分布
+
+| 等级 | 数量 | 策略 | 说明 |
+|------|------|------|------|
+| L0 | 18 | auto_execute | 查询、总结、解释 - 自动执行 |
+| L1 | 6 | auto_execute | 轻写入（备忘录、日程） - 自动执行 |
+| L2 | 12 | rate_limited | 短信、通知、批量操作 - 策略控制 + 限流 |
+| L3 | 16 | confirm_once | 删除、拨电话、重要修改 - 默认确认 |
+| L4 | 1 | strong_confirm | 支付、金融、账号、隐私、游戏自动化 - 强确认 + 分步执行 |
+| BLOCKED | 0 | blocked | 违法、盗号、绕过反作弊 - 拒绝执行 |
+
+## 策略说明
+
+| 策略 | 说明 |
+|------|------|
+| auto_execute | 自动执行，无需确认 |
+| rate_limited | 限流执行，防止滥用 |
+| confirm_once | 单次确认，用户同意后执行 |
+| strong_confirm | 强确认，双重确认 + 预览 + 分步执行 |
+| blocked | 拒绝执行，不执行任何操作 |
+
+## 变更详情
+
+无需变更。
+
+## 与 safety_governor 一致性
+
+风险等级和策略名称完全匹配 `safety_governor/risk_levels.py` 定义:
+
+- RiskLevel: L0, L1, L2, L3, L4, BLOCKED
+- RiskPolicy: auto_execute, rate_limited, confirm_once, strong_confirm, blocked
+
+## 验证
+
+运行以下命令验证:
+
+```bash
+python scripts/check_route_registry.py
+python -m pytest tests/test_route_safety_governor_consistency.py -v
+```
+
+---
+
+**风险体系统一完成** ✅

@@ -1,0 +1,953 @@
+{
+  "timestamp": "2026-04-25T00:23:19.624143",
+  "checks": {
+    "modules": {
+      "stats": {
+        "total": 8,
+        "active": 8,
+        "created_only": 0,
+        "registered_only": 0
+      },
+      "issues": []
+    },
+    "capabilities": {
+      "stats": {
+        "total": 53,
+        "active": 0,
+        "created_only": 0,
+        "unrouted": 0,
+        "untested": 0
+      },
+      "issues": []
+    },
+    "configs": {
+      "stats": {
+        "total": 15,
+        "active": 0,
+        "unused": 0
+      },
+      "issues": []
+    },
+    "scripts": {
+      "stats": {
+        "total": 126,
+        "active": 0,
+        "created_only": 3
+      },
+      "issues": [
+        {
+          "type": "script_not_registered",
+          "name": "auto_register_routes",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/auto_register_routes.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "check_route_registry",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/check_route_registry.py",
+          "status": "created_only"
+        },
+        {
+          "type": "script_not_registered",
+          "name": "create_utility_skills",
+          "path": "/home/sandbox/.openclaw/workspace/scripts/create_utility_skills.py",
+          "status": "created_only"
+        }
+      ]
+    },
+    "tests": {
+      "stats": {
+        "total": 75,
+        "collected": 75,
+        "uncollected": 0
+      },
+      "issues": []
+    },
+    "documents": {
+      "stats": {
+        "total": 88,
+        "indexed": 17,
+        "orphan": 71
+      },
+      "issues": [
+        {
+          "type": "doc_not_indexed",
+          "name": "RELEASE_NOTES_SKILL_REFACTOR",
+          "path": "/home/sandbox/.openclaw/workspace/docs/RELEASE_NOTES_SKILL_REFACTOR.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "EXECUTION_SEMANTICS_STATE_TABLE",
+          "path": "/home/sandbox/.openclaw/workspace/docs/EXECUTION_SEMANTICS_STATE_TABLE.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "V7.2.0_ARCHITECTURE",
+          "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_ARCHITECTURE.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "DEMO_QUICKSTART",
+          "path": "/home/sandbox/.openclaw/workspace/docs/DEMO_QUICKSTART.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "RESULT_UNCERTAIN_HANDLING",
+          "path": "/home/sandbox/.openclaw/workspace/docs/RESULT_UNCERTAIN_HANDLING.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SCHEDULED_TASKS",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SKILL_UPLOAD_CHECKLIST",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_UPLOAD_CHECKLIST.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "COMPONENT_CLASSIFICATION_POLICY",
+          "path": "/home/sandbox/.openclaw/workspace/docs/COMPONENT_CLASSIFICATION_POLICY.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "DELIVERY_CONFIRMATION_STRATEGY",
+          "path": "/home/sandbox/.openclaw/workspace/docs/DELIVERY_CONFIRMATION_STRATEGY.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "loop_guard_design",
+          "path": "/home/sandbox/.openclaw/workspace/docs/loop_guard_design.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_EXPORT_AND_BACKUP",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_EXPORT_AND_BACKUP.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "MANUAL_CONFIRMATION_PLAYBOOK",
+          "path": "/home/sandbox/.openclaw/workspace/docs/MANUAL_CONFIRMATION_PLAYBOOK.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "00_exact_refactor_fix_v2",
+          "path": "/home/sandbox/.openclaw/workspace/docs/00_exact_refactor_fix_v2.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "DEGRADATION_STRATEGY",
+          "path": "/home/sandbox/.openclaw/workspace/docs/DEGRADATION_STRATEGY.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "OPTIMIZATION_CALCULATION",
+          "path": "/home/sandbox/.openclaw/workspace/docs/OPTIMIZATION_CALCULATION.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "state_machine",
+          "path": "/home/sandbox/.openclaw/workspace/docs/state_machine.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SCHEDULED_TASKS_DISCOVERY_V3",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_DISCOVERY_V3.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "configuration",
+          "path": "/home/sandbox/.openclaw/workspace/docs/configuration.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_ENHANCED_SKILL_ARCHITECTURE",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_ENHANCED_SKILL_ARCHITECTURE.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "CAPABILITY_PERFORMANCE_REPORT",
+          "path": "/home/sandbox/.openclaw/workspace/docs/CAPABILITY_PERFORMANCE_REPORT.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "MEMORY_OPTIMIZATION_STRATEGY",
+          "path": "/home/sandbox/.openclaw/workspace/docs/MEMORY_OPTIMIZATION_STRATEGY.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_CONNECTED_EXECUTION_FLOW",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CONNECTED_EXECUTION_FLOW.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SKILL_PRODUCT_ARCHITECTURE",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_PRODUCT_ARCHITECTURE.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PERMANENT_KEEPER_MODULE",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PERMANENT_KEEPER_MODULE.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SKILL_DELIVERY_BOM",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_DELIVERY_BOM.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_CONNECTION_MATRIX",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CONNECTION_MATRIX.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "XIAOYI_REAL_INTEGRATION_PLAN",
+          "path": "/home/sandbox/.openclaw/workspace/docs/XIAOYI_REAL_INTEGRATION_PLAN.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_CAPABILITY_MAPPING",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CAPABILITY_MAPPING.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "CAPABILITY_CLOSED_LOOP_MATRIX",
+          "path": "/home/sandbox/.openclaw/workspace/docs/CAPABILITY_CLOSED_LOOP_MATRIX.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "runbook",
+          "path": "/home/sandbox/.openclaw/workspace/docs/runbook.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_INVOCATION_RETENTION_POLICY",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_INVOCATION_RETENTION_POLICY.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SKILL_SCAN_COVERAGE_REPORT",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_SCAN_COVERAGE_REPORT.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_AUDIT_OPERATIONS",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_AUDIT_OPERATIONS.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "OPTIMIZATION_PLAN",
+          "path": "/home/sandbox/.openclaw/workspace/docs/OPTIMIZATION_PLAN.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SCHEDULED_TASKS_ANALYSIS",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_ANALYSIS.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "HEARTBEAT_ANALYSIS",
+          "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_ANALYSIS.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "task_lifecycle",
+          "path": "/home/sandbox/.openclaw/workspace/docs/task_lifecycle.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "observability",
+          "path": "/home/sandbox/.openclaw/workspace/docs/observability.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "AUTO_RUN_COMPONENTS",
+          "path": "/home/sandbox/.openclaw/workspace/docs/AUTO_RUN_COMPONENTS.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SCENARIO_TEMPLATE_PACK",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SCENARIO_TEMPLATE_PACK.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "NOTIFICATION_AUTH_GUIDE",
+          "path": "/home/sandbox/.openclaw/workspace/docs/NOTIFICATION_AUTH_GUIDE.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SKILL_LIMITATIONS_AND_DEGRADATION",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_LIMITATIONS_AND_DEGRADATION.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SKILL_USER_RESULT_EXPLANATION",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_USER_RESULT_EXPLANATION.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_HEALTH_CHECK",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_HEALTH_CHECK.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SCHEDULED_TASKS_EXECUTION",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_EXECUTION.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "HEARTBEAT_DAEMON_CONFIGURED",
+          "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_DAEMON_CONFIGURED.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_INVOCATION_AUDIT_REPORT",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_INVOCATION_AUDIT_REPORT.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "00_exact_skill_refactor_fix_list",
+          "path": "/home/sandbox/.openclaw/workspace/docs/00_exact_skill_refactor_fix_list.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SAFETY_CONTROLS",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SAFETY_CONTROLS.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "FINAL_DELIVERY_MODE_MATRIX",
+          "path": "/home/sandbox/.openclaw/workspace/docs/FINAL_DELIVERY_MODE_MATRIX.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "DELETE_CONFIRMATION_POLICY",
+          "path": "/home/sandbox/.openclaw/workspace/docs/DELETE_CONFIRMATION_POLICY.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "skill_integration_rules",
+          "path": "/home/sandbox/.openclaw/workspace/docs/skill_integration_rules.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "TOKEN_OPTIMIZATION_STRATEGY",
+          "path": "/home/sandbox/.openclaw/workspace/docs/TOKEN_OPTIMIZATION_STRATEGY.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "DEFAULT_SKILL_CONFIG",
+          "path": "/home/sandbox/.openclaw/workspace/docs/DEFAULT_SKILL_CONFIG.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SKILL_RUNTIME_MODES",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_RUNTIME_MODES.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "SCHEDULED_TASKS_COMPLETE",
+          "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_COMPLETE.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "FUSION_REPORT",
+          "path": "/home/sandbox/.openclaw/workspace/docs/FUSION_REPORT.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "COMPRESSION_OPTIMIZATION",
+          "path": "/home/sandbox/.openclaw/workspace/docs/COMPRESSION_OPTIMIZATION.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "EXECUTION_SEMANTICS",
+          "path": "/home/sandbox/.openclaw/workspace/docs/EXECUTION_SEMANTICS.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "WORKFLOW_ENHANCEMENT_PLAN",
+          "path": "/home/sandbox/.openclaw/workspace/docs/WORKFLOW_ENHANCEMENT_PLAN.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "README",
+          "path": "/home/sandbox/.openclaw/workspace/docs/README.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "PLATFORM_CAPABILITY_MATRIX",
+          "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CAPABILITY_MATRIX.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "RELEASE_READINESS",
+          "path": "/home/sandbox/.openclaw/workspace/docs/RELEASE_READINESS.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "USER_RESULT_MESSAGE_MATRIX",
+          "path": "/home/sandbox/.openclaw/workspace/docs/USER_RESULT_MESSAGE_MATRIX.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "REAL_INFRASTRUCTURE_SETUP",
+          "path": "/home/sandbox/.openclaw/workspace/docs/REAL_INFRASTRUCTURE_SETUP.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "HEARTBEAT_INTERVAL_ANALYSIS",
+          "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_INTERVAL_ANALYSIS.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "V7.2.0_架构中文完整版",
+          "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_架构中文完整版.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "LITE_VERSION_PLAN",
+          "path": "/home/sandbox/.openclaw/workspace/docs/LITE_VERSION_PLAN.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "BACKUP_MECHANISM_EXPLAINED",
+          "path": "/home/sandbox/.openclaw/workspace/docs/BACKUP_MECHANISM_EXPLAINED.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "V7.2.0_UNIFIED_ARCHITECTURE",
+          "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_UNIFIED_ARCHITECTURE.md",
+          "status": "orphan"
+        },
+        {
+          "type": "doc_not_indexed",
+          "name": "production_deployment",
+          "path": "/home/sandbox/.openclaw/workspace/docs/production_deployment.md",
+          "status": "orphan"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_checks": 6,
+    "total_issues": 74,
+    "passed": false
+  },
+  "issues": [
+    {
+      "type": "script_not_registered",
+      "name": "auto_register_routes",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/auto_register_routes.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "check_route_registry",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/check_route_registry.py",
+      "status": "created_only"
+    },
+    {
+      "type": "script_not_registered",
+      "name": "create_utility_skills",
+      "path": "/home/sandbox/.openclaw/workspace/scripts/create_utility_skills.py",
+      "status": "created_only"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "RELEASE_NOTES_SKILL_REFACTOR",
+      "path": "/home/sandbox/.openclaw/workspace/docs/RELEASE_NOTES_SKILL_REFACTOR.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "EXECUTION_SEMANTICS_STATE_TABLE",
+      "path": "/home/sandbox/.openclaw/workspace/docs/EXECUTION_SEMANTICS_STATE_TABLE.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "V7.2.0_ARCHITECTURE",
+      "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_ARCHITECTURE.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "DEMO_QUICKSTART",
+      "path": "/home/sandbox/.openclaw/workspace/docs/DEMO_QUICKSTART.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "RESULT_UNCERTAIN_HANDLING",
+      "path": "/home/sandbox/.openclaw/workspace/docs/RESULT_UNCERTAIN_HANDLING.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SCHEDULED_TASKS",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SKILL_UPLOAD_CHECKLIST",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_UPLOAD_CHECKLIST.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "COMPONENT_CLASSIFICATION_POLICY",
+      "path": "/home/sandbox/.openclaw/workspace/docs/COMPONENT_CLASSIFICATION_POLICY.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "DELIVERY_CONFIRMATION_STRATEGY",
+      "path": "/home/sandbox/.openclaw/workspace/docs/DELIVERY_CONFIRMATION_STRATEGY.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "loop_guard_design",
+      "path": "/home/sandbox/.openclaw/workspace/docs/loop_guard_design.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_EXPORT_AND_BACKUP",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_EXPORT_AND_BACKUP.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "MANUAL_CONFIRMATION_PLAYBOOK",
+      "path": "/home/sandbox/.openclaw/workspace/docs/MANUAL_CONFIRMATION_PLAYBOOK.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "00_exact_refactor_fix_v2",
+      "path": "/home/sandbox/.openclaw/workspace/docs/00_exact_refactor_fix_v2.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "DEGRADATION_STRATEGY",
+      "path": "/home/sandbox/.openclaw/workspace/docs/DEGRADATION_STRATEGY.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "OPTIMIZATION_CALCULATION",
+      "path": "/home/sandbox/.openclaw/workspace/docs/OPTIMIZATION_CALCULATION.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "state_machine",
+      "path": "/home/sandbox/.openclaw/workspace/docs/state_machine.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SCHEDULED_TASKS_DISCOVERY_V3",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_DISCOVERY_V3.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "configuration",
+      "path": "/home/sandbox/.openclaw/workspace/docs/configuration.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_ENHANCED_SKILL_ARCHITECTURE",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_ENHANCED_SKILL_ARCHITECTURE.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "CAPABILITY_PERFORMANCE_REPORT",
+      "path": "/home/sandbox/.openclaw/workspace/docs/CAPABILITY_PERFORMANCE_REPORT.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "MEMORY_OPTIMIZATION_STRATEGY",
+      "path": "/home/sandbox/.openclaw/workspace/docs/MEMORY_OPTIMIZATION_STRATEGY.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_CONNECTED_EXECUTION_FLOW",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CONNECTED_EXECUTION_FLOW.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SKILL_PRODUCT_ARCHITECTURE",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_PRODUCT_ARCHITECTURE.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PERMANENT_KEEPER_MODULE",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PERMANENT_KEEPER_MODULE.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SKILL_DELIVERY_BOM",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_DELIVERY_BOM.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_CONNECTION_MATRIX",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CONNECTION_MATRIX.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "XIAOYI_REAL_INTEGRATION_PLAN",
+      "path": "/home/sandbox/.openclaw/workspace/docs/XIAOYI_REAL_INTEGRATION_PLAN.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_CAPABILITY_MAPPING",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CAPABILITY_MAPPING.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "CAPABILITY_CLOSED_LOOP_MATRIX",
+      "path": "/home/sandbox/.openclaw/workspace/docs/CAPABILITY_CLOSED_LOOP_MATRIX.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "runbook",
+      "path": "/home/sandbox/.openclaw/workspace/docs/runbook.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_INVOCATION_RETENTION_POLICY",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_INVOCATION_RETENTION_POLICY.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SKILL_SCAN_COVERAGE_REPORT",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_SCAN_COVERAGE_REPORT.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_AUDIT_OPERATIONS",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_AUDIT_OPERATIONS.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "OPTIMIZATION_PLAN",
+      "path": "/home/sandbox/.openclaw/workspace/docs/OPTIMIZATION_PLAN.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SCHEDULED_TASKS_ANALYSIS",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_ANALYSIS.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "HEARTBEAT_ANALYSIS",
+      "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_ANALYSIS.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "task_lifecycle",
+      "path": "/home/sandbox/.openclaw/workspace/docs/task_lifecycle.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "observability",
+      "path": "/home/sandbox/.openclaw/workspace/docs/observability.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "AUTO_RUN_COMPONENTS",
+      "path": "/home/sandbox/.openclaw/workspace/docs/AUTO_RUN_COMPONENTS.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SCENARIO_TEMPLATE_PACK",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SCENARIO_TEMPLATE_PACK.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "NOTIFICATION_AUTH_GUIDE",
+      "path": "/home/sandbox/.openclaw/workspace/docs/NOTIFICATION_AUTH_GUIDE.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SKILL_LIMITATIONS_AND_DEGRADATION",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_LIMITATIONS_AND_DEGRADATION.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SKILL_USER_RESULT_EXPLANATION",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_USER_RESULT_EXPLANATION.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_HEALTH_CHECK",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_HEALTH_CHECK.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SCHEDULED_TASKS_EXECUTION",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_EXECUTION.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "HEARTBEAT_DAEMON_CONFIGURED",
+      "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_DAEMON_CONFIGURED.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_INVOCATION_AUDIT_REPORT",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_INVOCATION_AUDIT_REPORT.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "00_exact_skill_refactor_fix_list",
+      "path": "/home/sandbox/.openclaw/workspace/docs/00_exact_skill_refactor_fix_list.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SAFETY_CONTROLS",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SAFETY_CONTROLS.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "FINAL_DELIVERY_MODE_MATRIX",
+      "path": "/home/sandbox/.openclaw/workspace/docs/FINAL_DELIVERY_MODE_MATRIX.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "DELETE_CONFIRMATION_POLICY",
+      "path": "/home/sandbox/.openclaw/workspace/docs/DELETE_CONFIRMATION_POLICY.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "skill_integration_rules",
+      "path": "/home/sandbox/.openclaw/workspace/docs/skill_integration_rules.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "TOKEN_OPTIMIZATION_STRATEGY",
+      "path": "/home/sandbox/.openclaw/workspace/docs/TOKEN_OPTIMIZATION_STRATEGY.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "DEFAULT_SKILL_CONFIG",
+      "path": "/home/sandbox/.openclaw/workspace/docs/DEFAULT_SKILL_CONFIG.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SKILL_RUNTIME_MODES",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_RUNTIME_MODES.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "SCHEDULED_TASKS_COMPLETE",
+      "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_COMPLETE.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "FUSION_REPORT",
+      "path": "/home/sandbox/.openclaw/workspace/docs/FUSION_REPORT.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "COMPRESSION_OPTIMIZATION",
+      "path": "/home/sandbox/.openclaw/workspace/docs/COMPRESSION_OPTIMIZATION.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "EXECUTION_SEMANTICS",
+      "path": "/home/sandbox/.openclaw/workspace/docs/EXECUTION_SEMANTICS.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "WORKFLOW_ENHANCEMENT_PLAN",
+      "path": "/home/sandbox/.openclaw/workspace/docs/WORKFLOW_ENHANCEMENT_PLAN.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "README",
+      "path": "/home/sandbox/.openclaw/workspace/docs/README.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "PLATFORM_CAPABILITY_MATRIX",
+      "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CAPABILITY_MATRIX.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "RELEASE_READINESS",
+      "path": "/home/sandbox/.openclaw/workspace/docs/RELEASE_READINESS.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "USER_RESULT_MESSAGE_MATRIX",
+      "path": "/home/sandbox/.openclaw/workspace/docs/USER_RESULT_MESSAGE_MATRIX.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "REAL_INFRASTRUCTURE_SETUP",
+      "path": "/home/sandbox/.openclaw/workspace/docs/REAL_INFRASTRUCTURE_SETUP.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "HEARTBEAT_INTERVAL_ANALYSIS",
+      "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_INTERVAL_ANALYSIS.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "V7.2.0_架构中文完整版",
+      "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_架构中文完整版.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "LITE_VERSION_PLAN",
+      "path": "/home/sandbox/.openclaw/workspace/docs/LITE_VERSION_PLAN.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "BACKUP_MECHANISM_EXPLAINED",
+      "path": "/home/sandbox/.openclaw/workspace/docs/BACKUP_MECHANISM_EXPLAINED.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "V7.2.0_UNIFIED_ARCHITECTURE",
+      "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_UNIFIED_ARCHITECTURE.md",
+      "status": "orphan"
+    },
+    {
+      "type": "doc_not_indexed",
+      "name": "production_deployment",
+      "path": "/home/sandbox/.openclaw/workspace/docs/production_deployment.md",
+      "status": "orphan"
+    }
+  ]
+}

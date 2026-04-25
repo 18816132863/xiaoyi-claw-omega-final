@@ -1,110 +1,102 @@
 """
-Runtime Modes - 运行时模式
+Runtime Mode Definitions
+
+Defines 4 runtime modes for device interaction:
+- dry_run: No side effects, for CI/testing
+- fake_device: Mock device responses, for E2E testing
+- probe_only: Real device connection, read-only probing
+- connected_runtime: Real device with controlled execution
 """
 
 from enum import Enum
-from typing import Dict, Any, Optional
 from dataclasses import dataclass
+from typing import Optional
 
 
-class RuntimeMode(Enum):
-    """运行时模式"""
-    SKILL_DEFAULT = "skill_default"
-    PLATFORM_ENHANCED = "platform_enhanced"
-    SELF_HOSTED_ENHANCED = "self_hosted_enhanced"
+class RuntimeMode(str, Enum):
+    """Runtime execution modes."""
+    DRY_RUN = "dry_run"
+    FAKE_DEVICE = "fake_device"
+    PROBE_ONLY = "probe_only"
+    CONNECTED_RUNTIME = "connected_runtime"
 
 
 @dataclass
-class ModeCapabilities:
-    """模式能力"""
-    mode: RuntimeMode
-    description: str
-    features: Dict[str, bool]
-    requirements: list
-    limitations: list
+class RuntimeModeConfig:
+    """Configuration for a runtime mode."""
+    allow_side_effects: bool
+    require_device: bool
+    allow_screen_read: bool = False
+    allow_click: bool = False
+    allow_type: bool = False
+    allow_delete: bool = False
+    allow_send: bool = False
+    allow_call: bool = False
+    enforce_safety_governor: bool = False
 
 
-class RuntimeModes:
-    """运行时模式管理"""
+RUNTIME_MODE_CONFIGS: dict[RuntimeMode, RuntimeModeConfig] = {
+    RuntimeMode.DRY_RUN: RuntimeModeConfig(
+        allow_side_effects=False,
+        require_device=False,
+    ),
+    RuntimeMode.FAKE_DEVICE: RuntimeModeConfig(
+        allow_side_effects=False,
+        require_device=False,
+        allow_screen_read=True,
+    ),
+    RuntimeMode.PROBE_ONLY: RuntimeModeConfig(
+        allow_side_effects=False,
+        require_device=True,
+        allow_screen_read=True,
+        allow_click=False,
+        allow_type=False,
+        allow_delete=False,
+        allow_send=False,
+        allow_call=False,
+    ),
+    RuntimeMode.CONNECTED_RUNTIME: RuntimeModeConfig(
+        allow_side_effects=True,
+        require_device=True,
+        allow_screen_read=True,
+        allow_click=True,
+        allow_type=True,
+        allow_delete=True,
+        allow_send=True,
+        allow_call=True,
+        enforce_safety_governor=True,
+    ),
+}
+
+
+def get_runtime_mode_config(mode: RuntimeMode) -> RuntimeModeConfig:
+    """Get configuration for a runtime mode."""
+    return RUNTIME_MODE_CONFIGS.get(mode, RUNTIME_MODE_CONFIGS[RuntimeMode.DRY_RUN])
+
+
+def is_side_effect_allowed(mode: RuntimeMode, action: str) -> bool:
+    """Check if a side-effecting action is allowed in the given mode."""
+    config = get_runtime_mode_config(mode)
     
-    MODE_DEFINITIONS = {
-        RuntimeMode.SKILL_DEFAULT: ModeCapabilities(
-            mode=RuntimeMode.SKILL_DEFAULT,
-            description="默认模式，零配置可用",
-            features={
-                "sqlite_storage": True,
-                "single_process": True,
-                "request_driven": True,
-                "basic_scheduling": True,
-                "diagnostics": True,
-                "export": True,
-                "replay": True
-            },
-            requirements=[],
-            limitations=[
-                "No distributed execution",
-                "No Redis caching",
-                "Single instance only"
-            ]
-        ),
-        RuntimeMode.PLATFORM_ENHANCED: ModeCapabilities(
-            mode=RuntimeMode.PLATFORM_ENHANCED,
-            description="平台增强模式，利用平台能力",
-            features={
-                "sqlite_storage": True,
-                "platform_scheduling": True,
-                "platform_messaging": True,
-                "platform_notifications": True,
-                "diagnostics": True,
-                "export": True,
-                "replay": True
-            },
-            requirements=["Xiaoyi or HarmonyOS platform"],
-            limitations=[
-                "Platform availability dependent"
-            ]
-        ),
-        RuntimeMode.SELF_HOSTED_ENHANCED: ModeCapabilities(
-            mode=RuntimeMode.SELF_HOSTED_ENHANCED,
-            description="自托管增强模式，完整功能",
-            features={
-                "postgresql_storage": True,
-                "redis_caching": True,
-                "distributed_execution": True,
-                "advanced_scheduling": True,
-                "diagnostics": True,
-                "export": True,
-                "replay": True,
-                "self_repair": True
-            },
-            requirements=["PostgreSQL", "Redis", "Docker (optional)"],
-            limitations=[]
-        )
+    if not config.allow_side_effects:
+        return False
+    
+    action_map = {
+        "click": config.allow_click,
+        "type": config.allow_type,
+        "delete": config.allow_delete,
+        "send": config.allow_send,
+        "call": config.allow_call,
     }
     
-    @classmethod
-    def get_current_mode(cls) -> RuntimeMode:
-        """获取当前运行模式"""
-        from platform_adapter.runtime_probe import RuntimeProbe
-        env = RuntimeProbe.detect_environment()
-        
-        mode_str = env.get("runtime_mode", "skill_default")
-        
-        return {
-            "skill_default": RuntimeMode.SKILL_DEFAULT,
-            "platform_enhanced": RuntimeMode.PLATFORM_ENHANCED,
-            "self_hosted_enhanced": RuntimeMode.SELF_HOSTED_ENHANCED
-        }.get(mode_str, RuntimeMode.SKILL_DEFAULT)
-    
-    @classmethod
-    def get_capabilities(cls, mode: Optional[RuntimeMode] = None) -> ModeCapabilities:
-        """获取模式能力"""
-        if mode is None:
-            mode = cls.get_current_mode()
-        return cls.MODE_DEFINITIONS.get(mode)
-    
-    @classmethod
-    def is_feature_available(cls, feature: str, mode: Optional[RuntimeMode] = None) -> bool:
-        """检查功能是否可用"""
-        caps = cls.get_capabilities(mode)
-        return caps.features.get(feature, False) if caps else False
+    return action_map.get(action, False)
+
+
+def is_probe_only(mode: RuntimeMode) -> bool:
+    """Check if the mode is probe-only (no side effects)."""
+    return mode == RuntimeMode.PROBE_ONLY
+
+
+def requires_device(mode: RuntimeMode) -> bool:
+    """Check if the mode requires a real device."""
+    return get_runtime_mode_config(mode).require_device

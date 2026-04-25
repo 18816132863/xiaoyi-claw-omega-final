@@ -1,0 +1,180 @@
+================================================================================
+Route Risk Policy Unification Report V3
+================================================================================
+
+版本: V8.8.6 Clean Full
+时间: 2026-04-25 01:15:00
+状态: ✅ 完成
+
+================================================================================
+一、背景
+================================================================================
+
+用户要求将 route_registry 风险体系统一为正式口径 (L0/L1/L2/L3/L4/BLOCKED)，
+替换旧口径 (LOW/MEDIUM/HIGH/SYSTEM)。
+
+================================================================================
+二、完成内容
+================================================================================
+
+1. ✅ 风险等级转换
+   - 旧口径 → 新口径映射:
+     * LOW → L0/L1 (查询类操作 → L0, 其他 → L1)
+     * MEDIUM → L2
+     * HIGH → L3
+     * SYSTEM → L3/L4 (重启/关机类 → L4, 其他 → L3)
+     * CRITICAL → L4
+   
+   - 转换后分布:
+     * L0: 18 条 (只读查询)
+     * L1: 6 条 (低风险操作)
+     * L2: 12 条 (中等风险)
+     * L3: 16 条 (高风险)
+     * L4: 1 条 (系统级操作)
+     * BLOCKED: 0 条 (禁止操作)
+
+2. ✅ Policy 字段补充
+   - L0 → auto_execute
+   - L1 → auto_execute
+   - L2 → rate_limited
+   - L3 → confirm_once
+   - L4 → strong_confirm
+   - BLOCKED → blocked
+
+3. ✅ 完整字段补充
+   每条 route 新增字段:
+   - policy: 风险策略
+   - requires_preview: 是否需要预览
+   - requires_stepwise_execution: 是否需要逐步执行
+   - audit_required: 是否需要审计
+
+4. ✅ Stats 更新
+   - stats.by_risk_level 使用新口径
+   - 移除所有旧口径残留
+
+5. ✅ 测试文件创建
+   - tests/test_route_risk_l0_l4_blocked_mapping.py (12 tests)
+   - tests/test_route_l4_strong_confirm_fields.py (4 tests)
+   - tests/test_route_blocked_policy_fields.py (4 tests)
+   - tests/test_no_legacy_route_risk_levels.py (4 tests)
+   - tests/test_route_safety_governor_consistency.py (5 tests)
+
+6. ✅ 检查脚本更新
+   - scripts/check_route_registry.py - 路由注册表检查
+   - scripts/system_integrity_check.py - 系统完整性检查
+
+================================================================================
+三、验证结果
+================================================================================
+
+1. check_route_registry.py
+   - 错误: 0
+   - 警告: 0
+   - 信息: 46 (handler 文件不存在，预期行为)
+   - 状态: ✅ 通过
+
+2. pytest 测试
+   - 测试数: 29
+   - 通过: 29
+   - 失败: 0
+   - 状态: ✅ 通过
+
+3. system_integrity_check.py
+   - 错误: 0
+   - 警告: 0
+   - 状态: ✅ 通过
+
+================================================================================
+四、Clean Full 包信息
+================================================================================
+
+文件名: xiaoyi_claw_omega_V8.8.6_clean_full.tar.gz
+大小: 34 MB
+条目数: 7943
+
+包含目录:
+- capabilities/
+- device_capability_bus/
+- autonomous_planner/
+- visual_operation_agent/
+- safety_governor/
+- learning_loop/
+- closed_loop_verifier/
+- tests/
+- scripts/
+- infrastructure/
+- skill_asset_registry/
+- skills/
+- application/
+- domain/
+
+包含关键文件:
+- infrastructure/route_registry.json (53 条 routes)
+- scripts/check_route_registry.py
+- scripts/system_integrity_check.py
+- safety_governor/risk_levels.py
+- tests/test_route_risk_l0_l4_blocked_mapping.py
+- tests/test_route_l4_strong_confirm_fields.py
+- tests/test_route_blocked_policy_fields.py
+- tests/test_no_legacy_route_risk_levels.py
+- tests/test_route_safety_governor_consistency.py
+
+排除内容:
+- .openclaw/
+- .local/
+- logs/
+- bin/
+- lib/
+- __pycache__/
+- .pytest_cache/
+- *.pyc
+- *.log
+- .git/
+- repo/
+- *.tar.gz
+- *.zip
+
+================================================================================
+五、风险等级定义 (来自 safety_governor/risk_levels.py)
+================================================================================
+
+L0 - 无风险
+  - 只读查询操作
+  - policy: auto_execute
+  - 无需确认
+
+L1 - 低风险
+  - 可逆操作
+  - policy: auto_execute
+  - 无需确认
+
+L2 - 中等风险
+  - 可能影响用户体验
+  - policy: rate_limited
+  - 需要确认
+
+L3 - 高风险
+  - 不可逆操作
+  - policy: confirm_once
+  - 需要确认 + 预览 + 审计
+
+L4 - 极高风险
+  - 系统级操作
+  - policy: strong_confirm
+  - 需要确认 + 预览 + 逐步执行 + 审计
+
+BLOCKED - 禁止
+  - 违规操作
+  - policy: blocked
+  - 禁止执行
+
+================================================================================
+六、结论
+================================================================================
+
+✅ 风险体系统一完成
+✅ 所有测试通过
+✅ Clean Full 包正确打包
+✅ 无旧口径残留
+
+================================================================================

@@ -1,0 +1,58 @@
+============================================================
+Clean Package Report V4
+时间: 2026-04-25 07:50
+============================================================
+
+📦 打包信息:
+   文件名: clean_full_v4.tar.gz
+   位置: dist/clean_full_v4.tar.gz
+
+🚫 排除规则:
+   ✅ logs/ - 运行时日志目录
+   ✅ *.log - 所有日志文件
+   ✅ *.jsonl - 所有运行时 jsonl 文件
+   ✅ *.db - 所有数据库文件
+   ✅ __pycache__/ - Python 缓存
+   ✅ .pytest_cache/ - pytest 缓存
+   ✅ .cache/ - 通用缓存
+   ✅ .openclaw/ - OpenClaw 运行时
+   ✅ .local/ - 本地运行时
+   ✅ repo/ - 外部仓库
+   ✅ bin/ - 二进制目录
+   ✅ lib/ - 库目录
+   ✅ site-packages/ - Python 包
+   ✅ dist/ - 分发目录
+   ✅ *.tar.gz, *.zip - 压缩包
+   ✅ *.bak, *.backup - 备份文件
+   ✅ .vscode/, .idea/ - IDE 配置
+   ✅ *.pyc - 编译缓存
+   ✅ *.tmp, *.swp - 临时文件
+
+🔍 验证结果:
+   ✅ 无 logs/ 目录
+   ✅ 无 .jsonl 文件
+   ✅ 无 .db 文件
+   ✅ 无 .log 文件
+   ✅ 无 __pycache__ 目录
+   ✅ 无 .pytest_cache 目录
+   ✅ 无 .openclaw 目录
+   ✅ 无 .local 目录
+   ✅ 无 repo/ 目录
+   ✅ 无 bin/ 目录
+   ✅ 无 lib/ 目录
+   ✅ 无 site-packages 目录
+
+📊 包内容抽样:
+   - core/ (核心模块)
+   - skills/ (技能目录)
+   - infrastructure/ (基础设施)
+   - governance/ (治理模块)
+   - tests/ (测试文件)
+   - config/ (配置文件)
+   - scripts/ (脚本)
+   - reports/ (报告，不含运行时 jsonl)
+
+✅ Clean Package V4 验收通过
+   - 无运行时产物混入
+   - 无缓存文件混入
+   - 无外部依赖混入

@@ -1,0 +1,22 @@
+============================================================
+CONNECTED RUNTIME PROBE REPORT
+============================================================
+Timestamp: 2026-04-25T10:51:45.025625
+
+Probe Results:
+------------------------------------------------------------
+runtime_available: True
+call_device_tool_available: True
+adapter_loaded: False
+route_registry_available: True
+safety_governor_available: True
+connected_runtime: unavailable
+reason: sandbox environment - no real device
+infrastructure_ready: False
+status: skipped
+probe_only_side_effects_blocked: True
+
+============================================================
+STATUS: Infrastructure Ready, No Real Device
+ACTION: Tests will skip when no device is connected
+============================================================

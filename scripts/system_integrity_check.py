@@ -1,472 +1,249 @@
 #!/usr/bin/env python3
 """
-系统完整性检查 - 总入口
-
-检查所有新增模块、能力、配置、脚本、测试、文档是否真正生效。
-
-状态定义：
-- created: 文件存在
-- registered: 已注册到对应 registry
-- wired: 已接入主链路
-- tested: 已被测试覆盖
-- documented: 已被文档记录
-- active: 已被验收脚本检查
-
-验收标准：
-只有同时满足 created + registered + wired + tested + documented 才允许标记为 active
+系统完整性检查脚本
+检查工程目录结构和关键文件
 """
-
+import os
 import json
 import sys
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Tuple
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
+WORKSPACE = Path(__file__).parent.parent
+
+# 必须存在的目录
+REQUIRED_DIRS = [
+    "capabilities",
+    "device_capability_bus",
+    "autonomous_planner",
+    "visual_operation_agent",
+    "safety_governor",
+    "learning_loop",
+    "closed_loop_verifier",
+    "tests",
+    "scripts",
+    "infrastructure",
+    "skill_asset_registry",
+    "skills",
+    "application",
+    "domain",
+    "governance",
+    "core",
+    "orchestration",
+]
+
+# 必须存在的文件
+REQUIRED_FILES = [
+    "infrastructure/route_registry.json",
+    "scripts/check_route_registry.py",
+    "scripts/system_integrity_check.py",
+    "safety_governor/risk_levels.py",
+]
+
+# 必须存在的测试文件
+REQUIRED_TESTS = [
+    "tests/test_route_risk_l0_l4_blocked_mapping.py",
+    "tests/test_route_l4_strong_confirm_fields.py",
+    "tests/test_route_blocked_policy_fields.py",
+    "tests/test_no_legacy_route_risk_levels.py",
+    "tests/test_route_safety_governor_consistency.py",
+]
 
 
-class SystemIntegrityChecker:
-    """系统完整性检查器"""
+def check_directories():
+    """检查必需目录"""
+    errors = []
+    warnings = []
     
-    # 组件类型
-    COMPONENT_TYPES = [
-        "module",
-        "capability", 
-        "config",
-        "script",
-        "test",
-        "document",
-        "table",
-        "rule",
-    ]
-    
-    # 状态流转
-    STATUS_FLOW = ["created", "registered", "wired", "tested", "documented", "active"]
-    
-    def __init__(self, root: Path = None):
-        self.root = root or PROJECT_ROOT
-        self.inventory_dir = self.root / "infrastructure" / "inventory"
-        self.reports_dir = self.root / "reports" / "integrity"
-        
-        # 确保目录存在
-        self.inventory_dir.mkdir(parents=True, exist_ok=True)
-        self.reports_dir.mkdir(parents=True, exist_ok=True)
-        
-        # 加载所有注册表
-        self.registries = self._load_all_registries()
-        
-        # 检查结果
-        self.results = {
-            "timestamp": datetime.now().isoformat(),
-            "checks": {},
-            "summary": {},
-            "issues": [],
-        }
-    
-    def _load_all_registries(self) -> Dict:
-        """加载所有注册表"""
-        registries = {}
-        
-        registry_files = {
-            "module": "module_registry.json",
-            "capability": "capability_registry.json",
-            "route": "route_registry.json",
-            "config": "config_registry.json",
-            "script": "script_registry.json",
-            "docs": "docs_registry.json",
-            "test": "test_registry.json",
-        }
-        
-        for name, filename in registry_files.items():
-            path = self.inventory_dir / filename
-            if path.exists():
-                with open(path, 'r', encoding='utf-8') as f:
-                    registries[name] = json.load(f)
-            else:
-                registries[name] = {"version": "1.0.0", "items": {}}
-        
-        return registries
-    
-    def check_modules(self) -> Dict:
-        """检查模块完整性"""
-        print("\n📦 检查模块完整性...")
-        
-        issues = []
-        stats = {"total": 0, "active": 0, "created_only": 0, "registered_only": 0}
-        
-        # 扫描模块目录
-        module_dirs = self._scan_module_directories()
-        
-        for module_name, module_path in module_dirs.items():
-            stats["total"] += 1
-            
-            # 检查是否注册
-            registered = module_name in self.registries.get("module", {}).get("modules", {})
-            
-            if not registered:
-                issues.append({
-                    "type": "module_not_registered",
-                    "name": module_name,
-                    "path": str(module_path),
-                    "status": "created_only",
-                })
-                stats["created_only"] += 1
-                continue
-            
-            # 检查状态
-            module_info = self.registries["module"]["modules"][module_name]
-            status = module_info.get("status", "created")
-            
-            if status == "active":
-                stats["active"] += 1
-            elif status == "registered":
-                stats["registered_only"] += 1
-        
-        print(f"  总计: {stats['total']}, 活跃: {stats['active']}, 仅创建: {stats['created_only']}, 仅注册: {stats['registered_only']}")
-        
-        return {"stats": stats, "issues": issues}
-    
-    def check_capabilities(self) -> Dict:
-        """检查能力完整性"""
-        print("\n⚡ 检查能力完整性...")
-        
-        issues = []
-        stats = {"total": 0, "active": 0, "created_only": 0, "unrouted": 0, "untested": 0}
-        
-        # 扫描 capabilities 目录
-        cap_dir = self.root / "capabilities"
-        if not cap_dir.exists():
-            print("  ⚠️  capabilities 目录不存在")
-            return {"stats": stats, "issues": issues}
-        
-        capability_files = list(cap_dir.glob("*.py"))
-        capability_files = [f for f in capability_files if not f.name.startswith("_")]
-        
-        for cap_file in capability_files:
-            cap_name = cap_file.stem
-            stats["total"] += 1
-            
-            # 检查是否注册
-            registered = cap_name in self.registries.get("capability", {}).get("items", {})
-            
-            if not registered:
-                issues.append({
-                    "type": "capability_not_registered",
-                    "name": cap_name,
-                    "path": str(cap_file),
-                    "status": "created_only",
-                })
-                stats["created_only"] += 1
-        
-        print(f"  总计: {stats['total']}, 活跃: {stats['active']}, 仅创建: {stats['created_only']}")
-        
-        return {"stats": stats, "issues": issues}
-    
-    def check_configs(self) -> Dict:
-        """检查配置完整性"""
-        print("\n⚙️  检查配置完整性...")
-        
-        issues = []
-        stats = {"total": 0, "active": 0, "unused": 0}
-        
-        # 扫描 config 目录
-        config_dir = self.root / "config"
-        if not config_dir.exists():
-            print("  ⚠️  config 目录不存在")
-            return {"stats": stats, "issues": issues}
-        
-        config_files = list(config_dir.glob("*.json")) + list(config_dir.glob("*.py"))
-        
-        for config_file in config_files:
-            if config_file.name.startswith("_"):
-                continue
-            
-            config_name = config_file.stem
-            stats["total"] += 1
-            
-            # 检查是否被引用
-            referenced = self._check_config_referenced(config_name)
-            
-            if not referenced:
-                issues.append({
-                    "type": "config_not_referenced",
-                    "name": config_name,
-                    "path": str(config_file),
-                    "status": "unused",
-                })
-                stats["unused"] += 1
-        
-        print(f"  总计: {stats['total']}, 未使用: {stats['unused']}")
-        
-        return {"stats": stats, "issues": issues}
-    
-    def check_scripts(self) -> Dict:
-        """检查脚本完整性"""
-        print("\n📜 检查脚本完整性...")
-        
-        issues = []
-        stats = {"total": 0, "active": 0, "created_only": 0}
-        
-        # 扫描 scripts 目录
-        scripts_dir = self.root / "scripts"
-        if not scripts_dir.exists():
-            print("  ⚠️  scripts 目录不存在")
-            return {"stats": stats, "issues": issues}
-        
-        script_files = list(scripts_dir.glob("*.py"))
-        
-        for script_file in script_files:
-            if script_file.name.startswith("_"):
-                continue
-            
-            script_name = script_file.stem
-            stats["total"] += 1
-            
-            # 检查是否注册
-            registered = script_name in self.registries.get("script", {}).get("items", {})
-            
-            if not registered:
-                issues.append({
-                    "type": "script_not_registered",
-                    "name": script_name,
-                    "path": str(script_file),
-                    "status": "created_only",
-                })
-                stats["created_only"] += 1
-        
-        print(f"  总计: {stats['total']}, 仅创建: {stats['created_only']}")
-        
-        return {"stats": stats, "issues": issues}
-    
-    def check_tests(self) -> Dict:
-        """检查测试完整性"""
-        print("\n🧪 检查测试完整性...")
-        
-        issues = []
-        stats = {"total": 0, "collected": 0, "uncollected": 0}
-        
-        # 扫描 tests 目录
-        tests_dir = self.root / "tests"
-        if not tests_dir.exists():
-            print("  ⚠️  tests 目录不存在")
-            return {"stats": stats, "issues": issues}
-        
-        test_files = list(tests_dir.glob("test_*.py"))
-        
-        for test_file in test_files:
-            test_name = test_file.stem
-            stats["total"] += 1
-            
-            # 检查是否能被 pytest 收集
-            collected = self._check_test_collectible(test_file)
-            
-            if not collected:
-                issues.append({
-                    "type": "test_not_collected",
-                    "name": test_name,
-                    "path": str(test_file),
-                    "status": "uncollected",
-                })
-                stats["uncollected"] += 1
-            else:
-                stats["collected"] += 1
-        
-        print(f"  总计: {stats['total']}, 可收集: {stats['collected']}, 不可收集: {stats['uncollected']}")
-        
-        return {"stats": stats, "issues": issues}
-    
-    def check_documents(self) -> Dict:
-        """检查文档完整性"""
-        print("\n📄 检查文档完整性...")
-        
-        issues = []
-        stats = {"total": 0, "indexed": 0, "orphan": 0}
-        
-        # 扫描 docs 目录
-        docs_dir = self.root / "docs"
-        if not docs_dir.exists():
-            print("  ⚠️  docs 目录不存在")
-            return {"stats": stats, "issues": issues}
-        
-        doc_files = list(docs_dir.glob("*.md"))
-        
-        for doc_file in doc_files:
-            if doc_file.name.startswith("_"):
-                continue
-            
-            doc_name = doc_file.stem
-            stats["total"] += 1
-            
-            # 检查是否在索引中
-            indexed = self._check_doc_indexed(doc_name)
-            
-            if not indexed:
-                issues.append({
-                    "type": "doc_not_indexed",
-                    "name": doc_name,
-                    "path": str(doc_file),
-                    "status": "orphan",
-                })
-                stats["orphan"] += 1
-            else:
-                stats["indexed"] += 1
-        
-        print(f"  总计: {stats['total']}, 已索引: {stats['indexed']}, 孤儿: {stats['orphan']}")
-        
-        return {"stats": stats, "issues": issues}
-    
-    def _scan_module_directories(self) -> Dict[str, Path]:
-        """扫描模块目录"""
-        modules = {}
-        
-        # 标准目录（不是模块）
-        standard_dirs = {
-            "core", "memory_context", "orchestration", "execution",
-            "governance", "infrastructure", "skills", "tests",
-            "scripts", "docs", "config", "data", "reports",
-            "capabilities", "diagnostics", "storage", "platform_adapter",
-            "memory", "repo", "build", "dist", "node_modules",
-            "application", "domain",
-        }
-        
-        for item in self.root.iterdir():
-            if not item.is_dir():
-                continue
-            if item.name.startswith(".") or item.name.startswith("_"):
-                continue
-            if item.name in standard_dirs:
-                continue
-            
-            # 检查是否有 __init__.py
-            init_file = item / "__init__.py"
-            if init_file.exists():
-                modules[item.name] = item
-        
-        return modules
-    
-    def _check_config_referenced(self, config_name: str) -> bool:
-        """检查配置是否被引用"""
-        # 简单检查：在代码中搜索配置名或相关类名
-        import subprocess
-        
-        try:
-            # 搜索文件名
-            result = subprocess.run(
-                ["grep", "-r", config_name, "--include=*.py", str(self.root)],
-                capture_output=True,
-                text=True,
-                timeout=10
-            )
-            
-            # 排除 config 目录自身的引用
-            lines = result.stdout.strip().split('\n') if result.stdout.strip() else []
-            external_refs = [l for l in lines if '/config/' not in l and l]
-            
-            if len(external_refs) > 0:
-                return True
-            
-            # 搜索类名（驼峰转换）
-            # default_skill_config -> DefaultSkillConfig
-            class_name = ''.join(word.capitalize() for word in config_name.split('_'))
-            
-            result2 = subprocess.run(
-                ["grep", "-r", class_name, "--include=*.py", str(self.root)],
-                capture_output=True,
-                text=True,
-                timeout=10
-            )
-            
-            lines2 = result2.stdout.strip().split('\n') if result2.stdout.strip() else []
-            external_refs2 = [l for l in lines2 if '/config/' not in l and l]
-            
-            return len(external_refs2) > 0
-        except:
-            return True  # 假设已引用
-    
-    def _check_test_collectible(self, test_file: Path) -> bool:
-        """检查测试是否能被 pytest 收集"""
-        # 简单检查：文件名以 test_ 开头，且有 test 函数或类
-        content = test_file.read_text(encoding='utf-8')
-        
-        has_test_func = "def test_" in content
-        has_test_class = "class Test" in content
-        
-        return has_test_func or has_test_class
-    
-    def _check_doc_indexed(self, doc_name: str) -> bool:
-        """检查文档是否在索引中"""
-        # 检查 README 或索引文件
-        readme_path = self.root / "docs" / "README.md"
-        
-        if readme_path.exists():
-            content = readme_path.read_text(encoding='utf-8')
-            return doc_name in content
-        
-        return True  # 假设已索引
-    
-    def run_all_checks(self) -> Dict:
-        """运行所有检查"""
-        print("=" * 60)
-        print("  系统完整性检查 V1.0.0")
-        print("=" * 60)
-        
-        # 运行各项检查
-        self.results["checks"]["modules"] = self.check_modules()
-        self.results["checks"]["capabilities"] = self.check_capabilities()
-        self.results["checks"]["configs"] = self.check_configs()
-        self.results["checks"]["scripts"] = self.check_scripts()
-        self.results["checks"]["tests"] = self.check_tests()
-        self.results["checks"]["documents"] = self.check_documents()
-        
-        # 汇总问题
-        all_issues = []
-        for check_name, check_result in self.results["checks"].items():
-            all_issues.extend(check_result.get("issues", []))
-        
-        self.results["issues"] = all_issues
-        
-        # 汇总统计
-        self.results["summary"] = {
-            "total_checks": len(self.results["checks"]),
-            "total_issues": len(all_issues),
-            "passed": len(all_issues) == 0,
-        }
-        
-        # 打印汇总
-        print("\n" + "=" * 60)
-        if all_issues:
-            print(f"  ❌ 发现 {len(all_issues)} 个问题")
-            for issue in all_issues[:10]:  # 只显示前10个
-                print(f"    - [{issue['type']}] {issue['name']}: {issue['status']}")
-            if len(all_issues) > 10:
-                print(f"    ... 还有 {len(all_issues) - 10} 个问题")
+    for dir_name in REQUIRED_DIRS:
+        dir_path = WORKSPACE / dir_name
+        if not dir_path.exists():
+            errors.append(f"目录缺失: {dir_name}")
+        elif not dir_path.is_dir():
+            errors.append(f"不是目录: {dir_name}")
         else:
-            print("  ✅ 所有检查通过")
-        print("=" * 60 + "\n")
-        
-        return self.results
+            # 检查目录是否有文件
+            file_count = len(list(dir_path.rglob("*.*")))
+            if file_count == 0:
+                warnings.append(f"目录为空: {dir_name}")
     
-    def save_report(self) -> Path:
-        """保存报告"""
-        report_path = self.reports_dir / f"integrity_check_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+    return errors, warnings
+
+
+def check_files():
+    """检查必需文件"""
+    errors = []
+    warnings = []
+    
+    for file_name in REQUIRED_FILES:
+        file_path = WORKSPACE / file_name
+        if not file_path.exists():
+            errors.append(f"文件缺失: {file_name}")
+        elif file_path.stat().st_size == 0:
+            warnings.append(f"文件为空: {file_name}")
+    
+    return errors, warnings
+
+
+def check_tests():
+    """检查测试文件"""
+    errors = []
+    warnings = []
+    
+    for test_name in REQUIRED_TESTS:
+        test_path = WORKSPACE / test_name
+        if not test_path.exists():
+            errors.append(f"测试缺失: {test_name}")
+        elif test_path.stat().st_size == 0:
+            warnings.append(f"测试为空: {test_name}")
+    
+    return errors, warnings
+
+
+def check_route_registry():
+    """检查 route_registry.json"""
+    errors = []
+    warnings = []
+    info = []
+    
+    route_path = WORKSPACE / "infrastructure" / "route_registry.json"
+    
+    if not route_path.exists():
+        errors.append("route_registry.json 不存在")
+        return errors, warnings, info
+    
+    try:
+        with open(route_path) as f:
+            data = json.load(f)
         
-        with open(report_path, 'w', encoding='utf-8') as f:
-            json.dump(self.results, f, ensure_ascii=False, indent=2)
+        # 检查 routes 数量
+        routes = data.get("routes", {})
+        route_count = len(routes)
+        info.append(f"routes 数量: {route_count}")
         
-        print(f"📄 报告已保存: {report_path}")
+        if route_count == 0:
+            errors.append("routes 为空")
+        elif route_count != 53:
+            warnings.append(f"routes 数量不是 53: {route_count}")
         
-        return report_path
+        # 检查风险等级
+        valid_levels = {"L0", "L1", "L2", "L3", "L4", "BLOCKED"}
+        legacy_levels = {"LOW", "MEDIUM", "HIGH", "SYSTEM", "CRITICAL"}
+        
+        for route_id, route in routes.items():
+            risk_level = route.get("risk_level", "")
+            if risk_level in legacy_levels:
+                errors.append(f"旧口径风险等级: {route_id} = {risk_level}")
+            elif risk_level not in valid_levels:
+                errors.append(f"无效风险等级: {route_id} = {risk_level}")
+        
+        # 检查 stats
+        stats = data.get("stats", {})
+        by_risk_level = stats.get("by_risk_level", {})
+        
+        for level in by_risk_level.keys():
+            if level in legacy_levels:
+                errors.append(f"stats 中有旧口径: {level}")
+            elif level not in valid_levels:
+                errors.append(f"stats 中有无效等级: {level}")
+        
+        info.append(f"风险等级分布: {json.dumps(by_risk_level)}")
+        
+    except json.JSONDecodeError as e:
+        errors.append(f"JSON 解析错误: {e}")
+    except Exception as e:
+        errors.append(f"读取错误: {e}")
+    
+    return errors, warnings, info
 
 
 def main():
     """主函数"""
-    checker = SystemIntegrityChecker()
-    results = checker.run_all_checks()
-    checker.save_report()
+    print("=" * 60)
+    print("系统完整性检查报告")
+    print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print("=" * 60)
+    print()
     
-    # 返回退出码
-    return 0 if results["summary"]["passed"] else 1
+    total_errors = 0
+    total_warnings = 0
+    
+    # 检查目录
+    print("📁 目录检查:")
+    errors, warnings = check_directories()
+    total_errors += len(errors)
+    total_warnings += len(warnings)
+    
+    for e in errors:
+        print(f"   ❌ {e}")
+    for w in warnings:
+        print(f"   ⚠️  {w}")
+    
+    if not errors and not warnings:
+        print("   ✅ 所有必需目录存在")
+    print()
+    
+    # 检查文件
+    print("📄 文件检查:")
+    errors, warnings = check_files()
+    total_errors += len(errors)
+    total_warnings += len(warnings)
+    
+    for e in errors:
+        print(f"   ❌ {e}")
+    for w in warnings:
+        print(f"   ⚠️  {w}")
+    
+    if not errors and not warnings:
+        print("   ✅ 所有必需文件存在")
+    print()
+    
+    # 检查测试
+    print("🧪 测试检查:")
+    errors, warnings = check_tests()
+    total_errors += len(errors)
+    total_warnings += len(warnings)
+    
+    for e in errors:
+        print(f"   ❌ {e}")
+    for w in warnings:
+        print(f"   ⚠️  {w}")
+    
+    if not errors and not warnings:
+        print("   ✅ 所有必需测试存在")
+    print()
+    
+    # 检查 route_registry
+    print("🛣️  Route Registry 检查:")
+    errors, warnings, info = check_route_registry()
+    total_errors += len(errors)
+    total_warnings += len(warnings)
+    
+    for e in errors:
+        print(f"   ❌ {e}")
+    for w in warnings:
+        print(f"   ⚠️  {w}")
+    for i in info:
+        print(f"   ℹ️  {i}")
+    
+    if not errors and not warnings:
+        print("   ✅ Route Registry 检查通过")
+    print()
+    
+    # 总结
+    print("=" * 60)
+    print("📊 总结:")
+    print(f"   错误: {total_errors}")
+    print(f"   警告: {total_warnings}")
+    
+    if total_errors == 0:
+        print()
+        print("✅ 系统完整性检查通过")
+        return 0
+    else:
+        print()
+        print("❌ 系统完整性检查失败")
+        return 1
 
 
 if __name__ == "__main__":

@@ -1,0 +1,33 @@
+============================================================
+VISUAL CONNECTED PROBE REPORT
+============================================================
+Timestamp: 2026-04-25T10:51:49.905659
+Mode: probe_only
+
+Capabilities:
+------------------------------------------------------------
+visual_agent_available: False
+gui_route_available: True
+gui_route_risk_level: L4
+gui_route_policy: strong_confirm
+l4_enforcement: True
+requires_strong_confirm: True
+requires_preview: True
+observe_screen: True
+read_screen: True
+detect_ui: True
+locate_text: True
+plan_action: True
+preview_action: True
+tap: False
+swipe: False
+type_text: False
+long_press: False
+
+Side Effects:
+------------------------------------------------------------
+side_effects_blocked: True
+
+============================================================
+STATUS: Probe Complete, No Side Effects
+============================================================

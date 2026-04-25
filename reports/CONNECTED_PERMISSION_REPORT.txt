@@ -1,0 +1,95 @@
+============================================================
+CONNECTED PERMISSION REPORT
+============================================================
+
+[Environment]
+  is_xiaoyi_channel: True
+  check_time: 2026-04-25T11:09:21
+
+[Permission Status]
+
+✓ 联系人权限 (contact): granted
+  - Required for: route.query_contact, route.call_phone, route.send_message
+  - Tool: get_contact_tool_schema
+
+✓ 日历权限 (calendar): granted
+  - Required for: route.query_calendar, route.create_calendar_event
+  - Tool: get_calendar_tool_schema
+
+✓ 备忘录权限 (note): granted
+  - Required for: route.query_note, route.create_note
+  - Tool: get_note_tool_schema
+
+✓ 位置权限 (location): granted
+  - Required for: route.get_location
+  - Tool: get_user_location
+
+✓ 通知权限 (notification): granted
+  - Required for: route.query_alarm, route.set_alarm
+  - Tool: get_alarm_tool_schema
+
+✓ 截图/读屏权限 (screenshot): granted
+  - Required for: route.screenshot, route.read_screen
+  - Tool: get_photo_tool_schema
+
+[Summary]
+
+total_permissions: 6
+granted: 6
+denied: 0
+timeout: 0
+unknown: 0
+ready_percentage: 100.0%
+is_fully_ready: True
+
+[Permission Check Logic]
+
+1. In xiaoyi_channel environment:
+   - Default assumption: permissions granted
+   - Actual check: call get_*_tool_schema
+   - Fallback: mark as unknown if check fails
+
+2. In non-xiaoyi environment:
+   - Default assumption: unknown
+   - Requires explicit permission grant
+   - May need user authorization
+
+[Recovery Hints for Missing Permissions]
+
+If contact denied:
+  → 请在手机设置中授予联系人访问权限
+
+If calendar denied:
+  → 请在手机设置中授予日历访问权限
+
+If note denied:
+  → 请在手机设置中授予备忘录访问权限
+
+If location denied:
+  → 请在手机设置中授予位置访问权限
+
+If notification denied:
+  → 请在手机设置中授予通知访问权限
+
+If screenshot denied:
+  → 请在手机设置中授予相册/截图访问权限
+
+[Implementation]
+
+File: scripts/check_connected_permissions.py
+Class: PermissionChecker
+Methods:
+  - check_single_permission()
+  - check_all_permissions()
+  - get_permission_summary()
+  - get_missing_permission_hints()
+  - generate_report()
+
+Exit Codes:
+  0: All permissions granted
+  1: Partial permissions granted
+  2: No permissions granted
+
+============================================================
+Generated: 2026-04-25T11:09:21
+============================================================

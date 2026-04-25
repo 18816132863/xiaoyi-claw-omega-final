@@ -63,7 +63,7 @@ class TestRouteIntegrity:
     
     def test_valid_risk_levels(self, route_registry):
         """测试有效的风险等级"""
-        valid_levels = ["LOW", "MEDIUM", "HIGH", "SYSTEM"]
+        valid_levels = ["L0", "L1", "L2", "L3", "L4", "BLOCKED"]
         for route_id, route in route_registry["routes"].items():
             assert route["risk_level"] in valid_levels, \
                 f"路由 {route_id} 无效风险等级: {route['risk_level']}"
@@ -71,7 +71,7 @@ class TestRouteIntegrity:
     def test_high_risk_requires_confirmation(self, route_registry):
         """测试高风险路由需要确认"""
         for route_id, route in route_registry["routes"].items():
-            if route["risk_level"] in ["HIGH", "SYSTEM"]:
+            if route["risk_level"] in ["L3", "L4", "BLOCKED"]:
                 assert route["requires_confirmation"], \
                     f"高风险路由 {route_id} 应该需要确认"
 
@@ -154,14 +154,14 @@ class TestRiskStatistics:
         routes = route_registry["routes"]
         stats = route_registry["stats"]
         
-        actual_counts = {"LOW": 0, "MEDIUM": 0, "HIGH": 0, "SYSTEM": 0}
+        actual_counts = {"L0": 0, "L1": 0, "L2": 0, "L3": 0, "L4": 0, "BLOCKED": 0}
         for route in routes.values():
-            risk = route.get("risk_level", "LOW")
+            risk = route.get("risk_level", "L0")
             if risk in actual_counts:
                 actual_counts[risk] += 1
         
         recorded_counts = stats.get("by_risk_level", {})
-        for level in ["LOW", "MEDIUM", "HIGH", "SYSTEM"]:
+        for level in ["L0", "L1", "L2", "L3", "L4", "BLOCKED"]:
             assert actual_counts[level] == recorded_counts.get(level, 0), \
                 f"风险等级统计不一致 {level}: {actual_counts[level]} vs {recorded_counts.get(level, 0)}"
 

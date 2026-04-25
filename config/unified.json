@@ -98,5 +98,29 @@
       "trash_enabled": true,
       "trash_retention_days": 7
     }
+  },
+  "ocr": {
+    "provider": "deepseek",
+    "service_id": "deepseek-ocr-2sk-u3qymvvjrvxh26j6",
+    "enabled": true,
+    "timeout_ms": 30000,
+    "max_image_size_mb": 10,
+    "supported_formats": ["jpg", "jpeg", "png", "gif", "webp", "bmp"],
+    "languages": ["zh", "en", "ja", "ko"],
+    "features": {
+      "text_detection": true,
+      "text_recognition": true,
+      "table_detection": false,
+      "handwriting": true,
+      "formula": false
+    },
+    "cache": {
+      "enabled": true,
+      "ttl_seconds": 3600
+    },
+    "fallback": {
+      "enabled": true,
+      "provider": "tesseract"
+    }
   }
 }

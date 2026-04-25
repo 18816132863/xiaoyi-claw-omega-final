@@ -4212,6 +4212,204 @@
       },
       "context": {},
       "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425002331894589",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T00:23:31.894615",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425002331910820",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T00:23:31.910840",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425074602980833",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T07:46:02.980862",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425074602994525",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T07:46:02.994549",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425074925266614",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T07:49:25.266634",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425074925276035",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T07:49:25.276052",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425081443571579",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T08:14:43.571600",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425081443581408",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T08:14:43.581424",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425083544811503",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T08:35:44.811522",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425083544821099",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T08:35:44.821115",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425090727590407",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T09:07:27.590426",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425090727600002",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T09:07:27.600017",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425091002114857",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T09:10:02.114877",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425091002124605",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T09:10:02.124622",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425092558770511",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T09:25:58.770532",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425092558780597",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T09:25:58.780615",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425102130124876",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T10:21:30.124897",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425102130134849",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T10:21:30.134865",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
     }
   ]
 }

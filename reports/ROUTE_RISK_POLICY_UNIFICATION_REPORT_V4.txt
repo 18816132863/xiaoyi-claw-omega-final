@@ -1,0 +1,51 @@
+============================================================
+Route Risk Policy Unification Report V4
+时间: 2026-04-25 07:50
+============================================================
+
+🎯 统一目标:
+   将风险等级从 LOW/MEDIUM/HIGH/SYSTEM 统一为 L0/L1/L2/L3/L4/BLOCKED
+
+📊 新风险体系:
+   L0       - 无风险 (只读、查询)
+   L1       - 低风险 (简单操作)
+   L2       - 中风险 (修改操作)
+   L3       - 高风险 (删除、发送、拨打)
+   L4       - 系统级 (自修复、系统配置)
+   BLOCKED  - 禁止执行
+
+🔄 迁移映射:
+   LOW    → L0/L1
+   MEDIUM → L2
+   HIGH   → L3
+   SYSTEM → L4
+
+📈 统计数据:
+   总路由数: 53
+   风险分布:
+     L0:      18 (34.0%)
+     L1:       6 (11.3%)
+     L2:      12 (22.6%)
+     L3:      16 (30.2%)
+     L4:       1 (1.9%)
+     BLOCKED:  0 (0.0%)
+
+   需确认数: 29 (54.7%)
+
+✅ 确认策略:
+   - L3+ 路由需要确认
+   - 删除操作 (L3) 需要确认
+   - 发送操作 (L3) 需要确认
+   - 系统操作 (L4) 需要确认
+
+📝 测试更新:
+   ✅ test_route_registry.py - 更新风险等级验证
+   ✅ test_route_risk_policy.py - 重写风险策略验证
+   ✅ test_planner_route_selection.py - 更新路由选择测试
+
+🔍 验证结果:
+   ✅ check_route_registry: 0 error
+   ✅ system_integrity_check: 0 error
+   ✅ pytest: 622 passed, 5 skipped
+
+✅ Route Risk Policy V4 统一完成

@@ -1,0 +1,128 @@
+============================================================
+TASK PROGRESS TIMEOUT REPORT
+============================================================
+
+[Timeout Thresholds]
+
+| Threshold | Duration | Action |
+|-----------|----------|--------|
+| Progress Output | 20s | Output current stage |
+| Auto Degrade | 60s | Downgrade probe mode |
+| Stop Probe | 120s | Abort current probe |
+| Partial Output | 180s | Return partial results |
+
+[Timeout States]
+
+1. continue
+   - Normal operation
+   - Within all thresholds
+   - No action needed
+
+2. degrade
+   - No progress for 60s
+   - Trigger: since_last_progress > 60
+   - Action: Switch to faster probe mode
+
+3. stop_probe
+   - No progress for 120s
+   - Trigger: since_last_progress > 120
+   - Action: Abort current probe, move to next
+
+4. output_partial
+   - Total elapsed > 180s
+   - Trigger: elapsed_seconds > 180
+   - Action: Return partial results, don't wait
+
+[Progress Tracking]
+
+Each task tracks:
+  - task_id: Unique identifier
+  - start_time: When task started
+  - last_progress_time: Last progress update
+  - progress_stages: List of stage updates
+  - current_stage: Current stage name
+
+Progress stages include:
+  - timestamp: When stage started
+  - stage: Stage name
+  - details: Stage details
+  - elapsed_seconds: Time since task start
+
+[Implementation]
+
+File: infrastructure/connected_runtime_recovery_policy.py
+Class: TaskProgressTracker
+
+Methods:
+  - __init__(task_id, timeout_seconds=180.0)
+  - update_progress(stage, details="")
+  - check_timeout() -> Dict[str, Any]
+  - get_progress_report() -> str
+
+Usage Example:
+```python
+from infrastructure.connected_runtime_recovery_policy import TaskProgressTracker
+
+tracker = TaskProgressTracker("my_task", timeout_seconds=180.0)
+
+# Update progress
+tracker.update_progress("stage1", "Processing data")
+
+# Check timeout
+status = tracker.check_timeout()
+if status["action"] != "continue":
+    print(f"Timeout action: {status['action']}")
+
+# Get report
+print(tracker.get_progress_report())
+```
+
+[Test Results]
+
+During this test session:
+  - All tasks completed within thresholds
+  - No timeout actions triggered
+  - Maximum elapsed time: < 1 second
+  - All stages properly tracked
+
+[Best Practices]
+
+1. Call update_progress() regularly (at least every 20s)
+2. Check timeout before long-running operations
+3. Handle all timeout actions appropriately
+4. Log progress stages for debugging
+5. Don't block on operations that may timeout
+
+[Anti-Patterns to Avoid]
+
+❌ Waiting indefinitely for slow operations
+❌ Not updating progress during long operations
+❌ Ignoring timeout status
+❌ Continuing after output_partial
+❌ Not logging progress stages
+
+[Recommended Flow]
+
+```
+Start Task
+    ↓
+Update Progress (init)
+    ↓
+Check Timeout ──→ output_partial ──→ Return Partial
+    ↓ continue
+Execute Operation
+    ↓
+Update Progress (operation_done)
+    ↓
+Check Timeout ──→ degrade/stop ──→ Handle Accordingly
+    ↓ continue
+Continue Task
+    ↓
+...
+    ↓
+Complete Task
+```
+
+============================================================
+Generated: 2026-04-25T11:09:00
+============================================================

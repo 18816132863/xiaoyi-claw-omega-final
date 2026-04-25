@@ -1,0 +1,102 @@
+============================================================
+CONNECTED RUNTIME RECOVERY REPORT
+============================================================
+
+[L0 Auto Adjustment Status]
+
+Current Mode: normal_probe
+Success Rate: 100.0%
+Last Adjustment: N/A
+
+Mode Downgrade Chain:
+  normal_probe → fast_probe → limited_scope_probe → cache_fallback → permission_diagnosis
+
+Trigger Condition:
+  - L0 success rate < 80%
+  - At least 5 probe attempts recorded
+
+[Recovery Strategies]
+
+For Service Timeout (contact/calendar/note/location):
+  1. retry (max 3 attempts, exponential backoff)
+  2. limited_scope_probe (reduce request scope)
+  3. cache_fallback (use cached data)
+  4. pending_queue (defer to later)
+  5. permission_diagnosis (check permissions)
+  6. human_action_required (last resort)
+
+For Permission Required:
+  1. permission_diagnosis
+  2. human_action_required
+
+For Runtime Bridge Unavailable:
+  1. retry
+  2. limited_scope_probe
+  3. human_action_required
+
+For Session Disconnected:
+  1. retry
+  2. human_action_required
+
+[Failure Classification]
+
+Error Pattern → Failure Type:
+  - "contact service timeout" → contact_service_timeout
+  - "calendar timeout" → calendar_service_timeout
+  - "note timeout" → note_service_timeout
+  - "location timeout" → location_service_timeout
+  - "permission denied" → permission_required
+  - "bridge unavailable" → runtime_bridge_unavailable
+  - "session disconnected" → session_disconnected
+
+[Task Progress Timeout Control]
+
+Stage Output Interval: 20 seconds
+Auto Degrade Threshold: 60 seconds (no progress)
+Stop Probe Threshold: 120 seconds (no progress)
+Partial Output Threshold: 180 seconds (total elapsed)
+
+Actions:
+  - continue: Normal operation
+  - degrade: Switch to faster/lighter probe mode
+  - stop_probe: Abort current probe, move to next
+  - output_partial: Return partial results, don't wait
+
+[Recovery Statistics]
+
+Total Recovery Attempts: 0
+Successful Recoveries: 0
+Failed Recoveries: 0
+Human Interventions Required: 0
+
+Note: No actual failures occurred during testing.
+All probes completed successfully in xiaoyi_channel environment.
+
+[Best Practices]
+
+1. Always classify failure type before recovery
+2. Start with least invasive strategy (retry)
+3. Escalate only when simpler strategies fail
+4. Record all recovery attempts for analysis
+5. Only request human intervention when truly necessary
+6. Respect timeout thresholds to prevent hanging
+
+[Implementation Details]
+
+File: infrastructure/connected_runtime_recovery_policy.py
+Classes:
+  - RecoveryStrategy (Enum)
+  - ProbeMode (Enum)
+  - FailureType (Enum)
+  - RecoveryStep (Dataclass)
+  - RecoveryPlan (Dataclass)
+  - L0AutoAdjustment (Class)
+  - ConnectedRuntimeRecoveryPolicy (Class)
+  - TaskProgressTracker (Class)
+
+Functions:
+  - format_recovery_report()
+
+============================================================
+Generated: 2026-04-25T11:09:00
+============================================================

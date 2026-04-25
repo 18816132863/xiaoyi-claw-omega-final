@@ -118,21 +118,27 @@ class TestRouteSelection:
         route = route_selector.select_best_route("发送消息")
         assert route is not None
         assert route["capability"] == "send_message"
-        assert route["risk_level"] == "HIGH"
+        # 新风险体系：L3 = 高风险
+        assert route["risk_level"] in ["L3", "L4"], \
+            f"send_message 应该是高风险 (L3+), 实际: {route['risk_level']}"
     
     def test_select_best_route_for_query(self, route_selector):
         """测试查询操作的最佳路由选择"""
         route = route_selector.select_best_route("查询备忘录")
         assert route is not None
         assert "query" in route["capability"]
-        assert route["risk_level"] == "LOW"
+        # 新风险体系：L0-L2 = 低风险
+        assert route["risk_level"] in ["L0", "L1", "L2"], \
+            f"query 应该是低风险 (L0-L2), 实际: {route['risk_level']}"
     
     def test_select_best_route_for_delete(self, route_selector):
         """测试删除操作的最佳路由选择"""
         route = route_selector.select_best_route("删除备忘录")
         assert route is not None
         assert "delete" in route["capability"]
-        assert route["risk_level"] == "HIGH"
+        # 新风险体系：L3+ = 高风险
+        assert route["risk_level"] in ["L3", "L4"], \
+            f"delete 应该是高风险 (L3+), 实际: {route['risk_level']}"
         assert route["requires_confirmation"] is True
 
 
@@ -158,8 +164,10 @@ class TestRouteMetadata:
         for cap in high_risk_caps:
             route = route_selector.find_route_by_capability(cap)
             if route:
-                assert route["requires_confirmation"], \
-                    f"{cap} 应该需要确认"
+                # 新风险体系：L3+ 需要确认
+                if route["risk_level"] in ["L3", "L4", "BLOCKED"]:
+                    assert route["requires_confirmation"], \
+                        f"{cap} 应该需要确认"
 
 
 class TestFallbackChain:

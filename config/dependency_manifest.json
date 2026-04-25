@@ -1,0 +1,82 @@
+{
+  "version": "1.0.0",
+  "description": "依赖清单 - 定义所有需要的依赖",
+  "categories": {
+    "core": {
+      "description": "核心依赖 - 必须安装",
+      "required": true,
+      "packages": [
+        "numpy",
+        "scipy",
+        "scikit-learn",
+        "requests",
+        "aiosqlite",
+        "cryptography",
+        "pycryptodome"
+      ]
+    },
+    "llm": {
+      "description": "LLM 集成依赖",
+      "required": false,
+      "packages": [
+        "openai",
+        "anthropic",
+        "langchain",
+        "tiktoken"
+      ]
+    },
+    "embedding": {
+      "description": "Embedding 依赖",
+      "required": false,
+      "packages": [
+        "sentence-transformers",
+        "transformers"
+      ]
+    },
+    "vector": {
+      "description": "向量存储依赖",
+      "required": false,
+      "packages": [
+        "qdrant-client",
+        "chromadb",
+        "faiss-cpu"
+      ]
+    },
+    "ml": {
+      "description": "机器学习依赖",
+      "required": false,
+      "packages": [
+        "torch",
+        "numba",
+        "llvmlite"
+      ]
+    },
+    "performance": {
+      "description": "性能优化依赖",
+      "required": false,
+      "packages": [
+        "numexpr",
+        "bottleneck"
+      ]
+    },
+    "document": {
+      "description": "文档处理依赖",
+      "required": false,
+      "packages": [
+        "reportlab",
+        "weasyprint",
+        "pdfkit"
+      ]
+    }
+  },
+  "auto_install": {
+    "enabled": true,
+    "on_import_error": true,
+    "timeout_seconds": 300
+  },
+  "notes": [
+    "核心依赖必须安装，其他依赖按需安装",
+    "当检测到 ImportError 时自动安装对应依赖",
+    "可通过 dependency_manager.py 管理依赖"
+  ]
+}

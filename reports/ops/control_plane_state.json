@@ -1,0 +1,34 @@
+{
+  "overview": {
+    "total_policies": 10,
+    "active_policies": 10
+  },
+  "gates": {
+    "premerge": "passed",
+    "nightly": "passed",
+    "release": "pending"
+  },
+  "alerts": {
+    "active": 0,
+    "acknowledged": 0
+  },
+  "incidents": {
+    "open": 0,
+    "resolved": 0
+  },
+  "remediation": {
+    "pending": 0,
+    "completed": 0
+  },
+  "approvals": {
+    "pending": 0,
+    "approved": 0
+  },
+  "dashboard": {
+    "status": "healthy"
+  },
+  "audit": {
+    "last_run": "2026-04-24T22:52:05.127230"
+  },
+  "timestamp": "2026-04-24T22:52:05.127232"
+}

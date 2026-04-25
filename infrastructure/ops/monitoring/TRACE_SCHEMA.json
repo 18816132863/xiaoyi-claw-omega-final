@@ -1,0 +1,156 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-06T12:40:00+08:00",
+  "description": "执行轨迹记录结构",
+  "schema": {
+    "traceId": {
+      "type": "string",
+      "required": true,
+      "description": "轨迹唯一标识"
+    },
+    "sessionId": {
+      "type": "string",
+      "required": true,
+      "description": "会话ID"
+    },
+    "taskId": {
+      "type": "string",
+      "required": true,
+      "description": "任务ID"
+    },
+    "timestamp": {
+      "type": "datetime",
+      "required": true,
+      "description": "开始时间"
+    },
+    "task_type": {
+      "type": "string",
+      "required": true,
+      "enum": ["qa", "search", "document_edit", "planning", "creative_generation", "tool_use", "memory_update", "multi_step_agent", "high_risk_request"],
+      "description": "任务类型"
+    },
+    "workflow": {
+      "type": "string",
+      "required": true,
+      "description": "使用的工作流"
+    },
+    "selected_skills": {
+      "type": "array",
+      "items": { "type": "string" },
+      "required": true,
+      "description": "选择的技能列表"
+    },
+    "tools_used": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "call_time": { "type": "datetime" },
+          "duration_ms": { "type": "integer" },
+          "result": { "type": "string", "enum": ["success", "failure", "timeout"] }
+        }
+      },
+      "required": true,
+      "description": "使用的工具列表"
+    },
+    "retries": {
+      "type": "integer",
+      "required": true,
+      "default": 0,
+      "description": "重试次数"
+    },
+    "outcome": {
+      "type": "string",
+      "required": true,
+      "enum": ["success", "partial", "failure", "refused", "timeout"],
+      "description": "执行结果"
+    },
+    "failure_point": {
+      "type": "string",
+      "required": false,
+      "description": "失败点"
+    },
+    "failure_reason": {
+      "type": "string",
+      "required": false,
+      "description": "失败原因"
+    },
+    "duration_ms": {
+      "type": "integer",
+      "required": true,
+      "description": "总耗时(毫秒)"
+    },
+    "token_cost": {
+      "type": "object",
+      "required": true,
+      "properties": {
+        "input_tokens": { "type": "integer" },
+        "output_tokens": { "type": "integer" },
+        "total_tokens": { "type": "integer" }
+      },
+      "description": "Token消耗"
+    },
+    "memory_access": {
+      "type": "object",
+      "required": false,
+      "properties": {
+        "reads": { "type": "integer" },
+        "writes": { "type": "integer" },
+        "cache_hits": { "type": "integer" }
+      },
+      "description": "记忆访问统计"
+    },
+    "retrieval_stats": {
+      "type": "object",
+      "required": false,
+      "properties": {
+        "queries": { "type": "integer" },
+        "results": { "type": "integer" },
+        "sources": { "type": "array", "items": { "type": "string" } }
+      },
+      "description": "检索统计"
+    },
+    "context_stats": {
+      "type": "object",
+      "required": false,
+      "properties": {
+        "initial_tokens": { "type": "integer" },
+        "final_tokens": { "type": "integer" },
+        "compression_ratio": { "type": "number" }
+      },
+      "description": "上下文统计"
+    },
+    "degraded": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "是否降级执行"
+    },
+    "degraded_reason": {
+      "type": "string",
+      "required": false,
+      "description": "降级原因"
+    },
+    "metadata": {
+      "type": "object",
+      "required": false,
+      "properties": {
+        "channel": { "type": "string" },
+        "model": { "type": "string" },
+        "version": { "type": "string" }
+      },
+      "description": "元数据"
+    }
+  },
+  "storage": {
+    "format": "jsonl",
+    "path": "~/.openclaw/traces/",
+    "retention": "30 days",
+    "compression": "gzip after 7 days"
+  },
+  "indexing": {
+    "indexes": ["traceId", "sessionId", "taskId", "task_type", "timestamp", "outcome"],
+    "fulltext": ["failure_reason"]
+  }
+}

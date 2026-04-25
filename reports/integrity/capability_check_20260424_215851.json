@@ -1,0 +1,1235 @@
+{
+  "timestamp": "2026-04-24T21:58:51.832575",
+  "capabilities": {
+    "delete_note": {
+      "name": "delete_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_note.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "self_repair": {
+      "name": "self_repair",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/self_repair.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "query_contact": {
+      "name": "query_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_contact.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "explain_notification_auth_state": {
+      "name": "explain_notification_auth_state",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_notification_auth_state.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "refresh_notification_auth": {
+      "name": "refresh_notification_auth",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/refresh_notification_auth.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "delete_contact": {
+      "name": "delete_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_contact.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "pause_task": {
+      "name": "pause_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/pause_task.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "make_call": {
+      "name": "make_call",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/make_call.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "delete_photo": {
+      "name": "delete_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_photo.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "manage_file": {
+      "name": "manage_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/manage_file.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "cancel_task": {
+      "name": "cancel_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_task.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "get_location": {
+      "name": "get_location",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/get_location.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "delete_xiaoyi_note": {
+      "name": "delete_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_xiaoyi_note.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "query_photo": {
+      "name": "query_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_photo.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "delete_calendar_event": {
+      "name": "delete_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_calendar_event.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "preview_side_effect": {
+      "name": "preview_side_effect",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/preview_side_effect.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "send_message": {
+      "name": "send_message",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/send_message.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "list_recent_messages": {
+      "name": "list_recent_messages",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_messages.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "resend_message": {
+      "name": "resend_message",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/resend_message.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "create_album": {
+      "name": "create_album",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_album.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "query_note": {
+      "name": "query_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_note.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "explain_message_result": {
+      "name": "explain_message_result",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_message_result.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "update_calendar_event": {
+      "name": "update_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_calendar_event.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "query_file": {
+      "name": "query_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_file.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "explain_invocation_status": {
+      "name": "explain_invocation_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_invocation_status.py",
+      "has_class": true,
+      "has_execute": false,
+      "has_test": false,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "query_calendar_event": {
+      "name": "query_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_calendar_event.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "diagnostics": {
+      "name": "diagnostics",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/diagnostics.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "query_message_status": {
+      "name": "query_message_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_message_status.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "list_calendar_events": {
+      "name": "list_calendar_events",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_calendar_events.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "create_contact": {
+      "name": "create_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_contact.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "query_notification_status": {
+      "name": "query_notification_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_notification_status.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "create_alarm": {
+      "name": "create_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_alarm.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "update_contact": {
+      "name": "update_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_contact.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "search_notes": {
+      "name": "search_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/search_notes.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "bootstrap": {
+      "name": "bootstrap",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/bootstrap.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": false,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "approve_action": {
+      "name": "approve_action",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/approve_action.py",
+      "has_class": false,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "cancel_notification": {
+      "name": "cancel_notification",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_notification.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "delete_file": {
+      "name": "delete_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_file.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "update_note": {
+      "name": "update_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_note.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "registry": {
+      "name": "registry",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/registry.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "query_xiaoyi_note": {
+      "name": "query_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_xiaoyi_note.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "retry_task": {
+      "name": "retry_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/retry_task.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "resume_task": {
+      "name": "resume_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/resume_task.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "delete_alarm": {
+      "name": "delete_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_alarm.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "audit_queries": {
+      "name": "audit_queries",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/audit_queries.py",
+      "has_class": true,
+      "has_execute": false,
+      "has_test": false,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "schedule_task": {
+      "name": "schedule_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/schedule_task.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "export_history": {
+      "name": "export_history",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/export_history.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "replay_run": {
+      "name": "replay_run",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/replay_run.py",
+      "has_class": true,
+      "has_execute": true,
+      "has_test": true,
+      "has_doc": true,
+      "registered": false,
+      "routed": true
+    },
+    "query_alarm": {
+      "name": "query_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_alarm.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "confirm_invocation": {
+      "name": "confirm_invocation",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/confirm_invocation.py",
+      "has_class": true,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "update_alarm": {
+      "name": "update_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_alarm.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "list_recent_notes": {
+      "name": "list_recent_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_notes.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    },
+    "check_calendar_conflicts": {
+      "name": "check_calendar_conflicts",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/check_calendar_conflicts.py",
+      "has_class": false,
+      "has_execute": false,
+      "has_test": true,
+      "has_doc": false,
+      "registered": false,
+      "routed": false
+    }
+  },
+  "issues": [
+    {
+      "type": "capability_not_registered",
+      "name": "delete_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_note.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "self_repair",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/self_repair.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_contact.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "explain_notification_auth_state",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_notification_auth_state.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "refresh_notification_auth",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/refresh_notification_auth.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_contact.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "pause_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/pause_task.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "make_call",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/make_call.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_photo.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "manage_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/manage_file.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "cancel_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_task.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "get_location",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/get_location.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_xiaoyi_note.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_photo.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_calendar_event.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "preview_side_effect",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/preview_side_effect.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "send_message",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/send_message.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "list_recent_messages",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_messages.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "resend_message",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/resend_message.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "create_album",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_album.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_note.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "explain_message_result",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_message_result.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "update_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_calendar_event.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_file.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "explain_invocation_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_invocation_status.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_calendar_event.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "diagnostics",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/diagnostics.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_message_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_message_status.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "list_calendar_events",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_calendar_events.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "create_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_contact.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_notification_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_notification_status.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "create_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_alarm.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "update_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_contact.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "search_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/search_notes.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "bootstrap",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/bootstrap.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "approve_action",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/approve_action.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "cancel_notification",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_notification.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_file.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "update_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_note.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "registry",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/registry.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_xiaoyi_note.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "retry_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/retry_task.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "resume_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/resume_task.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "delete_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_alarm.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "audit_queries",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/audit_queries.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "schedule_task",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/schedule_task.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "export_history",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/export_history.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "replay_run",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/replay_run.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "query_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_alarm.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "confirm_invocation",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/confirm_invocation.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "update_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_alarm.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "list_recent_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_notes.py"
+    },
+    {
+      "type": "capability_not_registered",
+      "name": "check_calendar_conflicts",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/check_calendar_conflicts.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "delete_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_note.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "query_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_contact.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "explain_notification_auth_state",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_notification_auth_state.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "refresh_notification_auth",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/refresh_notification_auth.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "delete_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_contact.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "make_call",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/make_call.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "delete_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_photo.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "manage_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/manage_file.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "get_location",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/get_location.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "delete_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_xiaoyi_note.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "query_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_photo.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "delete_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_calendar_event.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "preview_side_effect",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/preview_side_effect.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "list_recent_messages",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_messages.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "resend_message",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/resend_message.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "create_album",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_album.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "query_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_note.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "explain_message_result",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_message_result.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "update_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_calendar_event.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "query_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_file.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "explain_invocation_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_invocation_status.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "query_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_calendar_event.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "query_message_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_message_status.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "list_calendar_events",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_calendar_events.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "create_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_contact.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "query_notification_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_notification_status.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "create_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_alarm.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "update_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_contact.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "search_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/search_notes.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "approve_action",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/approve_action.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "cancel_notification",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_notification.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "delete_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_file.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "update_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_note.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "query_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_xiaoyi_note.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "delete_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_alarm.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "audit_queries",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/audit_queries.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "query_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_alarm.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "confirm_invocation",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/confirm_invocation.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "update_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_alarm.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "list_recent_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_notes.py"
+    },
+    {
+      "type": "capability_not_routed",
+      "name": "check_calendar_conflicts",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/check_calendar_conflicts.py"
+    },
+    {
+      "type": "capability_not_tested",
+      "name": "explain_invocation_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_invocation_status.py"
+    },
+    {
+      "type": "capability_not_tested",
+      "name": "bootstrap",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/bootstrap.py"
+    },
+    {
+      "type": "capability_not_tested",
+      "name": "audit_queries",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/audit_queries.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "delete_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_note.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "query_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_contact.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "explain_notification_auth_state",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_notification_auth_state.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "refresh_notification_auth",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/refresh_notification_auth.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "delete_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_contact.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "make_call",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/make_call.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "delete_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_photo.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "manage_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/manage_file.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "get_location",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/get_location.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "delete_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_xiaoyi_note.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "query_photo",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_photo.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "delete_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_calendar_event.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "preview_side_effect",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/preview_side_effect.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "list_recent_messages",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_messages.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "resend_message",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/resend_message.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "create_album",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_album.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "query_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_note.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "explain_message_result",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_message_result.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "update_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_calendar_event.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "query_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_file.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "explain_invocation_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_invocation_status.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "query_calendar_event",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_calendar_event.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "query_message_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_message_status.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "list_calendar_events",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_calendar_events.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "create_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_contact.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "query_notification_status",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_notification_status.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "create_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/create_alarm.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "update_contact",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_contact.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "search_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/search_notes.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "approve_action",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/approve_action.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "cancel_notification",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_notification.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "delete_file",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_file.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "update_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_note.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "query_xiaoyi_note",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_xiaoyi_note.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "delete_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_alarm.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "audit_queries",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/audit_queries.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "query_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/query_alarm.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "confirm_invocation",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/confirm_invocation.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "update_alarm",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/update_alarm.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "list_recent_notes",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_notes.py"
+    },
+    {
+      "type": "capability_not_documented",
+      "name": "check_calendar_conflicts",
+      "path": "/home/sandbox/.openclaw/workspace/capabilities/check_calendar_conflicts.py"
+    }
+  ],
+  "stats": {
+    "total": 53,
+    "registered": 0,
+    "routed": 12,
+    "tested": 50,
+    "documented": 12,
+    "issues": 138
+  }
+}

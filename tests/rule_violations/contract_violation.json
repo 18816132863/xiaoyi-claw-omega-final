@@ -1,0 +1,4 @@
+{
+  "contract_violation": true,
+  "description": "Test fixture for JSON contract violation detection"
+}

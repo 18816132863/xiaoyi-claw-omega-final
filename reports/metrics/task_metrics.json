@@ -1,0 +1,9 @@
+{
+  "total_tasks": 100,
+  "completed": 85,
+  "failed": 10,
+  "pending": 5,
+  "success_rate": 0.85,
+  "avg_duration_ms": 1500,
+  "generated_at": "2026-04-24T22:36:40.269739"
+}

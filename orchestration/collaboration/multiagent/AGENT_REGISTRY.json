@@ -1,0 +1,188 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-06T13:40:00+08:00",
+  "description": "多智能体注册表",
+  "agents": {
+    "orchestrator": {
+      "agent_name": "主控Agent",
+      "role": "orchestrator",
+      "description": "负责任务接收、分解、调度、整合和最终输出",
+      "capabilities": [
+        "task_classification",
+        "task_decomposition",
+        "agent_delegation",
+        "result_integration",
+        "final_output"
+      ],
+      "limitations": [
+        "不直接执行检索",
+        "不直接执行工具调用",
+        "不直接进行事实校验"
+      ],
+      "callable_workflows": ["all"],
+      "allowed_tools": ["memory_search", "memory_get"],
+      "risk_level": "medium",
+      "handoff_targets": ["retriever", "executor", "validator", "writer", "planner", "auditor"],
+      "enabled": true,
+      "priority": 1
+    },
+    "retriever": {
+      "agent_name": "检索Agent",
+      "role": "retriever",
+      "description": "负责信息检索、来源评估、结果排序",
+      "capabilities": [
+        "web_search",
+        "memory_search",
+        "file_search",
+        "source_evaluation",
+        "result_ranking"
+      ],
+      "limitations": [
+        "不进行最终决策",
+        "不直接输出给用户",
+        "不修改记忆"
+      ],
+      "callable_workflows": ["search_pipeline"],
+      "allowed_tools": ["web_fetch", "memory_search", "search_file", "search_photo_gallery"],
+      "risk_level": "low",
+      "handoff_targets": ["validator", "orchestrator"],
+      "enabled": true,
+      "priority": 2
+    },
+    "executor": {
+      "agent_name": "执行Agent",
+      "role": "executor",
+      "description": "负责工具调用、技能执行、操作实施",
+      "capabilities": [
+        "tool_execution",
+        "skill_execution",
+        "operation_implementation",
+        "error_recovery"
+      ],
+      "limitations": [
+        "不进行规划决策",
+        "不直接输出给用户",
+        "不执行高风险操作"
+      ],
+      "callable_workflows": ["tool_execution", "document_pipeline"],
+      "allowed_tools": ["read", "write", "edit", "exec", "create_note", "create_alarm"],
+      "risk_level": "medium",
+      "handoff_targets": ["validator", "orchestrator"],
+      "enabled": true,
+      "priority": 2
+    },
+    "validator": {
+      "agent_name": "校验Agent",
+      "role": "validator",
+      "description": "负责事实校验、逻辑检查、安全验证、质量评估",
+      "capabilities": [
+        "fact_checking",
+        "logic_validation",
+        "security_validation",
+        "quality_assessment",
+        "conflict_detection"
+      ],
+      "limitations": [
+        "不生成内容",
+        "不直接输出给用户",
+        "不执行外部操作"
+      ],
+      "callable_workflows": [],
+      "allowed_tools": ["memory_search", "web_fetch"],
+      "risk_level": "low",
+      "handoff_targets": ["orchestrator"],
+      "enabled": true,
+      "priority": 3
+    },
+    "writer": {
+      "agent_name": "写作Agent",
+      "role": "writer",
+      "description": "负责内容创作、文档生成、格式化输出",
+      "capabilities": [
+        "content_creation",
+        "document_generation",
+        "formatting",
+        "style_adaptation"
+      ],
+      "limitations": [
+        "不进行事实决策",
+        "不执行外部操作",
+        "不修改记忆"
+      ],
+      "callable_workflows": ["creation_pipeline", "document_pipeline"],
+      "allowed_tools": ["read", "write"],
+      "risk_level": "low",
+      "handoff_targets": ["validator", "orchestrator"],
+      "enabled": true,
+      "priority": 2
+    },
+    "planner": {
+      "agent_name": "规划Agent",
+      "role": "planner",
+      "description": "负责任务规划、方案设计、步骤分解",
+      "capabilities": [
+        "task_planning",
+        "solution_design",
+        "step_decomposition",
+        "resource_estimation"
+      ],
+      "limitations": [
+        "不执行具体操作",
+        "不直接输出给用户",
+        "不进行最终决策"
+      ],
+      "callable_workflows": ["planning_workflow"],
+      "allowed_tools": ["memory_search"],
+      "risk_level": "low",
+      "handoff_targets": ["orchestrator", "executor"],
+      "enabled": true,
+      "priority": 2
+    },
+    "auditor": {
+      "agent_name": "审计Agent",
+      "role": "auditor",
+      "description": "负责操作审计、合规检查、风险监控",
+      "capabilities": [
+        "operation_auditing",
+        "compliance_checking",
+        "risk_monitoring",
+        "anomaly_detection"
+      ],
+      "limitations": [
+        "不执行操作",
+        "不生成内容",
+        "不直接输出给用户"
+      ],
+      "callable_workflows": [],
+      "allowed_tools": ["memory_search", "read"],
+      "risk_level": "low",
+      "handoff_targets": ["orchestrator"],
+      "enabled": true,
+      "priority": 4
+    }
+  },
+  "agent_interaction_rules": {
+    "max_concurrent_agents": 3,
+    "handoff_timeout_ms": 30000,
+    "result_aggregation": "orchestrator_only",
+    "conflict_resolution": "validator_priority"
+  },
+  "statistics": {
+    "total_agents": 7,
+    "by_role": {
+      "orchestrator": 1,
+      "retriever": 1,
+      "executor": 1,
+      "validator": 1,
+      "writer": 1,
+      "planner": 1,
+      "auditor": 1
+    },
+    "by_risk_level": {
+      "low": 5,
+      "medium": 2,
+      "high": 0,
+      "critical": 0
+    }
+  }
+}

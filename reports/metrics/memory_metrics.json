@@ -1,0 +1,8 @@
+{
+  "total_memories": 500,
+  "retrievals": 200,
+  "cache_hits": 150,
+  "cache_hit_rate": 0.75,
+  "avg_retrieval_ms": 50,
+  "generated_at": "2026-04-24T22:36:40.269752"
+}

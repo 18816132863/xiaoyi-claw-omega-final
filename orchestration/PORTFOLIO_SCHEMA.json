@@ -1,0 +1,222 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Portfolio Schema",
+  "description": "多项目组合数据结构定义，支持统一管理多个长期项目",
+  "type": "object",
+  "required": ["portfolio_id", "portfolio_name", "projects", "status", "created_at"],
+  "properties": {
+    "portfolio_id": {
+      "type": "string",
+      "description": "项目组合唯一标识符",
+      "pattern": "^PORT-\\d{4}-\\d{3}$"
+    },
+    "portfolio_name": {
+      "type": "string",
+      "description": "项目组合名称",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "description": {
+      "type": "string",
+      "description": "项目组合描述"
+    },
+    "projects": {
+      "type": "array",
+      "description": "包含的项目列表",
+      "items": {
+        "type": "object",
+        "required": ["project_id", "priority"],
+        "properties": {
+          "project_id": { "type": "string" },
+          "project_name": { "type": "string" },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "项目优先级，数字越大优先级越高"
+          },
+          "status": { "type": "string" },
+          "phase": { "type": "string" },
+          "resource_allocation": {
+            "type": "number",
+            "description": "资源分配比例",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "added_at": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "owners": {
+      "type": "array",
+      "description": "组合负责人列表",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user_id": { "type": "string" },
+          "role": { "type": "string", "enum": ["primary", "secondary", "observer"] }
+        }
+      }
+    },
+    "global_objectives": {
+      "type": "array",
+      "description": "组合级全局目标",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objective_id": { "type": "string" },
+          "description": { "type": "string" },
+          "target": { "type": "string" },
+          "measurement": { "type": "string" },
+          "priority": { "type": "string", "enum": ["critical", "high", "medium", "low"] }
+        }
+      }
+    },
+    "priority_rules": {
+      "type": "object",
+      "description": "优先级规则配置",
+      "properties": {
+        "default_strategy": {
+          "type": "string",
+          "enum": ["user_value_first", "deadline_first", "risk_first", "balanced"],
+          "default": "balanced"
+        },
+        "custom_rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rule_id": { "type": "string" },
+              "condition": { "type": "string" },
+              "priority_adjustment": { "type": "integer" }
+            }
+          }
+        },
+        "preemption_enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "是否允许高优先级项目抢占资源"
+        }
+      }
+    },
+    "shared_resources": {
+      "type": "array",
+      "description": "共享资源列表",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resource_id": { "type": "string" },
+          "resource_type": { "type": "string" },
+          "total_capacity": { "type": "number" },
+          "allocated_projects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "project_id": { "type": "string" },
+                "allocation": { "type": "number" },
+                "is_flexible": { "type": "boolean", "default": true }
+              }
+            }
+          }
+        }
+      }
+    },
+    "cross_project_dependencies": {
+      "type": "array",
+      "description": "跨项目依赖",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dependency_id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["milestone", "resource", "knowledge", "approval", "delivery_sequence"]
+          },
+          "from_project": { "type": "string" },
+          "to_project": { "type": "string" },
+          "description": { "type": "string" },
+          "status": { "type": "string", "enum": ["pending", "satisfied", "blocked", "failed"] }
+        }
+      }
+    },
+    "risk_level": {
+      "type": "string",
+      "description": "组合整体风险等级",
+      "enum": ["low", "medium", "high", "critical"],
+      "default": "medium"
+    },
+    "risk_factors": {
+      "type": "array",
+      "description": "风险因素",
+      "items": {
+        "type": "object",
+        "properties": {
+          "factor_id": { "type": "string" },
+          "description": { "type": "string" },
+          "impact": { "type": "string", "enum": ["low", "medium", "high"] },
+          "probability": { "type": "string", "enum": ["low", "medium", "high"] },
+          "mitigation": { "type": "string" }
+        }
+      }
+    },
+    "review_cadence": {
+      "type": "object",
+      "description": "复盘频率配置",
+      "properties": {
+        "weekly_review": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "day": { "type": "string", "enum": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] },
+            "time": { "type": "string" }
+          }
+        },
+        "monthly_review": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "day": { "type": "integer", "minimum": 1, "maximum": 28 }
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "组合状态",
+      "enum": ["active", "paused", "completed", "archived"],
+      "default": "active"
+    },
+    "budget": {
+      "type": "object",
+      "description": "组合预算",
+      "properties": {
+        "total_budget": { "type": "number" },
+        "allocated": { "type": "number" },
+        "consumed": { "type": "number" },
+        "currency": { "type": "string", "default": "CNY" }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "description": "组合时间线",
+      "properties": {
+        "start_date": { "type": "string", "format": "date" },
+        "target_end_date": { "type": "string", "format": "date" },
+        "actual_end_date": { "type": "string", "format": "date" }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

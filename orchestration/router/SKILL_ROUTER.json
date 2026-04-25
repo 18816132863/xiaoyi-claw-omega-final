@@ -1,0 +1,35 @@
+{
+  "version": "2.8.0",
+  "updated": "2026-04-10",
+  "routes": [
+    {
+      "pattern": "搜索|search|查询|query",
+      "skill": "xiaoyi-web-search",
+      "priority": 1
+    },
+    {
+      "pattern": "图片|image|照片|photo",
+      "skill": "xiaoyi-image-search",
+      "priority": 1
+    },
+    {
+      "pattern": "文档|document|word|pdf|ppt",
+      "skill": "docx",
+      "priority": 1
+    },
+    {
+      "pattern": "技能|skill|安装|install",
+      "skill": "find-skills",
+      "priority": 1
+    },
+    {
+      "pattern": "创建|create|生成|generate",
+      "skill": "skill-creator",
+      "priority": 2
+    }
+  ],
+  "fallback": {
+    "skill": "xiaoyi-web-search",
+    "reason": "默认使用搜索"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "version": "3.0.0",
+  "mode": "smart",
+  "description": "智能注入 - 自动压缩 + 增量更新",
+  "features": {
+    "smart_compress": true,
+    "incremental_update": true,
+    "auto_summary": true,
+    "cache_enabled": true
+  },
+  "inject": {
+    "core": [
+      "SOUL.md",
+      "USER.md",
+      "MEMORY.md"
+    ],
+    "auto_compress": [
+      "AGENTS.md",
+      "TOOLS.md"
+    ],
+    "indexes": [
+      "infrastructure/inventory/skill_registry_summary.json"
+    ]
+  },
+  "tools": {
+    "compressor": "scripts/smart_compressor.py",
+    "updater": "scripts/incremental_updater.py",
+    "summarizer": "scripts/auto_summarizer.py"
+  },
+  "estimated_tokens": 2000,
+  "cache_ttl": 3600
+}

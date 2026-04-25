@@ -1,0 +1,116 @@
+{
+  "MESSAGE_SENDING": {
+    "timeout_seconds": 30,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "短信发送能力"
+  },
+  "TASK_SCHEDULING": {
+    "timeout_seconds": 60,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "日程调度能力"
+  },
+  "STORAGE": {
+    "timeout_seconds": 30,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "存储能力（备忘录）"
+  },
+  "NOTIFICATION": {
+    "timeout_seconds": 30,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "通知推送能力"
+  },
+  "query_message_status": {
+    "timeout_seconds": 10,
+    "retry_count": 1,
+    "retry_delay_seconds": 1,
+    "description": "查询消息状态"
+  },
+  "resend_message": {
+    "timeout_seconds": 30,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "重发消息"
+  },
+  "query_calendar_event": {
+    "timeout_seconds": 15,
+    "retry_count": 1,
+    "retry_delay_seconds": 1,
+    "description": "查询日程事件"
+  },
+  "update_calendar_event": {
+    "timeout_seconds": 30,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "更新日程事件"
+  },
+  "delete_calendar_event": {
+    "timeout_seconds": 30,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "删除日程事件"
+  },
+  "check_calendar_conflicts": {
+    "timeout_seconds": 10,
+    "retry_count": 1,
+    "retry_delay_seconds": 1,
+    "description": "检查日程冲突"
+  },
+  "query_note": {
+    "timeout_seconds": 10,
+    "retry_count": 1,
+    "retry_delay_seconds": 1,
+    "description": "查询备忘录"
+  },
+  "update_note": {
+    "timeout_seconds": 30,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "更新备忘录"
+  },
+  "delete_note": {
+    "timeout_seconds": 30,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "删除备忘录"
+  },
+  "search_notes": {
+    "timeout_seconds": 15,
+    "retry_count": 1,
+    "retry_delay_seconds": 1,
+    "description": "搜索备忘录"
+  },
+  "query_notification_status": {
+    "timeout_seconds": 10,
+    "retry_count": 1,
+    "retry_delay_seconds": 1,
+    "description": "查询通知状态"
+  },
+  "cancel_notification": {
+    "timeout_seconds": 15,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "取消通知"
+  },
+  "confirm_invocation": {
+    "timeout_seconds": 10,
+    "retry_count": 1,
+    "retry_delay_seconds": 1,
+    "description": "确认调用记录"
+  },
+  "explain_message_result": {
+    "timeout_seconds": 5,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "解释消息结果"
+  },
+  "explain_notification_auth_state": {
+    "timeout_seconds": 10,
+    "retry_count": 0,
+    "retry_delay_seconds": 0,
+    "description": "解释通知授权状态"
+  }
+}

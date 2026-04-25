@@ -1,0 +1,133 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Collaboration Schema",
+  "description": "多人协作关系建模",
+  "type": "object",
+  "required": ["collaboration_id", "workspace_id", "participants", "roles", "status"],
+  "properties": {
+    "collaboration_id": {
+      "type": "string",
+      "description": "协作唯一标识",
+      "pattern": "^collab_[a-z0-9]{12}$"
+    },
+    "workspace_id": {
+      "type": "string",
+      "description": "所属工作空间ID",
+      "pattern": "^ws_[a-z0-9]{12}$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "所属租户ID"
+    },
+    "collaboration_type": {
+      "type": "string",
+      "enum": ["personal", "pair", "team", "organization"],
+      "description": "协作类型：个人/双人/团队/组织"
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["user_id", "role"],
+        "properties": {
+          "user_id": {"type": "string"},
+          "role": {"type": "string"},
+          "joined_at": {"type": "string", "format": "date-time"},
+          "status": {"type": "string", "enum": ["active", "inactive", "pending"]}
+        }
+      },
+      "minItems": 1
+    },
+    "roles": {
+      "type": "object",
+      "description": "角色定义",
+      "properties": {
+        "owner": {
+          "type": "object",
+          "properties": {
+            "can_delete": {"type": "boolean", "default": true},
+            "can_transfer": {"type": "boolean", "default": true},
+            "can_configure": {"type": "boolean", "default": true}
+          }
+        },
+        "admin": {
+          "type": "object",
+          "properties": {
+            "can_invite": {"type": "boolean", "default": true},
+            "can_remove": {"type": "boolean", "default": true},
+            "can_approve": {"type": "boolean", "default": true}
+          }
+        },
+        "member": {
+          "type": "object",
+          "properties": {
+            "can_create_task": {"type": "boolean", "default": true},
+            "can_comment": {"type": "boolean", "default": true},
+            "can_view": {"type": "boolean", "default": true}
+          }
+        },
+        "observer": {
+          "type": "object",
+          "properties": {
+            "can_view": {"type": "boolean", "default": true},
+            "can_comment": {"type": "boolean", "default": false}
+          }
+        }
+      }
+    },
+    "shared_projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "project_id": {"type": "string"},
+          "access_level": {"type": "string", "enum": ["read", "write", "admin"]}
+        }
+      }
+    },
+    "shared_contexts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "context_id": {"type": "string"},
+          "context_type": {"type": "string"},
+          "visibility": {"type": "string", "enum": ["all", "role_based", "need_to_know"]}
+        }
+      }
+    },
+    "visibility_scope": {
+      "type": "string",
+      "enum": ["private", "team", "organization", "public"],
+      "default": "team"
+    },
+    "approval_paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path_id": {"type": "string"},
+          "trigger": {"type": "string"},
+          "approvers": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "quorum": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "archived", "suspended", "pending"],
+      "default": "active"
+    }
+  }
+}

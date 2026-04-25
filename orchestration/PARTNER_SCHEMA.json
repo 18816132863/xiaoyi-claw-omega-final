@@ -1,0 +1,251 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Partner Schema",
+  "description": "合作伙伴对象定义",
+  "version": "1.0.0",
+  "updated": "2026-04-06",
+  
+  "partner_record": {
+    "type": "object",
+    "required": [
+      "partner_id",
+      "partner_name",
+      "partner_type",
+      "trust_level",
+      "status"
+    ],
+    "properties": {
+      "partner_id": {
+        "type": "string",
+        "description": "合作伙伴唯一标识",
+        "pattern": "^partner-[a-z0-9]{4,}$"
+      },
+      "partner_name": {
+        "type": "string",
+        "description": "合作伙伴名称",
+        "maxLength": 100
+      },
+      "partner_type": {
+        "type": "string",
+        "enum": [
+          "technology",
+          "service",
+          "reseller",
+          "integrator",
+          "consultant",
+          "isv"
+        ],
+        "description": "合作伙伴类型"
+      },
+      "trust_level": {
+        "type": "string",
+        "enum": ["bronze", "silver", "gold", "platinum"],
+        "description": "信任等级"
+      },
+      "allowed_scopes": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "tenant_read",
+            "tenant_diagnose",
+            "tenant_support",
+            "integration_manage",
+            "data_analyze",
+            "report_generate"
+          ]
+        },
+        "description": "允许的访问范围"
+      },
+      "approved_integrations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "integration_id": { "type": "string" },
+            "integration_name": { "type": "string" },
+            "approved_at": { "type": "string", "format": "date-time" },
+            "expires_at": { "type": "string", "format": "date-time" }
+          }
+        },
+        "description": "已批准的集成"
+      },
+      "data_access_mode": {
+        "type": "string",
+        "enum": ["none", "anonymized", "aggregated", "full"],
+        "description": "数据访问模式"
+      },
+      "commercial_model": {
+        "type": "object",
+        "properties": {
+          "model_type": {
+            "type": "string",
+            "enum": ["referral", "reseller", "service_fee", "revenue_share"]
+          },
+          "terms": { "type": "string" },
+          "commission_rate": { "type": "number" },
+          "contract_start": { "type": "string", "format": "date" },
+          "contract_end": { "type": "string", "format": "date" }
+        },
+        "description": "商业模型"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["pending", "active", "suspended", "terminated"],
+        "description": "合作伙伴状态"
+      },
+      "contact": {
+        "type": "object",
+        "properties": {
+          "primary_contact": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "email": { "type": "string", "format": "email" },
+              "phone": { "type": "string" }
+            }
+          },
+          "technical_contact": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "email": { "type": "string", "format": "email" },
+              "phone": { "type": "string" }
+            }
+          },
+          "business_contact": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "email": { "type": "string", "format": "email" },
+              "phone": { "type": "string" }
+            }
+          }
+        }
+      },
+      "certifications": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "certification_id": { "type": "string" },
+            "certification_name": { "type": "string" },
+            "issued_at": { "type": "string", "format": "date" },
+            "expires_at": { "type": "string", "format": "date" }
+          }
+        },
+        "description": "认证信息"
+      },
+      "audit_requirements": {
+        "type": "object",
+        "properties": {
+          "audit_frequency": {
+            "type": "string",
+            "enum": ["monthly", "quarterly", "annually"]
+          },
+          "last_audit": { "type": "string", "format": "date-time" },
+          "next_audit": { "type": "string", "format": "date-time" },
+          "audit_findings": { "type": "array" }
+        },
+        "description": "审计要求"
+      },
+      "assigned_tenants": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "tenant_id": { "type": "string" },
+            "assigned_at": { "type": "string", "format": "date-time" },
+            "scope": { "type": "array" },
+            "expires_at": { "type": "string", "format": "date-time" }
+          }
+        },
+        "description": "分配的租户"
+      },
+      "created_at": {
+        "type": "string",
+        "format": "date-time",
+        "description": "创建时间"
+      },
+      "updated_at": {
+        "type": "string",
+        "format": "date-time",
+        "description": "更新时间"
+      }
+    }
+  },
+  
+  "partner_types": {
+    "technology": {
+      "name": "技术合作伙伴",
+      "description": "提供技术集成或解决方案"
+    },
+    "service": {
+      "name": "服务合作伙伴",
+      "description": "提供实施或支持服务"
+    },
+    "reseller": {
+      "name": "经销商",
+      "description": "销售平台服务"
+    },
+    "integrator": {
+      "name": "集成商",
+      "description": "提供系统集成服务"
+    },
+    "consultant": {
+      "name": "咨询顾问",
+      "description": "提供咨询和培训服务"
+    },
+    "isv": {
+      "name": "独立软件开发商",
+      "description": "基于平台开发应用"
+    }
+  },
+  
+  "trust_levels": {
+    "bronze": {
+      "name": "铜级",
+      "description": "基础信任等级",
+      "max_tenant_access": 5,
+      "data_access": "anonymized",
+      "audit_frequency": "quarterly"
+    },
+    "silver": {
+      "name": "银级",
+      "description": "标准信任等级",
+      "max_tenant_access": 20,
+      "data_access": "aggregated",
+      "audit_frequency": "quarterly"
+    },
+    "gold": {
+      "name": "金级",
+      "description": "高级信任等级",
+      "max_tenant_access": 100,
+      "data_access": "full",
+      "audit_frequency": "monthly"
+    },
+    "platinum": {
+      "name": "白金级",
+      "description": "最高信任等级",
+      "max_tenant_access": "unlimited",
+      "data_access": "full",
+      "audit_frequency": "monthly",
+      "requires_certification": true
+    }
+  },
+  
+  "status_transitions": {
+    "pending": {
+      "can_transition_to": ["active", "terminated"]
+    },
+    "active": {
+      "can_transition_to": ["suspended", "terminated"]
+    },
+    "suspended": {
+      "can_transition_to": ["active", "terminated"]
+    },
+    "terminated": {
+      "can_transition_to": []
+    }
+  }
+}

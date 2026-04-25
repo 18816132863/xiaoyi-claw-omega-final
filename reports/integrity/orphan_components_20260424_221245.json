@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-04-24T22:12:45.080003",
+  "orphans": {
+    "modules": [],
+    "capabilities": [],
+    "configs": [],
+    "scripts": [],
+    "documents": [],
+    "tests": [],
+    "tables": []
+  },
+  "summary": {
+    "total": 0,
+    "by_category": {
+      "modules": 0,
+      "capabilities": 0,
+      "configs": 0,
+      "scripts": 0,
+      "documents": 0,
+      "tests": 0,
+      "tables": 0
+    }
+  }
+}

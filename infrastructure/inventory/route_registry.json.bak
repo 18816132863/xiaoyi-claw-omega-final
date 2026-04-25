@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-24",
+  "routes": {},
+  "stats": {
+    "total": 0,
+    "by_type": {
+      "capability": 0,
+      "skill": 0,
+      "module": 0
+    }
+  },
+  "description": "路由注册表 - 记录所有路由映射"
+}

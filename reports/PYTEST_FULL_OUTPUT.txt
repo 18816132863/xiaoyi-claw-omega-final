@@ -1,0 +1,92 @@
+============================================================
+PYTEST FULL OUTPUT - V8.8.6 Device State Fault Injection
+============================================================
+Generated: 2026-04-25T12:00:00
+
+============================================================
+Command:
+  python -m pytest tests/test_device_runtime_state.py tests/test_fault_injection_recovery.py tests/test_l0_auto_downgrade_triggered.py tests/test_task_progress_timeout.py tests/test_connected_permission_report.py tests/test_recovery_history_written.py -v --tb=short
+
+============================================================
+Output:
+============================= test session starts ==============================
+platform linux -- Python 3.12.10, pytest-8.4.2, pluggy-1.6.0 -- /usr/local/bin/python
+cachedir: .pytest_cache
+rootdir: /home/sandbox/.openclaw/workspace
+configfile: pyproject.toml
+plugins: asyncio-0.23.6, cov-7.1.0, anyio-4.12.1
+asyncio: mode=Mode.AUTO
+collecting ... collected 50 items
+
+tests/test_device_runtime_state.py::TestDeviceRuntimeState::test_xiaoyi_channel_session_connected_by_default PASSED [  2%]
+tests/test_device_runtime_state.py::TestDeviceRuntimeState::test_single_capability_timeout_not_device_disconnect PASSED [  4%]
+tests/test_device_runtime_state.py::TestDeviceRuntimeState::test_state_split_into_five_dimensions PASSED [  6%]
+tests/test_device_runtime_state.py::TestDeviceRuntimeState::test_get_failure_breakdown PASSED [  8%]
+tests/test_device_runtime_state.py::TestDeviceRuntimeState::test_is_partial_ready PASSED [ 10%]
+tests/test_device_runtime_state.py::TestDeviceRuntimeState::test_to_dict PASSED [ 12%]
+tests/test_device_runtime_state.py::TestNoFalseNoRealDevice::test_timeout_not_reported_as_no_real_device PASSED [ 14%]
+tests/test_device_runtime_state.py::TestNoFalseNoRealDevice::test_adapter_loaded_false_not_device_disconnect PASSED [ 16%]
+tests/test_device_runtime_state.py::TestServiceTimeoutNotSessionDisconnect::test_contact_timeout_keeps_session_connected PASSED [ 18%]
+tests/test_device_runtime_state.py::TestServiceTimeoutNotSessionDisconnect::test_multiple_timeouts_keeps_session_connected PASSED [ 20%]
+tests/test_fault_injection_recovery.py::TestFaultInjectionRecovery::test_contact_service_timeout_recovery PASSED [ 22%]
+tests/test_fault_injection_recovery.py::TestFaultInjectionRecovery::test_calendar_service_timeout_recovery PASSED [ 24%]
+tests/test_fault_injection_recovery.py::TestFaultInjectionRecovery::test_note_service_timeout_recovery PASSED [ 26%]
+tests/test_fault_injection_recovery.py::TestFaultInjectionRecovery::test_recovery_history_written PASSED [ 28%]
+tests/test_fault_injection_recovery.py::TestFaultInjectionRecovery::test_audit_written PASSED [ 30%]
+tests/test_fault_injection_recovery.py::Test_recovery_attempts_not_zero PASSED [ 32%]
+tests/test_fault_injection_recovery.py::TestFaultInjectionRecovery::test_fault_injection_matches_recovery_report PASSED [ 34%]
+tests/test_l0_auto_downgrade_triggered.py::TestL0AutoDowngradeTriggered::test_success_rate_below_80_triggers_downgrade PASSED [ 36%]
+tests/test_l0_auto_downgrade_triggered.py::TestL0AutoDowngradeTriggered::test_downgrade_chain_correct PASSED [ 38%]
+tests/test_l0_auto_downgrade_triggered.py::TestL0AutoDowngradeTriggered::test_recovery_history_records_downgrade PASSED [ 40%]
+tests/test_l0_auto_downgrade_triggered.py::TestL0AutoDowngradeTriggered::test_simulated_probes_count PASSED [ 42%]
+tests/test_l0_auto_downgrade_triggered.py::TestL0AutoDowngradeTriggered::test_success_failure_counts PASSED [ 44%]
+tests/test_l0_auto_downgrade_triggered.py::TestL0DowngradeChain::test_downgrade_from_normal_to_fast PASSED [ 46%]
+tests/test_l0_auto_downgrade_triggered.py::TestL0DowngradeChain::test_downgrade_chain_continues PASSED [ 48%]
+tests/test_l0_auto_downgrade_triggered.py::TestL0DowngradeChain::test_downgrade_stops_at_permission_diagnosis PASSED [ 50%]
+tests/test_l0_auto_downgrade_triggered.py::TestL0RecoveryStopsBeforeHumanWhenCacheAvailable::test_cache_fallback_prevents_human_action PASSED [ 52%]
+tests/test_task_progress_timeout.py::TestTaskProgressHeartbeat::test_heartbeat_emitted PASSED [ 54%]
+tests/test_task_progress_timeout.py::TestTaskProgressHeartbeat::test_heartbeat_count_reasonable PASSED [ 56%]
+tests/test_task_progress_timeout.py::TestTaskTimeoutDegradeTriggered::test_degrade_triggered_after_60s PASSED [ 58%]
+tests/test_task_progress_timeout.py::TestTaskTimeoutDegradeTriggered::test_degrade_event_recorded PASSED [ 60%]
+tests/test_task_progress_timeout.py::TestTaskTimeoutStopProbeTriggered::test_stop_probe_triggered_after_120s PASSED [ 62%]
+tests/test_task_progress_timeout.py::TestTaskTimeoutStopProbeTriggered::test_stop_probe_event_recorded PASSED [ 64%]
+tests/test_task_progress_timeout.py::TestTaskTimeoutPartialOutputTriggered::test_output_partial_triggered_after_180s PASSED [ 66%]
+tests/test_task_progress_timeout.py::TestTaskTimeoutPartialOutputTriggered::test_partial_result_generated PASSED [ 68%]
+tests/test_task_progress_timeout.py::TestTaskTimeoutPartialOutputTriggered::test_no_infinite_processing PASSED [ 70%]
+tests/test_task_progress_timeout.py::TestTaskProgressGuard::test_guard_initialization PASSED [ 72%]
+tests/test_task_progress_timeout.py::TestTaskProgressGuard::test_guard_update_progress PASSED [ 74%]
+tests/test_task_progress_timeout.py::TestTaskProgressGuard::test_guard_check_returns_continue_initially PASSED [ 76%]
+tests/test_connected_permission_report.py::TestConnectedPermissionReport::test_all_permissions_checked PASSED [ 78%]
+tests/test_connected_permission_report.py::TestConnectedPermissionReport::test_permission_states_valid PASSED [ 80%]
+tests/test_connected_permission_report.py::TestConnectedPermissionReport::test_permission_summary PASSED [ 82%]
+tests/test_connected_permission_report.py::TestConnectedPermissionReport::test_permission_report_format PASSED [ 84%]
+tests/test_connected_permission_report.py::TestPermissionRequiredHumanAction::test_denied_permission_requires_human_action PASSED [ 86%]
+tests/test_connected_permission_report.py::TestPermissionRequiredHumanAction::test_timeout_not_human_action_first PASSED [ 88%]
+tests/test_connected_permission_report.py::TestTimeoutNotHumanActionFirst::test_service_timeout_should_retry_first PASSED [ 90%]
+tests/test_connected_permission_report.py::TestTimeoutNotHumanActionFirst::test_permission_denied_can_be_human_action PASSED [ 92%]
+tests/test_recovery_history_written.py::TestRecoveryHistoryWritten::test_recovery_history_has_required_fields PASSED [ 94%]
+tests/test_recovery_history_written.py::TestRecoveryHistoryWritten::test_recovery_history_count_matches_results PASSED [ 96%]
+tests/test_recovery_history_written.py::TestRecoveryAuditWritten::test_audit_has_required_fields PASSED [ 98%]
+tests/test_recovery_history_written.py::TestRecoveryAuditWritten::test_audit_count_matches_results PASSED [100%]
+
+============================== 50 passed in 0.22s ==============================
+
+============================================================
+Summary:
+  - Total tests: 50
+  - Passed: 50
+  - Failed: 0
+  - Duration: 0.22s
+
+============================================================
+Test Categories:
+  - test_device_runtime_state.py: 10 passed
+  - test_fault_injection_recovery.py: 7 passed
+  - test_l0_auto_downgrade_triggered.py: 8 passed
+  - test_task_progress_timeout.py: 9 passed
+  - test_connected_permission_report.py: 8 passed
+  - test_recovery_history_written.py: 4 passed
+
+============================================================
+END OF PYTEST OUTPUT
+============================================================

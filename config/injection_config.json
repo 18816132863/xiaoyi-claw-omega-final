@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "mode": "minimal",
+  "description": "精简注入配置 - 减少 Token 消耗",
+  "inject": {
+    "always": [
+      "AGENTS.md",
+      "SOUL.md",
+      "USER.md",
+      "TOOLS.md",
+      "MEMORY.md"
+    ],
+    "daily": [
+      "memory/{date}.md"
+    ],
+    "indexes": [
+      "infrastructure/inventory/fusion_index.json",
+      "infrastructure/inventory/skill_registry_summary.json"
+    ]
+  },
+  "exclude": [
+    "skills/**",
+    "reports/**",
+    "docs/**",
+    "tests/**",
+    "repo/**",
+    "archive/**",
+    "*.pyc",
+    "*.pyo",
+    "__pycache__/**"
+  ],
+  "lazy_load": {
+    "skills": "find-skills",
+    "memory": "memory_search",
+    "reports": "read on demand"
+  }
+}

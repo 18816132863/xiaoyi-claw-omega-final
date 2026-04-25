@@ -1,0 +1,124 @@
+{
+  "version": "2.8.2",
+  "description": "技能路由表 - 按任务类型自动路由到对应层级",
+  
+  "layer_budgets": {
+    "L1": { "tokens": 5000, "load": "immediate", "skills": [] },
+    "L2": { "tokens": 3000, "load": "on_demand", "skills": ["memory", "obsidian", "find-skills"] },
+    "L3": { "tokens": 2000, "load": "on_demand", "skills": ["planning-with-files", "today-task", "post-job", "cron", "proactivity", "self-improving-agent", "command-center", "command-hook"] },
+    "L4": { "tokens": 2000, "load": "by_category", "skills": "see_categories" },
+    "L5": { "tokens": 1000, "load": "on_sensitive", "skills": ["clawsec-suite", "senior-security", "risk-management-specialist", "verified-agent-identity", "moltguard", "secret-guardian"] },
+    "L6": { "tokens": 1000, "load": "on_system", "skills": ["skill-creator", "skill-safe-install", "openclaw-agent-optimize", "performance-upgrade"] }
+  },
+  
+  "skill_categories": {
+    "document": {
+      "layer": "L4",
+      "skills": ["docx", "pdf", "pptx", "markitdown", "xiaoyi-doc-convert", "unified-document", "docs-cog", "nano-pdf"],
+      "triggers": ["文档", "word", "pdf", "ppt", "markdown", "转换格式"]
+    },
+    "data": {
+      "layer": "L4",
+      "skills": ["data-analysis", "excel-analysis", "sqlite", "mysql", "mongodb", "elasticsearch", "sheet-cog", "tushare-data"],
+      "triggers": ["数据", "分析", "excel", "数据库", "sql", "表格"]
+    },
+    "search": {
+      "layer": "L4",
+      "skills": ["xiaoyi-web-search", "web-browsing", "web-scraper", "web-search-exa", "tavily-search-skill", "cn-web-search", "deep-search-and-insight-synthesize", "unified-search"],
+      "triggers": ["搜索", "查找", "网页", "互联网", "网上"]
+    },
+    "image": {
+      "layer": "L4",
+      "skills": ["image", "xiaoyi-image-understanding", "xiaoyi-image-search", "seedream-image_gen", "unified-image", "chart-image", "image-gen", "camsnap"],
+      "triggers": ["图片", "图像", "照片", "截图", "生成图"]
+    },
+    "media": {
+      "layer": "L4",
+      "skills": ["audio-cog", "video-cog", "video-subtitles", "openai-whisper-api", "spotify-player", "sonoscli"],
+      "triggers": ["音频", "视频", "音乐", "字幕", "语音"]
+    },
+    "code": {
+      "layer": "L4",
+      "skills": ["git", "code-analysis-skills", "docker", "ansible", "terraform", "javascript-skills", "tdd-guide", "webapp-testing", "playwright", "agent-browser"],
+      "triggers": ["代码", "git", "docker", "部署", "测试", "开发"]
+    },
+    "content": {
+      "layer": "L4",
+      "skills": ["article-writer", "copywriter", "poetry", "novel-generator", "story-cog", "ai-ppt-generator", "ai-picture-book", "beauty-generation-api"],
+      "triggers": ["写作", "文章", "文案", "小说", "诗歌", "创作"]
+    },
+    "social": {
+      "layer": "L4",
+      "skills": ["xiaohongshu-all-in-one", "bilibili-all-in-one", "linkedin-api", "discord", "imsg", "imap-smtp-email"],
+      "triggers": ["小红书", "b站", "linkedin", "discord", "邮件", "发消息"]
+    },
+    "file": {
+      "layer": "L4",
+      "skills": ["file-manager", "baidu-netdisk-skills", "huawei-drive", "xiaoyi-file-upload", "tencent-cos-skill", "local_app_interconnect"],
+      "triggers": ["文件", "网盘", "上传", "下载", "云盘"]
+    },
+    "utility": {
+      "layer": "L4",
+      "skills": ["weather", "google-maps", "xiaoyi-health", "utils", "screenshot", "xiao-gui-agent"],
+      "triggers": ["天气", "地图", "健康", "截图", "手机"]
+    },
+    "business": {
+      "layer": "E1",
+      "skills": ["market-research", "stock-price-query", "crypto", "china-stock-analysis", "bitsoul-stock-quantization", "mx-stocks-screener", "industry-stock-tracker", "t-trading", "polymarket-trade", "moltrade", "klaviyo", "amazon-product-search-api-skill"],
+      "triggers": ["市场", "股票", "投资", "交易", "商业", "选品"]
+    },
+    "professional": {
+      "layer": "E2",
+      "skills": ["senior-architect", "senior-data-scientist", "ceo-advisor", "best-minds", "pexoai-agent", "university-applications"],
+      "triggers": ["架构", "专家", "顾问", "留学", "专业"]
+    },
+    "platform": {
+      "layer": "E3",
+      "skills": ["juejin-skills", "getnote", "hot-news-aggregator", "tech-news-digest"],
+      "triggers": ["掘金", "笔记", "热点", "新闻"]
+    },
+    "design": {
+      "layer": "E4",
+      "skills": ["frontend-design-pro", "ui-design-system", "admapix", "wan-image-video-generation-editting", "calcom-cal.com-web-design-guidelines-1.0.2"],
+      "triggers": ["设计", "ui", "前端", "创意"]
+    },
+    "automation": {
+      "layer": "E5",
+      "skills": ["auto-skill-upgrade", "skill-fusion", "agent-chronicle", "topic-monitor"],
+      "triggers": ["自动", "升级", "融合", "监控"]
+    },
+    "auxiliary": {
+      "layer": "E6",
+      "skills": ["keyword-research", "technical-seo-checker", "good-txt-to-hwreader", "xiaoyi-report", "quality-documentation-manager", "taskr"],
+      "triggers": ["关键词", "seo", "报告", "华为阅读"]
+    },
+    "special": {
+      "layer": "E7",
+      "skills": ["beginner-mode", "personas", "ontology"],
+      "triggers": ["新手", "人格", "本体"]
+    }
+  },
+  
+  "task_routing": {
+    "remember": { "layers": ["L1", "L2"], "description": "记忆相关任务" },
+    "schedule": { "layers": ["L1", "L3"], "description": "定时任务" },
+    "workflow": { "layers": ["L1", "L3", "L4"], "description": "复杂工作流" },
+    "document": { "layers": ["L1", "L4"], "category": "document", "description": "文档处理" },
+    "data": { "layers": ["L1", "L4"], "category": "data", "description": "数据分析" },
+    "search": { "layers": ["L1", "L4"], "category": "search", "description": "网络搜索" },
+    "image": { "layers": ["L1", "L4"], "category": "image", "description": "图片处理" },
+    "code": { "layers": ["L1", "L4"], "category": "code", "description": "代码开发" },
+    "content": { "layers": ["L1", "L4"], "category": "content", "description": "内容创作" },
+    "social": { "layers": ["L1", "L4"], "category": "social", "description": "社交平台" },
+    "business": { "layers": ["L1", "E1"], "category": "business", "description": "商业分析" },
+    "security": { "layers": ["L1", "L5"], "description": "安全相关" },
+    "system": { "layers": ["L1", "L6"], "description": "系统操作" }
+  },
+  
+  "performance_targets": {
+    "startup_latency_ms": 50,
+    "skill_lookup_ms": 10,
+    "layer_load_ms": 30,
+    "total_response_ms": 100
+  }
+}

@@ -1,0 +1,1254 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-24",
+  "items": {
+    "control_plane_audit": {
+      "name": "control_plane_audit",
+      "path": "scripts/control_plane_audit.py",
+      "description": "Script: control_plane_audit",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "smoke_test": {
+      "name": "smoke_test",
+      "path": "scripts/smoke_test.py",
+      "description": "Script: smoke_test",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "find_orphan_components": {
+      "name": "find_orphan_components",
+      "path": "scripts/find_orphan_components.py",
+      "description": "Script: find_orphan_components",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "send_daily_health_reminder": {
+      "name": "send_daily_health_reminder",
+      "path": "scripts/send_daily_health_reminder.py",
+      "description": "Script: send_daily_health_reminder",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "platform_health_check": {
+      "name": "platform_health_check",
+      "path": "scripts/platform_health_check.py",
+      "description": "Script: platform_health_check",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "run_nightly_audit": {
+      "name": "run_nightly_audit",
+      "path": "scripts/run_nightly_audit.py",
+      "description": "Script: run_nightly_audit",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_json_contracts": {
+      "name": "check_json_contracts",
+      "path": "scripts/check_json_contracts.py",
+      "description": "Script: check_json_contracts",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "start_production_celery": {
+      "name": "start_production_celery",
+      "path": "scripts/start_production_celery.py",
+      "description": "Script: start_production_celery",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "heartbeat_executor": {
+      "name": "heartbeat_executor",
+      "path": "scripts/heartbeat_executor.py",
+      "description": "Script: heartbeat_executor",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "control_plane": {
+      "name": "control_plane",
+      "path": "scripts/control_plane.py",
+      "description": "Script: control_plane",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "generate_alerts": {
+      "name": "generate_alerts",
+      "path": "scripts/generate_alerts.py",
+      "description": "Script: generate_alerts",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "start_local_celery": {
+      "name": "start_local_celery",
+      "path": "scripts/start_local_celery.py",
+      "description": "Script: start_local_celery",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "demo_manual_confirmation": {
+      "name": "demo_manual_confirmation",
+      "path": "scripts/demo_manual_confirmation.py",
+      "description": "场景演示：人工确认闭环",
+      "category": "demo",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "unified_inspector": {
+      "name": "unified_inspector",
+      "path": "scripts/unified_inspector.py",
+      "description": "Script: unified_inspector",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "test_all_skills": {
+      "name": "test_all_skills",
+      "path": "scripts/test_all_skills.py",
+      "description": "Script: test_all_skills",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "system_integrity_check": {
+      "name": "system_integrity_check",
+      "path": "scripts/system_integrity_check.py",
+      "description": "Script: system_integrity_check",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_test_collection": {
+      "name": "check_test_collection",
+      "path": "scripts/check_test_collection.py",
+      "description": "Script: check_test_collection",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_skill_security": {
+      "name": "check_skill_security",
+      "path": "scripts/check_skill_security.py",
+      "description": "Script: check_skill_security",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "deep_inspection": {
+      "name": "deep_inspection",
+      "path": "scripts/deep_inspection.py",
+      "description": "Script: deep_inspection",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "delete_manager": {
+      "name": "delete_manager",
+      "path": "scripts/delete_manager.py",
+      "description": "Script: delete_manager",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "release_check": {
+      "name": "release_check",
+      "path": "scripts/release_check.py",
+      "description": "Script: release_check",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "performance_benchmark": {
+      "name": "performance_benchmark",
+      "path": "scripts/performance_benchmark.py",
+      "description": "性能基准测试 V1.0.0",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "real_infra_test": {
+      "name": "real_infra_test",
+      "path": "scripts/real_infra_test.py",
+      "description": "Script: real_infra_test",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "auto_classify_skills": {
+      "name": "auto_classify_skills",
+      "path": "scripts/auto_classify_skills.py",
+      "description": "Script: auto_classify_skills",
+      "category": "automation",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "export_weekly_platform_report": {
+      "name": "export_weekly_platform_report",
+      "path": "scripts/export_weekly_platform_report.py",
+      "description": "Script: export_weekly_platform_report",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "upgrade_all_to_commercial": {
+      "name": "upgrade_all_to_commercial",
+      "path": "scripts/upgrade_all_to_commercial.py",
+      "description": "Script: upgrade_all_to_commercial",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "continuous_improvement": {
+      "name": "continuous_improvement",
+      "path": "scripts/continuous_improvement.py",
+      "description": "持续改进脚本 V1.0.0",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "component_classifier": {
+      "name": "component_classifier",
+      "path": "scripts/component_classifier.py",
+      "description": "Script: component_classifier",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "stress_capabilities": {
+      "name": "stress_capabilities",
+      "path": "scripts/stress_capabilities.py",
+      "description": "能力压测脚本",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "architecture_auto_improver": {
+      "name": "architecture_auto_improver",
+      "path": "scripts/architecture_auto_improver.py",
+      "description": "Script: architecture_auto_improver",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "skill_preflight_check": {
+      "name": "skill_preflight_check",
+      "path": "scripts/skill_preflight_check.py",
+      "description": "Script: skill_preflight_check",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "render_release_summary": {
+      "name": "render_release_summary",
+      "path": "scripts/render_release_summary.py",
+      "description": "渲染 release summary - 从统一规则引擎报告读取",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_route_wiring": {
+      "name": "check_route_wiring",
+      "path": "scripts/check_route_wiring.py",
+      "description": "Script: check_route_wiring",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "render_nightly_summary": {
+      "name": "render_nightly_summary",
+      "path": "scripts/render_nightly_summary.py",
+      "description": "渲染 nightly summary - 从统一规则引擎报告读取",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "permanent_keeper": {
+      "name": "permanent_keeper",
+      "path": "scripts/permanent_keeper.py",
+      "description": "Script: permanent_keeper",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "upgrade_skills_structure": {
+      "name": "upgrade_skills_structure",
+      "path": "scripts/upgrade_skills_structure.py",
+      "description": "Script: upgrade_skills_structure",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "demo_daily_reminder": {
+      "name": "demo_daily_reminder",
+      "path": "scripts/demo_daily_reminder.py",
+      "description": "场景演示：日常提醒自动化",
+      "category": "demo",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "session_end_detector": {
+      "name": "session_end_detector",
+      "path": "scripts/session_end_detector.py",
+      "description": "Script: session_end_detector",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "architecture_compliance_checker": {
+      "name": "architecture_compliance_checker",
+      "path": "scripts/architecture_compliance_checker.py",
+      "description": "Script: architecture_compliance_checker",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "security_sanity_check": {
+      "name": "security_sanity_check",
+      "path": "scripts/security_sanity_check.py",
+      "description": "Script: security_sanity_check",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_layer_dependencies": {
+      "name": "check_layer_dependencies",
+      "path": "scripts/check_layer_dependencies.py",
+      "description": "Script: check_layer_dependencies",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "create_scheduled_message": {
+      "name": "create_scheduled_message",
+      "path": "scripts/create_scheduled_message.py",
+      "description": "Script: create_scheduled_message",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "export_daily_platform_report": {
+      "name": "export_daily_platform_report",
+      "path": "scripts/export_daily_platform_report.py",
+      "description": "Script: export_daily_platform_report",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "send_message_helper": {
+      "name": "send_message_helper",
+      "path": "scripts/send_message_helper.py",
+      "description": "Script: send_message_helper",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "get_pending_sends": {
+      "name": "get_pending_sends",
+      "path": "scripts/get_pending_sends.py",
+      "description": "Script: get_pending_sends",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "run_release_gate": {
+      "name": "run_release_gate",
+      "path": "scripts/run_release_gate.py",
+      "description": "Script: run_release_gate",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "batch_upgrade_skills": {
+      "name": "batch_upgrade_skills",
+      "path": "scripts/batch_upgrade_skills.py",
+      "description": "Script: batch_upgrade_skills",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_capability_registry": {
+      "name": "check_capability_registry",
+      "path": "scripts/check_capability_registry.py",
+      "description": "Script: check_capability_registry",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_rule_guards": {
+      "name": "check_rule_guards",
+      "path": "scripts/check_rule_guards.py",
+      "description": "Script: check_rule_guards",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "run_rule_engine": {
+      "name": "run_rule_engine",
+      "path": "scripts/run_rule_engine.py",
+      "description": "Script: run_rule_engine",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "cleanup_reports": {
+      "name": "cleanup_reports",
+      "path": "scripts/cleanup_reports.py",
+      "description": "Script: cleanup_reports",
+      "category": "maintenance",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "auto_summarizer": {
+      "name": "auto_summarizer",
+      "path": "scripts/auto_summarizer.py",
+      "description": "Script: auto_summarizer",
+      "category": "automation",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "quick_start": {
+      "name": "quick_start",
+      "path": "scripts/quick_start.py",
+      "description": "快速启动脚本 V1.0.0",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "auto_register_scripts": {
+      "name": "auto_register_scripts",
+      "path": "scripts/auto_register_scripts.py",
+      "description": "Script: auto_register_scripts",
+      "category": "automation",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "generate_metrics": {
+      "name": "generate_metrics",
+      "path": "scripts/generate_metrics.py",
+      "description": "Script: generate_metrics",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "find_scheduled_tasks": {
+      "name": "find_scheduled_tasks",
+      "path": "scripts/find_scheduled_tasks.py",
+      "description": "Script: find_scheduled_tasks",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_repo_integrity": {
+      "name": "check_repo_integrity",
+      "path": "scripts/check_repo_integrity.py",
+      "description": "Script: check_repo_integrity",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "run_midday_check": {
+      "name": "run_midday_check",
+      "path": "scripts/run_midday_check.py",
+      "description": "Script: run_midday_check",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "one_time_trigger": {
+      "name": "one_time_trigger",
+      "path": "scripts/one_time_trigger.py",
+      "description": "Script: one_time_trigger",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "start_celery_real": {
+      "name": "start_celery_real",
+      "path": "scripts/start_celery_real.py",
+      "description": "Script: start_celery_real",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_change_impact": {
+      "name": "check_change_impact",
+      "path": "scripts/check_change_impact.py",
+      "description": "Script: check_change_impact",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "smart_compressor": {
+      "name": "smart_compressor",
+      "path": "scripts/smart_compressor.py",
+      "description": "Script: smart_compressor",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "demo_minimum_loop": {
+      "name": "demo_minimum_loop",
+      "path": "scripts/demo_minimum_loop.py",
+      "description": "Script: demo_minimum_loop",
+      "category": "demo",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "deploy_verification": {
+      "name": "deploy_verification",
+      "path": "scripts/deploy_verification.py",
+      "description": "Script: deploy_verification",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "export_capability_performance_report": {
+      "name": "export_capability_performance_report",
+      "path": "scripts/export_capability_performance_report.py",
+      "description": "导出能力性能报告",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "run_end_of_day_review": {
+      "name": "run_end_of_day_review",
+      "path": "scripts/run_end_of_day_review.py",
+      "description": "Script: run_end_of_day_review",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "run_weekly_growth_review": {
+      "name": "run_weekly_growth_review",
+      "path": "scripts/run_weekly_growth_review.py",
+      "description": "Script: run_weekly_growth_review",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "render_premerge_summary": {
+      "name": "render_premerge_summary",
+      "path": "scripts/render_premerge_summary.py",
+      "description": "渲染 premerge summary - 从统一规则引擎报告读取",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "demo_l4_strong_confirm": {
+      "name": "demo_l4_strong_confirm",
+      "path": "scripts/demo_l4_strong_confirm.py",
+      "description": "场景演示：L4 高风险强确认",
+      "category": "demo",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "start_celery_fakeredis": {
+      "name": "start_celery_fakeredis",
+      "path": "scripts/start_celery_fakeredis.py",
+      "description": "Script: start_celery_fakeredis",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "batch_skill_upgrade": {
+      "name": "batch_skill_upgrade",
+      "path": "scripts/batch_skill_upgrade.py",
+      "description": "Script: batch_skill_upgrade",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "production_acceptance": {
+      "name": "production_acceptance",
+      "path": "scripts/production_acceptance.py",
+      "description": "Script: production_acceptance",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "exception_manager": {
+      "name": "exception_manager",
+      "path": "scripts/exception_manager.py",
+      "description": "Script: exception_manager",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "demo_bootstrap": {
+      "name": "demo_bootstrap",
+      "path": "scripts/demo_bootstrap.py",
+      "description": "Script: demo_bootstrap",
+      "category": "demo",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_change_impact_enforcement": {
+      "name": "check_change_impact_enforcement",
+      "path": "scripts/check_change_impact_enforcement.py",
+      "description": "Script: check_change_impact_enforcement",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "package_release": {
+      "name": "package_release",
+      "path": "scripts/package_release.py",
+      "description": "Script: package_release",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "incident_cli": {
+      "name": "incident_cli",
+      "path": "scripts/incident_cli.py",
+      "description": "Script: incident_cli",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "skill_health_check": {
+      "name": "skill_health_check",
+      "path": "scripts/skill_health_check.py",
+      "description": "Script: skill_health_check",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_repo_integrity_fast": {
+      "name": "check_repo_integrity_fast",
+      "path": "scripts/check_repo_integrity_fast.py",
+      "description": "Script: check_repo_integrity_fast",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "incremental_updater": {
+      "name": "incremental_updater",
+      "path": "scripts/incremental_updater.py",
+      "description": "Script: incremental_updater",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "final_acceptance": {
+      "name": "final_acceptance",
+      "path": "scripts/final_acceptance.py",
+      "description": "Script: final_acceptance",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_config_usage": {
+      "name": "check_config_usage",
+      "path": "scripts/check_config_usage.py",
+      "description": "Script: check_config_usage",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "auto_register_capabilities": {
+      "name": "auto_register_capabilities",
+      "path": "scripts/auto_register_capabilities.py",
+      "description": "Script: auto_register_capabilities",
+      "category": "automation",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "build_ops_dashboard": {
+      "name": "build_ops_dashboard",
+      "path": "scripts/build_ops_dashboard.py",
+      "description": "Script: build_ops_dashboard",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "create_complete_docs": {
+      "name": "create_complete_docs",
+      "path": "scripts/create_complete_docs.py",
+      "description": "Script: create_complete_docs",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "benchmark_capabilities": {
+      "name": "benchmark_capabilities",
+      "path": "scripts/benchmark_capabilities.py",
+      "description": "能力级 Benchmark",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "start_real_infra": {
+      "name": "start_real_infra",
+      "path": "scripts/start_real_infra.py",
+      "description": "Script: start_real_infra",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "send_daily_weather_report": {
+      "name": "send_daily_weather_report",
+      "path": "scripts/send_daily_weather_report.py",
+      "description": "Script: send_daily_weather_report",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "start_production": {
+      "name": "start_production",
+      "path": "scripts/start_production.py",
+      "description": "Script: start_production",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "task_daemon": {
+      "name": "task_daemon",
+      "path": "scripts/task_daemon.py",
+      "description": "Script: task_daemon",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "migrate_to_postgres": {
+      "name": "migrate_to_postgres",
+      "path": "scripts/migrate_to_postgres.py",
+      "description": "Script: migrate_to_postgres",
+      "category": "maintenance",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "unified_inspector_v7": {
+      "name": "unified_inspector_v7",
+      "path": "scripts/unified_inspector_v7.py",
+      "description": "Script: unified_inspector_v7",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "run_daily_growth_check": {
+      "name": "run_daily_growth_check",
+      "path": "scripts/run_daily_growth_check.py",
+      "description": "Script: run_daily_growth_check",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "full_automation_agent_smoke": {
+      "name": "full_automation_agent_smoke",
+      "path": "scripts/full_automation_agent_smoke.py",
+      "description": "全自动化智能体冒烟测试",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "verify_phase3_final": {
+      "name": "verify_phase3_final",
+      "path": "scripts/verify_phase3_final.py",
+      "description": "Script: verify_phase3_final",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "approval_manager": {
+      "name": "approval_manager",
+      "path": "scripts/approval_manager.py",
+      "description": "Script: approval_manager",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "demo_learning_second_run": {
+      "name": "demo_learning_second_run",
+      "path": "scripts/demo_learning_second_run.py",
+      "description": "学习闭环演示：第二次执行（复用成功路径）",
+      "category": "demo",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "generate_observability_reports": {
+      "name": "generate_observability_reports",
+      "path": "scripts/generate_observability_reports.py",
+      "description": "Script: generate_observability_reports",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_ai_apis": {
+      "name": "check_ai_apis",
+      "path": "scripts/check_ai_apis.py",
+      "description": "Script: check_ai_apis",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "quick_task": {
+      "name": "quick_task",
+      "path": "scripts/quick_task.py",
+      "description": "Script: quick_task",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "full_backup": {
+      "name": "full_backup",
+      "path": "scripts/full_backup.py",
+      "description": "Script: full_backup",
+      "category": "maintenance",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "ops_center": {
+      "name": "ops_center",
+      "path": "scripts/ops_center.py",
+      "description": "Script: ops_center",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "message_server": {
+      "name": "message_server",
+      "path": "scripts/message_server.py",
+      "description": "Script: message_server",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "start_celery_production": {
+      "name": "start_celery_production",
+      "path": "scripts/start_celery_production.py",
+      "description": "Script: start_celery_production",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "demo_learning_first_run": {
+      "name": "demo_learning_first_run",
+      "path": "scripts/demo_learning_first_run.py",
+      "description": "学习闭环演示：第一次执行",
+      "category": "demo",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "generate_final_verification_bundle": {
+      "name": "generate_final_verification_bundle",
+      "path": "scripts/generate_final_verification_bundle.py",
+      "description": "Script: generate_final_verification_bundle",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "auto_fusion_hook": {
+      "name": "auto_fusion_hook",
+      "path": "scripts/auto_fusion_hook.py",
+      "description": "Script: auto_fusion_hook",
+      "category": "automation",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "create_professional_docs": {
+      "name": "create_professional_docs",
+      "path": "scripts/create_professional_docs.py",
+      "description": "Script: create_professional_docs",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "quick_schedule": {
+      "name": "quick_schedule",
+      "path": "scripts/quick_schedule.py",
+      "description": "Script: quick_schedule",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "auto_trigger": {
+      "name": "auto_trigger",
+      "path": "scripts/auto_trigger.py",
+      "description": "Script: auto_trigger",
+      "category": "automation",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "dependency_manager": {
+      "name": "dependency_manager",
+      "path": "scripts/dependency_manager.py",
+      "description": "Script: dependency_manager",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_docs_index": {
+      "name": "check_docs_index",
+      "path": "scripts/check_docs_index.py",
+      "description": "Script: check_docs_index",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "invocation_audit_cli": {
+      "name": "invocation_audit_cli",
+      "path": "scripts/invocation_audit_cli.py",
+      "description": "Script: invocation_audit_cli",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "test_redis_connection": {
+      "name": "test_redis_connection",
+      "path": "scripts/test_redis_connection.py",
+      "description": "Script: test_redis_connection",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "generate_release_reports": {
+      "name": "generate_release_reports",
+      "path": "scripts/generate_release_reports.py",
+      "description": "Script: generate_release_reports",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "remediation_center": {
+      "name": "remediation_center",
+      "path": "scripts/remediation_center.py",
+      "description": "Script: remediation_center",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "seed_platform_invocations": {
+      "name": "seed_platform_invocations",
+      "path": "scripts/seed_platform_invocations.py",
+      "description": "Script: seed_platform_invocations",
+      "category": "maintenance",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "generate_charts": {
+      "name": "generate_charts",
+      "path": "scripts/generate_charts.py",
+      "description": "Script: generate_charts",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "check_notification_auth": {
+      "name": "check_notification_auth",
+      "path": "scripts/check_notification_auth.py",
+      "description": "Script: check_notification_auth",
+      "category": "check",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "run_daily_growth_loop": {
+      "name": "run_daily_growth_loop",
+      "path": "scripts/run_daily_growth_loop.py",
+      "description": "Script: run_daily_growth_loop",
+      "category": "utility",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "precise_sender": {
+      "name": "precise_sender",
+      "path": "scripts/precise_sender.py",
+      "description": "Script: precise_sender",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "feishu_longpoll": {
+      "name": "feishu_longpoll",
+      "path": "scripts/feishu_longpoll.py",
+      "description": "Script: feishu_longpoll",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    },
+    "dual_channel_pusher": {
+      "name": "dual_channel_pusher",
+      "path": "scripts/dual_channel_pusher.py",
+      "description": "Script: dual_channel_pusher",
+      "category": "other",
+      "status": "registered",
+      "created_at": "2026-04-24",
+      "registered_at": "2026-04-24",
+      "tested": false
+    }
+  },
+  "stats": {
+    "total": 123,
+    "by_status": {
+      "created": 0,
+      "registered": 123,
+      "tested": 0,
+      "active": 0
+    },
+    "by_category": {
+      "other": 66,
+      "utility": 25,
+      "check": 15,
+      "demo": 7,
+      "automation": 6,
+      "maintenance": 4
+    }
+  },
+  "description": "脚本注册表 - 记录所有脚本的状态"
+}

@@ -1,0 +1,285 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Strategy Registry",
+  "description": "策略注册表，定义系统可用的执行策略",
+  "type": "object",
+  "properties": {
+    "strategies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["strategy_id", "name", "applicable_tasks", "trigger_conditions"],
+        "properties": {
+          "strategy_id": {
+            "type": "string",
+            "description": "策略唯一标识符",
+            "pattern": "^STRAT-[a-z_]+$"
+          },
+          "name": {
+            "type": "string",
+            "description": "策略名称"
+          },
+          "description": {
+            "type": "string",
+            "description": "策略描述"
+          },
+          "applicable_tasks": {
+            "type": "array",
+            "description": "适用任务类型",
+            "items": {
+              "type": "string",
+              "enum": ["query", "analysis", "generation", "planning", "execution", "review", "integration"]
+            }
+          },
+          "trigger_conditions": {
+            "type": "object",
+            "description": "触发条件",
+            "properties": {
+              "task_types": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "risk_levels": {
+                "type": "array",
+                "items": { "type": "string", "enum": ["low", "medium", "high", "critical"] }
+              },
+              "time_constraints": {
+                "type": "object",
+                "properties": {
+                  "max_latency": { "type": "string" },
+                  "deadline_urgent": { "type": "boolean" }
+                }
+              },
+              "budget_constraints": {
+                "type": "object",
+                "properties": {
+                  "cost_sensitive": { "type": "boolean" },
+                  "max_cost": { "type": "number" }
+                }
+              },
+              "user_preferences": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "custom_conditions": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          },
+          "expected_benefit": {
+            "type": "object",
+            "description": "预期收益",
+            "properties": {
+              "accuracy_improvement": { "type": "string" },
+              "latency_improvement": { "type": "string" },
+              "cost_reduction": { "type": "string" },
+              "user_satisfaction": { "type": "string" }
+            }
+          },
+          "risk_profile": {
+            "type": "object",
+            "description": "风险画像",
+            "properties": {
+              "overall_risk": { "type": "string", "enum": ["low", "medium", "high"] },
+              "specific_risks": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "mitigation_required": { "type": "boolean" }
+            }
+          },
+          "required_validators": {
+            "type": "array",
+            "description": "必需的验证器",
+            "items": {
+              "type": "object",
+              "properties": {
+                "validator_id": { "type": "string" },
+                "phase": { "type": "string", "enum": ["pre", "during", "post"] },
+                "required": { "type": "boolean", "default": true }
+              }
+            }
+          },
+          "rollout_status": {
+            "type": "string",
+            "description": "发布状态",
+            "enum": ["draft", "testing", "canary", "production", "deprecated"],
+            "default": "draft"
+          },
+          "rollout_percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "default": 0
+          },
+          "priority": {
+            "type": "integer",
+            "description": "优先级（数字越大优先级越高）",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 50
+          },
+          "compatible_strategies": {
+            "type": "array",
+            "description": "兼容策略（可组合使用）",
+            "items": { "type": "string" }
+          },
+          "incompatible_strategies": {
+            "type": "array",
+            "description": "不兼容策略（不可同时使用）",
+            "items": { "type": "string" }
+          },
+          "fallback_strategy": {
+            "type": "string",
+            "description": "回退策略"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "owner": {
+            "type": "string",
+            "description": "策略负责人"
+          },
+          "version": {
+            "type": "string",
+            "default": "1.0"
+          }
+        }
+      }
+    },
+    "default_strategies": {
+      "type": "object",
+      "description": "默认策略映射",
+      "properties": {
+        "query": { "type": "string" },
+        "analysis": { "type": "string" },
+        "generation": { "type": "string" },
+        "planning": { "type": "string" },
+        "execution": { "type": "string" },
+        "review": { "type": "string" }
+      }
+    },
+    "strategy_combinations": {
+      "type": "array",
+      "description": "策略组合",
+      "items": {
+        "type": "object",
+        "properties": {
+          "combination_id": { "type": "string" },
+          "strategies": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "applicable_scenario": { "type": "string" }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "strategy_id": "STRAT-deep_search_first",
+      "name": "深检索优先",
+      "description": "优先进行深度检索，确保信息完整性",
+      "applicable_tasks": ["query", "analysis"],
+      "trigger_conditions": {
+        "task_types": ["complex_query", "research"],
+        "risk_levels": ["medium", "high"],
+        "time_constraints": { "max_latency": "30s" }
+      },
+      "expected_benefit": {
+        "accuracy_improvement": "+15%",
+        "latency_improvement": "-20%",
+        "cost_reduction": "N/A"
+      },
+      "risk_profile": {
+        "overall_risk": "low",
+        "specific_risks": ["higher_latency", "higher_cost"],
+        "mitigation_required": false
+      },
+      "rollout_status": "production",
+      "rollout_percentage": 100
+    },
+    {
+      "strategy_id": "STRAT-answer_then_verify",
+      "name": "先答后校验",
+      "description": "快速给出初步答案，后台验证",
+      "applicable_tasks": ["query"],
+      "trigger_conditions": {
+        "task_types": ["simple_query"],
+        "risk_levels": ["low"],
+        "time_constraints": { "deadline_urgent": true }
+      },
+      "expected_benefit": {
+        "latency_improvement": "-50%",
+        "user_satisfaction": "+10%"
+      },
+      "risk_profile": {
+        "overall_risk": "medium",
+        "specific_risks": ["potential_inaccuracy"],
+        "mitigation_required": true
+      },
+      "required_validators": [
+        { "validator_id": "fact_checker", "phase": "post", "required": true }
+      ],
+      "rollout_status": "canary",
+      "rollout_percentage": 10
+    },
+    {
+      "strategy_id": "STRAT-strong_citation",
+      "name": "强引用模式",
+      "description": "所有陈述必须有明确引用来源",
+      "applicable_tasks": ["generation", "analysis"],
+      "trigger_conditions": {
+        "risk_levels": ["high", "critical"]
+      },
+      "expected_benefit": {
+        "accuracy_improvement": "+20%",
+        "user_satisfaction": "+15%"
+      },
+      "risk_profile": {
+        "overall_risk": "low"
+      },
+      "rollout_status": "production"
+    },
+    {
+      "strategy_id": "STRAT_conservative_uncertainty",
+      "name": "保守不确定性模式",
+      "description": "不确定时明确说明，不猜测",
+      "applicable_tasks": ["query", "analysis", "generation"],
+      "trigger_conditions": {
+        "risk_levels": ["high", "critical"]
+      },
+      "expected_benefit": {
+        "accuracy_improvement": "+25%",
+        "user_satisfaction": "+20%"
+      },
+      "risk_profile": {
+        "overall_risk": "low"
+      },
+      "rollout_status": "production"
+    },
+    {
+      "strategy_id": "STRAT_cost_saving",
+      "name": "成本节省模式",
+      "description": "优先使用低成本资源",
+      "applicable_tasks": ["query", "analysis"],
+      "trigger_conditions": {
+        "budget_constraints": { "cost_sensitive": true }
+      },
+      "expected_benefit": {
+        "cost_reduction": "-40%"
+      },
+      "risk_profile": {
+        "overall_risk": "medium",
+        "specific_risks": ["reduced_accuracy"]
+      },
+      "rollout_status": "testing"
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-06T22:00:00+08:00",
+  "description": "报表对象结构 - 定义平台各类报表的统一结构",
+
+  "report_types": {
+    "operational": {
+      "name": "运营报表",
+      "description": "日常运营数据报表",
+      "audience": ["operator", "manager"],
+      "sensitivity_level": "L1",
+      "default_formats": ["json", "csv", "html"],
+      "approval_required": false,
+      "scheduling_supported": true
+    },
+    "financial": {
+      "name": "财务报表",
+      "description": "计费和成本相关报表",
+      "audience": ["finance", "admin"],
+      "sensitivity_level": "L2",
+      "default_formats": ["json", "csv", "pdf"],
+      "approval_required": true,
+      "scheduling_supported": true
+    },
+    "compliance": {
+      "name": "合规报表",
+      "description": "合规检查和审计报表",
+      "audience": ["compliance", "auditor"],
+      "sensitivity_level": "L2",
+      "default_formats": ["json", "pdf"],
+      "approval_required": true,
+      "scheduling_supported": true
+    },
+    "security": {
+      "name": "安全报表",
+      "description": "安全事件和风险报表",
+      "audience": ["security", "admin"],
+      "sensitivity_level": "L2",
+      "default_formats": ["json", "pdf"],
+      "approval_required": true,
+      "scheduling_supported": true
+    },
+    "performance": {
+      "name": "性能报表",
+      "description": "系统性能监控报表",
+      "audience": ["operator", "tech"],
+      "sensitivity_level": "L1",
+      "default_formats": ["json", "csv", "html"],
+      "approval_required": false,
+      "scheduling_supported": true
+    },
+    "executive": {
+      "name": "高管报表",
+      "description": "面向管理层的汇总报表",
+      "audience": ["executive", "board"],
+      "sensitivity_level": "L2",
+      "default_formats": ["pdf", "pptx"],
+      "approval_required": true,
+      "scheduling_supported": true
+    },
+    "tenant": {
+      "name": "租户报表",
+      "description": "租户专属数据报表",
+      "audience": ["tenant_admin"],
+      "sensitivity_level": "L2",
+      "default_formats": ["json", "csv", "pdf"],
+      "approval_required": false,
+      "scheduling_supported": true
+    },
+    "audit": {
+      "name": "审计报表",
+      "description": "操作审计和证据链报表",
+      "audience": ["auditor", "compliance"],
+      "sensitivity_level": "L2",
+      "default_formats": ["json", "pdf"],
+      "approval_required": true,
+      "scheduling_supported": true
+    }
+  },
+
+  "schema": {
+    "report_id": {
+      "type": "string",
+      "required": true,
+      "description": "报表唯一标识",
+      "format": "rpt_YYYYMMDD_HHMMSS_type"
+    },
+    "report_type": {
+      "type": "string",
+      "required": true,
+      "enum": ["operational", "financial", "compliance", "security", "performance", "executive", "tenant", "audit"],
+      "description": "报表类型"
+    },
+    "report_name": {
+      "type": "string",
+      "required": true,
+      "description": "报表名称"
+    },
+    "tenant_scope": {
+      "type": "string",
+      "required": true,
+      "description": "租户范围",
+      "values": ["all", "specific_tenant", "tenant_group"]
+    },
+    "tenant_id": {
+      "type": "string",
+      "required": false,
+      "description": "具体租户ID（当tenant_scope为specific_tenant时）"
+    },
+    "audience": {
+      "type": "array",
+      "required": true,
+      "description": "目标受众",
+      "items": {
+        "type": "string",
+        "enum": ["operator", "manager", "finance", "admin", "compliance", "auditor", "security", "tech", "executive", "board", "tenant_admin"]
+      }
+    },
+    "data_sources": {
+      "type": "array",
+      "required": true,
+      "description": "数据来源",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_type": { "type": "string" },
+          "source_ref": { "type": "string" },
+          "data_fields": { "type": "array" }
+        }
+      }
+    },
+    "time_range": {
+      "type": "object",
+      "required": true,
+      "description": "时间范围",
+      "properties": {
+        "start_time": { "type": "string", "format": "date-time" },
+        "end_time": { "type": "string", "format": "date-time" },
+        "granularity": { "type": "string", "enum": ["hourly", "daily", "weekly", "monthly"] }
+      }
+    },
+    "sensitivity_level": {
+      "type": "string",
+      "required": true,
+      "enum": ["L0", "L1", "L2", "L3"],
+      "description": "敏感级别"
+    },
+    "export_formats": {
+      "type": "array",
+      "required": true,
+      "description": "支持的导出格式",
+      "items": {
+        "type": "string",
+        "enum": ["json", "csv", "html", "pdf", "xlsx", "pptx"]
+      }
+    },
+    "approval_required": {
+      "type": "boolean",
+      "required": true,
+      "description": "是否需要审批"
+    },
+    "approval_status": {
+      "type": "string",
+      "required": false,
+      "enum": ["not_required", "pending", "approved", "rejected"],
+      "description": "审批状态"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "required": true,
+      "description": "生成时间"
+    },
+    "generated_by": {
+      "type": "string",
+      "required": true,
+      "description": "生成者"
+    },
+    "filters": {
+      "type": "object",
+      "required": false,
+      "description": "报表过滤条件"
+    },
+    "metrics": {
+      "type": "array",
+      "required": true,
+      "description": "报表包含的指标",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metric_name": { "type": "string" },
+          "metric_value": { "type": "number" },
+          "metric_unit": { "type": "string" },
+          "comparison": { "type": "object" }
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "required": false,
+      "description": "报表摘要"
+    },
+    "recommendations": {
+      "type": "array",
+      "required": false,
+      "description": "建议动作",
+      "items": {
+        "type": "object",
+        "properties": {
+          "priority": { "type": "string", "enum": ["high", "medium", "low"] },
+          "action": { "type": "string" },
+          "rationale": { "type": "string" }
+        }
+      }
+    }
+  },
+
+  "example": {
+    "report_id": "rpt_20260406_220000_operational",
+    "report_type": "operational",
+    "report_name": "每日运营概览",
+    "tenant_scope": "all",
+    "audience": ["operator", "manager"],
+    "data_sources": [
+      {
+        "source_type": "metrics",
+        "source_ref": "metrics://daily/summary",
+        "data_fields": ["request_count", "success_rate", "avg_latency"]
+      }
+    ],
+    "time_range": {
+      "start_time": "2026-04-05T00:00:00+08:00",
+      "end_time": "2026-04-05T23:59:59+08:00",
+      "granularity": "daily"
+    },
+    "sensitivity_level": "L1",
+    "export_formats": ["json", "csv", "html"],
+    "approval_required": false,
+    "generated_at": "2026-04-06T06:00:00+08:00",
+    "generated_by": "system",
+    "metrics": [
+      {
+        "metric_name": "总请求数",
+        "metric_value": 10000,
+        "metric_unit": "次",
+        "comparison": {
+          "previous_value": 9500,
+          "change_percent": 5.26
+        }
+      },
+      {
+        "metric_name": "成功率",
+        "metric_value": 99.5,
+        "metric_unit": "%",
+        "comparison": {
+          "previous_value": 99.2,
+          "change_percent": 0.3
+        }
+      }
+    ],
+    "summary": "系统运行稳定，各项指标正常",
+    "recommendations": [
+      {
+        "priority": "low",
+        "action": "继续监控请求量增长趋势",
+        "rationale": "请求量持续增长，需关注容量规划"
+      }
+    ]
+  },
+
+  "validation_rules": {
+    "time_range_valid": "end_time > start_time",
+    "sensitivity_matches_type": "sensitivity_level matches report_type requirements",
+    "audience_not_empty": "audience array has at least one element",
+    "data_sources_not_empty": "data_sources array has at least one source"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "version": "7.2.0",
+  "description": "唯一运行时配置 - 其他配置文件仅作兼容或实验用途",
+  "search": {
+    "top_k": 10,
+    "mode": "balanced",
+    "timeout_ms": 3000,
+    "use_semantic": true
+  },
+  "cache": {
+    "max_size": 1000,
+    "default_ttl": 300,
+    "l1_max_items": 100,
+    "l2_max_size_mb": 10
+  },
+  "router": {
+    "mode": "balanced",
+    "confidence_threshold": 0.5,
+    "max_alternatives": 3
+  },
+  "weights": {
+    "keyword": 0.3,
+    "semantic": 0.4,
+    "popularity": 0.2,
+    "recency": 0.1
+  },
+  "token_budget": {
+    "total": 10000,
+    "l1_core": 3000,
+    "l2_memory": 2000,
+    "l3_orchestration": 1500,
+    "l4_execution": 1500,
+    "l5_governance": 800,
+    "l6_infrastructure": 700
+  },
+  "ecommerce": {
+    "default_commission_rate": 0.25,
+    "min_follower_count": 10000,
+    "max_risk_level": "medium"
+  },
+  "performance": {
+    "parallel_inspection": true,
+    "cache_ttl": 3600,
+    "lazy_load_skills": true,
+    "batch_operations": true,
+    "async_io": true,
+    "numba_enabled": true,
+    "numpy_enabled": true,
+    "max_workers": 4
+  },
+  "updated": "2026-04-14",
+  "inspector": {
+    "version": "7.2.0",
+    "workers": 8,
+    "checks": [
+      "层间依赖",
+      "JSON契约",
+      "仓库完整性",
+      "变更影响",
+      "技能安全",
+      "架构完整性",
+      "Token优化",
+      "注入配置"
+    ]
+  },
+  "token_optimization": {
+    "enabled": true,
+    "default_mode": "smart",
+    "estimated_tokens": 2000
+  },
+  "llm_integration": {
+    "skill": "llm-memory-integration",
+    "version": "7.2.0",
+    "embedding": {
+      "provider": "Gitee AI",
+      "model": "Qwen3-Embedding-8B",
+      "dimensions": 4096
+    },
+    "llm": {
+      "provider": "Gitee AI",
+      "model": "Qwen3-235B-A22B"
+    },
+    "vector_engines": {
+      "primary": "sqlite-vec",
+      "secondary": "qdrant",
+      "backup": "tfidf"
+    }
+  },
+  "modules": {
+    "dependency_manager": {
+      "enabled": true,
+      "auto_check": true,
+      "auto_install": false
+    },
+    "delete_manager": {
+      "enabled": true,
+      "require_confirmation": true,
+      "trash_enabled": true,
+      "trash_retention_days": 7
+    }
+  },
+  "ocr": {
+    "provider": "deepseek",
+    "service_id": "deepseek-ocr-2sk-u3qymvvjrvxh26j6",
+    "enabled": true,
+    "timeout_ms": 30000,
+    "max_image_size_mb": 10,
+    "supported_formats": ["jpg", "jpeg", "png", "gif", "webp", "bmp"],
+    "languages": ["zh", "en", "ja", "ko"],
+    "features": {
+      "text_detection": true,
+      "text_recognition": true,
+      "table_detection": false,
+      "handwriting": true,
+      "formula": false
+    },
+    "cache": {
+      "enabled": true,
+      "ttl_seconds": 3600
+    },
+    "fallback": {
+      "enabled": true,
+      "provider": "tesseract"
+    }
+  }
+}

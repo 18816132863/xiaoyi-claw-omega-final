@@ -1,0 +1,22 @@
+{
+  "version": "7.2.0",
+  "description": "热点技能缓存配置",
+  "top_skills": [
+    "xiaoyi-web-search",
+    "xiaoyi-image-understanding",
+    "dealer-leader-cooperation",
+    "douyin-shop-operation",
+    "kuaishou-shop-operation",
+    "product-management",
+    "marketing-campaign",
+    "ecommerce-analytics",
+    "docx",
+    "pdf"
+  ],
+  "cache_strategy": {
+    "preload": true,
+    "max_preload": 10,
+    "eviction": "lru",
+    "max_memory_mb": 5
+  }
+}

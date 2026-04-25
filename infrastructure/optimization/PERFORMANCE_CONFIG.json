@@ -1,0 +1,100 @@
+{
+  "version": "7.2.0",
+  "updated": "2026-04-13",
+  "performance_targets": {
+    "startup_time_ms": 5000,
+    "skill_load_time_ms": 100,
+    "search_time_ms": 500,
+    "memory_usage_mb": 512
+  },
+  "optimization_layers": {
+    "L1_core": {
+      "strategy": "lazy_load",
+      "actions": [
+        "延迟加载非必需模块",
+        "压缩 ARCHITECTURE.md",
+        "缓存解析结果"
+      ]
+    },
+    "L2_memory": {
+      "strategy": "index_optimize",
+      "actions": [
+        "清理过期索引",
+        "压缩向量索引",
+        "增量更新策略"
+      ]
+    },
+    "L4_execution": {
+      "strategy": "skill_cache",
+      "actions": [
+        "技能元数据缓存",
+        "入口点预编译",
+        "依赖预加载"
+      ]
+    },
+    "L6_infrastructure": {
+      "strategy": "registry_optimize",
+      "actions": [
+        "技能注册表分片",
+        "倒排索引压缩",
+        "懒加载非活跃技能"
+      ]
+    }
+  },
+  "index_optimization": {
+    "vector_index": {
+      "current_size_mb": 2.5,
+      "target_size_mb": 0.5,
+      "actions": [
+        "清理空向量",
+        "压缩存储格式",
+        "增量更新"
+      ]
+    },
+    "keyword_index": {
+      "current_size_mb": 26,
+      "target_size_mb": 5,
+      "actions": [
+        "清理重复关键词",
+        "压缩存储",
+        "分片加载"
+      ]
+    },
+    "fts_index": {
+      "current_size_mb": 18,
+      "target_size_mb": 3,
+      "actions": [
+        "重建索引",
+        "清理停用词",
+        "压缩存储"
+      ]
+    }
+  },
+  "skill_optimization": {
+    "total_skills": 274,
+    "active_skills": 20,
+    "strategy": "lazy_load_inactive",
+    "actions": [
+      "只加载活跃技能元数据",
+      "非活跃技能延迟加载",
+      "技能分组缓存"
+    ]
+  },
+  "cache_config": {
+    "skill_metadata_cache": {
+      "enabled": true,
+      "ttl_seconds": 3600,
+      "max_size_mb": 50
+    },
+    "search_result_cache": {
+      "enabled": true,
+      "ttl_seconds": 300,
+      "max_size_mb": 20
+    },
+    "vector_cache": {
+      "enabled": true,
+      "ttl_seconds": 86400,
+      "max_size_mb": 100
+    }
+  }
+}

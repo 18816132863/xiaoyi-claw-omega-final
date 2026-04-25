@@ -1,0 +1,69 @@
+{
+  "version": "2.7.0",
+  "description": "层间高速连接配置",
+  
+  "directRoutes": {
+    "L1_to_L2": {
+      "latency_target_ms": 0.1,
+      "cache_ttl_seconds": 300,
+      "max_concurrent": 10
+    },
+    "L1_to_L3": {
+      "latency_target_ms": 0.1,
+      "cache_ttl_seconds": 60,
+      "max_concurrent": 5
+    },
+    "L1_to_L4": {
+      "latency_target_ms": 0.5,
+      "cache_ttl_seconds": 30,
+      "max_concurrent": 3
+    },
+    "L2_to_L3": {
+      "latency_target_ms": 0.1,
+      "cache_ttl_seconds": 120,
+      "max_concurrent": 8
+    },
+    "L3_to_L4": {
+      "latency_target_ms": 0.2,
+      "cache_ttl_seconds": 60,
+      "max_concurrent": 5
+    },
+    "L4_to_L5": {
+      "latency_target_ms": 1.0,
+      "cache_ttl_seconds": 300,
+      "max_concurrent": 2
+    },
+    "L4_to_L6": {
+      "latency_target_ms": 0.5,
+      "cache_ttl_seconds": 60,
+      "max_concurrent": 5
+    },
+    "L5_to_L6": {
+      "latency_target_ms": 1.0,
+      "cache_ttl_seconds": 300,
+      "max_concurrent": 2
+    }
+  },
+  
+  "callPriority": {
+    "critical": ["L1_to_L2", "L1_to_L3", "L2_to_L3"],
+    "high": ["L3_to_L4", "L1_to_L4"],
+    "normal": ["L4_to_L6", "L4_to_L5"],
+    "low": ["L5_to_L6", "L6_to_L1"]
+  },
+  
+  "optimization": {
+    "preconnect": true,
+    "cacheWarmup": true,
+    "lazyLoad": false,
+    "batchCalls": true,
+    "asyncExecution": true
+  },
+  
+  "performance": {
+    "target_avg_latency_ms": 0.5,
+    "target_cache_hit_rate": 0.95,
+    "target_throughput_per_sec": 10000,
+    "max_memory_mb": 100
+  }
+}

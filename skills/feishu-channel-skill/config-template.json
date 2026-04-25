@@ -1,0 +1,17 @@
+{
+  "channels": {
+    "feishu": {
+      "appId": "cli_your_app_id_here",
+      "appSecret": "your_app_secret_here",
+      "enabled": true
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "bind": "0.0.0.0",
+    "auth": {
+      "mode": "token",
+      "token": "your_gateway_token_here"
+    }
+  }
+}

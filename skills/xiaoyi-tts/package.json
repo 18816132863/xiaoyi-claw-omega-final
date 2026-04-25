@@ -1,0 +1,23 @@
+{
+  "name": "xiaoyi-tts",
+  "version": "1.0.0",
+  "description": "小艺语音合成API进行文字信息转成语音流",
+  "main": "scripts/tts.py",
+  "bin": {
+    "xiaoyi-text-to-speech": "./scripts/tts.py"
+  },
+  "scripts": {
+    "understand": "python scripts/tts.py"
+  },
+  "keywords": [
+    "text",
+    "speech",
+    "voice",
+    "audio",
+    "xiaoyi"
+  ],
+  "dependencies": {
+    "requests": "^2.31.0"
+  },
+  "python": ">=3.7"
+}

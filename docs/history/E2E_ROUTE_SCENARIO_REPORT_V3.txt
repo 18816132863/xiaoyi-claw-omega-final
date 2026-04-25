@@ -1,0 +1,123 @@
+============================================================
+E2E ROUTE SCENARIO REPORT V3
+时间: 2026-04-25 09:25
+============================================================
+
+测试模式: dry-run, fake-device
+
+============================================================
+场景测试结果:
+============================================================
+
+场景 1: 查询备忘录
+- User Goal: 查询备忘录
+- Selected Route: route.query_note
+- Risk Level: L0
+- Policy: auto_execute
+- Confirmation Required: False
+- Execution Status: dry_run
+- Fallback Used: None
+- Audit ID: ✅
+- Result: ✅ PASSED
+
+场景 2: 新建/更新/删除备忘录 dry-run
+- User Goal: 删除备忘录
+- Selected Route: route.delete_note
+- Risk Level: L3
+- Policy: confirm_once
+- Confirmation Required: True
+- Execution Status: dry_run
+- Fallback Used: None
+- Audit ID: ✅
+- Result: ✅ PASSED
+
+场景 3: 发送消息 dry-run + fallback
+- User Goal: 发送消息
+- Selected Route: route.send_message
+- Risk Level: L3
+- Policy: confirm_once
+- Confirmation Required: True
+- Execution Status: dry_run
+- Fallback Used: None
+- Audit ID: ✅
+- Result: ✅ PASSED
+
+场景 4: 设置闹钟
+- User Goal: 设置闹钟
+- Selected Route: route.create_alarm
+- Risk Level: L2
+- Policy: rate_limited
+- Confirmation Required: True
+- Execution Status: dry_run
+- Fallback Used: None
+- Audit ID: ✅
+- Result: ✅ PASSED
+
+场景 5: 删除闹钟 confirm_once
+- User Goal: 删除闹钟
+- Selected Route: route.delete_alarm
+- Risk Level: L3
+- Policy: confirm_once
+- Confirmation Required: True
+- Execution Status: dry_run
+- Fallback Used: None
+- Audit ID: ✅
+- Result: ✅ PASSED
+
+场景 6: 拨打电话 confirm_once
+- User Goal: 拨打电话
+- Selected Route: route.make_call
+- Risk Level: L3
+- Policy: confirm_once
+- Confirmation Required: True
+- Execution Status: dry_run
+- Fallback Used: None
+- Audit ID: ✅
+- Result: ✅ PASSED
+
+场景 7: 小艺 GUI 操作 L4 strong_confirm preview
+- User Goal: 手机操作
+- Selected Route: route.xiaoyi_gui_agent
+- Risk Level: L4
+- Policy: strong_confirm
+- Confirmation Required: True
+- Execution Status: cancelled
+- Fallback Used: None
+- Audit ID: ✅
+- Result: ✅ PASSED (L4 正确取消)
+
+场景 8: bootstrap L4 strong_confirm
+- User Goal: 引导
+- Selected Route: route.bootstrap
+- Risk Level: L4
+- Policy: strong_confirm
+- Confirmation Required: True
+- Execution Status: cancelled
+- Fallback Used: None
+- Audit ID: ✅
+- Result: ✅ PASSED (L4 正确取消)
+
+============================================================
+统计:
+============================================================
+
+Total: 8
+Passed: 8
+Failed: 0
+
+通过率: 100%
+
+============================================================
+结论:
+============================================================
+
+✅ 8/8 场景全部通过
+✅ L4 route 正确被取消，不会自动执行
+✅ Planner 能正确选择 route (包括 xiaoyi_gui_agent)
+✅ Orchestrator 能正确执行 route
+✅ Audit 记录完整
+
+统计口径统一:
+- 总路由数: 54 ✅
+- L4 数量: 2 ✅
+- Active 数量: 13 (不含 L4) ✅

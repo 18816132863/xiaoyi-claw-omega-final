@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "mode": "ultra-minimal",
+  "description": "极简注入 - 最小 Token 消耗",
+  "inject": {
+    "core": [
+      "SOUL.md",
+      "USER.md",
+      "MEMORY.md"
+    ],
+    "compressed": [
+      "core/compressed/AGENTS_summary.md",
+      "core/compressed/TOOLS_summary.md"
+    ],
+    "indexes": [
+      "infrastructure/inventory/skill_registry_summary.json"
+    ]
+  },
+  "exclude": [
+    "skills/**",
+    "reports/**",
+    "docs/**",
+    "tests/**",
+    "repo/**",
+    "archive/**",
+    "memory_context/**",
+    "infrastructure/**",
+    "governance/**",
+    "execution/**",
+    "orchestration/**"
+  ],
+  "lazy_load": {
+    "skills": "find-skills",
+    "memory": "memory_search",
+    "config": "read on demand",
+    "reports": "read on demand"
+  },
+  "estimated_tokens": 2500
+}

@@ -1,0 +1,14 @@
+{
+  "profile": "premerge",
+  "overall_passed": true,
+  "p0_count": 0,
+  "local_status": "passed",
+  "integration_status": "passed",
+  "external_status": "skipped",
+  "verified_at": "2026-04-24T22:52:05.127211",
+  "total_checks": 34,
+  "passed_checks": 30,
+  "failed_checks": 4,
+  "errors": [],
+  "warnings": []
+}

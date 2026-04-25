@@ -1,0 +1,96 @@
+# Runtime Policy Configuration
+# Defines behavior for each runtime mode
+
+default_mode: dry_run
+
+modes:
+  dry_run:
+    allow_side_effects: false
+    require_device: false
+    description: "No side effects, for CI/testing"
+
+  fake_device:
+    allow_side_effects: false
+    require_device: false
+    allow_screen_read: true
+    description: "Mock device responses, for E2E testing"
+
+  probe_only:
+    allow_side_effects: false
+    require_device: true
+    allow_screen_read: true
+    allow_click: false
+    allow_type: false
+    allow_delete: false
+    allow_send: false
+    allow_call: false
+    description: "Real device connection, read-only probing"
+
+  connected_runtime:
+    allow_side_effects: true
+    require_device: true
+    allow_screen_read: true
+    allow_click: true
+    allow_type: true
+    allow_delete: true
+    allow_send: true
+    allow_call: true
+    enforce_safety_governor: true
+    description: "Real device with controlled execution"
+
+# Risk level policies for connected_runtime
+risk_policies:
+  L0:
+    auto_execute: true
+    require_confirmation: false
+    audit_required: true
+  
+  L1:
+    auto_execute: true
+    require_confirmation: false
+    audit_required: true
+  
+  L2:
+    auto_execute: true
+    require_confirmation: optional
+    rate_limit: true
+    audit_required: true
+  
+  L3:
+    auto_execute: false
+    require_confirmation: true
+    confirmation_type: confirm_once
+    audit_required: true
+  
+  L4:
+    auto_execute: false
+    require_confirmation: true
+    confirmation_type: strong_confirm
+    requires_preview: true
+    requires_stepwise: true
+    audit_required: true
+  
+  BLOCKED:
+    auto_execute: false
+    blocked: true
+
+# Safe routes whitelist for connected smoke
+safe_routes:
+  - route.query_note
+  - route.search_notes
+  - route.list_recent_messages
+  - route.query_message_status
+  - route.query_alarm
+  - route.query_contact
+  - route.get_location
+  - route.check_calendar_conflicts
+
+# Routes that require confirmation (cannot auto-execute)
+confirmation_required_routes:
+  - route.send_message
+  - route.delete_note
+  - route.update_note
+  - route.delete_alarm
+  - route.make_call
+  - route.xiaoyi_gui_agent
+  - route.bootstrap

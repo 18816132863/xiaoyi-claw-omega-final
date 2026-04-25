@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-04-25T00:05:00+08:00",
+  "baseline": "V8.8.6",
+  "changed_files": [],
+  "blocking_commands_current_profile": [],
+  "blocking_commands_all_profiles": [],
+  "profile": "premerge",
+  "summary": {
+    "total_changes": 0,
+    "blocking_count": 0,
+    "warnings": 0
+  }
+}

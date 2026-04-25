@@ -1,0 +1,94 @@
+{
+  "version": "7.2.0",
+  "updated_at": "2026-04-12",
+
+  "profiles": {
+    "nightly_auto": {
+      "description": "Nightly workflow 自动执行策略",
+      "allowed_actions": [
+        "rebuild_dashboard",
+        "rebuild_ops_state",
+        "rebuild_bundle",
+        "retry_notifications"
+      ],
+      "prerequisites": {
+        "must_be_safe_auto": true,
+        "no_blocking_alerts": true,
+        "no_strong_regressions": true,
+        "no_release_blocked": true,
+        "p0_must_be_zero": true,
+        "not_in_cooldown": true,
+        "within_retry_limit": true,
+        "circuit_not_open": true
+      },
+      "require_explicit_enable": true,
+      "enable_env_var": "ENABLE_SAFE_REMEDIATION"
+    },
+
+    "release_auto": {
+      "description": "Release gate 自动执行策略（更严格）",
+      "allowed_actions": [
+        "retry_notifications"
+      ],
+      "dry_run_only_actions": [
+        "rebuild_dashboard",
+        "rebuild_ops_state",
+        "rebuild_bundle"
+      ],
+      "prerequisites": {
+        "must_be_safe_auto": true,
+        "no_blocking_alerts": true,
+        "no_strong_regressions": true,
+        "no_release_blocked": true,
+        "p0_must_be_zero": true,
+        "not_in_cooldown": true,
+        "within_retry_limit": true,
+        "circuit_not_open": true,
+        "release_gate_passed": true
+      },
+      "require_explicit_enable": true,
+      "enable_env_var": "ENABLE_SAFE_REMEDIATION"
+    },
+
+    "manual_only": {
+      "description": "人工模式，只允许 plan/dry-run",
+      "allowed_actions": [],
+      "dry_run_only_actions": [
+        "rebuild_dashboard",
+        "rebuild_ops_state",
+        "rebuild_bundle",
+        "retry_notifications"
+      ],
+      "prerequisites": {},
+      "require_explicit_enable": false
+    }
+  },
+
+  "cooldown": {
+    "default_minutes": 5,
+    "action_specific": {
+      "rebuild_dashboard": 10,
+      "rebuild_ops_state": 5,
+      "rebuild_bundle": 10,
+      "retry_notifications": 3
+    }
+  },
+
+  "retry": {
+    "max_retry_count": 3,
+    "retry_backoff_minutes": [1, 2, 5]
+  },
+
+  "circuit_breaker": {
+    "failure_threshold": 3,
+    "reset_minutes": 30,
+    "actions": {
+      "rebuild_dashboard": {"failure_threshold": 3, "reset_minutes": 30},
+      "rebuild_ops_state": {"failure_threshold": 3, "reset_minutes": 30},
+      "rebuild_bundle": {"failure_threshold": 3, "reset_minutes": 30},
+      "retry_notifications": {"failure_threshold": 5, "reset_minutes": 15}
+    }
+  },
+
+  "default_profile": "manual_only"
+}

@@ -1,0 +1,36 @@
+{
+  "module": "workflow",
+  "version": "1.0.0",
+  "description": "智能工作流编排系统",
+  "features": {
+    "visual_design": {
+      "enabled": true,
+      "drag_drop": true
+    },
+    "conditional_branch": {
+      "enabled": true,
+      "max_branches": 10
+    },
+    "loop_execution": {
+      "enabled": true,
+      "max_iterations": 1000
+    },
+    "error_handling": {
+      "enabled": true,
+      "auto_retry": true,
+      "max_retries": 3,
+      "retry_delay_ms": 1000
+    },
+    "scheduling": {
+      "enabled": true,
+      "cron_support": true,
+      "timezone": "auto"
+    }
+  },
+  "templates": [
+    "daily_report",
+    "data_pipeline",
+    "notification_chain",
+    "approval_flow"
+  ]
+}

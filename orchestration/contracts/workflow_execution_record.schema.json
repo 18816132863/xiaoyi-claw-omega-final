@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WorkflowExecutionRecord",
+  "description": "Workflow 执行记录 Schema",
+  "type": "object",
+  "required": [
+    "record_id",
+    "instance_id",
+    "workflow_id",
+    "execution_order",
+    "total_steps",
+    "status"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "记录唯一标识"
+    },
+    "instance_id": {
+      "type": "string",
+      "description": "实例 ID"
+    },
+    "workflow_id": {
+      "type": "string",
+      "description": "Workflow 模板 ID"
+    },
+    "version": {
+      "type": "string",
+      "description": "Workflow 版本"
+    },
+    "execution_order": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "执行顺序（step_id 列表）"
+    },
+    "total_steps": {
+      "type": "integer",
+      "description": "总步骤数"
+    },
+    "completed_steps": {
+      "type": "integer",
+      "description": "已完成步骤数"
+    },
+    "failed_steps": {
+      "type": "integer",
+      "description": "失败步骤数"
+    },
+    "skipped_steps": {
+      "type": "integer",
+      "description": "跳过步骤数"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "partial_success", "failed", "cancelled"],
+      "description": "执行状态"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "duration_ms": {
+      "type": "integer",
+      "description": "执行时长（毫秒）"
+    },
+    "step_results": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string" },
+          "output": { "type": "object" },
+          "error": { "type": "string" },
+          "duration_ms": { "type": "integer" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,462 @@
+{
+  "version": "5.0.0",
+  "timestamp": "2026-04-25T00:04:32.156367",
+  "layers": {
+    "L1_Core": {
+      "exists": true,
+      "files": 25,
+      "dirs": 19,
+      "size_mb": 0.71,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 3644
+      }
+    },
+    "L2_Memory": {
+      "exists": true,
+      "files": 86,
+      "dirs": 28,
+      "size_mb": 14.06,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 5143
+      }
+    },
+    "L3_Orchestration": {
+      "exists": true,
+      "files": 83,
+      "dirs": 26,
+      "size_mb": 0.96,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 10893
+      }
+    },
+    "L4_Execution": {
+      "exists": true,
+      "files": 44,
+      "dirs": 15,
+      "size_mb": 0.39,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 8302
+      }
+    },
+    "L5_Governance": {
+      "exists": true,
+      "files": 99,
+      "dirs": 39,
+      "size_mb": 0.95,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 8747
+      }
+    },
+    "L6_Infrastructure": {
+      "exists": true,
+      "files": 171,
+      "dirs": 61,
+      "size_mb": 2.54,
+      "protected_ok": true,
+      "required_ok": true,
+      "file_limit_ok": true,
+      "issues": [],
+      "details": {
+        "total_lines": 10149
+      }
+    }
+  },
+  "protected_files": {
+    "AGENTS.md": {
+      "exists": true,
+      "size": 16643,
+      "lines": 331,
+      "modified": "2026-04-23 23:58"
+    },
+    "HEARTBEAT.md": {
+      "exists": true,
+      "size": 2920,
+      "lines": 106,
+      "modified": "2026-04-23 23:58"
+    },
+    "IDENTITY.md": {
+      "exists": true,
+      "size": 643,
+      "lines": 29,
+      "modified": "2026-04-23 23:58"
+    },
+    "MEMORY.md": {
+      "exists": true,
+      "size": 17888,
+      "lines": 537,
+      "modified": "2026-04-23 23:58"
+    },
+    "SOUL.md": {
+      "exists": true,
+      "size": 1673,
+      "lines": 36,
+      "modified": "2026-04-23 23:58"
+    },
+    "TOOLS.md": {
+      "exists": true,
+      "size": 6959,
+      "lines": 198,
+      "modified": "2026-04-23 23:58"
+    },
+    "USER.md": {
+      "exists": true,
+      "size": 649,
+      "lines": 26,
+      "modified": "2026-04-23 23:58"
+    },
+    "core/ARCHITECTURE.md": {
+      "exists": true,
+      "size": 23494,
+      "lines": 867,
+      "modified": "2026-04-23 23:58"
+    },
+    "core/CHANGE_IMPACT_MATRIX.md": {
+      "exists": true,
+      "size": 2738,
+      "lines": 123,
+      "modified": "2026-04-23 23:58"
+    },
+    "core/LAYER_DEPENDENCY_MATRIX.md": {
+      "exists": true,
+      "size": 2366,
+      "lines": 66,
+      "modified": "2026-04-23 23:58"
+    },
+    "core/LAYER_DEPENDENCY_RULES.json": {
+      "exists": true,
+      "size": 2349,
+      "lines": 79,
+      "modified": "2026-04-23 23:58"
+    },
+    "core/LAYER_IO_CONTRACTS.md": {
+      "exists": true,
+      "size": 7261,
+      "lines": 295,
+      "modified": "2026-04-23 23:58"
+    },
+    "core/RULE_REGISTRY.json": {
+      "exists": true,
+      "size": 9945,
+      "lines": 364,
+      "modified": "2026-04-23 23:58"
+    },
+    "core/SINGLE_SOURCE_OF_TRUTH.md": {
+      "exists": true,
+      "size": 2229,
+      "lines": 104,
+      "modified": "2026-04-23 23:58"
+    },
+    "governance/ARCHITECTURE_GUARDRAILS.md": {
+      "exists": true,
+      "size": 2840,
+      "lines": 116,
+      "modified": "2026-04-23 23:58"
+    },
+    "governance/CHANGE_IMPACT_ENFORCEMENT_POLICY.md": {
+      "exists": true,
+      "size": 3893,
+      "lines": 166,
+      "modified": "2026-04-23 23:58"
+    }
+  },
+  "skill_registry": {
+    "exists": true,
+    "skill_count": 3,
+    "categories": {
+      "memory": 1,
+      "productivity": 2
+    },
+    "layers": {
+      "L2": 1,
+      "L4": 2
+    },
+    "issues": []
+  },
+  "config_files": {
+    "core/CONFIG.json": {
+      "exists": true,
+      "valid_json": true,
+      "size": 3953,
+      "keys": [
+        "version",
+        "name",
+        "architecture",
+        "layers",
+        "summary",
+        "performance",
+        "directories"
+      ]
+    },
+    "infrastructure/inventory/load_config.json": {
+      "exists": true,
+      "valid_json": true,
+      "size": 1750,
+      "keys": [
+        "version",
+        "description",
+        "startup_whitelist",
+        "context_budget",
+        "registry_minimal",
+        "load_exclude"
+      ]
+    },
+    "infrastructure/inventory/exclude_config.json": {
+      "exists": true,
+      "valid_json": true,
+      "size": 1278,
+      "keys": [
+        "version",
+        "description",
+        "index_exclude",
+        "load_exclude",
+        "registry_minimal_fields"
+      ]
+    },
+    "skills/llm-memory-integration/config/llm_config.json": {
+      "exists": false,
+      "valid_json": false,
+      "size": 0,
+      "keys": []
+    },
+    "skills/llm-memory-integration/config/unified_config.json": {
+      "exists": false,
+      "valid_json": false,
+      "size": 0,
+      "keys": []
+    }
+  },
+  "dependencies": {
+    "imports": {
+      "memory_context.unified_search": {
+        "ok": true,
+        "name": "统一搜索"
+      },
+      "infrastructure.token_budget": {
+        "ok": true,
+        "name": "Token 预算"
+      },
+      "infrastructure.path_resolver": {
+        "ok": true,
+        "name": "路径解析"
+      },
+      "infrastructure.auto_git": {
+        "ok": true,
+        "name": "自动 Git"
+      },
+      "execution.skill_gateway": {
+        "ok": true,
+        "name": "技能网关"
+      }
+    }
+  },
+  "code_quality": {
+    "total_files": 384,
+    "total_lines": 68259,
+    "todos": 32,
+    "fixmes": 6,
+    "deprecated": 2,
+    "issues": []
+  },
+  "security": {
+    "hardcoded_secrets": 0,
+    "dangerous_commands": 0,
+    "shell_injection": 1,
+    "issues": [
+      "test_embedding.py: shell_injection"
+    ]
+  },
+  "performance": {
+    "index_size": 0,
+    "cache_size": 0,
+    "log_size": 21472,
+    "largest_files": [
+      [
+        "scripts/remediation_center.py",
+        54250
+      ],
+      [
+        "build/release/scripts/remediation_center.py",
+        54250
+      ],
+      [
+        "governance/risk/skill_abuse_guard.py",
+        51581
+      ],
+      [
+        "build/release/governance/risk/skill_abuse_guard.py",
+        51581
+      ],
+      [
+        "build/release/skills/xiaoyi-pdf/scripts/render_body.py",
+        49358
+      ]
+    ]
+  },
+  "rule_registry": {
+    "exists": true,
+    "version": "1.2.0",
+    "rule_count": 10,
+    "profile_count": 3,
+    "rules": [
+      "layer_dependency_rule",
+      "json_contract_rule",
+      "single_source_of_truth_rule",
+      "change_impact_rule",
+      "rule_self_test_rule",
+      "repo_integrity_rule",
+      "skill_security_rule",
+      "legacy_format_rule",
+      "R009",
+      "R010"
+    ],
+    "profiles": [
+      "premerge",
+      "nightly",
+      "release"
+    ],
+    "issues": [
+      "规则 legacy_format_rule 的检查器不存在: scripts/check_legacy_format.py"
+    ]
+  },
+  "rule_engine": {
+    "engine_exists": true,
+    "report_exists": true,
+    "last_run": "2026-04-25T00:05:00+08:00",
+    "passed_rules": 6,
+    "failed_rules": 0
+  },
+  "change_impact": {
+    "impact_exists": true,
+    "enforcement_exists": true,
+    "changed_files": 0,
+    "blocking_commands": 0,
+    "enforcement_passed": true
+  },
+  "skill_security": {
+    "checker_exists": true,
+    "report_exists": true,
+    "scanned": 275,
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "loop_guard": {
+    "guard_exists": true,
+    "design_exists": true
+  },
+  "gate_reports": {
+    "reports": {
+      "runtime_integrity": {
+        "exists": true
+      },
+      "quality_gate": {
+        "exists": true
+      },
+      "release_gate": {
+        "exists": true
+      },
+      "rule_execution_index": {
+        "exists": true
+      },
+      "followup_requirements": {
+        "exists": true
+      }
+    }
+  },
+  "issues": [],
+  "warnings": [],
+  "summary": {
+    "layers": "6/6",
+    "protected_files": "16/16",
+    "config_files": "3/5",
+    "imports": "5/5",
+    "security": "通过",
+    "total_files": 384,
+    "total_lines": 68259,
+    "issues": 0,
+    "warnings": 0,
+    "rule_registry": "存在",
+    "rule_engine": "存在",
+    "change_impact": "通过",
+    "skill_security": "Critical:0 High:0",
+    "loop_guard": "存在"
+  },
+  "new_modules": {
+    "modules": {
+      "application/task_service": {
+        "exists": true,
+        "layer": "L3 Orchestration",
+        "files_found": [
+          "service.py",
+          "scheduler.py"
+        ],
+        "files_missing": []
+      },
+      "application/response_service": {
+        "exists": true,
+        "layer": "L3 Orchestration",
+        "files_found": [
+          "renderer.py",
+          "evidence_formatter.py"
+        ],
+        "files_missing": []
+      },
+      "domain/tasks": {
+        "exists": true,
+        "layer": "L4 Execution",
+        "files_found": [
+          "specs.py",
+          "state_machine.py"
+        ],
+        "files_missing": []
+      },
+      "infrastructure/storage/repositories": {
+        "exists": true,
+        "layer": "L6 Infrastructure",
+        "files_found": [
+          "interfaces.py",
+          "sqlite_repo.py"
+        ],
+        "files_missing": []
+      },
+      "infrastructure/storage/migrations": {
+        "exists": true,
+        "layer": "L6 Infrastructure",
+        "files_found": [
+          "001_task_system.sql"
+        ],
+        "files_missing": []
+      }
+    },
+    "all_ok": true
+  },
+  "task_system": {
+    "task_engine": true,
+    "skill_gateway": true,
+    "evidence_check": true,
+    "summarize_method": true,
+    "verify_method": true,
+    "error_code_field": true
+  }
+}

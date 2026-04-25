@@ -1,0 +1,17 @@
+[Unit]
+Description=OpenClaw Daemon Manager V7.2.0
+After=network.target
+
+[Service]
+Type=simple
+User=sandbox
+WorkingDirectory=/home/sandbox/.openclaw/workspace
+ExecStart=/usr/bin/python3 /home/sandbox/.openclaw/workspace/infrastructure/daemon_manager.py start
+ExecStop=/usr/bin/python3 /home/sandbox/.openclaw/workspace/infrastructure/daemon_manager.py stop
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:/home/sandbox/.openclaw/workspace/logs/daemon_manager.log
+StandardError=append:/home/sandbox/.openclaw/workspace/logs/daemon_manager.log
+
+[Install]
+WantedBy=multi-user.target

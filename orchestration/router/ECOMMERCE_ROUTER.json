@@ -1,0 +1,94 @@
+{
+  "version": "2.0.0",
+  "description": "电商运营路由配置",
+  "routes": {
+    "团长相关": {
+      "triggers": ["找团长", "团长筛选", "团长合作", "社区团购"],
+      "skill": "dealer-leader-cooperation",
+      "workflow": "leader_selection",
+      "priority": 1
+    },
+    "佣金设计": {
+      "triggers": ["设计佣金", "佣金方案", "分销佣金", "团长佣金"],
+      "skill": "dealer-leader-cooperation",
+      "workflow": "commission_design",
+      "priority": 1
+    },
+    "合作洽谈": {
+      "triggers": ["合作洽谈", "团长合作方案", "分销合作"],
+      "skill": "dealer-leader-cooperation",
+      "workflow": "cooperation_negotiation",
+      "priority": 1
+    },
+    "抖音运营": {
+      "triggers": ["抖音小店", "抖店", "抖音带货", "抖音直播", "抖音达人"],
+      "skill": "douyin-shop-operation",
+      "workflow": "live_stream_operation",
+      "priority": 1
+    },
+    "快手运营": {
+      "triggers": ["快手小店", "快手带货", "快手直播", "老铁"],
+      "skill": "kuaishou-shop-operation",
+      "workflow": "live_stream_operation",
+      "priority": 1
+    },
+    "直播带货": {
+      "triggers": ["直播脚本", "直播选品", "直播带货", "直播方案"],
+      "skill": "omni-channel-ecommerce",
+      "workflow": "live_stream_operation",
+      "priority": 1
+    },
+    "达人合作": {
+      "triggers": ["找达人", "达人合作", "达人筛选", "达人带货"],
+      "skill": "omni-channel-ecommerce",
+      "workflow": "influencer_cooperation",
+      "priority": 1
+    },
+    "平台选择": {
+      "triggers": ["平台对比", "选平台", "哪个平台好", "平台分析"],
+      "skill": "platform-comparison",
+      "workflow": null,
+      "priority": 2
+    },
+    "选品管理": {
+      "triggers": ["选品", "商品管理", "定价", "库存管理", "爆款"],
+      "skill": "product-management",
+      "workflow": null,
+      "priority": 1
+    },
+    "营销活动": {
+      "triggers": ["活动策划", "促销活动", "营销方案", "节日活动"],
+      "skill": "marketing-campaign",
+      "workflow": null,
+      "priority": 1
+    },
+    "数据分析": {
+      "triggers": ["数据分析", "店铺数据", "转化分析", "ROI分析"],
+      "skill": "ecommerce-analytics",
+      "workflow": null,
+      "priority": 1
+    },
+    "供应链": {
+      "triggers": ["供应链", "供应商", "采购", "仓储", "物流"],
+      "skill": "supply-chain-management",
+      "workflow": null,
+      "priority": 2
+    },
+    "客服售后": {
+      "triggers": ["客服", "售后", "投诉处理", "评价管理"],
+      "skill": "customer-service",
+      "workflow": null,
+      "priority": 2
+    },
+    "全渠道运营": {
+      "triggers": ["全渠道", "多平台运营", "电商运营", "渠道拓展"],
+      "skill": "omni-channel-ecommerce",
+      "workflow": "ecommerce_operation",
+      "priority": 1
+    }
+  },
+  "fallback": {
+    "skill": "omni-channel-ecommerce",
+    "workflow": "ecommerce_operation"
+  }
+}

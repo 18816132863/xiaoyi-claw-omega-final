@@ -1,0 +1,9 @@
+{
+  "total_skills": 174,
+  "active": 174,
+  "deprecated": 0,
+  "avg_latency_ms": 200,
+  "total_calls": 1000,
+  "success_rate": 0.95,
+  "generated_at": "2026-04-24T22:36:40.269749"
+}

@@ -1,0 +1,81 @@
+{
+  "version": "7.2.0",
+  "description": "索引和加载排除配置",
+  "index_exclude": {
+    "directories": [
+      "node_modules",
+      "__pycache__",
+      ".git",
+      ".svn",
+      "archive",
+      "reports",
+      "backups",
+      "tmp",
+      "temp",
+      "dist",
+      "build",
+      ".cache",
+      "logs"
+    ],
+    "extensions": [
+      ".pyc",
+      ".pyo",
+      ".so",
+      ".dll",
+      ".dylib",
+      ".tar",
+      ".gz",
+      ".zip",
+      ".rar",
+      ".7z",
+      ".mp3",
+      ".mp4",
+      ".avi",
+      ".mov",
+      ".wav",
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".gif",
+      ".bmp",
+      ".ico",
+      ".db",
+      ".sqlite",
+      ".sqlite3"
+    ],
+    "files": [
+      "package-lock.json",
+      "yarn.lock",
+      "pnpm-lock.yaml",
+      "composer.lock",
+      "Cargo.lock",
+      "poetry.lock"
+    ],
+    "max_file_size_bytes": 10485760
+  },
+  "load_exclude": {
+    "directories": [
+      "archive",
+      "reports",
+      "backups",
+      "logs"
+    ],
+    "patterns": [
+      "*.bak",
+      "*.backup",
+      "*.old",
+      "*_backup*",
+      "*_old*"
+    ]
+  },
+  "registry_minimal_fields": [
+    "name",
+    "registered",
+    "routable",
+    "callable",
+    "executor_type",
+    "entry_point",
+    "path",
+    "status"
+  ]
+}

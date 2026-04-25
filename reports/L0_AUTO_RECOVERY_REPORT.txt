@@ -1,0 +1,108 @@
+============================================================
+L0 AUTO RECOVERY REPORT
+============================================================
+
+[L0 Probe Mode Status]
+
+Current Mode: normal_probe
+Success Rate: 100.0%
+Adjustment History: 0 records
+
+[Mode Definitions]
+
+1. normal_probe
+   - Full capability check
+   - All routes tested
+   - Standard timeout (30s)
+   - Use when: Initial state, high success rate
+
+2. fast_probe
+   - Reduced capability check
+   - Core routes only
+   - Shorter timeout (15s)
+   - Use when: Success rate drops below 80%
+
+3. limited_scope_probe
+   - Minimal capability check
+   - Essential routes only
+   - Very short timeout (10s)
+   - Use when: Fast probe also failing
+
+4. cache_fallback
+   - Use cached results
+   - No live probing
+   - Immediate response
+   - Use when: All probes timing out
+
+5. permission_diagnosis
+   - Focus on permission checks
+   - Diagnose access issues
+   - Provide recovery hints
+   - Use when: Suspected permission problems
+
+[Auto Adjustment Logic]
+
+Trigger Conditions:
+  - L0 success rate < 80%
+  - At least 5 probe attempts recorded
+  - Last 10 attempts analyzed
+
+Adjustment Process:
+  1. Calculate success rate from last 10 attempts
+  2. If below threshold, downgrade to next mode
+  3. Record adjustment timestamp
+  4. Continue with new mode
+
+Recovery (Manual):
+  - Can manually reset to normal_probe
+  - After successful recovery
+  - Or after user intervention
+
+[Test Results]
+
+During this test session:
+  - All safe routes passed (8/8)
+  - All confirm routes reachable (3/3)
+  - All strong confirm routes reachable (3/3)
+  - No mode downgrade triggered
+  - Success rate maintained at 100%
+
+[Recommendations]
+
+1. Monitor success rate continuously
+2. Log all mode adjustments
+3. Alert when reaching cache_fallback
+4. Investigate root cause when reaching permission_diagnosis
+5. Consider manual reset after fixing underlying issues
+
+[Implementation]
+
+File: infrastructure/connected_runtime_recovery_policy.py
+Class: L0AutoAdjustment
+Methods:
+  - record_result(success: bool)
+  - should_downgrade() -> bool
+  - downgrade() -> Optional[ProbeMode]
+
+Usage Example:
+```python
+from infrastructure.connected_runtime_recovery_policy import ConnectedRuntimeRecoveryPolicy
+
+policy = ConnectedRuntimeRecoveryPolicy()
+
+# After each probe
+policy.l0_adjustment.record_result(success)
+
+# Check if need to adjust
+if policy.l0_adjustment.should_downgrade():
+    new_mode = policy.l0_adjustment.downgrade()
+    print(f"Switched to {new_mode.value}")
+
+# Get current status
+print(f"Mode: {policy.get_current_probe_mode().value}")
+print(f"Success Rate: {policy.get_success_rate():.1%}")
+```
+
+============================================================
+Generated: 2026-04-25T11:09:00
+============================================================

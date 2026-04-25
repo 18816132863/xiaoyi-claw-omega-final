@@ -1,0 +1,136 @@
+{
+  "version": "11.0.0",
+  "description": "架构展示配置 - 自动融合版",
+  
+  "auto_fusion_engine": {
+    "description": "自动融合引擎 - 新技能自动触发融合",
+    "enabled": true,
+    "triggers": [
+      {
+        "event": "skill_installed",
+        "description": "新技能安装完成",
+        "action": "自动识别类型 → 融合到对应层级 → 更新架构展示"
+      },
+      {
+        "event": "skill_created",
+        "description": "新技能创建完成",
+        "action": "自动识别类型 → 融合到对应层级 → 更新架构展示"
+      },
+      {
+        "event": "workspace_scan",
+        "description": "工作空间扫描",
+        "action": "检测新技能 → 自动融合 → 更新架构展示"
+      },
+      {
+        "event": "session_start",
+        "description": "会话启动",
+        "action": "扫描技能目录 → 自动融合 → 更新架构展示"
+      }
+    ],
+    "workflow": [
+      "1. 检测到新技能",
+      "2. 自动识别技能类型（关键词匹配）",
+      "3. 确定归属层级",
+      "4. 检查是否存在同类型技能",
+      "5. 自动融合到对应层级或类型",
+      "6. 更新架构展示",
+      "7. 记录融合日志"
+    ],
+    "notification": {
+      "enabled": true,
+      "message": "检测到新技能 {skill_name}，已自动融合到 {layer_name} 层级"
+    }
+  },
+  
+  "skill_fusion_skill": {
+    "description": "技能融合能力",
+    "skill_name": "skill-fusion",
+    "skill_type": "进化相关",
+    "target_layer": "control",
+    "auto_trigger": true,
+    "capabilities": [
+      "同类型技能融合",
+      "层级技能融合",
+      "新技能自动归类",
+      "融合效果评估"
+    ]
+  },
+  
+  "layer_fusion_engine": {
+    "layer_fusion_rules": [
+      {"layer": "intelligence", "fusion_target": "unified-intelligence", "sub_skills": ["市场研究", "AI能力"]},
+      {"layer": "capabilities", "fusion_target": "unified-capabilities", "sub_skills": ["文档处理", "数据分析", "网络服务", "图像处理", "音频视频", "内容创作", "开发工具"]},
+      {"layer": "execution", "fusion_target": "unified-execution", "sub_skills": ["效率工具", "手机操控"]},
+      {"layer": "control", "fusion_target": "unified-control", "sub_skills": ["安全相关", "进化相关", "技能融合"]},
+      {"layer": "platform", "fusion_target": "unified-platform", "sub_skills": ["通讯集成"]}
+    ]
+  },
+  
+  "skill_merge_engine": {
+    "merge_rules": [
+      {"skill_type": "文档处理", "merged_skill": "unified-document", "can_merge": true},
+      {"skill_type": "数据分析", "merged_skill": "unified-data", "can_merge": true},
+      {"skill_type": "网络服务", "merged_skill": "unified-web", "can_merge": true},
+      {"skill_type": "图像处理", "merged_skill": "unified-image", "can_merge": true},
+      {"skill_type": "内容创作", "merged_skill": "unified-creator", "can_merge": true}
+    ]
+  },
+  
+  "skill_fusion_engine": {
+    "detection_rules": [
+      {"skill_type": "文档处理", "keywords": ["pdf", "docx", "pptx", "xlsx", "markdown", "document"], "target_layer": "capabilities"},
+      {"skill_type": "数据分析", "keywords": ["data", "excel", "sql", "mongo", "elastic", "analysis"], "target_layer": "capabilities"},
+      {"skill_type": "开发工具", "keywords": ["git", "docker", "ansible", "terraform", "javascript", "code"], "target_layer": "capabilities"},
+      {"skill_type": "网络服务", "keywords": ["web", "scrap", "search", "api", "http", "fetch"], "target_layer": "capabilities"},
+      {"skill_type": "图像处理", "keywords": ["image", "chart", "screenshot", "photo", "visual"], "target_layer": "capabilities"},
+      {"skill_type": "音频视频", "keywords": ["audio", "video", "whisper", "subtitle", "speech"], "target_layer": "capabilities"},
+      {"skill_type": "内容创作", "keywords": ["article", "copy", "novel", "poetry", "writer"], "target_layer": "capabilities"},
+      {"skill_type": "通讯集成", "keywords": ["email", "imsg", "linkedin", "message", "chat"], "target_layer": "platform"},
+      {"skill_type": "效率工具", "keywords": ["obsidian", "cron", "productivity", "task", "automation"], "target_layer": "execution"},
+      {"skill_type": "市场研究", "keywords": ["market", "crypto", "stock", "news", "research"], "target_layer": "intelligence"},
+      {"skill_type": "AI能力", "keywords": ["ai", "llm", "gpt", "claude", "model", "neural"], "target_layer": "intelligence"},
+      {"skill_type": "手机操控", "keywords": ["phone", "mobile", "android", "ios", "app", "gui"], "target_layer": "execution"},
+      {"skill_type": "安全相关", "keywords": ["security", "guardian", "validator", "protect"], "target_layer": "control"},
+      {"skill_type": "进化相关", "keywords": ["evolution", "upgrade", "optimize", "improve", "fusion"], "target_layer": "control"}
+    ],
+    "default_layer": "capabilities",
+    "default_type": "通用能力"
+  },
+  
+  "main_architecture": {
+    "layers": [
+      {"name": "核心层", "key": "core", "description": "系统骨架、身份定义", "aggregates": ["core"], "can_fuse": false},
+      {"name": "智能层", "key": "intelligence", "description": "记忆、理解、推理、知识、智能分析", "aggregates": ["intelligence", "memory"], "can_fuse": true, "fusion_target": "unified-intelligence"},
+      {"name": "能力层", "key": "capabilities", "description": "统一能力入口", "aggregates": ["skills"], "can_fuse": true, "fusion_target": "unified-capabilities"},
+      {"name": "执行层", "key": "execution", "description": "统一自动化执行", "aggregates": ["execution"], "can_fuse": true, "fusion_target": "unified-execution"},
+      {"name": "控制层", "key": "control", "description": "统一安全控制（含自动融合）", "aggregates": ["control", "resilience", "evolution_lab"], "can_fuse": true, "fusion_target": "unified-control"},
+      {"name": "平台层", "key": "platform", "description": "统一对外接口", "aggregates": ["platform", "business"], "can_fuse": true, "fusion_target": "unified-platform"}
+    ]
+  },
+  
+  "internal_detail": {
+    "layers": [
+      {"key": "core", "maps_to": "core"},
+      {"key": "intelligence", "maps_to": "intelligence"},
+      {"key": "memory", "maps_to": "intelligence"},
+      {"key": "execution", "maps_to": "execution"},
+      {"key": "skills", "maps_to": "capabilities"},
+      {"key": "control", "maps_to": "control"},
+      {"key": "resilience", "maps_to": "control"},
+      {"key": "evolution_lab", "maps_to": "control"},
+      {"key": "platform", "maps_to": "platform"},
+      {"key": "business", "maps_to": "platform"}
+    ]
+  },
+  
+  "mapping_rules": {
+    "memory": "intelligence",
+    "skills": "capabilities",
+    "resilience": "control",
+    "evolution_lab": "control",
+    "business": "platform"
+  },
+  
+  "ignore_dirs": ["node_modules", ".git", "__pycache__", ".pytest_cache", "full-architecture-backup", "repo", "venv", ".venv", "site-packages", "include", "bin", "cache", ".cache", "dist", "build", "reports", "scripts", "_review_pending"],
+  "ignore_patterns": ["*.egg-info", "*.pyc", "*.log", "*.tmp"]
+}

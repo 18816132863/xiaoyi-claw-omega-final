@@ -1,0 +1,135 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-06T13:20:00+08:00",
+  "description": "工作流统一注册表",
+  "workflows": {
+    "direct_answer": {
+      "workflow_name": "直接回答",
+      "description": "简单问答直接回答",
+      "trigger_task_types": ["qa"],
+      "required_skills": [],
+      "optional_tools": ["memory_search", "web_fetch"],
+      "stop_conditions": ["question_answered", "max_steps_reached"],
+      "validator": "ANSWER_VALIDATOR",
+      "max_steps": 3,
+      "timeout_ms": 30000,
+      "enabled": true
+    },
+    "search_pipeline": {
+      "workflow_name": "搜索流水线",
+      "description": "搜索信息并整理结果",
+      "trigger_task_types": ["search"],
+      "required_skills": ["xiaoyi-web-search"],
+      "optional_tools": ["memory_search"],
+      "stop_conditions": ["results_returned", "no_results", "max_steps_reached"],
+      "validator": "ANSWER_VALIDATOR",
+      "max_steps": 5,
+      "timeout_ms": 30000,
+      "enabled": true
+    },
+    "document_pipeline": {
+      "workflow_name": "文档处理流水线",
+      "description": "创建或编辑文档",
+      "trigger_task_types": ["document_edit"],
+      "required_skills": ["xiaoyi-doc-convert"],
+      "optional_tools": ["docx", "pdf", "pptx"],
+      "stop_conditions": ["document_created", "document_edited", "error"],
+      "validator": "FORMAT_ENFORCEMENT",
+      "max_steps": 10,
+      "timeout_ms": 60000,
+      "enabled": true
+    },
+    "planning_workflow": {
+      "workflow_name": "规划工作流",
+      "description": "制定计划或方案",
+      "trigger_task_types": ["planning"],
+      "required_skills": ["planning-with-files"],
+      "optional_tools": ["productivity", "taskr"],
+      "stop_conditions": ["plan_completed", "user_confirmed", "max_steps_reached"],
+      "validator": "ANSWER_VALIDATOR",
+      "max_steps": 15,
+      "timeout_ms": 60000,
+      "enabled": true
+    },
+    "creation_pipeline": {
+      "workflow_name": "创作流水线",
+      "description": "生成创作内容",
+      "trigger_task_types": ["creative_generation"],
+      "required_skills": ["article-writer"],
+      "optional_tools": ["copywriter", "story-cog", "novel-generator"],
+      "stop_conditions": ["content_generated", "user_satisfied", "max_steps_reached"],
+      "validator": "FORMAT_ENFORCEMENT",
+      "max_steps": 20,
+      "timeout_ms": 120000,
+      "enabled": true
+    },
+    "tool_execution": {
+      "workflow_name": "工具执行",
+      "description": "执行工具操作",
+      "trigger_task_types": ["tool_use"],
+      "required_skills": ["api-gateway"],
+      "optional_tools": ["mcporter", "command-center"],
+      "stop_conditions": ["tool_executed", "error", "confirmation_timeout"],
+      "validator": "ANSWER_VALIDATOR",
+      "max_steps": 5,
+      "timeout_ms": 30000,
+      "enabled": true
+    },
+    "memory_write": {
+      "workflow_name": "记忆写入",
+      "description": "更新用户记忆",
+      "trigger_task_types": ["memory_update"],
+      "required_skills": ["memory-setup"],
+      "optional_tools": ["ontology"],
+      "stop_conditions": ["memory_updated", "error"],
+      "validator": null,
+      "max_steps": 3,
+      "timeout_ms": 10000,
+      "enabled": true
+    },
+    "agent_workflow": {
+      "workflow_name": "多步代理工作流",
+      "description": "复杂多步任务执行",
+      "trigger_task_types": ["multi_step_agent"],
+      "required_skills": ["self-improving-agent"],
+      "optional_tools": ["proactivity", "auto-skill-upgrade"],
+      "stop_conditions": ["task_completed", "user_cancelled", "max_steps_reached", "error"],
+      "validator": "ANSWER_VALIDATOR",
+      "max_steps": 30,
+      "timeout_ms": 180000,
+      "enabled": true
+    },
+    "high_risk_protocol": {
+      "workflow_name": "高风险协议",
+      "description": "高风险操作处理",
+      "trigger_task_types": ["high_risk_request"],
+      "required_skills": [],
+      "optional_tools": ["moltguard"],
+      "stop_conditions": ["confirmed_and_executed", "refused", "confirmation_timeout"],
+      "validator": "REFUSAL_POLICY",
+      "max_steps": 5,
+      "timeout_ms": 60000,
+      "requires_confirmation": true,
+      "requires_double_confirmation": true,
+      "enabled": true
+    }
+  },
+  "workflow_management": {
+    "version_control": true,
+    "rollback_enabled": true,
+    "audit_enabled": true,
+    "status": {
+      "enabled": "启用",
+      "disabled": "禁用",
+      "deprecated": "已废弃"
+    }
+  },
+  "statistics": {
+    "total_workflows": 9,
+    "by_status": {
+      "enabled": 9,
+      "disabled": 0,
+      "deprecated": 0
+    }
+  }
+}

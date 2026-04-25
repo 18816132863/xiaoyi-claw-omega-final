@@ -1,0 +1,9 @@
+{
+  "schema": "exec",
+  "bin": "scripts/image_translation.py",
+  "env": [],
+  "name": "xiaoyi-image-translation",
+  "description": "小艺图片翻译",
+  "tags": ["image", "vision", "translation"],
+  "autoLoad": true
+}

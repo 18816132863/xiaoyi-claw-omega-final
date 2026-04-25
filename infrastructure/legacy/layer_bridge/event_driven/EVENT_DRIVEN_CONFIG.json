@@ -1,0 +1,50 @@
+{
+  "module": "event_driven",
+  "version": "1.0.0",
+  "description": "事件驱动架构系统",
+  "brokers": {
+    "kafka": {
+      "enabled": true,
+      "version": "3.6"
+    },
+    "rabbitmq": {
+      "enabled": true,
+      "version": "3.12"
+    },
+    "pulsar": {
+      "enabled": true,
+      "version": "3.0"
+    },
+    "nats": {
+      "enabled": true,
+      "version": "2.10"
+    }
+  },
+  "features": {
+    "event_bus": {
+      "pub_sub": true,
+      "event_filtering": true,
+      "dead_letter_queue": true
+    },
+    "event_sourcing": {
+      "enabled": true,
+      "snapshot_strategy": "auto",
+      "replay_support": true
+    },
+    "cqrs": {
+      "enabled": true,
+      "read_write_separation": true,
+      "eventual_consistency": true
+    },
+    "saga": {
+      "choreography": true,
+      "orchestration": true,
+      "compensation": true
+    }
+  },
+  "performance": {
+    "throughput_events_per_sec": 1000000,
+    "latency_ms": 1,
+    "retention_days": 30
+  }
+}

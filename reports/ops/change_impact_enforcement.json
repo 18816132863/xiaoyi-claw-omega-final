@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-04-25T00:05:00+08:00",
+  "enforcement_passed": true,
+  "profile": "premerge",
+  "checks": {
+    "layer_dependency": true,
+    "json_contract": true,
+    "single_source": true,
+    "repo_integrity": true,
+    "skill_security": true
+  },
+  "violations": [],
+  "warnings": []
+}

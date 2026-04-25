@@ -1,0 +1,331 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KPI Catalog",
+  "description": "平台经营指标目录",
+  "version": "1.0.0",
+  "updated": "2026-04-06",
+  
+  "kpi_definitions": [
+    {
+      "kpi_id": "KPI-001",
+      "kpi_name": "租户活跃数",
+      "category": "engagement",
+      "definition": "统计周期内有活跃会话的租户数量",
+      "formula": "COUNT(DISTINCT tenant_id WHERE session_count > 0)",
+      "owner": "operations-team",
+      "refresh_cadence": "daily",
+      "data_sources": ["sessions", "tenancy"],
+      "alert_threshold": {
+        "warning": "week_over_week_decline > 10%",
+        "critical": "week_over_week_decline > 20%"
+      },
+      "dashboard_targets": ["executive", "operations"]
+    },
+    {
+      "kpi_id": "KPI-002",
+      "kpi_name": "任务成功率",
+      "category": "quality",
+      "definition": "成功完成的任务占总任务的比例",
+      "formula": "successful_tasks / total_tasks * 100",
+      "owner": "platform-team",
+      "refresh_cadence": "hourly",
+      "data_sources": ["orchestration", "tasks"],
+      "alert_threshold": {
+        "warning": "< 95%",
+        "critical": "< 90%"
+      },
+      "dashboard_targets": ["executive", "operations", "technical"]
+    },
+    {
+      "kpi_id": "KPI-003",
+      "kpi_name": "SLO 达成率",
+      "category": "reliability",
+      "definition": "达成 SLO 目标的服务比例",
+      "formula": "services_meeting_slo / total_services * 100",
+      "owner": "reliability-team",
+      "refresh_cadence": "daily",
+      "data_sources": ["reliability", "slo_definitions"],
+      "alert_threshold": {
+        "warning": "< 95%",
+        "critical": "< 90%"
+      },
+      "dashboard_targets": ["executive", "operations", "technical"]
+    },
+    {
+      "kpi_id": "KPI-004",
+      "kpi_name": "成本率",
+      "category": "financial",
+      "definition": "实际成本与预算成本的比例",
+      "formula": "actual_cost / budgeted_cost * 100",
+      "owner": "finance-team",
+      "refresh_cadence": "daily",
+      "data_sources": ["billing", "usage_schema"],
+      "alert_threshold": {
+        "warning": "> 90%",
+        "critical": "> 100%"
+      },
+      "dashboard_targets": ["executive", "finance"]
+    },
+    {
+      "kpi_id": "KPI-005",
+      "kpi_name": "回滚率",
+      "category": "quality",
+      "definition": "发布后需要回滚的比例",
+      "formula": "rollback_releases / total_releases * 100",
+      "owner": "release-team",
+      "refresh_cadence": "weekly",
+      "data_sources": ["release", "rollback"],
+      "alert_threshold": {
+        "warning": "> 5%",
+        "critical": "> 10%"
+      },
+      "dashboard_targets": ["executive", "operations", "technical"]
+    },
+    {
+      "kpi_id": "KPI-006",
+      "kpi_name": "审批积压数",
+      "category": "governance",
+      "definition": "待处理审批请求数量",
+      "formula": "COUNT(approval_requests WHERE status = 'pending')",
+      "owner": "governance-team",
+      "refresh_cadence": "hourly",
+      "data_sources": ["governance_center", "approval"],
+      "alert_threshold": {
+        "warning": "> 50",
+        "critical": "> 100"
+      },
+      "dashboard_targets": ["operations", "governance"]
+    },
+    {
+      "kpi_id": "KPI-007",
+      "kpi_name": "知识新鲜度",
+      "category": "knowledge",
+      "definition": "知识库中最近30天更新过的条目比例",
+      "formula": "knowledge_updated_30d / total_knowledge * 100",
+      "owner": "knowledge-team",
+      "refresh_cadence": "daily",
+      "data_sources": ["knowledge", "memory"],
+      "alert_threshold": {
+        "warning": "< 70%",
+        "critical": "< 50%"
+      },
+      "dashboard_targets": ["operations", "knowledge"]
+    },
+    {
+      "kpi_id": "KPI-008",
+      "kpi_name": "事件风暴率",
+      "category": "reliability",
+      "definition": "单位时间内事件触发数量异常增长",
+      "formula": "events_per_hour / baseline_events_per_hour",
+      "owner": "platform-team",
+      "refresh_cadence": "realtime",
+      "data_sources": ["events", "alert"],
+      "alert_threshold": {
+        "warning": "> 3x baseline",
+        "critical": "> 5x baseline"
+      },
+      "dashboard_targets": ["operations", "technical"]
+    },
+    {
+      "kpi_id": "KPI-009",
+      "kpi_name": "配额命中率",
+      "category": "resource",
+      "definition": "租户配额使用达到80%以上的比例",
+      "formula": "tenants_over_80p_quota / total_active_tenants * 100",
+      "owner": "operations-team",
+      "refresh_cadence": "daily",
+      "data_sources": ["billing", "quota"],
+      "alert_threshold": {
+        "warning": "> 20%",
+        "critical": "> 30%"
+      },
+      "dashboard_targets": ["operations", "finance"]
+    },
+    {
+      "kpi_id": "KPI-010",
+      "kpi_name": "新租户转化率",
+      "category": "growth",
+      "definition": "试用租户转化为付费租户的比例",
+      "formula": "converted_tenants / trial_tenants * 100",
+      "owner": "growth-team",
+      "refresh_cadence": "weekly",
+      "data_sources": ["tenancy", "billing"],
+      "alert_threshold": {
+        "warning": "< 20%",
+        "critical": "< 10%"
+      },
+      "dashboard_targets": ["executive", "growth"]
+    },
+    {
+      "kpi_id": "KPI-011",
+      "kpi_name": "平均响应时延",
+      "category": "performance",
+      "definition": "所有请求的平均响应时间",
+      "formula": "AVG(response_time)",
+      "owner": "platform-team",
+      "refresh_cadence": "hourly",
+      "data_sources": ["observability", "metrics"],
+      "alert_threshold": {
+        "warning": "> 30s",
+        "critical": "> 60s"
+      },
+      "dashboard_targets": ["technical", "operations"]
+    },
+    {
+      "kpi_id": "KPI-012",
+      "kpi_name": "工具使用覆盖率",
+      "category": "engagement",
+      "definition": "使用过至少一种工具的租户比例",
+      "formula": "tenants_using_tools / total_active_tenants * 100",
+      "owner": "tools-team",
+      "refresh_cadence": "weekly",
+      "data_sources": ["tools", "tenancy"],
+      "alert_threshold": {
+        "warning": "< 60%",
+        "critical": "< 40%"
+      },
+      "dashboard_targets": ["operations", "growth"]
+    },
+    {
+      "kpi_id": "KPI-013",
+      "kpi_name": "自动化任务占比",
+      "category": "engagement",
+      "definition": "自动化执行的任务占总任务比例",
+      "formula": "automated_tasks / total_tasks * 100",
+      "owner": "orchestration-team",
+      "refresh_cadence": "daily",
+      "data_sources": ["orchestration", "tasks"],
+      "alert_threshold": {
+        "warning": "week_over_week_decline > 10%",
+        "critical": "week_over_week_decline > 20%"
+      },
+      "dashboard_targets": ["executive", "operations"]
+    },
+    {
+      "kpi_id": "KPI-014",
+      "kpi_name": "合规审查通过率",
+      "category": "compliance",
+      "definition": "合规审查一次通过的比例",
+      "formula": "first_time_approvals / total_reviews * 100",
+      "owner": "compliance-team",
+      "refresh_cadence": "daily",
+      "data_sources": ["compliance", "governance"],
+      "alert_threshold": {
+        "warning": "< 80%",
+        "critical": "< 60%"
+      },
+      "dashboard_targets": ["governance", "compliance"]
+    },
+    {
+      "kpi_id": "KPI-015",
+      "kpi_name": "客户满意度评分",
+      "category": "satisfaction",
+      "definition": "基于反馈的客户满意度评分",
+      "formula": "AVG(satisfaction_score)",
+      "owner": "customer-success-team",
+      "refresh_cadence": "weekly",
+      "data_sources": ["feedback", "surveys"],
+      "alert_threshold": {
+        "warning": "< 4.0",
+        "critical": "< 3.5"
+      },
+      "dashboard_targets": ["executive", "operations"]
+    }
+  ],
+  
+  "kpi_categories": {
+    "engagement": {
+      "name": "用户参与",
+      "description": "衡量用户活跃度和参与深度",
+      "kpis": ["KPI-001", "KPI-012", "KPI-013"]
+    },
+    "quality": {
+      "name": "服务质量",
+      "description": "衡量服务交付质量",
+      "kpis": ["KPI-002", "KPI-005"]
+    },
+    "reliability": {
+      "name": "可靠性",
+      "description": "衡量系统可靠性",
+      "kpis": ["KPI-003", "KPI-008"]
+    },
+    "financial": {
+      "name": "财务",
+      "description": "衡量成本和收入",
+      "kpis": ["KPI-004"]
+    },
+    "governance": {
+      "name": "治理",
+      "description": "衡量治理效率",
+      "kpis": ["KPI-006", "KPI-014"]
+    },
+    "knowledge": {
+      "name": "知识",
+      "description": "衡量知识库健康度",
+      "kpis": ["KPI-007"]
+    },
+    "resource": {
+      "name": "资源",
+      "description": "衡量资源使用情况",
+      "kpis": ["KPI-009"]
+    },
+    "growth": {
+      "name": "增长",
+      "description": "衡量业务增长",
+      "kpis": ["KPI-010"]
+    },
+    "performance": {
+      "name": "性能",
+      "description": "衡量系统性能",
+      "kpis": ["KPI-011"]
+    },
+    "satisfaction": {
+      "name": "满意度",
+      "description": "衡量客户满意度",
+      "kpis": ["KPI-015"]
+    }
+  },
+  
+  "dashboard_targets": {
+    "executive": {
+      "name": "管理层看板",
+      "refresh_interval": "daily",
+      "kpis": ["KPI-001", "KPI-002", "KPI-003", "KPI-004", "KPI-005", "KPI-010", "KPI-013", "KPI-015"]
+    },
+    "operations": {
+      "name": "运营看板",
+      "refresh_interval": "hourly",
+      "kpis": ["KPI-001", "KPI-002", "KPI-006", "KPI-007", "KPI-009", "KPI-011", "KPI-012", "KPI-013", "KPI-015"]
+    },
+    "technical": {
+      "name": "技术看板",
+      "refresh_interval": "realtime",
+      "kpis": ["KPI-002", "KPI-003", "KPI-005", "KPI-008", "KPI-011"]
+    },
+    "governance": {
+      "name": "治理看板",
+      "refresh_interval": "hourly",
+      "kpis": ["KPI-006", "KPI-014"]
+    },
+    "finance": {
+      "name": "财务看板",
+      "refresh_interval": "daily",
+      "kpis": ["KPI-004", "KPI-009"]
+    },
+    "growth": {
+      "name": "增长看板",
+      "refresh_interval": "weekly",
+      "kpis": ["KPI-010", "KPI-012"]
+    },
+    "knowledge": {
+      "name": "知识看板",
+      "refresh_interval": "daily",
+      "kpis": ["KPI-007"]
+    },
+    "compliance": {
+      "name": "合规看板",
+      "refresh_interval": "daily",
+      "kpis": ["KPI-014"]
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "version": "2.7.0",
+  "description": "Token 优化配置",
+  "strategies": {
+    "fileTruncation": {
+      "maxLines": 500,
+      "skipFiles": ["AGENTS.md", "SOUL.md", "TOOLS.md"]
+    },
+    "referenceInlining": {
+      "enabled": true,
+      "maxInlineSize": 5000,
+      "useLinks": true
+    },
+    "summaryGeneration": {
+      "enabled": true,
+      "maxLength": 200,
+      "skipSections": ["code", "examples"]
+    },
+    "deduplication": {
+      "enabled": true,
+      "similarityThreshold": 0.9
+    }
+  },
+  "layerOptimization": {
+    "L1_core": {
+      "priority": "critical",
+      "maxTokens": 5000,
+      "strategy": "full"
+    },
+    "L2_memory_context": {
+      "priority": "high",
+      "maxTokens": 3000,
+      "strategy": "recent_first"
+    },
+    "L3_orchestration": {
+      "priority": "medium",
+      "maxTokens": 2000,
+      "strategy": "on_demand"
+    },
+    "L4_execution": {
+      "priority": "medium",
+      "maxTokens": 2000,
+      "strategy": "on_demand"
+    },
+    "L5_governance": {
+      "priority": "low",
+      "maxTokens": 1000,
+      "strategy": "lazy"
+    },
+    "L6_infrastructure": {
+      "priority": "low",
+      "maxTokens": 1000,
+      "strategy": "lazy"
+    }
+  },
+  "performance": {
+    "targetTokenReduction": 40,
+    "targetLatencyMs": 300,
+    "targetCacheHitRate": 0.95
+  }
+}

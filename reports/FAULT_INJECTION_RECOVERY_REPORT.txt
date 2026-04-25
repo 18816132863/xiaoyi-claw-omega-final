@@ -1,0 +1,185 @@
+============================================================
+FAULT INJECTION RECOVERY REPORT
+============================================================
+
+[Executive Summary]
+
+本次测试验证了故障注入和自动恢复策略的正确性。
+所有 5 个核心测试场景全部通过。
+
+[Fault Injection Scenarios]
+
+1. Contact Service Timeout
+   ✓ 正确分类为 contact_service_timeout
+   ✓ 恢复策略序列正确：
+     - retry
+     - limited_scope_probe
+     - cache_fallback
+     - pending_queue
+     - permission_diagnosis
+     - human_action_required
+
+2. Calendar Service Timeout
+   ✓ 正确分类为 calendar_service_timeout
+   ✓ 恢复计划创建成功
+
+3. Note Service Timeout
+   ✓ 正确分类为 note_service_timeout
+   ✓ 恢复计划创建成功
+
+[Auto Recovery Verification]
+
+1. Retry Strategy
+   - Max Attempts: 3
+   - Backoff: Exponential (1.5x)
+   - Timeout: 30s per attempt
+   ✓ 验证通过
+
+2. Limited Scope Probe
+   - Timeout: 20s
+   - Purpose: Reduce request scope
+   ✓ 验证通过
+
+3. Cache Fallback
+   - Timeout: 5s
+   - Purpose: Use cached data
+   ✓ 验证通过
+
+4. Pending Queue
+   - Timeout: 10s
+   - Purpose: Defer to later
+   ✓ 验证通过
+
+[L0 Auto Adjustment]
+
+Initial State:
+  - Mode: normal_probe
+  - Success Rate: 100%
+
+After 8 failures + 2 successes:
+  - Success Rate: 20%
+  - Should Downgrade: True
+  - New Mode: fast_probe
+
+✓ 自动降级机制验证通过
+
+[Task Not Stuck Verification]
+
+Scenario: No progress for 70 seconds
+Expected: Auto degrade
+Actual:
+  - Action: degrade
+  - Should Degrade: True
+
+✓ 任务不会卡住验证通过
+
+[Recovery Flow Summary]
+
+┌─────────────────────────────────────────────────────────────┐
+│                    FAILURE DETECTED                          │
+│                                                              │
+│  contact_service_timeout / calendar_service_timeout /       │
+│  note_service_timeout                                        │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    STEP 1: RETRY                             │
+│  - Attempt 1 (30s timeout)                                   │
+│  - Attempt 2 (45s timeout, 1.5x backoff)                    │
+│  - Attempt 3 (67.5s timeout)                                │
+│  - Success? → DONE                                           │
+│  - Fail? → NEXT STEP                                         │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│              STEP 2: LIMITED SCOPE PROBE                     │
+│  - Reduce request scope                                      │
+│  - 20s timeout                                               │
+│  - Success? → DONE                                           │
+│  - Fail? → NEXT STEP                                         │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                STEP 3: CACHE FALLBACK                        │
+│  - Use cached data                                           │
+│  - 5s timeout                                                │
+│  - Success? → DONE                                           │
+│  - Fail? → NEXT STEP                                         │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 STEP 4: PENDING QUEUE                        │
+│  - Add to pending queue                                      │
+│  - 10s timeout                                               │
+│  - Success? → DONE (deferred)                               │
+│  - Fail? → NEXT STEP                                         │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│              STEP 5: PERMISSION DIAGNOSIS                    │
+│  - Check permissions                                         │
+│  - Provide recovery hints                                    │
+│  - 15s timeout                                               │
+│  - Success? → DONE                                           │
+│  - Fail? → NEXT STEP                                         │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│            STEP 6: HUMAN ACTION REQUIRED                     │
+│  - Request user intervention                                 │
+│  - No timeout (wait for human)                              │
+│  - User fixes issue → RETRY from beginning                  │
+└─────────────────────────────────────────────────────────────┘
+
+[Test Results Summary]
+
+| Test | Status |
+|------|--------|
+| Contact Service Timeout | ✓ PASSED |
+| Calendar Service Timeout | ✓ PASSED |
+| Note Service Timeout | ✓ PASSED |
+| L0 Auto Adjustment | ✓ PASSED |
+| Task Not Stuck | ✓ PASSED |
+
+Total: 5/5 PASSED
+
+[Pytest Results]
+
+tests/test_device_runtime_state.py: 12 passed
+tests/test_connected_runtime_recovery.py: 19 passed
+Total: 31 passed in 0.10s
+
+[Files Delivered]
+
+1. infrastructure/device_runtime_state.py
+2. infrastructure/connected_runtime_recovery_policy.py
+3. scripts/check_connected_permissions.py
+4. scripts/connected_route_smoke.py
+5. scripts/visual_probe_smoke.py
+6. scripts/run_fault_injection_tests.py
+7. tests/test_device_runtime_state.py
+8. tests/test_connected_runtime_recovery.py
+9. tests/test_fault_injection_recovery.py
+
+[Conclusion]
+
+✓ 故障注入测试全部通过
+✓ 自动恢复策略验证正确
+✓ 任务不会卡住机制验证通过
+✓ L0 自动调整机制验证通过
+
+系统已具备：
+- 服务超时自动分类
+- 多级恢复策略自动执行
+- 成功率驱动的探测模式调整
+- 任务进度超时保护
+
+============================================================
+Generated: 2026-04-25T11:20:00
+============================================================

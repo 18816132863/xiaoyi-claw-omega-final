@@ -1,0 +1,169 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-06T13:20:00+08:00",
+  "description": "常见任务类型完成标准",
+  "taskTypes": {
+    "qa": {
+      "name": "问答型",
+      "minimum_criteria": {
+        "question_answered": true,
+        "factual_accuracy": true,
+        "no_hallucination": true
+      },
+      "high_quality_criteria": {
+        "complete_coverage": true,
+        "clear_explanation": true,
+        "relevant_examples": true,
+        "follow_up_offered": true
+      },
+      "success_metrics": {
+        "user_satisfaction": ">= 0.8",
+        "follow_up_rate": "<= 0.2"
+      }
+    },
+    "search": {
+      "name": "搜索型",
+      "minimum_criteria": {
+        "results_returned": true,
+        "results_relevant": true,
+        "sources_cited": true
+      },
+      "high_quality_criteria": {
+        "results_comprehensive": true,
+        "results_ranked": true,
+        "freshness_verified": true,
+        "summary_provided": true
+      },
+      "success_metrics": {
+        "result_click_rate": ">= 0.5",
+        "refinement_rate": "<= 0.3"
+      }
+    },
+    "document_generation": {
+      "name": "文档生成型",
+      "minimum_criteria": {
+        "content_complete": true,
+        "format_correct": true,
+        "no_errors": true
+      },
+      "high_quality_criteria": {
+        "structure_clear": true,
+        "content_accurate": true,
+        "style_appropriate": true,
+        "ready_to_use": true
+      },
+      "success_metrics": {
+        "revision_rate": "<= 0.2",
+        "acceptance_rate": ">= 0.8"
+      }
+    },
+    "planning": {
+      "name": "方案型",
+      "minimum_criteria": {
+        "goal_addressed": true,
+        "steps_defined": true,
+        "feasible": true
+      },
+      "high_quality_criteria": {
+        "alternatives_provided": true,
+        "risks_identified": true,
+        "timeline_realistic": true,
+        "resources_specified": true
+      },
+      "success_metrics": {
+        "plan_acceptance": ">= 0.7",
+        "execution_success": ">= 0.8"
+      }
+    },
+    "multi_step_execution": {
+      "name": "多步执行型",
+      "minimum_criteria": {
+        "all_steps_completed": true,
+        "final_result_delivered": true,
+        "no_critical_errors": true
+      },
+      "high_quality_criteria": {
+        "progress_reported": true,
+        "errors_handled": true,
+        "result_verified": true,
+        "cleanup_performed": true
+      },
+      "success_metrics": {
+        "completion_rate": ">= 0.9",
+        "error_rate": "<= 0.1"
+      }
+    },
+    "analysis": {
+      "name": "分析型",
+      "minimum_criteria": {
+        "data_processed": true,
+        "conclusions_drawn": true,
+        "evidence_cited": true
+      },
+      "high_quality_criteria": {
+        "insights_deep": true,
+        "recommendations_actionable": true,
+        "limitations_acknowledged": true,
+        "visualization_provided": true
+      },
+      "success_metrics": {
+        "insight_usefulness": ">= 0.8",
+        "actionability": ">= 0.7"
+      }
+    },
+    "creative_writing": {
+      "name": "创作型",
+      "minimum_criteria": {
+        "content_original": true,
+        "requirements_met": true,
+        "no_plagiarism": true
+      },
+      "high_quality_criteria": {
+        "style_engaging": true,
+        "content_compelling": true,
+        "structure_effective": true,
+        "polished": true
+      },
+      "success_metrics": {
+        "user_satisfaction": ">= 0.8",
+        "revision_requests": "<= 1"
+      }
+    },
+    "tool_operation": {
+      "name": "工具操作型",
+      "minimum_criteria": {
+        "operation_completed": true,
+        "result_correct": true,
+        "no_side_effects": true
+      },
+      "high_quality_criteria": {
+        "operation_efficient": true,
+        "result_verified": true,
+        "user_confirmed": true,
+        "cleanup_done": true
+      },
+      "success_metrics": {
+        "success_rate": ">= 0.95",
+        "undo_rate": "<= 0.05"
+      }
+    }
+  },
+  "global_standards": {
+    "always_required": [
+      "no_harmful_content",
+      "no_privacy_violation",
+      "no_security_risk",
+      "honest_uncertainty"
+    ],
+    "quality_thresholds": {
+      "minimum_pass": 0.6,
+      "high_quality": 0.8,
+      "excellent": 0.9
+    }
+  },
+  "validation": {
+    "auto_check": true,
+    "user_confirmation_for_high_risk": true,
+    "log_all_results": true
+  }
+}

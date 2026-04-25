@@ -1,0 +1,1259 @@
+{
+  "timestamp": "2026-04-24T21:58:47.845590",
+  "orphans": {
+    "modules": [],
+    "capabilities": [
+      {
+        "name": "delete_note",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_note.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "self_repair",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/self_repair.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "query_contact",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/query_contact.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "explain_notification_auth_state",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_notification_auth_state.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "refresh_notification_auth",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/refresh_notification_auth.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "delete_contact",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_contact.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "pause_task",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/pause_task.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "make_call",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/make_call.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "delete_photo",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_photo.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "manage_file",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/manage_file.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "cancel_task",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_task.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "get_location",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/get_location.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "delete_xiaoyi_note",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_xiaoyi_note.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "query_photo",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/query_photo.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "delete_calendar_event",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_calendar_event.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "preview_side_effect",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/preview_side_effect.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "send_message",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/send_message.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "list_recent_messages",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_messages.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "resend_message",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/resend_message.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "create_album",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/create_album.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "query_note",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/query_note.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "explain_message_result",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_message_result.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "update_calendar_event",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/update_calendar_event.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "query_file",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/query_file.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "explain_invocation_status",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/explain_invocation_status.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "query_calendar_event",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/query_calendar_event.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "diagnostics",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/diagnostics.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "query_message_status",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/query_message_status.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "list_calendar_events",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/list_calendar_events.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "create_contact",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/create_contact.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "query_notification_status",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/query_notification_status.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "create_alarm",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/create_alarm.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "update_contact",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/update_contact.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "search_notes",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/search_notes.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "bootstrap",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/bootstrap.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "approve_action",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/approve_action.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "cancel_notification",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/cancel_notification.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "delete_file",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_file.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "update_note",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/update_note.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "registry",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/registry.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "query_xiaoyi_note",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/query_xiaoyi_note.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "retry_task",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/retry_task.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "resume_task",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/resume_task.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "delete_alarm",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/delete_alarm.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "audit_queries",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/audit_queries.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "schedule_task",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/schedule_task.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "export_history",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/export_history.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "replay_run",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/replay_run.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "query_alarm",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/query_alarm.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "confirm_invocation",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/confirm_invocation.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "update_alarm",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/update_alarm.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "list_recent_notes",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/list_recent_notes.py",
+        "reason": "未注册到 capability_registry.json"
+      },
+      {
+        "name": "check_calendar_conflicts",
+        "path": "/home/sandbox/.openclaw/workspace/capabilities/check_calendar_conflicts.py",
+        "reason": "未注册到 capability_registry.json"
+      }
+    ],
+    "configs": [
+      {
+        "name": "dual_push_config",
+        "path": "/home/sandbox/.openclaw/workspace/config/dual_push_config.json",
+        "reason": "未被任何代码引用"
+      },
+      {
+        "name": "capability_timeouts",
+        "path": "/home/sandbox/.openclaw/workspace/config/capability_timeouts.json",
+        "reason": "未被任何代码引用"
+      },
+      {
+        "name": "default_skill_config",
+        "path": "/home/sandbox/.openclaw/workspace/config/default_skill_config.py",
+        "reason": "未被任何代码引用"
+      },
+      {
+        "name": "feature_flags",
+        "path": "/home/sandbox/.openclaw/workspace/config/feature_flags.py",
+        "reason": "未被任何代码引用"
+      }
+    ],
+    "scripts": [
+      {
+        "name": "control_plane_audit",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/control_plane_audit.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "smoke_test",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/smoke_test.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "find_orphan_components",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/find_orphan_components.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "send_daily_health_reminder",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/send_daily_health_reminder.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "platform_health_check",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/platform_health_check.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "run_nightly_audit",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/run_nightly_audit.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_json_contracts",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_json_contracts.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "start_production_celery",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/start_production_celery.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "heartbeat_executor",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/heartbeat_executor.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "control_plane",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/control_plane.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "generate_alerts",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/generate_alerts.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "start_local_celery",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/start_local_celery.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "demo_manual_confirmation",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/demo_manual_confirmation.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "unified_inspector",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/unified_inspector.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "test_all_skills",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/test_all_skills.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "system_integrity_check",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/system_integrity_check.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_test_collection",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_test_collection.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_skill_security",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_skill_security.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "deep_inspection",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/deep_inspection.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "delete_manager",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/delete_manager.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "release_check",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/release_check.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "performance_benchmark",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/performance_benchmark.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "real_infra_test",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/real_infra_test.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "auto_classify_skills",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/auto_classify_skills.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "export_weekly_platform_report",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/export_weekly_platform_report.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "upgrade_all_to_commercial",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/upgrade_all_to_commercial.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "continuous_improvement",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/continuous_improvement.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "component_classifier",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/component_classifier.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "stress_capabilities",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/stress_capabilities.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "architecture_auto_improver",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/architecture_auto_improver.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "skill_preflight_check",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/skill_preflight_check.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "render_release_summary",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/render_release_summary.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_route_wiring",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_route_wiring.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "render_nightly_summary",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/render_nightly_summary.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "permanent_keeper",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/permanent_keeper.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "upgrade_skills_structure",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/upgrade_skills_structure.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "demo_daily_reminder",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/demo_daily_reminder.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "session_end_detector",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/session_end_detector.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "architecture_compliance_checker",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/architecture_compliance_checker.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "security_sanity_check",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/security_sanity_check.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_layer_dependencies",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_layer_dependencies.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "create_scheduled_message",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/create_scheduled_message.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "export_daily_platform_report",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/export_daily_platform_report.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "send_message_helper",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/send_message_helper.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "get_pending_sends",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/get_pending_sends.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "run_release_gate",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/run_release_gate.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "batch_upgrade_skills",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/batch_upgrade_skills.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_capability_registry",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_capability_registry.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_rule_guards",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_rule_guards.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "run_rule_engine",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/run_rule_engine.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "cleanup_reports",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/cleanup_reports.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "auto_summarizer",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/auto_summarizer.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "quick_start",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/quick_start.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "generate_metrics",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/generate_metrics.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "find_scheduled_tasks",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/find_scheduled_tasks.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_repo_integrity",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_repo_integrity.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "run_midday_check",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/run_midday_check.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "one_time_trigger",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/one_time_trigger.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "start_celery_real",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/start_celery_real.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_change_impact",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_change_impact.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "smart_compressor",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/smart_compressor.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "demo_minimum_loop",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/demo_minimum_loop.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "deploy_verification",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/deploy_verification.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "export_capability_performance_report",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/export_capability_performance_report.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "run_end_of_day_review",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/run_end_of_day_review.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "run_weekly_growth_review",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/run_weekly_growth_review.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "render_premerge_summary",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/render_premerge_summary.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "demo_l4_strong_confirm",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/demo_l4_strong_confirm.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "start_celery_fakeredis",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/start_celery_fakeredis.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "batch_skill_upgrade",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/batch_skill_upgrade.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "production_acceptance",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/production_acceptance.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "exception_manager",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/exception_manager.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "demo_bootstrap",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/demo_bootstrap.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_change_impact_enforcement",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_change_impact_enforcement.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "package_release",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/package_release.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "incident_cli",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/incident_cli.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "skill_health_check",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/skill_health_check.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_repo_integrity_fast",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_repo_integrity_fast.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "incremental_updater",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/incremental_updater.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "final_acceptance",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/final_acceptance.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_config_usage",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_config_usage.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "build_ops_dashboard",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/build_ops_dashboard.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "create_complete_docs",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/create_complete_docs.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "benchmark_capabilities",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/benchmark_capabilities.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "start_real_infra",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/start_real_infra.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "send_daily_weather_report",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/send_daily_weather_report.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "start_production",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/start_production.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "task_daemon",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/task_daemon.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "migrate_to_postgres",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/migrate_to_postgres.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "unified_inspector_v7",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/unified_inspector_v7.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "run_daily_growth_check",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/run_daily_growth_check.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "full_automation_agent_smoke",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/full_automation_agent_smoke.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "verify_phase3_final",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/verify_phase3_final.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "approval_manager",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/approval_manager.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "demo_learning_second_run",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/demo_learning_second_run.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "generate_observability_reports",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/generate_observability_reports.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_ai_apis",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_ai_apis.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "quick_task",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/quick_task.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "full_backup",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/full_backup.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "ops_center",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/ops_center.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "message_server",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/message_server.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "start_celery_production",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/start_celery_production.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "demo_learning_first_run",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/demo_learning_first_run.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "generate_final_verification_bundle",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/generate_final_verification_bundle.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "auto_fusion_hook",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/auto_fusion_hook.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "create_professional_docs",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/create_professional_docs.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "quick_schedule",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/quick_schedule.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "auto_trigger",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/auto_trigger.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "dependency_manager",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/dependency_manager.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_docs_index",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_docs_index.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "invocation_audit_cli",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/invocation_audit_cli.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "test_redis_connection",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/test_redis_connection.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "generate_release_reports",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/generate_release_reports.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "remediation_center",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/remediation_center.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "seed_platform_invocations",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/seed_platform_invocations.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "generate_charts",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/generate_charts.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "check_notification_auth",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/check_notification_auth.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "run_daily_growth_loop",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/run_daily_growth_loop.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "precise_sender",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/precise_sender.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "feishu_longpoll",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/feishu_longpoll.py",
+        "reason": "未注册到 script_registry.json"
+      },
+      {
+        "name": "dual_channel_pusher",
+        "path": "/home/sandbox/.openclaw/workspace/scripts/dual_channel_pusher.py",
+        "reason": "未注册到 script_registry.json"
+      }
+    ],
+    "documents": [
+      {
+        "name": "sqlite_datetime_policy",
+        "path": "/home/sandbox/.openclaw/workspace/docs/sqlite_datetime_policy.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "RELEASE_NOTES_SKILL_REFACTOR",
+        "path": "/home/sandbox/.openclaw/workspace/docs/RELEASE_NOTES_SKILL_REFACTOR.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "data_retention_policy",
+        "path": "/home/sandbox/.openclaw/workspace/docs/data_retention_policy.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "EXECUTION_SEMANTICS_STATE_TABLE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/EXECUTION_SEMANTICS_STATE_TABLE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "V7.2.0_ARCHITECTURE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_ARCHITECTURE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "COMPONENT_CLASSIFICATION_POLICY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/COMPONENT_CLASSIFICATION_POLICY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DELIVERY_CONFIRMATION_STRATEGY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DELIVERY_CONFIRMATION_STRATEGY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "loop_guard_design",
+        "path": "/home/sandbox/.openclaw/workspace/docs/loop_guard_design.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "00_exact_refactor_fix_v2",
+        "path": "/home/sandbox/.openclaw/workspace/docs/00_exact_refactor_fix_v2.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "architecture",
+        "path": "/home/sandbox/.openclaw/workspace/docs/architecture.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DEGRADATION_STRATEGY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DEGRADATION_STRATEGY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "OPTIMIZATION_CALCULATION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/OPTIMIZATION_CALCULATION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "state_machine",
+        "path": "/home/sandbox/.openclaw/workspace/docs/state_machine.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS_DISCOVERY_V3",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_DISCOVERY_V3.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "configuration",
+        "path": "/home/sandbox/.openclaw/workspace/docs/configuration.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_ENHANCED_SKILL_ARCHITECTURE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_ENHANCED_SKILL_ARCHITECTURE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DEPLOY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DEPLOY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "MEMORY_OPTIMIZATION_STRATEGY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/MEMORY_OPTIMIZATION_STRATEGY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_CONNECTED_EXECUTION_FLOW",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CONNECTED_EXECUTION_FLOW.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SKILL_PRODUCT_ARCHITECTURE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_PRODUCT_ARCHITECTURE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PERMANENT_KEEPER_MODULE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PERMANENT_KEEPER_MODULE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SYSTEM_MODULES",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SYSTEM_MODULES.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_CONNECTION_MATRIX",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CONNECTION_MATRIX.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "CONTRIBUTING",
+        "path": "/home/sandbox/.openclaw/workspace/docs/CONTRIBUTING.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "XIAOYI_API_WIRING_POINTS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/XIAOYI_API_WIRING_POINTS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "XIAOYI_REAL_INTEGRATION_PLAN",
+        "path": "/home/sandbox/.openclaw/workspace/docs/XIAOYI_REAL_INTEGRATION_PLAN.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_CAPABILITY_MAPPING",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CAPABILITY_MAPPING.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "FILE_INVENTORY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/FILE_INVENTORY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "runbook",
+        "path": "/home/sandbox/.openclaw/workspace/docs/runbook.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "OPTIMIZATION_PLAN",
+        "path": "/home/sandbox/.openclaw/workspace/docs/OPTIMIZATION_PLAN.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS_ANALYSIS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_ANALYSIS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "HEARTBEAT_ANALYSIS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_ANALYSIS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "task_lifecycle",
+        "path": "/home/sandbox/.openclaw/workspace/docs/task_lifecycle.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "observability",
+        "path": "/home/sandbox/.openclaw/workspace/docs/observability.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "AUTO_RUN_COMPONENTS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/AUTO_RUN_COMPONENTS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "REFACTOR_PLAN",
+        "path": "/home/sandbox/.openclaw/workspace/docs/REFACTOR_PLAN.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "HUAWEI_CLOUD_SETUP",
+        "path": "/home/sandbox/.openclaw/workspace/docs/HUAWEI_CLOUD_SETUP.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SKILL_LIMITATIONS_AND_DEGRADATION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_LIMITATIONS_AND_DEGRADATION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SKILL_USER_RESULT_EXPLANATION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_USER_RESULT_EXPLANATION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS_EXECUTION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_EXECUTION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "API_REFERENCE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/API_REFERENCE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "HEARTBEAT_DAEMON_CONFIGURED",
+        "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_DAEMON_CONFIGURED.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "00_exact_skill_refactor_fix_list",
+        "path": "/home/sandbox/.openclaw/workspace/docs/00_exact_skill_refactor_fix_list.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "CAPABILITY_MATRIX",
+        "path": "/home/sandbox/.openclaw/workspace/docs/CAPABILITY_MATRIX.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "CHANGELOG",
+        "path": "/home/sandbox/.openclaw/workspace/docs/CHANGELOG.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DELETE_CONFIRMATION_POLICY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DELETE_CONFIRMATION_POLICY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "skill_integration_rules",
+        "path": "/home/sandbox/.openclaw/workspace/docs/skill_integration_rules.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "TOKEN_OPTIMIZATION_STRATEGY",
+        "path": "/home/sandbox/.openclaw/workspace/docs/TOKEN_OPTIMIZATION_STRATEGY.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "DEFAULT_SKILL_CONFIG",
+        "path": "/home/sandbox/.openclaw/workspace/docs/DEFAULT_SKILL_CONFIG.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "MAINTENANCE_GUIDE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/MAINTENANCE_GUIDE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SKILL_RUNTIME_MODES",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SKILL_RUNTIME_MODES.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "SCHEDULED_TASKS_COMPLETE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/SCHEDULED_TASKS_COMPLETE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "抖店智能客服系统功能说明书_V1.0",
+        "path": "/home/sandbox/.openclaw/workspace/docs/抖店智能客服系统功能说明书_V1.0.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "FUSION_REPORT",
+        "path": "/home/sandbox/.openclaw/workspace/docs/FUSION_REPORT.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "COMPRESSION_OPTIMIZATION",
+        "path": "/home/sandbox/.openclaw/workspace/docs/COMPRESSION_OPTIMIZATION.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "EXECUTION_SEMANTICS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/EXECUTION_SEMANTICS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "PLATFORM_CAPABILITY_MATRIX",
+        "path": "/home/sandbox/.openclaw/workspace/docs/PLATFORM_CAPABILITY_MATRIX.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "RUNTIME_ASSUMPTIONS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/RUNTIME_ASSUMPTIONS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "REAL_INFRASTRUCTURE_SETUP",
+        "path": "/home/sandbox/.openclaw/workspace/docs/REAL_INFRASTRUCTURE_SETUP.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "HEARTBEAT_INTERVAL_ANALYSIS",
+        "path": "/home/sandbox/.openclaw/workspace/docs/HEARTBEAT_INTERVAL_ANALYSIS.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "V7.2.0_架构中文完整版",
+        "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_架构中文完整版.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "ARCHITECTURE_RELATIONSHIP",
+        "path": "/home/sandbox/.openclaw/workspace/docs/ARCHITECTURE_RELATIONSHIP.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "LITE_VERSION_PLAN",
+        "path": "/home/sandbox/.openclaw/workspace/docs/LITE_VERSION_PLAN.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "BACKUP_MECHANISM_EXPLAINED",
+        "path": "/home/sandbox/.openclaw/workspace/docs/BACKUP_MECHANISM_EXPLAINED.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "V7.2.0_UNIFIED_ARCHITECTURE",
+        "path": "/home/sandbox/.openclaw/workspace/docs/V7.2.0_UNIFIED_ARCHITECTURE.md",
+        "reason": "未在文档索引中"
+      },
+      {
+        "name": "production_deployment",
+        "path": "/home/sandbox/.openclaw/workspace/docs/production_deployment.md",
+        "reason": "未在文档索引中"
+      }
+    ],
+    "tests": [
+      {
+        "name": "test_scenarios_v3",
+        "path": "/home/sandbox/.openclaw/workspace/tests/test_scenarios_v3.py",
+        "reason": "无可收集的测试函数或类"
+      }
+    ],
+    "tables": []
+  },
+  "summary": {
+    "total": 246,
+    "by_category": {
+      "modules": 0,
+      "capabilities": 53,
+      "configs": 4,
+      "scripts": 121,
+      "documents": 67,
+      "tests": 1,
+      "tables": 0
+    }
+  }
+}

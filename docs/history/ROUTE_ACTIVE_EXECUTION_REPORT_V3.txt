@@ -1,0 +1,105 @@
+============================================================
+ROUTE ACTIVE EXECUTION REPORT V3
+时间: 2026-04-25 09:40
+============================================================
+
+📊 Route 状态统计:
+   总路由数: 54
+   Active: 13 (核心 route L0-L3)
+   Verified: 41 (含 2 条 L4)
+   Generated: 0
+   Failed: 0
+   Deprecated: 0
+
+✅ 静态验证结果:
+   Verified: 54/54 (100%)
+   Failed: 0
+
+✅ Smoke 测试结果:
+   Executed: 20
+   Succeeded: 20
+   Failed: 0
+   Fallback tested: 5
+   Audit written: 20
+   Activated: 13 (不含 L4)
+
+✅ E2E 场景测试结果:
+   Total: 8
+   Passed: 8
+   Failed: 0
+
+============================================================
+📋 核心 Route 激活状态 (15条):
+============================================================
+
+| Route ID | Status | Risk | Policy | Audit |
+|----------|--------|------|--------|-------|
+| route.query_note | ✅ ACTIVE | L0 | auto_execute | ✅ |
+| route.delete_note | ✅ ACTIVE | L3 | confirm_once | ✅ |
+| route.update_note | ✅ ACTIVE | L3 | confirm_once | ✅ |
+| route.search_notes | ✅ ACTIVE | L0 | auto_execute | ✅ |
+| route.send_message | ✅ ACTIVE | L3 | confirm_once | ✅ |
+| route.query_message_status | ✅ ACTIVE | L0 | auto_execute | ✅ |
+| route.list_recent_messages | ✅ ACTIVE | L0 | auto_execute | ✅ |
+| route.create_alarm | ✅ ACTIVE | L2 | rate_limited | ✅ |
+| route.query_alarm | ✅ ACTIVE | L0 | auto_execute | ✅ |
+| route.delete_alarm | ✅ ACTIVE | L3 | confirm_once | ✅ |
+| route.make_call | ✅ ACTIVE | L3 | confirm_once | ✅ |
+| route.query_contact | ✅ ACTIVE | L0 | auto_execute | ✅ |
+| route.get_location | ✅ ACTIVE | L0 | auto_execute | ✅ |
+| route.xiaoyi_gui_agent | ⚠️ VERIFIED | L4 | strong_confirm | ✅ |
+| route.bootstrap | ⚠️ VERIFIED | L4 | strong_confirm | ✅ |
+
+============================================================
+🔒 L4 Route 验证 (2条):
+============================================================
+
+route.xiaoyi_gui_agent:
+   - Risk Level: L4
+   - Policy: strong_confirm
+   - User Intents: 手机操作, GUI操作, 小艺帮帮忙, 视觉操作, 操作手机, 自动操作手机, 打开手机操作, 小艺操作, 手机界面操作
+   - Auto-execute: ❌ BLOCKED (正确)
+   - Status: verified (L4 不自动激活)
+
+route.bootstrap:
+   - Risk Level: L4
+   - Policy: strong_confirm
+   - User Intents: 引导
+   - Auto-execute: ❌ BLOCKED (正确)
+   - Status: verified (L4 不自动激活)
+
+============================================================
+📈 风险等级分布:
+============================================================
+
+| Risk Level | Count | Percentage |
+|------------|-------|------------|
+| L0 | 18 | 33% |
+| L1 | 6 | 11% |
+| L2 | 12 | 22% |
+| L3 | 16 | 30% |
+| L4 | 2 | 4% |
+| BLOCKED | 0 | 0% |
+
+============================================================
+✅ ROUTE ACTIVE EXECUTION V3 验收通过
+============================================================
+
+核心指标:
+- 15 条核心 route 全部 verified ✅
+- 13 条核心 route 已 active (L0-L3) ✅
+- 2 条 L4 route 保持 verified (不自动激活) ✅
+- L4 route 不能自动执行 ✅
+- Fallback 真执行并写 audit ✅
+- Planner 能真实选 route ✅
+- Orchestrator 能真实执行 route ✅
+- Audit 记录完整 ✅
+- E2E 8/8 场景通过 ✅
+- pytest 629 passed ✅
+
+统计口径统一:
+- 总路由数: 54 ✅
+- L4 数量: 2 ✅
+- Active 数量: 13 (不含 L4) ✅
+- Verified 数量: 41 ✅
+- Generated 数量: 0 ✅

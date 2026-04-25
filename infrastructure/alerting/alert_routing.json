@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "routing_rules": {
+    "P0_BLOCKED": {
+      "severity": "blocking",
+      "channels": ["github_summary", "feishu"],
+      "cooldown_minutes": 30,
+      "escalate_after_minutes": 60
+    },
+    "STRONG_REGRESSION": {
+      "severity": "blocking",
+      "channels": ["github_summary", "feishu"],
+      "cooldown_minutes": 30,
+      "escalate_after_minutes": 60
+    },
+    "RELEASE_BLOCKED": {
+      "severity": "blocking",
+      "channels": ["github_summary", "feishu"],
+      "cooldown_minutes": 15,
+      "escalate_after_minutes": 30
+    },
+    "WEAK_REGRESSION": {
+      "severity": "warning",
+      "channels": ["github_summary"],
+      "cooldown_minutes": 60,
+      "escalate_after_minutes": null
+    }
+  },
+  "channel_config": {
+    "github_summary": {
+      "enabled": true,
+      "fallback": null
+    },
+    "feishu": {
+      "enabled": true,
+      "env_key": "FEISHU_WEBHOOK_URL",
+      "fallback": "github_summary"
+    },
+    "webhook": {
+      "enabled": true,
+      "env_key": "ALERT_WEBHOOK_URL",
+      "fallback": "github_summary"
+    }
+  },
+  "cooldown_policy": {
+    "same_alert_type": true,
+    "same_blocked_reasons": true,
+    "window_minutes": 30,
+    "max_notifications_per_hour": 10
+  },
+  "escalation_policy": {
+    "enabled": true,
+    "levels": [
+      {
+        "after_minutes": 30,
+        "action": "repeat_notification"
+      },
+      {
+        "after_minutes": 60,
+        "action": "escalate_to_secondary"
+      },
+      {
+        "after_minutes": 120,
+        "action": "create_urgent_incident"
+      }
+    ]
+  }
+}

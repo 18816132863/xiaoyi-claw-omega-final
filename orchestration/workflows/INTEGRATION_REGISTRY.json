@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Integration Registry",
+  "description": "外部系统集成注册表",
+  "type": "object",
+  "properties": {
+    "integrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["integration_id", "integration_name", "system_type", "auth_mode"],
+        "properties": {
+          "integration_id": {
+            "type": "string",
+            "description": "集成唯一标识符",
+            "pattern": "^INT-[a-z_]+-\\d{3}$"
+          },
+          "integration_name": {
+            "type": "string",
+            "description": "集成名称"
+          },
+          "description": {
+            "type": "string",
+            "description": "集成描述"
+          },
+          "system_type": {
+            "type": "string",
+            "description": "系统类型",
+            "enum": [
+              "calendar",
+              "email",
+              "docs",
+              "sheets",
+              "crm",
+              "ticketing",
+              "storage",
+              "messaging",
+              "database",
+              "api_gateway",
+              "notification",
+              "analytics"
+            ]
+          },
+          "provider": {
+            "type": "string",
+            "description": "服务提供商"
+          },
+          "auth_mode": {
+            "type": "string",
+            "description": "认证模式",
+            "enum": ["oauth2", "api_key", "basic_auth", "jwt", "certificate", "none"]
+          },
+          "auth_config": {
+            "type": "object",
+            "description": "认证配置",
+            "properties": {
+              "token_endpoint": { "type": "string" },
+              "scope": { "type": "array", "items": { "type": "string" } },
+              "refresh_enabled": { "type": "boolean" }
+            }
+          },
+          "allowed_actions": {
+            "type": "array",
+            "description": "允许的动作",
+            "items": {
+              "type": "object",
+              "properties": {
+                "action": { "type": "string" },
+                "description": { "type": "string" },
+                "risk_level": { "type": "string", "enum": ["low", "medium", "high", "critical"] }
+              }
+            }
+          },
+          "forbidden_actions": {
+            "type": "array",
+            "description": "禁止的动作",
+            "items": { "type": "string" }
+          },
+          "confirmation_requirements": {
+            "type": "object",
+            "description": "确认要求",
+            "properties": {
+              "always_require": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "risk_based": {
+                "type": "object",
+                "properties": {
+                  "high_risk": { "type": "boolean", "default": true },
+                  "medium_risk": { "type": "boolean", "default": false }
+                }
+              },
+              "batch_operations": { "type": "boolean", "default": true }
+            }
+          },
+          "rate_limits": {
+            "type": "object",
+            "description": "速率限制",
+            "properties": {
+              "requests_per_second": { "type": "number" },
+              "requests_per_minute": { "type": "number" },
+              "requests_per_hour": { "type": "number" },
+              "concurrent_requests": { "type": "number" }
+            }
+          },
+          "retry_policy": {
+            "type": "object",
+            "description": "重试策略",
+            "properties": {
+              "max_retries": { "type": "integer", "default": 3 },
+              "backoff": { "type": "string", "enum": ["fixed", "linear", "exponential"] },
+              "initial_delay_ms": { "type": "integer", "default": 1000 }
+            }
+          },
+          "timeout": {
+            "type": "object",
+            "description": "超时配置",
+            "properties": {
+              "connection_ms": { "type": "integer", "default": 5000 },
+              "read_ms": { "type": "integer", "default": 30000 },
+              "write_ms": { "type": "integer", "default": 30000 }
+            }
+          },
+          "audit_level": {
+            "type": "string",
+            "description": "审计级别",
+            "enum": ["minimal", "standard", "detailed", "comprehensive"],
+            "default": "standard"
+          },
+          "rollback_support": {
+            "type": "object",
+            "description": "回滚支持",
+            "properties": {
+              "supported": { "type": "boolean", "default": false },
+              "methods": {
+                "type": "array",
+                "items": { "type": "string", "enum": ["undo", "compensate", "version", "none"] }
+              },
+              "time_limit_ms": { "type": "integer" }
+            }
+          },
+          "data_residency": {
+            "type": "string",
+            "description": "数据驻留要求"
+          },
+          "compliance_requirements": {
+            "type": "array",
+            "description": "合规要求",
+            "items": { "type": "string" }
+          },
+          "status": {
+            "type": "string",
+            "description": "集成状态",
+            "enum": ["active", "paused", "disabled", "maintenance"],
+            "default": "active"
+          },
+          "health_check": {
+            "type": "object",
+            "description": "健康检查",
+            "properties": {
+              "endpoint": { "type": "string" },
+              "interval_seconds": { "type": "integer", "default": 60 },
+              "timeout_ms": { "type": "integer", "default": 5000 }
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "integration_id": "INT-calendar-001",
+      "integration_name": "Google Calendar",
+      "system_type": "calendar",
+      "provider": "google",
+      "auth_mode": "oauth2",
+      "allowed_actions": [
+        { "action": "read_events", "risk_level": "low" },
+        { "action": "create_event", "risk_level": "medium" },
+        { "action": "update_event", "risk_level": "medium" },
+        { "action": "delete_event", "risk_level": "high" }
+      ],
+      "confirmation_requirements": {
+        "always_require": ["delete_event"],
+        "batch_operations": true
+      },
+      "rollback_support": {
+        "supported": true,
+        "methods": ["undo"]
+      }
+    },
+    {
+      "integration_id": "INT-email-001",
+      "integration_name": "Email Service",
+      "system_type": "email",
+      "auth_mode": "oauth2",
+      "allowed_actions": [
+        { "action": "read_emails", "risk_level": "low" },
+        { "action": "send_email", "risk_level": "high" }
+      ],
+      "confirmation_requirements": {
+        "always_require": ["send_email"],
+        "batch_operations": true
+      },
+      "audit_level": "comprehensive"
+    },
+    {
+      "integration_id": "INT-docs-001",
+      "integration_name": "Document Storage",
+      "system_type": "docs",
+      "auth_mode": "oauth2",
+      "allowed_actions": [
+        { "action": "read_document", "risk_level": "low" },
+        { "action": "create_document", "risk_level": "medium" },
+        { "action": "update_document", "risk_level": "medium" },
+        { "action": "delete_document", "risk_level": "critical" }
+      ],
+      "rollback_support": {
+        "supported": true,
+        "methods": ["version"]
+      }
+    }
+  ]
+}

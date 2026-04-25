@@ -1,0 +1,26 @@
+{
+  "checkpoints": [
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260425235849649750",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-25T23:58:49.649780",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260425235849652967",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-25T23:58:49.652981",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    }
+  ]
+}

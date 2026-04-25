@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "description": "三引擎向量架构配置",
+  "engines": {
+    "primary": {
+      "name": "sqlite-vec",
+      "type": "local",
+      "enabled": true,
+      "path": "~/.openclaw/memory-tdai/vectors.db",
+      "dimensions": 4096,
+      "description": "主引擎 - 轻量级本地向量存储"
+    },
+    "secondary": {
+      "name": "qdrant",
+      "type": "hybrid",
+      "enabled": true,
+      "path": "~/.openclaw/qdrant-storage",
+      "host": "localhost",
+      "port": 6333,
+      "collection": "memories",
+      "description": "副引擎 - 高性能向量数据库"
+    },
+    "backup": {
+      "name": "tfidf",
+      "type": "local",
+      "enabled": true,
+      "path": "~/.openclaw/tfidf-storage/tfidf.db",
+      "description": "备份引擎 - 关键词检索"
+    }
+  },
+  "routing": {
+    "strategy": "cascade",
+    "description": "级联查询策略：主引擎 → 副引擎 → 备份引擎",
+    "fallback_order": ["primary", "secondary", "backup"],
+    "timeout_ms": 5000
+  },
+  "sync": {
+    "enabled": false,
+    "interval_seconds": 300,
+    "description": "三引擎数据同步（默认禁用，需用户手动启用）"
+  }
+}

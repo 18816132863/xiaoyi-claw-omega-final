@@ -1,0 +1,10 @@
+{
+  "optimize_interval": 604800,
+  "max_db_size_mb": 100,
+  "orphan_threshold": 10,
+  "auto_vacuum": false,
+  "auto_reindex": false,
+  "auto_cleanup_orphans": false,
+  "backup_before_optimize": true,
+  "_comment": "⚠️ 自动优化默认禁用，需用户手动触发"
+}

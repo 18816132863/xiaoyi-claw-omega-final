@@ -1,0 +1,104 @@
+{
+  "version": "4.1.0",
+  "description": "llm-memory-integration v4.1 全面性能优化配置",
+  
+  "optimization": {
+    "gpu": {
+      "enabled": true,
+      "prefer_cuda": true,
+      "fallback_to_cpu": true,
+      "batch_size": 1000,
+      "description": "GPU 加速（CUDA/OpenCL）"
+    },
+    
+    "vnni": {
+      "enabled": true,
+      "int8_quantization": true,
+      "rerank_top_k": 100,
+      "description": "INT8 量化 + VNNI 加速"
+    },
+    
+    "ann": {
+      "auto_select": true,
+      "hnsw_threshold": 10000,
+      "ivf_threshold": 1000000,
+      "n_probe": 10,
+      "description": "ANN 索引自动选择"
+    },
+    
+    "hugepages": {
+      "enabled": true,
+      "n_pages": 1024,
+      "page_size": "2MB",
+      "description": "大页内存"
+    },
+    
+    "async_io": {
+      "enabled": true,
+      "max_workers": 4,
+      "max_concurrent_llm": 10,
+      "max_concurrent_embedding": 10,
+      "description": "异步 I/O"
+    },
+    
+    "index_persistence": {
+      "enabled": true,
+      "auto_save": true,
+      "keep_versions": 3,
+      "incremental_update": true,
+      "description": "索引持久化"
+    },
+    
+    "mkl": {
+      "enabled": true,
+      "threads": 2,
+      "description": "Intel MKL 数学库"
+    },
+    
+    "numba": {
+      "enabled": true,
+      "threads": 2,
+      "fastmath": true,
+      "cache": true,
+      "description": "Numba JIT 编译"
+    },
+    
+    "cache": {
+      "blocking_enabled": true,
+      "l1_block_size": 2,
+      "l2_block_size": 32,
+      "l3_block_size": 512,
+      "description": "缓存阻塞优化"
+    },
+    
+    "cpu_affinity": {
+      "enabled": true,
+      "cpus": [0, 1],
+      "description": "CPU 亲和性绑定"
+    },
+    
+    "memory_pool": {
+      "enabled": true,
+      "max_vectors": 10000,
+      "description": "内存池"
+    }
+  },
+  
+  "performance_targets": {
+    "gpu_search": "< 2ms",
+    "vnni_search": "< 5ms",
+    "ann_search": "< 10ms",
+    "async_batch": "< 50ms (100 queries)",
+    "index_load": "< 100ms",
+    "accuracy": "> 95%"
+  },
+  
+  "expected_improvements": {
+    "gpu": "+200-500%",
+    "vnni": "+100-200%",
+    "ann": "+50-100%",
+    "hugepages": "+10-20%",
+    "async": "+20-50%",
+    "persistence": "+30-50%"
+  }
+}

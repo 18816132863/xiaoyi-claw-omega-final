@@ -1,0 +1,11 @@
+# 小艺 Claw 维护任务定时配置
+# 添加到 crontab: crontab -e
+
+# 每周一 03:00 运行完整维护
+0 3 * * 1 python3 ~/.openclaw/workspace/skills/llm-memory-integration/scripts/run_maintenance.py
+
+# 每日 06:00 检查覆盖率
+0 6 * * * python3 ~/.openclaw/workspace/skills/llm-memory-integration/scripts/check_coverage.py
+
+# 每周日凌晨 02:00 重建 FTS 索引
+0 2 * * 0 python3 ~/.openclaw/workspace/skills/llm-memory-integration/scripts/rebuild_fts.py

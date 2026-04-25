@@ -1,0 +1,106 @@
+{
+  "version": "4.0.0",
+  "description": "llm-memory-integration v4.0 性能优化配置 - 针对 Intel Xeon Platinum 8378C",
+  
+  "hardware": {
+    "cpu": "Intel Xeon Platinum 8378C",
+    "cores": 2,
+    "simd": {
+      "avx512": true,
+      "avx512_vnni": true,
+      "avx512_ifma": true,
+      "avx2": true,
+      "amx": false
+    },
+    "cache": {
+      "l1_size_kb": 80,
+      "l2_size_kb": 1280,
+      "l3_size_kb": 57344
+    },
+    "memory_gb": 5.8,
+    "numa_nodes": 1
+  },
+  
+  "optimization": {
+    "mkl": {
+      "enabled": true,
+      "threads": 2,
+      "threading_layer": "GNU",
+      "description": "Intel MKL 数学库加速"
+    },
+    
+    "numba": {
+      "enabled": true,
+      "threads": 2,
+      "fastmath": true,
+      "cache": true,
+      "description": "Numba JIT 编译，自动利用 AVX-512"
+    },
+    
+    "vnni": {
+      "enabled": true,
+      "int8_quantization": true,
+      "description": "AVX-512 VNNI INT8 加速"
+    },
+    
+    "cache": {
+      "blocking_enabled": true,
+      "l1_block_size": 2,
+      "l2_block_size": 32,
+      "l3_block_size": 512,
+      "description": "缓存阻塞优化"
+    },
+    
+    "hugepages": {
+      "enabled": true,
+      "count": 1024,
+      "size": "2MB",
+      "description": "大页内存，减少 TLB Miss"
+    },
+    
+    "cpu_affinity": {
+      "enabled": true,
+      "cpus": [0, 1],
+      "description": "CPU 亲和性绑定"
+    },
+    
+    "memory_pool": {
+      "enabled": true,
+      "max_vectors": 10000,
+      "description": "内存池，避免频繁分配"
+    }
+  },
+  
+  "vector_search": {
+    "top_k": 20,
+    "max_distance": 0.85,
+    "score_threshold": 0.2,
+    "use_cache_blocking": true,
+    "use_numba": true,
+    "description": "向量搜索配置"
+  },
+  
+  "quantization": {
+    "enabled": true,
+    "type": "int8",
+    "use_vnni": true,
+    "rerank_enabled": true,
+    "rerank_top_k": 50,
+    "description": "INT8 量化 + VNNI 加速"
+  },
+  
+  "performance_targets": {
+    "cache_hit": "< 5ms",
+    "fast_mode": "< 500ms",
+    "balanced_mode": "< 2s",
+    "full_mode": "< 5s",
+    "accuracy": "> 95%"
+  },
+  
+  "expected_improvements": {
+    "speed": "+300-500%",
+    "memory": "-50-75%",
+    "latency_stability": "+200%",
+    "cache_hit_rate": "+40%"
+  }
+}

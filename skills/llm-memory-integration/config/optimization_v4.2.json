@@ -1,0 +1,141 @@
+{
+  "version": "4.2.0",
+  "description": "llm-memory-integration v4.2 完整性能优化配置",
+  
+  "optimization": {
+    "distributed": {
+      "enabled": true,
+      "n_shards": 4,
+      "n_workers": 4,
+      "hash_func": "murmur",
+      "description": "分布式向量搜索"
+    },
+    
+    "query_cache": {
+      "enabled": true,
+      "max_size": 1000,
+      "similarity_threshold": 0.99,
+      "ttl_seconds": 3600,
+      "description": "查询缓存"
+    },
+    
+    "opq": {
+      "enabled": true,
+      "n_subspaces": 16,
+      "n_centroids": 256,
+      "n_iter": 20,
+      "description": "OPQ 量化"
+    },
+    
+    "query_rewriter": {
+      "enabled": true,
+      "expansion_factor": 1.5,
+      "min_top_k": 10,
+      "max_top_k": 100,
+      "description": "查询重写"
+    },
+    
+    "wal": {
+      "enabled": true,
+      "journal_mode": "WAL",
+      "synchronous": "NORMAL",
+      "cache_size_mb": 64,
+      "checkpoint_interval": 1000,
+      "description": "WAL 模式优化"
+    },
+    
+    "auto_tuner": {
+      "enabled": true,
+      "n_trials": 20,
+      "metric": "latency",
+      "description": "自动调优"
+    },
+    
+    "hardware": {
+      "auto_detect": true,
+      "use_amx": true,
+      "use_neural_engine": true,
+      "use_neon": true,
+      "description": "硬件特定优化"
+    },
+    
+    "gpu": {
+      "enabled": true,
+      "prefer_cuda": true,
+      "fallback_to_cpu": true,
+      "description": "GPU 加速"
+    },
+    
+    "vnni": {
+      "enabled": true,
+      "int8_quantization": true,
+      "rerank_top_k": 100,
+      "description": "INT8 + VNNI"
+    },
+    
+    "ann": {
+      "auto_select": true,
+      "hnsw_threshold": 10000,
+      "ivf_threshold": 1000000,
+      "description": "ANN 索引"
+    },
+    
+    "hugepages": {
+      "enabled": true,
+      "n_pages": 1024,
+      "description": "大页内存"
+    },
+    
+    "async_io": {
+      "enabled": true,
+      "max_workers": 4,
+      "description": "异步 I/O"
+    },
+    
+    "index_persistence": {
+      "enabled": true,
+      "auto_save": true,
+      "keep_versions": 3,
+      "description": "索引持久化"
+    },
+    
+    "mkl": {
+      "enabled": true,
+      "threads": 2,
+      "description": "Intel MKL"
+    },
+    
+    "numba": {
+      "enabled": true,
+      "threads": 2,
+      "fastmath": true,
+      "description": "Numba JIT"
+    },
+    
+    "cache": {
+      "blocking_enabled": true,
+      "l1_block_size": 2,
+      "l2_block_size": 32,
+      "l3_block_size": 512,
+      "description": "缓存阻塞"
+    }
+  },
+  
+  "performance_targets": {
+    "distributed_search": "< 10ms (多节点)",
+    "cached_query": "< 1ms",
+    "opq_search": "< 5ms",
+    "wal_write": "> 10000 rows/s",
+    "auto_tuned": "+10-30%",
+    "hardware_optimized": "+20-50%"
+  },
+  
+  "expected_improvements": {
+    "distributed": "+200-500%",
+    "cache": "+50-100%",
+    "opq": "+20-30%",
+    "wal": "+10-20%",
+    "auto_tune": "+10-30%",
+    "hardware": "+20-50%"
+  }
+}

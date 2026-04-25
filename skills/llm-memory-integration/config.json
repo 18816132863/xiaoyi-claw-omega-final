@@ -1,0 +1,44 @@
+{
+  "name": "llm-memory-integration",
+  "version": "3.5.1",
+  "license": "MIT-0",
+  "description": "LLM + 向量模型集成方案。支持任意 LLM + Embedding 模型，用户自行配置。支持混合检索、智能路由、渐进式启用、用户画像自动更新。",
+  "author": "@xkzs2007",
+  "homepage": "https://clawhub.ai/skill/llm-memory-integration",
+  "tags": ["llm", "embedding", "memory", "search", "vector", "hybrid", "rrf"],
+  "minOpenClawVersion": "0.1.0",
+  "requirements": {
+    "binaries": ["python3", "sqlite3"],
+    "envVars": {
+      "required": ["EMBEDDING_API_KEY"],
+      "optional": ["LLM_API_KEY"]
+    },
+    "network": true,
+    "description": "Requires Python3, SQLite3, and user-provided embedding API key"
+  },
+  "networkAccess": {
+    "required": true,
+    "endpoints": "user-configured",
+    "purpose": "LLM and Embedding API calls",
+    "noHardcodedEndpoints": true
+  },
+  "fileAccess": {
+    "read": ["~/.openclaw/memory-tdai/*", "~/.openclaw/workspace/*"],
+    "write": ["~/.openclaw/memory-tdai/*", "~/.openclaw/workspace/skills/llm-memory-integration/*"],
+    "purpose": "Memory storage, caching, and configuration"
+  },
+  "security": {
+    "noHardcodedCredentials": true,
+    "noHardcodedEndpoints": true,
+    "userConfiguredEndpoints": true,
+    "noShellTrue": true,
+    "parameterizedQueries": true,
+    "dynamicPaths": true,
+    "noAbsolutePaths": true,
+    "extensionLoadingWarning": "Loads SQLite vector extension from ~/.openclaw/extensions/ - verify source before use",
+    "noAutoCronInstall": true,
+    "autoUpdateDisabled": true,
+    "syncDisabled": true,
+    "requireConfirmation": true
+  }
+}

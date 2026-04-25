@@ -1,0 +1,18 @@
+{
+  "memory_qdrant": {
+    "enabled": true,
+    "storage_path": "~/.openclaw-memory",
+    "persist_to_disk": true,
+    "auto_recall": true,
+    "auto_capture": false,
+    "embedding_model": "local",
+    "description": "本地向量记忆集成，使用 Transformers.js 本地 Embedding"
+  },
+  "integration_mode": "hybrid",
+  "fallback_order": [
+    "memory-tencentdb",
+    "memory-qdrant",
+    "memory-core"
+  ],
+  "description": "混合记忆模式：优先使用 memory-tencentdb（云端 Embedding），回退到 memory-qdrant（本地 Embedding）"
+}

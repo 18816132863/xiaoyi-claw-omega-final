@@ -1,0 +1,52 @@
+{
+  "version": "1.1.0",
+  "description": "LLM Memory Integration 权限配置（已移除需要 root 权限的 Level 4）",
+  
+  "permissions": {
+    "level_0": {
+      "enabled": true,
+      "description": "普通用户权限",
+      "operations": ["vector_search", "memory_management", "llm_integration"],
+      "require_confirmation": false
+    },
+    "level_1": {
+      "enabled": true,
+      "description": "文件系统访问",
+      "operations": ["read_file", "write_file", "create_file", "delete_file"],
+      "paths": [
+        "~/.openclaw/memory-tdai",
+        "~/.openclaw/workspace/skills/llm-memory-integration"
+      ],
+      "require_confirmation": false
+    },
+    "level_2": {
+      "enabled": true,
+      "description": "网络访问",
+      "operations": ["llm_api", "embedding_api", "http_request"],
+      "endpoints": "user-configured",
+      "require_confirmation": false
+    },
+    "level_3": {
+      "enabled": false,
+      "description": "原生扩展加载",
+      "operations": ["load_extension", "unload_extension"],
+      "require_confirmation": true,
+      "sha256_verification": true,
+      "trusted_hashes_file": "~/.openclaw/extensions/.trusted_hashes.json"
+    }
+  },
+  
+  "audit": {
+    "enabled": true,
+    "log_path": "~/.openclaw/workspace/skills/llm-memory-integration/logs/audit.log",
+    "max_size_mb": 100,
+    "retention_days": 30
+  },
+  
+  "security": {
+    "default_deny": true,
+    "fail_safe": true,
+    "log_all_operations": true,
+    "note": "Level 4 (系统命令执行) 已移除 - 不再需要 root 权限"
+  }
+}

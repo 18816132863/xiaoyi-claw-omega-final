@@ -1,0 +1,6 @@
+{
+  "enable_native_extension": false,
+  "require_user_confirmation": true,
+  "allow_auto_load": false,
+  "_comment": "原生扩展加载配置。enable_native_extension: true 启用原生扩展加载（高风险操作）"
+}

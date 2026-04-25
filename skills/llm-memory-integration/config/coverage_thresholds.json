@@ -1,0 +1,8 @@
+{
+  "l1_min_coverage": 95.0,
+  "l0_min_coverage": 60.0,
+  "check_interval": 3600,
+  "auto_fix": false,
+  "alert_on_low": true,
+  "_comment": "⚠️ auto_fix 默认禁用，需用户手动触发"
+}

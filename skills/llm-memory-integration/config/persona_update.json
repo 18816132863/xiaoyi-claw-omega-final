@@ -1,0 +1,10 @@
+{
+  "update_interval": 86400,
+  "min_memories_for_update": 5,
+  "max_persona_length": 2000,
+  "auto_update": false,
+  "llm_assisted": true,
+  "require_confirmation": true,
+  "backup_before_update": true,
+  "backup_count": 5
+}

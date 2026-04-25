@@ -1,0 +1,148 @@
+{
+  "version": "2.1.0",
+  "description": "向量架构体系统一配置 - 与 memory-tencentdb 同步",
+  "progressive": {
+    "P0": {
+      "name": "核心优化",
+      "modules": [
+        "router",
+        "weights",
+        "rrf",
+        "dedup"
+      ],
+      "enabled": true
+    },
+    "P1": {
+      "name": "查询增强",
+      "modules": [
+        "understand",
+        "rewriter"
+      ],
+      "enabled": true
+    },
+    "P2": {
+      "name": "学习优化",
+      "modules": [
+        "feedback",
+        "history"
+      ],
+      "enabled": true
+    },
+    "P3": {
+      "name": "结果增强",
+      "modules": [
+        "explainer",
+        "summarizer"
+      ],
+      "enabled": true
+    }
+  },
+  "embedding": {
+    "provider": "openai-compatible",
+    "base_url": "YOUR_EMBEDDING_BASE_URL",
+    "api_key": "YOUR_EMBEDDING_API_KEY",
+    "model": "YOUR_EMBEDDING_MODEL",
+    "dimensions": 1536,
+    "_comment": "请配置您的 Embedding API"
+  },
+  "llm": {
+    "provider": "openai-compatible",
+    "base_url": "YOUR_LLM_BASE_URL",
+    "model": "YOUR_LLM_MODEL",
+    "max_tokens": 150,
+    "temperature": 0.5,
+    "_comment": "请配置您的 LLM API"
+  },
+  "vector_search": {
+    "top_k": 20,
+    "max_distance": 0.8,
+    "score_threshold": 0.2,
+    "description": "增加召回数量，放宽距离阈值"
+  },
+  "llm_expand": {
+    "max_tokens": 150,
+    "temperature": 0.5,
+    "max_expansions": 5,
+    "description": "优化扩展词生成prompt"
+  },
+  "rewriter": {
+    "spelling_corrections": "extended",
+    "synonyms": "extended",
+    "semantic_expansions": "enabled",
+    "description": "扩展拼写纠正和同义词词典"
+  },
+  "cache": {
+    "ttl": 3600,
+    "compression": true,
+    "enabled": true,
+    "max_size": 1000,
+    "description": "增量缓存 + 压缩存储"
+  },
+  "coverage_monitor": {
+    "l1_min_coverage": 95.0,
+    "l0_min_coverage": 60.0,
+    "check_interval": 3600,
+    "auto_fix": false,
+    "alert_on_low": true,
+    "_comment": "⚠️ auto_fix 默认禁用，需用户手动触发"
+  },
+  "smart_upgrade": {
+    "l0_to_l1": {
+      "min_conversations": 5,
+      "min_days": 3,
+      "min_importance": 0.6,
+      "keywords": [
+        "重要",
+        "记住",
+        "以后",
+        "偏好",
+        "规则",
+        "配置"
+      ]
+    },
+    "auto_upgrade": false,
+    "upgrade_interval": 86400
+  },
+  "persona_update": {
+    "update_interval": 86400,
+    "min_memories_for_update": 5,
+    "max_persona_length": 2000,
+    "auto_update": false,
+    "llm_assisted": true,
+    "require_confirmation": true,
+    "backup_before_update": true,
+    "trigger_every_n": 50,
+    "backup_count": 5
+  },
+  "pipeline": {
+    "every_n_conversations": 5,
+    "enable_warmup": true,
+    "l1_idle_timeout_seconds": 30,
+    "l2_delay_after_l1_seconds": 90,
+    "l2_min_interval_seconds": 300,
+    "l2_max_interval_seconds": 1800,
+    "session_active_window_hours": 24
+  },
+  "memory_cleanup": {
+    "enabled": true,
+    "retention_days": 30,
+    "clean_time": "03:00"
+  },
+  "system_optimize": {
+    "optimize_interval": 604800,
+    "max_db_size_mb": 100,
+    "orphan_threshold": 10,
+    "auto_vacuum": false,
+    "auto_reindex": false,
+    "auto_cleanup_orphans": false,
+    "backup_before_optimize": true,
+    "_comment": "⚠️ 自动优化默认禁用，需用户手动触发"
+  },
+  "performance_targets": {
+    "cache_hit": "< 10ms",
+    "fast_mode": "< 2s",
+    "balanced_mode": "< 5s",
+    "full_mode": "< 15s",
+    "accuracy": "> 80%"
+  }
+}

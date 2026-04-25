@@ -1,0 +1,75 @@
+{
+  "version": "5.0.0",
+  "description": "llm-memory-integration v5.0 全功能完整版配置",
+  
+  "features": {
+    "multimodal": {
+      "enabled": true,
+      "text_model": "text-embedding-ada-002",
+      "image_model": "clip-vit-base-patch32",
+      "audio_model": "whisper-base",
+      "description": "多模态搜索"
+    },
+    
+    "cross_lingual": {
+      "enabled": true,
+      "model": "multilingual-e5-base",
+      "languages": ["zh", "en", "ja", "ko", "ru", "ar"],
+      "description": "跨语言搜索"
+    },
+    
+    "cli": {
+      "enabled": true,
+      "description": "CLI 工具"
+    },
+    
+    "access_control": {
+      "enabled": true,
+      "rbac": true,
+      "audit_log": true,
+      "description": "访问控制"
+    },
+    
+    "conversation": {
+      "enabled": true,
+      "max_history": 20,
+      "context_window": 4096,
+      "description": "多轮对话"
+    },
+    
+    "streaming": {
+      "enabled": true,
+      "chunk_size": 10,
+      "timeout": 30,
+      "description": "LLM 流式输出"
+    },
+    
+    "model_router": {
+      "enabled": true,
+      "strategy": "cost_optimized",
+      "description": "多模型路由"
+    },
+    
+    "failover": {
+      "enabled": true,
+      "check_interval": 10,
+      "failure_threshold": 3,
+      "description": "故障转移"
+    },
+    
+    "monitor": {
+      "enabled": true,
+      "port": 8081,
+      "metrics_history": 1000,
+      "description": "监控面板"
+    }
+  },
+  
+  "performance_targets": {
+    "multimodal_search": "< 100ms",
+    "cross_lingual_search": "< 50ms",
+    "api_latency": "< 10ms",
+    "streaming_latency": "< 100ms",
+    "failover_time": "< 5s"
+  }
+}

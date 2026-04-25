@@ -21,6 +21,160 @@
       },
       "context": {},
       "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260426000217869543",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-26T00:02:17.869566",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260426000217873462",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-26T00:02:17.873477",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260426000310406205",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-26T00:03:10.406230",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260426000310410149",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-26T00:03:10.410165",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260426000427797475",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-26T00:04:27.797498",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260426000427801420",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-26T00:04:27.801434",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260426000637386062",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-26T00:06:37.386085",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260426000637390005",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-26T00:06:37.390020",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260426000746989315",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-26T00:07:46.989339",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260426000746993510",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-26T00:07:46.993525",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260426000855013576",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-26T00:08:55.013599",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260426000855017691",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-26T00:08:55.017706",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "full_loop_test_step_1_20260426000930285657",
+      "instance_id": "full_loop_test",
+      "step_id": "step_1",
+      "timestamp": "2026-04-26T00:09:30.285681",
+      "state_data": {
+        "test": "data"
+      },
+      "context": {},
+      "metadata": {}
+    },
+    {
+      "checkpoint_id": "test_instance_test_step_20260426000930289604",
+      "instance_id": "test_instance",
+      "step_id": "test_step",
+      "timestamp": "2026-04-26T00:09:30.289618",
+      "state_data": {
+        "key": "value"
+      },
+      "context": {},
+      "metadata": {}
     }
   ]
 }

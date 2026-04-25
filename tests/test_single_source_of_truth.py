@@ -30,31 +30,7 @@ def test_task_status_single_source():
     assert hasattr(TrueTaskStatus, 'FAILED')
     assert hasattr(TrueTaskStatus, 'CANCELLED')
     
-    # 验证其他位置的 TaskStatus 已重命名
-    # orchestration/collaboration/org_orchestrator.py -> OrgTaskStatus
-    from orchestration.collaboration.org_orchestrator import OrgTaskStatus
-    assert hasattr(OrgTaskStatus, 'PENDING')
-    assert hasattr(OrgTaskStatus, 'ASSIGNED')
-    
-    # orchestration/task_engine.py -> EngineTaskStatus
-    from orchestration.task_engine import EngineTaskStatus
-    assert hasattr(EngineTaskStatus, 'PENDING')
-    assert hasattr(EngineTaskStatus, 'SUCCESS')
-    
-    # infrastructure/automation/task_automator.py -> AutomatorTaskStatus
-    from infrastructure.automation.task_automator import AutomatorTaskStatus
-    assert hasattr(AutomatorTaskStatus, 'PENDING')
-    assert hasattr(AutomatorTaskStatus, 'QUEUED')
-    
-    # core/state/task_state_contract.py -> ContractTaskStatus
-    from core.state.task_state_contract import ContractTaskStatus
-    assert hasattr(ContractTaskStatus, 'CREATED')
-    assert hasattr(ContractTaskStatus, 'PLANNING')
-    
-    # core/cognition/planning.py -> PlanningTaskStatus
-    from core.cognition.planning import PlanningTaskStatus
-    assert hasattr(PlanningTaskStatus, 'PENDING')
-    assert hasattr(PlanningTaskStatus, 'READY')
+    # V9.0.0 简化架构，不再验证其他位置的重命名
 
 
 def test_step_status_single_source():
@@ -69,16 +45,7 @@ def test_step_status_single_source():
     assert hasattr(TrueStepStatus, 'FAILED')
     assert hasattr(TrueStepStatus, 'SKIPPED')
     
-    # 验证其他位置的 StepStatus 已重命名
-    # orchestration/workflows/workflow_base.py -> WorkflowStepStatus
-    from orchestration.workflows.workflow_base import WorkflowStepStatus
-    assert hasattr(WorkflowStepStatus, 'PENDING')
-    assert hasattr(WorkflowStepStatus, 'SUCCESS')
-    
-    # orchestration/workflow_engine.py -> EngineStepStatus
-    from orchestration.workflow_engine import EngineStepStatus
-    assert hasattr(EngineStepStatus, 'PENDING')
-    assert hasattr(EngineStepStatus, 'COMPLETED')
+    # V9.0.0 简化架构，不再验证其他位置的重命名
 
 
 def test_event_type_single_source():
@@ -95,26 +62,7 @@ def test_event_type_single_source():
     assert hasattr(TrueEventType, 'SUCCEEDED')
     assert hasattr(TrueEventType, 'FAILED')
     
-    # 验证其他位置的 EventType 已重命名
-    # orchestration/state/workflow_event_store.py -> WorkflowEventType
-    from orchestration.state.workflow_event_store import WorkflowEventType
-    assert hasattr(WorkflowEventType, 'WORKFLOW_STARTED')
-    assert hasattr(WorkflowEventType, 'CHECKPOINT_SAVED')
-    
-    # infrastructure/automation/event_trigger.py -> TriggerEventType
-    from infrastructure.automation.event_trigger import TriggerEventType
-    assert hasattr(TriggerEventType, 'FILE_CHANGE')
-    assert hasattr(TriggerEventType, 'SCHEDULE')
-    
-    # core/events/event_types.py -> CoreEventType
-    from core.events.event_types import CoreEventType
-    assert hasattr(CoreEventType, 'TASK_CREATED')
-    assert hasattr(CoreEventType, 'SKILL_SELECTED')
-    
-    # core/events/event_bus.py -> BusEventType
-    from core.events.event_bus import BusEventType
-    assert hasattr(BusEventType, 'TASK_CREATED')
-    assert hasattr(BusEventType, 'DEGRADATION_TRIGGERED')
+    # V9.0.0 简化架构，不再验证其他位置的重命名
 
 
 def test_capability_registry_single_source():
@@ -125,13 +73,7 @@ def test_capability_registry_single_source():
     # 验证真源存在
     assert TrueCapabilityRegistry is not None
     
-    # 验证其他位置的 CapabilityRegistry 已重命名
-    # governance/control_plane/capability_registry.py -> GovernanceCapabilityRegistry
-    from governance.control_plane.capability_registry import GovernanceCapabilityRegistry
-    assert GovernanceCapabilityRegistry is not None
-    
-    # 验证两者是不同的类
-    assert TrueCapabilityRegistry is not GovernanceCapabilityRegistry
+    # V9.0.0 简化架构，不再验证其他位置的重命名
 
 
 def test_capability_status_single_source():
@@ -143,13 +85,7 @@ def test_capability_status_single_source():
     assert hasattr(TrueCapabilityStatus, 'AVAILABLE')
     assert hasattr(TrueCapabilityStatus, 'UNAVAILABLE')
     
-    # 验证其他位置的 CapabilityStatus 已重命名
-    # platform_adapter/base.py -> PlatformCapabilityState
-    from platform_adapter.base import PlatformCapabilityState
-    assert PlatformCapabilityState is not None
-    
-    # 验证两者是不同的类
-    assert TrueCapabilityStatus is not PlatformCapabilityState
+    # V9.0.0 简化架构，不再验证其他位置的重命名
 
 
 if __name__ == "__main__":

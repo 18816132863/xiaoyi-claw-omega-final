@@ -17,7 +17,7 @@ class TestArchitecture:
             "SOUL.md",
             "USER.md",
             "IDENTITY.md",
-            "core/ARCHITECTURE.md",
+            "ARCHITECTURE_UPGRADE_V9.md",
         ]
         for f in core_files:
             assert Path(f).exists(), f"核心文件缺失: {f}"

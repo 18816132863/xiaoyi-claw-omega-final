@@ -5161,10 +5161,34 @@
         "previous_version_id": "ver_a1f1eb4e",
         "timestamp": "2026-04-25T10:21:30.046514",
         "metadata": {}
+      },
+      {
+        "version_id": "ver_5d3b1df0",
+        "memory_id": "mem_test_001",
+        "version_number": 431,
+        "content": "初始决策内容",
+        "change_type": "create",
+        "change_reason": "测试创建",
+        "source_task_id": "task_001",
+        "previous_version_id": "ver_7a408f81",
+        "timestamp": "2026-04-25T12:45:00.245772",
+        "metadata": {}
+      },
+      {
+        "version_id": "ver_c38af4b3",
+        "memory_id": "mem_test_001",
+        "version_number": 432,
+        "content": "更新后的决策内容",
+        "change_type": "update",
+        "change_reason": "测试更新",
+        "source_task_id": "task_002",
+        "previous_version_id": "ver_5d3b1df0",
+        "timestamp": "2026-04-25T12:45:00.250340",
+        "metadata": {}
       }
     ],
-    "current_version": 430,
+    "current_version": 432,
     "created_at": "2026-04-17T13:02:04.198682",
-    "last_modified": "2026-04-25T10:21:30.046520"
+    "last_modified": "2026-04-25T12:45:00.250345"
   }
 }

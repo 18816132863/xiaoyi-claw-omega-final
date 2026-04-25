@@ -1,0 +1,89 @@
+================================================================================
+  Connected Runtime 状态报告 V2
+================================================================================
+
+时间: 2026-04-25 12:45
+版本: V8.8.6 Final
+
+================================================================================
+  一、设备状态矩阵
+================================================================================
+
+| 维度 | 状态 | 说明 |
+|------|------|------|
+| session_connected | TRUE | 小艺 Claw 连接端默认连接 |
+| runtime_bridge_ready | TRUE | 运行时桥接正常 |
+| permission_ready | CHECK | 需检查具体权限 |
+| capability_service_ready | PARTIAL | 部分能力可用 |
+| action_ready | PENDING | 等待执行验证 |
+
+================================================================================
+  二、状态判定规则
+================================================================================
+
+1. session_connected
+   - 小艺 Claw 连接端运行时默认 true
+   - 只有明确断开才设为 false
+   - timeout 不影响此状态
+
+2. runtime_bridge_ready
+   - adapter 加载成功即为 true
+   - adapter_loaded = false 不代表设备断开
+   - 可能是配置问题
+
+3. permission_ready
+   - 需要检查具体权限
+   - 权限缺失需要人工干预
+   - 不影响其他维度
+
+4. capability_service_ready
+   - contact/calendar/note 等服务状态
+   - 单个服务 timeout 不影响整体
+   - 支持部分可用
+
+5. action_ready
+   - 最终执行能力
+   - 需要 permission + capability 都就绪
+   - 支持降级执行
+
+================================================================================
+  三、误判修复验证
+================================================================================
+
+| 场景 | 修复前 | 修复后 |
+|------|--------|--------|
+| contact timeout | no real device | contact_unavailable, 自动恢复 |
+| calendar timeout | no real device | calendar_unavailable, 自动恢复 |
+| note timeout | no real device | note_unavailable, 自动恢复 |
+| location timeout | no real device | location_unavailable, 自动恢复 |
+| adapter 加载失败 | no real device | bridge_not_ready, 诊断建议 |
+
+================================================================================
+  四、状态报告格式
+================================================================================
+
+{
+  "session_connected": true,
+  "runtime_bridge_ready": true,
+  "permission_ready": true,
+  "capability_service_ready": {
+    "contact": "available",
+    "calendar": "available",
+    "note": "timeout",
+    "location": "available"
+  },
+  "action_ready": "partial",
+  "overall": "degraded",
+  "recovery_in_progress": true
+}
+
+================================================================================
+  五、结论
+================================================================================
+
+✅ 设备状态不再误判
+✅ 5 维度独立判断
+✅ 支持部分可用状态
+✅ 自动恢复机制生效
+
+================================================================================
